@@ -1,0 +1,13 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Nowy przepis</h1>
+        <form action="." method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Zapisz</button>
+            <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
+        </form>
+    {% endif %}
+{% endblock %}

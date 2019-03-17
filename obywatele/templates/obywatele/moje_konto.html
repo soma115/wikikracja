@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<br><br><br>
+
+	<div>
+		<h3>Obywatel: {{ id.uid }}</h3>
+			<p>
+				Reputacja: {{ id.reputacja }} |
+				Data zmiany reputacji: {{ id.data_zmiany_reputacji }} |
+			</p>
+			<p>
+				Karma: {{ id.karma }} |
+				Data nadania karmy: {{ id.data_nadania_karmy }}
+			</p>
+	</div>
+
+<br><br>
+
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+=

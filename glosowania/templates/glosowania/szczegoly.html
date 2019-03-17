@@ -1,0 +1,49 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<br><br><br>
+{% if user.is_authenticated %}
+	<div>
+		<h3>Projekt numer: {{ id.id }}</h3>
+		<h3>Treść proponowanego przepisu: {{ id.tresc }}</h3>
+		<h3>Kara za nieprzestrzeganie: {{ id.kara }} </h3>
+			<p>
+				Autor: {{ id.autor }} |
+				Data powstania: {{ id.data_powstania }} |
+				Data zebrania podpisów: {{ id.data_zebrania_podpisow }} |
+				Ile osób podpisało: {{ id.ile_osob_podpisalo }}
+				{% if id.status == 7 %}
+					| Za: {{ id.za }} |
+					Przeciw: {{ id.przeciw }} |
+				{% endif %}
+				{% comment %} Status: {{ id.status }} {% endcomment %}
+			</p>
+	</div>
+
+	{% if id.status == 1 %}
+		{% comment %} propozycja = guzik do podpisania {% endcomment %}
+		<form action="#" method="get">
+			<p><u><h4>Czy na pewno chcesz się podpisać pod tym wnioskiem o nowy przepis?</h4></u></p>
+		    <input class="btn btn-primary" type="submit" name="podpisz" value="Tak, podpisuję"/>
+		    <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
+
+		</form>
+	{% endif %}
+
+	{% if id.status == 4 %}
+		{% comment %} referendum = dwa guziki - ZA i PRZECIW {% endcomment %}
+		<form action="#" method="get">
+			<p><u><h4>Czy zgadzasz się na wprowadzenie tego przepisu?</h4></u></p>
+		    <input class="btn btn-primary" type="submit" name="tak" value="Tak"/>
+			<input class="btn btn-primary" type="submit" name="nie" value="Nie"/>
+		    <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
+		</form>
+	{% endif %}
+
+	{% if id.status == 2 or id.status == 3 or id.status >= 5 %}
+		{% comment %} brak poparcia, w kolejce, odrzucone, zatwierdzone, obowiązuje = brak guzika {% endcomment %}
+		<button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
+	{% endif %}
+{% endif %}
+{% endblock %}

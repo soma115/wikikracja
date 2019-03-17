@@ -1,0 +1,13 @@
+{% extends "home/base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<p>
+<ul class="navbar-form">
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+</ul>
+</p>
+{% endblock %}

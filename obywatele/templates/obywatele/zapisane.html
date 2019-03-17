@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<br><br><br>
+
+	<div>
+		<h3>{{ komunikat }}</h3>
+
+	</div>
+
+	<div>
+		<h4>
+			<p>
+				{{ wynik }}
+			</p>
+		</h4>
+	</div>
+
+<div><button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button></div>
+
+{% endif %}
+{% endblock %}

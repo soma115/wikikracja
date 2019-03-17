@@ -1,0 +1,6 @@
+Django==1.11.20
+Pillow==4.1.1
+gunicorn==19.9.0
+psycopg2==2.7.6.1
+psycopg2-binary==2.7.6.1
+djangosecure==0.0.11

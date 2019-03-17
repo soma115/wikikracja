@@ -1,0 +1,25 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+	<h1>Wgraj ebooka</h1>
+	<p><h5>
+		<center>Przed wgraniem pliku upewnij się, że jego nazwa jest ładnie sformatowana.</center></p>
+		<p><center>Idealnie by było gdy nazwa pliku miała format w stylu:</center></p>
+		<p><center><b>Imię Nazwisko - Tytuł.pdf</b></center>
+	</h5></p>
+		<p>
+			<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type='file' class="btn btn-primary">Wyślij</button>
+			</form>
+		</p>
+	<p><a href="{% url 'elibrary:index' %}">Wróć</a></p>
+    {% endif %}
+{% endblock %}
+
+
+
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ HTTP_HOST }}</title>
+    {% load staticfiles %}
+	<link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'home/content/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'home/content/site.css' %}"/>
+    <script src="{% static 'home/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+
+<body>
+	<ul class="nav nav-tabs">
+		<a href="{% url 'home' %}"> <img style="padding: 0 10px; float: left;" src="{% static 'home/images/sitelogo.png' %}" ></a>
+	    <li role="presentation" {% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}><a href="{% url 'home' %}">Start</a></li>
+		<li role="presentation" {% if request.resolver_match.url_name == 'contact' and user.is_authenticated %} class="active" {% endif %}><a href="{% url 'contact' %}">Kontakt</a></li>
+		{% if not user.is_authenticated %}
+			<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">zaloguj</a></li>
+		{% endif %}
+		{% if user.is_authenticated %}
+			<li role="presentation" {% if request.resolver_match.url_name == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania' %}">Głosowania</a></li>
+			<li role="presentation" {% if request.resolver_match.url_name == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele' %}">Obywatele</a></li>
+			<li role="presentation" {% if request.resolver_match.url_name == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
+
+			<h6><a href="/obywatele/{{ user.id }}">{{ user }}</a></h6>
+			<h6><a href="/logout">logout</a></h6>
+			<!--<p>{{ user }}</p>-->
+		{% endif %}
+	</ul>
+
+	<div class="container body-content">
+	    {% block content %}{% endblock %}
+	</div>
+
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li class="{{ message.tags }}">{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+<br><br><br><br><br><br>
+	<div class="footer col-sm-6 center">
+	    <footer>
+	        <br><br><br><br><br><br>
+		    <!--# TODO: Domena zamiast statycznego napisu:-->
+	        <p>2018 dobrada.pl | Populacja: 2</p>
+	    </footer>
+	</div>
+
+	{% block scripts %}
+	<script src="{% static 'home/scripts/jquery-1.10.2.js' %}"></script>
+	<script src="{% static 'home/scripts/bootstrap.js' %}"></script>
+	<script src="{% static 'home/scripts/respond.js' %}"></script>
+	{% endblock %}
+</body>
+</html>
