@@ -94,7 +94,6 @@ def glosowanie_szczegoly(request, pk):
 			nowy_projekt.save()
 		except IntegrityError as e:
 			if 'UNIQUE constraint failed' in e.args[0]:
-				print('powtórzone')
 				# TODO: Guzik 'Tak, podpisuję' ma się nie pokazywać jeśli użytkownik już wcześniej podpisał
 				# trzeba chyba dodać kolumnę do modelu
 				message = 'Już wcześniej podpisałeś ten wniosek.'
@@ -151,7 +150,7 @@ class ZliczajWszystko():
 
 
 def zliczaj_wszystko():
-	print('Zliczam głosy i terminy...')
+	# print('Zliczam głosy i terminy...')
 	wymaganych_podpisow = 2  # Aby zatwierdzić wniosek o referendum
 	czas_na_zebranie_podpisow = timedelta(days=365)  # 365
 	kolejka = timedelta(days=7)  # czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki
@@ -179,40 +178,40 @@ def zliczaj_wszystko():
 
 				# TODO: Referendum odbędzie się 1 tydzień w niedzielę
 				i.data_referendum = dzisiaj + timedelta(days=-dzisiaj.weekday()+6, weeks=1)
-				print('Data referendum: '+str(i.data_referendum))
+				# print('Data referendum: '+str(i.data_referendum))
 
 				i.save()
-				print('Propozycja ' + str(i.id) + ' zmieniła status na "w kolejce".')
+				# print('Propozycja ' + str(i.id) + ' zmieniła status na "w kolejce".')
 				# log('Propozycja ' + str(i.id) + ' zmieniła status na "w kolejce".')
 				continue
 			if i.status == propozycja and i.data_powstania + czas_na_zebranie_podpisow < dzisiaj:
 				i.status = brak_poparcia
 				i.save()
-				print('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
+				# print('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
 				# log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
 				continue
 			if i.status == w_kolejce and i.data_zebrania_podpisow + kolejka < dzisiaj:
 				i.status = referendum
 				i.save()
-				print('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
+				# print('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
 				# log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
 				continue
 			if i.status == referendum and i.data_zebrania_podpisow + kolejka + czas_trwania_referendum < dzisiaj:
 				if i.za > i.przeciw:
 					i.status = zatwierdzone
 					i.save()
-					print('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
+					# print('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
 					# log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
 					continue
 				else:
 					i.status = odrzucone
 					i.save()
-					print('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
+					# print('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
 					# log('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
 					continue
 			if i.status == zatwierdzone and i.data_zebrania_podpisow + kolejka + czas_trwania_referendum + vacatio_legis < dzisiaj:
 				i.status = obowiazuje
 				i.save()
-				print('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
+				# print('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
 				# log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
 				continue

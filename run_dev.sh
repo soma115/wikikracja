@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# source ../wikikracja-venv/bin/activate
-# workon wiki
-
 ./manage.py makemigrations glosowania
 ./manage.py makemigrations obywatele
 ./manage.py makemigrations elibrary
