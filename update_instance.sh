@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# TODO: git clone if not exist
+
 git reset --hard
 git pull
 
 # There has to exist ../venv/bin/activate
-source ../venv/bin/activate
+source /var/www/venv/bin/activate
 
 #sudo su - postgres <<EOF
 #psql -c "DROP DATABASE wikikracja_dev;"
@@ -19,6 +21,7 @@ source ../venv/bin/activate
 find . -name *.pyc -exec rm -rf {} \;
 find -maxdepth 2 -mindepth 2 -type d -name migrations -exec rm -rf {} \;
 rm -rf static
+mkdir static media
 
 ./manage.py makemigrations obywatele
 ./manage.py makemigrations glosowania
