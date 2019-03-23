@@ -22,21 +22,17 @@ DATABASES = {
 }
 
 TIME_ZONE = 'Europe/Warsaw'
-
 LANGUAGE_CODE = 'pl'
 
 SITE_ID = config.site_id
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 MIDDLEWARE = (
@@ -63,7 +59,6 @@ TEMPLATES = [
             'django.template.context_processors.request',
             'django.contrib.auth.context_processors.auth',
             'django.contrib.messages.context_processors.messages',
-            # 'django.template.context_processors.media',
         ],
         'debug': DEBUG,
     },
@@ -83,7 +78,6 @@ INSTALLED_APPS = (
     'glosowania',
     'obywatele',
     'elibrary',
-    'rest_framework',
 )
 
 LOGGING = {
@@ -111,14 +105,11 @@ LOGGING = {
 }
 
 STATICFILES_DIRS = (
-    # os.path.join(BASE_DIR, "offer_need/static"),
     os.path.join(BASE_DIR, "media"),
-    # os.path.join(BASE_DIR, "static"),
 )
 
 STATIC_URL = '/static/'
 STATIC_ROOT = path.join(PROJECT_ROOT, 'static')
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

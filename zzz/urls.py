@@ -4,6 +4,8 @@ from home import views as hv
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from django.urls import include
+from django.contrib import admin
 
 urlpatterns = [
   url(r'^', include('home.urls')),
