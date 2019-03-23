@@ -29,6 +29,7 @@ elibrary/migrations/__init__.py
 *.swp
 
 .directory
+.project
 
 $RECYCLE.BIN/
 db.sqlite3
