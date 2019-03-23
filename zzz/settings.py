@@ -82,7 +82,8 @@ INSTALLED_APPS = (
     'home',
     'glosowania',
     'obywatele',
-    'elibrary', 
+    'elibrary',
+    'rest_framework',
 )
 
 LOGGING = {
