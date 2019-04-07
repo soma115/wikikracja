@@ -1,59 +1,59 @@
 import os
 from django.db import models
 import datetime
-from django.contrib.auth.models import User
+from obywatele.models import User  # Custom user model
 
 base_dir = os.path.abspath('.')
 
 
 class Decyzja(models.Model):
-    autor = models.CharField(max_length=200)
-    tresc = models.TextField(max_length=500, null=True, verbose_name='Treść')
-    kara = models.TextField(max_length=500, null=True, verbose_name='Kara')  # Kara za nie przestrzeganie przepisu
-    ile_osob_podpisalo = models.SmallIntegerField(editable=False, default=0)
-    data_powstania = models.DateField(editable=False, null=True)
-    data_zebrania_podpisow = models.DateField(editable=False, null=True)
-    # dodane później. Data referendum jest też datą zatwierdzenia/odrzucenia:
-    data_referendum = models.DateField(editable=False, null=True)
-    data_obowiazuje_od = models.DateField(editable=False, null=True)
-    za = models.SmallIntegerField(default=0, editable=False)
-    przeciw = models.SmallIntegerField(default=0, editable=False)
-    status = models.SmallIntegerField(default=1, editable=False)
+	autor = models.CharField(max_length=200)
+	tresc = models.TextField(max_length=500, null=True, verbose_name='Treść')
+	kara = models.TextField(max_length=500, null=True, verbose_name='Kara')  # Kara za nie przestrzeganie przepisu
+	ile_osob_podpisalo = models.SmallIntegerField(editable=False, default=0)
+	data_powstania = models.DateField(editable=False, null=True)
+	data_zebrania_podpisow = models.DateField(editable=False, null=True)
+	# dodane później. Data referendum jest też datą zatwierdzenia/odrzucenia:
+	data_referendum = models.DateField(editable=False, null=True)
+	data_obowiazuje_od = models.DateField(editable=False, null=True)
+	za = models.SmallIntegerField(default=0, editable=False)
+	przeciw = models.SmallIntegerField(default=0, editable=False)
+	status = models.SmallIntegerField(default=1, editable=False)
 
-    # 0.Propozycja, 1.Brak poparcia, 2.W kolejce, 3.Referendum, 4.Odrzucone, 5.Zatwierdzone/Vacatio Legis, 6.Obowiązuje
+	# 0.Propozycja, 1.Brak poparcia, 2.W kolejce, 3.Referendum, 4.Odrzucone, 5.Zatwierdzone/Vacatio Legis, 6.Obowiązuje
 
-    # TODO: data_wejscia_w_zycie = models.DateField(editable=False, default=dzis)
+	# TODO: data_wejscia_w_zycie = models.DateField(editable=False, default=dzis)
 
-    def __str__(self):
-        return '%s: %s on %s' % (self.pk, self.tresc, self.status)
+	def __str__(self):
+		return '%s: %s on %s' % (self.pk, self.tresc, self.status)
 
-    class Meta:
-        verbose_name_plural = "Decyzje"
+	class Meta:
+		verbose_name_plural = "Decyzje"
 
 
 class ZebranePodpisy(models.Model):
-    '''Lista podpisów pod wnioskiem o referendum'''
-    projekt = models.ForeignKey(Decyzja, on_delete=models.CASCADE)
-    podpis_uzytkownika = models.ForeignKey(User, on_delete=models.CASCADE)  # odnotowujemy kto się podpisał
+	'''Lista podpisów pod wnioskiem o referendum'''
+	projekt = models.ForeignKey(Decyzja, on_delete=models.CASCADE)
+	podpis_uzytkownika = models.ForeignKey(User, on_delete=models.CASCADE)  # odnotowujemy kto się podpisał
 
-    class Meta:
-        unique_together = ('projekt', 'podpis_uzytkownika')
+	class Meta:
+		unique_together = ('projekt', 'podpis_uzytkownika')
 
 
 class KtoJuzGlosowal(models.Model):
-    projekt = models.ForeignKey(Decyzja, on_delete=models.CASCADE)
-    ktory_uzytkownik_juz_zaglosowal = models.ForeignKey(User, on_delete=models.CASCADE)
+	projekt = models.ForeignKey(Decyzja, on_delete=models.CASCADE)
+	ktory_uzytkownik_juz_zaglosowal = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    # odnotowujemy tylko fakt głosowania
+	# odnotowujemy tylko fakt głosowania
 
-    class Meta:
-        unique_together = ('projekt', 'ktory_uzytkownik_juz_zaglosowal')
+	class Meta:
+		unique_together = ('projekt', 'ktory_uzytkownik_juz_zaglosowal')
 
 
 #######################################################
 
 # TODO: To powinno być składową klasy aby dało się importować.
-#       To samo jest powtórzone w "glosowania/views/ZliczajWszystko()":
+#	   To samo jest powtórzone w "glosowania/views/ZliczajWszystko()":
 WYMAGANYCH_PODPISOW = 2  # Aby zatwierdzić wniosek o referendum
 CZAS_NA_ZEBRANIE_PODPISOW = datetime.timedelta(days=30)  # 365
 KOLEJKA = datetime.timedelta(days=5)  # 14 czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki
@@ -84,8 +84,8 @@ Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date
 
 
 def pokaz_flow_f():
-    # webbrowser.open("https://i.imgur.com/FnVthWi.png")
-    print("\nStworzenie propozycji > Zbieranie podpisów > Kolejka i Dyskusja >")
-    print("> Referendum > Vacatio Legis > Przepis obowiązuje")
-    print('\nIle osób potrzeba do zaakceptowania/odrzucenia użytkownika:', AKCEPTUJACY)
-    input("\n\n[ENTER]")
+	# webbrowser.open("https://i.imgur.com/FnVthWi.png")
+	print("\nStworzenie propozycji > Zbieranie podpisów > Kolejka i Dyskusja >")
+	print("> Referendum > Vacatio Legis > Przepis obowiązuje")
+	print('\nIle osób potrzeba do zaakceptowania/odrzucenia użytkownika:', AKCEPTUJACY)
+	input("\n\n[ENTER]")

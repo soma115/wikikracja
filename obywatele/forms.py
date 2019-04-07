@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from obywatele.models import User  # Custom user model
 from django.utils.safestring import mark_safe
 
 

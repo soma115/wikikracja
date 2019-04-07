@@ -1,6 +1,6 @@
 from django import forms
 from elibrary.models import Ebook
-from django.contrib.auth.models import User
+from obywatele.models import User  # Custom user model
 
 
 class UploadFileForm(forms.ModelForm):

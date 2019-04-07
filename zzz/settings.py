@@ -10,15 +10,18 @@ SECRET_KEY = config.secret_key
 
 ALLOWED_HOSTS = config.allowed_hosts
 
+# AUTHENTICATION_BACKENDS = ['backends.ModelBackend']
+AUTH_USER_MODEL = 'obywatele.User'
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config.db_name,
-        'USER': config.db_user,
-        'PASSWORD': config.db_password,
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.postgresql_psycopg2',
+		'NAME': config.db_name,
+		'USER': config.db_user,
+		'PASSWORD': config.db_password,
+		'HOST': 'localhost',
+		'PORT': '',
+	}
 }
 
 TIME_ZONE = 'Europe/Warsaw'
@@ -31,17 +34,17 @@ USE_L10N = True
 USE_TZ = True
 
 STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+	'django.contrib.staticfiles.finders.FileSystemFinder',
+	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 MIDDLEWARE = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'zzz.urls'
@@ -50,62 +53,62 @@ WSGI_APPLICATION = 'zzz.wsgi.application'
 
 TEMPLATES = [
  {
-    'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': [], 
-    'APP_DIRS': True,
-    'OPTIONS': {
-        'context_processors': [
-            'django.template.context_processors.debug',
-            'django.template.context_processors.request',
-            'django.contrib.auth.context_processors.auth',
-            'django.contrib.messages.context_processors.messages',
-        ],
-        'debug': DEBUG,
-    },
+	'BACKEND': 'django.template.backends.django.DjangoTemplates',
+	'DIRS': [], 
+	'APP_DIRS': True,
+	'OPTIONS': {
+		'context_processors': [
+			'django.template.context_processors.debug',
+			'django.template.context_processors.request',
+			'django.contrib.auth.context_processors.auth',
+			'django.contrib.messages.context_processors.messages',
+		],
+		'debug': DEBUG,
+	},
  },
 ]
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
-    'home',
-    'glosowania',
-    'obywatele',
-    'elibrary',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.sites',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	'django.contrib.admin',
+	'django.contrib.admindocs',
+	'home',
+	'glosowania',
+	'obywatele',
+	'elibrary',
 )
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
+	'version': 1,
+	'disable_existing_loggers': False,
+	'filters': {
+		'require_debug_false': {
+			'()': 'django.utils.log.RequireDebugFalse'
+		}
+	},
+	'handlers': {
+		'mail_admins': {
+			'level': 'ERROR',
+			'filters': ['require_debug_false'],
+			'class': 'django.utils.log.AdminEmailHandler'
+		}
+	},
+	'loggers': {
+		'django.request': {
+			'handlers': ['mail_admins'],
+			'level': 'ERROR',
+			'propagate': True,
+		},
+	}
 }
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "media"),
+	os.path.join(BASE_DIR, "media"),
 )
 
 STATIC_URL = '/static/'

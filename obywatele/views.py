@@ -2,7 +2,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
-from django.contrib.auth.models import User
+from obywatele.models import User  # Custom user model
 from obywatele.forms import ObywatelForm
 from obywatele.models import Uzytkownik, AkceptacjaOsoby
 from django.shortcuts import render
@@ -11,9 +11,9 @@ from django.core.mail import send_mail
 import random
 import string
 from django.utils.timezone import now as dzis
+from math import log
 
-WYMAGANY_PROCENT_AKCEPTACJI = 0.2	# it is a %. It will be used later like this: 
-									# required_acceptance = population * WYMAGANY_PROCENT_AKCEPTACJI
+WYMAGANY_PROCENT_AKCEPTACJI = 2
 
 def obywatele(request):
 	zliczaj_obywateli(request)
@@ -54,7 +54,7 @@ def dodaj(request):
 				nowa_osoba.save()
 				nowy_w_uzytkownikach.save()
 
-				# Since you proposed new person, you probably also want to acceppt him
+				# Since you proposed new person, you probably also want to acceppt him/her
 				dawca = Uzytkownik.objects.get(pk=request.user.id)
 
 				glos = AkceptacjaOsoby()
@@ -122,7 +122,7 @@ def obywatele_szczegoly(request, pk):
 
 	populacja = User.objects.filter(is_active=True).count()
 	print('populacja:',populacja)
-	wymagana_rep = int(populacja * WYMAGANY_PROCENT_AKCEPTACJI)
+	wymagana_rep = int(log(populacja) * WYMAGANY_PROCENT_AKCEPTACJI)
 	twoja_rep = dawca.reputacja
 	
 	return render(request, 'obywatele/szczegoly.html', {'b': biorca, 'd': dawca, 'tr': twoja_rep, 'wr': wymagana_rep})
@@ -133,7 +133,7 @@ def zliczaj_obywateli(request): # TODO: zamienić na obiekt z metodą: "podaj ob
 	judge - if they break the law. This is only temporal solution for small comunities.'''
 	# Potrzebne w 'obywatele_szczegóły'
 	populacja = User.objects.filter(is_active=True).count()
-	wymagana_reputacja = int(populacja * WYMAGANY_PROCENT_AKCEPTACJI)
+	wymagana_reputacja = int(log(populacja) * WYMAGANY_PROCENT_AKCEPTACJI)
 
 	akceptacja = AkceptacjaOsoby()
 

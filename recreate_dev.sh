@@ -21,4 +21,14 @@ find -maxdepth 2 -mindepth 2 -type d -name migrations -exec rm -rf {} \;
 ./manage.py makemigrations
 ./manage.py migrate
 
-./manage.py createsuperuser
+./manage.py createsuperuser --email a@a.pl --noinput
+./manage.py changepassword a@a.pl
+
+# ./manage.py createsuperuser
+
+sudo su - postgres <<EOF
+psql --dbname wikikracja_dev -c "update obywatele_user set username='a' where id=1;"
+psql --dbname wikikracja_dev -c "update obywatele_user set is_active=TRUE where id=1;"
+psql --dbname wikikracja_dev -c "update obywatele_user set is_staff=TRUE where id=1;"
+EOF
+

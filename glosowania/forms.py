@@ -4,6 +4,6 @@ from .models import Decyzja
 
 class DecyzjaForm(forms.ModelForm):
 
-    class Meta:
-        model = Decyzja
-        fields = ('tresc', 'kara' )
+	class Meta:
+		model = Decyzja
+		fields = ('tresc', 'kara' )

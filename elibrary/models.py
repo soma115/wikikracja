@@ -2,7 +2,8 @@ from django.db import models
 import os
 from django.db import models
 import datetime
-from django.contrib.auth.models import User
+
+from obywatele.models import User  # Custom user model
 
 base_dir = os.path.abspath('.')
 
