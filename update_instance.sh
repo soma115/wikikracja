@@ -28,7 +28,6 @@ mkdir static media
 ./manage.py makemigrations elibrary
 ./manage.py makemigrations
 ./manage.py migrate
-./manage.py collectstatic
 
 chown -R r1:nginx *
 chmod -R o-rwx *
@@ -37,6 +36,7 @@ chmod u+w media/
 echo ""
 echo "--------------"
 echo "./manage.py createsuperuser"
+echo "./manage.py collectstatic"
 echo "was skipped. Run it manually if you need it."
 echo "--------------"
 echo ""
