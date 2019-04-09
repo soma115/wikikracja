@@ -29,7 +29,8 @@ class User(AbstractBaseUser, PermissionsMixin):    # Overrides standard User mod
 	REQUIRED_FIELDS = []
 
 	class Meta:
-		verbose_name = _('user')
+		# verbose_name = _('user')
+		verbose_name = 'Użytkownik'
 		verbose_name_plural = _('users')
 
 	def get_full_name(self):
