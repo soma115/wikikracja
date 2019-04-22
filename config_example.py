@@ -1,6 +1,6 @@
 # When deploying:
 debug = False
-secret_key = 'generate secret with "python secret-key-gen.py" and put it here'
+secret_key = 'generate secret and put it here'
 allowed_hosts = ['*']
 db_name = 'db_name'
 db_user = 'db_user'
