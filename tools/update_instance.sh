@@ -32,6 +32,7 @@ mkdir static media
 chown -R r1:nginx *
 chmod -R o-rwx *
 chmod u+w media/
+# find -type f -exec chmod ugo-x {} \;
 
 echo ""
 echo "--------------"
