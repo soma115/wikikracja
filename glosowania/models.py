@@ -13,8 +13,9 @@ class Decyzja(models.Model):
 	ile_osob_podpisalo = models.SmallIntegerField(editable=False, default=0)
 	data_powstania = models.DateField(editable=False, null=True)
 	data_zebrania_podpisow = models.DateField(editable=False, null=True)
-	# dodane później. Data referendum jest też datą zatwierdzenia/odrzucenia:
-	data_referendum = models.DateField(editable=False, null=True)
+	data_referendum_start = models.DateField(editable=False, null=True)
+	data_referendum_stop = models.DateField(editable=False, null=True)
+	data_zatwierdzenia = models.DateField(editable=False, null=True)
 	data_obowiazuje_od = models.DateField(editable=False, null=True)
 	za = models.SmallIntegerField(default=0, editable=False)
 	przeciw = models.SmallIntegerField(default=0, editable=False)

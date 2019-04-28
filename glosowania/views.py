@@ -173,39 +173,45 @@ def zliczaj_wszystko():
 	for i in decyzje:
 		if i.status != brak_poparcia and i.status != odrzucone and i.status != obowiazuje:
 			# Jeśli nie jest w jakiś sposób zatwierdzone/odrzucone to procesujemy:
+			
+			# FROM PROPOSITION TO QUEUE
 			if i.status == propozycja and i.ile_osob_podpisalo > wymaganych_podpisow:
-				# FROM PROPOSITION TO QUEUE
 				i.status = w_kolejce
 				i.data_zebrania_podpisow = dzisiaj
 
 				# TODO: Referendum odbędzie się 1 tydzień w niedzielę
-				# i.data_referendum = dzisiaj + timedelta(days=-dzisiaj.weekday()+6, weeks=1) + kolejka  # interfere with status change to Referendum # Coś to nie działa - za wcześnie się zamknęło
+				# i.data_referendum_start = dzisiaj + timedelta(days=-dzisiaj.weekday()+6, weeks=1) + kolejka  # interfere with status change to Referendum # Coś to nie działa - za wcześnie się zamknęło
 				# 0 = monday, 1 = tuesday, ..., 6 = sunday
-				i.data_referendum = dzisiaj + kolejka
-				# print('Data referendum: '+str(i.data_referendum))
+				i.data_referendum_start = i.data_zebrania_podpisow + kolejka
+				i.data_referendum_stop = i.data_referendum_start + czas_trwania_referendum
+				# print('Data referendum: '+str(i.data_referendum_start))
 
 				i.save()
 				# print('Propozycja ' + str(i.id) + ' zmieniła status na "w kolejce".')
 				# log('Propozycja ' + str(i.id) + ' zmieniła status na "w kolejce".')
 				continue
+
+			# FROM PROPOSITION TO NO_INTREST
 			if i.status == propozycja and i.data_powstania + czas_na_zebranie_podpisow <= dzisiaj:
-				# FROM PROPOSITION TO NO_INTREST
 				i.status = brak_poparcia
 				i.save()
 				# print('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
 				# log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
 				continue
-			if i.status == w_kolejce and i.data_referendum <= dzisiaj:
-				# FROM QUEUE TO REFERENDUM
+			
+			# FROM QUEUE TO REFERENDUM
+			if i.status == w_kolejce and i.data_referendum_start <= dzisiaj:
 				i.status = referendum
 				i.save()
 				# print('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
 				# log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
 				continue
-			if i.status == referendum and i.data_referendum + czas_trwania_referendum <= dzisiaj:
-				# FROM REFERENDUM TO VACATIO_LEGIS OR NO
+			
+			# FROM REFERENDUM TO VACATIO_LEGIS OR NOT_APPROVED
+			if i.status == referendum and i.data_referendum_stop <= dzisiaj:
 				if i.za > i.przeciw:
 					i.status = zatwierdzone
+					i.data_zatwierdzenia = dzisiaj
 					i.save()
 					# print('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
 					# log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
@@ -216,9 +222,11 @@ def zliczaj_wszystko():
 					# print('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
 					# log('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
 					continue
-			if i.status == zatwierdzone and i.data_zebrania_podpisow + kolejka + czas_trwania_referendum + vacatio_legis <= dzisiaj:
-				# FROM VACATIO_LEGIS TO LAW
+			
+			# FROM VACATIO_LEGIS TO LAW
+			if i.status == zatwierdzone and i.data_zatwierdzenia + vacatio_legis <= dzisiaj:
 				i.status = obowiazuje
+				i.data_obowiazuje_od = dzisiaj
 				i.save()
 				# print('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
 				# log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
