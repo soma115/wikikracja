@@ -4,18 +4,12 @@
 /venv/
 /myvenv/
 /obj/
-/migrations/
 /backup/
 /static/*
 /media/*
 /_inne_materialy/
 /.idea/
 /.vscode/
-**/migrations/**
-!**/migrations
-!**/migrations/__init__.py
-**/migrations/__init__.py
-elibrary/migrations/__init__.py
 
 *.DS_Store
 *.cache
