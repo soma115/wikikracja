@@ -9,14 +9,18 @@
 		<h3>Treść proponowanego przepisu: {{ id.tresc }}</h3>
 		<h3>Kara za nieprzestrzeganie: {{ id.kara }} </h3>
 			<p>
-				Autor: {{ id.autor }} |
-				Data powstania: {{ id.data_powstania }} |
-				Data zebrania podpisów: {{ id.data_zebrania_podpisow }} |
-				Ile osób podpisało: {{ id.ile_osob_podpisalo }}
-				{% if id.status == 7 %}
-					| Za: {{ id.za }} |
-					Przeciw: {{ id.przeciw }} |
-				{% endif %}
+				Autor: {{ id.autor }}
+
+				{% if id.ile_osob_podpisalo %} | Wniosek o referendum podpisało osób: {{ id.ile_osob_podpisalo }} {% endif %}
+				{% if id.status >= 6 %} | Za było: {{ id.za }} | Przeciw: {{ id.przeciw }} {% endif %}
+				
+				<br><small>
+				{% if id.data_powstania %} Data powstania: {{ id.data_powstania }} {% endif %}
+				{% if id.data_zebrania_podpisow %} | Data zebrania podpisów: {{ id.data_zebrania_podpisow }} {% endif %}
+				{% if id.data_referendum_start %} | Start referendum: {{ id.data_referendum_start }} {% endif %}
+				{% if id.data_referendum_stop %} | Koniec referendum: {{ id.data_referendum_stop }} (wyłącznie) {% endif %}
+				{% if id.data_obowiazuje_od %} <br> <b>Przepis obowiązuje od: {{ id.data_obowiazuje_od }}</b> {% endif %}
+				</small>
 				{% comment %} Status: {{ id.status }} {% endcomment %}
 			</p>
 	</div>

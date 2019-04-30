@@ -8,15 +8,15 @@ from glosowania.models import Decyzja
 
 def home(request):
     trwajace = Decyzja.objects.filter(status=4)
-    zblizajace_sie = Decyzja.objects.filter(status=3).order_by('data_referendum')
+    zblizajace_sie = Decyzja.objects.filter(status=3).order_by('data_referendum_start')
 
-    data_referendum = ZliczajWszystko.kolejka
+    data_referendum_start = ZliczajWszystko.kolejka
     # TODO: Aktualnie trwające referenda
     # Decyzja.objects.filter(status=0)
     # Decyzja.objects.all().order_by('-data_powstania')
     # print(decyzje)
     # print(kolejka)
-    return render(request, 'home/home.html', {'trwajace': trwajace, 'zblizajace_sie': zblizajace_sie, 'data_referendum': data_referendum})
+    return render(request, 'home/home.html', {'trwajace': trwajace, 'zblizajace_sie': zblizajace_sie, 'data_referendum_start': data_referendum_start})
 
 
 # class Home:

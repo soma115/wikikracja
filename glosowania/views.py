@@ -156,7 +156,7 @@ def zliczaj_wszystko():
 	czas_na_zebranie_podpisow = timedelta(days=365)  # 365
 	kolejka = timedelta(days=7)  # czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki
 	czas_trwania_referendum = timedelta(days=7)  #
-	vacatio_legis = timedelta(days=1)  #
+	vacatio_legis = timedelta(days=7)  #
 
 	propozycja = 1
 	brak_poparcia = 2
@@ -167,7 +167,8 @@ def zliczaj_wszystko():
 	obowiazuje = 7
 	grupa = 'rodzina'
 
-	dzisiaj = datetime.today().date()
+	dzisiaj = datetime.today().date() + timedelta(days=15)
+	print('Dzisiaj jest:', dzisiaj)
 
 	decyzje = Decyzja.objects.all()
 	for i in decyzje:
@@ -175,14 +176,15 @@ def zliczaj_wszystko():
 			# Jeśli nie jest w jakiś sposób zatwierdzone/odrzucone to procesujemy:
 			
 			# FROM PROPOSITION TO QUEUE
-			if i.status == propozycja and i.ile_osob_podpisalo > wymaganych_podpisow:
+			if i.status == propozycja and i.ile_osob_podpisalo >= wymaganych_podpisow:
 				i.status = w_kolejce
 				i.data_zebrania_podpisow = dzisiaj
 
 				# TODO: Referendum odbędzie się 1 tydzień w niedzielę
 				# i.data_referendum_start = dzisiaj + timedelta(days=-dzisiaj.weekday()+6, weeks=1) + kolejka  # interfere with status change to Referendum # Coś to nie działa - za wcześnie się zamknęło
 				# 0 = monday, 1 = tuesday, ..., 6 = sunday
-				i.data_referendum_start = i.data_zebrania_podpisow + kolejka
+				# i.data_referendum_start = i.data_zebrania_podpisow + kolejka
+				i.data_referendum_start = i.data_zebrania_podpisow + kolejka + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
 				i.data_referendum_stop = i.data_referendum_start + czas_trwania_referendum
 				# print('Data referendum: '+str(i.data_referendum_start))
 
@@ -211,7 +213,8 @@ def zliczaj_wszystko():
 			if i.status == referendum and i.data_referendum_stop <= dzisiaj:
 				if i.za > i.przeciw:
 					i.status = zatwierdzone
-					i.data_zatwierdzenia = dzisiaj
+					i.data_zatwierdzenia = i.data_referendum_stop
+					i.data_obowiazuje_od = i.data_referendum_stop + vacatio_legis
 					i.save()
 					# print('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
 					# log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
@@ -224,9 +227,8 @@ def zliczaj_wszystko():
 					continue
 			
 			# FROM VACATIO_LEGIS TO LAW
-			if i.status == zatwierdzone and i.data_zatwierdzenia + vacatio_legis <= dzisiaj:
+			if i.status == zatwierdzone and i.data_obowiazuje_od <= dzisiaj:
 				i.status = obowiazuje
-				i.data_obowiazuje_od = dzisiaj
 				i.save()
 				# print('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
 				# log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
