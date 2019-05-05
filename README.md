@@ -8,3 +8,6 @@ Clone repository:
 - go to your www root directory (usualy /var/www)
 - git clone git@gitlab.com:wikikracja/wikikracja.git some_folder
 - run some_folder/deploy_instance.sh
+
+## Known problems
+- if you get Error 500 - clear cookies in your web browser
