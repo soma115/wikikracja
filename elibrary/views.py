@@ -64,8 +64,8 @@ def add(request):
 
 
 class BookDelete(DeleteView):
-    model = Ebook
-    success_url = reverse_lazy('elibrary:index')
+	model = Ebook
+	success_url = reverse_lazy('elibrary:index')
 
 
 # def delete(request, pk):
