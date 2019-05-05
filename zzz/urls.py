@@ -4,17 +4,13 @@ from home import views as hv
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from django.urls import include
-from django.contrib import admin
 
 urlpatterns = [
   url(r'^', include('home.urls')),
   url(r'^login/$', auth_views.login, {'template_name': 'home/login.html'}, name='login'),
   url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
   url(r'^haslo/', hv.haslo, name='haslo'),
-
   url(r'^admin/', admin.site.urls),
-
   url(r'^glosowania/', include('glosowania.urls'), name='glosowania'),
   url(r'^obywatele/', include('obywatele.urls'), name='obywatele'),
   url(r'^elibrary/', include('elibrary.urls', namespace='elibrary')),
@@ -30,7 +26,7 @@ urlpatterns = [
   # url(r'^category/(?P<pk>[0-9]+)/edit/$', onv.category_edit, name='category_edit'),
   # url(r'^uzytkownik/(?P<pk>[0-9]+)/$', vviews.obywatele_szczegoly, name='obywatele_szczegoly1'),
   # url(r'^__debug__/', include(debug_toolbar.urls)), 
-] # + urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

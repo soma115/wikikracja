@@ -10,11 +10,6 @@ psql -c "CREATE USER wikikracja_dev WITH PASSWORD 'tymczasowe1000'";
 psql -c "GRANT ALL PRIVILEGES ON DATABASE wikikracja_dev TO wikikracja_dev";
 EOF
 
-# rm db.sqlite3
-
-find . -name *.pyc -exec rm -rf {} \;
-find -maxdepth 2 -mindepth 2 -type d -name migrations -exec rm -rf {} \;
-
 ./manage.py makemigrations obywatele
 ./manage.py makemigrations glosowania
 ./manage.py makemigrations elibrary

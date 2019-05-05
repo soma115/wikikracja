@@ -13,12 +13,14 @@ from django.core.files.storage import FileSystemStorage
 # 	# dodać X przy książce, której jestem uploaderem
 # 	return render(request, 'elibrary/all.html', {'ebooks': ebooks})
 
+
 class IndexView(generic.ListView):
 	template_name = 'elibrary/index.html'
 
 	def get_queryset(self):
 		# return super().get_queryset()
 		return Ebook.objects.all()
+
 
 # pierwotny
 # def add(request):
@@ -52,7 +54,7 @@ def add(request):
 
 		if form.is_valid():
 			form = form.save(commit=False)
-			form.uploader = User.objects.get(username=request.user)
+			form.uploader = User.objects.get(username=request.user.username)
 			form.title = str(request.FILES.getlist('file')).rsplit(':')[1].replace('>]', '').rsplit('(')[0].strip().replace('[', '').replace(']', '')
 			form.save()
 			return redirect('elibrary:index')

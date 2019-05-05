@@ -6,7 +6,7 @@ git reset --hard
 git pull
 
 # There has to exist ../venv/bin/activate
-source /var/www/venv/bin/activate
+# source /var/www/venv/bin/activate
 
 mkdir static media
 
