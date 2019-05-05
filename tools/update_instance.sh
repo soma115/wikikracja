@@ -18,8 +18,6 @@ source /var/www/venv/bin/activate
 
 # rm db.sqlite3
 
-find . -name *.pyc -exec rm -rf {} \;
-find -maxdepth 2 -mindepth 2 -type d -name migrations -exec rm -rf {} \;
 rm -rf static
 mkdir static media
 

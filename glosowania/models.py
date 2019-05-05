@@ -30,6 +30,8 @@ class Decyzja(models.Model):
 
 	class Meta:
 		verbose_name_plural = "Decyzje"
+	
+	objects = models.Manager() 
 
 
 class ZebranePodpisy(models.Model):
