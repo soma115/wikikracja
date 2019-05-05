@@ -22,7 +22,7 @@
 		{% if user.is_authenticated %}
 			<li role="presentation" {% if request.resolver_match.url_name == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania' %}">Głosowania</a></li>
 			<li role="presentation" {% if request.resolver_match.url_name == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele' %}">Obywatele</a></li>
-			<li role="presentation" {% if request.resolver_match.url_name == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
 
 			<h6><a href="/obywatele/{{ user.id }}">{{ user.username }}</a></h6>
 			<h6><a href="/logout">logout</a></h6>

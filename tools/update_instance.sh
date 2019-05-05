@@ -21,10 +21,5 @@ chmod -R o-rwx *
 chmod u+w media/
 # find -type f -exec chmod ugo-x {} \;
 
-echo ""
-echo "--------------"
-echo "./manage.py createsuperuser"
-echo "./manage.py collectstatic"
-echo "was skipped. Run it manually if you need it."
-echo "--------------"
-echo ""
+./manage.py collectstatic
+# ./manage.py createsuperuser"

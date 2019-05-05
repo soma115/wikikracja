@@ -1,27 +1,27 @@
 {% extends 'home/base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 {% if user.is_authenticated %}
-{% block content %}
-<br>
-<div class="col-sm-5 right"><a class="btn btn-warning fr-rounded fr-small" href="{% url 'elibrary:add' %}">Dodaj eBook</a></div>
-<div class="col-sm-8 right">
+	{% block content %}
+	<br>
+	<div class="col-sm-5 right"><a class="btn btn-warning fr-rounded fr-small" href="{% url 'elibrary:add' %}">Dodaj eBook</a></div>
+	<div class="col-sm-8 right">
 
-	<table style="width:100%">
-		{% for i in object_list %}
-			<tr>
-			<td><a href="{{ i.file.url }}"><h2>{{ i.title }}</h2> </a> </td>
-				<td>{% if user == i.uploader %}
-					<form action="{% url 'elibrary:bookdelete' i.id %}" method='post' style='display: inline;'>
-					{% csrf_token %}
-					<input type="hidden" name='i.id' value='kasuj'/>
-						<button type='submit' class='btn btn-default btn-sm'>
-							<span class='glyphicon glyphicon-trash'></span>
-						</button>
-				{% endif %}</td>
-			</tr>
-		{% endfor %}
-	</table> 
-</div>
-{% endblock %}
+		<table style="width:100%">
+			{% for i in object_list %}
+				<tr>
+				<td><a href="{{ i.file.url }}"><h2>{{ i.title }}</h2> </a> </td>
+					<td>{% if user == i.uploader %}
+						<form action="{% url 'elibrary:bookdelete' i.id %}" method='post' style='display: inline;'>
+						{% csrf_token %}
+						<input type="hidden" name='i.id' value='kasuj'/>
+							<button type='submit' class='btn btn-default btn-sm'>
+								<span class='glyphicon glyphicon-trash'></span>
+							</button>
+					{% endif %}</td>
+				</tr>
+			{% endfor %}
+		</table> 
+	</div>
+	{% endblock %}
 {% endif %}
