@@ -6,3 +6,4 @@ psycopg2-binary==2.7.6.1
 djangosecure==0.0.11
 djangorestframework==3.9.2
 django-core==1.4.1
+django-extensions==2.1.7

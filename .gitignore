@@ -1,21 +1,16 @@
-/__pycache__/
 /bin/
 /env/
 /venv/
 /myvenv/
 /obj/
 /backup/
-/static/*
-/media/*
 /_inne_materialy/
 /.idea/
 /.vscode/
 
 *.DS_Store
 *.cache
-*.log
 *.ptvs
-*.pyc
 *.sln.docstates
 *.suo
 *.user
@@ -26,7 +21,6 @@
 .project
 
 $RECYCLE.BIN/
-db.sqlite3
 Desktop.ini
 ehthumbs.db
 config.py
@@ -34,3 +28,13 @@ Thumbs.db
 web.config
 notatki.md
 create_database.sh
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media
+/static/*

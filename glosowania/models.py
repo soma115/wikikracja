@@ -10,9 +10,13 @@ class Decyzja(models.Model):
     autor = models.CharField(max_length=200)
     tresc = models.TextField(max_length=500, null=True, verbose_name='Treść')
     kara = models.TextField(max_length=500, null=True, verbose_name='Kara')
-    uzasadnienie = models.TextField(max_length=1500, null=True, verbose_name='Uzasadnienie')
+    uzasadnienie = models.TextField(max_length=1500,
+                                    null=True,
+                                    verbose_name='Uzasadnienie')
     ile_osob_podpisalo = models.SmallIntegerField(editable=False, default=0)
-    data_powstania = models.DateField(editable=False, null=True)
+    data_powstania = models.DateField(auto_now_add=True,
+                                      editable=False,
+									  null=True)
     data_zebrania_podpisow = models.DateField(editable=False, null=True)
     data_referendum_start = models.DateField(editable=False, null=True)
     data_referendum_stop = models.DateField(editable=False, null=True)
