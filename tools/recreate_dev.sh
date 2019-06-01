@@ -16,14 +16,14 @@ EOF
 ./manage.py makemigrations
 ./manage.py migrate
 
-./manage.py createsuperuser --email a@a.pl --noinput
-./manage.py changepassword a@a.pl
+./manage.py createsuperuser --username a --noinput --email a@a.pl
+./manage.py changepassword a
 
 # ./manage.py createsuperuser
 
 sudo su - postgres <<EOF
-psql --dbname wikikracja_dev -c "update obywatele_user set username='a' where id=1;"
-psql --dbname wikikracja_dev -c "update obywatele_user set is_active=TRUE where id=1;"
-psql --dbname wikikracja_dev -c "update obywatele_user set is_staff=TRUE where id=1;"
+psql --dbname wikikracja_dev -c "update auth_user set username='a' where id=1;"
+psql --dbname wikikracja_dev -c "update auth_user set is_active=TRUE where id=1;"
+psql --dbname wikikracja_dev -c "update auth_user set is_staff=TRUE where id=1;"
 EOF
 

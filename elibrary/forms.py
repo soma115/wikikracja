@@ -1,13 +1,12 @@
 from django import forms
 from elibrary.models import Ebook
-from obywatele.models import User  # Custom user model
 
 
 class UploadFileForm(forms.ModelForm):
-	# title = forms.CharField(max_length=200)
-	file = forms.FileField()
-	# uploader = User
+    # title = forms.CharField(max_length=200)
+    file = forms.FileField()
+    # uploader = User
 
-	class Meta:
-		model = Ebook
-		fields = ('file',)
+    class Meta:
+        model = Ebook
+        fields = ('file',)

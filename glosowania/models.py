@@ -1,7 +1,7 @@
 import os
 from django.db import models
 import datetime
-from obywatele.models import User  # Custom user model
+from django.contrib.auth.models import User
 
 base_dir = os.path.abspath('.')
 
@@ -16,7 +16,7 @@ class Decyzja(models.Model):
     ile_osob_podpisalo = models.SmallIntegerField(editable=False, default=0)
     data_powstania = models.DateField(auto_now_add=True,
                                       editable=False,
-									  null=True)
+                                      null=True)
     data_zebrania_podpisow = models.DateField(editable=False, null=True)
     data_referendum_start = models.DateField(editable=False, null=True)
     data_referendum_stop = models.DateField(editable=False, null=True)
@@ -37,8 +37,8 @@ class Decyzja(models.Model):
 
     class Meta:
         verbose_name_plural = "Decyzje"
-    
-    objects = models.Manager() 
+
+    objects = models.Manager()
 
 
 class ZebranePodpisy(models.Model):

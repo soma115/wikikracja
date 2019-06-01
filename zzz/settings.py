@@ -10,9 +10,6 @@ SECRET_KEY = config.secret_key
 
 ALLOWED_HOSTS = config.allowed_hosts
 
-# AUTHENTICATION_BACKENDS = ['backends.ModelBackend']
-AUTH_USER_MODEL = 'obywatele.User'
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',

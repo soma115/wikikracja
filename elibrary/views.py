@@ -2,11 +2,10 @@ from elibrary.forms import UploadFileForm
 from elibrary.models import Ebook
 from django.shortcuts import render
 from django.shortcuts import redirect
-from obywatele.models import User  # Custom user model
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from django.views import generic
-from django.core.files.storage import FileSystemStorage
+# from django.core.files.storage import FileSystemStorage
 
 # def index(request):
 # 	ebooks = Ebook.objects.all()
@@ -15,11 +14,11 @@ from django.core.files.storage import FileSystemStorage
 
 
 class IndexView(generic.ListView):
-	template_name = 'elibrary/index.html'
+    template_name = 'elibrary/index.html'
 
-	def get_queryset(self):
-		# return super().get_queryset()
-		return Ebook.objects.all()
+    def get_queryset(self):
+        # return super().get_queryset()
+        return Ebook.objects.all()
 
 
 # pierwotny
