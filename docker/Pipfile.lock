@@ -227,7 +227,7 @@
                 "sha256:f5e19802295e63bdf83bb92849285c01f7167840efb1c1e08507a50b10ba7efa",
                 "sha256:fc569682f012b1f62f8d28d8f9bc71f1de67648cd1bc124ef8ccf8db4edfc28a"
             ],
-            "version": "==3.6.1"
+            "version": "==3.6.6"
         },
         "pytz": {
             "hashes": [
