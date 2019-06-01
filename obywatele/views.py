@@ -230,7 +230,7 @@ def zliczaj_obywateli(request):
                 + '\n\nHasło możesz zmienić po zalogowaniu w swoim profilu: '
                 + request.get_host()+'/haslo/',
                 # TODO: should be configurable in secrets.py:
-                'from@example.com',
+                'from@example.com',  # TODO: zmienić na robot czy coś. Jest więcej takich spisów
                 [i.uid.email],
                 fail_silently=False,
             )

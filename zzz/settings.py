@@ -120,6 +120,7 @@ STATICFILES_STORAGE = \
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'glosowania'  # LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 DATE_FORMAT = "Y-m-d"
 INTERNAL_IPS = '127.0.0.1'
@@ -130,5 +131,8 @@ EMAIL_HOST_USER = config.email_host_user
 EMAIL_HOST_PASSWORD = config.email_host_password
 EMAIL_USE_SSL = config.email_use_ssl
 EMAIL_USE_TLS = config.email_use_tls
+DEFAULT_FROM_EMAIL = config.default_from_email
 
 X_FRAME_OPTIONS = 'DENY'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

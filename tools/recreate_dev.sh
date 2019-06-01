@@ -25,5 +25,7 @@ sudo su - postgres <<EOF
 psql --dbname wikikracja_dev -c "update auth_user set username='a' where id=1;"
 psql --dbname wikikracja_dev -c "update auth_user set is_active=TRUE where id=1;"
 psql --dbname wikikracja_dev -c "update auth_user set is_staff=TRUE where id=1;"
+psql --dbname wikikracja_dev -c "update django_site set domain='127.0.0.1:8000' where id=1;"
+psql --dbname wikikracja_dev -c "update django_site set name='127.0.0.1:8000' where id=1;"
 EOF
 
