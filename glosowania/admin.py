@@ -8,17 +8,17 @@ class NoweGlosowanie(admin.ModelAdmin):
     # inlines = [CommentInline]
 
     # def save_model(self, request, obj, form, change):
-    #	 obj.user = request.user
-    #	 obj.save()
+    #     obj.user = request.user
+    #     obj.save()
 
     # def save_formset(self, request, form, formset, change):
-    #	 if formset.model == Comment:
-    #		 instances = formset.save(commit=False)
-    #		 for instance in instances:
-    #			 instance.user = request.user
-    #			 instance.save()
-    #	 else:
-    #		 formset.save()
+    #     if formset.model == Comment:
+    #         instances = formset.save(commit=False)
+    #         for instance in instances:
+    #             instance.user = request.user
+    #             instance.save()
+    #     else:
+    #         formset.save()
 
 
 admin.site.register(Decyzja)

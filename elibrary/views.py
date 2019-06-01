@@ -5,12 +5,13 @@ from django.shortcuts import redirect
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from django.views import generic
+from django.contrib.auth.models import User
 # from django.core.files.storage import FileSystemStorage
 
 # def index(request):
-# 	ebooks = Ebook.objects.all()
-# 	# dodać X przy książce, której jestem uploaderem
-# 	return render(request, 'elibrary/all.html', {'ebooks': ebooks})
+#     ebooks = Ebook.objects.all()
+#     # dodać X przy książce, której jestem uploaderem
+#     return render(request, 'elibrary/all.html', {'ebooks': ebooks})
 
 
 class IndexView(generic.ListView):
@@ -23,49 +24,52 @@ class IndexView(generic.ListView):
 
 # pierwotny
 # def add(request):
-# 	if request.method == 'POST':
-# 		form = UploadFileForm(request.POST, request.FILES)
+#     if request.method == 'POST':
+#         form = UploadFileForm(request.POST, request.FILES)
 
-# 		if form.is_valid():
-# 			form = form.save(commit=False)
-# 			form.uploader = User.objects.get(username=request.user)
-# 			form.title = str(request.FILES.getlist('file')).rsplit(':')[1].replace('>]', '').rsplit('(')[0].strip().replace('[', '').replace(']', '')
-# 			form.save()
-# 			return redirect('elibrary:index')
-# 	else:
-# 		form = UploadFileForm()
-# 	return render(request, 'elibrary/add.html', {'form': form})
+#         if form.is_valid():
+#             form = form.save(commit=False)
+#             form.uploader = User.objects.get(username=request.user)
+#             form.title = str(request.FILES.getlist('file')).rsplit(':')[1].replace('>]', '').rsplit('(')[0].strip().replace('[', '').replace(']', '')
+#             form.save()
+#             return redirect('elibrary:index')
+#     else:
+#         form = UploadFileForm()
+#     return render(request, 'elibrary/add.html', {'form': form})
 
 
 # def add(request):
-# 	context = {}
-# 	if request.method == 'POST':
-# 		uploaded_file = request.FILES['document']
-# 		fs = FileSystemStorage()
-# 		name = fs.save(uploaded_file.name, uploaded_file)
-# 		context['url'] = fs.url(name)
-# 	return render(request, 'elibrary/add.html', context)
+#     context = {}
+#     if request.method == 'POST':
+#         uploaded_file = request.FILES['document']
+#         fs = FileSystemStorage()
+#         name = fs.save(uploaded_file.name, uploaded_file)
+#         context['url'] = fs.url(name)
+#     return render(request, 'elibrary/add.html', context)
 
 
 def add(request):
-	if request.method == 'POST':
-		form = UploadFileForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
 
-		if form.is_valid():
-			form = form.save(commit=False)
-			form.uploader = User.objects.get(username=request.user.username)
-			form.title = str(request.FILES.getlist('file')).rsplit(':')[1].replace('>]', '').rsplit('(')[0].strip().replace('[', '').replace(']', '')
-			form.save()
-			return redirect('elibrary:index')
-	else:
-		form = UploadFileForm()
-	return render(request, 'elibrary/add.html', {'form': form})
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.uploader = User.objects.get(username=request.user.username)
+            form.title = str(
+                request.FILES.getlist('file')).rsplit(
+                    ':')[1].replace('>]', '').rsplit(
+                        '(')[0].strip().replace('[', '').replace(']', '')
+            form.save()
+            return redirect('elibrary:index')
+    else:
+        form = UploadFileForm()
+    return render(request, 'elibrary/add.html', {'form': form})
 
 
 class BookDelete(DeleteView):
-	model = Ebook
-	success_url = reverse_lazy('elibrary:index')
+    model = Ebook
+    success_url = reverse_lazy('elibrary:index')
 
 
 # def delete(request, pk):
-# 	Ebook.object.get(pk=pk).delete()
+#     Ebook.object.get(pk=pk).delete()

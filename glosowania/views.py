@@ -35,7 +35,7 @@ def get_client_ip(request):
         username = request.user.username
 
     with open('access.log', 'a') as log:
-            log.writelines(f"{datetime.now()} {ip} {username}\n")
+        log.writelines(f"{datetime.now()} {ip} {username}\n")
 
 
 # Wyświetl głosowania:
@@ -45,36 +45,45 @@ def glosowania(request):
 
     if request.GET.get("1"):
         decyzje = Decyzja.objects.filter(status=1)
-        return render(request, 'glosowania/start.html', {'decyzje': decyzje, 'status': "Nowe propozycje"})
+        return render(request, 'glosowania/start.html',
+                      {'decyzje': decyzje, 'status': "Nowe propozycje"})
 
     if request.GET.get("2"):
         decyzje = Decyzja.objects.filter(status=2)
-        return render(request, 'glosowania/start.html', {'decyzje': decyzje, 'status': "Propozycje odrzucone"})
+        return render(request, 'glosowania/start.html',
+                      {'decyzje': decyzje, 'status': "Propozycje odrzucone"})
 
     if request.GET.get("3"):
         decyzje = Decyzja.objects.filter(status=3)
-        return render(request, 'glosowania/start.html', {'decyzje': decyzje, 'status': "W kolejce do referendum"})
+        return render(request, 'glosowania/start.html',
+                      {'decyzje': decyzje, 'status': "W kolejce do referendum"})
 
     if request.GET.get("4"):
         decyzje = Decyzja.objects.filter(status=4)
-        return render(request, 'glosowania/start.html', {'decyzje': decyzje, 'status': "Referendum"})
+        return render(request, 'glosowania/start.html',
+                      {'decyzje': decyzje, 'status': "Referendum"})
 
     if request.GET.get("5"):
         decyzje = Decyzja.objects.filter(status=5)
-        return render(request, 'glosowania/start.html', {'decyzje': decyzje, 'status': "Odrzucone w referendum"})
+        return render(request, 'glosowania/start.html',
+                      {'decyzje': decyzje, 'status': "Odrzucone w referendum"})
 
     if request.GET.get("6"):
         decyzje = Decyzja.objects.filter(status=6)
-        return render(request, 'glosowania/start.html', {'decyzje': decyzje, 'status': "Zatwierdzone w okresie Vacatio Legis"})
+        return render(request, 'glosowania/start.html',
+                      {'decyzje': decyzje,
+                       'status': "Zatwierdzone w okresie Vacatio Legis"})
 
     if request.GET.get("7"):
         decyzje = Decyzja.objects.filter(status=7)
-        return render(request, 'glosowania/start.html', {'decyzje': decyzje, 'status': "Przepisy obowiązujące"})
+        return render(request, 'glosowania/start.html',
+                      {'decyzje': decyzje, 'status': "Przepisy obowiązujące"})
 
     zliczaj_wszystko()
 
     decyzje = Decyzja.objects.filter(status=1)
-    return render(request, 'glosowania/start.html', {'decyzje': decyzje, 'status': "Nowe propozycje"})
+    return render(request, 'glosowania/start.html',
+                  {'decyzje': decyzje, 'status': "Nowe propozycje"})
 
 
 # Pokaż szczegóły przepisu
@@ -85,27 +94,34 @@ def glosowanie_szczegoly(request, pk):
 
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_podpisujaca = request.user
-        podpis = ZebranePodpisy(projekt=nowy_projekt, podpis_uzytkownika=osoba_podpisujaca)
+        podpis = ZebranePodpisy(projekt=nowy_projekt,
+                                podpis_uzytkownika=osoba_podpisujaca)
 
         nowy_projekt.ile_osob_podpisalo += 1
 
         try:
-            podpis.save()  # wyrzuci wyjątek jeśli kombinacja użytkownik-głosowanie nie jest unikatowa
+            # wyrzuci wyjątek jeśli kombinacja
+            # użytkownik-głosowanie nie jest unikatowa:
+            podpis.save()
             nowy_projekt.save()
         except IntegrityError as e:
             if 'UNIQUE constraint failed' in e.args[0]:
-                # TODO: Guzik 'Tak, podpisuję' ma się nie pokazywać jeśli użytkownik już wcześniej podpisał
-                # trzeba chyba dodać kolumnę do modelu
+                # TODO: Guzik 'Tak, podpisuję' ma się nie pokazywać
+                # jeśli użytkownik już wcześniej podpisał.
+                # Trzeba chyba dodać kolumnę do modelu
                 message = 'Już wcześniej podpisałeś ten wniosek.'
-                return render(request, 'glosowania/zapisane.html', {'id': szczegoly, 'message': message})
+                return render(request, 'glosowania/zapisane.html',
+                              {'id': szczegoly, 'message': message})
         message = 'Twój podpis został zapisany.'
-        return render(request, 'glosowania/zapisane.html', {'id': szczegoly, 'message': message})
+        return render(request, 'glosowania/zapisane.html',
+                      {'id': szczegoly, 'message': message})
 
     if request.GET.get('tak'):
 
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_glosujaca = request.user
-        glos = KtoJuzGlosowal(projekt=nowy_projekt, ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
+        glos = KtoJuzGlosowal(projekt=nowy_projekt,
+                              ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
 
         nowy_projekt.za += 1
 
@@ -115,7 +131,8 @@ def glosowanie_szczegoly(request, pk):
         except IntegrityError as e:
             if 'UNIQUE constraint failed' in e.args[0]:
                 pass  # Już podpisał
-        # TODO: Guzik 'Tak/Nie' ma się nie pokazywać jeśli użytkownik już wcześniej podpisał
+        # TODO: Guzik 'Tak/Nie' ma się nie pokazywać
+        # jeśli użytkownik już wcześniej podpisał.
 
         return render(request, 'glosowania/zapisane.html', {'id': szczegoly})
 
@@ -123,7 +140,8 @@ def glosowanie_szczegoly(request, pk):
 
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_glosujaca = request.user
-        glos = KtoJuzGlosowal(projekt=nowy_projekt, ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
+        glos = KtoJuzGlosowal(projekt=nowy_projekt,
+                              ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
 
         nowy_projekt.przeciw += 1
 
@@ -133,7 +151,8 @@ def glosowanie_szczegoly(request, pk):
         except IntegrityError as e:
             if 'UNIQUE constraint failed' in e.args[0]:
                 pass  # Już podpisał
-        # TODO: Guzik 'Tak/Nie' ma się nie pokazywać jeśli użytkownik już wcześniej podpisał
+        # TODO: Guzik 'Tak/Nie' ma się nie pokazywać
+        # jeśli użytkownik już wcześniej podpisał.
 
         return render(request, 'glosowania/zapisane.html', {'id': szczegoly})
 
@@ -141,7 +160,8 @@ def glosowanie_szczegoly(request, pk):
 
 
 class ZliczajWszystko():
-    # czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki
+    # czas pomiędzy zebraniem podpisów a referendum
+    # wymagany aby móc omówić skutki:
     kolejka = timedelta(days=7)
 
     def get(self, request):
@@ -150,11 +170,14 @@ class ZliczajWszystko():
 
 
 def zliczaj_wszystko():
-    '''Jeśi propozycja zostanie zatwierdzona w niedzielę to głosowanie odbędzie się za 2 tygodnie'''
+    '''Jeśi propozycja zostanie zatwierdzona w niedzielę
+    to głosowanie odbędzie się za 2 tygodnie'''
     # print('Zliczam głosy i terminy...')
     wymaganych_podpisow = 2  # Aby zatwierdzić wniosek o referendum
     czas_na_zebranie_podpisow = timedelta(days=365)  # 365
-    kolejka = timedelta(days=7)  # czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki
+    # czas pomiędzy zebraniem podpisów a referendum
+    # wymagany aby móc omówić skutki:
+    kolejka = timedelta(days=7)
     czas_trwania_referendum = timedelta(days=7)  #
     vacatio_legis = timedelta(days=7)  #
 
@@ -173,7 +196,8 @@ def zliczaj_wszystko():
     decyzje = Decyzja.objects.all()
     for i in decyzje:
         if i.status != brak_poparcia and i.status != odrzucone and i.status != obowiazuje:
-            # Jeśli nie jest w jakiś sposób zatwierdzone/odrzucone to procesujemy:
+            # Jeśli nie jest w jakiś sposób zatwierdzone/odrzucone
+            # to procesujemy:
             
             # FROM PROPOSITION TO QUEUE
             if i.status == propozycja and i.ile_osob_podpisalo >= wymaganych_podpisow:

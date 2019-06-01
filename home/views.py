@@ -16,8 +16,12 @@ def home(request):
     # Decyzja.objects.all().order_by('-data_powstania')
     # print(decyzje)
     # print(kolejka)
-    return render(request, 'home/home.html', {'trwajace': trwajace, 'zblizajace_sie': zblizajace_sie, 'data_referendum_start': data_referendum_start})
-
+    return render(request,
+                  'home/home.html',
+                  {'trwajace': trwajace,
+                   'zblizajace_sie': zblizajace_sie,
+                   'data_referendum_start': data_referendum_start}
+                  )
 
 # class Home:
 #     def home(request):
@@ -25,7 +29,8 @@ def home(request):
 #         decyzje = Decyzja.objects.all()
 #         print(decyzje)
 #         print(kolejka)
-#         return render(request, 'home/home.html', {'decyzje': decyzje, 'kolejka': kolejka})
+#         return render(request, 'home/home.html', {'decyzje': decyzje,
+#                                                   'kolejka': kolejka})
 
 
 def haslo(request):
@@ -37,7 +42,8 @@ def haslo(request):
             messages.success(request, 'Twoje hasło zostało zmienione.')
             return redirect('haslo')
         else:
-            messages.error(request, 'Coś źle wpisałeś. Zobacz jaki błąd pojawił się powyżej i spróbuj jeszcze raz.')
+            messages.error(request, 'Coś źle wpisałeś. Zobacz jaki błąd pojawił \
+                                     się powyżej i spróbuj jeszcze raz.')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'home/haslo.html', {
@@ -45,7 +51,8 @@ def haslo(request):
     })
 
 '''
-#Tak było kiedyś ale nie wiadomo dlaczego. Jak się pojawi ktoś kto wie to będziemy myśleli o przywróceniu tego. 20160501
+# Tak było kiedyś ale nie wiadomo dlaczego. Jak się pojawi ktoś kto wie to 
+# będziemy myśleli o przywróceniu tego. 20160501
 
 from django.shortcuts import render
 from django.shortcuts import render_to_response

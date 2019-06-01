@@ -65,7 +65,7 @@ class KtoJuzGlosowal(models.Model):
 #######################################################
 
 # TODO: To powinno być składową klasy aby dało się importować.
-#	   To samo jest powtórzone w "glosowania/views/ZliczajWszystko()":
+#       To samo jest powtórzone w "glosowania/views/ZliczajWszystko()":
 WYMAGANYCH_PODPISOW = 2  # Aby zatwierdzić wniosek o referendum
 CZAS_NA_ZEBRANIE_PODPISOW = datetime.timedelta(days=30)  # 365
 KOLEJKA = datetime.timedelta(days=5)  # 14 czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki

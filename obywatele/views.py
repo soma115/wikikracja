@@ -50,9 +50,9 @@ def dodaj(request):
                 nowa_osoba.is_active = False
                 nowy_w_uzytkownikach = Uzytkownik.objects.get(id=nowa_osoba.id)
                 nowy_w_uzytkownikach.polecajacy = request.user.username
-                # nowa_osoba.data_zgloszenia doesn't make sense becauese 
+                # nowa_osoba.data_zgloszenia doesn't make sense becauese
                 # date_joined in auth_user already exist.
-                # nowa_osoba.data_zgloszenia nie ma sensu bo już istnieje 
+                # nowa_osoba.data_zgloszenia nie ma sensu bo już istnieje
                 # date_joined w auth_user
                 nowa_osoba.save()
                 nowy_w_uzytkownikach.save()
@@ -111,7 +111,8 @@ def obywatele_szczegoly(request, pk):
             wynik = 'Ok, nadałeś użytkownikowi '
             + str(User.objects.get(pk=pk))
             + ' punkt reputacji.'
-            return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
+            return render(request,
+                          'obywatele/zapisane.html', {'wynik': wynik, })
 
     if request.GET.get('nie'):
         # Recall acceptance from pk
@@ -219,7 +220,7 @@ def zliczaj_obywateli(request):
                 akceptacja.kandydat = k
                 try:
                     akceptacja.save()
-                except:
+                except:  # TODO: except something
                     continue
 
             send_mail(
@@ -230,7 +231,7 @@ def zliczaj_obywateli(request):
                 + '\n\nHasło możesz zmienić po zalogowaniu w swoim profilu: '
                 + request.get_host()+'/haslo/',
                 # TODO: should be configurable in secrets.py:
-                'from@example.com',  # TODO: zmienić na robot czy coś. Jest więcej takich spisów
+                'from@example.com',
                 [i.uid.email],
                 fail_silently=False,
             )

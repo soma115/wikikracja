@@ -1,4 +1,3 @@
-from django.conf.urls import url
 from elibrary import views as v
 from django.urls import path
 
