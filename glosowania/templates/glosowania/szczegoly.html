@@ -5,10 +5,11 @@
 <br><br><br>
 {% if user.is_authenticated %}
 	<div>
-		<h3>Projekt numer: {{ id.id }}</h3>
-		<h3>Treść proponowanego przepisu: {{ id.tresc }}</h3>
-		<h3>Kara za nieprzestrzeganie: {{ id.kara }} </h3>
-		<h3>Uzasadnienie: {{ id.uzasadnienie }} </h3>
+		<h3>Przepis numer: {{ id.id }}</h3>
+		<h4>Treść proponowanego przepisu:</h4><p>{{ id.tresc }}</p>
+		<h4>Kara za nieprzestrzeganie:</h4><p>{{ id.kara }}</p>
+		<h4>Uzasadnienie:</h4><p>{{ id.uzasadnienie }}</p>
+        <h4>Ten przepis znosi następujące przepisy:</h4><p>{{ id.znosi }}</p>
 			<p>
 				Autor: {{ id.autor }}
 
@@ -29,7 +30,7 @@
 	{% if id.status == 1 %}
 		{% comment %} propozycja = guzik do podpisania {% endcomment %}
 		<form action="#" method="get">
-			<p><u><h4>Czy na pewno chcesz się podpisać pod tym wnioskiem o nowy przepis?</h4></u></p>
+			<p><u><h4>Czy chcesz referendum w sprawie tego przepisu?</h4></u></p>
 		    <input class="btn btn-primary" type="submit" name="podpisz" value="Tak, podpisuję"/>
 		    <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
 
@@ -39,7 +40,7 @@
 	{% if id.status == 4 %}
 		{% comment %} referendum = dwa guziki - ZA i PRZECIW {% endcomment %}
 		<form action="#" method="get">
-			<p><u><h4>Czy zgadzasz się na wprowadzenie tego przepisu?</h4></u></p>
+			<p><u><h4>Czy chcesz wprowadzenia tego przepisu?</h4></u></p>
 		    <input class="btn btn-primary" type="submit" name="tak" value="Tak"/>
 			<input class="btn btn-primary" type="submit" name="nie" value="Nie"/>
 		    <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>

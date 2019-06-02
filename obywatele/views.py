@@ -143,7 +143,7 @@ def obywatele_szczegoly(request, pk):
     print('populacja:', populacja)
     wymagana_rep = int(log(populacja) * WYMAGANY_PROCENT_AKCEPTACJI)
     twoja_rep = dawca.reputacja
-    
+
     return render(request,
                   'obywatele/szczegoly.html',
                   {'b': biorca,
@@ -185,14 +185,15 @@ def zliczaj_obywateli(request):
                 'Witaj ' + i.uid.username
                 + '\nTwoje konto na ' + str(request.get_host())
                 + ' zostało zablokowane.',
-                'from@example.com',
+                'from@example.com',  # TODO: change it to variable
                 [i.uid.email],
                 fail_silently=False,
             )
 
             # Also delete this person User and Uzytkownik instances.
-            Uzytkownik.objects.get(id=i.id).delete()
-            User.objects.get(id=i.id).delete()
+            # Uzytkownik.objects.get(id=i.id).delete()
+            # User.objects.get(id=i.id).delete()
+            # Deleting is bad idea after all. He may come back.
 
     # Włącz użytkowników z odpowiednio wysoką reputacją
     for i in Uzytkownik.objects.all():

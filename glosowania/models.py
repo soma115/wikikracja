@@ -9,8 +9,8 @@ base_dir = os.path.abspath('.')
 class Decyzja(models.Model):
     autor = models.CharField(max_length=200)
     tresc = models.TextField(max_length=500, null=True, verbose_name='Treść',
-                             help_text='Wpisz ostateczną treść przepisu\
-                                 w takim brzmieniu w jakim ma obowiązywać.')
+                             help_text='Wpisz treść przepisu w takim brzmieniu\
+                                 w jakim ma obowiązywać.')
     kara = models.TextField(max_length=500, null=True, verbose_name='Kara',
                             help_text='Jaka kara ma obowiązywać za nie\
                                 nie przestrzeganie tego przpisu. Może to być\
