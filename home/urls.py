@@ -11,9 +11,7 @@ urlpatterns = [
     # reset password
     # https://simpleisbetterthancomplex.com/tutorial/2016/09/19/how-to-create-password-reset-view.html
     url(r'^password_reset/$',
-        auth_views.PasswordResetView.as_view(
-            template_name='home/password_reset_form.html'),
-        name='password_reset'),
+        auth_views.PasswordResetView.as_view(template_name='home/password_reset_form.html'), name='password_reset'),
     url(r'^password_reset/done/$',
         auth_views.PasswordResetDoneView.as_view(
             template_name='home/password_reset_done.html'),

@@ -11,3 +11,4 @@ Clone repository:
 
 ## Known problems
 - if you get Error 500 - clear cookies in your web browser
+- `yum install python36-devel` on Centos 7 for Channels
