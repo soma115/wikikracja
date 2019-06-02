@@ -25,6 +25,7 @@ class Decyzja(models.Model):
                                         jego powstanie?')
     znosi = models.CharField(max_length=500,
                              null=True,
+                             blank=True,
                              verbose_name='Znosi przepisy',
                              help_text='Jeśli proponowany przepis znosi inne\
                                 przepisy to wpisz ich numery tutaj. Kolejne\

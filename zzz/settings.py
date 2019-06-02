@@ -79,6 +79,7 @@ INSTALLED_APPS = (
     'glosowania',
     'obywatele',
     'elibrary',
+    'crispy_forms',
 )
 
 LOGGING = {
@@ -134,5 +135,5 @@ EMAIL_USE_TLS = config.email_use_tls
 DEFAULT_FROM_EMAIL = config.default_from_email
 
 X_FRAME_OPTIONS = 'DENY'
-
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

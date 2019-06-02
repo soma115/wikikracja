@@ -7,3 +7,4 @@ djangosecure==0.0.11
 djangorestframework==3.9.2
 django-core==1.4.1
 django-extensions==2.1.7
+django-crispy-forms==1.7.2
