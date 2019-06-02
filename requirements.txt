@@ -8,3 +8,5 @@ djangorestframework==3.9.2
 django-core==1.4.1
 django-extensions==2.1.7
 django-crispy-forms==1.7.2
+six==1.10.0
+channels==2.2.0
