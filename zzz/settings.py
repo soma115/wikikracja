@@ -66,6 +66,13 @@ TEMPLATES = [
 ]
 
 INSTALLED_APPS = (
+    'chat',
+    'channels',
+    'crispy_forms',
+    'elibrary',
+    'obywatele',
+    'glosowania',
+    'home',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -75,11 +82,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django_extensions',
-    'home',
-    'glosowania',
-    'obywatele',
-    'elibrary',
-    'crispy_forms',
 )
 
 LOGGING = {
@@ -137,3 +139,4 @@ DEFAULT_FROM_EMAIL = config.default_from_email
 X_FRAME_OPTIONS = 'DENY'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+ASGI_APPLICATION = "zzz.routing.application"
