@@ -8,11 +8,27 @@ base_dir = os.path.abspath('.')
 
 class Decyzja(models.Model):
     autor = models.CharField(max_length=200)
-    tresc = models.TextField(max_length=500, null=True, verbose_name='Treść')
-    kara = models.TextField(max_length=500, null=True, verbose_name='Kara')
+    tresc = models.TextField(max_length=500, null=True, verbose_name='Treść',
+                             help_text='Wpisz ostateczną treść przepisu\
+                                 w takim brzmieniu w jakim ma obowiązywać.')
+    kara = models.TextField(max_length=500, null=True, verbose_name='Kara',
+                            help_text='Jaka kara ma obowiązywać za nie\
+                                nie przestrzeganie tego przpisu. Może to być\
+                                np. Banicja na 3 miesiące, Banicja na zawsze,\
+                                itd.')
     uzasadnienie = models.TextField(max_length=1500,
                                     null=True,
-                                    verbose_name='Uzasadnienie')
+                                    verbose_name='Uzasadnienie',
+                                    help_text='Co jest celem tego przepisu?\
+                                        Dlaczego powstał? Co mamy dzięki niemu\
+                                        osiągnąć? Jakie wydarzenie spowodowało\
+                                        jego powstanie?')
+    znosi = models.CharField(max_length=500,
+                             null=True,
+                             verbose_name='Znosi przepisy',
+                             help_text='Jeśli proponowany przepis znosi inne\
+                                przepisy to wpisz ich numery tutaj. Kolejne\
+                                numery przepisów rozdziel przecinkami.')
     ile_osob_podpisalo = models.SmallIntegerField(editable=False, default=0)
     data_powstania = models.DateField(auto_now_add=True,
                                       editable=False,
@@ -26,7 +42,7 @@ class Decyzja(models.Model):
     przeciw = models.SmallIntegerField(default=0, editable=False)
     status = models.SmallIntegerField(default=1, editable=False)
 
-    # 0.Propozycja, 1.Brak poparcia, 2.W kolejce, 3.Referendum, 4.Odrzucone, 
+    # 0.Propozycja, 1.Brak poparcia, 2.W kolejce, 3.Referendum, 4.Odrzucone,
     # 5.Zatwierdzone/Vacatio Legis, 6.Obowiązuje
 
     # TODO: data_wejscia_w_zycie =

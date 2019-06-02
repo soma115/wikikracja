@@ -6,4 +6,4 @@ class DecyzjaForm(forms.ModelForm):
 
     class Meta:
         model = Decyzja
-        fields = ('tresc', 'kara', 'uzasadnienie')
+        fields = ('tresc', 'kara', 'uzasadnienie', 'znosi')
