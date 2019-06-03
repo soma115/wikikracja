@@ -23,6 +23,8 @@
 		{% if user.is_authenticated %}
 			<li role="presentation" {% if request.resolver_match.url_name == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania' %}">Głosowania</a></li>
 			<li role="presentation" {% if request.resolver_match.url_name == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele' %}">Obywatele</a></li>
+			{% comment %} <li role="presentation" {% if request.resolver_match.url_name == 'room' %} class="active" {% endif %}><a href="{% url 'room/a' %}">Czat</a></li> {% endcomment %}
+            <a href="{% url 'index' %}">Czat</a>
 			<li role="presentation" {% if request.resolver_match.namespace == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
 			<li role="presentation" {% if request.resolver_match.url_name == 'obywatele_szczegoly' %} class="active" {% endif %}><a style="color:green" href="/obywatele/{{ user.id }}">{{ user.username }}</a></li>
 			<li><a style="color:gray" href="/logout">logout</a></li>

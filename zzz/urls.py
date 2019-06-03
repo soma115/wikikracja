@@ -19,7 +19,7 @@ urlpatterns = [
   url(r'^obywatele/', include('obywatele.urls'), name='obywatele'),
   url(r'^elibrary/', include('elibrary.urls', namespace='elibrary')),
 
-  url(r'^chat/', include('chat.urls')),
+  url(r'^chat/', include('chat.urls'), name='chaty'),
 
   # url(r'^offer/new/$', onv.offer_new, name='offer_new'),
   # url(r'^offer/(?P<pk>[0-9]+)/$', onv.offer_detail, name='offer_detail'),
