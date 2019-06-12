@@ -21,11 +21,11 @@
 			<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">zaloguj</a></li>
 		{% endif %}
 		{% if user.is_authenticated %}
-			<li role="presentation" {% if request.resolver_match.url_name == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania' %}">Głosowania</a></li>
-			<li role="presentation" {% if request.resolver_match.url_name == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele' %}">Obywatele</a></li>
-			<li role="presentation" {% if request.resolver_match.url_name == 'index' %} class="active" {% endif %}><a href="{% url 'index' %}">Czat</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania:index' %}">Głosowania</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele:index' %}">Obywatele</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="{% url 'chat:index' %}">Czat</a></li>
 			<li role="presentation" {% if request.resolver_match.namespace == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
-			<li role="presentation" {% if request.resolver_match.url_name == 'obywatele_szczegoly' %} class="active" {% endif %}><a style="color:green" href="/obywatele/{{ user.id }}">{{ user.username }}</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'obywatele_szczegoly' %} class="active" {% endif %}><a style="color:green" href="/obywatele/{{ user.id }}">{{ user.username }}</a></li>
 			<li><a style="color:gray" href="/logout">logout</a></li>
 		{% endif %}
 	</ul>

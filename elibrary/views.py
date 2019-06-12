@@ -31,7 +31,7 @@ class IndexView(generic.ListView):
 #             form = form.save(commit=False)
 #             form.uploader = User.objects.get(username=request.user)
 #             form.title = str(request.FILES.getlist('file')).rsplit(':')[1].replace('>]', '').rsplit('(')[0].strip().replace('[', '').replace(']', '')
-#             form.save()
+#             form.save()User.objects.get(username=request.user.username)
 #             return redirect('elibrary:index')
 #     else:
 #         form = UploadFileForm()

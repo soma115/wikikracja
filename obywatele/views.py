@@ -13,6 +13,7 @@ import string
 from django.utils.timezone import now as dzis
 from math import log
 
+
 WYMAGANY_PROCENT_AKCEPTACJI = 1
 
 

@@ -15,11 +15,11 @@ urlpatterns = [
       name='logout'),
   url(r'^haslo/', hv.haslo, name='haslo'),
   url(r'^admin/', admin.site.urls),
-  url(r'^glosowania/', include('glosowania.urls'), name='glosowania'),
-  url(r'^obywatele/', include('obywatele.urls'), name='obywatele'),
+  url(r'^glosowania/', include('glosowania.urls', namespace='glosowania')),
+  url(r'^obywatele/', include('obywatele.urls', namespace='obywatele')),
   url(r'^elibrary/', include('elibrary.urls', namespace='elibrary')),
 
-  url(r'^chat/', include('chat.urls'), name='chaty'),
+  url(r'^chat/', include('chat.urls', namespace='chat')),
 
   # url(r'^offer/new/$', onv.offer_new, name='offer_new'),
   # url(r'^offer/(?P<pk>[0-9]+)/$', onv.offer_detail, name='offer_detail'),
