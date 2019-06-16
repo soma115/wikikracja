@@ -49,18 +49,3 @@ def haslo(request):
     return render(request, 'home/haslo.html', {
         'form': form
     })
-
-'''
-# Tak było kiedyś ale nie wiadomo dlaczego. Jak się pojawi ktoś kto wie to 
-# będziemy myśleli o przywróceniu tego. 20160501
-
-from django.shortcuts import render
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.http import HttpResponse
-import datetime
-
-def index(request):
-    # return render_to_response('home/home.html')
-    return render_to_response('home/home.html', context_instance=RequestContext(request))
-'''

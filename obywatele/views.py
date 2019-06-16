@@ -12,6 +12,7 @@ import random
 import string
 from django.utils.timezone import now as dzis
 from math import log
+import config
 
 
 WYMAGANY_PROCENT_AKCEPTACJI = 1
@@ -225,18 +226,29 @@ def zliczaj_obywateli(request):
                 except:  # TODO: except something
                     continue
 
-            send_mail(
-                str(request.get_host()) + ' - Twoje konto zostało włączone',
-                'Witaj ' + i.uid.username + '\nTwoje konto na '
-                + str(request.get_host()) 
-                + ' zostało włączone.\n\nTwoje hasło: ' + password
-                + '\n\nHasło możesz zmienić po zalogowaniu w swoim profilu: '
-                + request.get_host()+'/haslo/',
-                # TODO: should be configurable in secrets.py:
-                'from@example.com',
-                [i.uid.email],
-                fail_silently=False,
-            )
+            subject = ' '.join(str(request.get_host()),
+                               '- Twoje konto zostało włączone')
+            m1 = ' '.join('Witaj', i.uid.username, '\nTwoje konto na',
+                          str(request.get_host()), 'zostało włączone.')
+            m2 = ' '.join('\n\nTwój login to:', i.uid.username,
+                          '\nTwoje hasło to:', password)
+            m3 = ' '.join('\n\nHasło możesz zmienić w swoim profilu:',
+                          request.get_host()+'/haslo/')
+            send_mail(subject, m1+m2+m3, config.email_host_user, [i.uid.email],
+                      fail_silently=False)
+            # send_mail(
+            #     str(request.get_host()) + ' - Twoje konto zostało włączone',
+            #     'Witaj ' + i.uid.username + '\nTwoje konto na '
+            #     + str(request.get_host()) 
+            #     + ' zostało włączone.\n\nTwój login to: ' + i.uid.username
+            #     + '\nTwoje hasło to: ' + password
+            #     + '\n\nHasło możesz zmienić po zalogowaniu w swoim profilu: '
+            #     + request.get_host()+'/haslo/',
+            #     # TODO: should be configurable in secrets.py:
+            #     'from@example.com',
+            #     [i.uid.email],
+            #     fail_silently=False,
+            # )
 
 
 def change_password(request):

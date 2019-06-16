@@ -16,7 +16,6 @@
 	<ul class="nav nav-tabs">
 		<a href="{% url 'home' %}"> <img style="padding: 0 10px; float: left;" src="{% static 'home/images/sitelogo.png' %}" ></a>
 	    <li role="presentation" {% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}><a href="{% url 'home' %}">Start</a></li>
-		<li role="presentation" {% if request.resolver_match.url_name == 'contact' and user.is_authenticated %} class="active" {% endif %}><a href="{% url 'contact' %}">Kontakt</a></li>
 		{% if not user.is_authenticated %}
 			<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">zaloguj</a></li>
 		{% endif %}
@@ -46,8 +45,7 @@
 	<div class="footer col-sm-6 center">
 	    <footer>
 	        <br><br><br><br><br><br>
-		    <!--# TODO: Domena zamiast statycznego napisu:-->
-	        <p>2018 dobrada.pl | Populacja: 2</p>
+	        <p>Zgłoś błąd i kontakt: <a href="https://wikikracja.pl/kontakt/" target="_blank">wikikracja.pl</a></p>
 	    </footer>
 	</div>
 
