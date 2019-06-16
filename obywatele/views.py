@@ -224,27 +224,12 @@ def zliczaj_obywateli(request):
                     continue
 
             subject = request.get_host() + ' - Twoje konto zostało włączone'
-            # message = 'Witaj '+i.uid.username+'\nTwoje konto na '+request.get_host()+' zostało włączone.'+'\n\nTwój login to: '+'\n\nHasło możesz zmienić w swoim profilu: '+request.get_host() + '/haslo/'
             uname = str(i.uid.username)
             uhost = str(request.get_host())
             message = f'Witaj {uname}\nTwoje konto na {uhost} zostało włączone.\n\nTwój login to: {uname}\nTwoje hasło to: {password}\n\nZaloguj się tutaj: {uhost}/login/\n\nHasło możesz zmienić tutaj: {uhost}/haslo/'
           
             send_mail(subject, message, config.email_host_user,
                       [i.uid.email], fail_silently=False)
-
-            # send_mail(
-            #     str(request.get_host()) + ' - Twoje konto zostało włączone',
-            #     'Witaj ' + i.uid.username + '\nTwoje konto na '
-            #     + str(request.get_host()) 
-            #     + ' zostało włączone.\n\nTwój login to: ' + i.uid.username
-            #     + '\nTwoje hasło to: ' + password
-            #     + '\n\nHasło możesz zmienić po zalogowaniu w swoim profilu: '
-            #     + request.get_host()+'/haslo/',
-            #     # TODO: should be configurable in secrets.py:
-            #     'from@example.com',
-            #     [i.uid.email],
-            #     fail_silently=False,
-            # )
 
 
 def change_password(request):

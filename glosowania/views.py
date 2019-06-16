@@ -190,8 +190,7 @@ def zliczaj_wszystko():
     obowiazuje = 7
     grupa = 'rodzina'
 
-    dzisiaj = datetime.today().date() + timedelta(days=15)
-    print('Dzisiaj jest:', dzisiaj)
+    dzisiaj = datetime.today().date()
 
     decyzje = Decyzja.objects.all()
     for i in decyzje:
