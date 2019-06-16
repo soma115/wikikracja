@@ -99,8 +99,7 @@ def obywatele_szczegoly(request, pk):
         jest_glos = AkceptacjaOsoby.objects.filter(obywatel=request.user.id,
                                                    kandydat=pk)
         if jest_glos:
-            wynik = 'Już wcześniej nadałeś reputację użytkownikowi '
-            + str(User.objects.get(pk=pk))
+            wynik = 'Już wcześniej nadałeś reputację użytkownikowi ' + str(User.objects.get(pk=pk))
             return render(request,
                           'obywatele/zapisane.html',
                           {'wynik': wynik, })
@@ -110,9 +109,7 @@ def obywatele_szczegoly(request, pk):
             glos.obywatel = dawca
             glos.save()
             biorca.save()
-            wynik = 'Ok, nadałeś użytkownikowi '
-            + str(User.objects.get(pk=pk))
-            + ' punkt reputacji.'
+            wynik = 'Ok, nadałeś użytkownikowi ' + str(User.objects.get(pk=pk)) + ' punkt reputacji.'
             return render(request,
                           'obywatele/zapisane.html', {'wynik': wynik, })
 
@@ -226,16 +223,15 @@ def zliczaj_obywateli(request):
                 except:  # TODO: except something
                     continue
 
-            subject = ' '.join(str(request.get_host()),
-                               '- Twoje konto zostało włączone')
-            m1 = ' '.join('Witaj', i.uid.username, '\nTwoje konto na',
-                          str(request.get_host()), 'zostało włączone.')
-            m2 = ' '.join('\n\nTwój login to:', i.uid.username,
-                          '\nTwoje hasło to:', password)
-            m3 = ' '.join('\n\nHasło możesz zmienić w swoim profilu:',
-                          request.get_host()+'/haslo/')
-            send_mail(subject, m1+m2+m3, config.email_host_user, [i.uid.email],
-                      fail_silently=False)
+            subject = request.get_host() + ' - Twoje konto zostało włączone'
+            # message = 'Witaj '+i.uid.username+'\nTwoje konto na '+request.get_host()+' zostało włączone.'+'\n\nTwój login to: '+'\n\nHasło możesz zmienić w swoim profilu: '+request.get_host() + '/haslo/'
+            uname = str(i.uid.username)
+            uhost = str(request.get_host())
+            message = f'Witaj {uname}\nTwoje konto na {uhost} zostało włączone.\n\nTwój login to: {uname}\nTwoje hasło to: {password}\n\nZaloguj się tutaj: {uhost}/login/\n\nHasło możesz zmienić tutaj: {uhost}/haslo/'
+          
+            send_mail(subject, message, config.email_host_user,
+                      [i.uid.email], fail_silently=False)
+
             # send_mail(
             #     str(request.get_host()) + ' - Twoje konto zostało włączone',
             #     'Witaj ' + i.uid.username + '\nTwoje konto na '
