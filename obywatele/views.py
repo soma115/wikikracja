@@ -132,8 +132,7 @@ def obywatele_szczegoly(request, pk):
             AkceptacjaOsoby.objects.get(obywatel=request.user.id,
                                         kandydat=pk).delete()
             biorca.save()
-            wynik = 'Ok, odebrałeś użytkownikowi '
-            + str(User.objects.get(pk=pk)) + ' punkt reputacji.'
+            wynik = f'Ok, odebrałeś użytkownikowi {str(User.objects.get(pk=pk))} punkt reputacji.'
         else:
             wynik = 'Już odebrałeś wcześniej temu użytkownikowi reputację.'
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
@@ -180,11 +179,9 @@ def zliczaj_obywateli(request):
             AkceptacjaOsoby.objects.filter(obywatel=i.id).delete()
 
             send_mail(
-                str(request.get_host())+' - Twoje konto zostało zablokowane',
-                'Witaj ' + i.uid.username
-                + '\nTwoje konto na ' + str(request.get_host())
-                + ' zostało zablokowane.',
-                'from@example.com',  # TODO: change it to variable
+                f'{str(request.get_host())} - Twoje konto zostało zablokowane',
+                f'Witaj {i.uid.username}\nTwoje konto na {str(request.get_host())} zostało zablokowane.',
+                str(config.email_host_user),
                 [i.uid.email],
                 fail_silently=False,
             )
@@ -227,7 +224,7 @@ def zliczaj_obywateli(request):
             uname = str(i.uid.username)
             uhost = str(request.get_host())
             message = f'Witaj {uname}\nTwoje konto na {uhost} zostało włączone.\n\nTwój login to: {uname}\nTwoje hasło to: {password}\n\nZaloguj się tutaj: {uhost}/login/\n\nHasło możesz zmienić tutaj: {uhost}/haslo/'
-          
+
             send_mail(subject, message, config.email_host_user,
                       [i.uid.email], fail_silently=False)
 
