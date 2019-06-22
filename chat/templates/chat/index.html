@@ -4,9 +4,13 @@
 
 {% block content %}
     {% if user.is_authenticated %}
+    </br>
+    <p>Wybierz pokój:</p><br/>
 
-    What chat room would you like to enter?<br/>
-    <input id="room-name-input" type="text" size="100"/><br/>
+	<a href="{% url 'chat:ogolny' %}">Ogólny</a>
+
+
+    {% comment %} <input id="room-name-input" type="text" size="100"/><br/>
     <input id="room-name-submit" type="button" value="Enter"/>
 
     <script>
@@ -21,6 +25,6 @@
             var roomName = document.querySelector('#room-name-input').value;
             window.location.pathname = '/chat/' + roomName + '/';
         };
-    </script>
+    </script> {% endcomment %}
     {% endif %}
 {% endblock %}

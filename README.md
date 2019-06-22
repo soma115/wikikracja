@@ -11,7 +11,8 @@ Smallest VM is enough.
 Clone repository:
 - git clone git@gitlab.com:wikikracja/wikikracja.git some_folder
 - create virtual environment and 'pip install -r requirements.'
-- Setup gunicorn, nginx and postgres e.g. like this: https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7
+- setup gunicorn, nginx and postgres e.g. like this: https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7
+- install Channels: https://www.tutorialdocs.com/tutorial/django-channels/installation.html
 
 
 
