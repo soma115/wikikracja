@@ -9,27 +9,18 @@ base_dir = os.path.abspath('.')
 class Decyzja(models.Model):
     autor = models.CharField(max_length=200)
     tresc = models.TextField(max_length=500, null=True, verbose_name='Treść',
-                             help_text='Wpisz treść przepisu w takim brzmieniu\
-                                 w jakim ma obowiązywać.')
+                             help_text='Wpisz treść przepisu w takim brzmieniu w jakim ma obowiązywać.')
     kara = models.TextField(max_length=500, null=True, verbose_name='Kara',
-                            help_text='Jaka kara ma obowiązywać za nie\
-                                nie przestrzeganie tego przpisu. Może to być\
-                                np. Banicja na 3 miesiące, Banicja na zawsze,\
-                                itd.')
+                            help_text='Jaka kara ma obowiązywać za nieprzestrzeganie tego przpisu. Może to być np. Banicja na 3 miesiące, Banicja na zawsze, itd.')
     uzasadnienie = models.TextField(max_length=1500,
                                     null=True,
                                     verbose_name='Uzasadnienie',
-                                    help_text='Co jest celem tego przepisu?\
-                                        Dlaczego powstał? Co mamy dzięki niemu\
-                                        osiągnąć? Jakie wydarzenie spowodowało\
-                                        jego powstanie?')
+                                    help_text='Co jest celem tego przepisu? Dlaczego powstał? Co mamy dzięki niemu osiągnąć? Jakie wydarzenie spowodowało jego powstanie?')
     znosi = models.CharField(max_length=500,
                              null=True,
                              blank=True,
                              verbose_name='Znosi przepisy',
-                             help_text='Jeśli proponowany przepis znosi inne\
-                                przepisy to wpisz ich numery tutaj. Kolejne\
-                                numery przepisów rozdziel przecinkami.')
+                             help_text='Jeśli proponowany przepis znosi inne przepisy to wpisz ich numery tutaj. Kolejne numery przepisów rozdziel przecinkami.')
     ile_osob_podpisalo = models.SmallIntegerField(editable=False, default=0)
     data_powstania = models.DateField(auto_now_add=True,
                                       editable=False,

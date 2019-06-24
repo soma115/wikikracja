@@ -134,7 +134,7 @@ EMAIL_HOST_USER = config.email_host_user
 EMAIL_HOST_PASSWORD = config.email_host_password
 EMAIL_USE_SSL = config.email_use_ssl
 EMAIL_USE_TLS = config.email_use_tls
-#DEFAULT_FROM_EMAIL = config.default_from_email
+# DEFAULT_FROM_EMAIL = config.default_from_email
 
 X_FRAME_OPTIONS = 'DENY'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
