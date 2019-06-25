@@ -3,8 +3,6 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<br><br><br>
-
 	<div>
 		<h3>Obywatel: {{ id.uid }}</h3>
 			<p>
@@ -16,9 +14,6 @@
 				Data nadania karmy: {{ id.data_nadania_karmy }}
 			</p>
 	</div>
-
-<br><br>
-
 {% endif %}
 {% endblock %}
 
