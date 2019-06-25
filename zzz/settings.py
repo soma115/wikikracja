@@ -139,6 +139,7 @@ EMAIL_USE_TLS = config.email_use_tls
 X_FRAME_OPTIONS = 'DENY'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 ASGI_APPLICATION = "zzz.routing.application"
 CHANNEL_LAYERS = {
     'default': {

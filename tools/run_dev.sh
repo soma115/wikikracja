@@ -8,5 +8,3 @@ sudo docker run -p 6379:6379 -d redis:2.8
 ./manage.py makemigrations
 ./manage.py migrate
 ./manage.py runserver
-
-
