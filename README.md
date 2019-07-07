@@ -17,3 +17,7 @@ Clone repository:
 - if you get Error 500 - clear cookies in your web browser
 - `yum install python36-devel` on Centos 7 for Channels
 
+### Fedora
+- run: dnf install python3-devel
+- Pillow issue: check requrements.txt version vs. OS version
+- 

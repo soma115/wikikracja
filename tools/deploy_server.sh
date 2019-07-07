@@ -2,7 +2,7 @@
 
 # software
 yum -y install epel-release
-yum -y install python2-certbot-nginx postgresql postgresql-server postgresql-devel postgresql-contrib python36 python36-libs python36-devel python36-pip python-pip yum-utils python-virtualenv git vim  gcc nginx pwgen docker
+yum -y install postgresql postgresql-server postgresql-devel postgresql-contrib python37 python37-libs python37-devel python37-pip python-pip yum-utils python-virtualenv git vim gcc nginx pwgen docker certbot python-certbot-nginx
 yum -y install https://centos7.iuscommunity.org/ius-release.rpm
 yum -y install epel-release
 yum -y update
