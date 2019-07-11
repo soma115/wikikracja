@@ -40,7 +40,6 @@ def get_client_ip(request):
 
 
 # Wyświetl głosowania:
-@login_required
 def glosowania(request):
 
     # get_client_ip(request) # logowanie
