@@ -5,7 +5,7 @@
 {% if user.is_authenticated %}
 	<div>
 		<h3>Przepis numer: {{ id.id }}</h3>
-		<h4>Treść proponowanego przepisu:</h4><p>{{ id.tresc }}</p>
+		<h4>Treść przepisu:</h4><p>{{ id.tresc }}</p>
 		<h4>Kara za nieprzestrzeganie:</h4><p>{{ id.kara }}</p>
 		<h4>Uzasadnienie:</h4><p>{{ id.uzasadnienie }}</p>
         <h4>Ten przepis znosi następujące przepisy:</h4><p>{{ id.znosi }}</p>

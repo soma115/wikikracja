@@ -5,6 +5,7 @@ from django.db import IntegrityError
 from django.shortcuts import render
 from glosowania.forms import DecyzjaForm
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 # Dodaj nową propozycję przepisu:
@@ -39,6 +40,7 @@ def get_client_ip(request):
 
 
 # Wyświetl głosowania:
+@login_required
 def glosowania(request):
 
     # get_client_ip(request) # logowanie
