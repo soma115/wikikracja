@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-{% if user.is_authenticated %}
 	<div>
 		<h3>Obywatel: {{ id.uid }}</h3>
 			<p>
@@ -14,7 +13,6 @@
 				Data nadania karmy: {{ id.data_nadania_karmy }}
 			</p>
 	</div>
-{% endif %}
 {% endblock %}
 
 

@@ -13,11 +13,13 @@ import string
 from django.utils.timezone import now as dzis
 from math import log
 import config
+from django.contrib.auth.decorators import login_required
 
 
 WYMAGANY_PROCENT_AKCEPTACJI = 1
 
 
+@login_required
 def obywatele(request):
     zliczaj_obywateli(request)
     uid = User.objects.filter(is_active=True)
@@ -25,12 +27,14 @@ def obywatele(request):
     return render(request, 'obywatele/start.html', {'uid': uid})
 
 
+@login_required
 def poczekalnia(request):
     zliczaj_obywateli(request)
     uid = User.objects.filter(is_active=False)
     return render(request, 'obywatele/poczekalnia.html', {'uid': uid})
 
 
+@login_required
 def dodaj(request):
     if request.method == 'POST':
         form = ObywatelForm(request.POST)
@@ -84,6 +88,7 @@ def dodaj(request):
     return render(request, 'obywatele/dodaj.html', {'form': form})
 
 
+@login_required
 def obywatele_szczegoly(request, pk):
     dawca = Uzytkownik.objects.get(pk=request.user.id)
     biorca = get_object_or_404(Uzytkownik, pk=pk)
@@ -245,6 +250,7 @@ def change_password(request):
     return render(request, 'obywatele/change_password.html', {'form': form})
 
 
+@login_required
 def profil(request):
     if request.method == 'POST':
         username = request.user.username

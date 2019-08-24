@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 
 # Dodaj nową propozycję przepisu:
+@login_required
 def dodaj(request):
     # nowy = DecyzjaForm(request.POST or None)
     if request.method == 'POST':
@@ -23,7 +24,7 @@ def dodaj(request):
         form = DecyzjaForm()
     return render(request, 'glosowania/dodaj.html', {'form': form})
 
-
+@login_required
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -40,6 +41,7 @@ def get_client_ip(request):
 
 
 # Wyświetl głosowania:
+@login_required
 def glosowania(request):
 
     # get_client_ip(request) # logowanie
@@ -88,6 +90,7 @@ def glosowania(request):
 
 
 # Pokaż szczegóły przepisu
+@login_required
 def glosowanie_szczegoly(request, pk):
     szczegoly = get_object_or_404(Decyzja, pk=pk)
 

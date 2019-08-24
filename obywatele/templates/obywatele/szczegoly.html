@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-{% if user.is_authenticated %}
 	<div>
 		<h3>{{ b.uid }}</h3>
 
@@ -25,7 +24,6 @@
 		<br>
 		    <div><button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button></div>
 	</div>
-{% endif %}
 {% endblock %}
 
 

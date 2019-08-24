@@ -3,7 +3,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    {% if user.is_authenticated %}
     </br>
     <p>Wybierz pokój:</p><br/>
 
@@ -26,5 +25,4 @@
             window.location.pathname = '/chat/' + roomName + '/';
         };
     </script> {% endcomment %}
-    {% endif %}
 {% endblock %}

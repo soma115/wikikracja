@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-{% if user.is_authenticated %}
 	<div>
 		<h3>Przepis numer: {{ id.id }}</h3>
 		<h4>Treść przepisu:</h4><p>{{ id.tresc }}</p>
@@ -50,5 +49,4 @@
 		{% comment %} brak poparcia, w kolejce, odrzucone, zatwierdzone, obowiązuje = brak guzika {% endcomment %}
 		<button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
 	{% endif %}
-{% endif %}
 {% endblock %}

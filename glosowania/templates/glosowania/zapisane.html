@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block content %}
-{% if user.is_authenticated %}
 	<div>
 		<h3>{{ id.tresc }}</h3>
 			<p>
@@ -21,5 +20,4 @@
 		</h4>
 	</div>
 <button onclick="location.href='{% url 'glosowania:index' %}'" class="btn btn-default" type="button">Wróć</button>
-{% endif %}
 {% endblock %}

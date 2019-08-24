@@ -3,7 +3,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    {% if user.is_authenticated %}
         <h1>Nowy przepis</h1>
         <form action="." method="POST" class="post-form">
             {% csrf_token %}
@@ -30,5 +29,4 @@
             <button type="submit" class="btn btn-success">Zapisz</button>
             <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
         </form>
-    {% endif %}
 {% endblock %}

@@ -7,16 +7,17 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.models import User
 # from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
+
 
 # def index(request):
 #     ebooks = Ebook.objects.all()
 #     # dodać X przy książce, której jestem uploaderem
 #     return render(request, 'elibrary/all.html', {'ebooks': ebooks})
 
-
 class IndexView(generic.ListView):
     template_name = 'elibrary/index.html'
-
+    
     def get_queryset(self):
         # return super().get_queryset()
         return Ebook.objects.all()
@@ -47,7 +48,7 @@ class IndexView(generic.ListView):
 #         context['url'] = fs.url(name)
 #     return render(request, 'elibrary/add.html', context)
 
-
+@login_required
 def add(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)

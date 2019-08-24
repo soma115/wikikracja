@@ -4,6 +4,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from glosowania.views import ZliczajWszystko
 from glosowania.models import Decyzja
+from django.contrib.auth.decorators import login_required
+
 
 
 def home(request):
@@ -33,6 +35,7 @@ def home(request):
 #                                                   'kolejka': kolejka})
 
 
+@login_required
 def haslo(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)

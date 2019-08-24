@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-    {% if user.is_authenticated %}
 	<h1>Wgraj ebooka</h1>
 	<p><h5>
 		<center>Przed wgraniem pliku upewnij się, że jego nazwa jest ładnie sformatowana.</center></p>
@@ -17,7 +16,6 @@
 			</form>
 		</p>
 	<p><a href="{% url 'elibrary:index' %}">Wróć</a></p>
-    {% endif %}
 {% endblock %}
 
 

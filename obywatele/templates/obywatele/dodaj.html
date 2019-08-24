@@ -1,7 +1,6 @@
 {% extends 'home/base.html' %}
 {% load staticfiles %}
 
-{% if user.is_authenticated %}
 	{% block content %}
 		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:index' %}">Obywatele</a>
 		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:poczekalnia' %}">Kandydaci</a>
@@ -44,4 +43,3 @@
 	        <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
 	    </form>
 	{% endblock %}
-{% endif %}
