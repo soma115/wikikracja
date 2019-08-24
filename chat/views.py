@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
 import json
+from django.contrib.auth.decorators import login_required
 
 
 @login_required

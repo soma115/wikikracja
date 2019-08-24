@@ -24,6 +24,7 @@ def dodaj(request):
         form = DecyzjaForm()
     return render(request, 'glosowania/dodaj.html', {'form': form})
 
+
 @login_required
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -201,7 +202,7 @@ def zliczaj_wszystko():
         if i.status != brak_poparcia and i.status != odrzucone and i.status != obowiazuje:
             # Jeśli nie jest w jakiś sposób zatwierdzone/odrzucone
             # to procesujemy:
-            
+
             # FROM PROPOSITION TO QUEUE
             if i.status == propozycja and i.ile_osob_podpisalo >= wymaganych_podpisow:
                 i.status = w_kolejce
@@ -227,7 +228,7 @@ def zliczaj_wszystko():
                 # print('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
                 continue
-            
+
             # FROM QUEUE TO REFERENDUM
             if i.status == w_kolejce and i.data_referendum_start <= dzisiaj:
                 i.status = referendum
@@ -235,7 +236,7 @@ def zliczaj_wszystko():
                 # print('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
                 continue
-            
+
             # FROM REFERENDUM TO VACATIO_LEGIS OR NOT_APPROVED
             if i.status == referendum and i.data_referendum_stop <= dzisiaj:
                 if i.za > i.przeciw:
@@ -252,7 +253,7 @@ def zliczaj_wszystko():
                     # print('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
                     continue
-            
+
             # FROM VACATIO_LEGIS TO LAW
             if i.status == zatwierdzone and i.data_obowiazuje_od <= dzisiaj:
                 i.status = obowiazuje

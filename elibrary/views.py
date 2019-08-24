@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 
 class IndexView(generic.ListView):
     template_name = 'elibrary/index.html'
-    
+
     def get_queryset(self):
         # return super().get_queryset()
         return Ebook.objects.all()
@@ -47,6 +47,7 @@ class IndexView(generic.ListView):
 #         name = fs.save(uploaded_file.name, uploaded_file)
 #         context['url'] = fs.url(name)
 #     return render(request, 'elibrary/add.html', context)
+
 
 @login_required
 def add(request):

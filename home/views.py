@@ -7,7 +7,6 @@ from glosowania.models import Decyzja
 from django.contrib.auth.decorators import login_required
 
 
-
 def home(request):
     trwajace = Decyzja.objects.filter(status=4)
     zblizajace_sie = Decyzja.objects.filter(status=3).order_by('data_referendum_start')
