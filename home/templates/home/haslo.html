@@ -1,0 +1,39 @@
+{% extends "home/base.html" %}
+{% block title %}Hasło{% endblock %}
+{% block content %}
+<p>
+    <ul class="navbar-form">
+        <form role="form" class="form-horizontal" method="post"action="{% url 'haslo' %}">{% csrf_token %}
+
+            <div class="input-group" >
+                <p>Stare hasło: {{ form.old_password }}</p>
+                <p>Wpisz nowe hasło: {{ form.new_password1 }}</p>
+                <p>Powtórz nowe hasło: {{ form.new_password2 }}</p>
+            </div>
+            <button type="submit">Zapisz</button>
+        </form>
+    </ul>
+</p>
+
+<!--<p><ul>-->
+    <!--<form role="form" class="form-horizontal" method="post" action="{% url 'haslo' %}">{% csrf_token %}-->
+    <!--<div class="form-group">-->
+        <!--{% for field in form %}-->
+            <!--<p>-->
+                <!--<div class="input-group">-->
+                    <!--<span class="input-group-addon" style="background-color:#b77b48; color:white">-->
+                        <!--<span class="glyphicon glyphicon-user"></span>-->
+                    <!--</span>-->
+        <!--{{ field }}-->
+                    <!--<input class="form-control" id="{{ field.old_password }}" label="asd" maxlength="30" name="{{ field.new_password1 }}" value="{{ field.new_password2 }}" type="text" />-->
+                    <!--{{ field.errors }}-->
+                <!--</div>-->
+            <!--</p>-->
+        <!--{% endfor %}-->
+        <!--<input type="submit" class="btn btn-primary" value="Zapisz" />-->
+        <!--<input type="hidden" name="next" value="{{ next }}" />-->
+    <!--</div>-->
+<!--</form>-->
+<!--</ul></p>-->
+
+{% endblock %}

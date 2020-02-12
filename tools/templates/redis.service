@@ -1,0 +1,11 @@
+[Unit]
+Description=Start Redis
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/var/www/demo/tools/start_redis.sh
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target

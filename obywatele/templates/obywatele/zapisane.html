@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<div>
+		<h3>{{ komunikat }}</h3>
+
+	</div>
+
+	<div>
+		<h4>
+			<p>
+				{{ wynik }}
+			</p>
+		</h4>
+	</div>
+
+{% comment %} <div><button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button></div> {% endcomment %}
+<button onclick="location.href='{% url 'obywatele:poczekalnia' %}'" class="btn btn-default" type="button">Wróć</button>
+
+
+{% endblock %}

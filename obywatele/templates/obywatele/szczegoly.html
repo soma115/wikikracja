@@ -1,0 +1,34 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<div>
+		<h3>{{ b.uid }}</h3>
+
+		{% if b.id == d.id %}
+		<!--Podgląd własnego profilu-->
+			{{ d.username }}
+			<p>Twoja reputacja: {{tr}} | Wymagana reputacja: {{wr}}</p>
+
+		<!--<p><a class="btn btn-info" href="password">Zmień hasło</a></p>-->
+		<p><a class="btn btn-info" href="{% url 'haslo'%}">Zmień hasło</a></p>
+
+		{% else %}
+		<!--Podgląd cudzego profilu-->
+			<form action="#" method="get">
+		    <input class="btn btn-primary" type="submit" name="tak" value="Znam osobiście tą osobę"/>
+			<input class="btn btn-primary" type="submit" name="nie" value="Nie znam tej osoby"/>
+		</form>
+		{% endif %}
+
+		<br>
+		    <div><button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button></div>
+	</div>
+{% endblock %}
+
+
+
+
+
+
+

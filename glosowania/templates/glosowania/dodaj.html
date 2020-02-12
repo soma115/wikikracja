@@ -1,0 +1,32 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+        <h1>Nowy przepis</h1>
+        <form action="." method="POST" class="post-form">
+            {% csrf_token %}
+            {% comment %} {{ form|crispy }} {% endcomment %}
+
+<div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                {{ form.tresc|as_crispy_field }}
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                {{ form.kara|as_crispy_field }}
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                {{ form.uzasadnienie|as_crispy_field }}
+            </div>
+            
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                {{ form.znosi|as_crispy_field }}
+            </div>
+</div>
+
+            <button type="submit" class="btn btn-success">Zapisz</button>
+            <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
+        </form>
+{% endblock %}

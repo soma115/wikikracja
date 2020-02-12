@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ HTTP_HOST }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% load staticfiles %}
+	<link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'home/content/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'home/content/site.css' %}"/>
+    <script src="{% static 'home/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+
+<body>
+	<ul class="nav nav-tabs">
+		<a href="{% url 'home' %}"> <img style="padding: 0 10px; float: left;" src="{% static 'home/images/sitelogo.png' %}" ></a>
+	    <li role="presentation" {% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}><a href="{% url 'home' %}">Start</a></li>
+		{% if not user.is_authenticated %}
+			<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">zaloguj</a></li>
+		{% endif %}
+		{% if user.is_authenticated %}
+			<li role="presentation" {% if request.resolver_match.namespace == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania:index' %}">Głosowania</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele:index' %}">Obywatele</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="{% url 'chat:index' %}">Czat</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'obywatele_szczegoly' %} class="active" {% endif %}><a style="color:green" href="/obywatele/{{ user.id }}">{{ user.username }}</a></li>
+			<li><a style="color:gray" href="/logout">logout</a></li>
+		{% endif %}
+	</ul>
+
+	<div class="container body-content">
+		<br>
+		{% block content %}{% endblock %}
+	</div>
+
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li class="{{ message.tags }}">{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+<br><br><br><br><br><br>
+	<div class="footer col-sm-6 center">
+	    <footer>
+	        <br><br><br><br><br><br>
+	        <p>Zgłoś błąd i kontakt: <a href="https://wikikracja.pl/kontakt/" target="_blank">wikikracja.pl</a></p>
+	    </footer>
+	</div>
+
+	{% block scripts %}
+	<script src="{% static 'home/scripts/jquery-1.10.2.js' %}"></script>
+	<script src="{% static 'home/scripts/bootstrap.js' %}"></script>
+	<script src="{% static 'home/scripts/respond.js' %}"></script>
+	{% endblock %}
+</body>
+</html>
