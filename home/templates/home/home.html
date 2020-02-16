@@ -5,7 +5,12 @@
 <h3>Witaj</h3>
 
 <ul>
-	{% if not user.is_authenticated %}<p><a href="{% url 'login' %}">Zaloguj się </a>albo <a href="{% url 'contact' %}">wyślij wiadomość.</a></p>{% endif %}
+	{% if not user.is_authenticated %}
+		<p><u><a href="{% url 'login' %}">> Zaloguj się</a></u></p>
+		<p><u><a href="{% url 'password_reset' %}">> Zresetuj hasło</a></u></p>
+		<p><u><a href=https://wikikracja.pl/kontakt/ target="_blank">> Wyślij wiadomość do admina</a></u></p>
+	{% endif %}
+
 	{% if user.is_authenticated %}
 
 		<p>Jesteś zalogowany {{ user.username }}.</p>
@@ -15,7 +20,6 @@
 			{% for i in trwajace %}
 				<h3>● <a href="glosowania/{{ i.pk }}">{{ i.tresc }}</a></h3>
 				<!-- Autor: {{ i.autor }} | ID: {{ i.pk }} | Data powstania: {{i.data_powstania}} -->
-			{% endfor %}
 {% empty %}
     <li>Obecnie nie ma trwających referendów.</li>
 {% endfor %}
@@ -28,7 +32,6 @@
 				<!-- Autor: {{ i.autor }} | ID: {{ i.pk }} | Data powstania: {{i.data_powstania}} -->
 				<h3>● <a href="glosowania/{{ i.pk }}">{{ i.tresc }}</a></h3>
 						<p><h4>{{ i.data_referendum_start }}</h4></p>
-			{% endfor %}
 {% empty %}
     <li>Obecnie nie ma zbliżających się referendów.</li>
 {% endfor %}

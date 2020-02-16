@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^contact/$', TemplateView.as_view(template_name="home/contact.html"),
-        name='contact'),
+        name='contact'),  # not in use at this point. Contact through https://wikikracja.pl/kontakt/
 
     # reset password
     # https://simpleisbetterthancomplex.com/tutorial/2016/09/19/how-to-create-password-reset-view.html
