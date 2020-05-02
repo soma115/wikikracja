@@ -13,8 +13,6 @@
 
 	{% if user.is_authenticated %}
 
-		<p>Jesteś zalogowany {{ user.username }}.</p>
-
 		<div class="col-sm-10 right">
 			<h1>Trwające referenda:</h1>
 			{% for i in trwajace %}
