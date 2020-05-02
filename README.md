@@ -8,12 +8,11 @@ Smallest VM is enough.
 
 ## Installation (Centos 7)
 Clone repository:
-- run: `yum -y install git; git clone https://github.com/soma115/wikikracja.git /var/www/wikikracja`
-- run: `/var/www/wikikracja/tools/install_server.sh`
-- setup gunicorn, nginx and postgres e.g. like this: https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7
+- setup gunicorn and nginx like this: https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7
+- git clone https://github.com/soma115/wikikracja.git
 - install Channels: https://www.tutorialdocs.com/tutorial/django-channels/installation.html
 
-## Known problems
+## Known issues
 - if you get Error 500 - clear cookies in your web browser
 - `yum install python36-devel` on Centos 7 for Channels
 
