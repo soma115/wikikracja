@@ -19,6 +19,8 @@
 
 .directory
 .project
+.vscode/
+.idea/
 
 $RECYCLE.BIN/
 Desktop.ini
@@ -34,6 +36,6 @@ create_database.sh
 *.pot
 *.pyc
 __pycache__/
-settings_example.py
 settings.py
+zzz/settings.py
 db.sqlite3
