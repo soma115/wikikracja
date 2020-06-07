@@ -10,11 +10,14 @@ Smallest VM is enough.
 Clone repository:
 - setup gunicorn and nginx like this: https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7
 - git clone https://github.com/soma115/wikikracja.git
-- install Channels: https://www.tutorialdocs.com/tutorial/django-channels/installation.html
+- adjust zzz/setting.py: Add SECRET_KEY etc.
 
 ## Known issues
 - if you get Error 500 - clear cookies in your web browser
 - `yum install python36-devel` on Centos 7 for Channels
+- Issues installing Pillow. Try:
+    python -m pip install -U --force-reinstall pip
+    easy_install pillow
 
 ### Fedora
 - run: dnf install python3-devel

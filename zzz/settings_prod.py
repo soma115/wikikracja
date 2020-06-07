@@ -1,25 +1,13 @@
 from os import path
 import os
-import config
 
 PROJECT_ROOT = path.dirname(path.abspath(path.dirname(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = config.debug
-SECRET_KEY = config.secret_key
+DEBUG = True
+SECRET_KEY = 'example'
 
-ALLOWED_HOSTS = config.allowed_hosts
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': config.db_name,
-#         'USER': config.db_user,
-#         'PASSWORD': config.db_password,
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
+ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
@@ -28,11 +16,10 @@ DATABASES = {
     }
 }
 
-
 TIME_ZONE = 'Europe/Warsaw'
 LANGUAGE_CODE = 'pl'
 
-SITE_ID = config.site_id
+SITE_ID = 1
 
 USE_I18N = True
 USE_L10N = True
@@ -75,7 +62,6 @@ TEMPLATES = [
 
 INSTALLED_APPS = (
     'chat',
-    'channels',
     'crispy_forms',
     'elibrary',
     'obywatele',
@@ -136,24 +122,14 @@ LOGOUT_REDIRECT_URL = '/login/'
 DATE_FORMAT = "Y-m-d"
 INTERNAL_IPS = '127.0.0.1'
 
-EMAIL_HOST = config.email_host
-EMAIL_PORT = config.email_port
-EMAIL_HOST_USER = config.email_host_user
-EMAIL_HOST_PASSWORD = config.email_host_password
-EMAIL_USE_SSL = config.email_use_ssl
-EMAIL_USE_TLS = config.email_use_tls
-# DEFAULT_FROM_EMAIL = config.default_from_email
+EMAIL_HOST = 'example.imap.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'example@gmail.com'
+EMAIL_HOST_PASSWORD = 'example'
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'example <example@gmail.com>'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # This will display the mail on the console for easy verification.
 
 X_FRAME_OPTIONS = 'DENY'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-ASGI_APPLICATION = "zzz.routing.application"
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}

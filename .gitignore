@@ -34,5 +34,6 @@ create_database.sh
 *.pot
 *.pyc
 __pycache__/
-local_settings.py
+settings_example.py
+settings.py
 db.sqlite3

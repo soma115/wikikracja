@@ -12,7 +12,7 @@ import random
 import string
 from django.utils.timezone import now as dzis
 from math import log
-import config
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
 
@@ -186,7 +186,7 @@ def zliczaj_obywateli(request):
             send_mail(
                 f'{str(request.get_host())} - Twoje konto zostało zablokowane',
                 f'Witaj {i.uid.username}\nTwoje konto na {str(request.get_host())} zostało zablokowane.',
-                str(config.email_host_user),
+                str(settings.DEFAULT_FROM_EMAIL),
                 [i.uid.email],
                 fail_silently=False,
             )
@@ -230,7 +230,7 @@ def zliczaj_obywateli(request):
             uhost = str(request.get_host())
             message = f'Witaj {uname}\nTwoje konto na {uhost} zostało włączone.\n\nTwój login to: {uname}\nTwoje hasło to: {password}\n\nZaloguj się tutaj: {uhost}/login/\n\nHasło możesz zmienić tutaj: {uhost}/haslo/'
 
-            send_mail(subject, message, config.email_host_user,
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
                       [i.uid.email], fail_silently=False)
 
 
