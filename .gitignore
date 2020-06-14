@@ -36,6 +36,6 @@ create_database.sh
 *.pot
 *.pyc
 __pycache__/
-settings.py
+zzz/settings_prod.py
 zzz/settings.py
 db.sqlite3
