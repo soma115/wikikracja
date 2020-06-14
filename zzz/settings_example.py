@@ -61,7 +61,7 @@ TEMPLATES = [
 ]
 
 INSTALLED_APPS = (
-    'chat',
+    # 'chat',
     'crispy_forms',
     'elibrary',
     'obywatele',

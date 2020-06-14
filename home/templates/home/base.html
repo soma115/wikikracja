@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ HTTP_HOST }}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    {% load staticfiles %}
+    {% load static %}
 	<link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'home/content/bootstrap.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'home/content/site.css' %}"/>
@@ -20,11 +20,12 @@
 			<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">zaloguj</a></li>
 		{% endif %}
 		{% if user.is_authenticated %}
-			<li role="presentation" {% if request.resolver_match.namespace == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania:index' %}">Głosowania</a></li>
 			<li role="presentation" {% if request.resolver_match.namespace == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele:index' %}">Obywatele</a></li>
-			{% comment %} <li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="{% url 'chat:index' %}">Czat</a></li> {% endcomment %}
+			<li role="presentation" {% if request.resolver_match.namespace == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania:index' %}">Głosowania</a></li>
 			<li role="presentation" {% if request.resolver_match.namespace == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
+			<li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="{% url 'chat:index' %}">chat</a></li>
 			<li role="presentation" {% if request.resolver_match.namespace == 'obywatele_szczegoly' %} class="active" {% endif %}><a style="color:green" href="/obywatele/{{ user.id }}">{{ user.username }}</a></li>
+			{% comment %} <li role="presentation" {% if request.resolver_match.namespace == 'spirit' %} class="active" {% endif %}><a href="{% url '' %}">Forum</a></li> {% endcomment %}
 			<li><a style="color:gray" href="/logout">logout</a></li>
 		{% endif %}
 	</ul>

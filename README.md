@@ -7,10 +7,12 @@ You will need email account like gmail in order to send emails to users.
 Smallest VM is enough. 
 
 ## Installation (Centos 7)
-Clone repository:
-- setup gunicorn and nginx like this: https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7
-- git clone https://github.com/soma115/wikikracja.git
+- Setup Gunicorn+Postgres+Nginx+Centos7: https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-centos-7
+- Setup Daphne server https://pypi.org/project/daphne/ or https://avilpage.com/2018/05/deploying-scaling-django-channels.html
+[TODO: Learn how to run it with Daphne only]
+- Clone repository: git clone https://github.com/soma115/wikikracja.git
 - adjust zzz/setting.py: Add SECRET_KEY etc.
+- Set site name in your_page.com/admin/sites/site/
 
 ## Known issues
 - if you get Error 500 - clear cookies in your web browser

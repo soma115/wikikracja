@@ -7,3 +7,4 @@ django-core
 django-extensions
 django-crispy-forms
 six
+channels

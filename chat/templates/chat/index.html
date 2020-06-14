@@ -1,16 +1,10 @@
 {% extends 'home/base.html' %}
-{% load staticfiles %}
-{% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
-    </br>
-    <p>Wybierz pokój:</p><br/>
-
-	<a href="{% url 'chat:ogolny' %}">Ogólny</a>
-
-
-    {% comment %} <input id="room-name-input" type="text" size="100"/><br/>
-    <input id="room-name-submit" type="button" value="Enter"/>
+    What chat room would you like to enter?<br>
+    <input id="room-name-input" type="text" size="100"><br>
+    <input id="room-name-submit" type="button" value="Enter">
 
     <script>
         document.querySelector('#room-name-input').focus();
@@ -24,5 +18,5 @@
             var roomName = document.querySelector('#room-name-input').value;
             window.location.pathname = '/chat/' + roomName + '/';
         };
-    </script> {% endcomment %}
+    </script>
 {% endblock %}
