@@ -9,5 +9,5 @@ source venv/bin/activate
 pip3 install -r requirements.txt
 
 # docker
-systemctl enable docker
-systemctl start docker
+# systemctl enable docker
+# systemctl start docker

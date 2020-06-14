@@ -3,7 +3,7 @@ Description=gunicorn daemon
 After=network.target
 
 [Service]
-User=r1
+User=user
 Group=nginx
 WorkingDirectory=/var/www/demo
 ExecStart=/var/www/prod-env/bin/gunicorn --workers 2 --bind unix:/var/www/demo.sock zzz.wsgi:application
