@@ -5,8 +5,6 @@
 /obj/
 /backup/
 /_inne_materialy/
-/.idea/
-/.vscode/
 
 *.DS_Store
 *.cache

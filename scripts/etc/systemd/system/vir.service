@@ -1,0 +1,13 @@
+[Unit]
+Description=vir service
+After=network.target
+
+[Service]
+User=user
+Group=nginx
+RuntimeDirectory=gunicorn
+WorkingDirectory=/home/user/vir/vir
+ExecStart=/home/user/vir/venv/bin/gunicorn --workers 2 --user user --group nginx --bind unix:/home/user/vir/vir.sock zzz.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
