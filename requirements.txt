@@ -8,3 +8,4 @@ django-extensions
 django-crispy-forms
 six
 channels
+channels_redis

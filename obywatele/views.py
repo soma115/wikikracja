@@ -16,7 +16,9 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
 
-WYMAGANY_PROCENT_AKCEPTACJI = 2
+# Default is 1. Higher limit seams to be problematic
+# bacuse people rarely acctepting each other.
+WYMAGANY_PROCENT_AKCEPTACJI = 1.1
 
 
 @login_required

@@ -1,10 +1,7 @@
-/bin/
-/env/
-/venv/
-/myvenv/
-/obj/
-/backup/
-/_inne_materialy/
+venv/
+myvenv/
+backup/
+_inne_materialy/
 
 *.DS_Store
 *.cache
@@ -25,7 +22,6 @@ Desktop.ini
 ehthumbs.db
 config.py
 Thumbs.db
-web.config
 notatki.md
 create_database.sh
 
