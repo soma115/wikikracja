@@ -1,0 +1,15 @@
+# Sevice for wiki. On Centos it will be /etc/systemd/system/wiki.service
+
+[Unit]
+Description=wiki service
+After=network.target
+
+[Service]
+User=user
+Group=nginx
+RuntimeDirectory=gunicorn
+WorkingDirectory=/home/user/wiki/wiki
+ExecStart=/home/user/wiki/venv/bin/gunicorn --workers 2 --user user --group nginx --bind unix:/home/user/wiki/wiki.sock zzz.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

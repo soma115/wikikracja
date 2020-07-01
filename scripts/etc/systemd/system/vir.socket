@@ -1,9 +1,0 @@
-Unit]
-Description=wiki socket
-
-[Socket]
-ListenStream=/home/user/vir/vir.sock
-User=user
-
-[Install]
-WantedBy=sockets.target

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # software
-yum -y install epel-release git-all python3 virtualenv nginx python2-certbot-nginx docker
+yum -y install epel-release git-all python3 virtualenv nginx python2-certbot-nginx
 
 # python
 virtualenv -p python3 venv

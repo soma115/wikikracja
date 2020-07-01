@@ -67,6 +67,7 @@ INSTALLED_APPS = (
     'obywatele',
     'glosowania',
     'home',
+    'chat',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
