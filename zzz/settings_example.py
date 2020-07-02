@@ -1,11 +1,16 @@
 from os import path
 import os
 
-PROJECT_ROOT = path.dirname(path.abspath(path.dirname(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "media"),)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-DEBUG = True
-SECRET_KEY = 'example'
+DEBUG = False
+SECRET_KEY = 'Change_This_To_Random_Chars'
 
 ALLOWED_HOSTS = ['*']
 
@@ -102,19 +107,6 @@ LOGGING = {
         },
     }
 }
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "media"),
-)
-
-STATIC_URL = '/static/'
-STATIC_ROOT = path.join(PROJECT_ROOT, 'static')
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-STATICFILES_STORAGE = \
-    'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'glosowania:index'  # LOGIN_REDIRECT_URL = '/'
