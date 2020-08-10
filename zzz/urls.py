@@ -1,8 +1,6 @@
 from django.contrib import admin
-from django.conf import settings
 from home import views as hv
 from django.conf.urls import include
-from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.urls import path
 

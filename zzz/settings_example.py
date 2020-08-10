@@ -47,6 +47,10 @@ MIDDLEWARE = (
 ROOT_URLCONF = 'zzz.urls'
 
 WSGI_APPLICATION = 'zzz.wsgi.application'
+# Channels
+# WSGI_APPLICATION = 'zzz.wsgi.application'
+
+ASGI_APPLICATION = 'zzz.routing.application'
 
 TEMPLATES = [
     {
