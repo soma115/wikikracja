@@ -3,16 +3,26 @@ from django.contrib.auth.models import User
 
 
 class Room(models.Model):
-    name = models.TextField()
-    label = models.SlugField(unique=True)
-    # users = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    users = models.ManyToManyField(User)
+    """
+    A room for people to chat in.
+    """
+
+    # Room title
+    title = models.CharField(max_length=255)
+
+    # If only "staff" users are allowed (is_staff on django's User)
+    staff_only = models.BooleanField(default=False)
 
     def __str__(self):
-        return '%s' % (self.label)
+        return self.title
 
-    def addUser():
-        pass
+    @property
+    def group_name(self):
+        """
+        Returns the Channels Group name that sockets should
+        subscribe to to get sent messages as they are generated.
+        """
+        return "room-%s" % self.id
 
 
 class Message(models.Model):
@@ -21,3 +31,5 @@ class Message(models.Model):
     text = models.TextField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
     # TODO: revisions (editMessage(), deleteMessage())
+    class Meta:
+        unique_together = ('sender', 'text', 'room')
