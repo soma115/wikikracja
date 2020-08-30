@@ -21,3 +21,7 @@ def index(request):
     return render(request, "chat/index.html", {
         "rooms": rooms, 'uid': uid
     })
+
+
+def generate_private_chatroom_for_each_user():
+    pass

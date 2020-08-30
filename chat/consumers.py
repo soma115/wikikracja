@@ -1,13 +1,16 @@
 from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
+# from channels.generic.websocket import WebsocketConsumer
 from .exceptions import ClientError
 from .utils import get_room_or_error
 from .models import Message, Room
 from datetime import datetime as dt
 from django.contrib.auth.models import User
 from channels.db import database_sync_to_async
+# from asgiref.sync import async_to_sync
 from django.db import IntegrityError
 from channels.layers import get_channel_layer
+# from django.http import HttpResponse
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
@@ -36,6 +39,19 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Store which rooms the user has joined on this connection
         self.rooms = set()
 
+    async def disconnect(self, code):
+        """
+        Called when the WebSocket closes for any reason.
+        """
+        # Leave all the rooms we are still in
+        for room_id in list(self.rooms):
+            try:
+                await self.leave_room(room_id)
+            except ClientError:
+                pass
+
+############################################################################
+
     async def receive_json(self, content):
         """
         Called when we get a text frame. Channels will JSON-decode
@@ -56,18 +72,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
 
-    async def disconnect(self, code):
-        """
-        Called when the WebSocket closes for any reason.
-        """
-        # Leave all the rooms we are still in
-        for room_id in list(self.rooms):
-            try:
-                await self.leave_room(room_id)
-            except ClientError:
-                pass
-
-    # Command helper methods called by receive_json
+    #################################################
+    # Command helper methods called by receive_json #
+    #################################################
 
     async def join_room(self, room_id):
         """
@@ -76,36 +83,48 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # The logged-in user is in our scope thanks to
         # the authentication ASGI middleware
         room = await get_room_or_error(room_id, self.scope["user"])
+
         # Send a join message if it's turned on
-        if settings.NOTIFY_USERS_ON_ENTER_OR_LEAVE_ROOMS:
-            await self.channel_layer.group_send(
-                room.group_name,
-                {
-                    "type": "chat.join",
-                    "room_id": room_id,
-                    "username": self.scope["user"].username,
-                }
-            )
+        # if settings.NOTIFY_USERS_ON_ENTER_OR_LEAVE_ROOMS:
+        #     await self.channel_layer.group_send(
+        #         room.group_name,
+        #         {
+        #             "type": "chat.join",
+        #             "room_id": room_id,
+        #             "username": self.scope["user"].username,
+        #         }
+        #     )
+
         # Store that we're in the room
-        self.rooms.add(room_id)
+        self.rooms.add(room_id)  # 1
+
         # Add them to the group so they get room messages
         await self.channel_layer.group_add(
-            room.group_name,
-            self.channel_name,
+            room.group_name,    # room-1
+            self.channel_name,  # specific.BZcPrnWw!vvvelNWGEgbE
         )
         # Instruct their client to finish opening the room
         await self.send_json({
-            "join": str(room.id),
-            "title": room.title,
+            "join": str(room.id),  # 1
+            "title": room.title,   # Pokój 1
         })
 
-        # Mechanizm naśladującą send_room,
-        # który ładuje wszystkie wiadomości z bazy do czatu
+        # # Obsługa czatu 1-to-1
+        # self.user = self.scope["user"]
+        # # Notification room name:
+        # self.user_room_name = "notif_room_for_user_"+str(self.user.id)
+        # await self.channel_layer.group_add(
+        #     self.user_room_name,
+        #     self.channel_name
+        #     )
+        # print(self.user, self.user_room_name, self.user_room_name, self.channel_name)
+        # print(type(self.user), type(self.user_room_name), type(self.user_room_name), type(self.channel_name))
+
+        # Ładujemy wszystkie wiadomości z bazy do czatu
         # ale tylko do tego channela, który właśnie się podłączył.
         if room_id not in self.rooms:
             raise ClientError("ROOM_ACCESS_DENIED")
-        room = await get_room_or_error(room_id, self.scope["user"])
-
+        # room = await get_room_or_error(room_id, self.scope["user"])
         channel_layer = get_channel_layer()
         cn = self.channel_name
         m = await self.get_messages(room_id)
@@ -182,10 +201,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             }
         )
 
-    # Handlers for messages sent over the channel layer
+    #####################################################
+    # Handlers for messages sent over the channel layer #
+    #                                                   #
+    # These helper methods are named by the types       #
+    # we send - so: chat.join    becomes chat_join      #
+    #               chat.leave   becomes chat_leave     #
+    #               chat.message becomes chat_message   #
+    #####################################################
 
-    # These helper methods are named by the types we send - so
-    # chat.join becomes chat_join
     async def chat_join(self, event):
         """
         Called when someone has joined our chat.
@@ -226,7 +250,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             },
         )
 
-        # Tutaj zapisujemy wiadmość do bazy
+        # Tutaj zapisujemy wiadomość do bazy
         u = await self.get_user_by_name(event["username"])
         r = await self.get_room(event["room_id"])
         msg = Message(sender=u, time=dt.now(), text=event['message'], room=r)

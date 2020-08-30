@@ -1,3 +1,4 @@
+# Folders
 venv/
 myvenv/
 backup/
@@ -24,6 +25,7 @@ config.py
 Thumbs.db
 notatki.md
 create_database.sh
+testy.py
 
 ### Django ###
 *.log
