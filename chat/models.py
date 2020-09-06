@@ -26,10 +26,11 @@ class Room(models.Model):
 
 
 class Message(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     time = models.DateTimeField(auto_now=True)
     text = models.TextField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
     # TODO: revisions (editMessage(), deleteMessage())
+
     class Meta:
         unique_together = ('sender', 'text', 'room')

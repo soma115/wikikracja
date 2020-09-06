@@ -18,13 +18,6 @@
     <!-- ??? -->
     <div id="chats"></div>
 
-    <p>
-        {% for i in uid %}
-            <a href="{{ i.pk }}">{{ i.username }}</a>
-            
-        {% endfor %}
-    </p>
-
 {% endblock %}
 
 
@@ -67,7 +60,7 @@
                         roomdiv.find("input").val("");
                         return false;
                     });
-                    $("#chats").append(roomdiv);
+                    $("#chats").append(roomdiv);  // Tutaj jest wykorzystany <div id="chats"></div>
                     // Handle leaving
                 } else if (data.leave) {
                     console.log("Leaving room " + data.leave);
@@ -83,6 +76,7 @@
                             // Message
                             ok_msg = "<div class='message'>" +
                                     "<span class='username'>" + data.username + "</span>" +
+                                    // "<span class='time'>" + data.time + "</span>" +
                                     "<span class='body'>" + data.message + "</span>" +
                                     "</div>";
                             break;
@@ -132,7 +126,7 @@
 
             // Room join/leave
             $("li.room-link").click(function () {
-                roomId = $(this).attr("data-room-id");
+                roomId = $(this).attr("data-room-id");  // Tutaj jest użyty <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
                 if (inRoom(roomId)) {
                     // Leave room
                     $(this).removeClass("joined");

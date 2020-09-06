@@ -1,16 +1,12 @@
 from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-# from channels.generic.websocket import WebsocketConsumer
 from .exceptions import ClientError
 from .utils import get_room_or_error
 from .models import Message, Room
 from datetime import datetime as dt
 from django.contrib.auth.models import User
 from channels.db import database_sync_to_async
-# from asgiref.sync import async_to_sync
 from django.db import IntegrityError
-from channels.layers import get_channel_layer
-# from django.http import HttpResponse
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
@@ -76,24 +72,13 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     # Command helper methods called by receive_json #
     #################################################
 
-    async def join_room(self, room_id):
+    async def join_room(self, room_id):  # and scope{user, }!
         """
         Called by receive_json when someone sent a join command.
         """
         # The logged-in user is in our scope thanks to
         # the authentication ASGI middleware
         room = await get_room_or_error(room_id, self.scope["user"])
-
-        # Send a join message if it's turned on
-        # if settings.NOTIFY_USERS_ON_ENTER_OR_LEAVE_ROOMS:
-        #     await self.channel_layer.group_send(
-        #         room.group_name,
-        #         {
-        #             "type": "chat.join",
-        #             "room_id": room_id,
-        #             "username": self.scope["user"].username,
-        #         }
-        #     )
 
         # Store that we're in the room
         self.rooms.add(room_id)  # 1
@@ -109,48 +94,21 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "title": room.title,   # Pokój 1
         })
 
-        # # Obsługa czatu 1-to-1
-        # self.user = self.scope["user"]
-        # # Notification room name:
-        # self.user_room_name = "notif_room_for_user_"+str(self.user.id)
-        # await self.channel_layer.group_add(
-        #     self.user_room_name,
-        #     self.channel_name
-        #     )
-        # print(self.user, self.user_room_name, self.user_room_name, self.channel_name)
-        # print(type(self.user), type(self.user_room_name), type(self.user_room_name), type(self.channel_name))
-
         # Ładujemy wszystkie wiadomości z bazy do czatu
-        # ale tylko do tego channela, który właśnie się podłączył.
-        if room_id not in self.rooms:
-            raise ClientError("ROOM_ACCESS_DENIED")
-        # room = await get_room_or_error(room_id, self.scope["user"])
-        channel_layer = get_channel_layer()
         cn = self.channel_name
-        m = await self.get_messages(room_id)
-        for i in m:
-            u = await self.get_user_by_id(i['sender_id'])
-            # This one also works and I don't know the difference:
-            # await self.channel_layer.send(
-            await channel_layer.send(
+        messages = await self.get_messages(room_id)
+        for message in messages:
+            u = await self.get_user_by_id(message['sender_id'])
+            await self.channel_layer.send(
                 cn,
                 {
                     "type": "chat.message",
                     "room_id": room_id,
                     "username": u.username,
-                    "message": i['text'],
+                    # "time": str(message['time']),  # doesn't work, maybe later
+                    "message": message['text'],
                 }
             )
-
-    @database_sync_to_async
-    def get_messages(self, room):
-        m = list(Message.objects.filter(room=room).values().order_by('time'))
-        return m
-
-    @database_sync_to_async
-    def get_user_by_id(self, id):
-        u = User.objects.get(id=id)
-        return u
 
     async def leave_room(self, room_id):
         """
@@ -159,17 +117,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # The logged-in user is in our scope thanks to
         # the authentication ASGI middleware
         room = await get_room_or_error(room_id, self.scope["user"])
-        # Send a leave message if it's turned on
-        if settings.NOTIFY_USERS_ON_ENTER_OR_LEAVE_ROOMS:
-            await self.channel_layer.group_send(
-                room.group_name,
-                {
-                    "type": "chat.leave",
-                    "room_id": room_id,
-                    "username": self.scope["user"].username,
-                }
-            )
-        # Remove that we're in the room
+
+        # Remove info that we're in the room
         self.rooms.discard(room_id)
         # Remove them from the group so they no longer get room messages
         await self.channel_layer.group_discard(
@@ -189,52 +138,29 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Check they are in this room
         if room_id not in self.rooms:
             raise ClientError("ROOM_ACCESS_DENIED")
-        # Get the room and send to the group about it
+
+        # Get the room...
         room = await get_room_or_error(room_id, self.scope["user"])
+        # ...and send to the group info about it
         await self.channel_layer.group_send(
             room.group_name,
             {
                 "type": "chat.message",
                 "room_id": room_id,
                 "username": self.scope["user"].username,
+                # "time": str(message['time']),  # doesn't work, maybe later
                 "message": message,
             }
         )
 
-    #####################################################
-    # Handlers for messages sent over the channel layer #
-    #                                                   #
-    # These helper methods are named by the types       #
-    # we send - so: chat.join    becomes chat_join      #
-    #               chat.leave   becomes chat_leave     #
-    #               chat.message becomes chat_message   #
-    #####################################################
-
-    async def chat_join(self, event):
-        """
-        Called when someone has joined our chat.
-        """
-        # Send a message down to the client
-        await self.send_json(
-            {
-                "msg_type": settings.MSG_TYPE_ENTER,
-                "room": event["room_id"],
-                "username": event["username"],
-            },
-        )
-
-    async def chat_leave(self, event):
-        """
-        Called when someone has left our chat.
-        """
-        # Send a message down to the client
-        await self.send_json(
-            {
-                "msg_type": settings.MSG_TYPE_LEAVE,
-                "room": event["room_id"],
-                "username": event["username"],
-            },
-        )
+    ###########################################################
+    # Handlers for messages sent over the channel layer       #
+    #                                                         #
+    # These helper methods are named by the types             #
+    # we send - so: chat.join    becomes chat_join (removed)  #
+    #               chat.leave   becomes chat_leave (removed) #
+    #               chat.message becomes chat_message         #
+    ###########################################################
 
     async def chat_message(self, event):
         """
@@ -250,11 +176,35 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             },
         )
 
-        # Tutaj zapisujemy wiadomość do bazy
+        # Save message to DB
         u = await self.get_user_by_name(event["username"])
         r = await self.get_room(event["room_id"])
         msg = Message(sender=u, time=dt.now(), text=event['message'], room=r)
         await self.save_message(msg)
+
+    ###########################
+    # Sync to async functions #
+    ###########################
+
+    @database_sync_to_async
+    def get_messages(self, room):
+        m = list(Message.objects.filter(room=room).values().order_by('time'))
+        return m
+
+    @database_sync_to_async
+    def get_room(self, room_id):
+        r = Room.objects.get(id=room_id)
+        return r
+
+    @database_sync_to_async
+    def get_user_by_id(self, id):
+        u = User.objects.get(id=id)
+        return u
+
+    @database_sync_to_async
+    def get_user_by_name(self, user):
+        u = User.objects.get(username=user)
+        return u
 
     @database_sync_to_async
     def save_message(self, message):
@@ -263,13 +213,3 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         except IntegrityError as e:
             if 'UNIQUE constraint failed' in e.args[0]:
                 pass  # This message already exist in DB
-
-    @database_sync_to_async
-    def get_user_by_name(self, user):
-        u = User.objects.get(username=user)
-        return u
-
-    @database_sync_to_async
-    def get_room(self, room_id):
-        r = Room.objects.get(id=room_id)
-        return r
