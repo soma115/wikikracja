@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<div class="row border-bottom" style="padding-top:20px;background-color: #eeeeee;">
+	<div class="row-site border-bottom" style="padding-top:20px;background-color: #eeeeee;">
 		<!--<div class="col-md-1 text-center">
 			<a href="{% url 'home' %}"> <img class="rounded" src="{% static 'home/images/sitelogo.png' %}" style="height:70px;margin:6px;"></a>
 		</div>-->
@@ -26,6 +26,7 @@
 				<li role="presentation" {% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}><a href="{% url 'home' %}">Start</a></li>
 				{% if not user.is_authenticated %}
 					<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">Zaloguj</a></li>
+					<li role="presentation" {% if request.resolver_match.url_name == 'password_reset' %} class="active" {% endif %}><a href="{% url 'password_reset' %}">Zresetuj hasło</a></li>
 				{% endif %}
 				{% if user.is_authenticated %}
 					<li role="presentation" {% if request.resolver_match.namespace == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele:index' %}">Obywatele</a></li>
@@ -53,7 +54,7 @@
 			{% endfor %}
 		</ul>
 	{% endif %}
-	<div class="row" style="background-color: #aeaeae; margin-top:50px;border-top:2px solid grey;border-bottom:1px solid grey;padding-top:20px;">
+	<div class="row-site" style="background-color: #aeaeae; margin-top:50px;border-top:2px solid grey;border-bottom:1px solid grey;padding-top:20px;">
 		<div class="container">
 			<div class="col-md-4">
 				<h4>Kontakt</h4>

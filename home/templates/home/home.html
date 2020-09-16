@@ -2,13 +2,47 @@
 {% block title %}Strona powitalna{% endblock %}
 {% block content %}
 
-<h3>Witaj</h3>
 
 <ul>
 	{% if not user.is_authenticated %}
-		<p><u><a href="{% url 'login' %}">> Zaloguj się</a></u></p>
-		<p><u><a href="{% url 'password_reset' %}">> Zresetuj hasło</a></u></p>
-		<p><u><a href=https://wikikracja.pl/kontakt/ target="_blank">> Wyślij wiadomość do admina</a></u></p>
+	<div class="row">
+		<div class="container">
+			<div class="row">
+				<h3 class="title">Czym jest Wikikracja?</h3>
+				<p class="lead">
+					Wikikracja jest systemem do głosowania dzięki któremu społeczność może zarządzać sama sobą – bez pomocy przedstawicieli i administratorów.
+				</p>
+				<h3 class="title">Główne cechy systemu</h3>
+				<p>
+					<ul>
+						<li>> każda osoba ma jeden głos</li>
+						<li>> każdy głos jest tak samo ważny</li>
+						<li>> decyzje podejmowane są zwykłą większością głosów</li>
+						<li>> głosowania są anonimowe</li>
+						<li>> głosowanie przypomina system szwajcarski – po zebraniu podpisów zaczyna się czas na dyskusję a dopiero po nim następuje referendum</li>
+						<li>> członkostwem zarządza cała grupa poprzez akceptowanie nowych osób</li>
+						<li>> możliwe jest też usunięcie przeszkadzającej osoby jeśli wiele osób odbierze jej punkty reputacji</li>
+					</ul>
+				</p>
+				<p>
+					Aplikacja jest tak napisana żeby nie było w niej hierarchii. Nie jest potrzebny administrator. Sami użytkownicy decydują kto należy 
+					do grupy i jakie obowiązują w niej zasady. Oznacza to pełną równość i prawdziwą demokrację, których nie da się wyłączyć.
+				</p>
+				<a href="https://wikikracja.pl/" class="btn btn-info m-2" target="_blank">Czytaj więcej...</a>
+			</div>
+			<div class="row rounded" style="background-color: #a7d2e4; padding:10px;margin-top:20px;">
+				<div class="col-md-4">
+					<a href="{% url 'login' %}" class="btn btn-success btn-block m-2"> Zaloguj się</a>
+				</div>
+				<div class="col-md-4">
+					<a href="{% url 'password_reset' %}" class="btn btn-success btn-block m-2">Zresetuj hasło</a>
+				</div>
+				<div class="col-md-4">
+					<a href=https://wikikracja.pl/kontakt/ target="_blank" class="btn btn-success btn-block m-2"> Wyślij wiadomość do admina</a>		
+				</div>
+			</div>
+		</div>
+	</div>
 	{% endif %}
 
 	{% if user.is_authenticated %}

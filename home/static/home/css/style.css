@@ -158,5 +158,8 @@ p {
 }
 .nav-tabs
 {
-border:none !important;
+    border:none !important;
+}
+.rounded {
+    border-radius:10px;
 }
