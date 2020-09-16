@@ -17,22 +17,29 @@
 </head>
 
 <body>
-	<ul class="nav nav-tabs">
-		<a href="{% url 'home' %}"> <img style="padding: 0 10px; float: left;" src="{% static 'home/images/sitelogo.png' %}" ></a>
-	    <li role="presentation" {% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}><a href="{% url 'home' %}">Start</a></li>
-		{% if not user.is_authenticated %}
-			<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">zaloguj</a></li>
-		{% endif %}
-		{% if user.is_authenticated %}
-			<li role="presentation" {% if request.resolver_match.namespace == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele:index' %}">Obywatele</a></li>
-			<li role="presentation" {% if request.resolver_match.namespace == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania:index' %}">Głosowania</a></li>
-			<li role="presentation" {% if request.resolver_match.namespace == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
-			{% comment %} <li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="{% url 'chat:index' %}">chat</a></li> {% endcomment %}
-			<li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="/chat/">Chat</a></li>
-			<li role="presentation" {% if request.resolver_match.namespace == 'obywatele_szczegoly' %} class="active" {% endif %}><a style="color:green" href="/obywatele/{{ user.id }}">{{ user.username }}</a></li>
-			<li><a style="color:gray" href="/logout">logout</a></li>
-		{% endif %}
-	</ul>
+	<div class="row border-bottom" style="padding-top:20px;background-color: #eeeeee;">
+		<!--<div class="col-md-1 text-center">
+			<a href="{% url 'home' %}"> <img class="rounded" src="{% static 'home/images/sitelogo.png' %}" style="height:70px;margin:6px;"></a>
+		</div>-->
+		<div class="container">
+			<ul class="nav nav-tabs">
+				<li role="presentation" {% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}><a href="{% url 'home' %}">Start</a></li>
+				{% if not user.is_authenticated %}
+					<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">Zaloguj</a></li>
+				{% endif %}
+				{% if user.is_authenticated %}
+					<li role="presentation" {% if request.resolver_match.namespace == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele:index' %}">Obywatele</a></li>
+					<li role="presentation" {% if request.resolver_match.namespace == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania:index' %}">Głosowania</a></li>
+					<li role="presentation" {% if request.resolver_match.namespace == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
+					{% comment %} <li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="{% url 'chat:index' %}">chat</a></li> {% endcomment %}
+					<li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="/chat/">Chat</a></li>
+					<li role="presentation" {% if request.resolver_match.namespace == 'obywatele_szczegoly' %} class="active" {% endif %}><a style="color:green" href="/obywatele/{{ user.id }}">{{ user.username }}</a></li>
+					<li><a style="color:gray" href="/logout">logout</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+
 
 	<div class="container body-content">
 		<br>
@@ -46,15 +53,20 @@
 			{% endfor %}
 		</ul>
 	{% endif %}
-
-<br><br><br><br><br><br>
-	<div class="footer col-sm-6 center">
-	    <footer>
-	        <br><br><br><br><br><br>
-	        <p>Zgłoś błąd i kontakt: <a href="https://wikikracja.pl/kontakt/" target="_blank">wikikracja.pl</a></p>
-	    </footer>
+	<div class="row" style="background-color: #aeaeae; margin-top:50px;border-top:2px solid grey;border-bottom:1px solid grey;padding-top:20px;">
+		<div class="container">
+			<div class="col-md-4">
+				<h4>Kontakt</h4>
+				<p><a href="https://wikikracja.pl/kontakt/" target="_blank">wikikracja.pl</a></p>
+			</div>
+			<div class="col-md-4">
+				<h4>O projekcie</h4>
+				<p><a href="https://wikikracja.pl/category/mozliwe-zastosowania/" target="_blank">Możliwe zastosowania</a></p>
+				<p><a href="https://wikikracja.pl/category/odrzucone-koncepcje/" target="_blank">Odrzucone koncepcje</a></p>
+			</div>
+		</div>
 	</div>
-
+</div>
 	{% block scripts %}
 	<script src="{% static 'home/scripts/jquery-1.10.2.js' %}"></script>
 	<script src="{% static 'home/scripts/bootstrap.js' %}"></script>

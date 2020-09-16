@@ -138,3 +138,25 @@ p {
         font-weight: bold;
         font-style: italic;
     }
+.m-2
+{
+    margin:2px !important;
+}
+#login-box
+{
+    padding:8px;
+    border:1px solid #eeeeee;
+    border-radius:5px;
+}
+.title
+{
+    font-size:xx-large;
+}
+.border-bottom
+{
+    border-bottom:1px solid #dddddd;
+}
+.nav-tabs
+{
+border:none !important;
+}
