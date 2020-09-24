@@ -3,6 +3,6 @@ import django
 from channels.routing import get_default_application
 
 
-os.environ.setdefault('DJANGO_SETTING_MODULE', 'zzz.setting')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'zzz.settings')
 django.setup()
 application = get_default_application()
