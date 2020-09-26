@@ -20,12 +20,9 @@ virtualenv -p python3 /home/user/wiki/venv
 source /home/user/wiki/venv/bin/activate
 pip3 install -r /home/user/wiki/wiki/requirements.txt
 
-# redis
-podman run -p 6379:6379 -d redis:6
-
 # user rights etc.
 /home/user/wiki/wiki/scripts/update.sh
 
 # services
-mkdir /run/daphne
-supervisorctl reread; supervisorctl update; systemctl enable nginx supervisord; systemctl start nginx supervisord;
+systemctl enable nginx supervisord
+./scripts/restart_services.sh

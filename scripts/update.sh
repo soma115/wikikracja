@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# run within virtual environment
+# run with virtual environment and and within app home directory
 
 git reset --hard
 git pull
