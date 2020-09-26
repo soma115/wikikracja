@@ -18,10 +18,11 @@ source venv/bin/activate
 pip3 install -r wiki/requirements.txt
 
 # user rights etc.
-./wiki/scripts/update.sh
+cd wiki
+./scripts/update.sh
 
 # services
-cp wiki/scripts/etc/supervisord.d/wiki.ini /etc/supervisord.d/
-cp wiki/scripts/etc/nginx/conf.d/wiki.conf /etc/nginx/conf.d/
+cp scripts/wiki.ini /etc/supervisord.d/
+cp scripts/wiki.conf /etc/nginx/conf.d/
 systemctl enable nginx supervisord
 ./scripts/restart_services.sh
