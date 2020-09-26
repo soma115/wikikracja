@@ -15,10 +15,10 @@ cd /home/user/wiki
 git clone https://github.com/soma115/wikikracja.git
 virtualenv -p python3 venv
 source venv/bin/activate
-pip3 install -r wiki/requirements.txt
+pip3 install -r wikikracja/requirements.txt
 
 # user rights etc.
-cd wiki
+cd wikikracja
 ./scripts/update.sh
 
 # services
