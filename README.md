@@ -7,12 +7,15 @@ You will need email account like gmail in order to send emails to users.
 Smallest KVM VM is enough. 
 
 ## Installation (Centos 7, 8)
-- download scripts/deploy_server.sh and run it as root
+- Run as root: 
+    wget https://raw.githubusercontent.com/soma115/wikikracja/master/scripts/deploy_server.sh; chmod u+x deploy_server.sh; ./deploy_server.sh
 - Set 'user' as default in /etc/nginx/nginx.conf (user user;)
-- adjust zzz/setting.py: Add SECRET_KEY etc.
+- Adjust zzz/setting.py: Add SECRET_KEY etc. (you may use zzz/settings_exampla.py as template)
+- Enable (source) virtual environment
+- run ./scripts/update.sh from application root
 - run `cerbot --nginx`
-- Set site name in your_page.com/admin/sites/site/
 - ./manage.py createsuperuser
+- Set site name in your_page.com/admin/sites/site/
 
 ## Known issues
 - if you get Error 500 - clear cookies in your web browser

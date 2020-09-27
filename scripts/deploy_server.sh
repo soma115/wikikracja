@@ -1,28 +1,30 @@
 #!/bin/bash
 
-# software
-dnf -y install epel-release 
+echo; echo SOFTWARE 
+dnf -y install epel-release
 dnf -y install git-all python3 virtualenv nginx python3-certbot-nginx supervisor podman
 
-# user
-adduser user -s /sbin/nologin
+echo; echo USER
+adduser user -s /sbin/nologin  # TODO: make it to be parameter or something
 
-# app folder
-mkdir /home/user/wiki  # TODO: as parameter or something
+echo; echo APP FOLDER
+mkdir /home/user/wiki
 cd /home/user/wiki
 
-# python
+echo; echo PYTHON
 git clone https://github.com/soma115/wikikracja.git
 virtualenv -p python3 venv
 source venv/bin/activate
 pip3 install -r wikikracja/requirements.txt
 
-# user rights etc.
+echo; echo USER RIGHTS ETC.
 cd wikikracja
-./scripts/update.sh
+chown -R user:nginx *
+chmod u+w media/
 
-# services
-cp scripts/wiki.ini /etc/supervisord.d/
+echo; echo SERVICES
 cp scripts/wiki.conf /etc/nginx/conf.d/
+cp scripts/wiki.ini /etc/supervisord.d/
+cp scripts/redis.ini /etc/supervisord.d/
 systemctl enable nginx supervisord
 ./scripts/restart_services.sh
