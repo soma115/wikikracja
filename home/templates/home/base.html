@@ -30,7 +30,7 @@
 				{% endif %}
 				{% if user.is_authenticated %}
 					<li role="presentation" {% if request.resolver_match.namespace == 'obywatele' %} class="active" {% endif %}><a href="{% url 'obywatele:index' %}">Obywatele</a></li>
-					<li role="presentation" {% if request.resolver_match.namespace == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania:index' %}">Głosowania</a></li>
+					<li role="presentation" {% if request.resolver_match.namespace == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania:index' %}">Przepisy</a></li>
 					<li role="presentation" {% if request.resolver_match.namespace == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:index' %}">eBiblioteka</a></li>
 					{% comment %} <li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="{% url 'chat:index' %}">chat</a></li> {% endcomment %}
 					<li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="/chat/">Chat</a></li>

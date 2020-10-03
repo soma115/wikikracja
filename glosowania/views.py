@@ -87,7 +87,7 @@ def glosowania(request):
 
     decyzje = Decyzja.objects.filter(status=1)
     return render(request, 'glosowania/start.html',
-                  {'decyzje': decyzje, 'status': "Nowe propozycje"})
+                  {'decyzje': decyzje, 'status': "Obowiązujące"})
 
 
 # Pokaż szczegóły przepisu

@@ -39,7 +39,7 @@
 
 <div class="col-sm-8 right">
 	{% for i in decyzje %}
-		<h3><a href="{{ i.pk }}">● {{ i.tresc }}</a></h3>
+		<h3><a href="{{ i.pk }}">{{ i.pk }}. {{ i.tresc }}</a></h3>
 		<!-- Autor: {{ i.autor }} | ID: {{ i.pk }} | Data powstania: {{i.data_powstania}} -->
 	{% endfor %}
 </div>
