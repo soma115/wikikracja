@@ -127,7 +127,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Channels
 ASGI_APPLICATION = "zzz.routing.application"
-WSGI_APPLICATION = 'zzz.wsgi.application'
+# WSGI_APPLICATION = 'zzz.wsgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
