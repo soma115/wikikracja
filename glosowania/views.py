@@ -85,9 +85,9 @@ def glosowania(request):
 
     zliczaj_wszystko()
 
-    decyzje = Decyzja.objects.filter(status=1)
+    decyzje = Decyzja.objects.filter(status=7)
     return render(request, 'glosowania/start.html',
-                  {'decyzje': decyzje, 'status': "Obowiązujące"})
+                  {'decyzje': decyzje, 'status': "Przepisy obowiązujące"})
 
 
 # Pokaż szczegóły przepisu
