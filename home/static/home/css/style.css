@@ -116,7 +116,7 @@ p {
         margin: 2px 0 5px 0;
     }
     #chats .username {
-        display: inline-block;
+        /* display: inline-block; */
         color: #C07A36;
         width: 100px;
         font-weight: bold;
