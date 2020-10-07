@@ -110,15 +110,13 @@ p {
         font-weight: bold;
     }
     #chats .messages {
-        height: 200px;
+        height: 300px;
         overflow: auto;
         background: #eee;
         margin: 2px 0 5px 0;
     }
     #chats .username {
-        /* display: inline-block; */
         color: #418AC9;
-        width: 100px;
         font-weight: bold;
     }
     #chats .contextual-message{
