@@ -19,5 +19,5 @@ chown -R user:nginx *
 # chmod -R o-rwx *
 chmod u+w media/
 
-./manage.py collectstatic
+./manage.py collectstatic --noinput
 # ./manage.py createsuperuser"
