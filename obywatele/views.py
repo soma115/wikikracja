@@ -159,9 +159,6 @@ def obywatele_szczegoly(request, pk):
 
 # TODO: zamienić na obiekt z metodą: "podaj obecną populację":
 def zliczaj_obywateli(request):
-    '''Citizens should be accepted by voting but banned by
-    judge - if they break the law. This is only temporal
-    solution for small comunities.'''
     # Potrzebne w 'obywatele_szczegóły'
     populacja = User.objects.filter(is_active=True).count()
     wymagana_reputacja = int(log(populacja) * WYMAGANY_PROCENT_AKCEPTACJI)
