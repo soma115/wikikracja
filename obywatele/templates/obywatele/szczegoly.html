@@ -15,9 +15,11 @@
 
 		{% else %}
 		<!--Podgląd cudzego profilu-->
+		<p>Twój stosunek do tej osoby jest {{rate}}</p>
 			<form action="#" method="get">
 		    <input class="btn btn-primary" type="submit" name="tak" value="Akceptuję tą osobę"/>
-			<input class="btn btn-primary" type="submit" name="nie" value="Nie akceptuję"/>
+			<input class="btn btn-primary" type="submit" name="reset" value="Obojętna"/>
+			<input class="btn btn-primary" type="submit" name="nie" value="Nie akceptuję tej osoby"/>
 		</form>
 		{% endif %}
 
