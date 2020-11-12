@@ -20,9 +20,8 @@ import logging as l
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
-# Higher limit seams to be problematic bacuse people rarely acctepting each
-# other.
-ACCEPTANCE_MULTIPLIER = 1.6
+# Above 0.7 second person requires 2 points of acceptance which is a paradox.
+ACCEPTANCE_MULTIPLIER = 0.7  
 
 
 @login_required
@@ -91,23 +90,19 @@ def dodaj(request):
 @login_required
 def obywatele_szczegoly(request, pk):
     '''BUG:  Reputation is calculated inorrectly.
-    -[x] There has to be a table relating user and new person. This table is
-    needed because vote for person may be withdrawn at some point. So there
-    are 3 states:
+    -[x] There has to be a table relating user and new person. This table is needed because vote for person may be withdrawn at some point. So there are 3 states:
       1. Candidate is positive
       2. Candidate is neutral (not clicked, default)
       3. Candidate is negative
     3 states are needed because:
       - this is a fact, those 3 states really exist
-      - but most importantly: it should be possible to take reputation
-        away - even if somebody did not give reputation to that person
-        before.
+      - but most importantly: it should be possible to take reputation away - even if somebody did not give reputation to that person before.
 
-    -[ ] Reputation should be calculated from Ratetable relating citizen and candidate.
+    -[x] Reputation should be calculated from Rate table relating citizen and candidate.
 
-    -[ ] Counter should be zeroed out if person drop below required reputation. Then user is deactivated and counting starts from 0.
+    -[x] Counter should NOT be zeroed out if person drop below required reputation.
 
-    -[ ] New person increase population so also increase reputation equirements. Therefore every time new person is accepted - every other old member should have his reputation increased autmatically. And vice versa - if somebody is banned - everyone else should loose one point of reputation from banned person.'''
+    -[x] New person increase population so also increase reputation requirements for existing citizens. Therefore every time new person is accepted - every other old member should have his reputation increased autmatically. And vice versa - if somebody is banned - everyone else should loose one point of reputation from banned person.'''
 
     citizen = Uzytkownik.objects.get(pk=request.user.id)
 
@@ -126,10 +121,7 @@ def obywatele_szczegoly(request, pk):
                        'tr': citizen_reputation,
                        'wr': required_reputation})
 
-    # print('-----------------', candidate_profile)
-    # print('-----------------', citizen)
     rate = Rate.objects.get_or_create(kandydat=candidate_profile, obywatel=citizen)[0]
-    # print('-----------------', rate.rate)
 
     if request.GET.get('tak'):
         rate.rate = 1
@@ -183,23 +175,18 @@ def zliczaj_obywateli(request):
     '''
 
     population = User.objects.filter(is_active=True).count()
-    required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
-    # akceptacja = Rate()
 
-    # Count everyones reputation from Rate model and
-    # put it in to Uzytkownik
+    # Be careful changing this formula - people rarely acctepting each other.
+    required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
+
+    # Count everyones reputation from Rate model and put it in to Uzytkownik
     for i in Uzytkownik.objects.all():
-        
-        # print(i.uid)
-        # tt = Rate.objects.get_or_create(obywatel=i, defaults={'obywatel': i, 'kandydat': i, 'rate': '0'})
-        # print(tt)
 
         if Rate.objects.filter(kandydat=i).exists():
             reputation = Rate.objects.filter(kandydat=i).aggregate(Sum('rate'))
             i.reputation = list(reputation.values())[0]
             # l.info(f'Candidate: {i.uid.id}; Reputation: {list(reputation.values())[0]};')
             i.save()
-
 
     # Włącz użytkowników z odpowiednio wysoką reputacją
     for i in Uzytkownik.objects.all():
@@ -211,25 +198,12 @@ def zliczaj_obywateli(request):
             i.uid.save()
             l.info(f'Activating user {i.uid}')
             i.save()
-
-            # Nadaj wszystkim pozostałym 1 punkt reputacji
-            # for j in Uzytkownik.objects.all():
-            #     if i != j:
-            #         j.reputation += 1
-            #         j.save()
             
-            # New person accepts automatically everyone
-            for k in Uzytkownik.objects.all():
+            # New person accepts automatically every other active user
+            for k in Uzytkownik.objects.filter(uid__is_active=True):  # TODO: tylko aktywnych userów
                 if i == k:    # but not yourself
                     continue
-                akceptacja = Rate()
-                akceptacja.obywatel = i
-                akceptacja.kandydat = k
-                akceptacja.rate = 1
-                try:
-                    akceptacja.save()
-                except:  # TODO: except something
-                    continue
+                obj, created = Rate.objects.update_or_create(obywatel = i, kandydat = k, defaults={'rate': '1'})
 
             subject = request.get_host() + ' - Twoje konto zostało włączone'
             uname = str(i.uid.username)
@@ -248,37 +222,8 @@ def zliczaj_obywateli(request):
             l.info(f'Blocking user {i.uid}')
             i.save()
 
-            # Odbierz wszystkim pozostałym 1 punkt reputacji
-            # for j in Uzytkownik.objects.all():
-            #     # print(j.uid)
-            #     j.reputation -= 1
-            #     j.save()
-
-            # Delete this person Acceptance votes
-            # tt = Rate.objects.filter(obywatel=i.id)
-            # for x in tt:
-            #     print(x.obywatel.uid)
-            #     x.rate=0
-                # x.save()
-            # tt.delete()
-            Rate.objects.filter(obywatel=i.id).update(rate=0)
-
             # Banned person takes back all acceptance from everyone
-            # for k in Uzytkownik.objects.all():
-            #     if i == k:    # but not yourself
-            #         continue
-            #     akceptacja = Rate()
-            #     akceptacja.obywatel = i
-            #     akceptacja.kandydat = k
-            #     akceptacja.rate = 0
-            #     akceptacja.save()
-            #     try:
-            #         akceptacja.save()
-            #         print('okokokokok')
-            #     except:  # TODO: except something
-            #         print('eeeeeeeeeeeeeeeeeee')
-            #         continue
-
+            Rate.objects.filter(obywatel=i.id).update(rate=0)
 
             send_mail(
                 f'{str(request.get_host())} - Twoje konto zostało zablokowane',
@@ -287,7 +232,6 @@ def zliczaj_obywateli(request):
                 [i.uid.email],
                 fail_silently=False,
             )
-
             # We are not deleting user bacuse he may come back.
 
     l.info(f'Population: {population}. Required reputation: {required_reputation}')

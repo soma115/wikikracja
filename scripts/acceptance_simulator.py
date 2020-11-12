@@ -1,4 +1,10 @@
 from math import log
-ACCEPTANCE_MULTIPLIER = 1.6
-for i in range(1, 30):
-    print(f'Population: {i}; Required acceptance: {round(log(i)*ACCEPTANCE_MULTIPLIER)}; Half: {round(i/2)};')
+ACCEPTANCE_MULTIPLIER = 0.7
+
+print('Population | Required acceptance')
+for i in range(1, 101):
+    print(f'{str(i).rjust(10)} | {str(round(log(i)*ACCEPTANCE_MULTIPLIER)+1).rjust(1)}')
+    # +1 because acceptance has to be > than threshold. +1 is just for simulation.
+
+    # print(f' {str(i).rjust(9)} | {str(round(i*ACCEPTANCE_MULTIPLIER)+1).rjust(1)}')
+
