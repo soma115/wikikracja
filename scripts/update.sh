@@ -14,10 +14,13 @@ git pull
 ./manage.py makemigrations chat
 ./manage.py makemigrations
 ./manage.py migrate
+./manage.py makemessages -l 'en'
+./manage.py makemessages -l 'pl'
+./manage.py compilemessages
 
 chown -R user:nginx *
 # chmod -R o-rwx *
 chmod u+w media/
 
-./manage.py collectstatic --noinput
+./manage.py collectstatic
 # ./manage.py createsuperuser"

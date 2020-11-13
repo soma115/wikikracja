@@ -1,7 +1,7 @@
 {% extends "home/base.html" %}
 {% block title %}Strona powitalna{% endblock %}
 {% block content %}
-
+{% load i18n %}
 
 <ul>
 	{% if not user.is_authenticated %}

@@ -5,6 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from glosowania.views import ZliczajWszystko
 from glosowania.models import Decyzja
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import ugettext_lazy as _
 
 
 def home(request):

@@ -1,5 +1,6 @@
 {% extends 'home/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 	<div>
@@ -15,7 +16,7 @@
 		</h4>
 	</div>
 
-{% comment %} <div><button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button></div> {% endcomment %}
+{% comment %} <div><button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button></div> {% endcomment %}
 <button onclick="location.href='{% url 'obywatele:poczekalnia' %}'" class="btn btn-default" type="button">Wróć</button>
 
 

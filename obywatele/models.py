@@ -12,7 +12,7 @@ class Uzytkownik(models.Model):
                                editable=False,
                                null=True)
 
-    reputation = models.SmallIntegerField(null=False, default=0)
+    reputation = models.SmallIntegerField(null=True, default=0)
     polecajacy = models.CharField(editable=False, null=True, max_length=64)
     data_przyjecia = models.DateField(null=True, editable=False)
 
@@ -31,13 +31,13 @@ class Uzytkownik(models.Model):
         instance.uzytkownik.save()
 
 
-class Rate(models.Model):
-    obywatel = models.ForeignKey(Uzytkownik,
-                                 on_delete=models.CASCADE,
-                                 related_name='obywatel')
+class AkceptacjaOsoby(models.Model):
     kandydat = models.ForeignKey(Uzytkownik,
                                  on_delete=models.CASCADE,
                                  related_name='kandydat')
+    obywatel = models.ForeignKey(Uzytkownik,
+                                 on_delete=models.CASCADE,
+                                 related_name='obywatel')
     rate = models.SmallIntegerField(null=True, default=0)
 
     class Meta:

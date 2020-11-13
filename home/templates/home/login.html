@@ -1,4 +1,6 @@
 {% extends "home/base.html" %}
+{% load i18n %}
+
 {% block title %}Login{% endblock %}
 {% block content %}
   <div class="container">
@@ -33,9 +35,14 @@
                   <input type="submit" name="submit" class="btn btn-info btn-block m-2" value="Zaloguj">
               </div>
               <div class="col-md-6">
-                <a href="{% url 'password_reset' %}" class="btn btn-warning btn-block m-2">Nie pamiętam hasła</a>
+                <a href="{% url 'password_reset' %}" class="btn btn-warning btn-block m-2">Reset hasła</a>
               </div>
             </div>
+
+            {% if form.errors %}
+            <p>{% trans "The username or password is incorrect. Please try again." %}</p>
+            {% endif %}
+
           </form>
       </div>
       </div>
