@@ -31,7 +31,7 @@ class Uzytkownik(models.Model):
         instance.uzytkownik.save()
 
 
-class AkceptacjaOsoby(models.Model):
+class Rate(models.Model):
     kandydat = models.ForeignKey(Uzytkownik,
                                  on_delete=models.CASCADE,
                                  related_name='kandydat')

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-13 21:53+0100\n"
+"POT-Creation-Date: 2020-11-13 22:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,6 +90,18 @@ msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:26
 msgid "Wróć"
+msgstr ""
+
+#: obywatele/views.py:147
+msgid "negative"
+msgstr ""
+
+#: obywatele/views.py:149
+msgid "neutral"
+msgstr ""
+
+#: obywatele/views.py:151
+msgid "positive"
 msgstr ""
 
 #: templates/admin/base_site.html:3
