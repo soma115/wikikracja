@@ -3,7 +3,6 @@
 {% load i18n %}
 
 	{% block content %}
-{% trans '
 	<div class="col-sm-5 right"><a class="btn btn-warning fr-rounded fr-small" href="{% url 'elibrary:add' %}">{% trans 'Dodaj eBook' %}</a></div>
 	<div class="col-sm-8 right">
 
@@ -14,7 +13,7 @@
 					<td>{% if user == i.uploader %}
 						<form action="{% url 'elibrary:bookdelete' i.id %}" method='post' style='display: inline;'>
 						{% csrf_token %}
-						<input type="hidden" name='i.id' value='kasuj'/>
+						<input type="hidden" name='i.id' value='{% trans kasuj' %}/>
 							<button type='submit' class='btn btn-default btn-sm'>
 								<span class='glyphicon glyphicon-trash'></span>
 							</button>
