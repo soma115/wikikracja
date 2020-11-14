@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-14 12:22+0100\n"
+"POT-Creation-Date: 2020-11-14 12:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: elibrary/templates/elibrary/index.html:7
+#: elibrary/templates/elibrary/index.html:6
 msgid "Dodaj eBook"
 msgstr ""
 
@@ -237,8 +237,8 @@ msgid "Reset password"
 msgstr ""
 
 #: home/templates/home/base.html:34 obywatele/templates/obywatele/dodaj.html:6
-#: obywatele/templates/obywatele/poczekalnia.html:5
-#: obywatele/templates/obywatele/start.html:5
+#: obywatele/templates/obywatele/poczekalnia.html:6
+#: obywatele/templates/obywatele/start.html:6
 msgid "Obywatele"
 msgstr ""
 
@@ -438,14 +438,15 @@ msgid "Wyślij"
 msgstr ""
 
 #: obywatele/templates/obywatele/dodaj.html:7
-#: obywatele/templates/obywatele/poczekalnia.html:6
-#: obywatele/templates/obywatele/start.html:6
+#: obywatele/templates/obywatele/poczekalnia.html:7
+#: obywatele/templates/obywatele/start.html:7
 msgid "Kandydaci"
 msgstr ""
 
 #: obywatele/templates/obywatele/dodaj.html:8
 #: obywatele/templates/obywatele/dodaj.html:43
-#: obywatele/templates/obywatele/poczekalnia.html:7
+#: obywatele/templates/obywatele/poczekalnia.html:8
+#: obywatele/templates/obywatele/start.html:8
 msgid "Zaproponuj nową osobę"
 msgstr ""
 
@@ -475,6 +476,10 @@ msgstr ""
 
 #: obywatele/templates/obywatele/moje_konto.html:14
 msgid "Data nadania karmy"
+msgstr ""
+
+#: obywatele/templates/obywatele/poczekalnia.html:13
+msgid "Zgłoszony"
 msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:12

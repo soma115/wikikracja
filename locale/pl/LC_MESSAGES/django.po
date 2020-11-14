@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-14 12:22+0100\n"
+"POT-Creation-Date: 2020-11-14 12:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,33 +22,33 @@ msgstr ""
 
 #: chat/templates/chat/index.html:16
 msgid "No chat rooms defined. Maybe make some in the"
-msgstr ""
+msgstr "Nie zdefiniowano pokojów rozmów. Może zrób trochę w formacie"
 
 #: elibrary/templates/elibrary/add.html:6
 msgid "Upload ebook"
-msgstr ""
+msgstr "Wgraj ebook"
 
 #: elibrary/templates/elibrary/add.html:8
 msgid "Before uploading a file make sure that file name is nicely formatted."
-msgstr ""
+msgstr "Przed przesłaniem pliku upewnij się, że jego nazwa jest ładnie sformatowana."
 
 #: elibrary/templates/elibrary/add.html:9
 msgid "Ideally the filename should be in the format like:"
-msgstr ""
+msgstr "Idealnie, nazwa pliku powinna mieć następujący format:"
 
 #: elibrary/templates/elibrary/add.html:10
 msgid "First Name Last Name - Title.pdf"
-msgstr ""
+msgstr "Imię Nazwisko - Tytuł.pdf"
 
 #: elibrary/templates/elibrary/add.html:16
 msgid "Send"
-msgstr ""
+msgstr "Wyślij"
 
 #: elibrary/templates/elibrary/add.html:19
 msgid "Back"
-msgstr ""
+msgstr "Wróć"
 
-#: elibrary/templates/elibrary/index.html:7
+#: elibrary/templates/elibrary/index.html:6
 msgid "Dodaj eBook"
 msgstr ""
 
@@ -239,8 +239,8 @@ msgid "Reset password"
 msgstr ""
 
 #: home/templates/home/base.html:34 obywatele/templates/obywatele/dodaj.html:6
-#: obywatele/templates/obywatele/poczekalnia.html:5
-#: obywatele/templates/obywatele/start.html:5
+#: obywatele/templates/obywatele/poczekalnia.html:6
+#: obywatele/templates/obywatele/start.html:6
 msgid "Obywatele"
 msgstr ""
 
@@ -438,14 +438,15 @@ msgid "Wyślij"
 msgstr ""
 
 #: obywatele/templates/obywatele/dodaj.html:7
-#: obywatele/templates/obywatele/poczekalnia.html:6
-#: obywatele/templates/obywatele/start.html:6
+#: obywatele/templates/obywatele/poczekalnia.html:7
+#: obywatele/templates/obywatele/start.html:7
 msgid "Kandydaci"
 msgstr ""
 
 #: obywatele/templates/obywatele/dodaj.html:8
 #: obywatele/templates/obywatele/dodaj.html:43
-#: obywatele/templates/obywatele/poczekalnia.html:7
+#: obywatele/templates/obywatele/poczekalnia.html:8
+#: obywatele/templates/obywatele/start.html:8
 msgid "Zaproponuj nową osobę"
 msgstr ""
 
@@ -475,6 +476,10 @@ msgstr ""
 
 #: obywatele/templates/obywatele/moje_konto.html:14
 msgid "Data nadania karmy"
+msgstr ""
+
+#: obywatele/templates/obywatele/poczekalnia.html:13
+msgid "Zgłoszony"
 msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:12
