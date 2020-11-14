@@ -6,20 +6,20 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <h3 class="title">{% trans 'Witaj w systemie Wikikracja!' %}</h3>
+        <h3 class="title">{% trans 'Welcome to Wikicracy!' %}</h3>
         <p class="lead">
-          {% trans 'Celem Wikikracji jest umożliwienie społeczności decydować o samej sobie.' %}
+          {% trans 'The purpose of Wikicracy is to allow the community to decide for itself.' %}
         </p>
         <p>
-          {% trans 'Możliwość kierowania własnym losem powinna sprawić, że stworzymy zasady, które premiują sprawiedliwość, szlachetne postawy, szerokie horyzonty,bezwarunkową miłość, współczucie, przyjacielską postawę oraz prawidłowe twierdzenia i przewidywania.' %}
+          {% trans 'Being able to manage our own destiny should lead us to create principles that reward justice, noble attitudes, broad horizons, unconditional love, compassion, friendly attitude, and correct statements and predictions.' %}
         </p>
-        <a href="https://wikikracja.pl/" class="btn btn-info m-2" target="_blank">{% trans 'Czytaj więcej...' %}</a>
+        <a href="https://wikikracja.pl/" class="btn btn-info m-2" target="_blank">{% trans 'Read more...' %}</a>
       </div>
       <div class="col-md-4 p-3 border border-info">
         <div id="login-box">
           <form id="login-form" class="form" action="" method="post">
               {% csrf_token %}
-              <h3 class="text-center text-info m-2">{% trans 'Wikikracja - Logowanie' %}</h3>
+              <h3 class="text-center text-info m-2">{% trans 'Wikicracy - Login' %}</h3>
               <div class="form-group">
                 <label for="{{form.username.name}}" class="text-info">{{form.username.label}}</label><br>
                 <input type="text" name="{{form.username.name}}" class="form-control" id="{{form.username.auto_id}}">
@@ -30,10 +30,10 @@
             </div>
             <div class="row">
               <div class="col-md-6">
-                  <input type="submit" name="submit" class="btn btn-info btn-block m-2" value="Zaloguj">
+                  <input type="submit" name="submit" class="btn btn-info btn-block m-2" value={% trans 'Login' %}>
               </div>
               <div class="col-md-6">
-                <a href="{% url 'password_reset' %}" class="btn btn-warning btn-block m-2">{% trans 'Reset hasła' %}</a>
+                <a href="{% url 'password_reset' %}" class="btn btn-warning btn-block m-2">{% trans 'Reset password' %}</a>
               </div>
             </div>
 

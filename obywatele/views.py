@@ -110,7 +110,7 @@ def obywatele_szczegoly(request, pk):
     candidate = str(User.objects.get(pk=pk))
 
     population = User.objects.filter(is_active=True).count()
-    required_reputation = int(log(population) * ACCEPTANCE_MULTIPLIER)
+    required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
     citizen_reputation = citizen.reputation
 
     if candidate_profile == citizen:
@@ -126,21 +126,21 @@ def obywatele_szczegoly(request, pk):
     if request.GET.get('tak'):
         rate.rate = 1
         rate.save()
-        wynik = 'Twój stosunek do użytkownika ' + candidate + ' jest pozytywny.'
+        wynik = str(_('Your relationship to the user ')) + candidate + str(_(' is positive'))
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
 
     if request.GET.get('nie'):
         rate.rate = -1
         rate.save()
 
-        wynik = 'Twój stosunek do użytkownika ' + candidate + ' jest negatywny.'
+        wynik = str(_('Your relationship to the user ')) + candidate + str(_(' is negative'))
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
 
     if request.GET.get('reset'):
         rate.rate = 0
         rate.save()
 
-        wynik = 'Twój stosunek do użytkownika ' + candidate + ' jest neutralny.'
+        wynik = str(_('Your relationship to the user ')) + candidate + str(_(' is neutral'))
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
 
     if rate.rate == -1:

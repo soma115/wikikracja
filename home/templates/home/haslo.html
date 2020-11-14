@@ -1,18 +1,18 @@
 {% extends "home/base.html" %}
 {% block title %}Hasło{% endblock %}
-{% block content %}
 {% load i18n %}
 
+{% block content %}
 <p>
     <ul class="navbar-form">
         <form role="form" class="form-horizontal" method="post"action="{% url 'haslo' %}">{% csrf_token %}
 
             <div class="input-group" >
-                <p>{% trans 'Stare hasło' %}: {{ form.old_password }}</p>
-                <p>{% trans 'Wpisz nowe hasło' %}: {{ form.new_password1 }}</p>
-                <p>{% trans 'Powtórz nowe hasło' %}: {{ form.new_password2 }}</p>
+                <p>{% trans 'Old password' %}: {{ form.old_password }}</p>
+                <p>{% trans 'New password' %}: {{ form.new_password1 }}</p>
+                <p>{% trans 'Repet new password' %}: {{ form.new_password2 }}</p>
             </div>
-            <button type="submit">{% trans 'Zapisz' %}</button>
+            <button type="submit">{% trans 'Save' %}</button>
         </form>
     </ul>
 </p>

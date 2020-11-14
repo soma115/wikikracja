@@ -8,8 +8,6 @@
 		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:zaproponuj_osobe' %}">+{% trans 'Propose new person' %}</a>
 
 		{% for i in uid %}
-			<h3><a href="{{ i.pk }}">{{ i.username }}</a></h3>
-			<!--<p>{{ i.email }} | Dołączył: {{ i.uid.data_przyjecia|date:"Y-m-d" }}</p>-->
-			<p>{{ i.email }}</p>
+			<p></p><a href="{{ i.pk }}">{{ i.username }} | {{ i.email }}</a></p>
 		{% endfor %}
 	{% endblock %}

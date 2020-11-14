@@ -16,23 +16,12 @@ def home(request):
     # TODO: Aktualnie trwające referenda
     # Decyzja.objects.filter(status=0)
     # Decyzja.objects.all().order_by('-data_powstania')
-    # print(decyzje)
-    # print(kolejka)
     return render(request,
                   'home/home.html',
                   {'trwajace': trwajace,
                    'zblizajace_sie': zblizajace_sie,
                    'data_referendum_start': data_referendum_start}
                   )
-
-# class Home:
-#     def home(request):
-#         kolejka = ZliczajWszystko.kolejka()
-#         decyzje = Decyzja.objects.all()
-#         print(decyzje)
-#         print(kolejka)
-#         return render(request, 'home/home.html', {'decyzje': decyzje,
-#                                                   'kolejka': kolejka})
 
 
 @login_required

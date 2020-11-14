@@ -6,10 +6,10 @@
 	<div>
 		<h3>{{ id.tresc }}</h3>
 			<p>
-				{% trans 'Autor' %}: {{ id.autor }} |
-				{% trans 'Data powstania' %}: {{ id.data_powstania }} |
-				{% trans 'Data zebrania podpisów' %}: {{ id.data_zebrania_podpisow }} |
-				{% trans 'Ile osób podpisało' %}: {{ id.ile_osob_podpisalo }}
+				{% trans 'Author' %}: {{ id.autor }} |
+				{% trans 'Date created' %}: {{ id.data_powstania }} |
+				{% trans 'Date of collecting signatures' %}: {{ id.data_zebrania_podpisow }} |
+				{% trans 'How many people signed' %}: {{ id.ile_osob_podpisalo }}
 			</p>
 	</div>
 
@@ -20,5 +20,5 @@
 			</p>
 		</h4>
 	</div>
-<button onclick="location.href='{% url 'glosowania:index' %}'" class="btn btn-default" type="button">{% trans 'Wróć</button>' %}
+<button onclick="location.href='{% url 'glosowania:index' %}'" class="btn btn-default" type="button">{% trans 'Back' %}</button>
 {% endblock %}

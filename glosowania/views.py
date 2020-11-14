@@ -6,6 +6,7 @@ from django.shortcuts import render
 from glosowania.forms import DecyzjaForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import ugettext_lazy as _
 
 
 # Dodaj nową propozycję przepisu:
@@ -50,44 +51,44 @@ def glosowania(request):
     if request.GET.get("1"):
         decyzje = Decyzja.objects.filter(status=1)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': "Nowe propozycje"})
+                      {'decyzje': decyzje, 'status': _("New propositions")})
 
     if request.GET.get("2"):
         decyzje = Decyzja.objects.filter(status=2)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': "Propozycje odrzucone"})
+                      {'decyzje': decyzje, 'status': _("No endorsement")})
 
     if request.GET.get("3"):
         decyzje = Decyzja.objects.filter(status=3)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': "W kolejce do referendum"})
+                      {'decyzje': decyzje, 'status': _("Queued for referedum")})
 
     if request.GET.get("4"):
         decyzje = Decyzja.objects.filter(status=4)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': "Referendum"})
+                      {'decyzje': decyzje, 'status': _("Referendum")})
 
     if request.GET.get("5"):
         decyzje = Decyzja.objects.filter(status=5)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': "Odrzucone w referendum"})
+                      {'decyzje': decyzje, 'status': _("Rejected in referendum")})
 
     if request.GET.get("6"):
         decyzje = Decyzja.objects.filter(status=6)
         return render(request, 'glosowania/start.html',
                       {'decyzje': decyzje,
-                       'status': "Zatwierdzone w okresie Vacatio Legis"})
+                       'status': _("Accepted / Vacatio Legis")})
 
     if request.GET.get("7"):
         decyzje = Decyzja.objects.filter(status=7)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': "Przepisy obowiązujące"})
+                      {'decyzje': decyzje, 'status': _("Applicable regulations")})
 
     zliczaj_wszystko()
 
     decyzje = Decyzja.objects.filter(status=7)
     return render(request, 'glosowania/start.html',
-                  {'decyzje': decyzje, 'status': "Przepisy obowiązujące"})
+                  {'decyzje': decyzje, 'status': _("Applicable regulations")})
 
 
 # Pokaż szczegóły przepisu
@@ -114,10 +115,10 @@ def glosowanie_szczegoly(request, pk):
                 # TODO: Guzik 'Tak, podpisuję' ma się nie pokazywać
                 # jeśli użytkownik już wcześniej podpisał.
                 # Trzeba chyba dodać kolumnę do modelu
-                message = 'Już wcześniej podpisałeś ten wniosek.'
+                message = _('You have already signed this application before.')
                 return render(request, 'glosowania/zapisane.html',
                               {'id': szczegoly, 'message': message})
-        message = 'Twój podpis został zapisany.'
+        message = _('Your signature has been saved.')
         return render(request, 'glosowania/zapisane.html',
                       {'id': szczegoly, 'message': message})
 
@@ -180,8 +181,7 @@ def zliczaj_wszystko():
     # print('Zliczam głosy i terminy...')
     wymaganych_podpisow = 2  # Aby zatwierdzić wniosek o referendum
     czas_na_zebranie_podpisow = timedelta(days=365)  # 365
-    # czas pomiędzy zebraniem podpisów a referendum
-    # wymagany aby móc omówić skutki:
+    # czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki:
     kolejka = timedelta(days=7)
     czas_trwania_referendum = timedelta(days=7)  #
     vacatio_legis = timedelta(days=7)  #
@@ -200,8 +200,7 @@ def zliczaj_wszystko():
     decyzje = Decyzja.objects.all()
     for i in decyzje:
         if i.status != brak_poparcia and i.status != odrzucone and i.status != obowiazuje:
-            # Jeśli nie jest w jakiś sposób zatwierdzone/odrzucone
-            # to procesujemy:
+            # Jeśli nie jest w jakiś sposób zatwierdzone/odrzucone to procesujemy:
 
             # FROM PROPOSITION TO QUEUE
             if i.status == propozycja and i.ile_osob_podpisalo >= wymaganych_podpisow:
@@ -217,7 +216,6 @@ def zliczaj_wszystko():
                 # print('Data referendum: '+str(i.data_referendum_start))
 
                 i.save()
-                # print('Propozycja ' + str(i.id) + ' zmieniła status na "w kolejce".')
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "w kolejce".')
                 continue
 
@@ -225,7 +223,6 @@ def zliczaj_wszystko():
             if i.status == propozycja and i.data_powstania + czas_na_zebranie_podpisow <= dzisiaj:
                 i.status = brak_poparcia
                 i.save()
-                # print('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
                 continue
 
@@ -233,7 +230,6 @@ def zliczaj_wszystko():
             if i.status == w_kolejce and i.data_referendum_start <= dzisiaj:
                 i.status = referendum
                 i.save()
-                # print('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
                 continue
 
@@ -244,13 +240,11 @@ def zliczaj_wszystko():
                     i.data_zatwierdzenia = i.data_referendum_stop
                     i.data_obowiazuje_od = i.data_referendum_stop + vacatio_legis
                     i.save()
-                    # print('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
                     continue
                 else:
                     i.status = odrzucone
                     i.save()
-                    # print('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
                     continue
 
@@ -258,6 +252,5 @@ def zliczaj_wszystko():
             if i.status == zatwierdzone and i.data_obowiazuje_od <= dzisiaj:
                 i.status = obowiazuje
                 i.save()
-                # print('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
                 continue

@@ -4,7 +4,7 @@
 {% load i18n %}
 
 {% block content %}
-        <h1>{% trans 'New rule' %}</h1>
+        <h1>{% trans 'New proposition' %}</h1>
         <form action="." method="POST" class="post-form">
             {% csrf_token %}
             {% comment %} {{ form|crispy }} {% endcomment %}

@@ -3,9 +3,9 @@
 {% load i18n %}
 
 	{% block content %}
-		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:index' %}">{% trans 'Obywatele' %}</a>
-		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:poczekalnia' %}">{% trans 'Kandydaci' %}</a>
-		<a class="btn btn-primary fr-rounded fr-small" href="{% url 'obywatele:zaproponuj_osobe' %}">+{% trans 'Zaproponuj nową osobę' %}</a>
+		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:index' %}">{% trans 'Citizens' %}</a>
+		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:poczekalnia' %}">{% trans 'Candidates' %}</a>
+		<a class="btn btn-primary fr-rounded fr-small" href="{% url 'obywatele:zaproponuj_osobe' %}">+{% trans 'Propose new person' %}</a>
 
 	    <form action="." method="POST" class="post-form">{% csrf_token %}
 
@@ -16,7 +16,7 @@
 		    <p>
 			    <table>
 			    <tr>
-				    <td>{% trans 'Nazwa użytkownika' %}:</td>
+				    <td>{% trans 'Username' %}:</td>
 				    <td>{{form.username}}</td>
 			    </tr>
 			    <tr>
@@ -40,7 +40,7 @@
 	        <!--</tr>-->
 
 	        <!--<button type="submit" class="save btn btn-default">Zaproponuj nową osobę</button>-->
-	        <button type="submit" class="save btn btn-default">{% trans 'Zaproponuj nową osobę' %}</button>
-	        <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Wróć' %}</button>
+	        <button type="submit" class="save btn btn-default">{% trans 'Propose new person' %}</button>
+	        <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button>
 	    </form>
 	{% endblock %}{% load i18n %}
