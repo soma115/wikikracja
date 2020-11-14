@@ -8,11 +8,11 @@
         <form role="form" class="form-horizontal" method="post"action="{% url 'haslo' %}">{% csrf_token %}
 
             <div class="input-group" >
-                <p>Stare hasło: {{ form.old_password }}</p>
-                <p>Wpisz nowe hasło: {{ form.new_password1 }}</p>
-                <p>Powtórz nowe hasło: {{ form.new_password2 }}</p>
+                <p>{% trans 'Stare hasło' %}: {{ form.old_password }}</p>
+                <p>{% trans 'Wpisz nowe hasło' %}: {{ form.new_password1 }}</p>
+                <p>{% trans 'Powtórz nowe hasło' %}: {{ form.new_password2 }}</p>
             </div>
-            <button type="submit">Zapisz</button>
+            <button type="submit">{% trans 'Zapisz' %}</button>
         </form>
     </ul>
 </p>

@@ -25,7 +25,7 @@
 		</div>-->
 		<div class="container">
 			<ul class="nav nav-tabs">
-				<li role="presentation" {% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}><a href="{% url 'home' %}">Start</a></li>
+				<li role="presentation" {% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}><a href="{% url 'home' %}">{% trans 'Start' %}</a></li>
 				{% if not user.is_authenticated %}
 					<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
 					<li role="presentation" {% if request.resolver_match.url_name == 'password_reset' %} class="active" {% endif %}><a href="{% url 'password_reset' %}">{% trans "Reset password" %}</a></li>
@@ -63,8 +63,8 @@
 			</div>
 			<div class="col-md-4">
 				<h4>O projekcie</h4>
-				<p><a href="https://wikikracja.pl/category/mozliwe-zastosowania/" target="_blank">Możliwe zastosowania</a></p>
-				<p><a href="https://wikikracja.pl/category/odrzucone-koncepcje/" target="_blank">Odrzucone koncepcje</a></p>
+				<p><a href="https://wikikracja.pl/category/mozliwe-zastosowania/" target="_blank">{% trans 'Możliwe zastosowania' %}</a></p>
+				<p><a href="https://wikikracja.pl/category/odrzucone-koncepcje/" target="_blank">{% trans 'Odrzucone koncepcje' %}</a></p>
 			</div>
 		</div>
 	</div>

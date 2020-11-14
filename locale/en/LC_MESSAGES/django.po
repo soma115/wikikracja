@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-13 22:51+0100\n"
+"POT-Creation-Date: 2020-11-14 12:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,189 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: home/templates/home/base.html:30
+#: elibrary/templates/elibrary/index.html:7
+msgid "Dodaj eBook"
+msgstr ""
+
+#: glosowania/templates/glosowania/dodaj.html:7
+msgid "Nowy przepis"
+msgstr ""
+
+#: glosowania/templates/glosowania/dodaj.html:31
+#: home/templates/home/haslo.html:15
+msgid "Zapisz"
+msgstr ""
+
+#: glosowania/templates/glosowania/dodaj.html:32
+#: glosowania/templates/glosowania/szczegoly.html:36
+#: glosowania/templates/glosowania/szczegoly.html:48
+#: glosowania/templates/glosowania/szczegoly.html:55
+#: obywatele/templates/obywatele/dodaj.html:44
+#: obywatele/templates/obywatele/szczegoly.html:28
+#: obywatele/templates/obywatele/zapisane.html:21
+msgid "Wróć"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:9
+msgid "Propozycje"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:13
+msgid "Brak poparcia"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:17
+msgid "W kolejce do referendum"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:21
+msgid "Referendum"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:25
+msgid "Odrzucone"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:29
+msgid "Zatwierdzone/Vacatio Legis"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:33
+msgid "Obowiązujące"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:37
+msgid "Dodaj Głosowanie"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:51
+msgid "Parametry głosowań:"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:52
+msgid ""
+"wymaganych_podpisow = potrzeba 2 osób aby zatwierdzić wniosek o referendum. "
+"Ta liczba powinna pozostać wystarczająco niska aby każdy sensowny wniosek "
+"mógł zostać poddany pod głosowanie i tylko na tyle wysoka żeby odsiać "
+"ewidentny spam."
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:53
+msgid ""
+"czas_na_zebranie_podpisow = 365 dni. Po tym czasie podpisy trzeba zbierać od "
+"nowa."
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:54
+msgid ""
+"kolejka_do_głosowania = 7 dni pomiędzy zebraniem podpisów a referendum aby "
+"móc omówić skutki"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:55
+msgid "czas_trwania_referendum = 7 dni"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:56
+msgid "vacatio_legis = 1 dzień"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:57
+msgid "Parametry przyjmowania nowych osób:"
+msgstr ""
+
+#: glosowania/templates/glosowania/start.html:58
+#, python-format
+msgid "wymagana_reputacja = 30%%"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:7
+msgid "Przepis numer"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:8
+msgid "Treść przepisu"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:9
+msgid "Kara za nieprzestrzeganie"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:10
+msgid "Uzasadnienie"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:11
+msgid "Ten przepis znosi następujące przepisy"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:15
+msgid "Wniosek o referendum podpisało osób"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:16
+msgid "Za było"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:16
+msgid "Przeciw"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:19
+#: glosowania/templates/glosowania/zapisane.html:10
+msgid "Data powstania"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:20
+#: glosowania/templates/glosowania/zapisane.html:11
+msgid "Data zebrania podpisów"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:21
+msgid "Start referendum"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:22
+msgid "Koniec referendum"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:23
+msgid "Przepis obowiązuje od"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:34
+msgid "Czy chcesz referendum w sprawie tego przepisu?"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:35
+msgid "Tak, podpisuję"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:46
+msgid "Tak"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:47
+msgid "Nie"
+msgstr ""
+
+#: glosowania/templates/glosowania/zapisane.html:9
+msgid "Autor"
+msgstr ""
+
+#: glosowania/templates/glosowania/zapisane.html:12
+msgid "Ile osób podpisało"
+msgstr ""
+
+#: glosowania/templates/glosowania/zapisane.html:23
+msgid "Wróć</button>"
+msgstr ""
+
+#: home/templates/home/base.html:28
+msgid "Start"
+msgstr ""
+
+#: home/templates/home/base.html:30 home/templates/home/login.html:4
 msgid "Login"
 msgstr ""
 
@@ -54,7 +236,9 @@ msgstr ""
 msgid "Reset password"
 msgstr ""
 
-#: home/templates/home/base.html:34
+#: home/templates/home/base.html:34 obywatele/templates/obywatele/dodaj.html:6
+#: obywatele/templates/obywatele/poczekalnia.html:5
+#: obywatele/templates/obywatele/start.html:5
 msgid "Obywatele"
 msgstr ""
 
@@ -74,22 +258,247 @@ msgstr ""
 msgid "logout"
 msgstr ""
 
-#: home/templates/home/login.html:43
+#: home/templates/home/base.html:66
+msgid "Możliwe zastosowania"
+msgstr ""
+
+#: home/templates/home/base.html:67
+msgid "Odrzucone koncepcje"
+msgstr ""
+
+#: home/templates/home/haslo.html:11
+msgid "Stare hasło"
+msgstr ""
+
+#: home/templates/home/haslo.html:12
+msgid "Wpisz nowe hasło"
+msgstr ""
+
+#: home/templates/home/haslo.html:13
+msgid "Powtórz nowe hasło"
+msgstr ""
+
+#: home/templates/home/home.html:11
+msgid "Czym jest Wikikracja?"
+msgstr ""
+
+#: home/templates/home/home.html:13
+msgid ""
+"Wikikracja jest systemem do głosowania dzięki któremu społeczność może "
+"zarządzać sama sobą – bez pomocy przedstawicieli i administratorów."
+msgstr ""
+
+#: home/templates/home/home.html:15
+msgid "Główne cechy systemu"
+msgstr ""
+
+#: home/templates/home/home.html:18
+msgid "każda osoba ma jeden głos"
+msgstr ""
+
+#: home/templates/home/home.html:19
+msgid "każdy głos jest tak samo ważny"
+msgstr ""
+
+#: home/templates/home/home.html:20
+msgid "decyzje podejmowane są zwykłą większością głosów"
+msgstr ""
+
+#: home/templates/home/home.html:21
+msgid "głosowania są anonimowe"
+msgstr ""
+
+#: home/templates/home/home.html:22
+msgid ""
+"głosowanie przypomina system szwajcarski – po zebraniu podpisów zaczyna się "
+"czas na dyskusję a dopiero po nim następuje referendum"
+msgstr ""
+
+#: home/templates/home/home.html:23
+msgid "członkostwem zarządza cała grupa poprzez akceptowanie nowych osób"
+msgstr ""
+
+#: home/templates/home/home.html:24
+msgid ""
+"możliwe jest też usunięcie przeszkadzającej osoby jeśli wiele osób odbierze "
+"jej punkty reputacji"
+msgstr ""
+
+#: home/templates/home/home.html:28
+msgid ""
+"Aplikacja jest tak napisana żeby nie było w niej hierarchii. Nie jest "
+"potrzebny administrator. Sami użytkownicy decydują kto należy do grupy i "
+"jakie obowiązują w niej zasady. Oznacza to pełną równość i prawdziwą "
+"demokrację, których nie da się wyłączyć."
+msgstr ""
+
+#: home/templates/home/home.html:30 home/templates/home/login.html:16
+msgid "Czytaj więcej..."
+msgstr ""
+
+#: home/templates/home/home.html:34
+msgid "Zaloguj się"
+msgstr ""
+
+#: home/templates/home/home.html:37
+#: home/templates/home/password_reset_form.html:6
+msgid "Zresetuj hasło"
+msgstr ""
+
+#: home/templates/home/home.html:40
+msgid "Wyślij wiadomość do admina"
+msgstr ""
+
+#: home/templates/home/home.html:50
+msgid "Trwające referenda"
+msgstr ""
+
+#: home/templates/home/home.html:55
+msgid "Obecnie nie ma trwających referendów."
+msgstr ""
+
+#: home/templates/home/home.html:60
+msgid "Zbliżające się referenda"
+msgstr ""
+
+#: home/templates/home/home.html:67
+msgid "Obecnie nie ma zbliżających się referendów."
+msgstr ""
+
+#: home/templates/home/login.html:9
+msgid "Witaj w systemie Wikikracja!"
+msgstr ""
+
+#: home/templates/home/login.html:11
+msgid ""
+"Celem Wikikracji jest umożliwienie społeczności decydować o samej sobie."
+msgstr ""
+
+#: home/templates/home/login.html:14
+msgid ""
+"Możliwość kierowania własnym losem powinna sprawić, że stworzymy zasady, "
+"które premiują sprawiedliwość, szlachetne postawy, szerokie horyzonty,"
+"bezwarunkową miłość, współczucie, przyjacielską postawę oraz prawidłowe "
+"twierdzenia i przewidywania."
+msgstr ""
+
+#: home/templates/home/login.html:22
+msgid "Wikikracja - Logowanie"
+msgstr ""
+
+#: home/templates/home/login.html:36
+msgid "Reset hasła"
+msgstr ""
+
+#: home/templates/home/login.html:41
 msgid "The username or password is incorrect. Please try again."
 msgstr ""
 "Nazwa użytkownika lub hasło są nieprawidłowe. Spróbuj ponownie lub odzyskaj "
 "hasło."
 
-#: obywatele/templates/obywatele/szczegoly.html:12
-msgid "Twoja reputacja: {{tr}} | Wymagana reputacja: {{wr}}"
+#: home/templates/home/password_reset_complete.html:7
+msgid "Nowe hasło zostało ustawione. Możesz się zalogować"
 msgstr ""
 
+#: home/templates/home/password_reset_complete.html:7
+#: home/templates/home/password_reset_confirm.html:17
+msgid "tutaj"
+msgstr ""
+
+#: home/templates/home/password_reset_confirm.html:7
+#: home/templates/home/password_reset_confirm.html:11
 #: obywatele/templates/obywatele/szczegoly.html:15
 msgid "Zmień hasło"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:26
-msgid "Wróć"
+#: home/templates/home/password_reset_confirm.html:16
+msgid ""
+"Link, którego użyłeś jest nieprawidłowy być może dlatego, że został już "
+"użyty."
+msgstr ""
+
+#: home/templates/home/password_reset_confirm.html:17
+msgid "Musisz uruchomić proces zmiany hasła ponownie"
+msgstr ""
+
+#: home/templates/home/password_reset_done.html:11
+msgid "Wysłaliśmy na twój email instrukcje jak ustawić nowe hasło."
+msgstr ""
+
+#: home/templates/home/password_reset_done.html:24
+msgid "Powrót do strony logowania"
+msgstr ""
+
+#: home/templates/home/password_reset_form.html:7
+msgid "Aby zresetować hasło, wpisz swój adres e-mail i kliknij \"Wyślij\""
+msgstr ""
+
+#: home/templates/home/password_reset_form.html:16
+msgid "Wyślij"
+msgstr ""
+
+#: obywatele/templates/obywatele/dodaj.html:7
+#: obywatele/templates/obywatele/poczekalnia.html:6
+#: obywatele/templates/obywatele/start.html:6
+msgid "Kandydaci"
+msgstr ""
+
+#: obywatele/templates/obywatele/dodaj.html:8
+#: obywatele/templates/obywatele/dodaj.html:43
+#: obywatele/templates/obywatele/poczekalnia.html:7
+msgid "Zaproponuj nową osobę"
+msgstr ""
+
+#: obywatele/templates/obywatele/dodaj.html:19
+msgid "Nazwa użytkownika"
+msgstr ""
+
+#: obywatele/templates/obywatele/dodaj.html:23
+msgid "Email"
+msgstr ""
+
+#: obywatele/templates/obywatele/moje_konto.html:7
+msgid "Obywatel"
+msgstr ""
+
+#: obywatele/templates/obywatele/moje_konto.html:9
+msgid "Reputacja"
+msgstr ""
+
+#: obywatele/templates/obywatele/moje_konto.html:10
+msgid "Data zmiany reputacji"
+msgstr ""
+
+#: obywatele/templates/obywatele/moje_konto.html:13
+msgid "Karma"
+msgstr ""
+
+#: obywatele/templates/obywatele/moje_konto.html:14
+msgid "Data nadania karmy"
+msgstr ""
+
+#: obywatele/templates/obywatele/szczegoly.html:12
+msgid "Twoja reputacja"
+msgstr ""
+
+#: obywatele/templates/obywatele/szczegoly.html:12
+msgid "Wymagana reputacja"
+msgstr ""
+
+#: obywatele/templates/obywatele/szczegoly.html:19
+msgid "Twój stosunek do tej osoby jest"
+msgstr ""
+
+#: obywatele/templates/obywatele/szczegoly.html:21
+msgid "Akceptuję tą osobę"
+msgstr ""
+
+#: obywatele/templates/obywatele/szczegoly.html:22
+msgid "Obojętna"
+msgstr ""
+
+#: obywatele/templates/obywatele/szczegoly.html:23
+msgid "Nie akceptuję tej osoby"
 msgstr ""
 
 #: obywatele/views.py:147
@@ -106,6 +515,10 @@ msgstr ""
 
 #: templates/admin/base_site.html:3
 msgid "Django site admin"
+msgstr ""
+
+#: templates/admin/base_site.html:6
+msgid "Administration"
 msgstr ""
 
 #: zzz/settings.py:43

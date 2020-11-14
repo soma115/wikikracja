@@ -1,5 +1,6 @@
 {% extends 'home/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 	<div>
@@ -8,22 +9,22 @@
 		{% if b.id == d.id %}
 		<!--Podgląd własnego profilu-->
 			{{ d.username }}
-			<p>Twoja reputacja: {{tr}} | Wymagana reputacja: {{wr}}</p>
+			<p>{% trans 'Twoja reputacja' %}: {{tr}} | {% trans 'Wymagana reputacja' %}: {{wr}}</p>
 
 		<!--<p><a class="btn btn-info" href="password">Zmień hasło</a></p>-->
-		<p><a class="btn btn-info" href="{% url 'haslo'%}">Zmień hasło</a></p>
+		<p><a class="btn btn-info" href="{% url 'haslo'%}">{% trans 'Zmień hasło' %}</a></p>
 
 		{% else %}
 		<!--Podgląd cudzego profilu-->
-		<p>Twój stosunek do tej osoby jest {{rate}}</p>
+		<p>{% trans 'Twój stosunek do tej osoby jest' %} {{rate}}</p>
 			<form action="#" method="get">
-		    <input class="btn btn-primary" type="submit" name="tak" value="Akceptuję tą osobę"/>
-			<input class="btn btn-primary" type="submit" name="reset" value="Obojętna"/>
-			<input class="btn btn-primary" type="submit" name="nie" value="Nie akceptuję tej osoby"/>
+		    <input class="btn btn-primary" type="submit" name="tak" value="{% trans 'Akceptuję tą osobę' %}"/>
+			<input class="btn btn-primary" type="submit" name="reset" value="{% trans 'Obojętna' %}"/>
+			<input class="btn btn-primary" type="submit" name="nie" value="{% trans 'Nie akceptuję tej osoby' %}"/>
 		</form>
 		{% endif %}
 
 		<br>
-		    <div><button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button></div>
+		    <div><button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Wróć' %}</button></div>
 	</div>
 {% endblock %}

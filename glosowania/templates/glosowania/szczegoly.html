@@ -4,23 +4,23 @@
 
 {% block content %}
 	<div>
-		<h3>Przepis numer: {{ id.id }}</h3>
-		<h4>Treść przepisu:</h4><p>{{ id.tresc }}</p>
-		<h4>Kara za nieprzestrzeganie:</h4><p>{{ id.kara }}</p>
-		<h4>Uzasadnienie:</h4><p>{{ id.uzasadnienie }}</p>
-        <h4>Ten przepis znosi następujące przepisy:</h4><p>{{ id.znosi }}</p>
+		<h3>{% trans 'Przepis numer' %}: {{ id.id }}</h3>
+		<h4>{% trans 'Treść przepisu' %}:</h4><p>{{ id.tresc }}</p>
+		<h4>{% trans 'Kara za nieprzestrzeganie' %}:</h4><p>{{ id.kara }}</p>
+		<h4>{% trans 'Uzasadnienie' %}:</h4><p>{{ id.uzasadnienie }}</p>
+        <h4>{% trans 'Ten przepis znosi następujące przepisy' %}:</h4><p>{{ id.znosi }}</p>
 			<p>
 				Autor: {{ id.autor }}
 
-				{% if id.ile_osob_podpisalo %} | Wniosek o referendum podpisało osób: {{ id.ile_osob_podpisalo }} {% endif %}
-				{% if id.status >= 6 %} | Za było: {{ id.za }} | Przeciw: {{ id.przeciw }} {% endif %}
+				{% if id.ile_osob_podpisalo %} | {% trans 'Wniosek o referendum podpisało osób' %}: {{ id.ile_osob_podpisalo }} {% endif %}
+				{% if id.status >= 6 %} | {% trans 'Za było' %}: {{ id.za }} | {% trans 'Przeciw' %}: {{ id.przeciw }} {% endif %}
 				
 				<br><small>
-				{% if id.data_powstania %} Data powstania: {{ id.data_powstania }} {% endif %}
-				{% if id.data_zebrania_podpisow %} | Data zebrania podpisów: {{ id.data_zebrania_podpisow }} {% endif %}
-				{% if id.data_referendum_start %} | Start referendum: {{ id.data_referendum_start }} {% endif %}
-				{% if id.data_referendum_stop %} | Koniec referendum: {{ id.data_referendum_stop }} (wyłącznie) {% endif %}
-				{% if id.data_obowiazuje_od %} <br> <b>Przepis obowiązuje od: {{ id.data_obowiazuje_od }}</b> {% endif %}
+				{% if id.data_powstania %} {% trans 'Data powstania' %}: {{ id.data_powstania }} {% endif %}
+				{% if id.data_zebrania_podpisow %} | {% trans 'Data zebrania podpisów' %}: {{ id.data_zebrania_podpisow }} {% endif %}
+				{% if id.data_referendum_start %} | {% trans 'Start referendum' %}: {{ id.data_referendum_start }} {% endif %}
+				{% if id.data_referendum_stop %} | {% trans 'Koniec referendum' %}: {{ id.data_referendum_stop }} (wyłącznie) {% endif %}
+				{% if id.data_obowiazuje_od %} <br> <b>{% trans 'Przepis obowiązuje od' %}: {{ id.data_obowiazuje_od }}</b> {% endif %}
 				</small>
 				{% comment %} Status: {{ id.status }} {% endcomment %}
 			</p>
@@ -29,9 +29,9 @@
 	{% if id.status == 1 %}
 		{% comment %} propozycja = guzik do podpisania {% endcomment %}
 		<form action="#" method="get">
-			<p><u><h4>Czy chcesz referendum w sprawie tego przepisu?</h4></u></p>
-		    <input class="btn btn-primary" type="submit" name="podpisz" value="Tak, podpisuję"/>
-		    <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
+			<p><u><h4>{% trans 'Czy chcesz referendum w sprawie tego przepisu?' %}</h4></u></p>
+		    <input class="btn btn-primary" type="submit" name="podpisz" value="{% trans 'Tak, podpisuję' %}"/>
+		    <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Wróć' %}</button>
 
 		</form>
 	{% endif %}
@@ -39,15 +39,15 @@
 	{% if id.status == 4 %}
 		{% comment %} referendum = dwa guziki - ZA i PRZECIW {% endcomment %}
 		<form action="#" method="get">
-			<p><u><h4>Czy chcesz wprowadzenia tego przepisu?</h4></u></p>
-		    <input class="btn btn-primary" type="submit" name="tak" value="Tak"/>
-			<input class="btn btn-primary" type="submit" name="nie" value="Nie"/>
-		    <button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
+			<p><u><h4>{% trans 'Czy chcesz wprowadzenia tego przepisu?</h4></u></p>
+		    <input class="btn btn-primary" type="submit" name="tak" value="{% trans 'Tak' %}"/>
+			<input class="btn btn-primary" type="submit" name="nie" value="{% trans 'Nie' %}"/>
+		    <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Wróć' %}</button>
 		</form>
 	{% endif %}
 
 	{% if id.status == 2 or id.status == 3 or id.status >= 5 %}
 		{% comment %} brak poparcia, w kolejce, odrzucone, zatwierdzone, obowiązuje = brak guzika {% endcomment %}
-		<button onclick="window.history.back();" class="btn btn-default" type="button">Wróć</button>
+		<button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Wróć' %}</button>
 	{% endif %}
 {% endblock %}

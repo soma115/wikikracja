@@ -4,14 +4,14 @@
 
 {% block content %}
 	<div>
-		<h3>Obywatel: {{ id.uid }}</h3>
+		<h3>{% trans 'Obywatel' %}: {{ id.uid }}</h3>
 			<p>
-				Reputacja: {{ id.reputacja }} |
-				Data zmiany reputacji: {{ id.data_zmiany_reputacji }} |
+				{% trans 'Reputacja' %}: {{ id.reputacja }} |
+				{% trans 'Data zmiany reputacji' %}: {{ id.data_zmiany_reputacji }} |
 			</p>
 			<p>
-				Karma: {{ id.karma }} |
-				Data nadania karmy: {{ id.data_nadania_karmy }}
+				{% trans 'Karma' %}: {{ id.karma }} |
+				{% trans 'Data nadania karmy' %}: {{ id.data_nadania_karmy }}
 			</p>
 	</div>
 {% endblock %}
