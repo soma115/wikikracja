@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-14 21:12+0100\n"
+"POT-Creation-Date: 2020-11-15 10:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -234,7 +234,7 @@ msgstr "Ile osób podpisało"
 
 #: glosowania/views.py:54
 msgid "New propositions"
-msgstr "Nowa propozycja"
+msgstr "Nowe propozycje"
 
 #: glosowania/views.py:64
 msgid "Queued for referedum"
@@ -378,10 +378,10 @@ msgid ""
 "group and what rules apply to it. This means full equality and true "
 "democracy that cannot be disabled."
 msgstr ""
-"Aplikacja jest napisana w taki sposób, że nie ma w niej hierarchii. Nie jest potrzebny "
-"żaden administrator. Użytkownicy sami decydują, kto należy do grupy i jakie "
-"zasady jej dotyczą. Oznacza to pełną równość i prawdziwą demokrację, której "
-"nie można wyłączyć."
+"Aplikacja jest napisana w taki sposób, że nie ma w niej hierarchii. Nie jest "
+"potrzebny żaden administrator. Użytkownicy sami decydują, kto należy do "
+"grupy i jakie zasady jej dotyczą. Oznacza to pełną równość i prawdziwą "
+"demokrację, której nie można wyłączyć."
 
 #: home/templates/home/home.html:30 home/templates/home/login.html:16
 msgid "Read more..."
@@ -592,10 +592,10 @@ msgstr "Django site admin"
 msgid "Wikicracy Administration"
 msgstr "Wikicracy Administration"
 
-#: zzz/settings.py:43
+#: zzz/settings.py:43 zzz/settings_example.py:36 zzz/settings_prod.py:36
 msgid "English"
 msgstr "Angielski"
 
-#: zzz/settings.py:44
+#: zzz/settings.py:44 zzz/settings_example.py:37 zzz/settings_prod.py:37
 msgid "Polish"
 msgstr "Polski"

@@ -5,7 +5,7 @@
 {% block content %}
 	<div>
 		<h3>{{ b.uid }}</h3>
-			<p>{{ b.uid.email }} | {% trans 'Joined' %}: {{ d.data_przyjecia|date:"Y-m-d" }}</p>
+			<p>{{ b.uid.email }} | {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d" }}</p>
 
 		{% if b.id == d.id %}
 		<!--Podgląd własnego profilu-->

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-14 21:12+0100\n"
+"POT-Creation-Date: 2020-11-15 10:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -564,10 +564,10 @@ msgstr ""
 msgid "Wikicracy Administration"
 msgstr ""
 
-#: zzz/settings.py:43
+#: zzz/settings.py:43 zzz/settings_example.py:36 zzz/settings_prod.py:36
 msgid "English"
 msgstr ""
 
-#: zzz/settings.py:44
+#: zzz/settings.py:44 zzz/settings_example.py:37 zzz/settings_prod.py:37
 msgid "Polish"
 msgstr ""
