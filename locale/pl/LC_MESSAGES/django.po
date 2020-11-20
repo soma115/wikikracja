@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-15 10:52+0100\n"
+"POT-Creation-Date: 2020-11-17 18:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgstr "Nowa propozycja"
 msgid "Save"
 msgstr "Zapisz"
 
-#: glosowania/templates/glosowania/start.html:13 glosowania/views.py:59
+#: glosowania/templates/glosowania/start.html:13 glosowania/views.py:71
 msgid "No endorsement"
 msgstr "Brak poparcia"
 
@@ -84,7 +84,7 @@ msgstr "Brak poparcia"
 msgid "Queued for referendum"
 msgstr "W kolejce do referendum"
 
-#: glosowania/templates/glosowania/start.html:21 glosowania/views.py:69
+#: glosowania/templates/glosowania/start.html:21 glosowania/views.py:81
 msgid "Referendum"
 msgstr "Referendum"
 
@@ -232,31 +232,31 @@ msgstr "Nie"
 msgid "How many people signed"
 msgstr "Ile osób podpisało"
 
-#: glosowania/views.py:54
+#: glosowania/views.py:66
 msgid "New propositions"
 msgstr "Nowe propozycje"
 
-#: glosowania/views.py:64
+#: glosowania/views.py:76
 msgid "Queued for referedum"
 msgstr "W kolejce do referendum"
 
-#: glosowania/views.py:74
+#: glosowania/views.py:86
 msgid "Rejected in referendum"
 msgstr "Odrzucone w referendum"
 
-#: glosowania/views.py:80
+#: glosowania/views.py:92
 msgid "Accepted / Vacatio Legis"
 msgstr "Zaakceptowane / Vacatio Legis"
 
-#: glosowania/views.py:85 glosowania/views.py:91
+#: glosowania/views.py:97 glosowania/views.py:103
 msgid "Applicable regulations"
 msgstr "Obowiązujące przepisy"
 
-#: glosowania/views.py:118
+#: glosowania/views.py:130
 msgid "You have already signed this application before."
 msgstr "You have already signed this application before."
 
-#: glosowania/views.py:121
+#: glosowania/views.py:133
 msgid "Your signature has been saved."
 msgstr "Twój podpis został zapisany."
 
@@ -599,3 +599,12 @@ msgstr "Angielski"
 #: zzz/settings.py:44 zzz/settings_example.py:37 zzz/settings_prod.py:37
 msgid "Polish"
 msgstr "Polski"
+
+#~ msgid "test textu"
+#~ msgstr "TEST TEXTU"
+
+#~ msgid "dodał nowy projekt przepisu"
+#~ msgstr "added new law proposition"
+
+#~ msgid "test htmla"
+#~ msgstr "TEST HTMLA"

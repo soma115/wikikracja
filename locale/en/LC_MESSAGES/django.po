@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-15 10:52+0100\n"
+"POT-Creation-Date: 2020-11-17 18:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:13 glosowania/views.py:59
+#: glosowania/templates/glosowania/start.html:13 glosowania/views.py:71
 msgid "No endorsement"
 msgstr ""
 
@@ -81,7 +81,7 @@ msgstr ""
 msgid "Queued for referendum"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:21 glosowania/views.py:69
+#: glosowania/templates/glosowania/start.html:21 glosowania/views.py:81
 msgid "Referendum"
 msgstr ""
 
@@ -223,31 +223,31 @@ msgstr ""
 msgid "How many people signed"
 msgstr ""
 
-#: glosowania/views.py:54
+#: glosowania/views.py:66
 msgid "New propositions"
 msgstr ""
 
-#: glosowania/views.py:64
+#: glosowania/views.py:76
 msgid "Queued for referedum"
 msgstr ""
 
-#: glosowania/views.py:74
+#: glosowania/views.py:86
 msgid "Rejected in referendum"
 msgstr ""
 
-#: glosowania/views.py:80
+#: glosowania/views.py:92
 msgid "Accepted / Vacatio Legis"
 msgstr ""
 
-#: glosowania/views.py:85 glosowania/views.py:91
+#: glosowania/views.py:97 glosowania/views.py:103
 msgid "Applicable regulations"
 msgstr ""
 
-#: glosowania/views.py:118
+#: glosowania/views.py:130
 msgid "You have already signed this application before."
 msgstr ""
 
-#: glosowania/views.py:121
+#: glosowania/views.py:133
 msgid "Your signature has been saved."
 msgstr ""
 
