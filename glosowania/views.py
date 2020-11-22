@@ -29,9 +29,10 @@ def dodaj(request):
             form.autor = request.user
             form.data_powstania = datetime.today()
             form.save()
+            # l.info(form.autor)
             SendEmail(
-                f'{_("Nowy projekt przepisu")}',
-                f'{form.autor} {_("dodał nowy projekt przepisu")} \n Znajdziesz go tutaj: http://{HOST}/glosowania/{form.id}'
+                _('New law proposition'),
+                _(f'{request.user.username.capitalize()} added new law proposition\nYou can read it here: http://{HOST}/glosowania/{str(form.id)}')
                 )
             return HttpResponseRedirect('/glosowania/?1=1.+Nowa+propozycja#')
     else:
@@ -224,7 +225,10 @@ def zliczaj_wszystko():
                 i.data_referendum_start = i.data_zebrania_podpisow + kolejka + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
                 i.data_referendum_stop = i.data_referendum_start + czas_trwania_referendum
                 i.save()
-                SendEmail(f'Propozycja {str(i.id)} zatwierdzona pod głosowanie', f'Propozycja {str(i.id)} zebrała wymaganą liczbę podpisów i zostanie za jakiś czas poddana pod głosowanie.')
+                SendEmail(
+                    _(f'Proposition {str(i.id)} approved for referendum'),
+                    _(f'Proposition {str(i.id)} gathered required amount of signatures and will be voted from {i.data_referendum_start} to {i.data_referendum_stop}.\nClick here to read proposition: http://{HOST}/glosowania/{str(i.id)}')
+                    )
                 continue
 
             # FROM PROPOSITION TO NO_INTREST
@@ -232,6 +236,10 @@ def zliczaj_wszystko():
                 i.status = brak_poparcia
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
+                SendEmail(
+                _(f"Proposition {str(i.id)} didn't gathered required amount of signatures"),
+                _(f"Proposition {str(i.id)} didn't gathered required amount of signatures and was removed from queue. Feel free to improve it and send it again.\nClick here to read proposition: http://{HOST}/glosowania/{str(i.id)}")
+                )
                 continue
 
             # FROM QUEUE TO REFERENDUM
@@ -239,6 +247,10 @@ def zliczaj_wszystko():
                 i.status = referendum
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
+                SendEmail(
+                _(f'Referendum on proposition {str(i.id)} starting now'),
+                _(f'It is time to vote on proposition {str(i.id)}.\nReferendum ends at {i.data_referendum_stop}.\nClick here to vote: http://{HOST}/glosowania/{str(i.id)}')
+                )
                 continue
 
             # FROM REFERENDUM TO VACATIO_LEGIS OR NOT_APPROVED
@@ -249,11 +261,19 @@ def zliczaj_wszystko():
                     i.data_obowiazuje_od = i.data_referendum_stop + vacatio_legis
                     i.save()
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
+                    SendEmail(
+                    _(f'Proposition {str(i.id)} approved'),
+                    _(f'Proposition {str(i.id)} was approved in referendum and is now in Vacatio Legis period.\nThe law will take effect on {i.data_obowiazuje_od}.\nClick here to read proposition: http://{HOST}/glosowania/{str(i.id)}')
+                    )
                     continue
                 else:
                     i.status = odrzucone
                     i.save()
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
+                    SendEmail(
+                    _(f'Proposition {str(i.id)} rejected'),
+                    _(f'Proposition {str(i.id)} was rejected in referendum.\nFeel free to improve it and send it again.\nClick here to read proposition: http://{HOST}/glosowania/{str(i.id)}')
+                    )
                     continue
 
             # FROM VACATIO_LEGIS TO LAW
@@ -261,6 +281,10 @@ def zliczaj_wszystko():
                 i.status = obowiazuje
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
+                SendEmail(
+                _(f'Proposition {str(i.id)} is in efect from today'),
+                _(f'Proposition {str(i.id)} became abiding law today.\nClick here to read proposition: http://{HOST}/glosowania/{str(i.id)}')
+                )
                 continue
 
 
