@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-25 15:54+0100\n"
+"POT-Creation-Date: 2020-12-25 16:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -817,7 +817,9 @@ msgstr "Email"
 msgid ""
 "Below fields are not mandatory but filling them out will help us make the "
 "right decision when accepting a new person."
-msgstr "Poniższe pola nie są obowiązkowe, ale ich wypełnienie pomoże nam podjąć właściwą decyzję przy przyjmowaniu nowej osoby."
+msgstr ""
+"Poniższe pola nie są obowiązkowe, ale ich wypełnienie pomoże nam podjąć "
+"właściwą decyzję przy przyjmowaniu nowej osoby."
 
 #: obywatele/templates/obywatele/dodaj.html:31
 msgid "The place where that person spends most of their time"
@@ -845,7 +847,9 @@ msgstr "Zawód wykonywany"
 
 #: obywatele/templates/obywatele/dodaj.html:63
 msgid "Other things worth mentioning. Things that doesn't fit in other fields"
-msgstr "Inne rzeczy godne wspomnienia. Rzeczy, które nie mieszczą się w pozostałych polach"
+msgstr ""
+"Inne rzeczy godne wspomnienia. Rzeczy, które nie mieszczą się w pozostałych "
+"polach"
 
 #: obywatele/templates/obywatele/my_assets.html:7
 #: obywatele/templates/obywatele/my_profile.html:18
