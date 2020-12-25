@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-25 16:13+0100\n"
+"POT-Creation-Date: 2020-12-25 16:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -576,114 +576,90 @@ msgstr ""
 msgid "Tasks performed in our group"
 msgstr ""
 
-#: obywatele/models.py:21
-msgid "Where you are spending most of your time"
-msgstr ""
-
-#: obywatele/models.py:22
-msgid "Hobbies you have"
-msgstr ""
-
-#: obywatele/models.py:23
-msgid "Things you are willing to give away for free"
-msgstr ""
-
-#: obywatele/models.py:24
-msgid "Stuff you can borrow to others"
-msgstr ""
-
-#: obywatele/models.py:25
-msgid "Stuff you have for sale"
-msgstr ""
-
-#: obywatele/models.py:26
-msgid "What do you need"
-msgstr ""
-
-#: obywatele/models.py:27
-msgid "What practical skills do you have"
-msgstr ""
-
-#: obywatele/models.py:28
-msgid "Knowledge you have"
-msgstr ""
-
-#: obywatele/models.py:29
-msgid "Things you would like to learn"
-msgstr ""
-
-#: obywatele/models.py:30
-msgid "If you are running a business"
-msgstr ""
-
-#: obywatele/models.py:31
-msgid "Your profession"
-msgstr ""
-
-#: obywatele/models.py:32 obywatele/templates/obywatele/dodaj.html:59
-msgid "Link to Facebook profile"
-msgstr ""
-
-#: obywatele/models.py:33
-msgid "Other things about worth mentioning"
-msgstr ""
-
-#: obywatele/templates/obywatele/assets.html:9
-msgid "Name"
-msgstr ""
-
-#: obywatele/templates/obywatele/assets.html:10
+#: obywatele/models.py:20 obywatele/templates/obywatele/assets.html:10
 #: obywatele/templates/obywatele/my_profile.html:22
 #: obywatele/templates/obywatele/szczegoly.html:29
 msgid "Responsibilities"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:11
+#: obywatele/models.py:21
+msgid "Where you are spending most of your time"
+msgstr ""
+
+#: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:11
 #: obywatele/templates/obywatele/dodaj.html:30
 #: obywatele/templates/obywatele/my_profile.html:23
 #: obywatele/templates/obywatele/szczegoly.html:30
 msgid "City"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:12
+#: obywatele/models.py:22
+msgid "Hobbies you have"
+msgstr ""
+
+#: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:12
 #: obywatele/templates/obywatele/dodaj.html:34
 #: obywatele/templates/obywatele/my_profile.html:24
 #: obywatele/templates/obywatele/szczegoly.html:31
 msgid "Hobby"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:13
+#: obywatele/models.py:23
+msgid "Things you are willing to give away for free"
+msgstr ""
+
+#: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:13
 #: obywatele/templates/obywatele/my_profile.html:25
 #: obywatele/templates/obywatele/szczegoly.html:32
 msgid "To give away"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:14
+#: obywatele/models.py:24
+msgid "Stuff you can borrow to others"
+msgstr ""
+
+#: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:14
 #: obywatele/templates/obywatele/my_profile.html:26
 #: obywatele/templates/obywatele/szczegoly.html:33
 msgid "To borrow"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:15
+#: obywatele/models.py:25
+msgid "Stuff you have for sale"
+msgstr ""
+
+#: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:15
 #: obywatele/templates/obywatele/my_profile.html:27
 #: obywatele/templates/obywatele/szczegoly.html:34
 msgid "For sale"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:16
+#: obywatele/models.py:26
+msgid "What do you need"
+msgstr ""
+
+#: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:16
 #: obywatele/templates/obywatele/my_profile.html:28
 #: obywatele/templates/obywatele/szczegoly.html:35
 msgid "I need"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:17
+#: obywatele/models.py:27
+msgid "What practical skills do you have"
+msgstr ""
+
+#: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:17
 #: obywatele/templates/obywatele/dodaj.html:38
 #: obywatele/templates/obywatele/my_profile.html:29
 #: obywatele/templates/obywatele/szczegoly.html:36
 msgid "Skills"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:18
+#: obywatele/models.py:28
+msgid "Knowledge you have"
+msgstr ""
+
+#: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:18
 #: obywatele/templates/obywatele/dodaj.html:42
 #: obywatele/templates/obywatele/dodaj.html:43
 #: obywatele/templates/obywatele/my_profile.html:30
@@ -691,39 +667,63 @@ msgstr ""
 msgid "Knowledge"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:19
+#: obywatele/models.py:29
+msgid "Things you would like to learn"
+msgstr ""
+
+#: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:19
 #: obywatele/templates/obywatele/dodaj.html:46
 #: obywatele/templates/obywatele/my_profile.html:31
 #: obywatele/templates/obywatele/szczegoly.html:38
 msgid "I want to learn"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:20
+#: obywatele/models.py:30
+msgid "If you are running a business"
+msgstr ""
+
+#: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:20
 #: obywatele/templates/obywatele/dodaj.html:50
 #: obywatele/templates/obywatele/my_profile.html:32
 #: obywatele/templates/obywatele/szczegoly.html:39
 msgid "Business"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:21
+#: obywatele/models.py:31
+msgid "Your profession"
+msgstr ""
+
+#: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:21
 #: obywatele/templates/obywatele/dodaj.html:54
 #: obywatele/templates/obywatele/my_profile.html:33
 #: obywatele/templates/obywatele/szczegoly.html:40
 msgid "Job"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:22
+#: obywatele/models.py:32 obywatele/templates/obywatele/dodaj.html:59
+msgid "Link to Facebook profile"
+msgstr ""
+
+#: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:22
 #: obywatele/templates/obywatele/dodaj.html:58
 #: obywatele/templates/obywatele/my_profile.html:34
 #: obywatele/templates/obywatele/szczegoly.html:41
 msgid "Facebook"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:23
+#: obywatele/models.py:33
+msgid "Other things about worth mentioning"
+msgstr ""
+
+#: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:23
 #: obywatele/templates/obywatele/dodaj.html:62
 #: obywatele/templates/obywatele/my_profile.html:35
 #: obywatele/templates/obywatele/szczegoly.html:42
 msgid "Other"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:9
+msgid "Name"
 msgstr ""
 
 #: obywatele/templates/obywatele/dodaj.html:7
