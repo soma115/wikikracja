@@ -1,0 +1,38 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div>
+	<p>
+		<b>{% trans "This is your profile" %} {{ user }}</b>
+		<div>{% trans "Your email" %}: {{ user.email }}</div>
+		<div>{% trans "Your reputation" %}: {{ profile.reputation }} ({% trans "required reputation" %}: {{ required_reputation }})</div>
+		<div>{% trans "You've been introduced by" %}: {{ profile.polecajacy }}</div>
+		<div>{% trans "You've joined" %}: {{ profile.data_przyjecia|date:"Y-m-d" }}</div>
+	</p>
+
+	<p><a class="btn btn-info" href="{% url 'haslo'%}">{% trans 'Change password' %}</a></p>
+
+	<p>
+		<div><b>{% trans "Those are your assets" %}</b></div>
+		<div>{% trans "You don't have to fill all of them but the more information you give - the more profit each one of us and whole group will gain. Those information will be also usefull for new people in the group. We will know each other better and we will be able to fullfill our needs better." %}</div>
+	</p>
+
+	<div>{% trans "City" %}: {{ profile.city|default_if_none:"-" }}</div>
+	<div>{% trans "Hobby" %}: {{ profile.hobby|default_if_none:"-" }}</div>
+	<div>{% trans "To give away" %}: {{ profile.to_give_away|default_if_none:"-" }}</div>
+	<div>{% trans "To borrow" %}: {{ profile.to_borrow|default_if_none:"-" }}</div>
+	<div>{% trans "For sale" %}: {{ profile.for_sale|default_if_none:"-" }}</div>
+	<div>{% trans "I need" %}: {{ profile.i_need|default_if_none:"-" }}</div>
+	<div>{% trans "Skills" %}: {{ profile.skills|default_if_none:"-" }}</div>
+	<div>{% trans "Knowledge" %}: {{ profile.knowledge|default_if_none:"-" }}</div>
+	<div>{% trans "I want to learn" %}: {{ profile.want_to_learn|default_if_none:"-" }}</div>
+	<div>{% trans "Business" %}: {{ profile.business|default_if_none:"-" }}</div>
+	<div>{% trans "Job" %}: {{ profile.job|default_if_none:"-" }}</div>
+
+	<div><p><a class="btn btn-primary fr-rounded fr-small" href="{% url 'obywatele:my_assets' %}">{% trans 'Edit my assets' %}</a></p></div>
+
+	<div><button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button></div>
+</div>
+{% endblock %}

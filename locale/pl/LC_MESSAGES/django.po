@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-22 20:16+0100\n"
+"POT-Creation-Date: 2020-12-24 23:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: chat/templates/chat/index.html:16
+#: chat/templates/chat/chat.html:16
 msgid "No chat rooms defined. Maybe make some in the"
 msgstr "Nie zdefiniowano pokojów rozmów. Może zrób trochę w formacie"
 
@@ -53,16 +53,17 @@ msgstr "Wyślij"
 #: glosowania/templates/glosowania/szczegoly.html:49
 #: glosowania/templates/glosowania/zapisane.html:23
 #: obywatele/templates/obywatele/dodaj.html:44
-#: obywatele/templates/obywatele/szczegoly.html:29
+#: obywatele/templates/obywatele/my_profile.html:32
+#: obywatele/templates/obywatele/szczegoly.html:26
 #: obywatele/templates/obywatele/zapisane.html:19
 msgid "Back"
 msgstr "Wróć"
 
-#: elibrary/templates/elibrary/index.html:6
+#: elibrary/templates/elibrary/elibrary.html:6
 msgid "Add eBook"
 msgstr "Dodaj eBook"
 
-#: elibrary/templates/elibrary/index.html:16
+#: elibrary/templates/elibrary/elibrary.html:16
 msgid "delete"
 msgstr "skasuj"
 
@@ -114,6 +115,8 @@ msgstr "Nowa propozycja"
 
 #: glosowania/templates/glosowania/dodaj.html:31
 #: home/templates/home/haslo.html:15
+#: obywatele/templates/obywatele/my_assets.html:14
+#: obywatele/templates/obywatele/my_profile.html:28
 msgid "Save"
 msgstr "Zapisz"
 
@@ -423,31 +426,31 @@ msgstr "Odzyskaj hasło"
 msgid "Citizens"
 msgstr "Obywatele"
 
-#: home/templates/home/base.html:35
+#: home/templates/home/base.html:36
 msgid "Law"
 msgstr "Przepisy"
 
-#: home/templates/home/base.html:36
+#: home/templates/home/base.html:37
 msgid "eLibrary"
 msgstr "eBiblioteka"
 
-#: home/templates/home/base.html:37
+#: home/templates/home/base.html:38
 msgid "Chat"
 msgstr "Chat"
 
-#: home/templates/home/base.html:39
+#: home/templates/home/base.html:42
 msgid "logout"
 msgstr "wyloguj"
 
-#: home/templates/home/base.html:65
+#: home/templates/home/base.html:68
 msgid "About project"
 msgstr "O projekcie"
 
-#: home/templates/home/base.html:66
+#: home/templates/home/base.html:69
 msgid "Possible use cases"
 msgstr "Możliwe zastosowania"
 
-#: home/templates/home/base.html:67
+#: home/templates/home/base.html:70
 msgid "Rejected concepts"
 msgstr "Odrzucone koncepcje"
 
@@ -470,7 +473,7 @@ msgstr "Czym jest Wikikracja"
 #: home/templates/home/home.html:13
 msgid ""
 "Wikicracy is a voting system that allows the community to manage itself - "
-"without the help of representatives and administrators."
+"without the help of representatives or administrators."
 msgstr ""
 "Wikikracja to system do głosowania, który pozwala społeczności zarządzać "
 "sobą - bez pomocy przedstawicieli i administratorów."
@@ -594,7 +597,7 @@ msgstr "tutaj"
 
 #: home/templates/home/password_reset_confirm.html:7
 #: home/templates/home/password_reset_confirm.html:11
-#: obywatele/templates/obywatele/szczegoly.html:16
+#: obywatele/templates/obywatele/my_profile.html:30
 msgid "Change password"
 msgstr "Zmień hasło"
 
@@ -632,6 +635,56 @@ msgstr "Powrót do strony logowania"
 msgid "To reset your password, enter your e-mail address and click \"Send\""
 msgstr "Aby zresetować hasło, wprowadź swój adres e-mail i kliknij \"Wyślij\""
 
+#: obywatele/templates/obywatele/assets.html:9
+msgid "Name"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:10
+#: obywatele/templates/obywatele/my_profile.html:18
+msgid "City"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:11
+#: obywatele/templates/obywatele/my_profile.html:19
+msgid "Hobby"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:12
+msgid "To give away"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:13
+msgid "To borrow"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:14
+msgid "For sale"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:15
+msgid "I need"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:16
+msgid "Skills"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:17
+msgid "Knowledge"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:18
+msgid "I want to learn"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:19
+msgid "Business"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:20
+msgid "Job"
+msgstr ""
+
 #: obywatele/templates/obywatele/dodaj.html:7
 #: obywatele/templates/obywatele/poczekalnia.html:7
 #: obywatele/templates/obywatele/start.html:7
@@ -653,82 +706,129 @@ msgstr "Nazwa użytkownika"
 msgid "Email"
 msgstr "Email"
 
-#: obywatele/templates/obywatele/moje_konto.html:7
-msgid "Citizen"
-msgstr "Obywatele"
+#: obywatele/templates/obywatele/my_assets.html:7
+#: obywatele/templates/obywatele/my_profile.html:15
+msgid "Those are your assets"
+msgstr ""
 
-#: obywatele/templates/obywatele/moje_konto.html:9
-msgid "Reputation"
-msgstr "Reputacja"
+#: obywatele/templates/obywatele/my_assets.html:17
+msgid "Cancel"
+msgstr ""
 
-#: obywatele/templates/obywatele/moje_konto.html:10
-msgid "Reputation date change"
-msgstr "Data zmiany reputacji"
+#: obywatele/templates/obywatele/my_profile.html:8
+msgid "This is your profile"
+msgstr ""
 
-#: obywatele/templates/obywatele/moje_konto.html:13
-msgid "Karma"
-msgstr "Karma"
+#: obywatele/templates/obywatele/my_profile.html:9
+#, fuzzy
+#| msgid "Your reputation"
+msgid "Your email"
+msgstr "Twoja reputacja"
 
-#: obywatele/templates/obywatele/moje_konto.html:14
-msgid "Date karma assigned"
-msgstr "Data przypisania karmy"
+#: obywatele/templates/obywatele/my_profile.html:10
+msgid "Your reputation"
+msgstr "Twoja reputacja"
+
+#: obywatele/templates/obywatele/my_profile.html:10
+msgid "required reputation"
+msgstr "Wymagana reputacja"
+
+#: obywatele/templates/obywatele/my_profile.html:11
+msgid "You've been introduced by"
+msgstr "Polecony przez"
+
+#: obywatele/templates/obywatele/my_profile.html:12
+msgid "You've joined"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:16
+msgid ""
+"You don't have to fill all of them but the more information you give - the "
+"more profit each one of us and whole group will gain. Those information will "
+"be also usefull for new people in the group. We will know each other better "
+"and we will be able to fullfill our needs better."
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:21
+msgid "Edit my assets"
+msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:13
 #: obywatele/templates/obywatele/szczegoly.html:8
 msgid "Joined"
 msgstr "Data przyjęcia"
 
-#: obywatele/templates/obywatele/szczegoly.html:13
-msgid "Your reputation"
-msgstr "Twoja reputacja"
+#: obywatele/templates/obywatele/start.html:11
+#, fuzzy
+#| msgid "Citizens parameters:"
+msgid "Citizens assets"
+msgstr "Parametry obywateli:"
+
+#: obywatele/templates/obywatele/szczegoly.html:8
+msgid "Introduced by"
+msgstr "Polecony przez"
+
+#: obywatele/templates/obywatele/szczegoly.html:12
+msgid "This is you"
+msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:13
-msgid "Required reputation"
-msgstr "Wymagana reputacja"
+msgid "You will find more setting in your profile"
+msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:20
+#: obywatele/templates/obywatele/szczegoly.html:17
 msgid "Your relationship to this person is"
 msgstr "Twój stosunek do tej osoby jest"
 
-#: obywatele/templates/obywatele/szczegoly.html:22
+#: obywatele/templates/obywatele/szczegoly.html:19
 msgid "I accept this person"
 msgstr "Akceptuję tą osobę"
 
-#: obywatele/templates/obywatele/szczegoly.html:23
+#: obywatele/templates/obywatele/szczegoly.html:20
 msgid "Indifferent"
 msgstr "Obojętny"
 
-#: obywatele/templates/obywatele/szczegoly.html:24
+#: obywatele/templates/obywatele/szczegoly.html:21
 msgid "I'm not accept this person"
 msgstr "Nie akceptuję tej osoby"
 
-#: obywatele/views.py:129 obywatele/views.py:136 obywatele/views.py:143
+#: obywatele/views.py:119
+#, fuzzy
+#| msgid "Change password"
+msgid "Changes was saved"
+msgstr "Zmień hasło"
+
+#: obywatele/views.py:131
+msgid "Form is not valid!"
+msgstr ""
+
+#: obywatele/views.py:207
+msgid "positive"
+msgstr "pozytywny"
+
+#: obywatele/views.py:211 obywatele/views.py:219 obywatele/views.py:227
 msgid "Your relationship to the user "
 msgstr "Twój stosunek do użytkownnka "
 
-#: obywatele/views.py:129
+#: obywatele/views.py:211
 msgid " is positive"
 msgstr " jest pozytywny"
 
-#: obywatele/views.py:136
-msgid " is negative"
-msgstr " jest negatywny"
-
-#: obywatele/views.py:143
-msgid " is neutral"
-msgstr " jest neutralny"
-
-#: obywatele/views.py:147
+#: obywatele/views.py:215
 msgid "negative"
 msgstr "negatywny"
 
-#: obywatele/views.py:149
+#: obywatele/views.py:219
+msgid " is negative"
+msgstr " jest negatywny"
+
+#: obywatele/views.py:223
 msgid "neutral"
 msgstr "eutralny"
 
-#: obywatele/views.py:151
-msgid "positive"
-msgstr "pozytywny"
+#: obywatele/views.py:227
+msgid " is neutral"
+msgstr " jest neutralny"
 
 #: templates/admin/base_site.html:3
 msgid "Django site admin"
@@ -745,3 +845,18 @@ msgstr "Angielski"
 #: zzz/settings.py:44 zzz/settings_example.py:37 zzz/settings_prod.py:37
 msgid "Polish"
 msgstr "Polski"
+
+#~ msgid "Citizen"
+#~ msgstr "Obywatele"
+
+#~ msgid "Reputation"
+#~ msgstr "Reputacja"
+
+#~ msgid "Reputation date change"
+#~ msgstr "Data zmiany reputacji"
+
+#~ msgid "Karma"
+#~ msgstr "Karma"
+
+#~ msgid "Date karma assigned"
+#~ msgstr "Data przypisania karmy"

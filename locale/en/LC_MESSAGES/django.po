@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-22 20:16+0100\n"
+"POT-Creation-Date: 2020-12-24 23:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: chat/templates/chat/index.html:16
+#: chat/templates/chat/chat.html:16
 msgid "No chat rooms defined. Maybe make some in the"
 msgstr ""
 
@@ -50,16 +50,17 @@ msgstr ""
 #: glosowania/templates/glosowania/szczegoly.html:49
 #: glosowania/templates/glosowania/zapisane.html:23
 #: obywatele/templates/obywatele/dodaj.html:44
-#: obywatele/templates/obywatele/szczegoly.html:29
+#: obywatele/templates/obywatele/my_profile.html:32
+#: obywatele/templates/obywatele/szczegoly.html:26
 #: obywatele/templates/obywatele/zapisane.html:19
 msgid "Back"
 msgstr ""
 
-#: elibrary/templates/elibrary/index.html:6
+#: elibrary/templates/elibrary/elibrary.html:6
 msgid "Add eBook"
 msgstr ""
 
-#: elibrary/templates/elibrary/index.html:16
+#: elibrary/templates/elibrary/elibrary.html:16
 msgid "delete"
 msgstr ""
 
@@ -106,6 +107,8 @@ msgstr ""
 
 #: glosowania/templates/glosowania/dodaj.html:31
 #: home/templates/home/haslo.html:15
+#: obywatele/templates/obywatele/my_assets.html:14
+#: obywatele/templates/obywatele/my_profile.html:28
 msgid "Save"
 msgstr ""
 
@@ -384,31 +387,31 @@ msgstr ""
 msgid "Citizens"
 msgstr ""
 
-#: home/templates/home/base.html:35
+#: home/templates/home/base.html:36
 msgid "Law"
 msgstr ""
 
-#: home/templates/home/base.html:36
+#: home/templates/home/base.html:37
 msgid "eLibrary"
 msgstr ""
 
-#: home/templates/home/base.html:37
+#: home/templates/home/base.html:38
 msgid "Chat"
 msgstr ""
 
-#: home/templates/home/base.html:39
+#: home/templates/home/base.html:42
 msgid "logout"
 msgstr ""
 
-#: home/templates/home/base.html:65
+#: home/templates/home/base.html:68
 msgid "About project"
 msgstr ""
 
-#: home/templates/home/base.html:66
+#: home/templates/home/base.html:69
 msgid "Possible use cases"
 msgstr ""
 
-#: home/templates/home/base.html:67
+#: home/templates/home/base.html:70
 msgid "Rejected concepts"
 msgstr ""
 
@@ -431,7 +434,7 @@ msgstr ""
 #: home/templates/home/home.html:13
 msgid ""
 "Wikicracy is a voting system that allows the community to manage itself - "
-"without the help of representatives and administrators."
+"without the help of representatives or administrators."
 msgstr ""
 
 #: home/templates/home/home.html:15
@@ -537,7 +540,7 @@ msgstr ""
 
 #: home/templates/home/password_reset_confirm.html:7
 #: home/templates/home/password_reset_confirm.html:11
-#: obywatele/templates/obywatele/szczegoly.html:16
+#: obywatele/templates/obywatele/my_profile.html:30
 msgid "Change password"
 msgstr ""
 
@@ -570,6 +573,56 @@ msgstr ""
 msgid "To reset your password, enter your e-mail address and click \"Send\""
 msgstr ""
 
+#: obywatele/templates/obywatele/assets.html:9
+msgid "Name"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:10
+#: obywatele/templates/obywatele/my_profile.html:18
+msgid "City"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:11
+#: obywatele/templates/obywatele/my_profile.html:19
+msgid "Hobby"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:12
+msgid "To give away"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:13
+msgid "To borrow"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:14
+msgid "For sale"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:15
+msgid "I need"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:16
+msgid "Skills"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:17
+msgid "Knowledge"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:18
+msgid "I want to learn"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:19
+msgid "Business"
+msgstr ""
+
+#: obywatele/templates/obywatele/assets.html:20
+msgid "Job"
+msgstr ""
+
 #: obywatele/templates/obywatele/dodaj.html:7
 #: obywatele/templates/obywatele/poczekalnia.html:7
 #: obywatele/templates/obywatele/start.html:7
@@ -591,24 +644,49 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: obywatele/templates/obywatele/moje_konto.html:7
-msgid "Citizen"
+#: obywatele/templates/obywatele/my_assets.html:7
+#: obywatele/templates/obywatele/my_profile.html:15
+msgid "Those are your assets"
 msgstr ""
 
-#: obywatele/templates/obywatele/moje_konto.html:9
-msgid "Reputation"
+#: obywatele/templates/obywatele/my_assets.html:17
+msgid "Cancel"
 msgstr ""
 
-#: obywatele/templates/obywatele/moje_konto.html:10
-msgid "Reputation date change"
+#: obywatele/templates/obywatele/my_profile.html:8
+msgid "This is your profile"
 msgstr ""
 
-#: obywatele/templates/obywatele/moje_konto.html:13
-msgid "Karma"
+#: obywatele/templates/obywatele/my_profile.html:9
+msgid "Your email"
 msgstr ""
 
-#: obywatele/templates/obywatele/moje_konto.html:14
-msgid "Date karma assigned"
+#: obywatele/templates/obywatele/my_profile.html:10
+msgid "Your reputation"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:10
+msgid "required reputation"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:11
+msgid "You've been introduced by"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:12
+msgid "You've joined"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:16
+msgid ""
+"You don't have to fill all of them but the more information you give - the "
+"more profit each one of us and whole group will gain. Those information will "
+"be also usefull for new people in the group. We will know each other better "
+"and we will be able to fullfill our needs better."
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:21
+msgid "Edit my assets"
 msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:13
@@ -616,56 +694,72 @@ msgstr ""
 msgid "Joined"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:13
-msgid "Your reputation"
+#: obywatele/templates/obywatele/start.html:11
+msgid "Citizens assets"
+msgstr ""
+
+#: obywatele/templates/obywatele/szczegoly.html:8
+msgid "Introduced by"
+msgstr ""
+
+#: obywatele/templates/obywatele/szczegoly.html:12
+msgid "This is you"
 msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:13
-msgid "Required reputation"
+msgid "You will find more setting in your profile"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:20
+#: obywatele/templates/obywatele/szczegoly.html:17
 msgid "Your relationship to this person is"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:22
+#: obywatele/templates/obywatele/szczegoly.html:19
 msgid "I accept this person"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:23
+#: obywatele/templates/obywatele/szczegoly.html:20
 msgid "Indifferent"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:24
+#: obywatele/templates/obywatele/szczegoly.html:21
 msgid "I'm not accept this person"
 msgstr ""
 
-#: obywatele/views.py:129 obywatele/views.py:136 obywatele/views.py:143
+#: obywatele/views.py:119
+msgid "Changes was saved"
+msgstr ""
+
+#: obywatele/views.py:131
+msgid "Form is not valid!"
+msgstr ""
+
+#: obywatele/views.py:207
+msgid "positive"
+msgstr ""
+
+#: obywatele/views.py:211 obywatele/views.py:219 obywatele/views.py:227
 msgid "Your relationship to the user "
 msgstr ""
 
-#: obywatele/views.py:129
+#: obywatele/views.py:211
 msgid " is positive"
 msgstr ""
 
-#: obywatele/views.py:136
-msgid " is negative"
-msgstr ""
-
-#: obywatele/views.py:143
-msgid " is neutral"
-msgstr ""
-
-#: obywatele/views.py:147
+#: obywatele/views.py:215
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:149
+#: obywatele/views.py:219
+msgid " is negative"
+msgstr ""
+
+#: obywatele/views.py:223
 msgid "neutral"
 msgstr ""
 
-#: obywatele/views.py:151
-msgid "positive"
+#: obywatele/views.py:227
+msgid " is neutral"
 msgstr ""
 
 #: templates/admin/base_site.html:3

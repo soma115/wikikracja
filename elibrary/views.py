@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 
 class IndexView(generic.ListView):
-    template_name = 'elibrary/index.html'
+    template_name = 'elibrary/elibrary.html'
 
     def get_queryset(self):
         return Ebook.objects.all()
@@ -30,7 +30,7 @@ def add(request):
                     ':')[1].replace('>]', '').rsplit(
                         '(')[0].strip().replace('[', '').replace(']', '')
             form.save()
-            return redirect('elibrary:index')
+            return redirect('elibrary:elibrary')
     else:
         form = UploadFileForm()
     return render(request, 'elibrary/add.html', {'form': form})
@@ -38,4 +38,4 @@ def add(request):
 
 class BookDelete(DeleteView):
     model = Ebook
-    success_url = reverse_lazy('elibrary:index')
+    success_url = reverse_lazy('elibrary:elibrary')

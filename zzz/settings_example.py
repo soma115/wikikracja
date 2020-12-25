@@ -114,7 +114,7 @@ LOGGING = {
 }
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'glosowania:index'  # LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'glosowania:glosowania'  # LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 
 DATE_FORMAT = "Y-m-d"

@@ -5,15 +5,12 @@
 {% block content %}
 	<div>
 		<h3>{{ b.uid }}</h3>
-			<p>{{ b.uid.email }} | {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d" }}</p>
+			<p>{{ b.uid.email }} | {% trans 'Introduced by' %}: {{ p }} | {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d" }}</p>
 
 		{% if b.id == d.id %}
-		<!--Podgląd własnego profilu-->
-			{{ d.username }}
-			<p>{% trans 'Your reputation' %}: {{tr}} | {% trans 'Required reputation' %}: {{wr}}</p>
-
-		<!--<p><a class="btn btn-info" href="password">Zmień hasło</a></p>-->
-		<p><a class="btn btn-info" href="{% url 'haslo'%}">{% trans 'Change password' %}</a></p>
+			<!--Podgląd własnego profilu-->
+			<p>{% trans 'This is you' %} {{ b.uid }}</p>
+			<p><a href="{% url 'obywatele:my_profile' %}">{% trans 'You will find more setting in your profile' %}</a></p>
 
 		{% else %}
 		<!--Podgląd cudzego profilu-->

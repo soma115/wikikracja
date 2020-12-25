@@ -1,0 +1,46 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<table style="width:100%; border: 1px solid rgb(150, 150, 150)">
+	<tr style="border: 1px solid rgb(150, 150, 150)">
+		<th>{% trans "Name" %}</th>
+		<th>{% trans "City" %}</th>
+		<th>{% trans "Hobby" %}</th>
+		<th>{% trans "To give away" %}</th>
+		<th>{% trans "To borrow" %}</th>
+		<th>{% trans "For sale" %}</th>
+		<th>{% trans "I need" %}</th>
+		<th>{% trans "Skills" %}</th>
+		<th>{% trans "Knowledge" %}</th>
+		<th>{% trans "I want to learn" %}</th>
+		<th>{% trans "Business" %}</th>
+		<th>{% trans "Job" %}</th>
+	</tr>
+	{% for asset in all_assets %}
+	<tr>
+		<td>{{ asset.uid }}</td>
+		<td>{{ asset.city|default_if_none:"-" }}</td>
+		<td>{{ asset.hobby|default_if_none:"-" }}</td>
+		<td>{{ asset.to_give_away|default_if_none:"-" }}</td>
+		<td>{{ asset.to_borrow|default_if_none:"-" }}</td>
+		<td>{{ asset.for_sale|default_if_none:"-" }}</td>
+		<td>{{ asset.i_need|default_if_none:"-" }}</td>
+		<td>{{ asset.skills|default_if_none:"-" }}</td>
+		<td>{{ asset.knowledge|default_if_none:"-" }}</td>
+		<td>{{ asset.want_to_learn|default_if_none:"-" }}</td>
+		<td>{{ asset.business|default_if_none:"-" }}</td>
+		<td>{{ asset.job|default_if_none:"-" }}</td>
+	</tr>
+	{% empty %}
+	<tr>
+		<td>
+			asd
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

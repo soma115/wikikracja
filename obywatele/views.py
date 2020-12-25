@@ -3,7 +3,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from obywatele.forms import ObywatelForm
+from obywatele.forms import ObywatelForm, ProfileForm
 from obywatele.models import Uzytkownik, Rate
 from django.shortcuts import render
 from django.contrib import messages
@@ -26,7 +26,7 @@ ACCEPTANCE_MULTIPLIER = 0.7
 
 @login_required
 def obywatele(request):
-    zliczaj_obywateli(request)  # TODO: show puplation on page Obywatele
+    zliczaj_obywateli(request)  # TODO: show pupulation on page Obywatele
     uid = User.objects.filter(is_active=True)
     # TODO: dodać datę przyjęcia do szczegółów każdego użytkownika
     return render(request, 'obywatele/start.html', {'uid': uid})
@@ -88,8 +88,96 @@ def dodaj(request):
 
 
 @login_required
+def my_profile(request):
+    pk=request.user.id
+    profile = Uzytkownik.objects.get(pk=pk)
+    user = User.objects.get(pk=pk)
+    population = User.objects.filter(is_active=True).count()
+    required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
+    return render(request, 'obywatele/my_profile.html', {'profile': profile, 'user': user, 'population': population, 'required_reputation': required_reputation,})
+
+
+@login_required
+def my_assets(request):
+    pk=request.user.id
+    profile = Uzytkownik.objects.get(pk=pk)
+    user = User.objects.get(pk=pk)
+    population = User.objects.filter(is_active=True).count()
+    required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
+    form = ProfileForm(request.POST)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            profile.city = form.cleaned_data['city']
+            profile.hobby = form.cleaned_data['hobby']
+            profile.save()
+
+            return render(
+                request,
+                'obywatele/my_profile.html',
+                {
+                    'message': _('Changes was saved'),
+                    'profile': profile,
+                    'required_reputation': required_reputation,
+                    # 'form': form,
+                }
+            )
+        else:  # form.is_NOT_valid():
+            wynik = form.errors
+            return render(
+                request,
+                'obywatele/my_profile.html',
+                {
+                    'message': _('Form is not valid!'),
+                    'profile': profile,
+                    'required_reputation': required_reputation,
+                    # 'form': form,
+                }
+            )
+    else:  # request.method != 'POST':
+        form = ProfileForm(initial={  # pre-populate fields from database
+            'city': profile.city,
+            'hobby': profile.hobby,
+            # 'form': form,
+            }
+        )
+
+        return render(
+            request,
+            'obywatele/my_assets.html',
+            {
+                'user': user,
+                'profile': profile,
+                'form': form,
+            }
+        )
+
+
+@login_required
+def assets(request):
+    all_assets = Uzytkownik.objects.filter(uid__is_active=True).exclude(to_give_away__isnull=True,
+                                                                        to_borrow__isnull=True,
+                                                                        for_sale__isnull=True,
+                                                                        i_need__isnull=True,
+                                                                        skills__isnull=True,
+                                                                        knowledge__isnull=True,
+                                                                        want_to_learn__isnull=True,
+                                                                        business__isnull=True,
+                                                                        job__isnull=True,
+                                                                        city__isnull=True,
+                                                                        hobby__isnull=True)
+    return render(
+        request,
+        'obywatele/assets.html',
+        {
+            'all_assets': all_assets
+        },
+    )
+
+
+@login_required
 def obywatele_szczegoly(request, pk):
-    '''BUG:  Reputation is calculated inorrectly.
+    '''
     -[x] There has to be a table relating user and new person. This table is needed because vote for person may be withdrawn at some point. So there are 3 states:
       1. Candidate is positive
       2. Candidate is neutral (not clicked, default)
@@ -97,12 +185,10 @@ def obywatele_szczegoly(request, pk):
     3 states are needed because:
       - this is a fact, those 3 states really exist
       - but most importantly: it should be possible to take reputation away - even if somebody did not give reputation to that person before.
-
     -[x] Reputation should be calculated from Rate table relating citizen and candidate.
-
     -[x] Counter should NOT be zeroed out if person drop below required reputation.
-
-    -[x] New person increase population so also increase reputation requirements for existing citizens. Therefore every time new person is accepted - every other old member should have his reputation increased autmatically. And vice versa - if somebody is banned - everyone else should loose one point of reputation from banned person.'''
+    -[x] New person increase population so also increase reputation requirements for existing citizens. Therefore every time new person is accepted - every other old member should have his reputation increased autmatically. And vice versa - if somebody is banned - everyone else should loose one point of reputation from banned person.
+    '''
 
     citizen = Uzytkownik.objects.get(pk=request.user.id)
 
@@ -113,42 +199,33 @@ def obywatele_szczegoly(request, pk):
     required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
     citizen_reputation = citizen.reputation
 
-    if candidate_profile == citizen:
-        return render(request,
-                      'obywatele/szczegoly.html',
-                      {'b': candidate_profile,
-                       'd': citizen,
-                       'tr': citizen_reputation,
-                       'wr': required_reputation})
+    polecajacy = citizen.polecajacy
 
     rate = Rate.objects.get_or_create(kandydat=candidate_profile, obywatel=citizen)[0]
 
+    if rate.rate == 1:
+        r1 = _('positive')
     if request.GET.get('tak'):
         rate.rate = 1
         rate.save()
         wynik = str(_('Your relationship to the user ')) + candidate + str(_(' is positive'))
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
 
+    if rate.rate == -1:
+        r1 = _('negative')
     if request.GET.get('nie'):
         rate.rate = -1
         rate.save()
-
         wynik = str(_('Your relationship to the user ')) + candidate + str(_(' is negative'))
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
 
+    if rate.rate == 0:
+        r1 = _('neutral')
     if request.GET.get('reset'):
         rate.rate = 0
         rate.save()
-
         wynik = str(_('Your relationship to the user ')) + candidate + str(_(' is neutral'))
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
-
-    if rate.rate == -1:
-        r1 = _('negative')
-    if rate.rate == 0:
-        r1 = _('neutral')
-    if rate.rate == 1:
-        r1 = _('positive')
 
     return render(
         request,
@@ -158,7 +235,8 @@ def obywatele_szczegoly(request, pk):
             'd': citizen,
             'tr': citizen_reputation,
             'wr': required_reputation,
-            'rate': r1
+            'rate': r1,
+            'p': polecajacy
         })
 
 
@@ -237,6 +315,7 @@ def zliczaj_obywateli(request):
     l.info(f'Population: {population}. Required reputation: {required_reputation}')
 
 
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -251,13 +330,6 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'obywatele/change_password.html', {'form': form})
-
-
-@login_required
-def profil(request):
-    if request.method == 'POST':
-        username = request.user.username
-        return render(request, 'index.html', {'username': username})
 
 
 def password_generator(size=8, chars=string.ascii_letters + string.digits):
