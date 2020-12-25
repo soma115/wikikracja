@@ -29,7 +29,7 @@ class Uzytkownik(models.Model):
     want_to_learn = models.CharField(null=True, blank=True, max_length=500, help_text=_('Things you would like to learn'), verbose_name=_('I want to learn'))
     business = models.CharField(null=True, blank=True, max_length=200, help_text=_('If you are running a business'), verbose_name=_('Business'))
     job = models.CharField(null=True, blank=True, max_length=500, help_text=_('Your profession'), verbose_name=_('Job'))
-    fb = models.CharField(null=True, blank=True, max_length=500, help_text=_('Link to Facebook profile'), verbose_name=_('Facebook'))
+    fb = models.CharField(null=True, blank=True, max_length=500, help_text=_('Link to your Facebook profile'), verbose_name=_('Facebook'))
     other = models.CharField(null=True, blank=True, max_length=500, help_text=_('Other things about worth mentioning'), verbose_name=_('Other'))
 
     # foto = models.CharField(null=True, blank=True, max_length=500)

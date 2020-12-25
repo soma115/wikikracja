@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-25 16:25+0100\n"
+"POT-Creation-Date: 2020-12-25 17:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -700,8 +700,8 @@ msgstr ""
 msgid "Job"
 msgstr ""
 
-#: obywatele/models.py:32 obywatele/templates/obywatele/dodaj.html:59
-msgid "Link to Facebook profile"
+#: obywatele/models.py:32
+msgid "Link to your Facebook profile"
 msgstr ""
 
 #: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:22
@@ -779,6 +779,10 @@ msgstr ""
 
 #: obywatele/templates/obywatele/dodaj.html:55
 msgid "Occupation"
+msgstr ""
+
+#: obywatele/templates/obywatele/dodaj.html:59
+msgid "Link to Facebook profile"
 msgstr ""
 
 #: obywatele/templates/obywatele/dodaj.html:63
