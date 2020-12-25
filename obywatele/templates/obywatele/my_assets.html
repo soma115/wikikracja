@@ -5,15 +5,17 @@
 {% block content %}
 	<div>
 		{% trans 'Those are your assets' %} {{ user }}
-
+<br><br>
 		<form action="#" method="POST" class="post-form">
 			{% csrf_token %}
 			{% for field in form %}
-				{{ field.label_tag }}{{ field }}<br>
+				{{ field.label_tag }} {{ field }} {{ field.help_text }}<br>
 			{% endfor %}
+<br>
+
 			<button type="submit" class="save btn btn-default">{% trans 'Save' %}</button>
 			</form>
-
+<br>
 		<div><button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Cancel' %}</button></div>
 	</div>
 {% endblock %}

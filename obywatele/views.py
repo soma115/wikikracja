@@ -3,7 +3,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from obywatele.forms import ObywatelForm, ProfileForm
+from obywatele.forms import UserForm, ProfileForm
 from obywatele.models import Uzytkownik, Rate
 from django.shortcuts import render
 from django.contrib import messages
@@ -41,10 +41,13 @@ def poczekalnia(request):
 @login_required
 def dodaj(request):
     if request.method == 'POST':
-        form = ObywatelForm(request.POST)
-        if form.is_valid():
-            mail = form.cleaned_data['email']
-            nick = form.cleaned_data['username']
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            # USER
+            mail = user_form.cleaned_data['email']
+            nick = user_form.cleaned_data['username']
 
             if User.objects.filter(email=mail).exists():
                 # is_valid doesn't check if email exist
@@ -55,13 +58,25 @@ def dodaj(request):
 
             else:
                 # If everything is ok
-                form.save()
+                user_form.save()
                 candidate = User.objects.get(username=nick)
                 candidate.is_active = False
                 candidate.save()
 
+                # CANDIDATE
                 candidate_profile = Uzytkownik.objects.get(id=candidate.id)
                 candidate_profile.polecajacy = request.user.username
+                candidate_profile.responsibilities = profile_form.cleaned_data['responsibilities']
+                candidate_profile.city = profile_form.cleaned_data['city']
+                candidate_profile.hobby = profile_form.cleaned_data['hobby']
+                candidate_profile.skills = profile_form.cleaned_data['skills']
+                candidate_profile.knowledge = profile_form.cleaned_data['knowledge']
+                candidate_profile.want_to_learn = profile_form.cleaned_data['want_to_learn']
+                candidate_profile.business = profile_form.cleaned_data['business']
+                candidate_profile.job = profile_form.cleaned_data['job']
+                candidate_profile.fb = profile_form.cleaned_data['fb']
+                candidate_profile.other = profile_form.cleaned_data['other']
+
                 candidate_profile.save()
 
                 # Since you proposed new person,
@@ -78,13 +93,15 @@ def dodaj(request):
                               'obywatele/zapisane.html',
                               {'wynik': wynik, })
         else:
-            wynik = form.errors
+            wynik = user_form.errors
             return render(request,
                           'obywatele/zapisane.html',
                           {'wynik': wynik, })
 
-    form = ObywatelForm()
-    return render(request, 'obywatele/dodaj.html', {'form': form})
+    user_form = UserForm()
+    profile_form = ProfileForm()
+
+    return render(request, 'obywatele/dodaj.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 @login_required
@@ -108,8 +125,20 @@ def my_assets(request):
 
     if request.method == 'POST':
         if form.is_valid():
+            profile.responsibilities = form.cleaned_data['responsibilities']
             profile.city = form.cleaned_data['city']
             profile.hobby = form.cleaned_data['hobby']
+            profile.to_give_away = form.cleaned_data['to_give_away']
+            profile.to_borrow = form.cleaned_data['to_borrow']
+            profile.for_sale = form.cleaned_data['for_sale']
+            profile.i_need = form.cleaned_data['i_need']
+            profile.skills = form.cleaned_data['skills']
+            profile.knowledge = form.cleaned_data['knowledge']
+            profile.want_to_learn = form.cleaned_data['want_to_learn']
+            profile.business = form.cleaned_data['business']
+            profile.job = form.cleaned_data['job']
+            profile.fb = form.cleaned_data['fb']
+            profile.fb = form.cleaned_data['other']
             profile.save()
 
             return render(
@@ -136,9 +165,20 @@ def my_assets(request):
             )
     else:  # request.method != 'POST':
         form = ProfileForm(initial={  # pre-populate fields from database
+            'responsibilities': profile.responsibilities,
             'city': profile.city,
             'hobby': profile.hobby,
-            # 'form': form,
+            'to_give_away': profile.to_give_away,
+            'to_borrow': profile.to_borrow,
+            'for_sale': profile.for_sale,
+            'i_need': profile.i_need,
+            'skills': profile.skills,
+            'knowledge': profile.knowledge,
+            'want_to_learn': profile.want_to_learn,
+            'business': profile.business,
+            'job': profile.job,
+            'fb': profile.fb,
+            'other': profile.other,
             }
         )
 
@@ -155,17 +195,22 @@ def my_assets(request):
 
 @login_required
 def assets(request):
-    all_assets = Uzytkownik.objects.filter(uid__is_active=True).exclude(to_give_away__isnull=True,
-                                                                        to_borrow__isnull=True,
-                                                                        for_sale__isnull=True,
-                                                                        i_need__isnull=True,
-                                                                        skills__isnull=True,
-                                                                        knowledge__isnull=True,
-                                                                        want_to_learn__isnull=True,
-                                                                        business__isnull=True,
-                                                                        job__isnull=True,
-                                                                        city__isnull=True,
-                                                                        hobby__isnull=True)
+    all_assets = Uzytkownik.objects.filter(uid__is_active=True).exclude(
+                                responsibilities__isnull=True,
+                                city__isnull=True,
+                                hobby__isnull=True,
+                                to_give_away__isnull=True,
+                                to_borrow__isnull=True,
+                                for_sale__isnull=True,
+                                i_need__isnull=True,
+                                skills__isnull=True,
+                                knowledge__isnull=True,
+                                want_to_learn__isnull=True,
+                                business__isnull=True,
+                                job__isnull=True,
+                                fb__isnull=True,
+                                other__isnull=True,
+                                )
     return render(
         request,
         'obywatele/assets.html',

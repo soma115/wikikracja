@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 
 class Uzytkownik(models.Model):
@@ -16,19 +17,21 @@ class Uzytkownik(models.Model):
     polecajacy = models.CharField(editable=False, null=True, max_length=64)
     data_przyjecia = models.DateField(null=True, editable=False)
 
-    city = models.CharField(null=True, blank=True, max_length=100)
-    hobby = models.CharField(null=True, blank=True, max_length=200)
-    to_give_away = models.CharField(null=True, blank=True, max_length=2000)
-    to_borrow = models.CharField(null=True, blank=True, max_length=500)
-    for_sale = models.CharField(null=True, blank=True, max_length=500)
-    i_need = models.CharField(null=True, blank=True, max_length=500)
-    skills = models.CharField(null=True, blank=True, max_length=500)
-    knowledge = models.CharField(null=True, blank=True, max_length=500)
-    want_to_learn = models.CharField(null=True, blank=True, max_length=500)
-    business = models.CharField(null=True, blank=True, max_length=200)
-    job = models.CharField(null=True, blank=True, max_length=500)
+    responsibilities = models.CharField(null=True, blank=True, max_length=2000, help_text=_('Tasks performed in our group'))
+    city = models.CharField(null=True, blank=True, max_length=100, help_text=_('Where you are spending most of your time'))
+    hobby = models.CharField(null=True, blank=True, max_length=200, help_text=_('Hobbies you have'))
+    to_give_away = models.CharField(null=True, blank=True, max_length=2000, help_text=_('Things you are willing to give away for free'))
+    to_borrow = models.CharField(null=True, blank=True, max_length=500, help_text=_('Stuff you can borrow to others'))
+    for_sale = models.CharField(null=True, blank=True, max_length=500, help_text=_('Stuff you have for sale'))
+    i_need = models.CharField(null=True, blank=True, max_length=500, help_text=_('What do you need'))
+    skills = models.CharField(null=True, blank=True, max_length=500, help_text=_('What practical skills do you have'))
+    knowledge = models.CharField(null=True, blank=True, max_length=500, help_text=_('Knowledge you have'))
+    want_to_learn = models.CharField(null=True, blank=True, max_length=500, help_text=_('Things you would like to learn'))
+    business = models.CharField(null=True, blank=True, max_length=200, help_text=_('If you are running a business'))
+    job = models.CharField(null=True, blank=True, max_length=500, help_text=_('Your profession'))
+    fb = models.CharField(null=True, blank=True, max_length=500, help_text=_('Link to Facebook profile'))
+    other = models.CharField(null=True, blank=True, max_length=500, help_text=_('Other things about worth mentioning'))
 
-    # fb_profil = models.CharField(null=True, blank=True, max_length=200)
     # foto = models.CharField(null=True, blank=True, max_length=500)
     # i_know_personally_those_important_people = models.CharField(null=True, blank=True, max_length=500)
 

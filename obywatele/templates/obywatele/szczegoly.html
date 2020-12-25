@@ -6,8 +6,8 @@
 	<div>
 		<h3>{{ b.uid }}</h3>
 			<p>{{ b.uid.email }} | {% trans 'Introduced by' %}: {{ p }} | {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d" }}</p>
+			{% if b.id == d.id %}
 
-		{% if b.id == d.id %}
 			<!--Podgląd własnego profilu-->
 			<p>{% trans 'This is you' %} {{ b.uid }}</p>
 			<p><a href="{% url 'obywatele:my_profile' %}">{% trans 'You will find more setting in your profile' %}</a></p>
@@ -22,6 +22,45 @@
 		</form>
 		{% endif %}
 
+		<br>
+
+<table style="width:100%; border: 1px solid rgb(150, 150, 150)">
+	<tr style="border: 1px solid rgb(150, 150, 150)">
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Responsibilities" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "City" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Hobby" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "To give away" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "To borrow" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "For sale" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "I need" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Skills" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Knowledge" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "I want to learn" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Business" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Job" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Facebook" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Other" %}</th>
+	</tr>
+	<tr>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.responsibilities|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.city|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.hobby|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.to_give_away|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.to_borrow|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.for_sale|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.i_need|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.skills|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.knowledge|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.want_to_learn|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.business|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.job|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.fb|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.other|default_if_none:"-" }}</td>
+	</tr>
+</table>
+
+
+		<br>
 		<br>
 		    <div><button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button></div>
 	</div>

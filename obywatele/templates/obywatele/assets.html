@@ -6,39 +6,41 @@
 
 <table style="width:100%; border: 1px solid rgb(150, 150, 150)">
 	<tr style="border: 1px solid rgb(150, 150, 150)">
-		<th>{% trans "Name" %}</th>
-		<th>{% trans "City" %}</th>
-		<th>{% trans "Hobby" %}</th>
-		<th>{% trans "To give away" %}</th>
-		<th>{% trans "To borrow" %}</th>
-		<th>{% trans "For sale" %}</th>
-		<th>{% trans "I need" %}</th>
-		<th>{% trans "Skills" %}</th>
-		<th>{% trans "Knowledge" %}</th>
-		<th>{% trans "I want to learn" %}</th>
-		<th>{% trans "Business" %}</th>
-		<th>{% trans "Job" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Name" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Responsibilities" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "City" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Hobby" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "To give away" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "To borrow" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "For sale" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "I need" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Skills" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Knowledge" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "I want to learn" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Business" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Job" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Facebook" %}</th>
+		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Other" %}</th>
 	</tr>
 	{% for asset in all_assets %}
 	<tr>
-		<td>{{ asset.uid }}</td>
-		<td>{{ asset.city|default_if_none:"-" }}</td>
-		<td>{{ asset.hobby|default_if_none:"-" }}</td>
-		<td>{{ asset.to_give_away|default_if_none:"-" }}</td>
-		<td>{{ asset.to_borrow|default_if_none:"-" }}</td>
-		<td>{{ asset.for_sale|default_if_none:"-" }}</td>
-		<td>{{ asset.i_need|default_if_none:"-" }}</td>
-		<td>{{ asset.skills|default_if_none:"-" }}</td>
-		<td>{{ asset.knowledge|default_if_none:"-" }}</td>
-		<td>{{ asset.want_to_learn|default_if_none:"-" }}</td>
-		<td>{{ asset.business|default_if_none:"-" }}</td>
-		<td>{{ asset.job|default_if_none:"-" }}</td>
-	</tr>
-	{% empty %}
-	<tr>
-		<td>
-			asd
+		<td style="border: 1px solid rgb(150, 150, 150)">
+			<a href="{% url 'obywatele:obywatele' %}{{ asset.pk }}">{{ asset.uid }}</a>
 		</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.responsibilities|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.city|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.hobby|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.to_give_away|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.to_borrow|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.for_sale|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.i_need|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.skills|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.knowledge|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.want_to_learn|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.business|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.job|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.fb|default_if_none:"-" }}</td>
+		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.other|default_if_none:"-" }}</td>
 	</tr>
 	{% endfor %}
 </table>
