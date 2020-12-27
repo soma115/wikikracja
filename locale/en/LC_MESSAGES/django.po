@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-27 15:38+0100\n"
+"POT-Creation-Date: 2020-12-27 17:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgid "Send"
 msgstr ""
 
 #: elibrary/templates/elibrary/add.html:19
-#: glosowania/templates/glosowania/dodaj.html:32
+#: glosowania/templates/glosowania/dodaj.html:26
 #: glosowania/templates/glosowania/szczegoly.html:34
 #: glosowania/templates/glosowania/szczegoly.html:44
 #: glosowania/templates/glosowania/szczegoly.html:49
@@ -56,11 +56,12 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: elibrary/templates/elibrary/elibrary.html:6
+#: elibrary/templates/elibrary/elibrary.html:7
 msgid "Add eBook"
 msgstr ""
 
-#: elibrary/templates/elibrary/elibrary.html:17
+#: elibrary/templates/elibrary/elibrary.html:18
+#: elibrary/templates/elibrary/elibrary.html:19
 msgid "delete"
 msgstr ""
 
@@ -104,40 +105,40 @@ msgstr ""
 msgid "New proposition"
 msgstr ""
 
-#: glosowania/templates/glosowania/dodaj.html:31
+#: glosowania/templates/glosowania/dodaj.html:25
 #: home/templates/home/haslo.html:15
 msgid "Save"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:15 glosowania/views.py:75
+#: glosowania/templates/glosowania/start.html:14 glosowania/views.py:75
 msgid "New propositions"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:20 glosowania/views.py:84
+#: glosowania/templates/glosowania/start.html:19 glosowania/views.py:84
 msgid "No endorsement"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:24
+#: glosowania/templates/glosowania/start.html:23
 msgid "Queued for referendum"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:28 glosowania/views.py:102
+#: glosowania/templates/glosowania/start.html:27 glosowania/views.py:102
 msgid "Referendum"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:32
+#: glosowania/templates/glosowania/start.html:31
 msgid "Rejected"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:36
+#: glosowania/templates/glosowania/start.html:35
 msgid "Approved / Vacatio Legis"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:40
+#: glosowania/templates/glosowania/start.html:39
 msgid "Governing Law"
 msgstr ""
 
-#: glosowania/templates/glosowania/start.html:45
+#: glosowania/templates/glosowania/start.html:44
 msgid "Add proposition"
 msgstr ""
 
@@ -488,7 +489,7 @@ msgid "Ongoing referenda"
 msgstr ""
 
 #: home/templates/home/home.html:54
-msgid "There are currently no pending referenda."
+msgid "there is currently no referendum"
 msgstr ""
 
 #: home/templates/home/home.html:59
@@ -496,7 +497,7 @@ msgid "Upcoming referenda"
 msgstr ""
 
 #: home/templates/home/home.html:64
-msgid "There are currently no upcoming referenda."
+msgid "there are no upcoming referenda at this moment"
 msgstr ""
 
 #: home/templates/home/login.html:9
@@ -861,10 +862,10 @@ msgstr ""
 msgid "Wikicracy Administration"
 msgstr ""
 
-#: zzz/settings.py:47 zzz/settings_example.py:36 zzz/settings_prod.py:36
+#: zzz/settings.py:41 zzz/settings_example.py:36 zzz/settings_prod.py:36
 msgid "English"
 msgstr ""
 
-#: zzz/settings.py:48 zzz/settings_example.py:37 zzz/settings_prod.py:37
+#: zzz/settings.py:42 zzz/settings_example.py:37 zzz/settings_prod.py:37
 msgid "Polish"
 msgstr ""

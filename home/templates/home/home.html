@@ -47,21 +47,21 @@
 	{% if user.is_authenticated %}
 
 		<div class="col-sm-10 right">
-			<h1>{% trans 'Ongoing referenda' %}:</h1>
+			<h3>{% trans 'Ongoing referenda' %}:</h3>
 			{% for i in trwajace %}
 				<h3>● <a href="glosowania/{{ i.pk }}">{{ i.tresc }}</a></h3>
 {% empty %}
-    <li>{% trans 'There are currently no pending referenda.' %}</li>
+    ({% trans 'there is currently no referendum' %})
 {% endfor %}
 		</div>
 
 		<div class="col-sm-10 right">
-			<h1>{% trans 'Upcoming referenda' %}:</h1>
+			<h3>{% trans 'Upcoming referenda' %}:</h3>
 			{% for i in zblizajace_sie %}
 				<h3>● <a href="glosowania/{{ i.pk }}">{{ i.tresc }}</a></h3>
 						<p><h4>{{ i.data_referendum_start }}</h4></p>
 {% empty %}
-    <li>{% trans 'There are currently no upcoming referenda.' %}</li>
+    ({% trans 'there are no upcoming referenda at this moment' %})
 {% endfor %}
 		</div>
 

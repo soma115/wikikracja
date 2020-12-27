@@ -16,7 +16,8 @@
 			<button type='file' class="btn btn-primary">{% trans 'Send' %}</button>
 			</form>
 		</p>
-	<p><a href="{% url 'elibrary:elibrary' %}">{% trans 'Back' %}</a></p>
+	<button onclick="window.history.back();" class="btn btn-warning" type="button">{% trans 'Back' %}</button>
+
 {% endblock %}
 
 

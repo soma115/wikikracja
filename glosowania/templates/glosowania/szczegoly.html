@@ -30,7 +30,7 @@
 		<form action="#" method="get">
 			<p><u><h4>{% trans 'Do you want a referendum on this law?' %}</h4></u></p>
 		    <input class="btn btn-primary" type="submit" name="podpisz" value="{% trans "Yes, I sign" %}"/>
-		    <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button>
+		    <button onclick="window.history.back();" class="btn btn-warning" type="button">{% trans 'Back' %}</button>
 
 		</form>
 	{% endif %}
@@ -40,11 +40,11 @@
 			<p><u><h4>{% trans 'Do you want to implement this law?' %}</h4></u></p>
 		    <input class="btn btn-primary" type="submit" name="tak" value="{% trans 'Yes' %}"/>
 			<input class="btn btn-primary" type="submit" name="nie" value="{% trans 'No' %}"/>
-		    <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button>
+		    <button onclick="window.history.back();" class="btn btn-warning" type="button">{% trans 'Back' %}</button>
 		</form>
 	{% endif %}
 
 	{% if id.status == 2 or id.status == 3 or id.status >= 5 %}
-		<button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button>
+		<button onclick="window.history.back();" class="btn btn-warning" type="button">{% trans 'Back' %}</button>
 	{% endif %}
 {% endblock %}
