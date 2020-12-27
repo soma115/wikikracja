@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-27 17:09+0100\n"
+"POT-Creation-Date: 2020-12-27 17:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,7 +52,6 @@ msgstr ""
 #: obywatele/templates/obywatele/dodaj.html:61
 #: obywatele/templates/obywatele/szczegoly.html:71
 #: obywatele/templates/obywatele/zapisane.html:20
-#: obywatele/templates/obywatele/zapisane.html:21
 msgid "Back"
 msgstr ""
 
@@ -601,7 +600,7 @@ msgid "Hobby"
 msgstr ""
 
 #: obywatele/models.py:23
-msgid "Things to are willing to give away for free"
+msgid "Things you are willing to give away for free"
 msgstr ""
 
 #: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:14

@@ -20,7 +20,7 @@ class Uzytkownik(models.Model):
     responsibilities = models.TextField(null=True, blank=True, max_length=2000, help_text=_('Tasks performed in our group'), verbose_name=_('Responsibilities'))
     city = models.CharField(null=True, blank=True, max_length=100, help_text=_('Where one spend most of their time'), verbose_name=_('City'))
     hobby = models.CharField(null=True, blank=True, max_length=200, help_text=_('Hobbies one have'), verbose_name=_('Hobby'))
-    to_give_away = models.TextField(null=True, blank=True, max_length=2000, help_text=_('Things to are willing to give away for free'), verbose_name=_('To give away'))
+    to_give_away = models.TextField(null=True, blank=True, max_length=2000, help_text=_('Things you are willing to give away for free'), verbose_name=_('To give away'))
     to_borrow = models.TextField(null=True, blank=True, max_length=500, help_text=_('Stuff you can borrow to others'), verbose_name=_('To borrow'))
     for_sale = models.TextField(null=True, blank=True, max_length=500, help_text=_('Stuff you have for sale'), verbose_name=_('For sale'))
     i_need = models.TextField(null=True, blank=True, max_length=500, help_text=_('What do you need'), verbose_name=_('I need'))

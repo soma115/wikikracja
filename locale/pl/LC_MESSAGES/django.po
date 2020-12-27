@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-27 17:09+0100\n"
+"POT-Creation-Date: 2020-12-27 17:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,6 @@ msgstr "Wyślij"
 #: obywatele/templates/obywatele/dodaj.html:61
 #: obywatele/templates/obywatele/szczegoly.html:71
 #: obywatele/templates/obywatele/zapisane.html:20
-#: obywatele/templates/obywatele/zapisane.html:21
 msgid "Back"
 msgstr "Wróć"
 
@@ -538,20 +537,16 @@ msgid "Ongoing referenda"
 msgstr "Trwające referenda"
 
 #: home/templates/home/home.html:54
-#, fuzzy
-#| msgid "There are currently no pending referenda."
 msgid "there is currently no referendum"
-msgstr "Nie ma obecnie trwających referendów."
+msgstr "nie ma obecnie trwających referendów."
 
 #: home/templates/home/home.html:59
 msgid "Upcoming referenda"
 msgstr "Nadchodzące referenda"
 
 #: home/templates/home/home.html:64
-#, fuzzy
-#| msgid "There are currently no upcoming referenda."
 msgid "there are no upcoming referenda at this moment"
-msgstr "Nie ma obecnie nadchodzących referendów."
+msgstr "nie ma obecnie nadchodzących referendów"
 
 #: home/templates/home/login.html:9
 msgid "Welcome to Wikicracy!"
@@ -647,10 +642,8 @@ msgid "Responsibilities"
 msgstr "Zadania"
 
 #: obywatele/models.py:21
-#, fuzzy
-#| msgid "Where you are spending most of your time"
 msgid "Where one spend most of their time"
-msgstr "Gdzie spędzasz obecnie większość czasu"
+msgstr "Gdzie spędza się większość czasu"
 
 #: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:12
 #: obywatele/templates/obywatele/my_profile.html:23
@@ -659,10 +652,8 @@ msgid "City"
 msgstr "Miasto"
 
 #: obywatele/models.py:22
-#, fuzzy
-#| msgid "Hobbies you have"
 msgid "Hobbies one have"
-msgstr "Jakie masz hobby"
+msgstr "Hobby"
 
 #: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
 #: obywatele/templates/obywatele/my_profile.html:24
@@ -671,9 +662,7 @@ msgid "Hobby"
 msgstr "Hobby"
 
 #: obywatele/models.py:23
-#, fuzzy
-#| msgid "Things you are willing to give away for free"
-msgid "Things to are willing to give away for free"
+msgid "Things you are willing to give away for free"
 msgstr "Przedmioty, które chcesz oddać za darmo"
 
 #: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:14
@@ -713,10 +702,8 @@ msgid "I need"
 msgstr "Potrzebuję"
 
 #: obywatele/models.py:27
-#, fuzzy
-#| msgid "What practical skills do you have"
 msgid "Practical skills one have"
-msgstr "Praktyczne umiejętności, które posiadasz"
+msgstr "Praktyczne umiejętności"
 
 #: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:18
 #: obywatele/templates/obywatele/my_profile.html:29
@@ -725,8 +712,6 @@ msgid "Skills"
 msgstr "Umiejętności"
 
 #: obywatele/models.py:28
-#, fuzzy
-#| msgid "Knowledge you have"
 msgid "Knowledge one have"
 msgstr "Wiedza"
 
@@ -737,10 +722,8 @@ msgid "Knowledge"
 msgstr "Wiedza"
 
 #: obywatele/models.py:29
-#, fuzzy
-#| msgid "Things you would like to learn"
 msgid "Things one would like to learn"
-msgstr "Czego chciałbyś się nauczyć"
+msgstr "Czego chciałby się nauczyć"
 
 #: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:20
 #: obywatele/templates/obywatele/my_profile.html:31
@@ -749,8 +732,6 @@ msgid "I want to learn"
 msgstr "Chcę się nauczyć"
 
 #: obywatele/models.py:30
-#, fuzzy
-#| msgid "If you are running a business"
 msgid "If running a business"
 msgstr "Jaki prowadzisz biznes"
 
@@ -761,8 +742,6 @@ msgid "Business"
 msgstr "Biznes"
 
 #: obywatele/models.py:31
-#, fuzzy
-#| msgid "Your profession"
 msgid "Profession"
 msgstr "Wykonywany zawód"
 
@@ -783,10 +762,8 @@ msgid "Facebook"
 msgstr "Facebook"
 
 #: obywatele/models.py:33
-#, fuzzy
-#| msgid "Other things about worth mentioning"
 msgid "Other things worth mentioning"
-msgstr "Inne rzeczy o Tobie"
+msgstr "Inne rzeczy warte wzmianki"
 
 #: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:24
 #: obywatele/templates/obywatele/my_profile.html:35
@@ -816,14 +793,12 @@ msgid "Candidates"
 msgstr "Kandydaci"
 
 #: obywatele/templates/obywatele/menu.html:15
-#, fuzzy
-#| msgid "New proposition"
 msgid "New person"
-msgstr "Nowa propozycja"
+msgstr "Nowa osoba"
 
 #: obywatele/templates/obywatele/menu.html:18
 msgid "Assets"
-msgstr ""
+msgstr "Zasoby"
 
 #: obywatele/templates/obywatele/my_assets.html:8
 #: obywatele/templates/obywatele/my_profile.html:18
@@ -891,8 +866,6 @@ msgid "This is you"
 msgstr "To jesteś Ty"
 
 #: obywatele/templates/obywatele/szczegoly.html:11
-#, fuzzy
-#| msgid "You will find more setting in your profile"
 msgid "You can find more setting in your profile"
 msgstr "Więcej ustawień znajdziesz w twoim profilu"
 
@@ -909,8 +882,6 @@ msgid "Indifferent"
 msgstr "Obojętny"
 
 #: obywatele/templates/obywatele/szczegoly.html:20
-#, fuzzy
-#| msgid "I'm not accept this person"
 msgid "I do not accept this person"
 msgstr "Nie akceptuję tej osoby"
 
@@ -965,45 +936,3 @@ msgstr "Angielski"
 #: zzz/settings.py:42 zzz/settings_example.py:37 zzz/settings_prod.py:37
 msgid "Polish"
 msgstr "Polski"
-
-#~ msgid "Link to your Facebook profile"
-#~ msgstr "Link do twojego profilu na Facebooku"
-
-#~ msgid "Username"
-#~ msgstr "Nazwa użytkownika"
-
-#~ msgid "Usually just a name or beginning of email (part before @)"
-#~ msgstr "Zwykle po prostu imię lub część emaila przed znakiem @"
-
-#~ msgid "Email"
-#~ msgstr "Email"
-
-#~ msgid "The place where that person spends most of their time"
-#~ msgstr "Miejsce gdzie ta osoba przeważnie przebywa"
-
-#~ msgid "Passion, intrest, the way of spanding free time"
-#~ msgstr "Pasja, zainteresowania, sposób na spędzanie wolnego czasu"
-
-#~ msgid "What practical skills does he/she have"
-#~ msgstr "Praktyczne umiejętności, które posiada ta osoba"
-
-#~ msgid "What he/she want's to learn"
-#~ msgstr "Czego ta osoba chce się nauczuć"
-
-#~ msgid "The business this person is running"
-#~ msgstr "Biznes tej osoby"
-
-#~ msgid "Occupation"
-#~ msgstr "Zawód wykonywany"
-
-#~ msgid ""
-#~ "Other things worth mentioning. Things that doesn't fit in other fields"
-#~ msgstr ""
-#~ "Inne rzeczy godne wspomnienia. Rzeczy, które nie mieszczą się w "
-#~ "pozostałych polach"
-
-#~ msgid "Propose new person"
-#~ msgstr "Zaproponuj nową osobę"
-
-#~ msgid "Citizens assets"
-#~ msgstr "Zasoby obywateli"
