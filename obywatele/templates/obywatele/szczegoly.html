@@ -15,9 +15,9 @@
 	<p>
 		{% trans 'Your relationship to this person is' %} {{rate}}
 		<form action="#" method="get">
-		<input class="btn btn-success" type="submit" name="tak" value="{% trans 'I accept this person' %}"/>
-		<input class="btn btn-warning" type="submit" name="reset" value="{% trans 'Indifferent' %}"/>
-		<input class="btn btn-danger" type="submit" name="nie" value="{% trans "I do not accept this person" %}"/>
+		<input class="btn btn-success btn-sm" type="submit" name="tak" value="{% trans 'I accept this person' %}"/>
+		<input class="btn btn-warning btn-sm" type="submit" name="reset" value="{% trans 'Indifferent' %}"/>
+		<input class="btn btn-danger btn-sm" type="submit" name="nie" value="{% trans "I do not accept this person" %}"/>
 		</form>
 	</p>
 {% endif %}
@@ -68,7 +68,7 @@
 </p>
 
 <p>
-	<button onclick="window.history.back();" class="btn btn-warning" type="button">{% trans 'Back' %}</button>
+	<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
 </p>
 
 {% endblock citizens %}

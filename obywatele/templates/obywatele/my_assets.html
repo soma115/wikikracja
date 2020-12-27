@@ -9,11 +9,11 @@
 
 <form action="#" method="POST">{% csrf_token %}
 	{{ form|crispy }}
-	<button type="submit" class="btn btn-primary">Submit</button>
+	<button type="submit" class="btn btn-primary btn-sm">Submit</button>
 </form>
 
 <p>
-	<button onclick="window.history.back();" class="btn btn-warning" type="button">{% trans 'Cancel' %}</button>
+	<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Cancel' %}</button>
 </p>
 
 {% endblock %}

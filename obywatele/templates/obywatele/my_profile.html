@@ -12,7 +12,7 @@
 		<div>{% trans "You've joined" %}: {{ profile.data_przyjecia|date:"Y-m-d" }}</div>
 	</p>
 
-	<p><a class="btn btn-primary" href="{% url 'haslo'%}">{% trans 'Change password' %}</a></p>
+	<p><a class="btn btn-primary btn-sm" href="{% url 'haslo'%}">{% trans 'Change password' %}</a></p>
 
 	<p>
 		<b>{% trans "Those are your assets" %}</b>
@@ -34,7 +34,7 @@
 	<div>{% trans "Facebook" %}: {{ profile.fb|default_if_none:"-" }}</div>
 	<div>{% trans "Other" %}: {{ profile.other|default_if_none:"-" }}</div>
 
-	<p><a class="btn btn-primary" href="{% url 'obywatele:my_assets' %}">{% trans 'Edit my assets' %}</a></p>
+	<p><a class="btn btn-primary btn-sm" href="{% url 'obywatele:my_assets' %}">{% trans 'Edit my assets' %}</a></p>
 
 </div>
 {% endblock %}
