@@ -1,72 +1,64 @@
-{% extends 'home/base.html' %}
+{% extends 'obywatele/menu.html' %}
 {% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
-	{% block content %}
-		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:obywatele' %}">{% trans 'Citizens' %}</a>
-		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:poczekalnia' %}">{% trans 'Candidates' %}</a>
-		<a class="btn btn-primary fr-rounded fr-small" href="{% url 'obywatele:zaproponuj_osobe' %}">+{% trans 'Propose new person' %}</a>
+{% block citizens %}
 
-	    <form action="." method="POST" class="post-form">{% csrf_token %}
+<form action="." method="POST" class="post-form">{% csrf_token %}
+	<div class="row">
+		<div class="col-6">
+			{{ user_form.username|as_crispy_field }}
+		</div>
+		<div class="col-6">
+			{{ user_form.email|as_crispy_field }}
+		</div>
+	</div>
 
-		    <p>
-			    <table>
-			    <tr>
-				    <td>{% trans 'Username' %}*:</td>
-					<td>{{user_form.username}} {% trans "Usually just a name or beginning of email (part before @)" %}</td>
-			    </tr>
-			    <tr>
-				    <td>{% trans 'Email' %}*:</td>
-				    <td>{{user_form.email}}</td>
-				</tr>
-		    </table>
-				
-		</p>
-<p>{% trans "Below fields are not mandatory but filling them out will help us make the right decision when accepting a new person." %}</p>
-		<p>
-			<table>
+	<p>
+		<h2>{% trans "Below fields are not mandatory but filling them out will help us make the right decision when accepting a new person." %}</h2>
+	</p>
 
-				<tr>
-					<td>{% trans 'City' %}:</td>
-				    <td>{{profile_form.city}} {% trans "The place where that person spends most of their time" %}</td>
-				</tr>
-				<tr>
-					<td>{% trans 'Hobby' %}:</td>
-				    <td>{{profile_form.hobby}} {% trans "Passion, intrest, the way of spanding free time" %}</td>
-				</tr>
-				<tr>
-					<td>{% trans 'Skills' %}:</td>
-				    <td>{{profile_form.skills}} {% trans "What practical skills does he/she have" %}</td>
-				</tr>
-				<tr>
-					<td>{% trans 'Knowledge' %}:</td>
-				    <td>{{profile_form.knowledge}} {% trans "Knowledge" %}</td>
-				</tr>
-				<tr>
-					<td>{% trans 'I want to learn' %}:</td>
-				    <td>{{profile_form.want_to_learn}} {% trans "What he/she want's to learn" %}</td>
-				</tr>
-				<tr>
-					<td>{% trans 'Business' %}:</td>
-				    <td>{{profile_form.business}} {% trans "The business this person is running" %}</td>
-				</tr>
-				<tr>
-					<td>{% trans 'Job' %}:</td>
-				    <td>{{profile_form.job}} {% trans "Occupation" %}</td>
-				</tr>
-				<tr>
-					<td>{% trans 'Facebook' %}:</td>
-				    <td>{{profile_form.fb}} {% trans "Link to Facebook profile" %}</td>
-				</tr>
-				<tr>
-					<td>{% trans 'Other' %}:</td>
-				    <td>{{profile_form.other}} {% trans "Other things worth mentioning. Things that doesn't fit in other fields" %}</td>
-				</tr>
-		    </table>
-		    </p>
+	<div class="row">
+		<div class="col-6">
+			{{ profile_form.city|as_crispy_field }}
+		</div>
+		<div class="col-6">
+			{{ profile_form.hobby|as_crispy_field }}
+		</div>
+	</div>
 
-	        <!--<button type="submit" class="save btn btn-default">Zaproponuj nową osobę</button>-->
-	        <button type="submit" class="save btn btn-default">{% trans 'Propose new person' %}</button>
-	        <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button>
-	    </form>
-	{% endblock %}{% load i18n %}
+	<div class="row">
+		<div class="col-6">
+			{{ profile_form.job|as_crispy_field }}
+		</div>
+		<div class="col-6">
+			{{ profile_form.fb|as_crispy_field }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6">
+			{{ profile_form.skills|as_crispy_field }}
+		</div>
+		<div class="col-6">
+			{{ profile_form.knowledge|as_crispy_field }}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6">
+			{{ profile_form.want_to_learn|as_crispy_field }}
+		</div>
+		<div class="col-6">
+			{{ profile_form.business|as_crispy_field }}
+		</div>
+	</div>
+
+	{{ profile_form.other|as_crispy_field }}
+
+	<button type="submit" class="save btn btn-danger">{% trans 'Submit' %}</button>
+	<button onclick="window.history.back();" class="btn btn-warning" type="button">{% trans 'Back' %}</button>
+</form>
+
+{% endblock citizens %}

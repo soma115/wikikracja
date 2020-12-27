@@ -235,25 +235,25 @@ def obywatele_szczegoly(request, pk):
     -[x] New person increase population so also increase reputation requirements for existing citizens. Therefore every time new person is accepted - every other old member should have his reputation increased autmatically. And vice versa - if somebody is banned - everyone else should loose one point of reputation from banned person.
     '''
 
-    citizen = Uzytkownik.objects.get(pk=request.user.id)
+    citizen_profile = Uzytkownik.objects.get(pk=request.user.id)
 
     candidate_profile = get_object_or_404(Uzytkownik, pk=pk)
-    candidate = str(User.objects.get(pk=pk))
+    candidate_user = User.objects.get(pk=pk)
 
     population = User.objects.filter(is_active=True).count()
     required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
-    citizen_reputation = citizen.reputation
+    citizen_reputation = citizen_profile.reputation
 
-    polecajacy = citizen.polecajacy
+    polecajacy = citizen_profile.polecajacy
 
-    rate = Rate.objects.get_or_create(kandydat=candidate_profile, obywatel=citizen)[0]
+    rate = Rate.objects.get_or_create(kandydat=candidate_profile, obywatel=citizen_profile)[0]
 
     if rate.rate == 1:
         r1 = _('positive')
     if request.GET.get('tak'):
         rate.rate = 1
         rate.save()
-        wynik = str(_('Your relationship to the user ')) + candidate + str(_(' is positive'))
+        wynik = str(_('Your relationship to the user ')) + candidate_user.username + str(_(' is positive'))
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
 
     if rate.rate == -1:
@@ -261,7 +261,7 @@ def obywatele_szczegoly(request, pk):
     if request.GET.get('nie'):
         rate.rate = -1
         rate.save()
-        wynik = str(_('Your relationship to the user ')) + candidate + str(_(' is negative'))
+        wynik = str(_('Your relationship to the user ')) + candidate_user.username + str(_(' is negative'))
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
 
     if rate.rate == 0:
@@ -269,7 +269,7 @@ def obywatele_szczegoly(request, pk):
     if request.GET.get('reset'):
         rate.rate = 0
         rate.save()
-        wynik = str(_('Your relationship to the user ')) + candidate + str(_(' is neutral'))
+        wynik = str(_('Your relationship to the user ')) + candidate_user.username + str(_(' is neutral'))
         return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
 
     return render(
@@ -277,7 +277,7 @@ def obywatele_szczegoly(request, pk):
         'obywatele/szczegoly.html',
         {
             'b': candidate_profile,
-            'd': citizen,
+            'd': citizen_profile,
             'tr': citizen_reputation,
             'wr': required_reputation,
             'rate': r1,

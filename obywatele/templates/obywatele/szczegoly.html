@@ -1,67 +1,74 @@
-{% extends 'home/base.html' %}
+{% extends 'obywatele/menu.html' %}
 {% load static %}
 {% load i18n %}
 
-{% block content %}
-	<div>
-		<h3>{{ b.uid }}</h3>
-			<p>{{ b.uid.email }} | {% trans 'Introduced by' %}: {{ p }} | {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d" }}</p>
-			{% if b.id == d.id %}
+{% block citizens %}
 
-			<!--Podgląd własnego profilu-->
-			<p>{% trans 'This is you' %} {{ b.uid }}</p>
-			<p><a href="{% url 'obywatele:my_profile' %}">{% trans 'You will find more setting in your profile' %}</a></p>
+{{ b.uid }} | {{ b.uid.email }} | {% trans 'Introduced by' %}: {{ b.polecajacy|default:"-" }} | {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d"|default:"-" }}
 
-		{% else %}
-		<!--Podgląd cudzego profilu-->
-		<p>{% trans 'Your relationship to this person is' %} {{rate}}</p>
-			<form action="#" method="get">
-		    <input class="btn btn-primary" type="submit" name="tak" value="{% trans 'I accept this person' %}"/>
-			<input class="btn btn-primary" type="submit" name="reset" value="{% trans 'Indifferent' %}"/>
-			<input class="btn btn-primary" type="submit" name="nie" value="{% trans "I'm not accept this person" %}"/>
+{% if b.id == d.id %}  <!--Podgląd własnego profilu-->
+	<p>
+		{% trans 'This is you' %} {{ b.uid }}. <a href="{% url 'obywatele:my_profile' %}">{% trans 'You can find more setting in your profile' %}</a>
+	</p>
+{% else %}
+	<!--Podgląd cudzego profilu-->
+	<p>
+		{% trans 'Your relationship to this person is' %} {{rate}}
+		<form action="#" method="get">
+		<input class="btn btn-success" type="submit" name="tak" value="{% trans 'I accept this person' %}"/>
+		<input class="btn btn-warning" type="submit" name="reset" value="{% trans 'Indifferent' %}"/>
+		<input class="btn btn-danger" type="submit" name="nie" value="{% trans "I do not accept this person" %}"/>
 		</form>
-		{% endif %}
+	</p>
+{% endif %}
 
-		<br>
+<p>
+	<table class="table table-striped table-bordered table-sm">
+		<thead>
+			<tr class="text-center">
+				<th scope="col">{% trans "Name" %}</th>
+				<th scope="col">{% trans "Responsibilities" %}</th>
+				<th scope="col">{% trans "City" %}</th>
+				<th scope="col">{% trans "Hobby" %}</th>
+				<th scope="col">{% trans "To give away" %}</th>
+				<th scope="col">{% trans "To borrow" %}</th>
+				<th scope="col">{% trans "For sale" %}</th>
+				<th scope="col">{% trans "I need" %}</th>
+				<th scope="col">{% trans "Skills" %}</th>
+				<th scope="col">{% trans "Knowledge" %}</th>
+				<th scope="col">{% trans "I want to learn" %}</th>
+				<th scope="col">{% trans "Business" %}</th>
+				<th scope="col">{% trans "Job" %}</th>
+				<th scope="col">{% trans "Facebook" %}</th>
+				<th scope="col">{% trans "Other" %}</th>
+			</tr>
+		</thead>
+		<tbody>
+				<tr>
+					<td scope="col">
+						<a href="{% url 'obywatele:obywatele' %}{{ b.pk }}">{{ b.uid }}</a>
+					</td>
+					<td scope="col">{{ b.responsibilities|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.city|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.hobby|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.to_give_away|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.to_borrow|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.for_sale|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.i_need|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.skills|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.knowledge|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.want_to_learn|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.business|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.job|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.fb|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.other|default_if_none:"-" }}</td>
+				</tr>
+		</tbody>
+	</table>
+</p>
 
-<table style="width:100%; border: 1px solid rgb(150, 150, 150)">
-	<tr style="border: 1px solid rgb(150, 150, 150)">
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Responsibilities" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "City" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Hobby" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "To give away" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "To borrow" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "For sale" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "I need" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Skills" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Knowledge" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "I want to learn" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Business" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Job" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Facebook" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Other" %}</th>
-	</tr>
-	<tr>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.responsibilities|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.city|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.hobby|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.to_give_away|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.to_borrow|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.for_sale|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.i_need|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.skills|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.knowledge|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.want_to_learn|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.business|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.job|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.fb|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ b.other|default_if_none:"-" }}</td>
-	</tr>
-</table>
+<p>
+	<button onclick="window.history.back();" class="btn btn-warning" type="button">{% trans 'Back' %}</button>
+</p>
 
-
-		<br>
-		<br>
-		    <div><button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button></div>
-	</div>
-{% endblock %}
+{% endblock citizens %}

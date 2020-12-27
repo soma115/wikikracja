@@ -7,6 +7,7 @@ from glosowania.forms import DecyzjaForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language
 import logging as l
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -60,48 +61,84 @@ def get_client_ip(request):
 @login_required
 def glosowania(request):
     # get_client_ip(request) # logowanie
+    
+    lang = get_language()
+
+    # decyzje = Decyzja.objects.filter(status=1)
+    # print(request.GET.keys())
 
     if request.GET.get("1"):
         decyzje = Decyzja.objects.filter(status=1)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': _("New propositions")})
+                            {
+                                'decyzje': decyzje,
+                                'status': _("New propositions"),
+                                'lang': lang,
+                            })
 
     if request.GET.get("2"):
         decyzje = Decyzja.objects.filter(status=2)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': _("No endorsement")})
+                        {
+                          'decyzje': decyzje,
+                          'status': _("No endorsement"),
+                          'lang': lang,
+                        })
 
     if request.GET.get("3"):
         decyzje = Decyzja.objects.filter(status=3)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': _("Queued for referedum")})
+                        {
+                            'decyzje': decyzje,
+                            'status': _("Queued for referedum"),
+                            'lang': lang,
+                        })
 
     if request.GET.get("4"):
         decyzje = Decyzja.objects.filter(status=4)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': _("Referendum")})
+                        {
+                            'decyzje': decyzje,
+                            'status': _("Referendum"),
+                            'lang': lang,
+                        })
 
     if request.GET.get("5"):
         decyzje = Decyzja.objects.filter(status=5)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': _("Rejected in referendum")})
+                        {
+                            'decyzje': decyzje,
+                            'status': _("Rejected in referendum"),
+                            'lang': lang,
+                        })
 
     if request.GET.get("6"):
         decyzje = Decyzja.objects.filter(status=6)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje,
-                       'status': _("Accepted / Vacatio Legis")})
+                        {
+                          'decyzje': decyzje,
+                          'status': _("Accepted / Vacatio Legis"),
+                          'lang': lang,
+                        })
 
     if request.GET.get("7"):
         decyzje = Decyzja.objects.filter(status=7)
         return render(request, 'glosowania/start.html',
-                      {'decyzje': decyzje, 'status': _("Applicable regulations")})
+                        {
+                            'decyzje': decyzje,
+                            'status': _("Applicable regulations"),
+                            'lang': lang,
+                        })
 
     zliczaj_wszystko()
 
     decyzje = Decyzja.objects.filter(status=7)
     return render(request, 'glosowania/start.html',
-                  {'decyzje': decyzje, 'status': _("Applicable regulations")})
+                        {
+                            'decyzje': decyzje,
+                            'status': _("Applicable regulations"),
+                            'lang': lang,
+                        })
 
 
 # Pokaż szczegóły przepisu

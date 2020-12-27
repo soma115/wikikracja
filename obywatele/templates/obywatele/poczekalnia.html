@@ -1,15 +1,14 @@
-{% extends 'home/base.html' %}
+{% extends 'obywatele/menu.html' %}
 {% load static %}
 {% load i18n %}
 
-	{% block content %}
-		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:obywatele' %}">{% trans 'Citizens' %}</a>
-		<a class="btn btn-primary fr-rounded fr-small" href="{% url 'obywatele:poczekalnia' %}">{% trans 'Candidates' %}</a>
-		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:zaproponuj_osobe' %}">+{% trans 'Propose new person' %}</a>
+{% block citizens %}
 
+	<ul class="list-group-flush">
 		{% for i in uid %}
-			<!--<h2><a href="{{ i.pk }}">{{ i.first_name }} {{i.last_name}}</a></h2>-->
-			<h3><a href="{{ i.pk }}">{{ i.username }}</a></h3>
-			<p>{{ i.email }} | {% trans 'Joined' %}: {{ i.date_joined|date:"Y-m-d" }}</p>
+		<li class="list-group-item"><a href="{{ i.pk }}">{{ i.username }} | {{ i.email }} | {% trans 'proposed at' %}: {{ i.date_joined|date:"Y-m-d" }}</a></li>
 		{% endfor %}
-	{% endblock %}
+	</ul>
+
+{% endblock citizens %}
+

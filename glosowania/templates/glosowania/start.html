@@ -1,52 +1,62 @@
 {% extends 'home/base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
 {% load static %}
 {% load i18n %}
 
 {% block content %}
+<!-- <div class="col-sm-8 offset-sm-3 right"><p><h3>{{ status }}</h3></p></div> -->
 
-<div class="col-sm-4 text-align: left;">
-				<form action="#" method="get" style="text-align: left;">
-					<input class="btn btn-primary fr-rounded" name="1" value="1. {% trans 'New proposition' %}" type="submit">
-				</form></p>
+<div class='row'>
+	<div class="col-md-6">
+		<form action="#" method="get" style="text-align: left;">
+			<input class="btn btn-primary fr-rounded" name="1" value="1. {% trans 'New propositions' %}" type="submit">
+			<!-- <input class="btn btn-primary fr-rounded" name="1" value="1" type="submit"> -->
+		</form></p>
 
-				<p><form action="#" method="get" style="text-align: left;">
-					<input class="btn btn-primary fr-rounded" name="2" value="2. {% trans 'No endorsement' %}" type="submit">
-				</form></p>
+		<p><form action="#" method="get" style="text-align: left;">
+			<input class="btn btn-primary fr-rounded" name="2" value="2. {% trans 'No endorsement' %}" type="submit">
+		</form></p>
 
-				<p><form action="#" method="get" style="text-align: left;">
-					<input class="btn btn-primary fr-rounded" name="3" value="3. {% trans 'Queued for referendum' %}" type="submit">
-				</form></p>
+		<p><form action="#" method="get" style="text-align: left;">
+			<input class="btn btn-primary fr-rounded" name="3" value="3. {% trans 'Queued for referendum' %}" type="submit">
+		</form></p>
 
-				<p><form action="#" method="get" style="text-align: left;">
-					<input class="btn btn-primary fr-rounded" name="4" value="4. {% trans 'Referendum' %}" type="submit">
-				</form></p>
+		<p><form action="#" method="get" style="text-align: left;">
+			<input class="btn btn-primary fr-rounded" name="4" value="4. {% trans 'Referendum' %}" type="submit">
+		</form></p>
 
-				<p><form action="#" method="get" style="text-align: left;">
-					<input class="btn btn-primary fr-rounded" name="5" value="5. {% trans 'Rejected' %}" type="submit">
-				</form></p>
+		<p><form action="#" method="get" style="text-align: left;">
+			<input class="btn btn-primary fr-rounded" name="5" value="5. {% trans 'Rejected' %}" type="submit">
+		</form></p>
 
-				<p><form action="#" method="get" style="text-align: left;">
-					<input class="btn btn-primary fr-rounded" name="6" value="6. {% trans 'Approved / Vacatio Legis' %}" type="submit">
-				</form></p>
+		<p><form action="#" method="get" style="text-align: left;">
+			<input class="btn btn-primary fr-rounded" name="6" value="6. {% trans 'Approved / Vacatio Legis' %}" type="submit">
+		</form></p>
 
-				<p><form action="#" method="get" style="text-align: left;">
-					<input class="btn btn-primary fr-rounded" name="7" value="7. {% trans 'Governing Law' %}" type="submit">
-				</form></p>
-</div>
+		<p><form action="#" method="get" style="text-align: left;">
+			<input class="btn btn-primary fr-rounded" name="7" value="7. {% trans 'Governing Law' %}" type="submit">
+		</form></p>
+	</div>
 
-<div class="col-sm-4 right"><a class="btn btn-warning fr-rounded fr-small" href="{% url 'glosowania:dodaj_nowy' %}">{% trans 'Add proposition' %}</a></div>
+	<div class="col-md-6">
+		<a class="btn btn-info" href="{% url 'glosowania:dodaj_nowy' %}">+{% trans 'Add proposition' %}</a>
 
-<div class="col-sm-8 offset-sm-3 right"><p><h3>{{ status }}</h3></p></div>
+		<p>
+			{% for i in decyzje %}
+			<h3><a href="{{ i.pk }}">{{ i.pk }}. {{ i.tresc }}</a></h3>
+			{% endfor %}
+		</p>
+	</div>
+ 
+<p>
+	<img class="img-fluid col-sm-8 offset-sm-1" src="../static/glosowania/{{ lang }}/schemat.png">
+</p>
 
-<div class="col-sm-8 right">
-	{% for i in decyzje %}
-		<h3><a href="{{ i.pk }}">{{ i.pk }}. {{ i.tresc }}</a></h3>
-	{% endfor %}
-</div>
 
-<div class="col-sm-10 left"><img src="../static/glosowania/schemat.png"></div>
-
-<div class="col-sm-10">
+<div class="col-md-12">
 	<h2>{% trans 'Voting parameters:' %}</h2>
 	<li>{% trans '2 signatures are needed to approve a referendum request. This number should remain low enough for any sensible proposal to be voted on, and only high enough to filter out obvious spam.' %}</li>
 	<li>{% trans 'Signature is valid for 365 days. After this time, signatures must be collected again.' %}</li>
@@ -56,5 +66,6 @@
 	<h2>{% trans 'Citizens parameters:' %}</h2>
 	<li>{% trans 'Required Reputation = round(log(population) * 0.7)' %}</li>
 </div>
+
 
 {% endblock %}

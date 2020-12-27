@@ -1,56 +1,63 @@
 {% load i18n %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ HTTP_HOST }}</title>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     {% load static %}
 	<link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}"/>
-	<link rel="stylesheet" type="text/css" href="{% static 'home/content/bootstrap.css' %}"/>
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'home/content/site.css' %}"/> -->
-	<script src="{% static 'home/scripts/modernizr-2.6.2.js' %}"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.css' %}"/> -->
+	<script src="{% static 'home/js/modernizr-2.6.2.js' %}"></script>
 	
-	<link rel="stylesheet" href="{% static "home/css/style.css" %}" type="text/css" media="screen" />
+	<!-- Chat rooms styling: -->
+	<link rel="stylesheet" href="{% static "home/css/chat.css" %}" type="text/css" media="screen" /> 
+	
 	<script src="{% static "home/js/jquery-1.12.2.min.js" %}" type="text/javascript"></script>
 	<script src="{% static "home/js/reconnecting-websocket.min.js" %}" type="text/javascript"></script>
 </head>
 
 <body>
-	<div class="row-site border-bottom" style="padding-top:20px;background-color: #eeeeee;">
-		<!--<div class="col-md-1 text-center">
-			<a href="{% url 'home' %}"> <img class="rounded" src="{% static 'home/images/sitelogo.png' %}" style="height:70px;margin:6px;"></a>
-		</div>-->
-		<div class="container">
-			<ul class="nav nav-tabs">
-				<li role="presentation" {% if request.resolver_match.url_name == 'home' %} class="active"{% endif %}><a href="{% url 'home' %}">{% trans 'Start' %}</a></li>
-				{% if not user.is_authenticated %}
-					<li role="presentation" {% if request.resolver_match.url_name == 'login' %} class="active" {% endif %}><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
-					<li role="presentation" {% if request.resolver_match.url_name == 'password_reset' %} class="active" {% endif %}><a href="{% url 'password_reset' %}">{% trans "Reset password" %}</a></li>
-				{% endif %}
-				{% if user.is_authenticated %}
-					<li role="presentation" {% if request.resolver_match.url_name == 'obywatele' or request.resolver_match.url_name == 'poczekalnia' or request.resolver_match.url_name == 'zaproponuj_osobe' or request.resolver_match.url_name == 'obywatele_szczegoly' or request.resolver_match.url_name == 'assets'%} class="active" {% endif %}><a href="{% url 'obywatele:obywatele' %}">{% trans "Citizens" %}</a></li>
 
-					<li role="presentation" {% if request.resolver_match.namespace == 'glosowania' %} class="active" {% endif %}><a href="{% url 'glosowania:glosowania' %}">{% trans "Law" %}</a></li>
-					<li role="presentation" {% if request.resolver_match.namespace == 'elibrary' %} class="active" {% endif %}><a href="{% url 'elibrary:elibrary' %}">{% trans "eLibrary" %}</a></li>
-					<li role="presentation" {% if request.resolver_match.namespace == 'chat' %} class="active" {% endif %}><a href="/chat/">{% trans "Chat" %}</a></li>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="{% url 'home' %}">{{ request.site.name }}</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		  <!-- <div class="navbar-nav"> -->
+		  <div class="nav nav-tabs">
+			<a {% if request.resolver_match.url_name == 'home' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'home' %}">{% trans 'Start' %}</a>
+			{% if not user.is_authenticated %}
+				<a {% if request.resolver_match.url_name == 'login' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'login' %}">{% trans "Login" %}</a>
+				<a {% if request.resolver_match.url_name == 'password_reset' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'password_reset' %}">{% trans "Reset password" %}</a>
+			{% endif %}
+			{% if user.is_authenticated %}
+				<a {% if request.resolver_match.url_name == 'obywatele' or request.resolver_match.url_name == 'poczekalnia' or request.resolver_match.url_name == 'zaproponuj_osobe' or request.resolver_match.url_name == 'obywatele_szczegoly'  or request.resolver_match.url_name == 'poczekalnia_szczegoly' or request.resolver_match.url_name == 'assets'%} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'obywatele:obywatele' %}">{% trans "Citizens" %}</a>
 
-					<li role="presentation" {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="active" {% endif %}><a style="color:green" href="{% url 'obywatele:my_profile' %}">{{ user.username }}</a></li>
+				<a {% if request.resolver_match.namespace == 'glosowania' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'glosowania:glosowania' %}">{% trans "Law" %}</a>
+				<a {% if request.resolver_match.namespace == 'elibrary' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'elibrary:elibrary' %}">{% trans "eLibrary" %}</a>
+				<a {% if request.resolver_match.namespace == 'chat' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/chat/">{% trans "Chat" %}</a>
 
-					<li><a style="color:gray" href="/logout">{% trans "logout" %}</a></li>
-				{% endif %}
-			</ul>
+				<a {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} style="color:green" href="{% url 'obywatele:my_profile' %}">{{ user.username }}</a>
+
+				<a class="nav-item nav-link" style="color:gray" href="/logout">{% trans "logout" %}</a>
+			{% endif %}
+
+		  </div>
 		</div>
-	</div>
-
+	  </nav>
 
 	<div class="container body-content">
-		<br>
-		{% block content %}{% endblock %}
+		<p>{% block content %}{% endblock content%}</p>
 	</div>
-
+	
 	{% if messages %}
 		<ul class="messages">
 			{% for message in messages %}
@@ -73,9 +80,35 @@
 	</div>
 </div>
 	{% block scripts %}
-	<script src="{% static 'home/scripts/jquery-1.10.2.js' %}"></script>
-	<script src="{% static 'home/scripts/bootstrap.js' %}"></script>
-	<script src="{% static 'home/scripts/respond.js' %}"></script>
+	<!-- <script src="{% static 'home/scripts
+    
+/* .m-2
+{
+    margin:2px !important;
+}
+#login-box
+{
+    padding:8px;
+    border:1px solid #eeeeee;
+    border-radius:5px;
+}
+.title
+{
+    font-size:xx-large;
+}
+.border-bottom
+{
+    border-bottom:1px solid #dddddd;
+}
+.nav-tabs
+{
+    border:none !important;
+}
+.rounded {
+    border-radius:10px;
+} *//jquery-1.10.2.js' %}"></script> -->
+	<script src="{% static 'home/js/bootstrap.js' %}"></script>
+	<script src="{% static 'home/js/respond.js' %}"></script>
 	{% endblock %}
 
 	{% block extra_body %}{% endblock %}

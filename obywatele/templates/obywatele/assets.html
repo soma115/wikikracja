@@ -1,48 +1,52 @@
-{% extends 'home/base.html' %}
+{% extends 'obywatele/menu.html' %}
 {% load static %}
 {% load i18n %}
 
-{% block content %}
-
-<table style="width:100%; border: 1px solid rgb(150, 150, 150)">
-	<tr style="border: 1px solid rgb(150, 150, 150)">
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Name" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Responsibilities" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "City" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Hobby" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "To give away" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "To borrow" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "For sale" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "I need" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Skills" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Knowledge" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "I want to learn" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Business" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Job" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Facebook" %}</th>
-		<th style="border: 1px solid rgb(150, 150, 150)">{% trans "Other" %}</th>
-	</tr>
-	{% for asset in all_assets %}
-	<tr>
-		<td style="border: 1px solid rgb(150, 150, 150)">
-			<a href="{% url 'obywatele:obywatele' %}{{ asset.pk }}">{{ asset.uid }}</a>
-		</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.responsibilities|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.city|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.hobby|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.to_give_away|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.to_borrow|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.for_sale|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.i_need|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.skills|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.knowledge|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.want_to_learn|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.business|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.job|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.fb|default_if_none:"-" }}</td>
-		<td style="border: 1px solid rgb(150, 150, 150)">{{ asset.other|default_if_none:"-" }}</td>
-	</tr>
-	{% endfor %}
-</table>
-
-{% endblock %}
+{% block citizens %}
+<p>
+	<table class="table table-striped table-bordered table-sm">
+		<thead>
+			<tr class="text-center">
+				<th scope="col">{% trans "Name" %}</th>
+				<th scope="col">{% trans "Responsibilities" %}</th>
+				<th scope="col">{% trans "City" %}</th>
+				<th scope="col">{% trans "Hobby" %}</th>
+				<th scope="col">{% trans "To give away" %}</th>
+				<th scope="col">{% trans "To borrow" %}</th>
+				<th scope="col">{% trans "For sale" %}</th>
+				<th scope="col">{% trans "I need" %}</th>
+				<th scope="col">{% trans "Skills" %}</th>
+				<th scope="col">{% trans "Knowledge" %}</th>
+				<th scope="col">{% trans "I want to learn" %}</th>
+				<th scope="col">{% trans "Business" %}</th>
+				<th scope="col">{% trans "Job" %}</th>
+				<th scope="col">{% trans "Facebook" %}</th>
+				<th scope="col">{% trans "Other" %}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for asset in all_assets %}
+				<tr>
+					<td scope="col">
+						<a href="{% url 'obywatele:obywatele' %}{{ asset.pk }}">{{ asset.uid }}</a>
+					</td>
+					<td scope="col">{{ asset.responsibilities|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.city|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.hobby|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.to_give_away|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.to_borrow|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.for_sale|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.i_need|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.skills|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.knowledge|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.want_to_learn|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.business|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.job|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.fb|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.other|default_if_none:"-" }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</p>
+{% endblock citizens %}
