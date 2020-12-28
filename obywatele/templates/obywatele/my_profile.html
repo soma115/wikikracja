@@ -12,7 +12,10 @@
 		<div>{% trans "You've joined" %}: {{ profile.data_przyjecia|date:"Y-m-d" }}</div>
 	</p>
 
-	<p><a class="btn btn-primary btn-sm" href="{% url 'haslo'%}">{% trans 'Change password' %}</a></p>
+	<p>
+		<a class="btn btn-primary btn-sm" href="{% url 'haslo'%}">{% trans 'Change password' %}</a>
+		<a class="btn btn-primary btn-sm" href="{% url 'email_change'%}">{% trans 'Change email' %}</a>
+	</p>
 
 	<p>
 		<b>{% trans "Those are your assets" %}</b>

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from home import views as hv
+from obywatele import views as ov
 from django.conf.urls import include
 from django.contrib.auth import views as auth_views
 from django.urls import path
@@ -16,6 +17,8 @@ urlpatterns = [
   path('obywatele/', include('obywatele.urls', namespace='obywatele')),
   path('elibrary/', include('elibrary.urls', namespace='elibrary')),
   path('chat/', include('chat.urls', namespace='chat')),
+  path('email_change/', ov.email_change, name='email_change'),
+
 ]
 
 if settings.DEBUG:

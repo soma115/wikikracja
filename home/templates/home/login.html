@@ -19,7 +19,7 @@
         <div id="login-box">
           <form id="login-form" class="form" action="" method="post">
               {% csrf_token %}
-              <h3 class="text-center text-info m-2">{% trans 'Wikicracy - Login' %}</h3>
+              <h3 class="text-center text-info m-2">{% trans 'Login' %}</h3>
               <div class="form-group">
                 <label for="{{form.username.name}}" class="text-info">{{form.username.label}}</label><br>
                 <input type="text" name="{{form.username.name}}" class="form-control" id="{{form.username.auto_id}}">
@@ -29,10 +29,10 @@
                 <input type="password" name="{{form.password.name}}" class="form-control" id="{{form.password.auto_id}}">
             </div>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 d-flex justify-content-between">
                   <input type="submit" name="submit" class="btn btn-info btn-block m-2 btn-sm" value={% trans 'Login' %}>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 d-flex justify-content-between">
                 <a href="{% url 'password_reset' %}" class="btn btn-warning btn-block m-2 btn-sm">{% trans 'Reset password' %}</a>
               </div>
             </div>

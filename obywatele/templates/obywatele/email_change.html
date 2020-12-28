@@ -4,26 +4,25 @@
 {% load i18n %}
 
 {% block content %}
-<h3>{% trans 'Change password' %}</h3>
-<form class="post-form" method="post" action="{% url 'haslo' %}">{% csrf_token %}
+<h3>{% trans 'Change email' %}</h3>
+
+<p class="font-weight-bold">{% trans "Your current email" %}: {{ request.user.email }}</p>
+
+<form class="post-form" method="post" action="{% url 'email_change' %}">{% csrf_token %}
     <div class="row">
         <div class="col-md-3">
-            {{ form.old_password|as_crispy_field }}
+            {{ form.new_email1|as_crispy_field }}
         </div>
     </div>
     <div class="row">
         <div class="col-md-3">
-            {{ form.new_password1|as_crispy_field }}
+            {{ form.new_email2|as_crispy_field }}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-            {{ form.new_password2|as_crispy_field }}
-        </div>
-    </div>
-    
+
     <button type="submit" class="btn btn-danger btn-sm">{% trans 'Save' %}</button>
     <button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
 </form>
 
 {% endblock %}
+

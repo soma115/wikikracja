@@ -1,18 +1,18 @@
+from django.conf import settings
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
-from django.contrib.auth.models import User
-from obywatele.forms import UserForm, ProfileForm
-from obywatele.models import Uzytkownik, Rate
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from obywatele.forms import UserForm, ProfileForm, EmailChangeForm
+from obywatele.models import Uzytkownik, Rate
 from django.contrib import messages
 from django.core.mail import send_mail
 import random
 import string
 from django.utils.timezone import now as dzis
 from math import log
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Avg, Sum
@@ -21,7 +21,31 @@ import logging as l
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
 # Above 0.7 second person requires 2 points of acceptance which is a paradox.
-ACCEPTANCE_MULTIPLIER = 0.7  
+ACCEPTANCE_MULTIPLIER = 0.7
+
+
+@login_required() 
+def email_change(request):
+    form = EmailChangeForm(request.user)
+    if request.method=='POST':
+        form = EmailChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            komunikat = _("New email saved")
+            wynik = _("Your new email has been saved.")
+            return render(request, 'obywatele/zapisane.html',
+                          {
+                              'komunikat': komunikat,
+                              'wynik': wynik
+                          }
+                        )
+        else:
+            wynik = form.errors
+            return render(request,
+                          'obywatele/zapisane.html',
+                          {'wynik': wynik, })
+    else:
+        return render(request, 'obywatele/email_change.html', {'form':form})
 
 
 @login_required
