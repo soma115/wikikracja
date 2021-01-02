@@ -30,20 +30,20 @@
 					<td scope="col">
 						<a href="{% url 'obywatele:obywatele' %}{{ asset.pk }}">{{ asset.uid }}</a>
 					</td>
-					<td scope="col">{{ asset.responsibilities|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.city|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.hobby|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.to_give_away|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.to_borrow|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.for_sale|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.i_need|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.skills|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.knowledge|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.want_to_learn|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.business|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.job|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.fb|default_if_none:"-" }}</td>
-					<td scope="col">{{ asset.other|default_if_none:"-" }}</td>
+					<td scope="col">{{ asset.responsibilities|default:"-" }}</td>
+					<td scope="col">{{ asset.city|default:"-" }}</td>
+					<td scope="col">{{ asset.hobby|default:"-" }}</td>
+					<td scope="col">{{ asset.to_give_away|default:"-" }}</td>
+					<td scope="col">{{ asset.to_borrow|default:"-" }}</td>
+					<td scope="col">{{ asset.for_sale|default:"-" }}</td>
+					<td scope="col">{{ asset.i_need|default:"-" }}</td>
+					<td scope="col">{{ asset.skills|default:"-" }}</td>
+					<td scope="col">{{ asset.knowledge|default:"-" }}</td>
+					<td scope="col">{{ asset.want_to_learn|default:"-" }}</td>
+					<td scope="col">{{ asset.business|default:"-" }}</td>
+					<td scope="col">{{ asset.job|default:"-" }}</td>
+					<td scope="col">{{ asset.fb|default:"-" }}</td>
+					<td scope="col">{{ asset.other|default:"-" }}</td>
 				</tr>
 			{% endfor %}
 		</tbody>

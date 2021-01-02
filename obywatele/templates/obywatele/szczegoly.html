@@ -48,20 +48,20 @@
 					<td scope="col">
 						<a href="{% url 'obywatele:obywatele' %}{{ b.pk }}">{{ b.uid }}</a>
 					</td>
-					<td scope="col">{{ b.responsibilities|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.city|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.hobby|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.to_give_away|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.to_borrow|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.for_sale|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.i_need|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.skills|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.knowledge|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.want_to_learn|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.business|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.job|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.fb|default_if_none:"-" }}</td>
-					<td scope="col">{{ b.other|default_if_none:"-" }}</td>
+					<td scope="col">{{ b.responsibilities|default:"-" }}</td>
+					<td scope="col">{{ b.city|default:"-" }}</td>
+					<td scope="col">{{ b.hobby|default:"-" }}</td>
+					<td scope="col">{{ b.to_give_away|default:"-" }}</td>
+					<td scope="col">{{ b.to_borrow|default:"-" }}</td>
+					<td scope="col">{{ b.for_sale|default:"-" }}</td>
+					<td scope="col">{{ b.i_need|default:"-" }}</td>
+					<td scope="col">{{ b.skills|default:"-" }}</td>
+					<td scope="col">{{ b.knowledge|default:"-" }}</td>
+					<td scope="col">{{ b.want_to_learn|default:"-" }}</td>
+					<td scope="col">{{ b.business|default:"-" }}</td>
+					<td scope="col">{{ b.job|default:"-" }}</td>
+					<td scope="col">{{ b.fb|default:"-" }}</td>
+					<td scope="col">{{ b.other|default:"-" }}</td>
 				</tr>
 		</tbody>
 	</table>
