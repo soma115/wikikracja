@@ -17,7 +17,7 @@
 	<li class="nav-item">
 		<a {% if request.resolver_match.url_name == 'assets' %} class="btn btn-primary mr-1 btn-sm" {% else %} class="btn btn-outline-primary mr-1 btn-sm" {% endif %}" href="{% url 'obywatele:assets' %}">{% trans "Assets" %}</a>
 	</li>
-</ul> 
+</ul>
 
 	<p>
 		{% block citizens %}

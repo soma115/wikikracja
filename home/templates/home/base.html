@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="{% static "home/css/chat.css" %}" type="text/css" media="screen" async/> 
 	
 	<script src="{% static "home/js/jquery-1.12.2.min.js" %}" type="text/javascript" async></script>
-	<script src="{% static "home/js/reconnecting-websocket.min.js" %}" type="text/javascript" async></script>
+	<script src="{% static "home/js/reconnecting-websocket.js" %}" type="text/javascript" async></script>
 </head>
 
 <body>
@@ -46,7 +46,8 @@
 				<a {% if request.resolver_match.namespace == 'elibrary' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'elibrary:elibrary' %}">{% trans "eLibrary" %}</a>
 				<a {% if request.resolver_match.namespace == 'chat' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/chat/">{% trans "Chat" %}</a>
 
-				<a {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} style="color:green" href="{% url 'obywatele:my_profile' %}">{{ user.username }}</a>
+				<a {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} style="color:green" href="{% url 'obywatele:my_profile' %}">{% trans "profile" %}</a>
+				<!-- {{ user.username }} -->
 
 				<a class="nav-item nav-link" style="color:gray" href="/logout">{% trans "logout" %}</a>
 			{% endif %}

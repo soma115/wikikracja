@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-28 11:37+0100\n"
+"POT-Creation-Date: 2021-01-02 08:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,6 @@ msgstr ""
 
 #: elibrary/templates/elibrary/add.html:16
 #: home/templates/home/password_reset_form.html:15
-#: home/templates/home/password_reset_form.html:31
 msgid "Send"
 msgstr ""
 
@@ -380,7 +379,6 @@ msgstr ""
 #: home/templates/home/base.html:40 home/templates/home/home.html:37
 #: home/templates/home/login.html:36
 #: home/templates/home/password_reset_form.html:5
-#: home/templates/home/password_reset_form.html:21
 msgid "Reset password"
 msgstr ""
 
@@ -401,23 +399,27 @@ msgstr ""
 msgid "Chat"
 msgstr ""
 
-#: home/templates/home/base.html:51
+#: home/templates/home/base.html:49
+msgid "profile"
+msgstr ""
+
+#: home/templates/home/base.html:52
 msgid "logout"
 msgstr ""
 
-#: home/templates/home/base.html:73
+#: home/templates/home/base.html:74
 msgid "Contact"
 msgstr ""
 
-#: home/templates/home/base.html:77
+#: home/templates/home/base.html:78
 msgid "About project"
 msgstr ""
 
-#: home/templates/home/base.html:78
+#: home/templates/home/base.html:79
 msgid "System description"
 msgstr ""
 
-#: home/templates/home/base.html:79
+#: home/templates/home/base.html:80
 msgid "Possible use cases"
 msgstr ""
 
@@ -561,7 +563,6 @@ msgid "Back to login page"
 msgstr ""
 
 #: home/templates/home/password_reset_form.html:7
-#: home/templates/home/password_reset_form.html:22
 msgid "To reset your password, enter your e-mail address and click \"Send\""
 msgstr ""
 

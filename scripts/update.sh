@@ -1,12 +1,14 @@
 #!/bin/bash
 
-# run with virtual environment and and within app home directory
+# Used to update production instances
+# Run within python virtual environment and and within app home directory
+# For example:
+# cd /home/user/wiki/wiki/
+# source ../venv/bin/activate
+# ./script/update.sh
 
 git reset --hard
 git pull
-
-# There has to exist ../venv/bin/activate
-# source /var/www/venv/bin/activate
 
 ./manage.py makemigrations obywatele
 ./manage.py makemigrations glosowania
