@@ -30,6 +30,7 @@ class Uzytkownik(models.Model):
     business = models.TextField(null=True, blank=True, max_length=200, help_text=_('If running a business'), verbose_name=_('Business'))
     job = models.CharField(null=True, blank=True, max_length=500, help_text=_('Profession'), verbose_name=_('Job'))
     fb = models.CharField(null=True, blank=True, max_length=500, help_text=_('Link to Facebook profile'), verbose_name=_('Facebook'))
+    gift = models.CharField(null=True, blank=True, max_length=500, help_text=_('What gift would you like to receive'), verbose_name=_('Gift'))
     other = models.TextField(null=True, blank=True, max_length=500, help_text=_('Other things worth mentioning'), verbose_name=_('Other'))
 
     # foto = models.CharField(null=True, blank=True, max_length=500)

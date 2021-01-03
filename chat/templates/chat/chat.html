@@ -2,21 +2,56 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Chat{% endblock %}
-{% block header_text %}Chat{% endblock %}
-
 {% block content %}
 
-    <ul class="rooms">
-        {% for room in rooms %}
-            <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
-        {% empty %}
-            <p class="empty">{% trans 'No chat rooms defined. Maybe make some in the' %} <a href="{% url 'admin:index' %}">admin</a>?</p>
+    {% comment %} ADD ROOM {% endcomment %}
+    <div class="col-md-2 offset-8">
+        <a class="btn btn-info btn-sm" href="{% url 'chat:add' %}">+{% trans 'Add Room' %}</a>
+    </div>
+
+    {% comment %} PUBLIC CHAT ROOMS {% endcomment %}
+    <ul class="rooms col-md-8">
+        <h4>{% trans 'Public chat rooms' %}</h4>
+        {% for room in allowed_rooms %}
+            {% if room.public == True and room.archived == False %}
+                <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
+            {% endif %}
         {% endfor %}
     </ul>
-    <div id="chats"></div>
 
-{% endblock %}
+    {% comment %} PRIVATE MESSAGES {% endcomment %}
+    <ul class="rooms col-md-8">
+        <h4>{% trans 'Private messages' %}</h4>
+        {% for room in allowed_rooms %}
+            {% if room.public == False and room.archived == False %}
+                <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    {% comment %} ARCHIVED PUBLIC ROOMS {% endcomment %}
+    <div class="col-md-2 offset-8">
+        <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#archive" role="button" aria-expanded="false" aria-controls="collapseExample">Archive</button>
+    </div>
+    <p>
+    <div id="archive" class="collapse">
+        <div class="col-md-8 text-center">
+            <p>{% trans 'Unused public chat rooms are archived if they are not used for 3 months.<br>If room is not used for 1 year - it will be deleted' %}</p>
+        </div>
+        <ul class="rooms col-md-8">
+            {% for room in allowed_rooms %}
+                {% if room.archived == True %}
+                    <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    </p>
+    
+    {% comment %} HERE CHATS WILL APPEAR {% endcomment %}
+    <div id="chats" class="col-md-12"></div>
+
+{% endblock content %}
 
 {% block extra_body %}
     <script>
@@ -26,6 +61,7 @@
             var ws_path = ws_scheme + '://' + window.location.host + "/chat/stream/";
             console.log("Connecting to " + ws_path);
             var socket = new ReconnectingWebSocket(ws_path);
+
             // Handle incoming messages
             socket.onmessage = function (message) {
                 // Decode the JSON
@@ -47,21 +83,27 @@
                             "<form><input><button>Send</button></form>" +
                             "</div>"
                     );
-                    // <h2>Room Name</h2>
-                    // <div class="messages"></div>
-                    // <form><input><button>Send</button></form>
 
                     // Hook up send button to send a message
                     roomdiv.find("form").on("submit", function () {
-                        socket.send(JSON.stringify({
-                            "command": "send",
-                            "room": data.join,
-                            "message": roomdiv.find("input").val()
-                        }));
-                        roomdiv.find("input").val("");
+                        socket.send(
+                            JSON.stringify(
+                                {
+                                    "command": "send",
+                                    "room": data.join,
+                                    "message": roomdiv.find("input").val()
+                                }
+                            )
+                        );
+
+                        // Clears input field
+                        roomdiv.find("input").val(""); // TODO: Here we can plugin edititing old messages (with val)
                         return false;
                     });
-                    $("#chats").append(roomdiv);  // Tutaj jest wykorzystany <div id="chats"></div>
+
+                    // 
+                    // Tutaj jest wykorzystany <div id="chats"></div>
+                    $("#chats").append(roomdiv);  
 
                 // Handle leaving
                 } else if (data.leave) {
@@ -69,56 +111,18 @@
                     $("#room-" + data.leave).remove();
 
                 // Handle getting a message
-                } else if (data.message || data.msg_type != 0) {
+                } else if (data.message != 0) {
                     var msgdiv = $("#room-" + data.room + " .messages");
-                    var ok_msg = "";
-                    // msg types are defined in chat/settings.py
-                    // Only for demo purposes is hardcoded, in production scenarios, consider call a service.
-                    switch (data.msg_type) {
-                        case 0:
-                            // Message
-                            ok_msg = "<div class='message'>" +
+                    var ok_msg = "<div class='message'>" +
                                     "<span class='username'>" + data.username + ": " + "</span>" +
-                                    // "<span class='time'>" + data.time + "</span>" +
                                     "<span class='body'>" + data.message + "</span>" +
                                     "</div>";
-                            break;
-                        case 1:
-                            // Warning / Advice messages
-                            ok_msg = "<div class='contextual-message text-warning'>" + data.message +
-                                    "</div>";
-                            break;
-                        case 2:
-                            // Alert / Danger messages
-                            ok_msg = "<div class='contextual-message text-danger'>" + data.message +
-                                    "</div>";
-                            break;
-                        case 3:
-                            // "Muted" messages
-                            ok_msg = "<div class='contextual-message text-muted'>" + data.message +
-                                    "</div>";
-                            break;
-                        case 4:
-                            // User joined room
-                            ok_msg = "<div class='contextual-message text-muted'>" + data.username +
-                                    " joined the room!" +
-                                    "</div>";
-                            break;
-                        case 5:
-                            // User left room
-                            ok_msg = "<div class='contextual-message text-muted'>" + data.username +
-                                    " left the room!" +
-                                    "</div>";
-                            break;
-                        default:
-                            console.log("Unsupported message type!");
-                            return;
-                    }
+
                     msgdiv.append(ok_msg);
 
                     msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
                 } else {
-                    console.log("Cannot handle message!");
+                    console.log("Cannot handle message!");  // i.e. empty message
                 }
             };
 
@@ -156,4 +160,4 @@
             }
         });
     </script>
-{% endblock %}
+{% endblock extra_body %}

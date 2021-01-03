@@ -1,0 +1,18 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% trans 'New room' %}</h2>
+<form action="." method="POST" class="post-form" style="text-transform:uppercase">
+    {% csrf_token %}
+    <div class="row" style="text-transform:uppercase">
+        <div class="col-md-3" style="text-transform:uppercase">
+         {{ form.title|as_crispy_field }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-danger btn-sm">{% trans 'Save' %}</button>
+    <button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
+</form>
+{% endblock %}

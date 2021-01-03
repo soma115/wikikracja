@@ -46,8 +46,6 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             except ClientError:
                 pass
 
-############################################################################
-
     async def receive_json(self, content):
         """
         Called when we get a text frame. Channels will JSON-decode
@@ -91,10 +89,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Instruct their client to finish opening the room
         await self.send_json({
             "join": str(room.id),  # 1
-            "title": room.title,   # Pokój 1
+            "title": room.title,   # "Room 1"
         })
 
-        # Ładujemy wszystkie wiadomości z bazy do czatu
+        # Load all messages from DB to Chat
         cn = self.channel_name
         messages = await self.get_messages(room_id)
         for message in messages:
@@ -105,7 +103,6 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "type": "chat.message",
                     "room_id": room_id,
                     "username": u.username,
-                    # "time": str(message['time']),  # doesn't work, maybe later
                     "message": message['text'],
                 }
             )
@@ -148,7 +145,6 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "type": "chat.message",
                 "room_id": room_id,
                 "username": self.scope["user"].username,
-                # "time": str(message['time']),  # doesn't work, maybe later
                 "message": message,
             }
         )
@@ -164,12 +160,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     async def chat_message(self, event):
         """
-        Called when someone has messaged our chat.
+        Called when someone has messaged our chat
         """
         # Send a message down to the client
         await self.send_json(
             {
-                "msg_type": settings.MSG_TYPE_MESSAGE,
                 "room": event["room_id"],
                 "username": event["username"],
                 "message": event["message"],

@@ -35,6 +35,7 @@
 	<div>{% trans "Business" %}: {{ profile.business|default:"-" }}</div>
 	<div>{% trans "Job" %}: {{ profile.job|default:"-" }}</div>
 	<div>{% trans "Facebook" %}: {{ profile.fb|default:"-" }}</div>
+	<div>{% trans "Gift" %}: {{ profile.gift|default:"-" }}</div>
 	<div>{% trans "Other" %}: {{ profile.other|default:"-" }}</div>
 
 	<p><a class="btn btn-primary btn-sm" href="{% url 'obywatele:my_assets' %}">{% trans 'Edit my assets' %}</a></p>

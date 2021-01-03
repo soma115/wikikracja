@@ -26,7 +26,6 @@
 	<table class="table table-striped table-bordered table-sm">
 		<thead>
 			<tr class="text-center">
-				<th scope="col">{% trans "Name" %}</th>
 				<th scope="col">{% trans "Responsibilities" %}</th>
 				<th scope="col">{% trans "City" %}</th>
 				<th scope="col">{% trans "Hobby" %}</th>
@@ -40,29 +39,28 @@
 				<th scope="col">{% trans "Business" %}</th>
 				<th scope="col">{% trans "Job" %}</th>
 				<th scope="col">{% trans "Facebook" %}</th>
+				<th scope="col">{% trans "Gift" %}</th>
 				<th scope="col">{% trans "Other" %}</th>
 			</tr>
 		</thead>
 		<tbody>
-				<tr>
-					<td scope="col">
-						<a href="{% url 'obywatele:obywatele' %}{{ b.pk }}">{{ b.uid }}</a>
-					</td>
-					<td scope="col">{{ b.responsibilities|default:"-" }}</td>
-					<td scope="col">{{ b.city|default:"-" }}</td>
-					<td scope="col">{{ b.hobby|default:"-" }}</td>
-					<td scope="col">{{ b.to_give_away|default:"-" }}</td>
-					<td scope="col">{{ b.to_borrow|default:"-" }}</td>
-					<td scope="col">{{ b.for_sale|default:"-" }}</td>
-					<td scope="col">{{ b.i_need|default:"-" }}</td>
-					<td scope="col">{{ b.skills|default:"-" }}</td>
-					<td scope="col">{{ b.knowledge|default:"-" }}</td>
-					<td scope="col">{{ b.want_to_learn|default:"-" }}</td>
-					<td scope="col">{{ b.business|default:"-" }}</td>
-					<td scope="col">{{ b.job|default:"-" }}</td>
-					<td scope="col">{{ b.fb|default:"-" }}</td>
-					<td scope="col">{{ b.other|default:"-" }}</td>
-				</tr>
+			<tr>
+				<td scope="col">{{ b.responsibilities|default:"-" }}</td>
+				<td scope="col">{{ b.city|default:"-" }}</td>
+				<td scope="col">{{ b.hobby|default:"-" }}</td>
+				<td scope="col">{{ b.to_give_away|default:"-" }}</td>
+				<td scope="col">{{ b.to_borrow|default:"-" }}</td>
+				<td scope="col">{{ b.for_sale|default:"-" }}</td>
+				<td scope="col">{{ b.i_need|default:"-" }}</td>
+				<td scope="col">{{ b.skills|default:"-" }}</td>
+				<td scope="col">{{ b.knowledge|default:"-" }}</td>
+				<td scope="col">{{ b.want_to_learn|default:"-" }}</td>
+				<td scope="col">{{ b.business|default:"-" }}</td>
+				<td scope="col">{{ b.job|default:"-" }}</td>
+				<td scope="col">{{ b.fb|default:"-" }}</td>
+				<td scope="col">{{ b.gift|default:"-" }}</td>
+				<td scope="col">{{ b.other|default:"-" }}</td>
+			</tr>
 		</tbody>
 	</table>
 </p>

@@ -6,17 +6,22 @@ class Room(models.Model):
     """
     A room for people to chat in.
     """
+    # Allowed users
+    allowed = models.ManyToManyField(User)
 
+    # For 1to1 chats
+    public = models.BooleanField(default=True)
+
+    # For old chats without activity
+    archived = models.BooleanField(default=False)
+    
     # Room title
-    title = models.CharField(max_length=255)
-
-    # If only "staff" users are allowed (is_staff on django's User)
-    staff_only = models.BooleanField(default=False)
+    title = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
         return self.title
 
-    @property
+    @property  # adds 'getter', 'setter' and 'deleter' methods
     def group_name(self):
         """
         Returns the Channels Group name that sockets should
