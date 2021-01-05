@@ -12,7 +12,7 @@ import logging as l
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
 @login_required
-def add(request):
+def add_room(request):
     """
     Add public chat room
     """
@@ -59,12 +59,12 @@ def chat(request):
     for i in public_rooms:
         i.allowed.set(active_users)
     
-    # Archive/Delete old publicchat rooms
-    all_rooms = Room.objects.filter(public=True)
-    for i in all_rooms:
+    # Archive/Delete old public chat rooms
+    all_public_rooms = Room.objects.filter(public=True)
+    for i in all_public_rooms:
         try:
             last_message = Message.objects.filter(room_id=i.id).latest('time')
-        except:
+        except Message.DoesNotExist:
             continue
         if last_message.time < (timezone.now() - td(days=90)):  # archive after 3 months
             l.info(f'Chat room {i.title} archived.')
@@ -73,9 +73,28 @@ def chat(request):
         elif last_message.time > (timezone.now() - td(days=90)):  # unarchive
             i.archived = False  # unarchive
             i.save()
-        if last_message.time < (timezone.now() - td(days=365)):  # delete after 1 year<
+        if last_message.time < (timezone.now() - td(days=365)):  # delete after 1 year
             l.info(f'Chat room {i.title} deleted.')
             i.delete()  # delete
+
+    # Archive/Delete old private messages
+    all_private_rooms = Room.objects.filter(public=False)
+    for i in all_private_rooms:
+        for user in i.allowed.all():
+            if user.is_active == False:
+                i.archived = True
+                i.save()
+                try:
+                    last_message = Message.objects.filter(room_id=i.id).latest('time')
+                except Message.DoesNotExist:
+                    continue
+                if last_message.time < (timezone.now() - td(days=365)):  # delete after 1 year
+                    l.info(f'Chat room {i.title} deleted.')
+                    i.delete()  # delete
+            elif user.is_active == True:
+                i.archived = False
+                i.save()
+
 
     # Get a list of rooms, ordered alphabetically
     allowed_rooms = Room.objects.filter(allowed=request.user.id).order_by("title")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-03 20:14+0100\n"
+"POT-Creation-Date: 2021-01-05 11:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,26 +48,17 @@ msgid "Add Room"
 msgstr ""
 
 #: chat/templates/chat/chat.html:16
-msgid "Private messages"
-msgstr ""
-
-#: chat/templates/chat/chat.html:22 chat/templates/chat/chat.html:35
-#: chat/templates/chat/chat.html:54
-msgid "No chat rooms defined. Maybe make some in the"
-msgstr ""
-
-#: chat/templates/chat/chat.html:29
 msgid "Public chat rooms"
 msgstr ""
 
-#: chat/templates/chat/chat.html:46
-msgid ""
-"Unused public chat rooms are archived if they are not used for 3 months. If "
-"room is not used for 1 year - it will be deleted"
+#: chat/templates/chat/chat.html:27
+msgid "Private messages"
 msgstr ""
 
-#: chat/templates/chat/chat.html:48
-msgid "Archived chat rooms"
+#: chat/templates/chat/chat.html:43
+msgid ""
+"Unused public chat rooms are archived if they are not used for 3 months."
+"<br>If room is not used for 1 year - it will be deleted"
 msgstr ""
 
 #: elibrary/templates/elibrary/add.html:6
