@@ -1,0 +1,72 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<ul class="nav nav-pills">
+	<li class="nav-item" >
+		<a {% if request.resolver_match.url_name == '1' %}
+			class="btn btn-primary mr-1 btn-sm" 
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'glosowania:1' %}">{% trans "New propositions" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.resolver_match.url_name == '2' %}
+			class="btn btn-primary mr-1 btn-sm" 
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'glosowania:2' %}">{% trans "No endorsement" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.resolver_match.url_name == '3' %}
+			class="btn btn-primary mr-1 btn-sm" 
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'glosowania:3' %}">{% trans "Queued for referendum" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.resolver_match.url_name == '4' %}
+			class="btn btn-primary mr-1 btn-sm" 
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'glosowania:4' %}">{% trans "Referendum" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.resolver_match.url_name == '5' %}
+			class="btn btn-primary mr-1 btn-sm" 
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'glosowania:5' %}">{% trans "Rejected" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.resolver_match.url_name == '6' %}
+			class="btn btn-primary mr-1 btn-sm" 
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'glosowania:6' %}">{% trans "Vacatio Legis" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.resolver_match.url_name == '7' %}
+			class="btn btn-primary mr-1 btn-sm" 
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'glosowania:7' %}">{% trans "Governing Law" %}</a>
+	</li>
+</ul>
+
+<p>
+	{% block glosowania %}
+	{% endblock glosowania %}
+</p>
+
+{% endblock content %}
+	

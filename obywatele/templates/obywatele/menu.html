@@ -6,16 +6,36 @@
 
 <ul class="nav nav-pills">
 	<li class="nav-item" >
-		<a {% if request.resolver_match.url_name == 'obywatele' or request.resolver_match.url_name == 'obywatele_szczegoly' %} class="btn btn-primary mr-1 btn-sm" {% else %} class="btn btn-outline-primary mr-1 btn-sm" {% endif %}" href="{% url 'obywatele:obywatele' %}">{% trans "Citizens" %}</a>
+		<a {% if request.resolver_match.url_name == 'obywatele' or request.resolver_match.url_name == 'obywatele_szczegoly' %}
+			class="btn btn-primary mr-1 btn-sm" 
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'obywatele:obywatele' %}">{% trans "Citizens" %}</a>
 	</li>
 	<li class="nav-item">
-		<a {% if request.resolver_match.url_name == 'poczekalnia' or request.resolver_match.url_name == 'poczekalnia_szczegoly' %} class="btn btn-primary mr-1 btn-sm" {% else %} class="btn btn-outline-primary mr-1 btn-sm" {% endif %}" href="{% url 'obywatele:poczekalnia' %}">{% trans "Candidates" %}</a>
+		<a {% if request.resolver_match.url_name == 'poczekalnia' or request.resolver_match.url_name == 'poczekalnia_szczegoly' %}
+			class="btn btn-primary mr-1 btn-sm"
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm" 
+		{% endif %}
+			href="{% url 'obywatele:poczekalnia' %}">{% trans "Candidates" %}</a>
 	</li>
 	<li class="nav-item">
-		<a {% if request.resolver_match.url_name == 'zaproponuj_osobe' %} class="btn btn-primary mr-1 btn-sm" {% else %} class="btn btn-outline-primary mr-1 btn-sm" {% endif %}" href="{% url 'obywatele:zaproponuj_osobe' %}">+{% trans "New person" %}</a>
+		<a {% if request.resolver_match.url_name == 'zaproponuj_osobe' %} 
+			class="btn btn-primary mr-1 btn-sm"
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'obywatele:zaproponuj_osobe' %}">+{% trans "New person" %}</a>
 	</li>
 	<li class="nav-item">
-		<a {% if request.resolver_match.url_name == 'assets' %} class="btn btn-primary mr-1 btn-sm" {% else %} class="btn btn-outline-primary mr-1 btn-sm" {% endif %}" href="{% url 'obywatele:assets' %}">{% trans "Assets" %}</a>
+		<a {% if request.resolver_match.url_name == 'assets' %}
+			class="btn btn-primary mr-1 btn-sm"
+		{% else %}
+			class="btn btn-outline-primary mr-1 btn-sm"
+		{% endif %}
+			href="{% url 'obywatele:assets' %}">{% trans "Assets" %}</a>
 	</li>
 </ul>
 
@@ -26,4 +46,3 @@
 
 {% endblock content %}
 	
-	<!-- <a class="btn btn-default fr-rounded fr-small btn-sm" href="{% url 'obywatele:obywatele' %}">{% trans 'Citizens' %}</a> -->
