@@ -29,7 +29,7 @@
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse justify-content-center fixed-top bg-light" id="navbarNavAltMarkup">
+		<div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
 		  <div class="navbar-nav text-right">
 		  <!-- <div class="nav nav-tabs"> -->
 			<a {% if request.resolver_match.url_name == 'home' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'home' %}">{% trans 'Start' %}</a>

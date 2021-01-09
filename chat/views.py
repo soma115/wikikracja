@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Room, Message
 from django.contrib.auth.models import User
 from chat.forms import RoomForm
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponse
 from datetime import datetime as dt
 from datetime import timedelta as td
 from django.utils import timezone

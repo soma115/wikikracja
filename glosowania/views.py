@@ -37,7 +37,7 @@ def dodaj(request):
             form.save()
             signed = ZebranePodpisy.objects.create(projekt=form, podpis_uzytkownika = request.user)
             
-            # l.info(form.autor)
+            # l.warning(f"{form.autor} _('added new law proposition:' form.tresc)")
             message = _("New proposition has been saved.")
             messages.success(request, (message))
 
@@ -45,8 +45,7 @@ def dodaj(request):
                 _('New law proposition'),
                 _(f'{request.user.username.capitalize()} added new law proposition\nYou can read it here: http://{HOST}/glosowania/{str(form.id)}')
                 )
-            return HttpResponseRedirect('/glosowania/?1=1.+Nowa+propozycja#')
-            # return redirect('glosowania:glosowania')
+            return redirect('glosowania:status', 1)
     else:
         form = DecyzjaForm()
     return render(request, 'glosowania/dodaj.html', {'form': form})
@@ -174,7 +173,7 @@ def zliczaj_wszystko():
                 i.status = w_kolejce
                 i.data_zebrania_podpisow = dzisiaj
 
-                # TODO: Referendum odbędzie się 1 tydzień w niedzielę
+                # TODO: Referendum odbędzie się za 1 tydzień w niedzielę
                 # 0 = monday, 1 = tuesday, ..., 6 = sunday
                 i.data_referendum_start = i.data_zebrania_podpisow + KOLEJKA + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
                 i.data_referendum_stop = i.data_referendum_start + CZAS_TRWANIA_REFERENDUM
@@ -253,5 +252,5 @@ def SendEmail(subject, message):
         subject=f'{HOST} - {subject}',
         body=message,
         )
-    l.info(f'subject: {subject} \n message: {message}')
+    # l.warning(f'subject: {subject} \n message: {message}')
     email_message.send(fail_silently=False)

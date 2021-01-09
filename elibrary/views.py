@@ -38,5 +38,5 @@ def add(request):
 
 class BookDelete(DeleteView):
     model = Ebook
-    # TODO: Files are not physicaly deleted. Maybe it is not a bad thing.
+    # Files are not physicaly deleted. Maybe it is not a bad thing.
     success_url = reverse_lazy('elibrary:elibrary')

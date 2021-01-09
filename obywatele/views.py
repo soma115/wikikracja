@@ -336,7 +336,7 @@ def zliczaj_obywateli(request):
             i.save()
             
             # New person accepts automatically every other active user
-            for k in Uzytkownik.objects.filter(uid__is_active=True):  # TODO: tylko aktywnych userów
+            for k in Uzytkownik.objects.filter(uid__is_active=True):
                 if i == k:    # but not yourself
                     continue
                 obj, created = Rate.objects.update_or_create(obywatel = i, kandydat = k, defaults={'rate': '1'})
@@ -370,7 +370,7 @@ def zliczaj_obywateli(request):
             )
             # We are not deleting user bacuse he may come back.
 
-    l.info(f'Population: {POPULATION}. Required reputation: {REQUIRED_REPUTATION}')
+    # l.info(f'Population: {POPULATION}. Required reputation: {REQUIRED_REPUTATION}')
 
 
 @login_required
