@@ -10,7 +10,7 @@
 
 <p>
 	{% for i in filtered_glosowania %}
-		<p><a href="{% url 'glosowania:glosowanie_szczegoly' pk=i.pk %}">{{ i.pk }}. {{ i.tresc }}</a></p>
+		<p><a href="{% url 'glosowania:details' pk=i.pk %}">{{ i.pk }}. {{ i.tresc }}</a></p>
 	{% empty %}
 		<div class="alert alert-light">({% trans 'There is no proposition with this status' %})</div>
 	{% endfor %}

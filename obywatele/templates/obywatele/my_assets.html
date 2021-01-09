@@ -13,7 +13,7 @@
 </form>
 
 <p>
-	<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Cancel' %}</button>
+    <a href="{% url 'obywatele:my_profile' %}" class="btn btn-warning btn-sm">{% trans 'Cancel' %}</a>
 </p>
 
 {% endblock %}

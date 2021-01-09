@@ -23,7 +23,7 @@
     </div>
     
     <button type="submit" class="btn btn-danger btn-sm">{% trans 'Save' %}</button>
-    <button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
+    <a href="{% url 'obywatele:my_profile' %}" class="btn btn-warning btn-sm">{% trans 'Cancel' %}</a>
 </form>
 
 {% endblock %}

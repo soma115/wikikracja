@@ -2,22 +2,22 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from glosowania.views import ZliczajWszystko
+# from glosowania.views import ZliczajWszystko
 from glosowania.models import Decyzja
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
 
 def home(request):
-    trwajace = Decyzja.objects.filter(status=4)
-    zblizajace_sie = Decyzja.objects.filter(status=3).order_by('data_referendum_start')
+    ongoing = Decyzja.objects.filter(status=4).order_by('data_referendum_start')
+    upcoming = Decyzja.objects.filter(status=3).order_by('data_referendum_start')
 
-    data_referendum_start = ZliczajWszystko.kolejka
+    # data_referendum_start = ZliczajWszystko.kolejka
     return render(request,
                   'home/home.html',
                   {
-                    'trwajace': trwajace,
-                   'zblizajace_sie': zblizajace_sie,
+                    'ongoing': ongoing,
+                   'upcoming': upcoming,
                    })
 
 

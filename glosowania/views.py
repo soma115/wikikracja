@@ -72,12 +72,6 @@ def get_client_ip(request):
 def status(request, pk):
     filtered_glosowania = Decyzja.objects.filter(status=pk)
     lang = get_language()
-    # WYMAGANYCH_PODPISOW = 2  # Aby zatwierdzić wniosek o referendum
-    # CZAS_NA_ZEBRANIE_PODPISOW = timedelta(days=365)  # 365
-    # # czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki:
-    # KOLEJKA = timedelta(days=7)
-    # CZAS_TRWANIA_REFERENDUM = timedelta(days=7)
-    # VACATIO_LEGIS
 
     zliczaj_wszystko()
     return render(request, 'glosowania/status.html', {
@@ -93,7 +87,7 @@ def status(request, pk):
 
 # Pokaż szczegóły przepisu
 @login_required
-def glosowanie_szczegoly(request, pk):
+def details(request, pk):
     szczegoly = get_object_or_404(Decyzja, pk=pk)
 
     if request.GET.get('podpisz'):
@@ -105,7 +99,7 @@ def glosowanie_szczegoly(request, pk):
         nowy_projekt.save()
         message = _('Your signature has been saved.')
         messages.success(request, (message))
-        return redirect('glosowania:glosowanie_szczegoly', pk)
+        return redirect('glosowania:details', pk)
 
     if request.GET.get('tak'):
         nowy_projekt = Decyzja.objects.get(pk=pk)
@@ -116,7 +110,7 @@ def glosowanie_szczegoly(request, pk):
         nowy_projekt.save()
         message = _('Your vote has been saved. You voted Yes.')
         messages.success(request, (message))
-        return redirect('glosowania:glosowanie_szczegoly', pk)
+        return redirect('glosowania:details', pk)
 
     if request.GET.get('nie'):
         nowy_projekt = Decyzja.objects.get(pk=pk)
@@ -127,7 +121,7 @@ def glosowanie_szczegoly(request, pk):
         nowy_projekt.save()
         message = _('Your vote has been saved. You voted No.')
         messages.success(request, (message))
-        return redirect('glosowania:glosowanie_szczegoly', pk)
+        return redirect('glosowania:details', pk)
 
     # check if already signed
     signed = ZebranePodpisy.objects.filter(projekt=pk, podpis_uzytkownika=request.user).exists()
@@ -136,17 +130,6 @@ def glosowanie_szczegoly(request, pk):
     voted = KtoJuzGlosowal.objects.filter(projekt=pk, ktory_uzytkownik_juz_zaglosowal=request.user).exists()
 
     return render(request, 'glosowania/szczegoly.html', {'id': szczegoly, 'signed': signed, 'voted': voted})
-
-
-class ZliczajWszystko():
-    # TODO: ZliczajWszystko
-    # czas pomiędzy zebraniem podpisów a referendum
-    # wymagany aby móc omówić skutki:
-    kolejka = timedelta(days=7)
-
-    def get(self, request):
-        pass
-        return HttpResponse('result')
 
 
 def zliczaj_wszystko():
@@ -175,8 +158,8 @@ def zliczaj_wszystko():
 
                 # TODO: Referendum odbędzie się za 1 tydzień w niedzielę
                 # 0 = monday, 1 = tuesday, ..., 6 = sunday
-                i.data_referendum_start = i.data_zebrania_podpisow + KOLEJKA + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
-                i.data_referendum_stop = i.data_referendum_start + CZAS_TRWANIA_REFERENDUM
+                i.data_referendum_start = i.data_zebrania_podpisow + s.KOLEJKA + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
+                i.data_referendum_stop = i.data_referendum_start + s.CZAS_TRWANIA_REFERENDUM
                 i.save()
                 SendEmail(
                     _(f'Proposition {str(i.id)} approved for referendum'),
