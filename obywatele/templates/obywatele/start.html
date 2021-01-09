@@ -9,6 +9,31 @@
 			<li class="list-group-item"><a href="{{ i.pk }}">{{ i.username }} | {{ i.email }}</a></li>
 		{% endfor %}
 	</ul>
-
+	<br>
+	<p>
+		<h5 class="text-center font-weight-bold">{% trans "System parameters" %}</h5>
+		<ul class="list-group">
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{% trans "Population" %}
+			  <span class="badge badge-primary badge-pill">{{ population }}</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{% trans "Acceptance multiplier" %}
+			  <span class="badge badge-primary badge-pill">{{ acceptance }}</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{% trans "Acceptance formula: required_reputation = round(log(Population) * Acceptance_multiplier)" %}
+			  <span class="badge badge-primary badge-pill"></span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{% trans "Currently required_reputation" %}
+			  <span class="badge badge-primary badge-pill">{{ required_reputation }}</span>
+			</li>
+			<li class="list-group-item text-center align-items-center font-weight-bold">
+				{% trans "New person will be accepted above that threshold. Existing person will be banned bellow that threshold." %}
+			  <span class="badge badge-primary badge-pill"></span>
+			</li>
+		  </ul>
+	</p>
 {% endblock citizens %}
 

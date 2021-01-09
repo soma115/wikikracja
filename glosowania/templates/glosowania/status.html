@@ -1,0 +1,48 @@
+{% extends 'glosowania/menu.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+{% load static %}
+{% load i18n %}
+
+{% block glosowania %}
+
+<p>
+	{% for i in filtered_glosowania %}
+		<p><a href="{% url 'glosowania:glosowanie_szczegoly' pk=i.pk %}">{{ i.pk }}. {{ i.tresc }}</a></p>
+	{% empty %}
+		<div class="alert alert-light">({% trans 'There is no proposition with this status' %})</div>
+	{% endfor %}
+</p>
+
+<p>
+	<img class="img-fluid col-sm-8 offset-sm-1" src="/static/glosowania/schemat_{{ lang }}.png">
+</p>
+
+<p>
+	<h5 class="text-center font-weight-bold">{% trans "Voting parameters" %}</h5>
+	<ul class="list-group">
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Signatures needed to approve a referendum request. This number should remain low enough for any sensible proposal to be voted on, and only high enough to filter out obvious spam." %}
+			<span class="badge badge-primary badge-pill">{{ signatures }}</span>
+		</li>
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Maximal time to gather signatures [in days]. If there is not enough signatures - after this time, proposition is rejected." %}
+			<span class="badge badge-primary badge-pill">{{ signatures_span }}</span>
+		</li>
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Queue and discussion time [days]." %}
+			<span class="badge badge-primary badge-pill">{{ queue_span }}</span>
+		</li>
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Referendum duration [days]." %}
+			<span class="badge badge-primary badge-pill">{{ referendum_span }}</span>
+		</li>
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Vacatio Legis duration [days]." %}
+			<span class="badge badge-primary badge-pill">{{ vacatio_legis_span }}</span>
+		</li>
+	</ul>
+</p>
+{% endblock glosowania %}

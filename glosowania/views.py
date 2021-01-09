@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
 from django.core.mail import EmailMessage
-from django.conf import settings
+from django.conf import settings as s
 from django.contrib.auth.models import User
 from django.template.loader import get_template
 from django.urls import reverse
@@ -20,8 +20,8 @@ import logging as l
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
-HOST = settings.ALLOWED_HOSTS[0]
-# ROOT = settings.BASE_DIR
+HOST = s.ALLOWED_HOSTS[0]
+# ROOT = s.BASE_DIR
 
 # Dodaj nową propozycję przepisu:
 @login_required
@@ -70,104 +70,26 @@ def get_client_ip(request):
 
 # Wyświetl głosowania:
 @login_required
-def glosowania(request):
-    # get_client_ip(request) # logowanie
+def status(request, pk):
+    filtered_glosowania = Decyzja.objects.filter(status=pk)
     lang = get_language()
-
-    # print(request.body)
-    # print(request.scheme)
-    # print(request.path)
-    # print(request.content_params)
-    # print(request.GET)
-    # print(request.POST)
-    # print(request.resolver_match)
-    # print(request.current_app)
-    # print(request.headers)
-
-    # if request.method == 'GET':
-    #     for i in request.GET.items():
-    #         print(i)
-    #         x = i[0]
-    # decyzje = Decyzja.objects.filter(status=x)
-    # print(x)
-
-    # TODO: Guziki będą się zapalały więc nie trzeba pola 'status'
-    # TODO: Wtedy będzie można zrobić jeden return i dzięki temu będzie można łatwo zrobić 'Voting parameters'
-
-    
-
-    if request.GET.get("1"):
-        decyzje = Decyzja.objects.filter(status=1)
-        return render(request, 'glosowania/start.html',
-                            {
-                                'decyzje': decyzje,
-                                'status': _("New propositions"),
-                                'lang': lang,
-                            })
-
-    if request.GET.get("2"):
-        decyzje = Decyzja.objects.filter(status=2)
-        return render(request, 'glosowania/start.html',
-                        {
-                          'decyzje': decyzje,
-                          'status': _("No endorsement"),
-                          'lang': lang,
-                        })
-
-    if request.GET.get("3"):
-        decyzje = Decyzja.objects.filter(status=3)
-        return render(request, 'glosowania/start.html',
-                        {
-                            'decyzje': decyzje,
-                            'status': _("Queued for referedum"),
-                            'lang': lang,
-                        })
-
-    if request.GET.get("4"):
-        decyzje = Decyzja.objects.filter(status=4)
-        return render(request, 'glosowania/start.html',
-                        {
-                            'decyzje': decyzje,
-                            'status': _("Referendum"),
-                            'lang': lang,
-                        })
-
-    if request.GET.get("5"):
-        decyzje = Decyzja.objects.filter(status=5)
-        return render(request, 'glosowania/start.html',
-                        {
-                            'decyzje': decyzje,
-                            'status': _("Rejected in referendum"),
-                            'lang': lang,
-                        })
-
-    if request.GET.get("6"):
-        decyzje = Decyzja.objects.filter(status=6)
-        return render(request, 'glosowania/start.html',
-                        {
-                          'decyzje': decyzje,
-                          'status': _("Accepted / Vacatio Legis"),
-                          'lang': lang,
-                        })
-
-    if request.GET.get("7"):
-        decyzje = Decyzja.objects.filter(status=7)
-        return render(request, 'glosowania/start.html',
-                        {
-                            'decyzje': decyzje,
-                            'status': _("Applicable regulations"),
-                            'lang': lang,
-                        })
+    # WYMAGANYCH_PODPISOW = 2  # Aby zatwierdzić wniosek o referendum
+    # CZAS_NA_ZEBRANIE_PODPISOW = timedelta(days=365)  # 365
+    # # czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki:
+    # KOLEJKA = timedelta(days=7)
+    # CZAS_TRWANIA_REFERENDUM = timedelta(days=7)
+    # VACATIO_LEGIS
 
     zliczaj_wszystko()
-
-    decyzje = Decyzja.objects.filter(status=7)
-    return render(request, 'glosowania/start.html',
-                        {
-                            'decyzje': decyzje,
-                            'status': _("Applicable regulations"),
-                            'lang': lang,
-                        })
+    return render(request, 'glosowania/status.html', {
+        'filtered_glosowania': filtered_glosowania,
+        'lang': lang,
+        'signatures': s.WYMAGANYCH_PODPISOW,
+        'signatures_span': s.CZAS_NA_ZEBRANIE_PODPISOW.days,
+        'queue_span': s.KOLEJKA.days,
+        'referendum_span': s.CZAS_TRWANIA_REFERENDUM.days,
+        'vacatio_legis_span': s.VACATIO_LEGIS.days,
+    })
 
 
 # Pokaż szczegóły przepisu
@@ -231,13 +153,6 @@ class ZliczajWszystko():
 def zliczaj_wszystko():
     '''Jeśli propozycja zostanie zatwierdzona w niedzielę
     to głosowanie odbędzie się za 2 tygodnie'''
-    # print('Zliczam głosy i terminy...')
-    wymaganych_podpisow = 2  # Aby zatwierdzić wniosek o referendum
-    czas_na_zebranie_podpisow = timedelta(days=365)  # 365
-    # czas pomiędzy zebraniem podpisów a referendum wymagany aby móc omówić skutki:
-    kolejka = timedelta(days=7)
-    czas_trwania_referendum = timedelta(days=7)  #
-    vacatio_legis = timedelta(days=7)  #
 
     propozycja = 1
     brak_poparcia = 2
@@ -255,14 +170,14 @@ def zliczaj_wszystko():
             # Jeśli nie jest w jakiś sposób zatwierdzone/odrzucone to procesujemy:
 
             # FROM PROPOSITION TO QUEUE
-            if i.status == propozycja and i.ile_osob_podpisalo >= wymaganych_podpisow:
+            if i.status == propozycja and i.ile_osob_podpisalo >= s.WYMAGANYCH_PODPISOW:
                 i.status = w_kolejce
                 i.data_zebrania_podpisow = dzisiaj
 
                 # TODO: Referendum odbędzie się 1 tydzień w niedzielę
                 # 0 = monday, 1 = tuesday, ..., 6 = sunday
-                i.data_referendum_start = i.data_zebrania_podpisow + kolejka + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
-                i.data_referendum_stop = i.data_referendum_start + czas_trwania_referendum
+                i.data_referendum_start = i.data_zebrania_podpisow + KOLEJKA + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
+                i.data_referendum_stop = i.data_referendum_start + CZAS_TRWANIA_REFERENDUM
                 i.save()
                 SendEmail(
                     _(f'Proposition {str(i.id)} approved for referendum'),
@@ -271,7 +186,7 @@ def zliczaj_wszystko():
                 continue
 
             # FROM PROPOSITION TO NO_INTREST
-            if i.status == propozycja and i.data_powstania + czas_na_zebranie_podpisow <= dzisiaj:
+            if i.status == propozycja and i.data_powstania + s.CZAS_NA_ZEBRANIE_PODPISOW <= dzisiaj:
                 i.status = brak_poparcia
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
@@ -297,7 +212,7 @@ def zliczaj_wszystko():
                 if i.za > i.przeciw:
                     i.status = zatwierdzone
                     i.data_zatwierdzenia = i.data_referendum_stop
-                    i.data_obowiazuje_od = i.data_referendum_stop + vacatio_legis
+                    i.data_obowiazuje_od = i.data_referendum_stop + VACATIO_LEGIS
                     i.save()
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
                     SendEmail(
@@ -333,7 +248,7 @@ def SendEmail(subject, message):
     # message: Custom
 
     email_message = EmailMessage(
-        from_email=str(settings.DEFAULT_FROM_EMAIL),
+        from_email=str(s.DEFAULT_FROM_EMAIL),
         bcc = list(User.objects.filter(is_active=True).values_list('email', flat=True)),
         subject=f'{HOST} - {subject}',
         body=message,

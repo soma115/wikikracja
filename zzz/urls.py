@@ -18,8 +18,7 @@ urlpatterns = [
   path('elibrary/', include('elibrary.urls', namespace='elibrary')),
   path('chat/', include('chat.urls', namespace='chat')),
   path('email_change/', ov.email_change, name='email_change'),
-
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

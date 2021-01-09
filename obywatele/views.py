@@ -1,4 +1,4 @@
-from django.conf import settings
+from django.conf import settings as s
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404
@@ -24,7 +24,7 @@ l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctim
 POPULATION = User.objects.filter(is_active=True).count()
 
 # Be careful changing this formula - people rarely acctepting each other.
-REQUIRED_REPUTATION = round(log(POPULATION) * settings.ACCEPTANCE_MULTIPLIER)
+REQUIRED_REPUTATION = round(log(POPULATION) * s.ACCEPTANCE_MULTIPLIER)
 
 
 @login_required() 
@@ -49,7 +49,12 @@ def email_change(request):
 def obywatele(request):
     zliczaj_obywateli(request)
     uid = User.objects.filter(is_active=True)
-    return render(request, 'obywatele/start.html', {'uid': uid,})
+    return render(request, 'obywatele/start.html', {
+        'uid': uid,
+        'population': POPULATION,
+        'acceptance': s.ACCEPTANCE_MULTIPLIER,
+        'required_reputation': REQUIRED_REPUTATION,
+        })
 
 
 @login_required
@@ -58,7 +63,7 @@ def poczekalnia(request):
     return render(request, 'obywatele/poczekalnia.html', {
         'uid': uid,
         'population': POPULATION,
-        'acceptance': settings.ACCEPTANCE_MULTIPLIER,
+        'acceptance': s.ACCEPTANCE_MULTIPLIER,
         'required_reputation': REQUIRED_REPUTATION,
         })
 
@@ -341,7 +346,7 @@ def zliczaj_obywateli(request):
             uhost = str(request.get_host())
             message = f'Witaj {uname}\nTwoje konto na {uhost} zostało włączone.\n\nTwój login to: {uname}\nTwoje hasło to: {password}\n\nZaloguj się tutaj: {uhost}/login/\n\nHasło możesz zmienić tutaj: {uhost}/haslo/'
 
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
+            send_mail(subject, message, s.DEFAULT_FROM_EMAIL,
                       [i.uid.email], fail_silently=False)
 
     # Blokuj użytkowników ze zbyt niską reputacją
@@ -359,7 +364,7 @@ def zliczaj_obywateli(request):
             send_mail(
                 f'{str(request.get_host())} - Twoje konto zostało zablokowane',
                 f'Witaj {i.uid.username}\nTwoje konto na {str(request.get_host())} zostało zablokowane.',
-                str(settings.DEFAULT_FROM_EMAIL),
+                str(s.DEFAULT_FROM_EMAIL),
                 [i.uid.email],
                 fail_silently=False,
             )
