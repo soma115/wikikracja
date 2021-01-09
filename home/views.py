@@ -13,15 +13,12 @@ def home(request):
     zblizajace_sie = Decyzja.objects.filter(status=3).order_by('data_referendum_start')
 
     data_referendum_start = ZliczajWszystko.kolejka
-    # TODO: Aktualnie trwające referenda
-    # Decyzja.objects.filter(status=0)
-    # Decyzja.objects.all().order_by('-data_powstania')
     return render(request,
                   'home/home.html',
-                  {'trwajace': trwajace,
+                  {
+                    'trwajace': trwajace,
                    'zblizajace_sie': zblizajace_sie,
-                   'data_referendum_start': data_referendum_start}
-                  )
+                   })
 
 
 @login_required
@@ -31,11 +28,10 @@ def haslo(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Twoje hasło zostało zmienione.')
+            messages.success(request, _('Your password has been changed.'))
             return redirect('haslo')
         else:
-            messages.error(request, 'Coś źle wpisałeś. Zobacz jaki błąd pojawił \
-                                     się powyżej i spróbuj jeszcze raz.')
+            messages.error(request, _('You typed something wrong. See what error appeared above and try again.'))
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'home/haslo.html', {

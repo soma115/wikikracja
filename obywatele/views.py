@@ -18,10 +18,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models import Avg, Sum
 import logging as l
 
+
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
-# Above 0.7 second person requires 2 points of acceptance which is a paradox.
-ACCEPTANCE_MULTIPLIER = 0.7
+POPULATION = User.objects.filter(is_active=True).count()
+
+# Be careful changing this formula - people rarely acctepting each other.
+REQUIRED_REPUTATION = round(log(POPULATION) * settings.ACCEPTANCE_MULTIPLIER)
 
 
 @login_required() 
@@ -31,35 +34,33 @@ def email_change(request):
         form = EmailChangeForm(request.user, request.POST)
         if form.is_valid():
             form.save()
-            komunikat = _("New email saved")
-            wynik = _("Your new email has been saved.")
-            return render(request, 'obywatele/zapisane.html',
-                          {
-                              'komunikat': komunikat,
-                              'wynik': wynik
-                          }
-                        )
+            message = _("Your new email has been saved.")
+            messages.success(request, (message))
+            return redirect('obywatele:my_profile')
         else:
-            wynik = form.errors
-            return render(request,
-                          'obywatele/zapisane.html',
-                          {'wynik': wynik, })
+            message = form.errors
+            messages.error(request, (message))
+            return redirect('obywatele:my_profile')
     else:
         return render(request, 'obywatele/email_change.html', {'form':form})
 
 
 @login_required
 def obywatele(request):
-    zliczaj_obywateli(request)  # TODO: show pupulation on page Obywatele
+    zliczaj_obywateli(request)
     uid = User.objects.filter(is_active=True)
-    # TODO: dodać datę przyjęcia do szczegółów każdego użytkownika
-    return render(request, 'obywatele/start.html', {'uid': uid})
+    return render(request, 'obywatele/start.html', {'uid': uid,})
 
 
 @login_required
 def poczekalnia(request):
     uid = User.objects.filter(is_active=False)
-    return render(request, 'obywatele/poczekalnia.html', {'uid': uid})
+    return render(request, 'obywatele/poczekalnia.html', {
+        'uid': uid,
+        'population': POPULATION,
+        'acceptance': settings.ACCEPTANCE_MULTIPLIER,
+        'required_reputation': REQUIRED_REPUTATION,
+        })
 
 
 @login_required
@@ -75,10 +76,9 @@ def dodaj(request):
 
             if User.objects.filter(email=mail).exists():
                 # is_valid doesn't check if email exist
-                wynik = 'Email już istnieje'
-                return render(request,
-                              'obywatele/zapisane.html',
-                              {'wynik': wynik, })
+                message = _('Email already exist')
+                messages.error(request, (message))
+                return redirect('obywatele:zaproponuj_osobe')
 
             else:
                 # If everything is ok
@@ -112,15 +112,13 @@ def dodaj(request):
                 rate.rate = 1
                 rate.save()
 
-                wynik = 'Nowy użytkownik został zapisany'
-                return render(request,
-                              'obywatele/zapisane.html',
-                              {'wynik': wynik, })
+                message = _('The new user has been saved')
+                messages.success(request, (message))
+                return redirect('obywatele:poczekalnia')
         else:
-            wynik = user_form.errors
-            return render(request,
-                          'obywatele/zapisane.html',
-                          {'wynik': wynik, })
+            message = user_form.errors.get_json_data()['username'][0]['message']
+            messages.error(request, (message))
+            return redirect('obywatele:zaproponuj_osobe')
 
     user_form = UserForm()
     profile_form = ProfileForm()
@@ -133,9 +131,7 @@ def my_profile(request):
     pk=request.user.id
     profile = Uzytkownik.objects.get(pk=pk)
     user = User.objects.get(pk=pk)
-    population = User.objects.filter(is_active=True).count()
-    required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
-    return render(request, 'obywatele/my_profile.html', {'profile': profile, 'user': user, 'population': population, 'required_reputation': required_reputation,})
+    return render(request, 'obywatele/my_profile.html', {'profile': profile, 'user': user, 'population': POPULATION, 'required_reputation': REQUIRED_REPUTATION,})
 
 
 @login_required
@@ -143,8 +139,6 @@ def my_assets(request):
     pk=request.user.id
     profile = Uzytkownik.objects.get(pk=pk)
     user = User.objects.get(pk=pk)
-    population = User.objects.filter(is_active=True).count()
-    required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
     form = ProfileForm(request.POST)
 
     if request.method == 'POST':
@@ -171,20 +165,20 @@ def my_assets(request):
                 {
                     'message': _('Changes was saved'),
                     'profile': profile,
-                    'required_reputation': required_reputation,
-                    # 'form': form,
+                    'required_reputation': REQUIRED_REPUTATION,
                 }
             )
         else:  # form.is_NOT_valid():
-            wynik = form.errors
+            message = form.errors
+            messages.error(request, (message))
+
             return render(
                 request,
                 'obywatele/my_profile.html',
                 {
                     'message': _('Form is not valid!'),
                     'profile': profile,
-                    'required_reputation': required_reputation,
-                    # 'form': form,
+                    'required_reputation': REQUIRED_REPUTATION,
                 }
             )
     else:  # request.method != 'POST':
@@ -264,8 +258,6 @@ def obywatele_szczegoly(request, pk):
     candidate_profile = get_object_or_404(Uzytkownik, pk=pk)
     candidate_user = User.objects.get(pk=pk)
 
-    population = User.objects.filter(is_active=True).count()
-    required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
     citizen_reputation = citizen_profile.reputation
 
     polecajacy = citizen_profile.polecajacy
@@ -277,24 +269,21 @@ def obywatele_szczegoly(request, pk):
     if request.GET.get('tak'):
         rate.rate = 1
         rate.save()
-        wynik = str(_('Your relationship to the user ')) + candidate_user.username + str(_(' is positive'))
-        return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
+        return redirect('obywatele:obywatele_szczegoly', pk)
 
     if rate.rate == -1:
         r1 = _('negative')
     if request.GET.get('nie'):
         rate.rate = -1
         rate.save()
-        wynik = str(_('Your relationship to the user ')) + candidate_user.username + str(_(' is negative'))
-        return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
+        return redirect('obywatele:obywatele_szczegoly', pk)
 
     if rate.rate == 0:
         r1 = _('neutral')
     if request.GET.get('reset'):
         rate.rate = 0
         rate.save()
-        wynik = str(_('Your relationship to the user ')) + candidate_user.username + str(_(' is neutral'))
-        return render(request, 'obywatele/zapisane.html', {'wynik': wynik, })
+        return redirect('obywatele:obywatele_szczegoly', pk)
 
     return render(
         request,
@@ -303,7 +292,7 @@ def obywatele_szczegoly(request, pk):
             'b': candidate_profile,
             'd': citizen_profile,
             'tr': citizen_reputation,
-            'wr': required_reputation,
+            'wr': REQUIRED_REPUTATION,
             'rate': r1,
             'p': polecajacy
         })
@@ -321,11 +310,6 @@ def zliczaj_obywateli(request):
     Acceptance simulator: scripts/acceptance_simulator.py
     '''
 
-    population = User.objects.filter(is_active=True).count()
-
-    # Be careful changing this formula - people rarely acctepting each other.
-    required_reputation = round(log(population) * ACCEPTANCE_MULTIPLIER)
-
     # Count everyones reputation from Rate model and put it in to Uzytkownik
     for i in Uzytkownik.objects.all():
 
@@ -337,7 +321,7 @@ def zliczaj_obywateli(request):
 
     # Włącz użytkowników z odpowiednio wysoką reputacją
     for i in Uzytkownik.objects.all():
-        if i.reputation > required_reputation and not i.uid.is_active:
+        if i.reputation > REQUIRED_REPUTATION and not i.uid.is_active:
             i.uid.is_active = True  # Uzytkownik.uid -> User
             password = password_generator()
             i.uid.set_password(password)
@@ -363,7 +347,7 @@ def zliczaj_obywateli(request):
     # Blokuj użytkowników ze zbyt niską reputacją
     for i in Uzytkownik.objects.all():
         # l.info(f'Uzytkownik {i.id} reputation: {i.reputation}')
-        if i.reputation < required_reputation and i.uid.is_active:
+        if i.reputation < REQUIRED_REPUTATION and i.uid.is_active:
             i.uid.is_active = False  # Uzytkownik.uid -> User
             i.uid.save()
             l.info(f'Blocking user {i.uid}')
@@ -381,7 +365,7 @@ def zliczaj_obywateli(request):
             )
             # We are not deleting user bacuse he may come back.
 
-    l.info(f'Population: {population}. Required reputation: {required_reputation}')
+    l.info(f'Population: {POPULATION}. Required reputation: {REQUIRED_REPUTATION}')
 
 
 @login_required

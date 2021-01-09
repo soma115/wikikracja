@@ -46,26 +46,40 @@
 		<p>
 			<div class="col-sm-6 left"><p><h4>{{ status }}</h4></p></div>
 			{% for i in decyzje %}
-			<h3><a href="{{ i.pk }}">{{ i.pk }}. {{ i.tresc }}</a></h3>
+				<h5><a href="{{ i.pk }}">{{ i.pk }}. {{ i.tresc }}</a></h5>
 			{% endfor %}
 		</p>
 	</div>
+</div>
  
 <p>
 	<img class="img-fluid col-sm-8 offset-sm-1" src="../static/glosowania/{{ lang }}/schemat.png">
 </p>
 
 
-<div class="col-md-10 offset-sm-1 text-justify">
-	<h2>{% trans 'Voting parameters:' %}</h2>
-	<li>{% trans '2 signatures are needed to approve a referendum request. This number should remain low enough for any sensible proposal to be voted on, and only high enough to filter out obvious spam.' %}</li>
-	<li>{% trans 'Signature is valid for 365 days. After this time, signatures must be collected again.' %}</li>
-	<li>{% trans 'There is 7 days between collecting signatures and the referendum to discuss its effects.' %}</li>
-	<li>{% trans 'Referendum duration is 7 days' %}</li>
-	<li>{% trans 'Vacatio Legis - 1 day' %}</li>
-	<h2>{% trans 'Citizens parameters:' %}</h2>
-	<li>{% trans 'Required Reputation = round(log(population) * 0.7)' %}</li>
-</div>
-
-
+<p>
+	<h5 class="text-center font-weight-bold">{% trans "Voting parameters" %}</h5>
+	<ul class="list-group">
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Signatures needed to approve a referendum request. This number should remain low enough for any sensible proposal to be voted on, and only high enough to filter out obvious spam." %}
+			<span class="badge badge-primary badge-pill">14</span>
+		</li>
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Maximal time to gather signatures [in days]. If there is not enough signatures - after this time, proposition is rejected." %}
+			<span class="badge badge-primary badge-pill">2</span>
+		</li>
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Queue and discussion time [days]." %}
+			<span class="badge badge-primary badge-pill">1</span>
+		</li>
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Referendum duration [days]." %}
+			<span class="badge badge-primary badge-pill">1</span>
+		</li>
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			{% trans "Vacatio Legis duration [days]." %}
+			<span class="badge badge-primary badge-pill">1</span>
+		</li>
+	</ul>
+</p>
 {% endblock %}

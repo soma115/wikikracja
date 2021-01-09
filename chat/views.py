@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from datetime import datetime as dt
 from datetime import timedelta as td
 from django.utils import timezone
+from django.shortcuts import redirect
+
 import logging as l
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
@@ -20,13 +22,7 @@ def add_room(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             form.save()
-            # Upper case looks good on public chats
-            upperCase = Room.objects.filter(public=True)
-            for i in upperCase:
-                i.title = i.title.upper()
-                i.save()
-
-            return HttpResponseRedirect('/chat/')
+            return redirect('chat:chat')
     else:
         form = RoomForm()
     return render(request, 'chat/add.html', {'form': form})
@@ -37,7 +33,6 @@ def chat(request):
     Root page view. This is essentially a single-page app, if you ignore the
     login and admin parts.
     """
-    # TODO: Delete inactive user from rooms?
 
     # Create all 1to1 rooms
     active_users = User.objects.filter(is_active=True)
@@ -58,7 +53,7 @@ def chat(request):
     public_rooms = Room.objects.filter(public=True)
     for i in public_rooms:
         i.allowed.set(active_users)
-    
+
     # Archive/Delete old public chat rooms
     all_public_rooms = Room.objects.filter(public=True)
     for i in all_public_rooms:

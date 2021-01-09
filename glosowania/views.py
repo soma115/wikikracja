@@ -8,16 +8,20 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import get_language
-import logging as l
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.loader import get_template
+from django.urls import reverse
+from django.contrib import messages
+from django.shortcuts import redirect
+import logging as l
+
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
 HOST = settings.ALLOWED_HOSTS[0]
-ROOT = settings.BASE_DIR
+# ROOT = settings.BASE_DIR
 
 # Dodaj nową propozycję przepisu:
 @login_required
@@ -29,13 +33,20 @@ def dodaj(request):
             form = form.save(commit=False)
             form.autor = request.user
             form.data_powstania = datetime.today()
+            form.ile_osob_podpisalo += 1
             form.save()
+            signed = ZebranePodpisy.objects.create(projekt=form, podpis_uzytkownika = request.user)
+            
             # l.info(form.autor)
+            message = _("New proposition has been saved.")
+            messages.success(request, (message))
+
             SendEmail(
                 _('New law proposition'),
                 _(f'{request.user.username.capitalize()} added new law proposition\nYou can read it here: http://{HOST}/glosowania/{str(form.id)}')
                 )
             return HttpResponseRedirect('/glosowania/?1=1.+Nowa+propozycja#')
+            # return redirect('glosowania:glosowania')
     else:
         form = DecyzjaForm()
     return render(request, 'glosowania/dodaj.html', {'form': form})
@@ -61,11 +72,29 @@ def get_client_ip(request):
 @login_required
 def glosowania(request):
     # get_client_ip(request) # logowanie
-    
     lang = get_language()
 
-    # decyzje = Decyzja.objects.filter(status=1)
-    # print(request.GET.keys())
+    # print(request.body)
+    # print(request.scheme)
+    # print(request.path)
+    # print(request.content_params)
+    # print(request.GET)
+    # print(request.POST)
+    # print(request.resolver_match)
+    # print(request.current_app)
+    # print(request.headers)
+
+    # if request.method == 'GET':
+    #     for i in request.GET.items():
+    #         print(i)
+    #         x = i[0]
+    # decyzje = Decyzja.objects.filter(status=x)
+    # print(x)
+
+    # TODO: Guziki będą się zapalały więc nie trzeba pola 'status'
+    # TODO: Wtedy będzie można zrobić jeden return i dzięki temu będzie można łatwo zrobić 'Voting parameters'
+
+    
 
     if request.GET.get("1"):
         decyzje = Decyzja.objects.filter(status=1)
@@ -147,75 +176,49 @@ def glosowanie_szczegoly(request, pk):
     szczegoly = get_object_or_404(Decyzja, pk=pk)
 
     if request.GET.get('podpisz'):
-
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_podpisujaca = request.user
-        podpis = ZebranePodpisy(projekt=nowy_projekt,
-                                podpis_uzytkownika=osoba_podpisujaca)
-
+        podpis = ZebranePodpisy(projekt=nowy_projekt, podpis_uzytkownika=osoba_podpisujaca)
         nowy_projekt.ile_osob_podpisalo += 1
-
-        try:
-            # wyrzuci wyjątek jeśli kombinacja
-            # użytkownik-głosowanie nie jest unikatowa:
-            podpis.save()
-            nowy_projekt.save()
-        except IntegrityError as e:
-            if 'UNIQUE constraint failed' in e.args[0]:
-                # TODO: Guzik 'Tak, podpisuję' ma się nie pokazywać
-                # jeśli użytkownik już wcześniej podpisał.
-                # Trzeba chyba dodać kolumnę do modelu
-                message = _('You have already signed this application before.')
-                return render(request, 'glosowania/zapisane.html',
-                              {'id': szczegoly, 'message': message})
+        podpis.save()
+        nowy_projekt.save()
         message = _('Your signature has been saved.')
-        return render(request, 'glosowania/zapisane.html',
-                      {'id': szczegoly, 'message': message})
+        messages.success(request, (message))
+        return redirect('glosowania:glosowanie_szczegoly', pk)
 
     if request.GET.get('tak'):
-
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_glosujaca = request.user
-        glos = KtoJuzGlosowal(projekt=nowy_projekt,
-                              ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
-
+        glos = KtoJuzGlosowal(projekt=nowy_projekt, ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
         nowy_projekt.za += 1
-
-        try:
-            glos.save()
-            nowy_projekt.save()
-        except IntegrityError as e:
-            if 'UNIQUE constraint failed' in e.args[0]:
-                pass  # Już podpisał
-        # TODO: Guzik 'Tak/Nie' ma się nie pokazywać
-        # jeśli użytkownik już wcześniej podpisał.
-
-        return render(request, 'glosowania/zapisane.html', {'id': szczegoly})
+        glos.save()
+        nowy_projekt.save()
+        message = _('Your vote has been saved. You voted Yes.')
+        messages.success(request, (message))
+        return redirect('glosowania:glosowanie_szczegoly', pk)
 
     if request.GET.get('nie'):
-
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_glosujaca = request.user
-        glos = KtoJuzGlosowal(projekt=nowy_projekt,
-                              ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
-
+        glos = KtoJuzGlosowal(projekt=nowy_projekt, ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
         nowy_projekt.przeciw += 1
+        glos.save()
+        nowy_projekt.save()
+        message = _('Your vote has been saved. You voted No.')
+        messages.success(request, (message))
+        return redirect('glosowania:glosowanie_szczegoly', pk)
 
-        try:
-            glos.save()
-            nowy_projekt.save()
-        except IntegrityError as e:
-            if 'UNIQUE constraint failed' in e.args[0]:
-                pass  # Już podpisał
-        # TODO: Guzik 'Tak/Nie' ma się nie pokazywać
-        # jeśli użytkownik już wcześniej podpisał.
+    # check if already signed
+    signed = ZebranePodpisy.objects.filter(projekt=pk, podpis_uzytkownika=request.user).exists()
 
-        return render(request, 'glosowania/zapisane.html', {'id': szczegoly})
+    # check if already voted
+    voted = KtoJuzGlosowal.objects.filter(projekt=pk, ktory_uzytkownik_juz_zaglosowal=request.user).exists()
 
-    return render(request, 'glosowania/szczegoly.html', {'id': szczegoly})
+    return render(request, 'glosowania/szczegoly.html', {'id': szczegoly, 'signed': signed, 'voted': voted})
 
 
 class ZliczajWszystko():
+    # TODO: ZliczajWszystko
     # czas pomiędzy zebraniem podpisów a referendum
     # wymagany aby móc omówić skutki:
     kolejka = timedelta(days=7)
@@ -243,7 +246,6 @@ def zliczaj_wszystko():
     odrzucone = 5
     zatwierdzone = 6  # Vacatio Legis
     obowiazuje = 7
-    grupa = 'rodzina'
 
     dzisiaj = datetime.today().date()
 
