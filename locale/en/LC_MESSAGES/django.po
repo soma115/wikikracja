@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-09 17:35+0100\n"
+"POT-Creation-Date: 2021-01-09 19:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,7 +135,7 @@ msgid "Add new law proposition"
 msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:14
-msgid "New"
+msgid "New propositions"
 msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:30
@@ -293,56 +293,56 @@ msgid ""
 "You can read it here: http://{HOST}/glosowania/{str(form.id)}"
 msgstr ""
 
-#: glosowania/views.py:102
+#: glosowania/views.py:107
 msgid "Your signature has been saved."
 msgstr ""
 
-#: glosowania/views.py:113
+#: glosowania/views.py:118
 msgid "Your vote has been saved. You voted Yes."
 msgstr ""
 
-#: glosowania/views.py:124
+#: glosowania/views.py:129
 msgid "Your vote has been saved. You voted No."
 msgstr ""
 
-#: glosowania/views.py:178
+#: glosowania/views.py:183
 msgid "Proposition {str(i.id)} approved for referendum"
 msgstr ""
 
-#: glosowania/views.py:179
+#: glosowania/views.py:184
 msgid ""
 "Proposition {str(i.id)} gathered required amount of signatures and will be "
 "voted from {i.data_referendum_start} to {i.data_referendum_stop}.\n"
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:189
+#: glosowania/views.py:194
 msgid "Proposition {str(i.id)} didn't gathered required amount of signatures"
 msgstr ""
 
-#: glosowania/views.py:190
+#: glosowania/views.py:195
 msgid ""
 "Proposition {str(i.id)} didn't gathered required amount of signatures and "
 "was removed from queue. Feel free to improve it and send it again.\n"
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:200
+#: glosowania/views.py:205
 msgid "Referendum on proposition {str(i.id)} starting now"
 msgstr ""
 
-#: glosowania/views.py:201
+#: glosowania/views.py:206
 msgid ""
 "It is time to vote on proposition {str(i.id)}.\n"
 "Referendum ends at {i.data_referendum_stop}.\n"
 "Click here to vote: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:214
+#: glosowania/views.py:219
 msgid "Proposition {str(i.id)} approved"
 msgstr ""
 
-#: glosowania/views.py:215
+#: glosowania/views.py:220
 msgid ""
 "Proposition {str(i.id)} was approved in referendum and is now in Vacatio "
 "Legis period.\n"
@@ -350,22 +350,22 @@ msgid ""
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:223
+#: glosowania/views.py:228
 msgid "Proposition {str(i.id)} rejected"
 msgstr ""
 
-#: glosowania/views.py:224
+#: glosowania/views.py:229
 msgid ""
 "Proposition {str(i.id)} was rejected in referendum.\n"
 "Feel free to improve it and send it again.\n"
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:234
+#: glosowania/views.py:239
 msgid "Proposition {str(i.id)} is in efect from today"
 msgstr ""
 
-#: glosowania/views.py:235
+#: glosowania/views.py:240
 msgid ""
 "Proposition {str(i.id)} became abiding law today.\n"
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
@@ -829,28 +829,34 @@ msgid "proposed at"
 msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:14
+#: obywatele/templates/obywatele/start.html:14
 msgid "System parameters"
 msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:17
+#: obywatele/templates/obywatele/start.html:17
 msgid "Population"
 msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:21
+#: obywatele/templates/obywatele/start.html:21
 msgid "Acceptance multiplier"
 msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:25
+#: obywatele/templates/obywatele/start.html:25
 msgid ""
 "Acceptance formula: required_reputation = round(log(Population) * "
 "Acceptance_multiplier)"
 msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:29
-msgid "Currently required reputation"
+#: obywatele/templates/obywatele/start.html:29
+msgid "Currently required_reputation"
 msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:33
+#: obywatele/templates/obywatele/start.html:33
 msgid ""
 "New person will be accepted above that threshold. Existing person will be "
 "banned bellow that threshold."
@@ -892,31 +898,31 @@ msgstr ""
 msgid "Your new email has been saved."
 msgstr ""
 
-#: obywatele/views.py:79
+#: obywatele/views.py:84
 msgid "Email already exist"
 msgstr ""
 
-#: obywatele/views.py:115
+#: obywatele/views.py:120
 msgid "The new user has been saved"
 msgstr ""
 
-#: obywatele/views.py:166
+#: obywatele/views.py:171
 msgid "Changes was saved"
 msgstr ""
 
-#: obywatele/views.py:179
+#: obywatele/views.py:184
 msgid "Form is not valid!"
 msgstr ""
 
-#: obywatele/views.py:268
+#: obywatele/views.py:273
 msgid "positive"
 msgstr ""
 
-#: obywatele/views.py:275
+#: obywatele/views.py:280
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:282
+#: obywatele/views.py:287
 msgid "neutral"
 msgstr ""
 
