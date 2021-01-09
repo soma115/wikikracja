@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-09 22:23+0100\n"
+"POT-Creation-Date: 2021-01-09 22:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1009,7 +1009,7 @@ msgstr "Obojętny"
 msgid "I do not accept this person"
 msgstr "Nie akceptuję tej osoby"
 
-#: obywatele/views.py:37 z.py:3
+#: obywatele/views.py:37 testy.py:8
 #, fuzzy
 #| msgid "Your signature has been saved."
 msgid "Your new email has been saved."
