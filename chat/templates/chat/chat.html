@@ -35,10 +35,19 @@
     </div>
     <p>
     <div id="archive" class="collapse">
+
+
+
+
+        
         <div class="col-md-8 text-center">
-            <p>{% trans 'Public chat rooms are archived if they are not used for 3 months.<br> After 1 year they are deleted.' %}</p>
-            <p>{% trans 'Private messages are archived when user is blocked and deleted after 1 year.' %}</p>
+            <p>{% trans 'Public chat rooms are archived if they are not used for' %} {{ ARCHIVE_CHAT_ROOM }} {% trans 'days' %}.<br> {% trans 'After' %} {{ DELETE_CHAT_ROOM }} {% trans 'days they are deleted.' %}</p>
+            <p>{% trans 'Private messages are archived when user is blocked and deleted after' %} {{ DELETE_CHAT_ROOM }} {% trans 'days' %}.</p>
         </div>
+
+
+
+
         {% comment %} PUBLIC ROOMS {% endcomment %}
         <ul class="rooms col-md-8">
             {% for room in allowed_rooms %}

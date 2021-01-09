@@ -8,6 +8,8 @@ from datetime import datetime as dt
 from datetime import timedelta as td
 from django.utils import timezone
 from django.shortcuts import redirect
+from django.conf import settings as s
+
 
 import logging as l
 
@@ -61,18 +63,18 @@ def chat(request):
             last_message = Message.objects.filter(room_id=i.id).latest('time')
         except Message.DoesNotExist:
             continue
-        if last_message.time < (timezone.now() - td(days=90)):  # archive after 3 months
+        if last_message.time < (timezone.now() - td(days=s.ARCHIVE_CHAT_ROOM)):  # archive after 3 months
             l.info(f'Chat room {i.title} archived.')
             i.archived = True  # archive
             i.save()
-        elif last_message.time > (timezone.now() - td(days=90)):  # unarchive
+        elif last_message.time > (timezone.now() - td(days=s.ARCHIVE_CHAT_ROOM)):  # unarchive
             i.archived = False  # unarchive
             i.save()
-        if last_message.time < (timezone.now() - td(days=365)):  # delete after 1 year
+        if last_message.time < (timezone.now() - td(days=s.DELETE_CHAT_ROOM)):  # delete after 1 year
             l.info(f'Chat room {i.title} deleted.')
             i.delete()  # delete
 
-    # Archive/Delete old private messages
+    # Archive/Delete old private chat room
     all_private_rooms = Room.objects.filter(public=False)
     for i in all_private_rooms:
         for user in i.allowed.all():
@@ -83,7 +85,7 @@ def chat(request):
                     last_message = Message.objects.filter(room_id=i.id).latest('time')
                 except Message.DoesNotExist:
                     continue
-                if last_message.time < (timezone.now() - td(days=365)):  # delete after 1 year
+                if last_message.time < (timezone.now() - td(days=s.DELETE_CHAT_ROOM)):  # delete after 1 year
                     l.info(f'Chat room {i.title} deleted.')
                     i.delete()  # delete
             elif user.is_active == True:
@@ -96,5 +98,7 @@ def chat(request):
 
     # Render that in the chat template
     return render(request, "chat/chat.html", {
-        "allowed_rooms": allowed_rooms,
+        'allowed_rooms': allowed_rooms,
+        'ARCHIVE_CHAT_ROOM': td(days=s.ARCHIVE_CHAT_ROOM).days,
+        'DELETE_CHAT_ROOM': td(days=s.DELETE_CHAT_ROOM).days,
     })

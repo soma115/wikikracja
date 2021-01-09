@@ -78,10 +78,10 @@ def status(request, pk):
         'filtered_glosowania': filtered_glosowania,
         'lang': lang,
         'signatures': s.WYMAGANYCH_PODPISOW,
-        'signatures_span': s.CZAS_NA_ZEBRANIE_PODPISOW.days,
-        'queue_span': s.KOLEJKA.days,
-        'referendum_span': s.CZAS_TRWANIA_REFERENDUM.days,
-        'vacatio_legis_span': s.VACATIO_LEGIS.days,
+        'signatures_span': timedelta(days=s.CZAS_NA_ZEBRANIE_PODPISOW).days,
+        'queue_span': timedelta(days=s.KOLEJKA).days,
+        'referendum_span': timedelta(days=s.CZAS_TRWANIA_REFERENDUM).days,
+        'vacatio_legis_span': timedelta(days=s.VACATIO_LEGIS).days,
     })
 
 
@@ -158,8 +158,8 @@ def zliczaj_wszystko():
 
                 # TODO: Referendum odbędzie się za 1 tydzień w niedzielę
                 # 0 = monday, 1 = tuesday, ..., 6 = sunday
-                i.data_referendum_start = i.data_zebrania_podpisow + s.KOLEJKA + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
-                i.data_referendum_stop = i.data_referendum_start + s.CZAS_TRWANIA_REFERENDUM
+                i.data_referendum_start = i.data_zebrania_podpisow + timedelta(days=s.KOLEJKA) + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
+                i.data_referendum_stop = i.data_referendum_start + timedelta(days=s.CZAS_TRWANIA_REFERENDUM)
                 i.save()
                 SendEmail(
                     _(f'Proposition {str(i.id)} approved for referendum'),
@@ -168,7 +168,7 @@ def zliczaj_wszystko():
                 continue
 
             # FROM PROPOSITION TO NO_INTREST
-            if i.status == propozycja and i.data_powstania + s.CZAS_NA_ZEBRANIE_PODPISOW <= dzisiaj:
+            if i.status == propozycja and i.data_powstania + timedelta(days=s.CZAS_NA_ZEBRANIE_PODPISOW) <= dzisiaj:
                 i.status = brak_poparcia
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
@@ -194,7 +194,7 @@ def zliczaj_wszystko():
                 if i.za > i.przeciw:
                     i.status = zatwierdzone
                     i.data_zatwierdzenia = i.data_referendum_stop
-                    i.data_obowiazuje_od = i.data_referendum_stop + VACATIO_LEGIS
+                    i.data_obowiazuje_od = i.data_referendum_stop + timedelta(days=s.VACATIO_LEGIS)
                     i.save()
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
                     SendEmail(

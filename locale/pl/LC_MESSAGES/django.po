@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-09 19:39+0100\n"
+"POT-Creation-Date: 2021-01-09 22:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,9 +38,7 @@ msgstr "Zapisz"
 #: glosowania/templates/glosowania/szczegoly.html:39
 #: glosowania/templates/glosowania/szczegoly.html:52
 #: glosowania/templates/glosowania/szczegoly.html:56
-#: home/templates/home/haslo.html:26
 #: obywatele/templates/obywatele/dodaj.html:61
-#: obywatele/templates/obywatele/email_change.html:24
 #: obywatele/templates/obywatele/szczegoly.html:47
 msgid "Back"
 msgstr "Wróć"
@@ -59,15 +57,24 @@ msgstr ""
 msgid "Private messages"
 msgstr ""
 
-#: chat/templates/chat/chat.html:43
-msgid ""
-"Public chat rooms are archived if they are not used for 3 months.<br> After "
-"1 year they are deleted."
+#: chat/templates/chat/chat.html:48
+msgid "Public chat rooms are archived if they are not used for"
 msgstr ""
 
-#: chat/templates/chat/chat.html:44
-msgid ""
-"Private messages are archived when user is blocked and deleted after 1 year."
+#: chat/templates/chat/chat.html:48 chat/templates/chat/chat.html:49
+msgid "days"
+msgstr ""
+
+#: chat/templates/chat/chat.html:48
+msgid "After"
+msgstr ""
+
+#: chat/templates/chat/chat.html:48
+msgid "days they are deleted."
+msgstr ""
+
+#: chat/templates/chat/chat.html:49
+msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
 
 #: elibrary/templates/elibrary/add.html:6
@@ -149,7 +156,9 @@ msgid "Add new law proposition"
 msgstr "Nowa propozycja przepisu"
 
 #: glosowania/templates/glosowania/menu.html:14
-msgid "New propositions"
+#, fuzzy
+#| msgid "New propositions"
+msgid "Propositions"
 msgstr "Nowe propozycje"
 
 #: glosowania/templates/glosowania/menu.html:30
@@ -331,27 +340,27 @@ msgstr ""
 "{request.user.username.capitalize()} dodał/a nową propozycję przepisu\n"
 "Możesz ją zobaczyć tutaj http://{HOST}/glosowania/{str(form.id)}"
 
-#: glosowania/views.py:107
+#: glosowania/views.py:100
 msgid "Your signature has been saved."
 msgstr "Twój podpis został zapisany."
 
-#: glosowania/views.py:118
+#: glosowania/views.py:111
 #, fuzzy
 #| msgid "Your signature has been saved."
 msgid "Your vote has been saved. You voted Yes."
 msgstr "Twój podpis został zapisany."
 
-#: glosowania/views.py:129
+#: glosowania/views.py:122
 #, fuzzy
 #| msgid "Your signature has been saved."
 msgid "Your vote has been saved. You voted No."
 msgstr "Twój podpis został zapisany."
 
-#: glosowania/views.py:183
+#: glosowania/views.py:165
 msgid "Proposition {str(i.id)} approved for referendum"
 msgstr "Propozycja nr. {str(i.id)} została zatwierdzona w referendum"
 
-#: glosowania/views.py:184
+#: glosowania/views.py:166
 msgid ""
 "Proposition {str(i.id)} gathered required amount of signatures and will be "
 "voted from {i.data_referendum_start} to {i.data_referendum_stop}.\n"
@@ -362,11 +371,11 @@ msgstr ""
 "Kliknij tutaj, aby przeczytać propozycję: http://{HOST}/glosowania/{str(i."
 "id)}"
 
-#: glosowania/views.py:194
+#: glosowania/views.py:176
 msgid "Proposition {str(i.id)} didn't gathered required amount of signatures"
 msgstr "Propozycja {str(i.id)} nie zebrała wymaganej liczby podpisów"
 
-#: glosowania/views.py:195
+#: glosowania/views.py:177
 msgid ""
 "Proposition {str(i.id)} didn't gathered required amount of signatures and "
 "was removed from queue. Feel free to improve it and send it again.\n"
@@ -377,11 +386,11 @@ msgstr ""
 "Kliknij tutaj, aby przeczytać propozycję: http://{HOST}/glosowania/{str(i."
 "id)}"
 
-#: glosowania/views.py:205
+#: glosowania/views.py:187
 msgid "Referendum on proposition {str(i.id)} starting now"
 msgstr "Referendum nad propozycją {str(i.id)} właśnie startuje"
 
-#: glosowania/views.py:206
+#: glosowania/views.py:188
 msgid ""
 "It is time to vote on proposition {str(i.id)}.\n"
 "Referendum ends at {i.data_referendum_stop}.\n"
@@ -391,11 +400,11 @@ msgstr ""
 "Referendum kończy się dnia {i.data_referendum_stop}.\n"
 "Kliknij tutaj aby zagłosować: http://{HOST}/glosowania/{str(i.id)}"
 
-#: glosowania/views.py:219
+#: glosowania/views.py:201
 msgid "Proposition {str(i.id)} approved"
 msgstr "Propozycja {str(i.id)} została zatwierdzona"
 
-#: glosowania/views.py:220
+#: glosowania/views.py:202
 msgid ""
 "Proposition {str(i.id)} was approved in referendum and is now in Vacatio "
 "Legis period.\n"
@@ -408,11 +417,11 @@ msgstr ""
 "Kliknij tutaj, aby przeczytać treść przepisu: http://{HOST}/glosowania/"
 "{str(i.id)}"
 
-#: glosowania/views.py:228
+#: glosowania/views.py:210
 msgid "Proposition {str(i.id)} rejected"
 msgstr "Propozycja {str(i.id)} została odrzucona"
 
-#: glosowania/views.py:229
+#: glosowania/views.py:211
 msgid ""
 "Proposition {str(i.id)} was rejected in referendum.\n"
 "Feel free to improve it and send it again.\n"
@@ -423,11 +432,11 @@ msgstr ""
 "Kliknij tutaj, aby przeczytać propozycję: http://{HOST}/glosowania/{str (i."
 "id)}"
 
-#: glosowania/views.py:239
+#: glosowania/views.py:221
 msgid "Proposition {str(i.id)} is in efect from today"
 msgstr "Propozycja {str(i.id)} obowiązuje od dzisiaj"
 
-#: glosowania/views.py:240
+#: glosowania/views.py:222
 msgid ""
 "Proposition {str(i.id)} became abiding law today.\n"
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
@@ -498,6 +507,12 @@ msgstr "Możliwe zastosowania"
 #: obywatele/templates/obywatele/my_profile.html:16
 msgid "Change password"
 msgstr "Zmień hasło"
+
+#: home/templates/home/haslo.html:26
+#: obywatele/templates/obywatele/email_change.html:24
+#: obywatele/templates/obywatele/my_assets.html:16
+msgid "Cancel"
+msgstr "Anuluj"
 
 #: home/templates/home/home.html:11
 msgid "What is Wikicracy?"
@@ -876,10 +891,6 @@ msgstr "Zasoby"
 msgid "Those are your assets"
 msgstr "To są twoje zasoby"
 
-#: obywatele/templates/obywatele/my_assets.html:16
-msgid "Cancel"
-msgstr "Anuluj"
-
 #: obywatele/templates/obywatele/my_profile.html:8
 msgid "This is your profile"
 msgstr "To jest twój profil"
@@ -962,8 +973,8 @@ msgstr "Wymagana reputacja"
 #: obywatele/templates/obywatele/poczekalnia.html:33
 #: obywatele/templates/obywatele/start.html:33
 msgid ""
-"New person will be accepted above that threshold. Existing person will be "
-"banned bellow that threshold."
+"New person will be accepted above required_reputation threshold. Existing "
+"person will be banned bellow that threshold."
 msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:8
