@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-09 22:58+0100\n"
+"POT-Creation-Date: 2021-01-10 16:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,23 +57,23 @@ msgstr ""
 msgid "Private messages"
 msgstr ""
 
-#: chat/templates/chat/chat.html:48
+#: chat/templates/chat/chat.html:43
 msgid "Public chat rooms are archived if they are not used for"
 msgstr ""
 
-#: chat/templates/chat/chat.html:48 chat/templates/chat/chat.html:49
+#: chat/templates/chat/chat.html:43 chat/templates/chat/chat.html:44
 msgid "days"
 msgstr ""
 
-#: chat/templates/chat/chat.html:48
+#: chat/templates/chat/chat.html:43
 msgid "After"
 msgstr ""
 
-#: chat/templates/chat/chat.html:48
+#: chat/templates/chat/chat.html:43
 msgid "days they are deleted."
 msgstr ""
 
-#: chat/templates/chat/chat.html:49
+#: chat/templates/chat/chat.html:44
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
 

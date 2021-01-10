@@ -9,8 +9,6 @@ from datetime import timedelta as td
 from django.utils import timezone
 from django.shortcuts import redirect
 from django.conf import settings as s
-
-
 import logging as l
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
@@ -91,7 +89,6 @@ def chat(request):
             elif user.is_active == True:
                 i.archived = False
                 i.save()
-
 
     # Get a list of rooms, ordered alphabetically
     allowed_rooms = Room.objects.filter(allowed=request.user.id).order_by("title")

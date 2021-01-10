@@ -61,7 +61,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 # Leave the room
                 await self.leave_room(content["room"])
             elif command == "send":
-                await self.send_room(content["room"], content["message"])
+                await self.send_room(content["room"], content["message"])  # goes to chat and DB
+                # await self.send_room(content["room"], str(content["message"]+'===='))
         except ClientError as e:
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
@@ -97,13 +98,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         messages = await self.get_messages(room_id)
         for message in messages:
             u = await self.get_user_by_id(message['sender_id'])
+            # message: id, sender_id, time, text, room_id
+            t=str(message['time'])[0:19]
             await self.channel_layer.send(
                 cn,
                 {
                     "type": "chat.message",
                     "room_id": room_id,
                     "username": u.username,
-                    "message": message['text'],
+                    "message": t+': '+message['text'], 
                 }
             )
 
@@ -145,9 +148,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "type": "chat.message",
                 "room_id": room_id,
                 "username": self.scope["user"].username,
-                "message": message,
+                "message": message,  # goes to chat and DB
             }
         )
+
+        # Save message to DB
+        u = await self.get_user_by_name(self.scope["user"].username)
+        r = await self.get_room(room_id)
+        msg = Message(sender=u, time=dt.now(), text=message, room=r)
+        await self.save_message(msg)
 
     ###########################################################
     # Handlers for messages sent over the channel layer       #
@@ -162,20 +171,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when someone has messaged our chat
         """
+
         # Send a message down to the client
-        await self.send_json(
+        await self.send_json( 
             {
+                # type, room_id, username, message
                 "room": event["room_id"],
                 "username": event["username"],
-                "message": event["message"],
+                "message": event["message"],  # goes only from DB to chat. Display alteration possible but only from DB.
             },
         )
-
-        # Save message to DB
-        u = await self.get_user_by_name(event["username"])
-        r = await self.get_room(event["room_id"])
-        msg = Message(sender=u, time=dt.now(), text=event['message'], room=r)
-        await self.save_message(msg)
 
     ###########################
     # Sync to async functions #
@@ -203,8 +208,5 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     @database_sync_to_async
     def save_message(self, message):
-        try:
+        if message.text:
             message.save()
-        except IntegrityError as e:
-            if 'UNIQUE constraint failed' in e.args[0]:
-                pass  # This message already exist in DB

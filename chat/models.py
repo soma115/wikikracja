@@ -38,4 +38,4 @@ class Message(models.Model):
     # TODO: revisions (editMessage(), deleteMessage())
 
     class Meta:
-        unique_together = ('sender', 'text', 'room')
+        unique_together = ('sender', 'text', 'room', 'time')
