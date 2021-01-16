@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 16:19+0100\n"
+"POT-Creation-Date: 2021-01-16 23:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,10 +21,8 @@ msgstr ""
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #: chat/templates/chat/add.html:7
-#, fuzzy
-#| msgid "New person"
 msgid "New room"
-msgstr "Nowa osoba"
+msgstr "Nowy pokój"
 
 #: chat/templates/chat/add.html:15
 #: glosowania/templates/glosowania/dodaj.html:25
@@ -44,38 +42,38 @@ msgid "Back"
 msgstr "Wróć"
 
 #: chat/templates/chat/chat.html:10
-#, fuzzy
-#| msgid "Add eBook"
 msgid "Add Room"
-msgstr "Dodaj eBook"
+msgstr "Dodaj pokój"
 
 #: chat/templates/chat/chat.html:16
 msgid "Public chat rooms"
-msgstr ""
+msgstr "Publiczne pokoje"
 
 #: chat/templates/chat/chat.html:27
 msgid "Private messages"
-msgstr ""
+msgstr "Prywatne wiadomości"
 
 #: chat/templates/chat/chat.html:43
 msgid "Public chat rooms are archived if they are not used for"
-msgstr ""
+msgstr "Publiczne pokoje są archiwizowane jeśli nie są używane przez"
 
 #: chat/templates/chat/chat.html:43 chat/templates/chat/chat.html:44
 msgid "days"
-msgstr ""
+msgstr "dni"
 
 #: chat/templates/chat/chat.html:43
 msgid "After"
-msgstr ""
+msgstr "Po upływie"
 
 #: chat/templates/chat/chat.html:43
 msgid "days they are deleted."
-msgstr ""
+msgstr "dni - są kasowane."
 
 #: chat/templates/chat/chat.html:44
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
+"Prywatne wiadomości są archiwizowane, gdy użytkownik zostanie zablokowany i "
+"usuwane po upływie"
 
 #: elibrary/templates/elibrary/add.html:6
 msgid "Upload ebook"
@@ -150,14 +148,10 @@ msgstr ""
 "Jeśli proponowane prawo zastępuje inne przepisy, wprowadź tutaj ich numery."
 
 #: glosowania/templates/glosowania/dodaj.html:7
-#, fuzzy
-#| msgid "New law proposition"
 msgid "Add new law proposition"
 msgstr "Nowa propozycja przepisu"
 
 #: glosowania/templates/glosowania/menu.html:14
-#, fuzzy
-#| msgid "New propositions"
 msgid "Propositions"
 msgstr "Nowe propozycje"
 
@@ -167,7 +161,7 @@ msgstr "Brak poparcia"
 
 #: glosowania/templates/glosowania/menu.html:38
 msgid "Queued"
-msgstr ""
+msgstr "W kolejce"
 
 #: glosowania/templates/glosowania/menu.html:46
 msgid "Referendum"
@@ -178,10 +172,8 @@ msgid "Rejected"
 msgstr "Odrzucone"
 
 #: glosowania/templates/glosowania/menu.html:62
-#, fuzzy
-#| msgid "Approved / Vacatio Legis"
 msgid "Vacatio Legis"
-msgstr "Zatwierdzone / Vacatio Legis"
+msgstr "Vacatio Legis"
 
 #: glosowania/templates/glosowania/menu.html:70
 msgid "Governing Law"
@@ -189,20 +181,13 @@ msgstr "Obowiązujące prawo"
 
 #: glosowania/templates/glosowania/status.html:15
 msgid "There is no proposition with this status"
-msgstr ""
+msgstr "Nie ma propozycji o tym statusie"
 
 #: glosowania/templates/glosowania/status.html:24
-#, fuzzy
-#| msgid "Voting parameters:"
 msgid "Voting parameters"
-msgstr "Parametry głosowania:"
+msgstr "Parametry głosowania"
 
 #: glosowania/templates/glosowania/status.html:27
-#, fuzzy
-#| msgid ""
-#| "2 signatures are needed to approve a referendum request. This number "
-#| "should remain low enough for any sensible proposal to be voted on, and "
-#| "only high enough to filter out obvious spam."
 msgid ""
 "Signatures needed to approve a referendum request. This number should remain "
 "low enough for any sensible proposal to be voted on, and only high enough to "
@@ -214,27 +199,23 @@ msgstr ""
 
 #: glosowania/templates/glosowania/status.html:31
 msgid ""
-"Maximal time to gather signatures [in days]. If there is not enough "
+"Maximum time to gather signatures [in days]. If there is not enough "
 "signatures - after this time, proposition is rejected."
 msgstr ""
+"Maksymalny czas na zebranie podpisów [w dniach]. Jeśli nie ma wystarczającej "
+"liczby podpisów - po tym czasie propozycja jest odrzucana."
 
 #: glosowania/templates/glosowania/status.html:35
-#, fuzzy
-#| msgid "Referendum duration is 7 days"
 msgid "Queue and discussion time [days]."
-msgstr "Referendum trwa 7 dni"
+msgstr "Czas na dyskusję trwa 7 dni"
 
 #: glosowania/templates/glosowania/status.html:39
-#, fuzzy
-#| msgid "Referendum duration is 7 days"
 msgid "Referendum duration [days]."
 msgstr "Referendum trwa 7 dni"
 
 #: glosowania/templates/glosowania/status.html:43
-#, fuzzy
-#| msgid "Vacatio Legis - 1 day"
 msgid "Vacatio Legis duration [days]."
-msgstr "Vacatio Legis - 1 dzień"
+msgstr "Vacatio Legis trwa [dni]."
 
 #: glosowania/templates/glosowania/szczegoly.html:7
 msgid "Bill number"
@@ -301,10 +282,8 @@ msgid "Yes, I sign"
 msgstr "Tak, podpisuję"
 
 #: glosowania/templates/glosowania/szczegoly.html:37
-#, fuzzy
-#| msgid "You have already signed this application before."
 msgid "You already signed this proposition."
-msgstr "You have already signed this application before."
+msgstr "Już podpisałeś tę propozycję."
 
 #: glosowania/templates/glosowania/szczegoly.html:45
 msgid "Do you want to implement this law?"
@@ -320,13 +299,11 @@ msgstr "Nie"
 
 #: glosowania/templates/glosowania/szczegoly.html:50
 msgid "You already voted."
-msgstr ""
+msgstr "Już głosowałeś."
 
 #: glosowania/views.py:41
-#, fuzzy
-#| msgid "New propositions"
 msgid "New proposition has been saved."
-msgstr "Nowe propozycje"
+msgstr "Nowa propozycja została zapisana"
 
 #: glosowania/views.py:45
 msgid "New law proposition"
@@ -345,16 +322,12 @@ msgid "Your signature has been saved."
 msgstr "Twój podpis został zapisany."
 
 #: glosowania/views.py:111
-#, fuzzy
-#| msgid "Your signature has been saved."
 msgid "Your vote has been saved. You voted Yes."
-msgstr "Twój podpis został zapisany."
+msgstr "Twój podpis został zapisany. Zagłosowałeś na Tak."
 
 #: glosowania/views.py:122
-#, fuzzy
-#| msgid "Your signature has been saved."
 msgid "Your vote has been saved. You voted No."
-msgstr "Twój podpis został zapisany."
+msgstr "Twój podpis został zapisany. Zagłosowałeś na Nie."
 
 #: glosowania/views.py:165
 msgid "Proposition {str(i.id)} approved for referendum"
@@ -479,7 +452,7 @@ msgstr "Chat"
 
 #: home/templates/home/base.html:47
 msgid "profile"
-msgstr ""
+msgstr "profil"
 
 #: home/templates/home/base.html:49
 msgid "logout"
@@ -674,14 +647,13 @@ msgid "To reset your password, enter your e-mail address and click \"Send\""
 msgstr "Aby zresetować hasło, wprowadź swój adres e-mail i kliknij \"Wyślij\""
 
 #: home/views.py:31
-#, fuzzy
-#| msgid "Your signature has been saved."
 msgid "Your password has been changed."
-msgstr "Twój podpis został zapisany."
+msgstr "Twoje hasło zostało zmienione."
 
 #: home/views.py:34
 msgid "You typed something wrong. See what error appeared above and try again."
 msgstr ""
+"Coś źle wpisałeś. Zobacz, jaki błąd pojawił się powyżej i spróbuj ponownie."
 
 #: obywatele/forms.py:26
 msgid "The two email addresses fields didn't match."
@@ -831,13 +803,13 @@ msgstr "Facebook"
 
 #: obywatele/models.py:33
 msgid "What gift would you like to receive"
-msgstr ""
+msgstr "Jaki prazent chciałbyś dostać"
 
 #: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:24
 #: obywatele/templates/obywatele/my_profile.html:39
 #: obywatele/templates/obywatele/szczegoly.html:42
 msgid "Gift"
-msgstr ""
+msgstr "Prezent"
 
 #: obywatele/models.py:34
 msgid "Other things worth mentioning"
@@ -937,38 +909,31 @@ msgstr "zaproponowany dnia"
 
 #: obywatele/templates/obywatele/poczekalnia.html:14
 #: obywatele/templates/obywatele/start.html:14
-#, fuzzy
-#| msgid "Citizens parameters:"
 msgid "System parameters"
-msgstr "Parametry obywateli:"
+msgstr "Parametry systemu"
 
 #: obywatele/templates/obywatele/poczekalnia.html:17
 #: obywatele/templates/obywatele/start.html:17
-#, fuzzy
-#| msgid "Your reputation"
 msgid "Population"
-msgstr "Twoja reputacja"
+msgstr "Populacja"
 
 #: obywatele/templates/obywatele/poczekalnia.html:21
 #: obywatele/templates/obywatele/start.html:21
-msgid "Acceptance multiplier"
-msgstr ""
+msgid "Multiplier"
+msgstr "Mnożnik"
 
 #: obywatele/templates/obywatele/poczekalnia.html:25
 #: obywatele/templates/obywatele/start.html:25
-#, fuzzy
-#| msgid "Required Reputation = round(log(population) * 0.7)"
 msgid ""
-"Acceptance formula: required_reputation = round(log(Population) * "
-"Acceptance_multiplier)"
-msgstr "Wymagana reputacja = round(log(population) * 0.7)"
+"Acceptance formula: required_reputation = round(log(Population) * Multiplier)"
+msgstr ""
+"Formuła obliczania akceptacji: wymagana_reputacja = round(log(Populacja) * "
+"Mnożnik"
 
 #: obywatele/templates/obywatele/poczekalnia.html:29
 #: obywatele/templates/obywatele/start.html:29
-#, fuzzy
-#| msgid "required reputation"
 msgid "Currently required_reputation"
-msgstr "Wymagana reputacja"
+msgstr "Obecnie wymagana reputacja"
 
 #: obywatele/templates/obywatele/poczekalnia.html:33
 #: obywatele/templates/obywatele/start.html:33
@@ -976,6 +941,8 @@ msgid ""
 "New person will be accepted above required_reputation threshold. Existing "
 "person will be banned bellow that threshold."
 msgstr ""
+"Nowa osoba zostanie zaakceptowana powyżej wymaganego progu reputacji. "
+"Istniejąca osoba zostanie zbanowana poniżej tego progu."
 
 #: obywatele/templates/obywatele/szczegoly.html:8
 msgid "Introduced by"
@@ -1010,38 +977,34 @@ msgid "I do not accept this person"
 msgstr "Nie akceptuję tej osoby"
 
 #: obywatele/views.py:37 testy.py:8
-#, fuzzy
-#| msgid "Your signature has been saved."
 msgid "Your new email has been saved."
-msgstr "Twój podpis został zapisany."
+msgstr "Twój nowy email został zapisany."
 
-#: obywatele/views.py:84
+#: obywatele/views.py:85
 msgid "Email already exist"
-msgstr ""
+msgstr "Email już został użyty"
 
-#: obywatele/views.py:120
-#, fuzzy
-#| msgid "Your signature has been saved."
+#: obywatele/views.py:121
 msgid "The new user has been saved"
-msgstr "Twój podpis został zapisany."
+msgstr "Nowy użytkownik został zapisany."
 
-#: obywatele/views.py:171
+#: obywatele/views.py:172
 msgid "Changes was saved"
 msgstr "Zmiany zostały zapisane"
 
-#: obywatele/views.py:184
+#: obywatele/views.py:185
 msgid "Form is not valid!"
 msgstr "Formularz zawiera błędy"
 
-#: obywatele/views.py:273
+#: obywatele/views.py:275
 msgid "positive"
 msgstr "pozytywny"
 
-#: obywatele/views.py:280
+#: obywatele/views.py:282
 msgid "negative"
 msgstr "negatywny"
 
-#: obywatele/views.py:287
+#: obywatele/views.py:289
 msgid "neutral"
 msgstr "neutralny"
 
@@ -1060,78 +1023,3 @@ msgstr "Angielski"
 #: zzz/settings.py:43 zzz/settings_example.py:38 zzz/settings_prod.py:38
 msgid "Polish"
 msgstr "Polski"
-
-#~ msgid "New proposition"
-#~ msgstr "Nowa propozycja"
-
-#~ msgid "Queued for referendum"
-#~ msgstr "W kolejce do referendum"
-
-#~ msgid "Approved / Vacatio Legis"
-#~ msgstr "Zatwierdzone / Vacatio Legis"
-
-#~ msgid "Add proposition"
-#~ msgstr "Dodaj nową propozycję"
-
-#~ msgid "Queued for referedum"
-#~ msgstr "W kolejce do referendum"
-
-#~ msgid "Rejected in referendum"
-#~ msgstr "Odrzucone w referendum"
-
-#~ msgid "Accepted / Vacatio Legis"
-#~ msgstr "Zaakceptowane / Vacatio Legis"
-
-#~ msgid "Applicable regulations"
-#~ msgstr "Obowiązujące przepisy"
-
-#~ msgid "How many people signed"
-#~ msgstr "Ile osób podpisało"
-
-#~ msgid ""
-#~ "Signature is valid for 365 days. After this time, signatures must be "
-#~ "collected again."
-#~ msgstr ""
-#~ "Podpis jest ważny przez 365 dni. Po tym czasie podpisy muszą być ponownie "
-#~ "zebrane."
-
-#~ msgid ""
-#~ "There is 7 days between collecting signatures and the referendum to "
-#~ "discuss its effects."
-#~ msgstr ""
-#~ "Od zebrania podpisów do referendum upływa 7 dni na omówienie jego skutków."
-
-#, fuzzy
-#~| msgid "New email address"
-#~ msgid "New email saved"
-#~ msgstr "Nowy email"
-
-#~ msgid "Your relationship to the user "
-#~ msgstr "Twój stosunek do użytkownnka "
-
-#~ msgid " is positive"
-#~ msgstr " jest pozytywny"
-
-#~ msgid " is negative"
-#~ msgstr " jest negatywny"
-
-#~ msgid " is neutral"
-#~ msgstr " jest neutralny"
-
-#~ msgid "No chat rooms defined. Maybe make some in the"
-#~ msgstr "Nie zdefiniowano pokojów rozmów. Może zrób trochę w formacie"
-
-#~ msgid "Wikicracy - Login"
-#~ msgstr "Wikikracja - Logowanie"
-
-#~ msgid "Rejected concepts"
-#~ msgstr "Odrzucone koncepcje"
-
-#~ msgid "Old password"
-#~ msgstr "Stare hasło"
-
-#~ msgid "New password"
-#~ msgstr "Nowe hasło"
-
-#~ msgid "Repet new password"
-#~ msgstr "Powtórz nowe hasło"

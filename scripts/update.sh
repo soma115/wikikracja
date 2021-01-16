@@ -26,3 +26,16 @@ chmod u+w media/
 
 ./manage.py collectstatic --no-input -c -v 0
 # ./manage.py createsuperuser"
+
+supervisorctl reread
+supervisorctl update
+
+systemctl stop nginx; sleep 1
+systemctl restart supervisord; sleep 1
+systemctl start nginx; sleep 1
+
+echo -n "nginx is:	"; systemctl is-active nginx
+echo -n "redis is:	"; systemctl is-active redis
+echo -n "supervisord is:	"; systemctl is-active supervisord
+echo ""
+supervisorctl status

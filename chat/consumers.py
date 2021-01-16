@@ -99,14 +99,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         for message in messages:
             u = await self.get_user_by_id(message['sender_id'])
             # message: id, sender_id, time, text, room_id
-            t=str(message['time'])[0:19]
+            # t=str(message['time'])[0:19]
             await self.channel_layer.send(
                 cn,
                 {
                     "type": "chat.message",
                     "room_id": room_id,
                     "username": u.username,
-                    "message": t+': '+message['text'], 
+                    # "message": t+': '+message['text'], 
+                    "message": message['text'], 
+                    # "time": message['time'], 
                 }
             )
 
@@ -149,13 +151,14 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "room_id": room_id,
                 "username": self.scope["user"].username,
                 "message": message,  # goes to chat and DB
+                # "time": dt.now(),
             }
         )
 
         # Save message to DB
         u = await self.get_user_by_name(self.scope["user"].username)
         r = await self.get_room(room_id)
-        msg = Message(sender=u, time=dt.now(), text=message, room=r)
+        msg = Message(sender=u, text=message, room=r)  # time is added in a models.py
         await self.save_message(msg)
 
     ###########################################################
@@ -171,7 +174,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when someone has messaged our chat
         """
-
+        # print(event["time"])
+        # for i in event:
+        #     print(i)
+        # print(event)
         # Send a message down to the client
         await self.send_json( 
             {
@@ -179,6 +185,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "room": event["room_id"],
                 "username": event["username"],
                 "message": event["message"],  # goes only from DB to chat. Display alteration possible but only from DB.
+                # "time": event["time"],
+                # "time": dt.now(),
+                "time": str(dt.now()),  # to podejście jest ok
+                # "time": 'czas',
             },
         )
 

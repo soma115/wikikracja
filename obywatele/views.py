@@ -1,22 +1,22 @@
 from django.conf import settings as s
+from django.core.mail import send_mail
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
+from django.contrib.messages import success, error
+from django.db.models import Avg, Sum
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.contrib.auth.models import User
+from django.utils.timezone import now as dzis
+from django.utils.translation import ugettext_lazy as _
+from random import choice
+from string import ascii_letters, digits
+from math import log
+import logging as l
 from obywatele.forms import UserForm, ProfileForm, EmailChangeForm
 from obywatele.models import Uzytkownik, Rate
-from django.contrib import messages
-from django.core.mail import send_mail
-import random
-import string
-from django.utils.timezone import now as dzis
-from math import log
-from django.contrib.auth.decorators import login_required
-from django.utils.translation import ugettext_lazy as _
-from django.db.models import Avg, Sum
-import logging as l
 
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
@@ -35,11 +35,11 @@ def email_change(request):
         if form.is_valid():
             form.save()
             message = _("Your new email has been saved.")
-            messages.success(request, (message))
+            success(request, (message))
             return redirect('obywatele:my_profile')
         else:
             message = form.errors
-            messages.error(request, (message))
+            error(request, (message))
             return redirect('obywatele:my_profile')
     else:
         return render(request, 'obywatele/email_change.html', {'form':form})
@@ -59,6 +59,7 @@ def obywatele(request):
 
 @login_required
 def poczekalnia(request):
+    zliczaj_obywateli(request)
     uid = User.objects.filter(is_active=False)
     return render(request, 'obywatele/poczekalnia.html', {
         'uid': uid,
@@ -82,7 +83,7 @@ def dodaj(request):
             if User.objects.filter(email=mail).exists():
                 # is_valid doesn't check if email exist
                 message = _('Email already exist')
-                messages.error(request, (message))
+                error(request, (message))
                 return redirect('obywatele:zaproponuj_osobe')
 
             else:
@@ -118,11 +119,11 @@ def dodaj(request):
                 rate.save()
 
                 message = _('The new user has been saved')
-                messages.success(request, (message))
+                success(request, (message))
                 return redirect('obywatele:poczekalnia')
         else:
             message = user_form.errors.get_json_data()['username'][0]['message']
-            messages.error(request, (message))
+            error(request, (message))
             return redirect('obywatele:zaproponuj_osobe')
 
     user_form = UserForm()
@@ -175,7 +176,7 @@ def my_assets(request):
             )
         else:  # form.is_NOT_valid():
             message = form.errors
-            messages.error(request, (message))
+            error(request, (message))
 
             return render(
                 request,
@@ -218,6 +219,7 @@ def my_assets(request):
 
 @login_required
 def assets(request):
+    zliczaj_obywateli(request)
     all_assets = Uzytkownik.objects.filter(uid__is_active=True).exclude(
                                 responsibilities__isnull=True,
                                 city__isnull=True,
@@ -345,9 +347,8 @@ def zliczaj_obywateli(request):
             uname = str(i.uid.username)
             uhost = str(request.get_host())
             message = f'Witaj {uname}\nTwoje konto na {uhost} zostało włączone.\n\nTwój login to: {uname}\nTwoje hasło to: {password}\n\nZaloguj się tutaj: {uhost}/login/\n\nHasło możesz zmienić tutaj: {uhost}/haslo/'
-
-            send_mail(subject, message, s.DEFAULT_FROM_EMAIL,
-                      [i.uid.email], fail_silently=False)
+            
+            send_mail(subject, message, s.DEFAULT_FROM_EMAIL, [i.uid.email], fail_silently=False)
 
     # Blokuj użytkowników ze zbyt niską reputacją
     for i in Uzytkownik.objects.all():
@@ -380,15 +381,15 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            messages.success(request,
+            success(request,
                              'Your password was successfully updated!')
             return redirect('change_password')
         else:
-            messages.error(request, 'Please correct the error below.')
+            error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'obywatele/change_password.html', {'form': form})
 
 
-def password_generator(size=8, chars=string.ascii_letters + string.digits):
-    return ''.join(random.choice(chars) for i in range(size))
+def password_generator(size=8, chars=ascii_letters + digits):
+    return ''.join(choice(chars) for i in range(size))

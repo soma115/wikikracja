@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 16:19+0100\n"
+"POT-Creation-Date: 2021-01-16 23:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,7 +186,7 @@ msgstr ""
 
 #: glosowania/templates/glosowania/status.html:31
 msgid ""
-"Maximal time to gather signatures [in days]. If there is not enough "
+"Maximum time to gather signatures [in days]. If there is not enough "
 "signatures - after this time, proposition is rejected."
 msgstr ""
 
@@ -849,14 +849,13 @@ msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:21
 #: obywatele/templates/obywatele/start.html:21
-msgid "Acceptance multiplier"
+msgid "Multiplier"
 msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:25
 #: obywatele/templates/obywatele/start.html:25
 msgid ""
-"Acceptance formula: required_reputation = round(log(Population) * "
-"Acceptance_multiplier)"
+"Acceptance formula: required_reputation = round(log(Population) * Multiplier)"
 msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:29
@@ -907,31 +906,31 @@ msgstr ""
 msgid "Your new email has been saved."
 msgstr ""
 
-#: obywatele/views.py:84
+#: obywatele/views.py:85
 msgid "Email already exist"
 msgstr ""
 
-#: obywatele/views.py:120
+#: obywatele/views.py:121
 msgid "The new user has been saved"
 msgstr ""
 
-#: obywatele/views.py:171
+#: obywatele/views.py:172
 msgid "Changes was saved"
 msgstr ""
 
-#: obywatele/views.py:184
+#: obywatele/views.py:185
 msgid "Form is not valid!"
 msgstr ""
 
-#: obywatele/views.py:273
+#: obywatele/views.py:275
 msgid "positive"
 msgstr ""
 
-#: obywatele/views.py:280
+#: obywatele/views.py:282
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:287
+#: obywatele/views.py:289
 msgid "neutral"
 msgstr ""
 
