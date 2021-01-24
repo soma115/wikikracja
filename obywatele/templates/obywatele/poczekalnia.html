@@ -1,15 +1,42 @@
-{% extends 'home/base.html' %}
+{% extends 'obywatele/menu.html' %}
 {% load static %}
 {% load i18n %}
 
-	{% block content %}
-		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:index' %}">{% trans 'Citizens' %}</a>
-		<a class="btn btn-primary fr-rounded fr-small" href="{% url 'obywatele:poczekalnia' %}">{% trans 'Candidates' %}</a>
-		<a class="btn btn-default fr-rounded fr-small" href="{% url 'obywatele:zaproponuj_osobe' %}">+{% trans 'Propose new person' %}</a>
+{% block citizens %}
 
+	<ul class="list-group-flush">
 		{% for i in uid %}
-			<!--<h2><a href="{{ i.pk }}">{{ i.first_name }} {{i.last_name}}</a></h2>-->
-			<h3><a href="{{ i.pk }}">{{ i.username }}</a></h3>
-			<p>{{ i.email }} | {% trans 'Joined' %}: {{ i.date_joined|date:"Y-m-d" }}</p>
+			<li class="list-group-item"><a href="{{ i.pk }}">{{ i.username }} | {{ i.email }} | {% trans 'proposed at' %}: {{ i.date_joined|date:"Y-m-d" }}</a></li>
 		{% endfor %}
-	{% endblock %}
+	</ul>
+	
+	<p><button class="btn btn-secondary btn-sm col-md-2 offset-8" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+		{% trans "System parameters" %}
+	</button></p>
+
+	<div class="collapse" id="collapseExample">
+		<ul class="list-group">
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{% trans "Population" %}
+			  <span class="badge badge-primary badge-pill">{{ population }}</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{% trans "Multiplier" %}
+			  <span class="badge badge-primary badge-pill">{{ acceptance }}</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{% trans "Acceptance formula: required_reputation = round(log(Population) * Multiplier)" %}
+			  <span class="badge badge-primary badge-pill"></span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				{% trans "Currently required_reputation" %}
+			  <span class="badge badge-primary badge-pill">{{ required_reputation }}</span>
+			</li>
+			<li class="list-group-item text-center align-items-center font-weight-bold">
+				{% trans "New person will be accepted above required_reputation threshold. Existing person will be banned bellow that threshold." %}
+			  <span class="badge badge-primary badge-pill"></span>
+			</li>
+		  </ul>
+	</div>
+{% endblock citizens %}
+

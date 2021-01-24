@@ -1,34 +1,31 @@
-{% extends 'home/base.html' %}
+{% extends 'glosowania/menu.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 
-{% block content %}
-        <h1>{% trans 'New proposition' %}</h1>
-        <form action="." method="POST" class="post-form">
-            {% csrf_token %}
-            {% comment %} {{ form|crispy }} {% endcomment %}
-
-<div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                {{ form.tresc|as_crispy_field }}
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                {{ form.kara|as_crispy_field }}
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                {{ form.uzasadnienie|as_crispy_field }}
-            </div>
-            
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                {{ form.znosi|as_crispy_field }}
-            </div>
-</div>
-
-            <button type="submit" class="btn btn-success">{% trans 'Save' %}</button>
-            <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button>
-        </form>
+{% block glosowania %}
+<h2>{% trans 'Add new law proposition' %}</h2>
+<form action="." method="POST" class="post-form">
+    {% csrf_token %}
+    <!-- {{ form|crispy }} -->
+    <div class="row">
+        <div class="col-md-3">
+          {{ form.title|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.tresc|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.kara|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.uzasadnienie|as_crispy_field }}
+        </div>
+        <div class="col-md-2">
+          {{ form.znosi|as_crispy_field }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-danger btn-sm">{% trans 'Save' %}</button>
+    <button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
+</form>
 {% endblock %}
-{% load i18n %}

@@ -3,70 +3,71 @@
 {% block content %}
 {% load i18n %}
 
-<ul>
-	{% if not user.is_authenticated %}
-	<div class="row">
-		<div class="container">
-			<div class="row">
-				<h3 class="title">{% trans 'What is Wikicracy?' %}</h3>
-				<p class="lead">
-					{% trans 'Wikicracy is a voting system that allows the community to manage itself - without the help of representatives and administrators.' %}
-				</p>
-				<h3 class="title">{% trans 'Main features of the system' %}</h3>
-				<p>
-					<ul>
-						<li>> {% trans 'each person has one vote' %}</li>
-						<li>> {% trans 'every vote is equal' %}</li>
-						<li>> {% trans 'decisions are taken by simple majority of votes' %}</li>
-						<li>> {% trans 'votes are anonymous' %}</li>
-						<li>> {% trans 'voting is similar to the Swiss system - after collecting the signatures, the time for discussion begins and then a referendum follows' %}</li>
-						<li>> {% trans 'the membership is managed by the whole group by accepting new people' %}</li>
-						<li>> {% trans 'it is also possible to remove a disruptive person by popular vote' %}</li>
-					</ul>
-				</p>
-				<p>
-					{% trans 'The application is written so that there is no hierarchy in it. No administrator is needed. The users themselves decide who belongs to the group and what rules apply to it. This means full equality and true democracy that cannot be disabled.' %}
-				</p>
-				<a href="https://wikikracja.pl/" class="btn btn-info m-2" target="_blank">{% trans 'Read more...' %}</a>
+
+{% if not user.is_authenticated %}
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<h3 class="title">{% trans 'What is Wikicracy?' %}</h3>
+			<p class="lead">
+				{% trans 'Wikicracy is a voting system that allows the community to manage itself - without the help of representatives or administrators.' %}
+			</p>
+			<h3>{% trans 'Main features of the system' %}</h3>
+			<p>
+				<ul>
+					<li> {% trans 'each person has one vote' %}</li>
+					<li> {% trans 'every vote is equal' %}</li>
+					<li> {% trans 'decisions are taken by simple majority of votes' %}</li>
+					<li> {% trans 'votes are anonymous' %}</li>
+					<li> {% trans 'voting is similar to the Swiss system - after collecting the signatures, the time for discussion begins and then a referendum follows' %}</li>
+					<li> {% trans 'the membership is managed by the whole group by accepting new people' %}</li>
+					<li> {% trans 'it is also possible to remove a disruptive person by popular vote' %}</li>
+				</ul>
+			</p>
+			<p><u>
+				{% trans 'The application is written so that there is no hierarchy in it. No administrator is needed. The users themselves decide who belongs to the group and what rules apply to it. This means full equality and true democracy that cannot be disabled.' %}
+			</p></u>
+			<a href="https://wikikracja.pl/" class="btn btn-info m-2 btn-sm" target="_blank">{% trans 'Read more...' %}</a>
+		</div>
+		<div class="row rounded" style="background-color: #a7d2e4; padding:10px;margin-top:20px;">
+			<div class="col-md-4">
+				<a href="{% url 'login' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Login' %}</a>
 			</div>
-			<div class="row rounded" style="background-color: #a7d2e4; padding:10px;margin-top:20px;">
-				<div class="col-md-4">
-					<a href="{% url 'login' %}" class="btn btn-success btn-block m-2">{% trans 'Login' %}</a>
-				</div>
-				<div class="col-md-4">
-					<a href="{% url 'password_reset' %}" class="btn btn-success btn-block m-2">{% trans 'Reset password' %}</a>
-				</div>
-				<div class="col-md-4">
-					<a href=https://wikikracja.pl/kontakt/ target="_blank" class="btn btn-success btn-block m-2">{% trans 'Send message to developer' %}</a>		
-				</div>
+			<div class="col-md-4">
+				<a href="{% url 'password_reset' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Reset password' %}</a>
+			</div>
+			<div class="col-md-4">
+				<a href=https://wikikracja.pl/kontakt/ target="_blank" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Send message to developer' %}</a>		
 			</div>
 		</div>
 	</div>
-	{% endif %}
+</div>
+{% endif %}
 
-	{% if user.is_authenticated %}
-
-		<div class="col-sm-10 right">
-			<h1>{% trans 'Ongoing referenda' %}:</h1>
-			{% for i in trwajace %}
-				<h3>● <a href="glosowania/{{ i.pk }}">{{ i.tresc }}</a></h3>
-{% empty %}
-    <li>{% trans 'There are currently no pending referenda.' %}</li>
-{% endfor %}
-		</div>
-
-		<div class="col-sm-10 right">
-			<h1>{% trans 'Upcoming referenda' %}:</h1>
-			{% for i in zblizajace_sie %}
-				<h3>● <a href="glosowania/{{ i.pk }}">{{ i.tresc }}</a></h3>
-						<p><h4>{{ i.data_referendum_start }}</h4></p>
-{% empty %}
-    <li>{% trans 'There are currently no upcoming referenda.' %}</li>
-{% endfor %}
-		</div>
-
-	{% endif %}
-</ul>
+{% if user.is_authenticated %}
+	<p>
+	<div class="col-sm-10 right">
+		<h4>{% trans 'Ongoing referenda' %}:</h4>
+		{% for i in ongoing %}
+			<a href="glosowania/details/{{ i.pk }}" class="list-group-item list-group-item-action list-group-item-success">{{ i.tresc }}<br>{{ i.data_referendum_start }}</a>
+			{% empty %}
+				<div class="alert alert-light">({% trans 'there is currently no referendum' %})</div>
+		{% endfor %}
+	</div>
+	</p>
+	<p>
+	<div class="col-sm-10 right">
+		<h4>{% trans 'Upcoming referenda' %}:</h4>
+		<ul class="list-group">
+			{% for i in upcoming %}
+				<a href="glosowania/details/{{ i.pk }}" class="list-group-item list-group-item-action list-group-item-primary">{{ i.tresc }}<br>{{ i.data_referendum_start }}</a>
+				{% empty %}
+				<div class="alert alert-light">({% trans 'there are no upcoming referenda at this moment' %})</div>
+			{% endfor %}
+		</ul>
+	</div>
+	</p>
+{% endif %}
 
 {% endblock %}
 

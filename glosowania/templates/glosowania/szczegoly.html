@@ -4,11 +4,11 @@
 
 {% block content %}
 	<div>
-		<h3>{% trans 'Bill number' %}: {{ id.id }}</h3>
-		<h4>{% trans 'Bill text' %}:</h4><p>{{ id.tresc }}</p>
-		<h4>{% trans 'Penalty for non-compliance' %}:</h4><p>{{ id.kara }}</p>
-		<h4>{% trans 'Reason' %}:</h4><p>{{ id.uzasadnienie }}</p>
-        <h4>{% trans 'This law supersedes the following bills' %}:</h4><p>{{ id.znosi }}</p>
+		<h5>{% trans 'Bill number' %}: {{ id.id }}</h5>
+		<h5>{% trans 'Bill text' %}:</h5><p>{{ id.tresc }}</p>
+		<h5>{% trans 'Penalty for non-compliance' %}:</h5><p>{{ id.kara }}</p>
+		<h5>{% trans 'Reason' %}:</h5><p>{{ id.uzasadnienie }}</p>
+        <h5>{% trans 'This law supersedes the following bills' %}:</h5><p>{{ id.znosi }}</p>
 			<p>
 				{% trans 'Author' %}: {{ id.autor }}
 
@@ -27,24 +27,31 @@
 	</div>
 
 	{% if id.status == 1 %}
-		<form action="#" method="get">
-			<p><u><h4>{% trans 'Do you want a referendum on this law?' %}</h4></u></p>
-		    <input class="btn btn-primary" type="submit" name="podpisz" value="{% trans "Yes, I sign" %}"/>
-		    <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button>
-
-		</form>
+		{% if not signed %}
+			<form action="#" method="get">
+				<p><u><h5>{% trans 'Do you want a referendum on this law?' %}</h5></u></p>
+				<input class="btn btn-primary btn-sm" type="submit" name="podpisz" value="{% trans "Yes, I sign" %}"/>
+			</form>
+			{% elif signed %}
+			<p><u><h5>{% trans 'You already signed this proposition.' %}</h5></u></p>
+			{% endif %}
+		<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
 	{% endif %}
 
 	{% if id.status == 4 %}
-		<form action="#" method="get">
-			<p><u><h4>{% trans 'Do you want to implement this law?' %}</h4></u></p>
-		    <input class="btn btn-primary" type="submit" name="tak" value="{% trans 'Yes' %}"/>
-			<input class="btn btn-primary" type="submit" name="nie" value="{% trans 'No' %}"/>
-		    <button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button>
-		</form>
+		{% if not voted %}
+			<form action="#" method="get">
+				<p><u><h5>{% trans 'Do you want to implement this law?' %}</h5></u></p>
+				<input class="btn btn-primary btn-sm" type="submit" name="tak" value="{% trans 'Yes' %}"/>
+				<input class="btn btn-primary btn-sm" type="submit" name="nie" value="{% trans 'No' %}"/>
+			</form>
+		{% elif voted %}
+			<p><u><h5>{% trans 'You already voted.' %}</h5></u></p>
+		{% endif %}
+		<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
 	{% endif %}
 
 	{% if id.status == 2 or id.status == 3 or id.status >= 5 %}
-		<button onclick="window.history.back();" class="btn btn-default" type="button">{% trans 'Back' %}</button>
+		<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
 	{% endif %}
 {% endblock %}

@@ -6,6 +6,7 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "media"),)
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
@@ -114,7 +115,7 @@ LOGGING = {
 }
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'glosowania:index'  # LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'glosowania:glosowania'  # LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 
 DATE_FORMAT = "Y-m-d"
@@ -147,27 +148,3 @@ CHANNEL_LAYERS = {
         },
     },
 }
-
-NOTIFY_USERS_ON_ENTER_OR_LEAVE_ROOMS = True
-MSG_TYPE_MESSAGE = 0  # For standard messages
-MSG_TYPE_WARNING = 1  # For yellow messages
-MSG_TYPE_ALERT = 2  # For red & dangerous alerts
-MSG_TYPE_MUTED = 3  # For just OK information that doesn't bother users
-MSG_TYPE_ENTER = 4  # For just OK information that doesn't bother users
-MSG_TYPE_LEAVE = 5  # For just OK information that doesn't bother users
-MESSAGE_TYPES_CHOICES = (
-    (MSG_TYPE_MESSAGE, 'MESSAGE'),
-    (MSG_TYPE_WARNING, 'WARNING'),
-    (MSG_TYPE_ALERT, 'ALERT'),
-    (MSG_TYPE_MUTED, 'MUTED'),
-    (MSG_TYPE_ENTER, 'ENTER'),
-    (MSG_TYPE_LEAVE, 'LEAVE'),
-)
-MESSAGE_TYPES_LIST = [
-    MSG_TYPE_MESSAGE,
-    MSG_TYPE_WARNING,
-    MSG_TYPE_ALERT,
-    MSG_TYPE_MUTED,
-    MSG_TYPE_ENTER,
-    MSG_TYPE_LEAVE,
-]
