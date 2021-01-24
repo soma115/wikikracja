@@ -56,11 +56,18 @@
 		<p>{% block content %}{% endblock content%}</p>
 	</div>
 
-	<div class="container" style="background-color: #aeaeae; margin-top:50px;border-top:2px solid grey;border-bottom:1px solid grey;padding-top:20px;">
-		<div class="row justify-content-around">
-			<div class="col-4">
-				<h5>{% trans 'Contact' %}</h5>
-				<p><a href="https://wikikracja.pl/kontakt/" target="_blank">wikikracja.pl</a></p>
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+				<li class="{{ message.tags }}">{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	<div class="row-site" style="background-color: #aeaeae; margin-top:50px;border-top:2px solid grey;border-bottom:1px solid grey;padding-top:20px;">
+		<div class="container">
+			<div class="col-md-4">
+				<h4>Kontakt</h4>
+				<p><a href="https://mojglos.org.pl/" target="_blank">mojglos.org.pl</a></p>
 			</div>
 			<div class="col-4">
 				<h5>{% trans 'About project' %}</h5>
