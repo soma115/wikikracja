@@ -10,7 +10,10 @@
     <!-- {{ form|crispy }} -->
     <div class="row">
         <div class="col-md-3">
-         {{ form.tresc|as_crispy_field }}
+          {{ form.title|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.tresc|as_crispy_field }}
         </div>
         <div class="col-md-3">
           {{ form.kara|as_crispy_field }}

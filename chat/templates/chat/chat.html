@@ -31,14 +31,29 @@
 
     {% comment %} ARCHIVED PUBLIC ROOMS {% endcomment %}
     <div class="col-md-2 offset-8">
-        <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#archive" role="button" aria-expanded="false" aria-controls="collapseExample">Archive</button>
+        <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#archive" role="button" aria-expanded="false" aria-controls="collapseExample">
+            {% trans "Archived chats" %}
+        </button>
     </div>
-    <p>
+
     <div id="archive" class="collapse">
-        <div class="col-md-8 text-center">
-            <p>{% trans 'Public chat rooms are archived if they are not used for' %} {{ ARCHIVE_CHAT_ROOM }} {% trans 'days' %}.<br> {% trans 'After' %} {{ DELETE_CHAT_ROOM }} {% trans 'days they are deleted.' %}</p>
-            <p>{% trans 'Private messages are archived when user is blocked and deleted after' %} {{ DELETE_CHAT_ROOM }} {% trans 'days' %}.</p>
-        </div>
+        <p>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    {% trans 'Public chat rooms are archived if they are not used for' %}
+                    <span class="badge badge-primary badge-pill">{{ ARCHIVE_CHAT_ROOM }}</span>
+                    {% trans 'days. After' %} 
+                    <span class="badge badge-primary badge-pill">{{ DELETE_CHAT_ROOM }}</span>
+                    {% trans 'days they are deleted.' %}
+                </li>
+                <li class="list-group-item">
+                    {% trans 'Private messages are archived when user is blocked and deleted after' %} 
+                    <span class="badge badge-primary badge-pill">{{ DELETE_CHAT_ROOM }}</span>
+                    {% trans 'days' %}
+                </li>
+            </ul>
+        </p>
+
         {% comment %} PUBLIC ROOMS {% endcomment %}
         <ul class="rooms col-md-8">
             {% for room in allowed_rooms %}
@@ -47,6 +62,7 @@
                 {% endif %}
             {% endfor %}
         </ul>
+
         {% comment %} PRIVATE MESSAGES {% endcomment %}
         <ul class="rooms col-md-8">
             {% for room in allowed_rooms %}
@@ -56,8 +72,26 @@
             {% endfor %}
         </ul>
     </div>
-    </p>
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     {% comment %} HERE CHATS WILL APPEAR {% endcomment %}
     <div id="chats" class="col-md-12"></div>
 

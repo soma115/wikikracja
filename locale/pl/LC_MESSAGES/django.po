@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-16 23:25+0100\n"
+"POT-Creation-Date: 2021-01-18 23:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,14 +25,14 @@ msgid "New room"
 msgstr "Nowy pokój"
 
 #: chat/templates/chat/add.html:15
-#: glosowania/templates/glosowania/dodaj.html:25
+#: glosowania/templates/glosowania/dodaj.html:28
 #: home/templates/home/haslo.html:25
 #: obywatele/templates/obywatele/email_change.html:23
 msgid "Save"
 msgstr "Zapisz"
 
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:19
-#: glosowania/templates/glosowania/dodaj.html:26
+#: glosowania/templates/glosowania/dodaj.html:29
 #: glosowania/templates/glosowania/szczegoly.html:39
 #: glosowania/templates/glosowania/szczegoly.html:52
 #: glosowania/templates/glosowania/szczegoly.html:56
@@ -53,27 +53,31 @@ msgstr "Publiczne pokoje"
 msgid "Private messages"
 msgstr "Prywatne wiadomości"
 
-#: chat/templates/chat/chat.html:43
+#: chat/templates/chat/chat.html:39
+msgid "Archived chats"
+msgstr "Archiwum czatów"
+
+#: chat/templates/chat/chat.html:47
 msgid "Public chat rooms are archived if they are not used for"
 msgstr "Publiczne pokoje są archiwizowane jeśli nie są używane przez"
 
-#: chat/templates/chat/chat.html:43 chat/templates/chat/chat.html:44
-msgid "days"
-msgstr "dni"
+#: chat/templates/chat/chat.html:49
+msgid "days. After"
+msgstr "dni. Po upływie"
 
-#: chat/templates/chat/chat.html:43
-msgid "After"
-msgstr "Po upływie"
-
-#: chat/templates/chat/chat.html:43
+#: chat/templates/chat/chat.html:51
 msgid "days they are deleted."
 msgstr "dni - są kasowane."
 
-#: chat/templates/chat/chat.html:44
+#: chat/templates/chat/chat.html:54
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
 "Prywatne wiadomości są archiwizowane, gdy użytkownik zostanie zablokowany i "
 "usuwane po upływie"
+
+#: chat/templates/chat/chat.html:56
+msgid "days"
+msgstr "dni"
 
 #: elibrary/templates/elibrary/add.html:6
 msgid "Upload ebook"
@@ -107,18 +111,27 @@ msgid "delete"
 msgstr "skasuj"
 
 #: glosowania/models.py:15
+msgid "Title"
+msgstr "Tytuł"
+
+#: glosowania/models.py:16
+msgid "Enter short title describing new law."
+msgstr "Wpisz krótki tytuł opisujący nowe prawo"
+
+#: glosowania/models.py:21
 msgid "Law text"
 msgstr "Treść przepisu"
 
-#: glosowania/models.py:16
-msgid "Enter the wording of the law as it is to be applied."
-msgstr "Wpisz treść przepisu w takim brzmieniu w jakim ma obowiązywać."
+#: glosowania/models.py:22
+msgid "Enter the exact wording of the law as it is to be applied."
+msgstr ""
+"Wpisz treść przepisu dokładnie w takim brzmieniu w jakim ma obowiązywać."
 
-#: glosowania/models.py:21
+#: glosowania/models.py:27
 msgid "Penalty"
 msgstr "Kara"
 
-#: glosowania/models.py:22
+#: glosowania/models.py:28
 msgid ""
 "What is the penalty for non-compliance with this rule. This can be, for "
 "example: \"Banishment for 3 months\", \"Banishment forever\", etc."
@@ -126,11 +139,11 @@ msgstr ""
 "Jaka jest kara za nieprzestrzeganie tej zasady. Może to być na przykład: "
 "\"Wygnanie na 3 miesiące\", \"Wygnanie na zawsze itd.\""
 
-#: glosowania/models.py:27
+#: glosowania/models.py:33
 msgid "Reasoning"
 msgstr "Uzasadnienie"
 
-#: glosowania/models.py:28
+#: glosowania/models.py:34
 msgid ""
 "What is the purpose of this law? Why was it created? What are we going to "
 "achieve with it? What event caused it to arise?"
@@ -138,11 +151,11 @@ msgstr ""
 "Jaki jest cel tego prawa? Dlaczego zostało stworzony? Co dzięki niemu "
 "osiągniemy? Jakie wydarzenie spowodowało jego powstanie?"
 
-#: glosowania/models.py:34
+#: glosowania/models.py:40
 msgid "Abolishes the rules"
 msgstr "Znosi przepis/y"
 
-#: glosowania/models.py:35
+#: glosowania/models.py:41
 msgid "If the proposed law supersedes other recipes, enter their numbers here."
 msgstr ""
 "Jeśli proponowane prawo zastępuje inne przepisy, wprowadź tutaj ich numery."
@@ -183,39 +196,56 @@ msgstr "Obowiązujące prawo"
 msgid "There is no proposition with this status"
 msgstr "Nie ma propozycji o tym statusie"
 
-#: glosowania/templates/glosowania/status.html:24
+#: glosowania/templates/glosowania/status.html:25
 msgid "Voting parameters"
 msgstr "Parametry głosowania"
 
-#: glosowania/templates/glosowania/status.html:27
+#: glosowania/templates/glosowania/status.html:32
+msgid "New proposition needs to gather"
+msgstr "Nowa propozycja musi zebrać"
+
+#: glosowania/templates/glosowania/status.html:34
 msgid ""
-"Signatures needed to approve a referendum request. This number should remain "
-"low enough for any sensible proposal to be voted on, and only high enough to "
+"signatures in order to trigger referendum. This number should remain low "
+"enough for any sensible proposal to be voted on, and only high enough to "
 "filter out obvious spam."
 msgstr ""
-"Do zatwierdzenia wniosku o referendum potrzebne są 2 podpisy. Ta liczba "
-"powinna pozostać wystarczająco niska aby możliwe było głosowanie nad każdą "
-"rozsądną propozycją, i tyle na tyle wysoka aby odfiltrować oczywisty spam."
+"podpisów aby została poddana pod referendum. Ta liczba powinna pozostać "
+"wystarczająco niska aby możliwe było głosowanie nad każdą rozsądną "
+"propozycją, i tylko na tyle wysoka aby odfiltrować oczywisty spam."
 
-#: glosowania/templates/glosowania/status.html:31
-msgid ""
-"Maximum time to gather signatures [in days]. If there is not enough "
-"signatures - after this time, proposition is rejected."
-msgstr ""
-"Maksymalny czas na zebranie podpisów [w dniach]. Jeśli nie ma wystarczającej "
-"liczby podpisów - po tym czasie propozycja jest odrzucana."
-
-#: glosowania/templates/glosowania/status.html:35
-msgid "Queue and discussion time [days]."
-msgstr "Czas na dyskusję trwa 7 dni"
+#: glosowania/templates/glosowania/status.html:37
+msgid "Maximum time to gather signatures is"
+msgstr "Maksymalny czas na zebranie podpisów to"
 
 #: glosowania/templates/glosowania/status.html:39
-msgid "Referendum duration [days]."
-msgstr "Referendum trwa 7 dni"
+msgid ""
+"days. If there is not enough signatures - after this time, proposition is "
+"rejected."
+msgstr ""
+"dni. Jeśli nie ma wystarczającej liczby podpisów - po tym czasie propozycja "
+"jest odrzucana."
 
-#: glosowania/templates/glosowania/status.html:43
-msgid "Vacatio Legis duration [days]."
-msgstr "Vacatio Legis trwa [dni]."
+#: glosowania/templates/glosowania/status.html:42
+msgid "Queue and discussion before referendum lasts"
+msgstr "Czas na dyskusję trwa"
+
+#: glosowania/templates/glosowania/status.html:44
+#: glosowania/templates/glosowania/status.html:49
+msgid "days."
+msgstr "dni."
+
+#: glosowania/templates/glosowania/status.html:47
+msgid "Referendum lasts for"
+msgstr "Referendum trwa"
+
+#: glosowania/templates/glosowania/status.html:52
+msgid "Vacatio Legis duration is"
+msgstr "Vacatio Legis trwa"
+
+#: glosowania/templates/glosowania/status.html:54
+msgid "days. After that time new law is in force."
+msgstr "dni. Po tym czasie prawo obowiązuje."
 
 #: glosowania/templates/glosowania/szczegoly.html:7
 msgid "Bill number"
@@ -912,31 +942,31 @@ msgstr "zaproponowany dnia"
 msgid "System parameters"
 msgstr "Parametry systemu"
 
-#: obywatele/templates/obywatele/poczekalnia.html:17
-#: obywatele/templates/obywatele/start.html:17
+#: obywatele/templates/obywatele/poczekalnia.html:20
+#: obywatele/templates/obywatele/start.html:20
 msgid "Population"
 msgstr "Populacja"
 
-#: obywatele/templates/obywatele/poczekalnia.html:21
-#: obywatele/templates/obywatele/start.html:21
+#: obywatele/templates/obywatele/poczekalnia.html:24
+#: obywatele/templates/obywatele/start.html:24
 msgid "Multiplier"
 msgstr "Mnożnik"
 
-#: obywatele/templates/obywatele/poczekalnia.html:25
-#: obywatele/templates/obywatele/start.html:25
+#: obywatele/templates/obywatele/poczekalnia.html:28
+#: obywatele/templates/obywatele/start.html:28
 msgid ""
 "Acceptance formula: required_reputation = round(log(Population) * Multiplier)"
 msgstr ""
 "Formuła obliczania akceptacji: wymagana_reputacja = round(log(Populacja) * "
 "Mnożnik"
 
-#: obywatele/templates/obywatele/poczekalnia.html:29
-#: obywatele/templates/obywatele/start.html:29
+#: obywatele/templates/obywatele/poczekalnia.html:32
+#: obywatele/templates/obywatele/start.html:32
 msgid "Currently required_reputation"
 msgstr "Obecnie wymagana reputacja"
 
-#: obywatele/templates/obywatele/poczekalnia.html:33
-#: obywatele/templates/obywatele/start.html:33
+#: obywatele/templates/obywatele/poczekalnia.html:36
+#: obywatele/templates/obywatele/start.html:36
 msgid ""
 "New person will be accepted above required_reputation threshold. Existing "
 "person will be banned bellow that threshold."

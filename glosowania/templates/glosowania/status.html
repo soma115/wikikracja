@@ -10,7 +10,7 @@
 
 <p>
 	{% for i in filtered_glosowania %}
-		<p><a href="{% url 'glosowania:details' pk=i.pk %}">{{ i.pk }}. {{ i.tresc }}</a></p>
+		<p><a href="{% url 'glosowania:details' pk=i.pk %}">{{ i.pk }}. {{ i.title }}<br>{{ i.tresc }}</a></p>
 	{% empty %}
 		<div class="alert alert-light">({% trans 'There is no proposition with this status' %})</div>
 	{% endfor %}
@@ -21,28 +21,38 @@
 </p>
 
 <p>
-	<h5 class="text-center font-weight-bold">{% trans "Voting parameters" %}</h5>
-	<ul class="list-group">
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-			{% trans "Signatures needed to approve a referendum request. This number should remain low enough for any sensible proposal to be voted on, and only high enough to filter out obvious spam." %}
+	<button class="btn btn-secondary btn-sm col-md-2 offset-8" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+		{% trans "Voting parameters" %}
+	</button>
+</p>
+
+<div class="collapse" id="collapseExample">
+	<ul class="list-group"></ul>
+		<li class="list-group-item">
+			{% trans "New proposition needs to gather" %}
 			<span class="badge badge-primary badge-pill">{{ signatures }}</span>
+			{% trans "signatures in order to trigger referendum. This number should remain low enough for any sensible proposal to be voted on, and only high enough to filter out obvious spam." %}
 		</li>
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-			{% trans "Maximum time to gather signatures [in days]. If there is not enough signatures - after this time, proposition is rejected." %}
+		<li class="list-group-item">
+			{% trans "Maximum time to gather signatures is" %}
 			<span class="badge badge-primary badge-pill">{{ signatures_span }}</span>
+			{% trans "days. If there is not enough signatures - after this time, proposition is rejected." %}
 		</li>
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-			{% trans "Queue and discussion time [days]." %}
+		<li class="list-group-item">
+			{% trans "Queue and discussion before referendum lasts" %}
 			<span class="badge badge-primary badge-pill">{{ queue_span }}</span>
+			{% trans "days." %}
 		</li>
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-			{% trans "Referendum duration [days]." %}
+		<li class="list-group-item">
+			{% trans "Referendum lasts for" %}
 			<span class="badge badge-primary badge-pill">{{ referendum_span }}</span>
+			{% trans "days." %}
 		</li>
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-			{% trans "Vacatio Legis duration [days]." %}
+		<li class="list-group-item">
+			{% trans "Vacatio Legis duration is" %}
 			<span class="badge badge-primary badge-pill">{{ vacatio_legis_span }}</span>
+			{% trans "days. After that time new law is in force." %}
 		</li>
 	</ul>
-</p>
+</div>
 {% endblock glosowania %}

@@ -9,9 +9,12 @@
 			<li class="list-group-item"><a href="{{ i.pk }}">{{ i.username }} | {{ i.email }}</a></li>
 		{% endfor %}
 	</ul>
-	<br>
-	<p>
-		<h5 class="text-center font-weight-bold">{% trans "System parameters" %}</h5>
+
+	<p><button class="btn btn-secondary btn-sm col-md-2 offset-8" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+		{% trans "System parameters" %}
+	</button></p>
+
+	<div class="collapse" id="collapseExample">
 		<ul class="list-group">
 			<li class="list-group-item d-flex justify-content-between align-items-center">
 				{% trans "Population" %}
@@ -34,6 +37,6 @@
 			  <span class="badge badge-primary badge-pill"></span>
 			</li>
 		  </ul>
-	</p>
+	</div>
 {% endblock citizens %}
 

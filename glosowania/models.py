@@ -9,11 +9,17 @@ base_dir = os.path.abspath('.')
 
 class Decyzja(models.Model):
     autor = models.CharField(max_length=200)
+    title = models.TextField(
+    max_length=200,
+    null=True,
+    verbose_name=_('Title'),
+    help_text=_('Enter short title describing new law.')
+    )
     tresc = models.TextField(
         max_length=500,
         null=True,
         verbose_name=_('Law text'),
-        help_text=_('Enter the wording of the law as it is to be applied.')
+        help_text=_('Enter the exact wording of the law as it is to be applied.')
         )
     kara = models.TextField(
         max_length=500,
