@@ -26,6 +26,7 @@ chmod u+w media/
 
 ./manage.py collectstatic --no-input -c -v 0
 # ./manage.py createsuperuser"
+pip install -r requirements.txt
 
 supervisorctl reread
 supervisorctl update
