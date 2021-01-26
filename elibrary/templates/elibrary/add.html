@@ -1,21 +1,23 @@
 {% extends 'home/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
-	<h1>Wgraj ebooka</h1>
+	<h1>{% trans 'Upload ebook' %}</h1>
 	<p><h5>
-		<center>Przed wgraniem pliku upewnij się, że jego nazwa jest ładnie sformatowana.</center></p>
-		<p><center>Idealnie by było gdy nazwa pliku miała format w stylu:</center></p>
-		<p><center><b>Imię Nazwisko - Tytuł.pdf</b></center>
+		<center>{% trans 'Before uploading a file make sure that file name is nicely formatted.' %}</center></p>
+		<p><center>{% trans 'Ideally the filename should be in the format like:' %}</center></p>
+		<p><center><b>{% trans 'First Name Last Name - Title.pdf' %}</b></center>
 	</h5></p>
 		<p>
 			<form method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			{{ form.as_p }}
-			<button type='file' class="btn btn-primary">Wyślij</button>
+			<button type='file' class="btn btn-primary btn-sm">{% trans 'Send' %}</button>
 			</form>
 		</p>
-	<p><a href="{% url 'elibrary:index' %}">Wróć</a></p>
+	<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
+
 {% endblock %}
 
 

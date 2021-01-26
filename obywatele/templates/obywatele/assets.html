@@ -1,0 +1,54 @@
+{% extends 'obywatele/menu.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block citizens %}
+<p>
+	<table class="table table-striped table-bordered table-sm">
+		<thead>
+			<tr class="text-center">
+				<th scope="col">{% trans "Name" %}</th>
+				<th scope="col">{% trans "Responsibilities" %}</th>
+				<th scope="col">{% trans "City" %}</th>
+				<th scope="col">{% trans "Hobby" %}</th>
+				<th scope="col">{% trans "To give away" %}</th>
+				<th scope="col">{% trans "To borrow" %}</th>
+				<th scope="col">{% trans "For sale" %}</th>
+				<th scope="col">{% trans "I need" %}</th>
+				<th scope="col">{% trans "Skills" %}</th>
+				<th scope="col">{% trans "Knowledge" %}</th>
+				<th scope="col">{% trans "I want to learn" %}</th>
+				<th scope="col">{% trans "Business" %}</th>
+				<th scope="col">{% trans "Job" %}</th>
+				<th scope="col">{% trans "Facebook" %}</th>
+				<th scope="col">{% trans "Gift" %}</th>
+				<th scope="col">{% trans "Other" %}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for asset in all_assets %}
+				<tr>
+					<td scope="col">
+						<a href="{% url 'obywatele:obywatele' %}{{ asset.pk }}">{{ asset.uid }}</a>
+					</td>
+					<td scope="col">{{ asset.responsibilities|default:"-" }}</td>
+					<td scope="col">{{ asset.city|default:"-" }}</td>
+					<td scope="col">{{ asset.hobby|default:"-" }}</td>
+					<td scope="col">{{ asset.to_give_away|default:"-" }}</td>
+					<td scope="col">{{ asset.to_borrow|default:"-" }}</td>
+					<td scope="col">{{ asset.for_sale|default:"-" }}</td>
+					<td scope="col">{{ asset.i_need|default:"-" }}</td>
+					<td scope="col">{{ asset.skills|default:"-" }}</td>
+					<td scope="col">{{ asset.knowledge|default:"-" }}</td>
+					<td scope="col">{{ asset.want_to_learn|default:"-" }}</td>
+					<td scope="col">{{ asset.business|default:"-" }}</td>
+					<td scope="col">{{ asset.job|default:"-" }}</td>
+					<td scope="col">{{ asset.fb|default:"-" }}</td>
+					<td scope="col">{{ asset.gift|default:"-" }}</td>
+					<td scope="col">{{ asset.other|default:"-" }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</p>
+{% endblock citizens %}

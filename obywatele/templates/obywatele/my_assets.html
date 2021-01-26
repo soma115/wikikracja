@@ -1,0 +1,19 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<p>{% trans 'Those are your assets' %} <b>{{ user }}</b></p>
+
+<form action="#" method="POST">{% csrf_token %}
+	{{ form|crispy }}
+	<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+</form>
+
+<p>
+    <a href="{% url 'obywatele:my_profile' %}" class="btn btn-warning btn-sm">{% trans 'Cancel' %}</a>
+</p>
+
+{% endblock %}
