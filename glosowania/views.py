@@ -76,7 +76,7 @@ def status(request, pk):
     zliczaj_wszystko()
     return render(request, 'glosowania/status.html', {
         'filtered_glosowania': filtered_glosowania,
-        'lang': lang,
+        'lang': lang[0:2],  # just en instead of en-us
         'signatures': s.WYMAGANYCH_PODPISOW,
         'signatures_span': timedelta(days=s.CZAS_NA_ZEBRANIE_PODPISOW).days,
         'queue_span': timedelta(days=s.KOLEJKA).days,
