@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-27 21:40+0100\n"
+"POT-Creation-Date: 2021-02-07 12:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,14 +23,14 @@ msgid "New room"
 msgstr ""
 
 #: chat/templates/chat/add.html:15
-#: glosowania/templates/glosowania/dodaj.html:28
+#: glosowania/templates/glosowania/dodaj.html:34
 #: home/templates/home/haslo.html:25
 #: obywatele/templates/obywatele/email_change.html:23
 msgid "Save"
 msgstr ""
 
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:19
-#: glosowania/templates/glosowania/dodaj.html:29
+#: glosowania/templates/glosowania/dodaj.html:35
 #: glosowania/templates/glosowania/szczegoly.html:39
 #: glosowania/templates/glosowania/szczegoly.html:52
 #: glosowania/templates/glosowania/szczegoly.html:56
@@ -141,11 +141,27 @@ msgid ""
 "achieve with it? What event caused it to arise?"
 msgstr ""
 
+#: glosowania/models.py:39
+msgid "Arguments for"
+msgstr ""
+
 #: glosowania/models.py:40
+msgid "Why should have this law? What will it give us?"
+msgstr ""
+
+#: glosowania/models.py:46
+msgid "Arguments against"
+msgstr ""
+
+#: glosowania/models.py:47
+msgid "What can go wrong if we will have it? What are the risks?"
+msgstr ""
+
+#: glosowania/models.py:53
 msgid "Abolishes the rules"
 msgstr ""
 
-#: glosowania/models.py:41
+#: glosowania/models.py:54
 msgid "If the proposed law supersedes other recipes, enter their numbers here."
 msgstr ""
 
@@ -323,62 +339,62 @@ msgstr ""
 msgid "New law proposition"
 msgstr ""
 
-#: glosowania/views.py:46
+#: glosowania/views.py:48
 msgid ""
-"{request.user.username.capitalize()} added new law proposition\n"
-"You can read it here: http://{HOST}/glosowania/{str(form.id)}"
+"added new law proposition\n"
+"You can read it here:"
 msgstr ""
 
-#: glosowania/views.py:100
+#: glosowania/views.py:103
 msgid "Your signature has been saved."
 msgstr ""
 
-#: glosowania/views.py:111
+#: glosowania/views.py:114
 msgid "Your vote has been saved. You voted Yes."
 msgstr ""
 
-#: glosowania/views.py:122
+#: glosowania/views.py:125
 msgid "Your vote has been saved. You voted No."
 msgstr ""
 
-#: glosowania/views.py:165
+#: glosowania/views.py:168
 msgid "Proposition {str(i.id)} approved for referendum"
 msgstr ""
 
-#: glosowania/views.py:166
+#: glosowania/views.py:169
 msgid ""
 "Proposition {str(i.id)} gathered required amount of signatures and will be "
 "voted from {i.data_referendum_start} to {i.data_referendum_stop}.\n"
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:176
+#: glosowania/views.py:179
 msgid "Proposition {str(i.id)} didn't gathered required amount of signatures"
 msgstr ""
 
-#: glosowania/views.py:177
+#: glosowania/views.py:180
 msgid ""
 "Proposition {str(i.id)} didn't gathered required amount of signatures and "
 "was removed from queue. Feel free to improve it and send it again.\n"
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:187
+#: glosowania/views.py:190
 msgid "Referendum on proposition {str(i.id)} starting now"
 msgstr ""
 
-#: glosowania/views.py:188
+#: glosowania/views.py:191
 msgid ""
 "It is time to vote on proposition {str(i.id)}.\n"
 "Referendum ends at {i.data_referendum_stop}.\n"
 "Click here to vote: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:201
+#: glosowania/views.py:204
 msgid "Proposition {str(i.id)} approved"
 msgstr ""
 
-#: glosowania/views.py:202
+#: glosowania/views.py:205
 msgid ""
 "Proposition {str(i.id)} was approved in referendum and is now in Vacatio "
 "Legis period.\n"
@@ -386,22 +402,22 @@ msgid ""
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:210
+#: glosowania/views.py:213
 msgid "Proposition {str(i.id)} rejected"
 msgstr ""
 
-#: glosowania/views.py:211
+#: glosowania/views.py:214
 msgid ""
 "Proposition {str(i.id)} was rejected in referendum.\n"
 "Feel free to improve it and send it again.\n"
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgstr ""
 
-#: glosowania/views.py:221
+#: glosowania/views.py:224
 msgid "Proposition {str(i.id)} is in efect from today"
 msgstr ""
 
-#: glosowania/views.py:222
+#: glosowania/views.py:225
 msgid ""
 "Proposition {str(i.id)} became abiding law today.\n"
 "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
@@ -931,7 +947,7 @@ msgstr ""
 msgid "I do not accept this person"
 msgstr ""
 
-#: obywatele/views.py:37 testy.py:8
+#: obywatele/views.py:37
 msgid "Your new email has been saved."
 msgstr ""
 

@@ -43,7 +43,7 @@ def dodaj(request):
 
             SendEmail(
                 _('New law proposition'),
-                _(f'{request.user.username.capitalize()} added new law proposition\nYou can read it here: http://{HOST}/glosowania/{str(form.id)}')
+                f'{request.user.username.capitalize()} ' + str(_('added new law proposition\nYou can read it here:')) + f' http://{HOST}/glosowania/{str(form.id)}'
                 )
             return redirect('glosowania:status', 1)
     else:
