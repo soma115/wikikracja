@@ -163,7 +163,7 @@ def zliczaj_wszystko():
                 i.save()
                 SendEmail(
                     _(f'Proposition {str(i.id)} approved for referendum'),
-                    _(f'Proposition {str(i.id)} gathered required amount of signatures and will be voted from {i.data_referendum_start} to {i.data_referendum_stop}.\nClick here to read proposition: http://{HOST}/glosowania/{str(i.id)}')
+                    _(f'Proposition {str(i.id)} gathered required amount of signatures and will be voted from {i.data_referendum_start} to {i.data_referendum_stop}.\nClick here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}')
                     )
                 continue
 
@@ -185,7 +185,7 @@ def zliczaj_wszystko():
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
                 SendEmail(
                 _(f'Referendum on proposition {str(i.id)} starting now'),
-                _(f'It is time to vote on proposition {str(i.id)}.\nReferendum ends at {i.data_referendum_stop}.\nClick here to vote: http://{HOST}/glosowania/{str(i.id)}')
+                _(f'It is time to vote on proposition {str(i.id)}.\nReferendum ends at {i.data_referendum_stop}.\nClick here to vote: http://{HOST}/glosowania/details/{str(i.id)}')
                 )
                 continue
 
@@ -199,7 +199,7 @@ def zliczaj_wszystko():
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
                     SendEmail(
                     _(f'Proposition {str(i.id)} approved'),
-                    _(f'Proposition {str(i.id)} was approved in referendum and is now in Vacatio Legis period.\nThe law will take effect on {i.data_obowiazuje_od}.\nClick here to read proposition: http://{HOST}/glosowania/{str(i.id)}')
+                    _(f'Proposition {str(i.id)} was approved in referendum and is now in Vacatio Legis period.\nThe law will take effect on {i.data_obowiazuje_od}.\nClick here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}')
                     )
                     continue
                 else:
@@ -219,7 +219,7 @@ def zliczaj_wszystko():
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
                 SendEmail(
                 _(f'Proposition {str(i.id)} is in efect from today'),
-                _(f'Proposition {str(i.id)} became abiding law today.\nClick here to read proposition: http://{HOST}/glosowania/{str(i.id)}')
+                _(f'Proposition {str(i.id)} became abiding law today.\nClick here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}')
                 )
                 continue
 
