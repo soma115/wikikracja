@@ -1,8 +1,9 @@
 #!/bin/bash
+# Tested with Centos 7 and 8
 
 echo; echo SOFTWARE 
 dnf -y install epel-release
-dnf -y install git-all python3 virtualenv nginx python3-certbot-nginx supervisor podman
+dnf -y install git-all python3 virtualenv nginx python3-certbot-nginx supervisor redis
 
 echo; echo USER
 adduser user -s /sbin/nologin  # TODO: make it to be parameter or something
@@ -26,5 +27,5 @@ echo; echo SERVICES
 cp scripts/wiki.conf /etc/nginx/conf.d/
 cp scripts/wiki.ini /etc/supervisord.d/
 cp scripts/redis.ini /etc/supervisord.d/
-systemctl enable nginx supervisord
+systemctl enable nginx supervisord redis
 ./scripts/restart_services.sh

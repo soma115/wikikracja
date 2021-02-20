@@ -1,76 +1,73 @@
 {% extends "home/base.html" %}
 {% block title %}Strona powitalna{% endblock %}
 {% block content %}
+{% load i18n %}
 
 
-<ul>
-	{% if not user.is_authenticated %}
-	<div class="row">
-		<div class="container">
-			<div class="row">
-				<h3 class="title">Czym jest Wikikracja?</h3>
-				<p class="lead">
-					Wikikracja jest systemem do głosowania dzięki któremu społeczność może zarządzać sama sobą – bez pomocy przedstawicieli i administratorów.
-				</p>
-				<h3 class="title">Główne cechy systemu</h3>
-				<p>
-					<ul>
-						<li>> każda osoba ma jeden głos</li>
-						<li>> każdy głos jest tak samo ważny</li>
-						<li>> decyzje podejmowane są zwykłą większością głosów</li>
-						<li>> głosowania są anonimowe</li>
-						<li>> głosowanie przypomina system szwajcarski – po zebraniu podpisów zaczyna się czas na dyskusję a dopiero po nim następuje referendum</li>
-						<li>> członkostwem zarządza cała grupa poprzez akceptowanie nowych osób</li>
-						<li>> możliwe jest też usunięcie przeszkadzającej osoby jeśli wiele osób odbierze jej punkty reputacji</li>
-					</ul>
-				</p>
-				<p>
-					Aplikacja jest tak napisana żeby nie było w niej hierarchii. Nie jest potrzebny administrator. Sami użytkownicy decydują kto należy 
-					do grupy i jakie obowiązują w niej zasady. Oznacza to pełną równość i prawdziwą demokrację, których nie da się wyłączyć.
-				</p>
-				<a href="https://wikikracja.pl/" class="btn btn-info m-2" target="_blank">Czytaj więcej...</a>
+{% if not user.is_authenticated %}
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<h3 class="title">{% trans 'What is Wikicracy?' %}</h3>
+			<p class="lead">
+				{% trans 'Wikicracy is a voting system that allows the community to manage itself - without the help of representatives or administrators.' %}
+			</p>
+			<h3>{% trans 'Main features of the system' %}</h3>
+			<p>
+				<ul>
+					<li> {% trans 'each person has one vote' %}</li>
+					<li> {% trans 'every vote is equal' %}</li>
+					<li> {% trans 'decisions are taken by simple majority of votes' %}</li>
+					<li> {% trans 'votes are anonymous' %}</li>
+					<li> {% trans 'voting is similar to the Swiss system - after collecting the signatures, the time for discussion begins and then a referendum follows' %}</li>
+					<li> {% trans 'the membership is managed by the whole group by accepting new people' %}</li>
+					<li> {% trans 'it is also possible to remove a disruptive person by popular vote' %}</li>
+				</ul>
+			</p>
+			<p><u>
+				{% trans 'The application is written so that there is no hierarchy in it. No administrator is needed. The users themselves decide who belongs to the group and what rules apply to it. This means full equality and true democracy that cannot be disabled.' %}
+			</p></u>
+			<a href="https://wikikracja.pl/" class="btn btn-info m-2 btn-sm" target="_blank">{% trans 'Read more...' %}</a>
+		</div>
+		<div class="row rounded" style="background-color: #a7d2e4; padding:10px;margin-top:20px;">
+			<div class="col-md-4">
+				<a href="{% url 'login' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Login' %}</a>
 			</div>
-			<div class="row rounded" style="background-color: #a7d2e4; padding:10px;margin-top:20px;">
-				<div class="col-md-4">
-					<a href="{% url 'login' %}" class="btn btn-success btn-block m-2"> Zaloguj się</a>
-				</div>
-				<div class="col-md-4">
-					<a href="{% url 'password_reset' %}" class="btn btn-success btn-block m-2">Zresetuj hasło</a>
-				</div>
-				<div class="col-md-4">
-					<a href=https://wikikracja.pl/kontakt/ target="_blank" class="btn btn-success btn-block m-2"> Wyślij wiadomość do admina</a>		
-				</div>
+			<div class="col-md-4">
+				<a href="{% url 'password_reset' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Reset password' %}</a>
+			</div>
+			<div class="col-md-4">
+				<a href=https://wikikracja.pl/kontakt/ target="_blank" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Send message to developer' %}</a>		
 			</div>
 		</div>
 	</div>
-	{% endif %}
+</div>
+{% endif %}
 
-	{% if user.is_authenticated %}
-
-		<div class="col-sm-10 right">
-			<h1>Trwające referenda:</h1>
-			{% for i in trwajace %}
-				<h3>● <a href="glosowania/{{ i.pk }}">{{ i.tresc }}</a></h3>
-				<!-- Autor: {{ i.autor }} | ID: {{ i.pk }} | Data powstania: {{i.data_powstania}} -->
-{% empty %}
-    <li>Obecnie nie ma trwających referendów.</li>
-{% endfor %}
-		</div>
-
-		<div class="col-sm-10 right">
-			<h1>Zbliżające się referenda:</h1>
-			{% for i in zblizajace_sie %}
-				<!--<h3>● <a href="glosowania/{{ i.pk }}">{{ i.data_zebrania_podpisow }}{{ i.tresc }}</a></h3>-->
-				<!-- Autor: {{ i.autor }} | ID: {{ i.pk }} | Data powstania: {{i.data_powstania}} -->
-				<h3>● <a href="glosowania/{{ i.pk }}">{{ i.tresc }}</a></h3>
-						<p><h4>{{ i.data_referendum_start }}</h4></p>
-{% empty %}
-    <li>Obecnie nie ma zbliżających się referendów.</li>
-{% endfor %}
-		</div>
-
-	{% endif %}
-</ul>
+{% if user.is_authenticated %}
+	<p>
+	<div class="col-sm-10 right">
+		<h4>{% trans 'Ongoing referenda' %}:</h4>
+		{% for i in ongoing %}
+			<a href="glosowania/details/{{ i.pk }}" class="list-group-item list-group-item-action list-group-item-success">{{ i.tresc }}<br>{{ i.data_referendum_start }}</a>
+			{% empty %}
+				<div class="alert alert-light">({% trans 'there is currently no referendum' %})</div>
+		{% endfor %}
+	</div>
+	</p>
+	<p>
+	<div class="col-sm-10 right">
+		<h4>{% trans 'Upcoming referenda' %}:</h4>
+		<ul class="list-group">
+			{% for i in upcoming %}
+				<a href="glosowania/details/{{ i.pk }}" class="list-group-item list-group-item-action list-group-item-primary">{{ i.tresc }}<br>{{ i.data_referendum_start }}</a>
+				{% empty %}
+				<div class="alert alert-light">({% trans 'there are no upcoming referenda at this moment' %})</div>
+			{% endfor %}
+		</ul>
+	</div>
+	</p>
+{% endif %}
 
 {% endblock %}
 

@@ -1,0 +1,20 @@
+[
+{
+    "model": "auth.user",
+    "pk": 15,
+    "fields": {
+        "password": "pbkdf2_sha256$216000$Y1P4k5c4gscz$/qCLTd/7y5Uz8oVWbWBvHRQ4ZA2EfnEAOMHLOZmvExQ=",
+        "last_login": "2021-01-03T19:38:45.580Z",
+        "is_superuser": false,
+        "username": "c",
+        "first_name": "",
+        "last_name": "",
+        "email": "robert.fialek+c@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-12-26T14:02:25.935Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

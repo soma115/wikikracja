@@ -1,0 +1,80 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<ul class="nav nav-pills justify-content-center">
+	<li class="nav-item" >
+		<a {% if request.path_info == '/glosowania/status/1/' %}
+			class="btn mr-1 btn-sm btn-primary" 
+		{% else %}
+			class="btn mr-1 btn-sm btn-outline-primary"
+		{% endif %}
+			href="{% url 'glosowania:status' pk=1 %}">{% trans "Propositions" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.path_info == '/glosowania/nowy/' %}
+			class="btn mr-1 btn-sm btn-danger text-white font-weight-bold" 
+		{% else %}
+			class="btn mr-1 btn-sm btn-danger text-white font-weight-bold"
+		{% endif %}
+			href="{% url 'glosowania:dodaj_nowy' %}">+</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.path_info == '/glosowania/status/2/' %}
+			class="btn mr-1 btn-sm btn-primary" 
+		{% else %}
+			class="btn mr-1 btn-sm btn-outline-primary"
+		{% endif %}
+			href="{% url 'glosowania:status' pk=2 %}">{% trans "No endorsement" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.path_info == '/glosowania/status/3/' %}
+			class="btn mr-1 btn-sm btn-primary" 
+		{% else %}
+			class="btn mr-1 btn-sm btn-outline-primary"
+		{% endif %}
+			href="{% url 'glosowania:status' pk=3 %}">{% trans "Queued" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.path_info == '/glosowania/status/4/' %}
+			class="btn mr-1 btn-sm btn-primary" 
+		{% else %}
+			class="btn mr-1 btn-sm btn-outline-primary"
+		{% endif %}
+			href="{% url 'glosowania:status' pk=4 %}">{% trans "Referendum" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.path_info == '/glosowania/status/5/' %}
+			class="btn mr-1 btn-sm btn-primary" 
+		{% else %}
+			class="btn mr-1 btn-sm btn-outline-primary"
+		{% endif %}
+			href="{% url 'glosowania:status' pk=5 %}">{% trans "Rejected" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.path_info == '/glosowania/status/6/' %}
+			class="btn mr-1 btn-sm btn-primary" 
+		{% else %}
+			class="btn mr-1 btn-sm btn-outline-primary"
+		{% endif %}
+			href="{% url 'glosowania:status' pk=6 %}">{% trans "Vacatio Legis" %}</a>
+	</li>
+	<li class="nav-item" >
+		<a {% if request.path_info == '/glosowania/status/7/' %}
+			class="btn mr-1 btn-sm btn-primary" 
+		{% else %}
+			class="btn mr-1 btn-sm btn-outline-primary"
+		{% endif %}
+			href="{% url 'glosowania:status' pk=7 %}">{% trans "Governing Law" %}</a>
+	</li>
+</ul>
+
+<p>
+	{% block glosowania %}
+	{% endblock glosowania %}
+</p>
+
+{% endblock content %}
+	

@@ -46,8 +46,6 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             except ClientError:
                 pass
 
-############################################################################
-
     async def receive_json(self, content):
         """
         Called when we get a text frame. Channels will JSON-decode
@@ -63,7 +61,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 # Leave the room
                 await self.leave_room(content["room"])
             elif command == "send":
-                await self.send_room(content["room"], content["message"])
+                await self.send_room(content["room"], content["message"])  # goes to chat and DB
+                # await self.send_room(content["room"], str(content["message"]+'===='))
         except ClientError as e:
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
@@ -91,22 +90,25 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Instruct their client to finish opening the room
         await self.send_json({
             "join": str(room.id),  # 1
-            "title": room.title,   # Pokój 1
+            "title": room.title,   # "Room 1"
         })
 
-        # Ładujemy wszystkie wiadomości z bazy do czatu
+        # Load all messages from DB to Chat
         cn = self.channel_name
         messages = await self.get_messages(room_id)
         for message in messages:
             u = await self.get_user_by_id(message['sender_id'])
+            # message: id, sender_id, time, text, room_id
+            # t=str(message['time'])[0:19]
             await self.channel_layer.send(
                 cn,
                 {
                     "type": "chat.message",
                     "room_id": room_id,
                     "username": u.username,
-                    # "time": str(message['time']),  # doesn't work, maybe later
-                    "message": message['text'],
+                    # "message": t+': '+message['text'], 
+                    "message": message['text'], 
+                    # "time": message['time'], 
                 }
             )
 
@@ -148,10 +150,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "type": "chat.message",
                 "room_id": room_id,
                 "username": self.scope["user"].username,
-                # "time": str(message['time']),  # doesn't work, maybe later
-                "message": message,
+                "message": message,  # goes to chat and DB
+                # "time": dt.now(),
             }
         )
+
+        # Save message to DB
+        u = await self.get_user_by_name(self.scope["user"].username)
+        r = await self.get_room(room_id)
+        msg = Message(sender=u, text=message, room=r)  # time is added in a models.py
+        await self.save_message(msg)
 
     ###########################################################
     # Handlers for messages sent over the channel layer       #
@@ -164,23 +172,25 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     async def chat_message(self, event):
         """
-        Called when someone has messaged our chat.
+        Called when someone has messaged our chat
         """
+        # print(event["time"])
+        # for i in event:
+        #     print(i)
+        # print(event)
         # Send a message down to the client
-        await self.send_json(
+        await self.send_json( 
             {
-                "msg_type": settings.MSG_TYPE_MESSAGE,
+                # type, room_id, username, message
                 "room": event["room_id"],
                 "username": event["username"],
-                "message": event["message"],
+                "message": event["message"],  # goes only from DB to chat. Display alteration possible but only from DB.
+                # "time": event["time"],
+                # "time": dt.now(),
+                "time": str(dt.now()),  # to podejście jest ok
+                # "time": 'czas',
             },
         )
-
-        # Save message to DB
-        u = await self.get_user_by_name(event["username"])
-        r = await self.get_room(event["room_id"])
-        msg = Message(sender=u, time=dt.now(), text=event['message'], room=r)
-        await self.save_message(msg)
 
     ###########################
     # Sync to async functions #
@@ -208,8 +218,5 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     @database_sync_to_async
     def save_message(self, message):
-        try:
+        if message.text:
             message.save()
-        except IntegrityError as e:
-            if 'UNIQUE constraint failed' in e.args[0]:
-                pass  # This message already exist in DB

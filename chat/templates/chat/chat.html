@@ -1,0 +1,203 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+    {% comment %} ADD ROOM {% endcomment %}
+    <div class="col-md-2 offset-8">
+        <a class="btn btn-info btn-sm" href="{% url 'chat:add_room' %}">+{% trans 'Add Room' %}</a>
+    </div>
+
+    {% comment %} PUBLIC CHAT ROOMS {% endcomment %}
+    <ul class="rooms col-md-8">
+        <h4>{% trans 'Public chat rooms' %}</h4>
+        {% for room in allowed_rooms %}
+            {% if room.public == True and room.archived == False %}
+                <li class="room-link text-uppercase" data-room-id="{{ room.id }}">{{ room }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    {% comment %} PRIVATE MESSAGES {% endcomment %}
+    <ul class="rooms col-md-8">
+        <h4>{% trans 'Private messages' %}</h4>
+        {% for room in allowed_rooms %}
+            {% if room.public == False and room.archived == False %}
+                <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    {% comment %} ARCHIVED PUBLIC ROOMS {% endcomment %}
+    <div class="col-md-2 offset-8">
+        <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#archive" role="button" aria-expanded="false" aria-controls="collapseExample">
+            {% trans "Archived chats" %}
+        </button>
+    </div>
+
+    <div id="archive" class="collapse">
+        <p>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    {% trans 'Public chat rooms are archived if they are not used for' %}
+                    <span class="badge badge-primary badge-pill">{{ ARCHIVE_CHAT_ROOM }}</span>
+                    {% trans 'days. After' %} 
+                    <span class="badge badge-primary badge-pill">{{ DELETE_CHAT_ROOM }}</span>
+                    {% trans 'days they are deleted.' %}
+                </li>
+                <li class="list-group-item">
+                    {% trans 'Private messages are archived when user is blocked and deleted after' %} 
+                    <span class="badge badge-primary badge-pill">{{ DELETE_CHAT_ROOM }}</span>
+                    {% trans 'days' %}
+                </li>
+            </ul>
+        </p>
+
+        {% comment %} PUBLIC ROOMS {% endcomment %}
+        <ul class="rooms col-md-8">
+            {% for room in allowed_rooms %}
+                {% if room.archived == True and room.public == True %}
+                    <li class="room-link text-uppercase" data-room-id="{{ room.id }}">{{ room }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        {% comment %} PRIVATE MESSAGES {% endcomment %}
+        <ul class="rooms col-md-8">
+            {% for room in allowed_rooms %}
+                {% if room.archived == True and room.public == False %}
+                    <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% comment %} HERE CHATS WILL APPEAR {% endcomment %}
+    <div id="chats" class="col-md-12"></div>
+
+{% endblock content %}
+
+{% block extra_body %}
+    <script>
+        $(function () {
+            // Correctly decide between ws:// and wss://
+            var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+            var ws_path = ws_scheme + '://' + window.location.host + "/chat/stream/";
+            console.log("Connecting to " + ws_path);
+            var socket = new ReconnectingWebSocket(ws_path);
+
+            // Handle incoming messages
+            socket.onmessage = function (message) {
+                // Decode the JSON
+                console.log("Got websocket message " + message.data);
+                var data = JSON.parse(message.data);
+                // Handle errors
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                // Handle joining
+                if (data.join) {
+                    console.log("Joining room " + data.join);
+                    var roomdiv = $(  // roomdiv is whole frame with one chat
+                        "<div class='room' id='room-" + data.join + "'>" +
+                        "<h5>" + data.title + "</h5>" +
+                        "<div class='messages'></div>" +
+                        "<form class='d-flex'><input class='col-12 col-sm'><button class='btn btn-danger btn-sm'>↲</button></form>" +
+                        "</div>"
+                        );
+
+                    // Hook up send button to send a message
+                    roomdiv.find("form").on("submit", function () {
+                        socket.send(
+                            JSON.stringify(
+                                {
+                                    "command": "send",
+                                    "room": data.join,  // room number
+                                    "message": roomdiv.find("input").val(),  // value, message to send
+                        }));
+
+                        // Clears input field
+                        roomdiv.find("input").val(""); // TODO: Here we can plugin edititing old messages (with val)
+                        return false;
+                    });
+
+                    // Here is <div id="chats"></div> used
+                    $("#chats").append(roomdiv);  
+
+                // Handle leaving
+                } else if (data.leave) {
+                    console.log("Leaving room " + data.leave);
+                    $("#room-" + data.leave).remove();
+
+                // Handle getting a message
+                } else if (data.message != 0) {
+                    var msgdiv = $("#room-" + data.room + " .messages");
+                    var ok_msg = "<div class='message'>" +
+                                    "<span class='username'>" + data.username + ": " + "</span>" +
+                                    // "<span class='username'>" + data.time + ": " + "</span>" +
+                                    "<span class='body'>" + data.message + "</span>" +
+                                    "</div>";
+                    msgdiv.append(ok_msg);
+                    msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
+                } else {
+                    console.log("Cannot handle message!");  // i.e. empty message
+                }
+            };
+
+            // Says if we joined a room or not by if there's a div for it
+            inRoom = function (roomId) {
+                return $("#room-" + roomId).length > 0;
+            };
+
+            // Room join/leave
+            $("li.room-link").click(function () {
+                roomId = $(this).attr("data-room-id");  // Here is  <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li> used
+                if (inRoom(roomId)) {
+                    // Leave room
+                    $(this).removeClass("joined");
+                    socket.send(JSON.stringify({
+                        "command": "leave",
+                        "room": roomId
+                    }));
+                } else {
+                    // Join room
+                    $(this).addClass("joined");
+                    socket.send(JSON.stringify({
+                        "command": "join",
+                        "room": roomId
+                    }));
+                }
+            });
+
+            // Helpful debugging
+            socket.onopen = function () {
+                console.log("Connected to chat socket");
+            };
+            socket.onclose = function () {
+                console.log("Disconnected from chat socket");
+            }
+        });
+    </script>
+{% endblock extra_body %}
