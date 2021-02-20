@@ -32,9 +32,10 @@ supervisorctl reread
 supervisorctl update
 
 # TODO: Don't restart everything if possible
-systemctl stop nginx; sleep 1
-systemctl restart supervisord; sleep 1
-systemctl start nginx; sleep 1
+# systemctl stop nginx; sleep 1
+# systemctl restart supervisord; sleep 1
+supervisorctl restart `basename $(dirname "$PWD")`:asgi0
+# systemctl start nginx; sleep 1
 
 echo -n "nginx is:	"; systemctl is-active nginx
 echo -n "redis is:	"; systemctl is-active redis

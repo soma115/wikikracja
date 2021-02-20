@@ -28,6 +28,8 @@ create_database.sh
 testy.py
 setup.cfg
 wiki.log
+gen_users_out.txt
+gen_users.txt
 
 ### Django ###
 *.log
