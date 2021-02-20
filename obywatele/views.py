@@ -21,11 +21,11 @@ from obywatele.models import Uzytkownik, Rate
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
-POPULATION = User.objects.filter(is_active=True).count()
-
-# Be careful changing this formula - people rarely acctepting each other.
-REQUIRED_REPUTATION = round(log(POPULATION) * s.ACCEPTANCE_MULTIPLIER)
-
+try:
+    POPULATION = User.objects.filter(is_active=True).count()
+    REQUIRED_REPUTATION = round(log(POPULATION) * s.ACCEPTANCE_MULTIPLIER)
+except:
+    pass
 
 @login_required() 
 def email_change(request):

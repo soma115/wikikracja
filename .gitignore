@@ -26,6 +26,8 @@ Thumbs.db
 notatki.md
 create_database.sh
 testy.py
+setup.cfg
+wiki.log
 
 ### Django ###
 *.log

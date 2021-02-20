@@ -31,6 +31,7 @@ pip install -r requirements.txt
 supervisorctl reread
 supervisorctl update
 
+# TODO: Don't restart everything if possible
 systemctl stop nginx; sleep 1
 systemctl restart supervisord; sleep 1
 systemctl start nginx; sleep 1
