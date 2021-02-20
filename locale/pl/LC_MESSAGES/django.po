@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-20 21:04+0100\n"
+"POT-Creation-Date: 2021-02-20 22:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -963,9 +963,8 @@ msgid ""
 "and we will be able to fullfill our needs better."
 msgstr ""
 "Nie musisz ich wszystkich wypełniać, ale im więcej informacji podasz - tym "
-"większy zysk odniesie każdy z nas i cała grupa. Informacje te będą przydatne "
-"również dla nowych osób w grupie. Poznamy się lepiej i będziemy w stanie "
-"lepiej zaspokajać nasze potrzeby."
+"lepiej będziemy mogli nawzajem sobie pomóc. Dzięki tym informacjom również "
+"lepiej się poznamy."
 
 #: obywatele/templates/obywatele/my_profile.html:43
 msgid "Edit my assets"
@@ -1038,7 +1037,7 @@ msgstr "Akceptuję tą osobę"
 
 #: obywatele/templates/obywatele/szczegoly.html:22
 msgid "Indifferent"
-msgstr "Obojętny"
+msgstr "Neutralny"
 
 #: obywatele/templates/obywatele/szczegoly.html:23
 msgid "I do not accept this person"
@@ -1074,7 +1073,7 @@ msgstr "negatywny"
 
 #: obywatele/views.py:294
 msgid "neutral"
-msgstr "neutralny"
+msgstr "obojętny"
 
 #: templates/admin/base_site.html:3
 msgid "Django site admin"
