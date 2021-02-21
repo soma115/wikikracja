@@ -9,11 +9,6 @@
 
 git reset --hard
 git pull | grep -q -F 'Already up to date.' && exit 0
-# TODO: check if there was update. If not - do nothing. Something like that:
-    # */30 * * * * cd /home/user/mojglos/mojglos; 
-    # git checkout mojglos; 
-    # source /home/user/mojglos/venv/bin/activate; 
-    # /home/user/mojglos/mojglos/scripts/update.sh | grep -q 'file changed' && supervisorctl restart asgi_mojglos:asgi0
 
 ./manage.py makemigrations obywatele
 ./manage.py makemigrations glosowania
