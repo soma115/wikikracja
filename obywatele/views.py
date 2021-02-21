@@ -351,6 +351,7 @@ def zliczaj_obywateli(request):
             subject = request.get_host() + ' - Twoje konto zostało włączone'
             uname = str(i.uid.username)
             uhost = str(request.get_host())
+            # TODO: Tłumaczenie na angielski
             message = f'Witaj {uname}\nTwoje konto na {uhost} zostało włączone.\n\nTwój login to: {uname}\nTwoje hasło to: {password}\n\nZaloguj się tutaj: {uhost}/login/\n\nHasło możesz zmienić tutaj: {uhost}/haslo/'
             
             send_mail(subject, message, s.DEFAULT_FROM_EMAIL, [i.uid.email], fail_silently=False)

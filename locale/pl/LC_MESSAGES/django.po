@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-20 22:07+0100\n"
+"POT-Creation-Date: 2021-02-21 16:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -208,7 +208,7 @@ msgstr "Vacatio Legis"
 
 #: glosowania/templates/glosowania/menu.html:70
 msgid "Governing Law"
-msgstr "Obowiązujące prawo"
+msgstr "Obowiązujące"
 
 #: glosowania/templates/glosowania/status.html:15
 msgid "There is no proposition with this status"
@@ -382,11 +382,6 @@ msgid "Proposition {str(i.id)} approved for referendum"
 msgstr "Propozycja nr. {str(i.id)} została zatwierdzona w referendum"
 
 #: glosowania/views.py:166
-#, fuzzy
-#| msgid ""
-#| "Proposition {str(i.id)} gathered required amount of signatures and will "
-#| "be voted from {i.data_referendum_start} to {i.data_referendum_stop}.\n"
-#| "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgid ""
 "Proposition {str(i.id)} gathered required amount of signatures and will be "
 "voted from {i.data_referendum_start} to {i.data_referendum_stop}.\n"
@@ -417,11 +412,6 @@ msgid "Referendum on proposition {str(i.id)} starting now"
 msgstr "Referendum nad propozycją {str(i.id)} właśnie startuje"
 
 #: glosowania/views.py:188
-#, fuzzy
-#| msgid ""
-#| "It is time to vote on proposition {str(i.id)}.\n"
-#| "Referendum ends at {i.data_referendum_stop}.\n"
-#| "Click here to vote: http://{HOST}/glosowania/{str(i.id)}"
 msgid ""
 "It is time to vote on proposition {str(i.id)}.\n"
 "Referendum ends at {i.data_referendum_stop}.\n"
@@ -436,12 +426,6 @@ msgid "Proposition {str(i.id)} approved"
 msgstr "Propozycja {str(i.id)} została zatwierdzona"
 
 #: glosowania/views.py:202
-#, fuzzy
-#| msgid ""
-#| "Proposition {str(i.id)} was approved in referendum and is now in Vacatio "
-#| "Legis period.\n"
-#| "The law will take effect on {i.data_obowiazuje_od}.\n"
-#| "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgid ""
 "Proposition {str(i.id)} was approved in referendum and is now in Vacatio "
 "Legis period.\n"
@@ -474,10 +458,6 @@ msgid "Proposition {str(i.id)} is in efect from today"
 msgstr "Propozycja {str(i.id)} obowiązuje od dzisiaj"
 
 #: glosowania/views.py:222
-#, fuzzy
-#| msgid ""
-#| "Proposition {str(i.id)} became abiding law today.\n"
-#| "Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
 msgid ""
 "Proposition {str(i.id)} became abiding law today.\n"
 "Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
@@ -507,8 +487,8 @@ msgid "Citizens"
 msgstr "Obywatele"
 
 #: home/templates/home/base.html:43
-msgid "Law"
-msgstr "Przepisy"
+msgid "Voting"
+msgstr "Głosowania"
 
 #: home/templates/home/base.html:45
 msgid "eLibrary"
@@ -1090,3 +1070,6 @@ msgstr "Angielski"
 #: zzz/settings.py:41 zzz/settings_example.py:38 zzz/settings_prod.py:38
 msgid "Polish"
 msgstr "Polski"
+
+#~ msgid "Law"
+#~ msgstr "Przepisy"
