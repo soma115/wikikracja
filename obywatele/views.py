@@ -21,11 +21,16 @@ from obywatele.models import Uzytkownik, Rate
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
-POPULATION = User.objects.filter(is_active=True).count()
+def population():
+    try:
+        population = User.objects.filter(is_active=True).count()
+        return population
+    except:
+        pass
+        l.error(f"Population zero, I don't know what to do.")
 
-# Be careful changing this formula - people rarely acctepting each other.
-REQUIRED_REPUTATION = round(log(POPULATION) * s.ACCEPTANCE_MULTIPLIER)
-
+def required_reputation():
+    return round(log(population()) * s.ACCEPTANCE_MULTIPLIER)
 
 @login_required() 
 def email_change(request):
@@ -51,9 +56,9 @@ def obywatele(request):
     uid = User.objects.filter(is_active=True)
     return render(request, 'obywatele/start.html', {
         'uid': uid,
-        'population': POPULATION,
+        'population': population(),
         'acceptance': s.ACCEPTANCE_MULTIPLIER,
-        'required_reputation': REQUIRED_REPUTATION,
+        'required_reputation': required_reputation(),
         })
 
 
@@ -63,9 +68,9 @@ def poczekalnia(request):
     uid = User.objects.filter(is_active=False)
     return render(request, 'obywatele/poczekalnia.html', {
         'uid': uid,
-        'population': POPULATION,
+        'population': population(),
         'acceptance': s.ACCEPTANCE_MULTIPLIER,
-        'required_reputation': REQUIRED_REPUTATION,
+        'required_reputation': required_reputation(),
         })
 
 
@@ -137,7 +142,7 @@ def my_profile(request):
     pk=request.user.id
     profile = Uzytkownik.objects.get(pk=pk)
     user = User.objects.get(pk=pk)
-    return render(request, 'obywatele/my_profile.html', {'profile': profile, 'user': user, 'population': POPULATION, 'required_reputation': REQUIRED_REPUTATION,})
+    return render(request, 'obywatele/my_profile.html', {'profile': profile, 'user': user, 'population': population(), 'required_reputation': required_reputation(),})
 
 
 @login_required
@@ -171,7 +176,7 @@ def my_assets(request):
                 {
                     'message': _('Changes was saved'),
                     'profile': profile,
-                    'required_reputation': REQUIRED_REPUTATION,
+                    'required_reputation': required_reputation(),
                 }
             )
         else:  # form.is_NOT_valid():
@@ -184,7 +189,7 @@ def my_assets(request):
                 {
                     'message': _('Form is not valid!'),
                     'profile': profile,
-                    'required_reputation': REQUIRED_REPUTATION,
+                    'required_reputation': required_reputation(),
                 }
             )
     else:  # request.method != 'POST':
@@ -299,7 +304,7 @@ def obywatele_szczegoly(request, pk):
             'b': candidate_profile,
             'd': citizen_profile,
             'tr': citizen_reputation,
-            'wr': REQUIRED_REPUTATION,
+            'wr': required_reputation(),
             'rate': r1,
             'p': polecajacy
         })
@@ -328,7 +333,7 @@ def zliczaj_obywateli(request):
 
     # Włącz użytkowników z odpowiednio wysoką reputacją
     for i in Uzytkownik.objects.all():
-        if i.reputation > REQUIRED_REPUTATION and not i.uid.is_active:
+        if i.reputation > required_reputation() and not i.uid.is_active:
             i.uid.is_active = True  # Uzytkownik.uid -> User
             password = password_generator()
             i.uid.set_password(password)
@@ -346,6 +351,7 @@ def zliczaj_obywateli(request):
             subject = request.get_host() + ' - Twoje konto zostało włączone'
             uname = str(i.uid.username)
             uhost = str(request.get_host())
+            # TODO: Tłumaczenie na angielski
             message = f'Witaj {uname}\nTwoje konto na {uhost} zostało włączone.\n\nTwój login to: {uname}\nTwoje hasło to: {password}\n\nZaloguj się tutaj: {uhost}/login/\n\nHasło możesz zmienić tutaj: {uhost}/haslo/'
             
             send_mail(subject, message, s.DEFAULT_FROM_EMAIL, [i.uid.email], fail_silently=False)
@@ -353,7 +359,7 @@ def zliczaj_obywateli(request):
     # Blokuj użytkowników ze zbyt niską reputacją
     for i in Uzytkownik.objects.all():
         # l.info(f'Uzytkownik {i.id} reputation: {i.reputation}')
-        if i.reputation < REQUIRED_REPUTATION and i.uid.is_active:
+        if i.reputation < required_reputation() and i.uid.is_active:
             i.uid.is_active = False  # Uzytkownik.uid -> User
             i.uid.save()
             l.info(f'Blocking user {i.uid}')

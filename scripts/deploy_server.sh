@@ -1,4 +1,5 @@
 #!/bin/bash
+# Tested with Centos 7 and 8
 
 echo; echo SOFTWARE 
 dnf -y install epel-release

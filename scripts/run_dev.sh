@@ -5,6 +5,7 @@
 # 'podman' is an equivalent of 'docker' on Centos/RedHat
 # podman/docker will not work on OpenVZ. At least KVM VM is needed.
 # podman run -p 6379:6379 -d redis:6
+pip install -q -r requirements.txt
 
 ./manage.py makemigrations glosowania
 ./manage.py makemigrations obywatele

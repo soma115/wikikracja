@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-18 23:05+0100\n"
+"POT-Creation-Date: 2021-02-27 14:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,14 +23,14 @@ msgid "New room"
 msgstr ""
 
 #: chat/templates/chat/add.html:15
-#: glosowania/templates/glosowania/dodaj.html:28
+#: glosowania/templates/glosowania/dodaj.html:34
 #: home/templates/home/haslo.html:25
 #: obywatele/templates/obywatele/email_change.html:23
 msgid "Save"
 msgstr ""
 
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:19
-#: glosowania/templates/glosowania/dodaj.html:29
+#: glosowania/templates/glosowania/dodaj.html:35
 #: glosowania/templates/glosowania/szczegoly.html:39
 #: glosowania/templates/glosowania/szczegoly.html:52
 #: glosowania/templates/glosowania/szczegoly.html:56
@@ -141,11 +141,27 @@ msgid ""
 "achieve with it? What event caused it to arise?"
 msgstr ""
 
+#: glosowania/models.py:39
+msgid "Arguments for"
+msgstr ""
+
 #: glosowania/models.py:40
+msgid "Why should have this law? What will it give us?"
+msgstr ""
+
+#: glosowania/models.py:46
+msgid "Arguments against"
+msgstr ""
+
+#: glosowania/models.py:47
+msgid "What can go wrong if we will have it? What are the risks?"
+msgstr ""
+
+#: glosowania/models.py:53
 msgid "Abolishes the rules"
 msgstr ""
 
-#: glosowania/models.py:41
+#: glosowania/models.py:54
 msgid "If the proposed law supersedes other recipes, enter their numbers here."
 msgstr ""
 
@@ -325,8 +341,8 @@ msgstr ""
 
 #: glosowania/views.py:46
 msgid ""
-"{request.user.username.capitalize()} added new law proposition\n"
-"You can read it here: http://{HOST}/glosowania/{str(form.id)}"
+"added new law proposition\n"
+"You can read it here:"
 msgstr ""
 
 #: glosowania/views.py:100
@@ -349,7 +365,7 @@ msgstr ""
 msgid ""
 "Proposition {str(i.id)} gathered required amount of signatures and will be "
 "voted from {i.data_referendum_start} to {i.data_referendum_stop}.\n"
-"Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
+"Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
 msgstr ""
 
 #: glosowania/views.py:176
@@ -371,7 +387,7 @@ msgstr ""
 msgid ""
 "It is time to vote on proposition {str(i.id)}.\n"
 "Referendum ends at {i.data_referendum_stop}.\n"
-"Click here to vote: http://{HOST}/glosowania/{str(i.id)}"
+"Click here to vote: http://{HOST}/glosowania/details/{str(i.id)}"
 msgstr ""
 
 #: glosowania/views.py:201
@@ -383,7 +399,7 @@ msgid ""
 "Proposition {str(i.id)} was approved in referendum and is now in Vacatio "
 "Legis period.\n"
 "The law will take effect on {i.data_obowiazuje_od}.\n"
-"Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
+"Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
 msgstr ""
 
 #: glosowania/views.py:210
@@ -404,7 +420,7 @@ msgstr ""
 #: glosowania/views.py:222
 msgid ""
 "Proposition {str(i.id)} became abiding law today.\n"
-"Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
+"Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
 msgstr ""
 
 #: home/templates/home/base.html:35
@@ -428,7 +444,7 @@ msgid "Citizens"
 msgstr ""
 
 #: home/templates/home/base.html:43
-msgid "Law"
+msgid "Voting"
 msgstr ""
 
 #: home/templates/home/base.html:45
@@ -931,35 +947,35 @@ msgstr ""
 msgid "I do not accept this person"
 msgstr ""
 
-#: obywatele/views.py:37 testy.py:8
+#: obywatele/views.py:42
 msgid "Your new email has been saved."
 msgstr ""
 
-#: obywatele/views.py:85
+#: obywatele/views.py:90
 msgid "Email already exist"
 msgstr ""
 
-#: obywatele/views.py:121
+#: obywatele/views.py:126
 msgid "The new user has been saved"
 msgstr ""
 
-#: obywatele/views.py:172
+#: obywatele/views.py:177
 msgid "Changes was saved"
 msgstr ""
 
-#: obywatele/views.py:185
+#: obywatele/views.py:190
 msgid "Form is not valid!"
 msgstr ""
 
-#: obywatele/views.py:275
+#: obywatele/views.py:280
 msgid "positive"
 msgstr ""
 
-#: obywatele/views.py:282
+#: obywatele/views.py:287
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:289
+#: obywatele/views.py:294
 msgid "neutral"
 msgstr ""
 
@@ -971,10 +987,10 @@ msgstr ""
 msgid "Wikicracy Administration"
 msgstr ""
 
-#: zzz/settings.py:42 zzz/settings_example.py:37 zzz/settings_prod.py:37
+#: zzz/settings.py:40 zzz/settings_example.py:37 zzz/settings_prod.py:37
 msgid "English"
 msgstr ""
 
-#: zzz/settings.py:43 zzz/settings_example.py:38 zzz/settings_prod.py:38
+#: zzz/settings.py:41 zzz/settings_example.py:38 zzz/settings_prod.py:38
 msgid "Polish"
 msgstr ""

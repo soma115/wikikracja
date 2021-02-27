@@ -40,7 +40,7 @@
 			{% if user.is_authenticated %}
 				<a {% if request.resolver_match.url_name == 'obywatele' or request.resolver_match.url_name == 'poczekalnia' or request.resolver_match.url_name == 'zaproponuj_osobe' or request.resolver_match.url_name == 'obywatele_szczegoly'  or request.resolver_match.url_name == 'poczekalnia_szczegoly' or request.resolver_match.url_name == 'assets'%} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'obywatele:obywatele' %}">{% trans "Citizens" %}</a>
 
-				<a {% if request.resolver_match.namespace == 'glosowania' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'glosowania:status' pk=7 %}">{% trans "Law" %}</a>
+				<a {% if request.resolver_match.namespace == 'glosowania' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'glosowania:status' pk=7 %}">{% trans "Voting" %}</a>
 
 				<a {% if request.resolver_match.namespace == 'elibrary' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'elibrary:elibrary' %}">{% trans "eLibrary" %}</a>
 				<a {% if request.resolver_match.namespace == 'chat' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/chat/">{% trans "Chat" %}</a>

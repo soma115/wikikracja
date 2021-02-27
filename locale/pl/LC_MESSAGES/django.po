@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-18 23:05+0100\n"
+"POT-Creation-Date: 2021-02-27 14:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,14 +25,14 @@ msgid "New room"
 msgstr "Nowy pokój"
 
 #: chat/templates/chat/add.html:15
-#: glosowania/templates/glosowania/dodaj.html:28
+#: glosowania/templates/glosowania/dodaj.html:34
 #: home/templates/home/haslo.html:25
 #: obywatele/templates/obywatele/email_change.html:23
 msgid "Save"
 msgstr "Zapisz"
 
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:19
-#: glosowania/templates/glosowania/dodaj.html:29
+#: glosowania/templates/glosowania/dodaj.html:35
 #: glosowania/templates/glosowania/szczegoly.html:39
 #: glosowania/templates/glosowania/szczegoly.html:52
 #: glosowania/templates/glosowania/szczegoly.html:56
@@ -151,11 +151,29 @@ msgstr ""
 "Jaki jest cel tego prawa? Dlaczego zostało stworzony? Co dzięki niemu "
 "osiągniemy? Jakie wydarzenie spowodowało jego powstanie?"
 
+#: glosowania/models.py:39
+msgid "Arguments for"
+msgstr "Argumenty Za"
+
 #: glosowania/models.py:40
+msgid "Why should have this law? What will it give us?"
+msgstr "Po co to prawo? Co nam to da?"
+
+#: glosowania/models.py:46
+msgid "Arguments against"
+msgstr "Argumenty Przeciw"
+
+#: glosowania/models.py:47
+msgid "What can go wrong if we will have it? What are the risks?"
+msgstr ""
+"Co może się nie udać jeśli będziemy mieć ten przepis? Jakie są "
+"niebezpieczeństwa?"
+
+#: glosowania/models.py:53
 msgid "Abolishes the rules"
 msgstr "Znosi przepis/y"
 
-#: glosowania/models.py:41
+#: glosowania/models.py:54
 msgid "If the proposed law supersedes other recipes, enter their numbers here."
 msgstr ""
 "Jeśli proponowane prawo zastępuje inne przepisy, wprowadź tutaj ich numery."
@@ -190,7 +208,7 @@ msgstr "Vacatio Legis"
 
 #: glosowania/templates/glosowania/menu.html:70
 msgid "Governing Law"
-msgstr "Obowiązujące prawo"
+msgstr "Obowiązujące"
 
 #: glosowania/templates/glosowania/status.html:15
 msgid "There is no proposition with this status"
@@ -341,11 +359,11 @@ msgstr "Nowa propozycja przepisu"
 
 #: glosowania/views.py:46
 msgid ""
-"{request.user.username.capitalize()} added new law proposition\n"
-"You can read it here: http://{HOST}/glosowania/{str(form.id)}"
+"added new law proposition\n"
+"You can read it here:"
 msgstr ""
-"{request.user.username.capitalize()} dodał/a nową propozycję przepisu\n"
-"Możesz ją zobaczyć tutaj http://{HOST}/glosowania/{str(form.id)}"
+"dodał/a nową propozycję przepisu\n"
+"Może ją zobaczyć tutaj:"
 
 #: glosowania/views.py:100
 msgid "Your signature has been saved."
@@ -367,7 +385,7 @@ msgstr "Propozycja nr. {str(i.id)} została zatwierdzona w referendum"
 msgid ""
 "Proposition {str(i.id)} gathered required amount of signatures and will be "
 "voted from {i.data_referendum_start} to {i.data_referendum_stop}.\n"
-"Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
+"Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
 msgstr ""
 "Propozycja {str(i.id)} zebrała wymaganą liczbę podpisów i będzie głosowana "
 "od dnia {i.data_referendum_start} do dnia {i.data_referendum_stop.\n"
@@ -397,7 +415,7 @@ msgstr "Referendum nad propozycją {str(i.id)} właśnie startuje"
 msgid ""
 "It is time to vote on proposition {str(i.id)}.\n"
 "Referendum ends at {i.data_referendum_stop}.\n"
-"Click here to vote: http://{HOST}/glosowania/{str(i.id)}"
+"Click here to vote: http://{HOST}/glosowania/details/{str(i.id)}"
 msgstr ""
 "Czas zagłosować nad propozycją {str (i.id)}.\n"
 "Referendum kończy się dnia {i.data_referendum_stop}.\n"
@@ -412,7 +430,7 @@ msgid ""
 "Proposition {str(i.id)} was approved in referendum and is now in Vacatio "
 "Legis period.\n"
 "The law will take effect on {i.data_obowiazuje_od}.\n"
-"Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
+"Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
 msgstr ""
 "Propozycja {str(i.id)} została zatwierdzona w referendum i jest obecnie w "
 "okresie Vacatio Legis.\n"
@@ -442,7 +460,7 @@ msgstr "Propozycja {str(i.id)} obowiązuje od dzisiaj"
 #: glosowania/views.py:222
 msgid ""
 "Proposition {str(i.id)} became abiding law today.\n"
-"Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
+"Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
 msgstr ""
 "Propozycja {str(i.id)} stała się dziś obowiązującym prawem.\n"
 "Kliknij tutaj aby przeczytać propozycję: http://{HOST}/glosowania/{str (i."
@@ -469,8 +487,8 @@ msgid "Citizens"
 msgstr "Obywatele"
 
 #: home/templates/home/base.html:43
-msgid "Law"
-msgstr "Przepisy"
+msgid "Voting"
+msgstr "Głosowania"
 
 #: home/templates/home/base.html:45
 msgid "eLibrary"
@@ -925,9 +943,8 @@ msgid ""
 "and we will be able to fullfill our needs better."
 msgstr ""
 "Nie musisz ich wszystkich wypełniać, ale im więcej informacji podasz - tym "
-"większy zysk odniesie każdy z nas i cała grupa. Informacje te będą przydatne "
-"również dla nowych osób w grupie. Poznamy się lepiej i będziemy w stanie "
-"lepiej zaspokajać nasze potrzeby."
+"lepiej będziemy mogli nawzajem sobie pomóc. Dzięki tym informacjom również "
+"lepiej się poznamy."
 
 #: obywatele/templates/obywatele/my_profile.html:43
 msgid "Edit my assets"
@@ -1000,43 +1017,43 @@ msgstr "Akceptuję tą osobę"
 
 #: obywatele/templates/obywatele/szczegoly.html:22
 msgid "Indifferent"
-msgstr "Obojętny"
+msgstr "Neutralny"
 
 #: obywatele/templates/obywatele/szczegoly.html:23
 msgid "I do not accept this person"
 msgstr "Nie akceptuję tej osoby"
 
-#: obywatele/views.py:37 testy.py:8
+#: obywatele/views.py:42
 msgid "Your new email has been saved."
 msgstr "Twój nowy email został zapisany."
 
-#: obywatele/views.py:85
+#: obywatele/views.py:90
 msgid "Email already exist"
 msgstr "Email już został użyty"
 
-#: obywatele/views.py:121
+#: obywatele/views.py:126
 msgid "The new user has been saved"
 msgstr "Nowy użytkownik został zapisany."
 
-#: obywatele/views.py:172
+#: obywatele/views.py:177
 msgid "Changes was saved"
 msgstr "Zmiany zostały zapisane"
 
-#: obywatele/views.py:185
+#: obywatele/views.py:190
 msgid "Form is not valid!"
 msgstr "Formularz zawiera błędy"
 
-#: obywatele/views.py:275
+#: obywatele/views.py:280
 msgid "positive"
 msgstr "pozytywny"
 
-#: obywatele/views.py:282
+#: obywatele/views.py:287
 msgid "negative"
 msgstr "negatywny"
 
-#: obywatele/views.py:289
+#: obywatele/views.py:294
 msgid "neutral"
-msgstr "neutralny"
+msgstr "obojętny"
 
 #: templates/admin/base_site.html:3
 msgid "Django site admin"
@@ -1046,10 +1063,13 @@ msgstr "Django site admin"
 msgid "Wikicracy Administration"
 msgstr "Wikicracy Administration"
 
-#: zzz/settings.py:42 zzz/settings_example.py:37 zzz/settings_prod.py:37
+#: zzz/settings.py:40 zzz/settings_example.py:37 zzz/settings_prod.py:37
 msgid "English"
 msgstr "Angielski"
 
-#: zzz/settings.py:43 zzz/settings_example.py:38 zzz/settings_prod.py:38
+#: zzz/settings.py:41 zzz/settings_example.py:38 zzz/settings_prod.py:38
 msgid "Polish"
 msgstr "Polski"
+
+#~ msgid "Law"
+#~ msgstr "Przepisy"

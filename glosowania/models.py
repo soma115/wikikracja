@@ -33,6 +33,19 @@ class Decyzja(models.Model):
         verbose_name=_('Reasoning'),
         help_text=_('What is the purpose of this law? Why was it created? What are we going to achieve with it? What event caused it to arise?')
         )
+    args_for = models.TextField(
+        max_length=1500,
+        null=True,
+        verbose_name=_('Arguments for'),
+        help_text=_('Why should have this law? What will it give us?')
+        )
+    # TODO: This field should be filled out by anyone:
+    args_against = models.TextField(
+        max_length=1500,
+        null=True,
+        verbose_name=_('Arguments against'),
+        help_text=_('What can go wrong if we will have it? What are the risks?')
+        )
     znosi = models.CharField(
         max_length=500,
         null=True,
