@@ -153,21 +153,21 @@ msgstr ""
 
 #: glosowania/models.py:39
 msgid "Positive Aspects of the Idea"
-msgstr ""
+msgstr "Pozytywne Aspekty Pomysłu"
 
 #: glosowania/models.py:40
 msgid ""
 "Enter the benefits for the group, environment, economy, etc. resulting from "
 "the introduction of the idea."
-msgstr ""
+msgstr "Określ korzyści dla grupy, otoczenia, środowiska, ekonomi etc. wynikające z wprowadzenia pomysłu."
 
 #: glosowania/models.py:46
 msgid "Negative Aspects of the Idea"
-msgstr ""
+msgstr "Negatywne Aspekty Pomysłu"
 
 #: glosowania/models.py:47
 msgid "Enter the potential threat associated with the proposal."
-msgstr ""
+msgstr "Określ potencjalne zagrożenie związane z propozycją."
 
 #: glosowania/models.py:53
 msgid "Abolishes the rules"
