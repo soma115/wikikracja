@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 14:20+0100\n"
+"POT-Creation-Date: 2021-02-27 15:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,22 +152,22 @@ msgstr ""
 "osiągniemy? Jakie wydarzenie spowodowało jego powstanie?"
 
 #: glosowania/models.py:39
-msgid "Arguments for"
-msgstr "Argumenty Za"
+msgid "Positive Aspects of the Idea"
+msgstr "Pozytywne Aspekty Pomysłu"
 
 #: glosowania/models.py:40
-msgid "Why should have this law? What will it give us?"
-msgstr "Po co to prawo? Co nam to da?"
+msgid ""
+"Enter the benefits for the group, environment, economy, etc. resulting from "
+"the introduction of the idea."
+msgstr "Określ korzyści dla grupy, otoczenia, środowiska, ekonomi etc. wynikające z wprowadzenia pomysłu."
 
 #: glosowania/models.py:46
-msgid "Arguments against"
-msgstr "Argumenty Przeciw"
+msgid "Negative Aspects of the Idea"
+msgstr "Negatywne Aspekty Pomysłu"
 
 #: glosowania/models.py:47
-msgid "What can go wrong if we will have it? What are the risks?"
-msgstr ""
-"Co może się nie udać jeśli będziemy mieć ten przepis? Jakie są "
-"niebezpieczeństwa?"
+msgid "Enter the potential threat associated with the proposal."
+msgstr "Określ potencjalne zagrożenie związane z propozycją."
 
 #: glosowania/models.py:53
 msgid "Abolishes the rules"
@@ -1070,6 +1070,20 @@ msgstr "Angielski"
 #: zzz/settings.py:41 zzz/settings_example.py:38 zzz/settings_prod.py:38
 msgid "Polish"
 msgstr "Polski"
+
+#~ msgid "Arguments for"
+#~ msgstr "Argumenty Za"
+
+#~ msgid "Why should have this law? What will it give us?"
+#~ msgstr "Po co to prawo? Co nam to da?"
+
+#~ msgid "Arguments against"
+#~ msgstr "Argumenty Przeciw"
+
+#~ msgid "What can go wrong if we will have it? What are the risks?"
+#~ msgstr ""
+#~ "Co może się nie udać jeśli będziemy mieć ten przepis? Jakie są "
+#~ "niebezpieczeństwa?"
 
 #~ msgid "Law"
 #~ msgstr "Przepisy"

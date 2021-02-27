@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 14:20+0100\n"
+"POT-Creation-Date: 2021-02-27 15:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,19 +142,21 @@ msgid ""
 msgstr ""
 
 #: glosowania/models.py:39
-msgid "Arguments for"
+msgid "Positive Aspects of the Idea"
 msgstr ""
 
 #: glosowania/models.py:40
-msgid "Why should have this law? What will it give us?"
+msgid ""
+"Enter the benefits for the group, environment, economy, etc. resulting from "
+"the introduction of the idea."
 msgstr ""
 
 #: glosowania/models.py:46
-msgid "Arguments against"
+msgid "Negative Aspects of the Idea"
 msgstr ""
 
 #: glosowania/models.py:47
-msgid "What can go wrong if we will have it? What are the risks?"
+msgid "Enter the potential threat associated with the proposal."
 msgstr ""
 
 #: glosowania/models.py:53
