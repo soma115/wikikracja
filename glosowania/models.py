@@ -36,15 +36,15 @@ class Decyzja(models.Model):
     args_for = models.TextField(
         max_length=1500,
         null=True,
-        verbose_name=_('Arguments for'),
-        help_text=_('Why should have this law? What will it give us?')
+        verbose_name=_('Positive Aspects of the Idea'),
+        help_text=_('Enter the benefits for the group, environment, economy, etc. resulting from the introduction of the idea.')
         )
     # TODO: This field should be filled out by anyone:
     args_against = models.TextField(
         max_length=1500,
         null=True,
-        verbose_name=_('Arguments against'),
-        help_text=_('What can go wrong if we will have it? What are the risks?')
+        verbose_name=_('Negative Aspects of the Idea'),
+        help_text=_('Enter the potential threat associated with the proposal.')
         )
     znosi = models.CharField(
         max_length=500,

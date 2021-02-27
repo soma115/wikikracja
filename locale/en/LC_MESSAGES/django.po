@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-27 14:20+0100\n"
+"POT-Creation-Date: 2021-02-27 15:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,14 +23,14 @@ msgid "New room"
 msgstr ""
 
 #: chat/templates/chat/add.html:15
-#: glosowania/templates/glosowania/dodaj.html:34
+#: glosowania/templates/glosowania/dodaj.html:35
 #: home/templates/home/haslo.html:25
 #: obywatele/templates/obywatele/email_change.html:23
 msgid "Save"
 msgstr ""
 
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:19
-#: glosowania/templates/glosowania/dodaj.html:35
+#: glosowania/templates/glosowania/dodaj.html:36
 #: glosowania/templates/glosowania/szczegoly.html:39
 #: glosowania/templates/glosowania/szczegoly.html:52
 #: glosowania/templates/glosowania/szczegoly.html:56
@@ -142,19 +142,21 @@ msgid ""
 msgstr ""
 
 #: glosowania/models.py:39
-msgid "Arguments for"
+msgid "Positive Aspects of the Idea"
 msgstr ""
 
 #: glosowania/models.py:40
-msgid "Why should have this law? What will it give us?"
+msgid ""
+"Enter the benefits for the group, environment, economy, etc. resulting from "
+"the introduction of the idea."
 msgstr ""
 
 #: glosowania/models.py:46
-msgid "Arguments against"
+msgid "Negative Aspects of the Idea"
 msgstr ""
 
 #: glosowania/models.py:47
-msgid "What can go wrong if we will have it? What are the risks?"
+msgid "Enter the potential threat associated with the proposal."
 msgstr ""
 
 #: glosowania/models.py:53
@@ -427,14 +429,12 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: home/templates/home/base.html:37 home/templates/home/home.html:34
-#: home/templates/home/login.html:4 home/templates/home/login.html:22
-#: home/templates/home/login.html:33
+#: home/templates/home/base.html:37 home/templates/home/login.html:4
+#: home/templates/home/login.html:22 home/templates/home/login.html:33
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/base.html:38 home/templates/home/home.html:37
-#: home/templates/home/login.html:36
+#: home/templates/home/base.html:38 home/templates/home/login.html:36
 #: home/templates/home/password_reset_form.html:5
 msgid "Reset password"
 msgstr ""
@@ -463,19 +463,15 @@ msgstr ""
 msgid "logout"
 msgstr ""
 
-#: home/templates/home/base.html:62
-msgid "Contact"
-msgstr ""
-
-#: home/templates/home/base.html:66
+#: home/templates/home/base.html:73
 msgid "About project"
 msgstr ""
 
-#: home/templates/home/base.html:67
+#: home/templates/home/base.html:74
 msgid "System description"
 msgstr ""
 
-#: home/templates/home/base.html:68
+#: home/templates/home/base.html:75
 msgid "Possible use cases"
 msgstr ""
 
@@ -492,96 +488,28 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: home/templates/home/home.html:11
-msgid "What is Wikicracy?"
-msgstr ""
-
-#: home/templates/home/home.html:13
-msgid ""
-"Wikicracy is a voting system that allows the community to manage itself - "
-"without the help of representatives or administrators."
-msgstr ""
-
-#: home/templates/home/home.html:15
-msgid "Main features of the system"
-msgstr ""
-
-#: home/templates/home/home.html:18
-msgid "each person has one vote"
-msgstr ""
-
-#: home/templates/home/home.html:19
-msgid "every vote is equal"
-msgstr ""
-
-#: home/templates/home/home.html:20
-msgid "decisions are taken by simple majority of votes"
-msgstr ""
-
-#: home/templates/home/home.html:21
-msgid "votes are anonymous"
-msgstr ""
-
-#: home/templates/home/home.html:22
-msgid ""
-"voting is similar to the Swiss system - after collecting the signatures, the "
-"time for discussion begins and then a referendum follows"
-msgstr ""
-
-#: home/templates/home/home.html:23
-msgid "the membership is managed by the whole group by accepting new people"
-msgstr ""
-
-#: home/templates/home/home.html:24
-msgid "it is also possible to remove a disruptive person by popular vote"
-msgstr ""
-
-#: home/templates/home/home.html:28
-msgid ""
-"The application is written so that there is no hierarchy in it. No "
-"administrator is needed. The users themselves decide who belongs to the "
-"group and what rules apply to it. This means full equality and true "
-"democracy that cannot be disabled."
-msgstr ""
-
-#: home/templates/home/home.html:30 home/templates/home/login.html:16
-msgid "Read more..."
-msgstr ""
-
-#: home/templates/home/home.html:40
-msgid "Send message to developer"
-msgstr ""
-
-#: home/templates/home/home.html:50
+#: home/templates/home/home.html:51
 msgid "Ongoing referenda"
 msgstr ""
 
-#: home/templates/home/home.html:54
+#: home/templates/home/home.html:55
 msgid "there is currently no referendum"
 msgstr ""
 
-#: home/templates/home/home.html:60
+#: home/templates/home/home.html:61
 msgid "Upcoming referenda"
 msgstr ""
 
-#: home/templates/home/home.html:65
+#: home/templates/home/home.html:66
 msgid "there are no upcoming referenda at this moment"
 msgstr ""
 
 #: home/templates/home/login.html:9
-msgid "Welcome to Wikicracy!"
+msgid "Witaj!"
 msgstr ""
 
-#: home/templates/home/login.html:11
-msgid ""
-"The purpose of Wikicracy is to allow the community to decide for itself."
-msgstr ""
-
-#: home/templates/home/login.html:14
-msgid ""
-"Being able to manage our own destiny should lead us to create principles "
-"that reward justice, noble attitudes, broad horizons, unconditional love, "
-"compassion, friendly attitude, and correct statements and predictions."
+#: home/templates/home/login.html:16
+msgid "Read more..."
 msgstr ""
 
 #: home/templates/home/login.html:41
