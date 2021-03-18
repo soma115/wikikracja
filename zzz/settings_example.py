@@ -137,14 +137,15 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ASGI_APPLICATION = "zzz.routing.application"
 # WSGI_APPLICATION = 'zzz.wsgi.application'
 
+# Install Redis service, it is very easy
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            # "hosts": [('127.0.0.1', 6379)],
-            "hosts": [('localhost', 6379)],
-            # "capacity": 1500,  # default 100
-            # "expiry": 10,  # default 60
+            'hosts': ['redis://127.0.0.1:6379/4',],  # change 4 to something different
+#            "hosts": [('127.0.0.1', 6379)],
+#            "capacity": 1500,  # default 100
+#            "expiry": 10,  # default 60
         },
     },
 }
