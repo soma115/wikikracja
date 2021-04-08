@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-19 08:58+0100\n"
+"POT-Creation-Date: 2021-04-08 21:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -779,7 +779,7 @@ msgstr "Przedmioty, które chcesz sprzedać"
 #: obywatele/templates/obywatele/my_profile.html:31
 #: obywatele/templates/obywatele/szczegoly.html:34
 msgid "For sale"
-msgstr "Do sprzadania"
+msgstr "Do sprzedania"
 
 #: obywatele/models.py:26
 msgid "What do you need"
