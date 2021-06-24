@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 21:11+0200\n"
+"POT-Creation-Date: 2021-06-24 18:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1037,23 +1037,23 @@ msgstr "Email już został użyty"
 msgid "The new user has been saved"
 msgstr "Nowy użytkownik został zapisany."
 
-#: obywatele/views.py:177
+#: obywatele/views.py:178
 msgid "Changes was saved"
 msgstr "Zmiany zostały zapisane"
 
-#: obywatele/views.py:190
+#: obywatele/views.py:191
 msgid "Form is not valid!"
 msgstr "Formularz zawiera błędy"
 
-#: obywatele/views.py:280
+#: obywatele/views.py:281
 msgid "positive"
 msgstr "pozytywny"
 
-#: obywatele/views.py:287
+#: obywatele/views.py:288
 msgid "negative"
 msgstr "negatywny"
 
-#: obywatele/views.py:294
+#: obywatele/views.py:295
 msgid "neutral"
 msgstr "obojętny"
 

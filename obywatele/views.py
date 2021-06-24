@@ -167,7 +167,8 @@ def my_assets(request):
             profile.business = form.cleaned_data['business']
             profile.job = form.cleaned_data['job']
             profile.fb = form.cleaned_data['fb']
-            profile.fb = form.cleaned_data['other']
+            profile.gift = form.cleaned_data['gift']
+            profile.other = form.cleaned_data['other']
             profile.save()
 
             return render(
