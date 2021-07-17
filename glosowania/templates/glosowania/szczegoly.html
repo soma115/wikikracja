@@ -5,9 +5,12 @@
 {% block content %}
 	<div>
 		<h5>{% trans 'Bill number' %}: {{ id.id }}</h5>
+		<h5>{% trans 'Bill title' %}: {{ id.title }}</h5>
 		<h5>{% trans 'Bill text' %}:</h5><p>{{ id.tresc }}</p>
 		<h5>{% trans 'Penalty for non-compliance' %}:</h5><p>{{ id.kara }}</p>
 		<h5>{% trans 'Reason' %}:</h5><p>{{ id.uzasadnienie }}</p>
+		<h5>{% trans 'Positives' %}:</h5><p>{{ id.args_for }}</p>
+		<h5>{% trans 'Negatives' %}:</h5><p>{{ id.args_against }}</p>
         <h5>{% trans 'This law supersedes the following bills' %}:</h5><p>{{ id.znosi }}</p>
 			<p>
 				{% trans 'Author' %}: {{ id.autor }}

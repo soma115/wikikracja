@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-24 18:39+0200\n"
+"POT-Creation-Date: 2021-07-17 13:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,9 +33,9 @@ msgstr "Zapisz"
 
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:19
 #: glosowania/templates/glosowania/dodaj.html:35
-#: glosowania/templates/glosowania/szczegoly.html:39
-#: glosowania/templates/glosowania/szczegoly.html:52
-#: glosowania/templates/glosowania/szczegoly.html:56
+#: glosowania/templates/glosowania/szczegoly.html:42
+#: glosowania/templates/glosowania/szczegoly.html:55
+#: glosowania/templates/glosowania/szczegoly.html:59
 #: obywatele/templates/obywatele/dodaj.html:61
 #: obywatele/templates/obywatele/szczegoly.html:47
 msgid "Back"
@@ -272,82 +272,94 @@ msgid "Bill number"
 msgstr "Numer przepisu"
 
 #: glosowania/templates/glosowania/szczegoly.html:8
+msgid "Bill title"
+msgstr "Tytuł"
+
+#: glosowania/templates/glosowania/szczegoly.html:9
 msgid "Bill text"
 msgstr "Treść przepisu"
 
-#: glosowania/templates/glosowania/szczegoly.html:9
+#: glosowania/templates/glosowania/szczegoly.html:10
 msgid "Penalty for non-compliance"
 msgstr "Kara za nieprzestrzeganie"
 
-#: glosowania/templates/glosowania/szczegoly.html:10
+#: glosowania/templates/glosowania/szczegoly.html:11
 msgid "Reason"
 msgstr "Uzasadnienie"
 
-#: glosowania/templates/glosowania/szczegoly.html:11
+#: glosowania/templates/glosowania/szczegoly.html:12
+msgid "Positives"
+msgstr "Argumenty Za"
+
+#: glosowania/templates/glosowania/szczegoly.html:13
+msgid "Negatives"
+msgstr "Argumenty przeciw"
+
+#: glosowania/templates/glosowania/szczegoly.html:14
 msgid "This law supersedes the following bills"
 msgstr "Ta propozycja znosi następujące przepisy"
 
-#: glosowania/templates/glosowania/szczegoly.html:13
+#: glosowania/templates/glosowania/szczegoly.html:16
 msgid "Author"
 msgstr "Autor"
 
-#: glosowania/templates/glosowania/szczegoly.html:15
+#: glosowania/templates/glosowania/szczegoly.html:18
 msgid "Number of people signed the motion for a referendum"
 msgstr "Liczba osób, które podpisały ten wniosek o referendum"
 
-#: glosowania/templates/glosowania/szczegoly.html:16
+#: glosowania/templates/glosowania/szczegoly.html:19
 msgid "For"
 msgstr "Za"
 
-#: glosowania/templates/glosowania/szczegoly.html:16
+#: glosowania/templates/glosowania/szczegoly.html:19
 msgid "Against"
 msgstr "Przeciw"
 
-#: glosowania/templates/glosowania/szczegoly.html:19
+#: glosowania/templates/glosowania/szczegoly.html:22
 msgid "Date created"
 msgstr "Data utworzenia"
 
-#: glosowania/templates/glosowania/szczegoly.html:20
+#: glosowania/templates/glosowania/szczegoly.html:23
 msgid "Date of collecting signatures"
 msgstr "Data zebrania podpisów"
 
-#: glosowania/templates/glosowania/szczegoly.html:21
+#: glosowania/templates/glosowania/szczegoly.html:24
 msgid "Start referendum"
 msgstr "Start referendum"
 
-#: glosowania/templates/glosowania/szczegoly.html:22
+#: glosowania/templates/glosowania/szczegoly.html:25
 msgid "End referendum"
 msgstr "Koniec referendum"
 
-#: glosowania/templates/glosowania/szczegoly.html:23
+#: glosowania/templates/glosowania/szczegoly.html:26
 msgid "The rule applies from"
 msgstr "Zasada obowiązuje od"
 
-#: glosowania/templates/glosowania/szczegoly.html:33
+#: glosowania/templates/glosowania/szczegoly.html:36
 msgid "Do you want a referendum on this law?"
 msgstr "Czy chcesz referendum w sprawie tego przepisu?"
 
-#: glosowania/templates/glosowania/szczegoly.html:34
+#: glosowania/templates/glosowania/szczegoly.html:37
 msgid "Yes, I sign"
 msgstr "Tak, podpisuję"
 
-#: glosowania/templates/glosowania/szczegoly.html:37
+#: glosowania/templates/glosowania/szczegoly.html:40
 msgid "You already signed this proposition."
 msgstr "Już podpisałeś tę propozycję."
 
-#: glosowania/templates/glosowania/szczegoly.html:45
+#: glosowania/templates/glosowania/szczegoly.html:48
 msgid "Do you want to implement this law?"
 msgstr "Czy chcesz wprowadzenia tego przepisu?"
 
-#: glosowania/templates/glosowania/szczegoly.html:46
+#: glosowania/templates/glosowania/szczegoly.html:49
 msgid "Yes"
 msgstr "Tak"
 
-#: glosowania/templates/glosowania/szczegoly.html:47
+#: glosowania/templates/glosowania/szczegoly.html:50
 msgid "No"
 msgstr "Nie"
 
-#: glosowania/templates/glosowania/szczegoly.html:50
+#: glosowania/templates/glosowania/szczegoly.html:53
 msgid "You already voted."
 msgstr "Już głosowałeś."
 
@@ -884,6 +896,7 @@ msgstr ""
 "właściwą decyzję przy przyjmowaniu nowej osoby."
 
 #: obywatele/templates/obywatele/dodaj.html:60
+#: obywatele/templates/obywatele/my_assets.html:12
 msgid "Submit"
 msgstr "Wyślij"
 
@@ -977,7 +990,7 @@ msgid ""
 "Acceptance formula: required_reputation = round(log(Population) * Multiplier)"
 msgstr ""
 "Formuła obliczania akceptacji: wymagana_reputacja = round(log(Populacja) * "
-"Mnożnik"
+"Mnożnik)"
 
 #: obywatele/templates/obywatele/poczekalnia.html:32
 #: obywatele/templates/obywatele/start.html:32
