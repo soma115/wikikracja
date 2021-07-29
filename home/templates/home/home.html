@@ -3,41 +3,42 @@
 {% block content %}
 {% load i18n %}
 
-
-{% if not user.is_authenticated %}
-<div class="row">
-	<div class="container">
-		<div class="row">
-			<h3 class="title">{% trans 'What is Wikicracy?' %}</h3>
-			<p class="lead">
-				{% trans 'Wikicracy is a voting system that allows the community to manage itself - without the help of representatives or administrators.' %}
-			</p>
-			<h3>{% trans 'Main features of the system' %}</h3>
-			<p>
-				<ul>
-					<li> {% trans 'each person has one vote' %}</li>
-					<li> {% trans 'every vote is equal' %}</li>
-					<li> {% trans 'decisions are taken by simple majority of votes' %}</li>
-					<li> {% trans 'votes are anonymous' %}</li>
-					<li> {% trans 'voting is similar to the Swiss system - after collecting the signatures, the time for discussion begins and then a referendum follows' %}</li>
-					<li> {% trans 'the membership is managed by the whole group by accepting new people' %}</li>
-					<li> {% trans 'it is also possible to remove a disruptive person by popular vote' %}</li>
-				</ul>
-			</p>
-			<p><u>
-				{% trans 'The application is written so that there is no hierarchy in it. No administrator is needed. The users themselves decide who belongs to the group and what rules apply to it. This means full equality and true democracy that cannot be disabled.' %}
-			</p></u>
-			<a href="https://wikikracja.pl/" class="btn btn-info m-2 btn-sm" target="_blank">{% trans 'Read more...' %}</a>
-		</div>
-		<div class="row rounded" style="background-color: #a7d2e4; padding:10px;margin-top:20px;">
-			<div class="col-md-4">
-				<a href="{% url 'login' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Login' %}</a>
+<ul>
+	{% if not user.is_authenticated %}
+	<div class="row">
+		<div class="container">
+			<div class="row">
+				<h3 class="title">Witamy w Stowarzyszeniu!</h3>
+				<p class="lead">
+					Nasz model demokracji bezpośredniej opiera się o platformę umożliwiającą każdemu użytkownikowi tworzenie głosowań wewnątrz określonych grup. Każda grupa podlega podstawowym założeniom funkcjonowania platformy opartej o ideę wspólnego decydowania.
+				</p>
+				<h3 class="title">Główne założenia:</h3>
+				<p>
+					<ul>
+						<li> Każda osoba dysponuje jednym głosem</li>
+						<li> Każdy głos ma taką samą wartość</li>
+						<li> Głosowania są anonimowe</li>
+						<li> Wynik głosowania zależy od większości głosów</li>
+						<li> Platforma nie ma administratorów</li>
+						<li> Grupa decyduje o przyjęciu lub usunięciu członka</li>
+						<li> Wewnątrz grup nie ma hierarchii</li>
+					</ul>
+				</p>
+				<p>
+					Pierwotne zasady działania grup są inspirowane założeniami oraz istniejącym systemami demokracji bezpośredniej.
+				</p>
+				<a href="https://mojglos.org.pl/" class="btn btn-info m-2" target="_blank">Czytaj więcej...</a>
 			</div>
-			<div class="col-md-4">
-				<a href="{% url 'password_reset' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Reset password' %}</a>
-			</div>
-			<div class="col-md-4">
-				<a href=https://wikikracja.pl/kontakt/ target="_blank" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Send message to developer' %}</a>		
+			<div class="row rounded" style="background-color: #a7d2e4; padding:10px;margin-top:20px;">
+				<div class="col-md-4">
+					<a href="{% url 'login' %}" class="btn btn-success btn-block m-2"> Zaloguj się</a>
+				</div>
+				<div class="col-md-4">
+					<a href="{% url 'password_reset' %}" class="btn btn-success btn-block m-2">Zresetuj hasło</a>
+				</div>
+				<div class="col-md-4">
+					<a href=https://wikikracja.pl/kontakt/ target="_blank" class="btn btn-success btn-block m-2">Zgłoś problem</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -70,4 +71,3 @@
 {% endif %}
 
 {% endblock %}
-

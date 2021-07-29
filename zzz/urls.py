@@ -19,6 +19,3 @@ urlpatterns = [
   path('obywatele/', include('obywatele.urls', namespace='obywatele')),
   path('email_change/', ov.email_change, name='email_change'),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
