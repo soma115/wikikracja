@@ -13,7 +13,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEBUG = False
 SECRET_KEY = 'Change_This_To_Random_Chars'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']  # Change_This
 
 DATABASES = {
     'default': {
@@ -46,6 +46,7 @@ STATICFILES_FINDERS = (
 MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -88,6 +89,7 @@ INSTALLED_APPS = (
     'glosowania',
     'home',
     'chat',
+    'bootstrap4'
 )
 
 LOGGING = {
@@ -115,19 +117,19 @@ LOGGING = {
 }
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'glosowania:glosowania'  # LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/glosowania/status/7'  # LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 
 DATE_FORMAT = "Y-m-d"
 INTERNAL_IPS = '127.0.0.1'
 
-EMAIL_HOST = 'example.imap.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'example@gmail.com'
-EMAIL_HOST_PASSWORD = 'example'
+EMAIL_HOST = 'example.imap.gmail.com'  # Change_This
+EMAIL_PORT = 587  # Change_This
+EMAIL_HOST_USER = 'example@gmail.com'  # Change_This
+EMAIL_HOST_PASSWORD = 'example'  # Change_This
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'example <example@gmail.com>'
+DEFAULT_FROM_EMAIL = 'example <example@gmail.com>'  # Change_This
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # This will display the mail on the console for easy verification.
 
 X_FRAME_OPTIONS = 'DENY'
@@ -137,15 +139,33 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ASGI_APPLICATION = "zzz.routing.application"
 # WSGI_APPLICATION = 'zzz.wsgi.application'
 
-# Install Redis service, it is very easy
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': ['redis://127.0.0.1:6379/4',],  # change 4 to something different
-#            "hosts": [('127.0.0.1', 6379)],
+            'hosts': ['redis://127.0.0.1:6379/4',],  # change 4 to something different in needed
 #            "capacity": 1500,  # default 100
 #            "expiry": 10,  # default 60
         },
     },
 }
+
+
+# INSTANCE SPECIFIC PARAMETERS
+
+# citizens
+# Higher = harder to accept new person. Higher = easier to ban existing person.
+# Above ~0.72 SECOND person in group requires 2 points of acceptance which is a paradox.
+# Be careful changing this formula - people rarely accept each other.
+ACCEPTANCE_MULTIPLIER = 0.72
+
+# voting
+WYMAGANYCH_PODPISOW = 2             # Number of signatures needed to approve request for referendum.
+CZAS_NA_ZEBRANIE_PODPISOW = 365     # default 365 days
+KOLEJKA = 7                         # default 7 days. Discussion before referendum.
+CZAS_TRWANIA_REFERENDUM = 7         # default 7 days
+VACATIO_LEGIS = 7                   # default 7 days
+
+# chat
+ARCHIVE_CHAT_ROOM = 90              # default 90 days
+DELETE_CHAT_ROOM = 365              # default 365 days
