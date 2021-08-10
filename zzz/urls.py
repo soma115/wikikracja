@@ -18,7 +18,15 @@ urlpatterns = [
   path('chat/', include('chat.urls', namespace='chat')),
   path('obywatele/', include('obywatele.urls', namespace='obywatele')),
   path('email_change/', ov.email_change, name='email_change'),
+  path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+'''
+allauth:
+Note that you do not necessarily need the URLs provided by django.contrib.auth.urls.
+Instead of the URLs login, logout, and password_change (among others),
+you can use the URLs provided by allauth: account_login, account_logout, account_set_password…
+'''

@@ -2,13 +2,16 @@ from os import path
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = path.dirname(path.abspath(path.dirname(__file__)))
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "media"),)
 
-MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
 
 DEBUG = False
 SECRET_KEY = 'Change_This_To_Random_Chars'
@@ -72,6 +75,11 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 INSTALLED_APPS = (
     'channels',
     'django.contrib.auth',
@@ -79,6 +87,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
@@ -89,7 +100,7 @@ INSTALLED_APPS = (
     'glosowania',
     'home',
     'chat',
-    'bootstrap4'
+    'bootstrap4',
 )
 
 LOGGING = {
@@ -130,6 +141,7 @@ EMAIL_HOST_PASSWORD = 'example'  # Change_This
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'example <example@gmail.com>'  # Change_This
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # This will display the mail on the console for easy verification.
 
 X_FRAME_OPTIONS = 'DENY'
@@ -143,13 +155,16 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': ['redis://127.0.0.1:6379/4',],  # change 4 to something different in needed
+            'hosts': ['redis://127.0.0.1:6379/4',],  # change 4 to something different for many instances
 #            "capacity": 1500,  # default 100
 #            "expiry": 10,  # default 60
         },
     },
 }
 
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
 
 # INSTANCE SPECIFIC PARAMETERS
 
