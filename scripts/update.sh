@@ -10,6 +10,14 @@
 git reset --hard
 git pull | grep -q -F 'Already up to date.' && exit 0
 
+chown -R user:nginx *
+# chmod -R o-rwx *
+chmod u+w media/
+
+# ./manage.py createsuperuser"
+pip install --upgrade pip
+pip install -r requirements.txt
+
 ./manage.py makemigrations obywatele
 ./manage.py makemigrations glosowania
 ./manage.py makemigrations elibrary
@@ -20,14 +28,7 @@ git pull | grep -q -F 'Already up to date.' && exit 0
 ./manage.py makemessages -l 'pl'
 ./manage.py compilemessages
 
-chown -R user:nginx *
-# chmod -R o-rwx *
-chmod u+w media/
-
 ./manage.py collectstatic --no-input -c -v 0
-# ./manage.py createsuperuser"
-pip install --upgrade pip
-pip install -r requirements.txt
 
 supervisorctl reread
 supervisorctl update
