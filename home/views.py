@@ -29,7 +29,7 @@ def haslo(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, _('Your password has been changed.'))
-            return redirect('haslo')
+            return redirect('obywatele:my_profile')
         else:
             messages.error(request, _('You typed something wrong. See what error appeared above and try again.'))
     else:
