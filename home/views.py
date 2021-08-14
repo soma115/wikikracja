@@ -4,6 +4,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 # from glosowania.views import ZliczajWszystko
 from glosowania.models import Decyzja
+from customize.models import Customize
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,13 +13,16 @@ def home(request):
     ongoing = Decyzja.objects.filter(status=4).order_by('data_referendum_start')
     upcoming = Decyzja.objects.filter(status=3).order_by('data_referendum_start')
 
+    start = Customize.objects.get(title='Start')
+
     # data_referendum_start = ZliczajWszystko.kolejka
     return render(request,
                   'home/home.html',
                   {
-                    'ongoing': ongoing,
-                   'upcoming': upcoming,
-                   })
+                      'ongoing': ongoing,
+                      'upcoming': upcoming,
+                      'start': start,
+                  })
 
 
 @login_required

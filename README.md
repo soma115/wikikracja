@@ -28,4 +28,7 @@ Smallest KVM VM is enough.
 ### Fedora
 - run: `dnf install python3-devel`
 - Pillow issue: check requrements.txt version vs. OS version
-- 
+
+## After installation
+- Give site a name https://yoursite.com/admin/sites/site/
+- Create role Editor and give it rights to View and Change "Customize" content. Assigne some user to this role. This user should create 2 Customizations: Footer and Start. Those Customizations will be used on welcome page (before loginnin in) and in footer.

@@ -19,6 +19,8 @@ urlpatterns = [
   path('obywatele/', include('obywatele.urls', namespace='obywatele')),
   path('email_change/', ov.email_change, name='email_change'),
   path('accounts/', include('allauth.urls')),
+  path('tinymce/', include('tinymce.urls')),
+  # path('customize/', include('customize.urls')),
 ]
 
 if settings.DEBUG:

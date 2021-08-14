@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-13 11:03+0200\n"
+"POT-Creation-Date: 2021-08-14 16:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -484,14 +484,14 @@ msgstr ""
 msgid "Start"
 msgstr "Start"
 
-#: home/templates/home/base.html:37 home/templates/home/home.html:34
-#: home/templates/home/login.html:4 home/templates/home/login.html:22
-#: home/templates/home/login.html:33
+#: home/templates/home/base.html:37 home/templates/home/home.html:20
+#: home/templates/home/login.html:4 home/templates/home/login.html:14
+#: home/templates/home/login.html:25
 msgid "Login"
 msgstr "Zaloguj"
 
-#: home/templates/home/base.html:38 home/templates/home/home.html:37
-#: home/templates/home/login.html:36
+#: home/templates/home/base.html:38 home/templates/home/home.html:23
+#: home/templates/home/login.html:28
 #: home/templates/home/password_reset_form.html:5
 msgid "Reset password"
 msgstr "Odzyskaj hasło"
@@ -520,22 +520,6 @@ msgstr "profil"
 msgid "logout"
 msgstr "wyloguj"
 
-#: home/templates/home/base.html:62
-msgid "Contact"
-msgstr "Kontakt"
-
-#: home/templates/home/base.html:66
-msgid "About project"
-msgstr "O projekcie"
-
-#: home/templates/home/base.html:67
-msgid "System description"
-msgstr "Opis systemu"
-
-#: home/templates/home/base.html:68
-msgid "Possible use cases"
-msgstr "Możliwe zastosowania"
-
 #: home/templates/home/haslo.html:7
 #: home/templates/home/password_reset_confirm.html:7
 #: home/templates/home/password_reset_confirm.html:11
@@ -549,115 +533,27 @@ msgstr "Zmień hasło"
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: home/templates/home/home.html:11
-msgid "What is Wikicracy?"
-msgstr "Czym jest Wikikracja"
-
-#: home/templates/home/home.html:13
-msgid ""
-"Wikicracy is a voting system that allows the community to manage itself - "
-"without the help of representatives or administrators."
-msgstr ""
-"Wikikracja to system do głosowania, który pozwala społeczności zarządzać "
-"sobą - bez pomocy przedstawicieli i administratorów."
-
-#: home/templates/home/home.html:15
-msgid "Main features of the system"
-msgstr "Główne cechy systemu"
-
-#: home/templates/home/home.html:18
-msgid "each person has one vote"
-msgstr "każda osoba ma jeden głos"
-
-#: home/templates/home/home.html:19
-msgid "every vote is equal"
-msgstr "każdy głos jest tak samo ważny"
-
-#: home/templates/home/home.html:20
-msgid "decisions are taken by simple majority of votes"
-msgstr "decyzje są podejmowane zwykłą większością głosów"
-
-#: home/templates/home/home.html:21
-msgid "votes are anonymous"
-msgstr "głosy są anonimowe"
-
-#: home/templates/home/home.html:22
-msgid ""
-"voting is similar to the Swiss system - after collecting the signatures, the "
-"time for discussion begins and then a referendum follows"
-msgstr ""
-"głosowanie przebiega podobnie jak w systemie szwajcarskim - po zebraniu "
-"podpisów rozpoczyna się czas dyskusji, a następnie referendum"
-
-#: home/templates/home/home.html:23
-msgid "the membership is managed by the whole group by accepting new people"
-msgstr "członkostwem zarządza cała grupa poprzez kceptowanie nowych osób"
-
-#: home/templates/home/home.html:24
-msgid "it is also possible to remove a disruptive person by popular vote"
-msgstr ""
-"możliwe jest również usunięcie przeszkadzającej osoby w głosowaniu "
-"powszechnym"
-
-#: home/templates/home/home.html:28
-msgid ""
-"The application is written so that there is no hierarchy in it. No "
-"administrator is needed. The users themselves decide who belongs to the "
-"group and what rules apply to it. This means full equality and true "
-"democracy that cannot be disabled."
-msgstr ""
-"Aplikacja jest napisana w taki sposób, że nie ma w niej hierarchii. Nie jest "
-"potrzebny żaden administrator. Użytkownicy sami decydują, kto należy do "
-"grupy i jakie zasady jej dotyczą. Oznacza to pełną równość i prawdziwą "
-"demokrację, której nie można wyłączyć."
-
-#: home/templates/home/home.html:30 home/templates/home/login.html:16
-msgid "Read more..."
-msgstr "Czytaj dalej..."
-
-#: home/templates/home/home.html:40
+#: home/templates/home/home.html:26
 msgid "Send message to developer"
 msgstr "Wyślij wiadomość do developera"
 
-#: home/templates/home/home.html:50
+#: home/templates/home/home.html:36
 msgid "Ongoing referenda"
 msgstr "Trwające referenda"
 
-#: home/templates/home/home.html:54
+#: home/templates/home/home.html:40
 msgid "there is currently no referendum"
 msgstr "nie ma obecnie trwających referendów."
 
-#: home/templates/home/home.html:60
+#: home/templates/home/home.html:46
 msgid "Upcoming referenda"
 msgstr "Nadchodzące referenda"
 
-#: home/templates/home/home.html:65
+#: home/templates/home/home.html:51
 msgid "there are no upcoming referenda at this moment"
 msgstr "nie ma obecnie nadchodzących referendów"
 
-#: home/templates/home/login.html:9
-msgid "Welcome to Wikicracy!"
-msgstr "Witamy w Wikikracji"
-
-#: home/templates/home/login.html:11
-msgid ""
-"The purpose of Wikicracy is to allow the community to decide for itself."
-msgstr ""
-"Celem Wikicracy jest umożliwienie społeczności samodzielnego decydowania o "
-"sobie."
-
-#: home/templates/home/login.html:14
-msgid ""
-"Being able to manage our own destiny should lead us to create principles "
-"that reward justice, noble attitudes, broad horizons, unconditional love, "
-"compassion, friendly attitude, and correct statements and predictions."
-msgstr ""
-"Umiejętność kierowania własnym losem powinna doprowadzić nas do utworzenia "
-"zasad nagradzających sprawiedliwość, szlachetne postawy, szerokie horyzonty, "
-"bezwarunkową miłość, współczucie, przyjazne nastawienie oraz prawidłowe "
-"twierdzenia i przewidywania."
-
-#: home/templates/home/login.html:41
+#: home/templates/home/login.html:33
 msgid ""
 "The username or password is incorrect. Please try again or reset your "
 "password."
@@ -708,11 +604,11 @@ msgstr "Powrót do strony logowania"
 msgid "To reset your password, enter your e-mail address and click \"Send\""
 msgstr "Aby zresetować hasło, wprowadź swój adres e-mail i kliknij \"Wyślij\""
 
-#: home/views.py:31
+#: home/views.py:35
 msgid "Your password has been changed."
 msgstr "Twoje hasło zostało zmienione."
 
-#: home/views.py:34
+#: home/views.py:38
 msgid "You typed something wrong. See what error appeared above and try again."
 msgstr ""
 "Coś źle wpisałeś. Zobacz, jaki błąd pojawił się powyżej i spróbuj ponownie."
@@ -1085,6 +981,91 @@ msgstr "Angielski"
 #: zzz/settings.py:41 zzz/settings_example.py:41 zzz/settings_prod.py:41
 msgid "Polish"
 msgstr "Polski"
+
+#~ msgid "Contact"
+#~ msgstr "Kontakt"
+
+#~ msgid "About project"
+#~ msgstr "O projekcie"
+
+#~ msgid "System description"
+#~ msgstr "Opis systemu"
+
+#~ msgid "Possible use cases"
+#~ msgstr "Możliwe zastosowania"
+
+#~ msgid "Welcome to Wikicracy!"
+#~ msgstr "Witamy w Wikikracji"
+
+#~ msgid ""
+#~ "The purpose of Wikicracy is to allow the community to decide for itself."
+#~ msgstr ""
+#~ "Celem Wikicracy jest umożliwienie społeczności samodzielnego decydowania "
+#~ "o sobie."
+
+#~ msgid ""
+#~ "Being able to manage our own destiny should lead us to create principles "
+#~ "that reward justice, noble attitudes, broad horizons, unconditional love, "
+#~ "compassion, friendly attitude, and correct statements and predictions."
+#~ msgstr ""
+#~ "Umiejętność kierowania własnym losem powinna doprowadzić nas do "
+#~ "utworzenia zasad nagradzających sprawiedliwość, szlachetne postawy, "
+#~ "szerokie horyzonty, bezwarunkową miłość, współczucie, przyjazne "
+#~ "nastawienie oraz prawidłowe twierdzenia i przewidywania."
+
+#~ msgid "Read more..."
+#~ msgstr "Czytaj dalej..."
+
+#~ msgid "What is Wikicracy?"
+#~ msgstr "Czym jest Wikikracja"
+
+#~ msgid ""
+#~ "Wikicracy is a voting system that allows the community to manage itself - "
+#~ "without the help of representatives or administrators."
+#~ msgstr ""
+#~ "Wikikracja to system do głosowania, który pozwala społeczności zarządzać "
+#~ "sobą - bez pomocy przedstawicieli i administratorów."
+
+#~ msgid "Main features of the system"
+#~ msgstr "Główne cechy systemu"
+
+#~ msgid "each person has one vote"
+#~ msgstr "każda osoba ma jeden głos"
+
+#~ msgid "every vote is equal"
+#~ msgstr "każdy głos jest tak samo ważny"
+
+#~ msgid "decisions are taken by simple majority of votes"
+#~ msgstr "decyzje są podejmowane zwykłą większością głosów"
+
+#~ msgid "votes are anonymous"
+#~ msgstr "głosy są anonimowe"
+
+#~ msgid ""
+#~ "voting is similar to the Swiss system - after collecting the signatures, "
+#~ "the time for discussion begins and then a referendum follows"
+#~ msgstr ""
+#~ "głosowanie przebiega podobnie jak w systemie szwajcarskim - po zebraniu "
+#~ "podpisów rozpoczyna się czas dyskusji, a następnie referendum"
+
+#~ msgid "the membership is managed by the whole group by accepting new people"
+#~ msgstr "członkostwem zarządza cała grupa poprzez kceptowanie nowych osób"
+
+#~ msgid "it is also possible to remove a disruptive person by popular vote"
+#~ msgstr ""
+#~ "możliwe jest również usunięcie przeszkadzającej osoby w głosowaniu "
+#~ "powszechnym"
+
+#~ msgid ""
+#~ "The application is written so that there is no hierarchy in it. No "
+#~ "administrator is needed. The users themselves decide who belongs to the "
+#~ "group and what rules apply to it. This means full equality and true "
+#~ "democracy that cannot be disabled."
+#~ msgstr ""
+#~ "Aplikacja jest napisana w taki sposób, że nie ma w niej hierarchii. Nie "
+#~ "jest potrzebny żaden administrator. Użytkownicy sami decydują, kto należy "
+#~ "do grupy i jakie zasady jej dotyczą. Oznacza to pełną równość i prawdziwą "
+#~ "demokrację, której nie można wyłączyć."
 
 #~ msgid "Arguments for"
 #~ msgstr "Argumenty Za"

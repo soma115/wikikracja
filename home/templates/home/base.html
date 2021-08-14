@@ -56,20 +56,9 @@
 		<p>{% block content %}{% endblock content%}</p>
 	</div>
 
-	<div class="container" style="background-color: #aeaeae; margin-top:50px;border-top:2px solid grey;border-bottom:1px solid grey;padding-top:20px;">
-		<div class="row justify-content-around">
-			<div class="col-4">
-				<h5>{% trans 'Contact' %}</h5>
-				<p><a href="https://wikikracja.pl/kontakt/" target="_blank">wikikracja.pl</a></p>
-			</div>
-			<div class="col-4">
-				<h5>{% trans 'About project' %}</h5>
-				<p><a href="https://wikikracja.pl/category/opis-systemu/" target="_blank">{% trans 'System description' %}</a></p>
-				<p><a href="https://wikikracja.pl/category/mozliwe-zastosowania/" target="_blank">{% trans 'Possible use cases' %}</a></p>
-			</div>
-		</div>
-	</div>
+	<div class="container" style=" background-color: #aeaeae; margin-top:50px;border-top:2px solid grey;border-bottom:1px solid grey;padding-top:20px;">
+		{{ footer.content|safe }}
+    </div>
 
-{% block extra_body %}{% endblock %}
 </body>
 </html>
