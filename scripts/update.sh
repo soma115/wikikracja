@@ -22,6 +22,7 @@ pip install -r requirements.txt
 ./manage.py makemigrations glosowania
 ./manage.py makemigrations elibrary
 ./manage.py makemigrations chat
+./manage.py makemigrations customize
 ./manage.py makemigrations
 ./manage.py migrate
 ./manage.py makemessages -l 'en'
