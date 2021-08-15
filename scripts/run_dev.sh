@@ -11,6 +11,7 @@ pip install -q -r requirements.txt
 ./manage.py makemigrations obywatele
 ./manage.py makemigrations elibrary
 ./manage.py makemigrations chat
+./manage.py makemigrations customize
 ./manage.py makemigrations
 ./manage.py migrate
 
