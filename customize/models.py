@@ -4,11 +4,11 @@ from tinymce.models import HTMLField
 
 
 class Customize(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(null=True, blank=True, max_length=200)
     # content = models.TextField()
-    content = HTMLField()
-    mod_date = models.DateField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = HTMLField(null=True, blank=True)
+    mod_date = models.DateField(null=True, blank=True)
+    author = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

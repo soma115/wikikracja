@@ -13,7 +13,12 @@ def home(request):
     ongoing = Decyzja.objects.filter(status=4).order_by('data_referendum_start')
     upcoming = Decyzja.objects.filter(status=3).order_by('data_referendum_start')
 
-    start = Customize.objects.get(title='Start')
+    # start = Customize.objects.get_or_create(title='Start', defaults={'title': 'Title', 'content': '', 'mod_date': '', 'author': ''})
+    try:
+        start = Customize.objects.get(title='Start')
+    except Exception as e:
+        pass
+        start=''
 
     # data_referendum_start = ZliczajWszystko.kolejka
     return render(request,

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-15 17:39+0200\n"
+"POT-Creation-Date: 2021-08-15 18:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -604,11 +604,11 @@ msgstr "Powrót do strony logowania"
 msgid "To reset your password, enter your e-mail address and click \"Send\""
 msgstr "Aby zresetować hasło, wprowadź swój adres e-mail i kliknij \"Wyślij\""
 
-#: home/views.py:35
+#: home/views.py:40
 msgid "Your password has been changed."
 msgstr "Twoje hasło zostało zmienione."
 
-#: home/views.py:38
+#: home/views.py:43
 msgid "You typed something wrong. See what error appeared above and try again."
 msgstr ""
 "Coś źle wpisałeś. Zobacz, jaki błąd pojawił się powyżej i spróbuj ponownie."

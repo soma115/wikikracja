@@ -30,6 +30,9 @@ Smallest KVM VM is enough.
 - Pillow issue: check requrements.txt version vs. OS version
 
 ## After installation
-- Create users
+- Create superuser (superuser will be eliminated in future versions)
 - Give site a name https://yoursite.com/admin/sites/site/
-- Create role "Editor" and give it rights to View and Change "Customize" content. Assign some user to this role. This user should create 2 Customizations titled: "Footer" and "Start". Those Customizations will be used in footer and on welcome page (before loging in).
+- Apply fixtures:
+    ./manage.py loaddata customize/fixture.json
+  This will create Editor group, Footer and Start page
+- later on assign some user to Editor group. This person will be able to modify Footer and Start page (the one visible before login).
