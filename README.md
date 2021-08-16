@@ -30,9 +30,10 @@ Smallest KVM VM is enough.
 - Pillow issue: check requrements.txt version vs. OS version
 
 ## After installation
+- run scripts/run_dev.py - it will apply all migrations
 - Create superuser (superuser will be eliminated in future versions)
-- Give site a name https://yoursite.com/admin/sites/site/
 - Apply fixtures:
     ./manage.py loaddata customize/fixture.json
-  This will create Editor group, Footer and Start page
+    This will create Editor group, Footer and Start page
+- Give site a name https://yoursite.com/admin/sites/site/
 - later on assign some user to Editor group. This person will be able to modify Footer and Start page (the one visible before login).
