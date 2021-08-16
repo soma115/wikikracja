@@ -43,7 +43,11 @@
 				<a {% if request.resolver_match.namespace == 'glosowania' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'glosowania:status' pk=7 %}">{% trans "Voting" %}</a>
 
 				<a {% if request.resolver_match.namespace == 'elibrary' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'elibrary:elibrary' %}">{% trans "eLibrary" %}</a>
+				
+				<a {% if request.resolver_match.namespace == 'blog' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'blog:blog-list' %}">{% trans "Blog" %}</a>
+				
 				<a {% if request.resolver_match.namespace == 'chat' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/chat/">{% trans "Chat" %}</a>
+				
 				<a {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} style="color:green" href="{% url 'obywatele:my_profile' %}">{% trans "profile" %}</a>
 
 				<a class="nav-item nav-link" style="color:gray" href="/logout">{% trans "logout" %}</a>
@@ -59,6 +63,9 @@
 	<div class="container" style=" background-color: #aeaeae; margin-top:50px;border-top:2px solid grey;border-bottom:1px solid grey;padding-top:20px;">
 		{{ footer.content|safe }}
     </div>
+
+{% comment %} Need for chat {% endcomment %}
+{% block extra_body %}{% endblock %}
 
 </body>
 </html>

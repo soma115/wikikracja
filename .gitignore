@@ -3,6 +3,7 @@ venv/
 myvenv/
 backup/
 _inne_materialy/
+static/
 
 *.DS_Store
 *.cache

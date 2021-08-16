@@ -1,0 +1,24 @@
+{% extends "home/base.html" %}
+
+{% load blog_tags %}
+
+{% block title %}Blogs{% endblock title %}
+
+{% block content %}
+  <h1>Blogs</h1>
+  <ul>
+    {% for blog in object_list %}
+    <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if is_paginated %}
+  <div class="clearfix">
+    {% if page_obj.has_previous %}
+    <a class="pull-left" href="?page={{ page_obj.previous_page_number }}">Newer Entries</a>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <a class="pull-right" href="?page={{ page_obj.next_page_number }}">Older Entries</a>
+    {% endif %}
+  </div>
+  {% endif %}
+{% endblock content %}

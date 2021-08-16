@@ -20,7 +20,7 @@ urlpatterns = [
   path('email_change/', ov.email_change, name='email_change'),
   path('accounts/', include('allauth.urls')),
   path('tinymce/', include('tinymce.urls')),
-  # path('customize/', include('customize.urls')),
+  path('blog/', include('blog.urls')),
 ]
 
 if settings.DEBUG:

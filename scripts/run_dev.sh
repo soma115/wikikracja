@@ -12,6 +12,7 @@ pip install -q -r requirements.txt
 ./manage.py makemigrations elibrary
 ./manage.py makemigrations chat
 ./manage.py makemigrations customize
+./manage.py makemigrations blog
 ./manage.py makemigrations
 ./manage.py migrate
 

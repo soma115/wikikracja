@@ -14,3 +14,4 @@ six==1.10.0
 rq==1.1.0
 django-allauth==0.45.0
 django-tinymce==3.3.0
+django-taggit==1.5.1

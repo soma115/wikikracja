@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-15 18:59+0200\n"
+"POT-Creation-Date: 2021-08-16 21:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: blog/models.py:15 glosowania/models.py:15
+msgid "Title"
+msgstr ""
+
+#: blog/models.py:16
+msgid "Slug"
+msgstr ""
+
+#: blog/models.py:17
+msgid "Summary"
+msgstr ""
+
+#: blog/models.py:18
+msgid "Image"
+msgstr ""
+
+#: blog/models.py:20
+msgid "Modified"
+msgstr ""
+
+#: blog/models.py:22
+msgid "Body"
+msgstr ""
 
 #: chat/templates/chat/add.html:7
 msgid "New room"
@@ -103,10 +127,6 @@ msgstr ""
 #: elibrary/templates/elibrary/elibrary.html:20
 #: elibrary/templates/elibrary/elibrary.html:21
 msgid "delete"
-msgstr ""
-
-#: glosowania/models.py:15
-msgid "Title"
 msgstr ""
 
 #: glosowania/models.py:16
@@ -441,13 +461,13 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: home/templates/home/base.html:37 home/templates/home/home.html:20
+#: home/templates/home/base.html:37 home/templates/home/home.html:21
 #: home/templates/home/login.html:4 home/templates/home/login.html:14
 #: home/templates/home/login.html:25
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/base.html:38 home/templates/home/home.html:23
+#: home/templates/home/base.html:38 home/templates/home/home.html:24
 #: home/templates/home/login.html:28
 #: home/templates/home/password_reset_form.html:5
 msgid "Reset password"
@@ -465,15 +485,15 @@ msgstr ""
 msgid "eLibrary"
 msgstr ""
 
-#: home/templates/home/base.html:46
+#: home/templates/home/base.html:50
 msgid "Chat"
 msgstr ""
 
-#: home/templates/home/base.html:47
+#: home/templates/home/base.html:52
 msgid "profile"
 msgstr ""
 
-#: home/templates/home/base.html:49
+#: home/templates/home/base.html:54
 msgid "logout"
 msgstr ""
 
@@ -490,23 +510,23 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: home/templates/home/home.html:26
+#: home/templates/home/home.html:27
 msgid "Send message to developer"
 msgstr ""
 
-#: home/templates/home/home.html:36
+#: home/templates/home/home.html:37
 msgid "Ongoing referenda"
 msgstr ""
 
-#: home/templates/home/home.html:40
+#: home/templates/home/home.html:41
 msgid "there is currently no referendum"
 msgstr ""
 
-#: home/templates/home/home.html:46
+#: home/templates/home/home.html:47
 msgid "Upcoming referenda"
 msgstr ""
 
-#: home/templates/home/home.html:51
+#: home/templates/home/home.html:52
 msgid "there are no upcoming referenda at this moment"
 msgstr ""
 
