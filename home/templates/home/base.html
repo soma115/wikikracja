@@ -44,7 +44,7 @@
 
 				<a {% if request.resolver_match.namespace == 'elibrary' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'elibrary:elibrary' %}">{% trans "eLibrary" %}</a>
 				
-				<a {% if request.resolver_match.namespace == 'blog' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'blog:blog-list' %}">{% trans "Blog" %}</a>
+				{% comment %} <a {% if request.resolver_match.namespace == 'blog' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'blog:blog-list' %}">{% trans "Blog" %}</a> {% endcomment %}
 				
 				<a {% if request.resolver_match.namespace == 'chat' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/chat/">{% trans "Chat" %}</a>
 				
