@@ -33,7 +33,7 @@
         "pk": 2,
         "fields": {
             "title": "Footer",
-            "content": "<p style=\"text-align: center;\"><a href=\"https://wikikracja.pl/category/opis-systemu/\" target=\"_blank\" rel=\"noopener\">wikikracja</a>&nbsp; &nbsp;&nbsp;<a href=\"https://wikikracja.pl/kontakt/\" target=\"_blank\" rel=\"noopener\">zgłoś_problem</a>&nbsp; &nbsp; <a href=\"https://www.facebook.com/groups/wikikracja\" target=\"_blank\" rel=\"noopener\">facebook</a>&nbsp; &nbsp; <a href=\"https://t.me/wikikracja\" target=\"_blank\" rel=\"noopener\">telegram</a></p>",
+            "content": "<p style=\"text-align: center;\"><a href=\"https://wikikracja.pl/category/opis-systemu/\" target=\"_blank\" rel=\"noopener\">wikikracja</a>&nbsp; &nbsp;&nbsp;<a href=\"https://wikikracja.pl/kontakt/\" target=\"_blank\" rel=\"noopener\">zgłoś problem</a>&nbsp; &nbsp; <a href=\"https://www.facebook.com/groups/wikikracja\" target=\"_blank\" rel=\"noopener\">facebook</a>&nbsp; &nbsp; <a href=\"https://t.me/wikikracja\" target=\"_blank\" rel=\"noopener\">telegram</a></p>",
             "mod_date": null,
             "author": null
         }

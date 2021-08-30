@@ -5,29 +5,20 @@
 
 
 {% if not user.is_authenticated %}
-
-<div class="row">
-	<div class="container">
-		<div class="row">
-
-
-<p>{{ start.content|safe }}</p>
-
-
-		</div>
-		<div class="row rounded" style="background-color: #a7d2e4; padding:10px;margin-top:20px;">
-			<div class="col-md-4">
-				<a href="{% url 'login' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Login' %}</a>
-			</div>
-			<div class="col-md-4">
-				<a href="{% url 'password_reset' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Reset password' %}</a>
-			</div>
-			<div class="col-md-4">
-				<a href=https://wikikracja.pl/kontakt/ target="_blank" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Send message to developer' %}</a>		
+		<div class="container">
+				<p>{{ start.content|safe }}</p>
+			<div class="row rounded" style="background-color: #a7d2e4; padding:10px;margin-top:20px;">
+				<div class="col-md-4">
+					<a href="{% url 'login' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Login' %}</a>
+				</div>
+				<div class="col-md-4">
+					<a href="{% url 'password_reset' %}" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Reset password' %}</a>
+				</div>
+				<div class="col-md-4">
+					<a href=https://wikikracja.pl/kontakt/ target="_blank" class="btn btn-success btn-block m-2 btn-sm">{% trans 'Send message to developer' %}</a>		
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 {% endif %}
 
 {% if user.is_authenticated %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-30 22:54+0200\n"
+"POT-Creation-Date: 2021-08-30 23:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -471,7 +471,7 @@ msgid ""
 "Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
 msgstr ""
 
-#: home/templates/home/base.html:38 home/templates/home/home.html:49
+#: home/templates/home/base.html:38 home/templates/home/home.html:48
 msgid "Start"
 msgstr ""
 
@@ -479,7 +479,7 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: home/templates/home/base.html:42 home/templates/home/home.html:20
+#: home/templates/home/base.html:42 home/templates/home/home.html:19
 #: home/templates/home/login.html:4 home/templates/home/login.html:14
 #: home/templates/home/login.html:25
 msgid "Login"
@@ -527,32 +527,32 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: home/templates/home/home.html:23 home/templates/home/login.html:28
+#: home/templates/home/home.html:22 home/templates/home/login.html:28
 #: home/templates/home/password_reset_form.html:5
 msgid "Reset password"
 msgstr ""
 
-#: home/templates/home/home.html:26
+#: home/templates/home/home.html:25
 msgid "Send message to developer"
 msgstr ""
 
-#: home/templates/home/home.html:36
+#: home/templates/home/home.html:35
 msgid "Ongoing referenda"
 msgstr ""
 
-#: home/templates/home/home.html:38
+#: home/templates/home/home.html:37
 msgid "End"
 msgstr ""
 
-#: home/templates/home/home.html:40
+#: home/templates/home/home.html:39
 msgid "there is currently no referendum"
 msgstr ""
 
-#: home/templates/home/home.html:46
+#: home/templates/home/home.html:45
 msgid "Upcoming referenda"
 msgstr ""
 
-#: home/templates/home/home.html:51
+#: home/templates/home/home.html:50
 msgid "there are no upcoming referenda at this moment"
 msgstr ""
 
