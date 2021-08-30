@@ -32,9 +32,11 @@ class Uzytkownik(models.Model):
     fb = models.CharField(null=True, blank=True, max_length=500, help_text=_('Link to Facebook profile'), verbose_name=_('Facebook'))
     gift = models.CharField(null=True, blank=True, max_length=500, help_text=_('What gift would you like to receive'), verbose_name=_('Gift'))
     other = models.TextField(null=True, blank=True, max_length=500, help_text=_('Other things worth mentioning'), verbose_name=_('Other'))
-
     # foto = models.CharField(null=True, blank=True, max_length=500)
     # i_know_personally_those_important_people = models.CharField(null=True, blank=True, max_length=500)
+    class Meta:
+        verbose_name = _("Citizen")
+        verbose_name_plural = _("Citizens")
 
     # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
     @receiver(post_save, sender=User)

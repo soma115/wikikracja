@@ -10,9 +10,16 @@
 		{% endfor %}
 	</ul>
 
-	<p><button class="btn btn-secondary btn-sm col-md-2 offset-8" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-		{% trans "System parameters" %}
-	</button></p>
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<p>
+					<button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+					{% trans "System parameters" %}</button>
+				</p>
+			</div>
+		</div>
+	</div>
 
 	<div class="collapse" id="collapseExample">
 		<ul class="list-group">

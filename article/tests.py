@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
-from .templatetags import blog_tags
+from .templatetags import article_tags
 from .models import Article
 
 
@@ -37,7 +37,7 @@ class ArticleViewTests(TestCase):
 
     def test_normal(self):
         res = self.client.get(reverse(
-            'article-detail', kwargs={'slug': 'the-first-article'}))
+            'blog:article-detail', kwargs={'slug': 'the-first-article'}))
         self.assertEqual(res.status_code, 200)
 
 
@@ -46,15 +46,15 @@ class TemplateTagsTests(TestCase):
     fixtures = ['articles.json']
 
     def test_normal(self):
-        queryset = blog_tags.recent_blogs()
+        queryset = article_tags.recent_articles()
         self.assertEqual(queryset.count(), 2)
 
     def test_exclude(self):
-        queryset = blog_tags.recent_blogs(exclude=1)
+        queryset = article_tags.recent_articles(exclude=1)
         self.assertEqual(queryset.count(), 1)
 
     def test_exclude_multi(self):
-        queryset = blog_tags.recent_blogs(exclude=[1, 2])
+        queryset = article_tags.recent_articles(exclude=[1, 2])
         self.assertEqual(queryset.count(), 1)
 
 

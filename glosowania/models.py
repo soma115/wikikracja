@@ -31,7 +31,7 @@ class Decyzja(models.Model):
         max_length=1500,
         null=True,
         verbose_name=_('Reasoning'),
-        help_text=_('What is the purpose of this law? Why was it created? What are we going to achieve with it? What event caused it to arise?')
+        help_text=_('What events inspired this bill? What are we going to achieve with it?')
         )
     args_for = models.TextField(
         max_length=1500,

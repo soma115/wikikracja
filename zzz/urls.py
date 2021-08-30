@@ -6,21 +6,27 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
+from filebrowser.sites import site
+from django.views.generic import RedirectView
 
 urlpatterns = [
-  path('admin/', admin.site.urls),
-  path('logout/', auth_views.LogoutView.as_view(), {'next_page': '/login/'}, name='logout'),
-  path('', include('home.urls')),
-  path('login/', auth_views.LoginView.as_view(template_name='home/login.html'), name='login'),
-  path('haslo/', hv.haslo, name='haslo'),
-  path('glosowania/', include('glosowania.urls', namespace='glosowania')),
-  path('elibrary/', include('elibrary.urls', namespace='elibrary')),
-  path('chat/', include('chat.urls', namespace='chat')),
-  path('obywatele/', include('obywatele.urls', namespace='obywatele')),
-  path('email_change/', ov.email_change, name='email_change'),
-  path('accounts/', include('allauth.urls')),
-  path('tinymce/', include('tinymce.urls')),
-  path('blog/', include('blog.urls')),
+    path('logout/', auth_views.LogoutView.as_view(), {'next_page': '/login/'}, name='logout'),
+    path('', include('home.urls')),
+    path('login/', auth_views.LoginView.as_view(template_name='home/login.html'), name='login'),
+    path('haslo/', hv.haslo, name='haslo'),
+    path('glosowania/', include('glosowania.urls', namespace='glosowania')),
+    path('elibrary/', include('elibrary.urls', namespace='elibrary')),
+    path('chat/', include('chat.urls', namespace='chat')),
+    path('obywatele/', include('obywatele.urls', namespace='obywatele')),
+    path('email_change/', ov.email_change, name='email_change'),
+    path('accounts/', include('allauth.urls')),
+    path('blog/', include('article.urls')),
+    path('tinymce/', include('tinymce.urls')),
+    path('admin/filebrowser/', site.urls),
+    path('grappelli/', include('grappelli.urls')),
+    path('admin/', admin.site.urls),
+    path('favicon.ico',RedirectView.as_view(url='/static/home/images/favicon.ico')),
+
 ]
 
 if settings.DEBUG:

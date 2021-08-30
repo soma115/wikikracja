@@ -17,6 +17,7 @@ from math import log
 import logging as l
 from obywatele.forms import UserForm, ProfileForm, EmailChangeForm
 from obywatele.models import Uzytkownik, Rate
+from django.contrib.auth.models import Group
 
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
@@ -336,6 +337,12 @@ def zliczaj_obywateli(request):
     for i in Uzytkownik.objects.all():
         if i.reputation > required_reputation() and not i.uid.is_active:
             i.uid.is_active = True  # Uzytkownik.uid -> User
+
+            i.uid.is_staff = True
+            # Add to Editor group
+            editor = Group.objects.get(name='Editor')
+            editor.user_set.add(i.uid)
+
             password = password_generator()
             i.uid.set_password(password)
             i.data_przyjecia = dzis()

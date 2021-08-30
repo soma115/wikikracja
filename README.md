@@ -33,7 +33,7 @@ Smallest KVM VM is enough.
 - run scripts/run_dev.py - it will apply all migrations
 - Create superuser (superuser will be eliminated in future versions)
 - Apply fixtures:
-    ./manage.py loaddata customize/fixture.json
+    ./manage.py loaddata customize/fixtures/customize.json
     This will create Editor group, Footer and Start page
 - Give site a name https://yoursite.com/admin/sites/site/
 - later on assign some user to Editor group. This person will be able to modify Footer and Start page (the one visible before login).

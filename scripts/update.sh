@@ -10,6 +10,7 @@
 git reset --hard
 git pull | grep -q -F 'Already up to date.' && exit 0
 
+mkdir -p media/uploads
 chown -R user:nginx *
 # chmod -R o-rwx *
 chmod u+w media/
@@ -23,7 +24,7 @@ pip install -r requirements.txt
 ./manage.py makemigrations elibrary
 ./manage.py makemigrations chat
 ./manage.py makemigrations customize
-./manage.py makemigrations blog
+./manage.py makemigrations article
 ./manage.py makemigrations
 ./manage.py migrate
 ./manage.py makemessages -l 'en'

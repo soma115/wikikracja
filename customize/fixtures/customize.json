@@ -30,7 +30,7 @@
     },
     {
         "model": "customize.customize",
-        "pk": 2,
+        "pk": null,
         "fields": {
             "title": "Footer",
             "content": "<p style=\"text-align: center;\"><a href=\"https://wikikracja.pl/category/opis-systemu/\" target=\"_blank\" rel=\"noopener\">wikikracja</a></p>",
