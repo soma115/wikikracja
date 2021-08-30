@@ -17,3 +17,4 @@ django-tinymce==3.3.0
 django-taggit==1.5.1
 django-grappelli==2.15.1
 django-filebrowser==3.14.1
+Django-tinymce-filebrowser==0.2.1

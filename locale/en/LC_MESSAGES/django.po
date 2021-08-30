@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-30 22:32+0200\n"
+"POT-Creation-Date: 2021-08-30 22:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -485,38 +485,32 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/base.html:43 home/templates/home/home.html:23
-#: home/templates/home/login.html:28
-#: home/templates/home/password_reset_form.html:5
-msgid "Reset password"
-msgstr ""
-
-#: home/templates/home/base.html:47 obywatele/models.py:39
+#: home/templates/home/base.html:46 obywatele/models.py:39
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
 msgstr ""
 
-#: home/templates/home/base.html:49
+#: home/templates/home/base.html:48
 msgid "Voting"
 msgstr ""
 
-#: home/templates/home/base.html:51
+#: home/templates/home/base.html:50
 msgid "eLibrary"
 msgstr ""
 
-#: home/templates/home/base.html:54
+#: home/templates/home/base.html:53
 msgid "Chat"
 msgstr ""
 
-#: home/templates/home/base.html:56
+#: home/templates/home/base.html:55
 msgid "profile"
 msgstr ""
 
-#: home/templates/home/base.html:58
+#: home/templates/home/base.html:57
 msgid "admin"
 msgstr ""
 
-#: home/templates/home/base.html:60
+#: home/templates/home/base.html:59
 msgid "logout"
 msgstr ""
 
@@ -531,6 +525,11 @@ msgstr ""
 #: obywatele/templates/obywatele/email_change.html:24
 #: obywatele/templates/obywatele/my_assets.html:16
 msgid "Cancel"
+msgstr ""
+
+#: home/templates/home/home.html:23 home/templates/home/login.html:28
+#: home/templates/home/password_reset_form.html:5
+msgid "Reset password"
 msgstr ""
 
 #: home/templates/home/home.html:26
