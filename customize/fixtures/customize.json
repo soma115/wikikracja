@@ -5,17 +5,13 @@
         "fields": {
             "name": "Editor",
             "permissions": [
+                93,
+                94,
+                95,
+                96,
                 82,
                 84
             ]
-        }
-    },
-    {
-        "model": "contenttypes.contenttype",
-        "pk": 21,
-        "fields": {
-            "app_label": "customize",
-            "model": "customize"
         }
     },
     {
