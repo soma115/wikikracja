@@ -153,17 +153,6 @@ LOGOUT_REDIRECT_URL = '/login/'
 DATE_FORMAT = "Y-m-d"
 INTERNAL_IPS = '127.0.0.1'
 
-# EMAIL_HOST = 'imap.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'melman439@gmail.com'
-# EMAIL_HOST_PASSWORD = 'jasnygwintcozaswinie'
-# EMAIL_USE_SSL = False
-# EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Wikikracja.pl <melman439@gmail.com>'
-
-# This will display the mail on the console for Easy Verification:
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 X_FRAME_OPTIONS = 'DENY'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'  # TODO: template?
 

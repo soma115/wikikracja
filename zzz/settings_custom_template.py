@@ -17,6 +17,18 @@ CHANNEL_LAYERS = {
     },
 }
 
+EMAIL_HOST = 'imap.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'login@gmail.com'
+EMAIL_HOST_PASSWORD = 'secret_password'
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'your_page.com <login@gmail.com>'
+# SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# This will display the mail on the console for Easy Verification:
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # citizens
 # Higher = harder to accept new person. Higher = easier to ban existing person.
 # Above ~0.72 SECOND person in group requires 2 points of acceptance which is a paradox.
