@@ -1,5 +1,10 @@
 # wikikracja
-This is community building system. Currently consist of two functioning modules: voting and citizens
+This is community building system. Currently it consist following modules:
+- voting
+- citizens
+- chat
+- eLibrary
+- blog
 Voting module (glosowania) uses principle known as Zero Knowledge Proof (https://youtu.be/HUs1bH85X9I). It means that voting is fairly anonymous.
 
 ## Requirements
@@ -27,13 +32,14 @@ Smallest KVM VM is enough.
 
 ### Fedora
 - run: `dnf install python3-devel`
-- Pillow issue: check requrements.txt version vs. OS version
+- Pillow issue: check requirements.txt version vs. OS version
 
 ## After installation
 - run scripts/run_dev.py - it will apply all migrations
 - Create superuser (superuser will be eliminated in future versions)
-- Apply fixtures:
-    ./manage.py loaddata customize/fixtures/customize.json
-    This will create Editor group, Footer and Start page
+- Create 'Editor' group and assign rights:
+    - Article - add, change, view, delete
+    - Customize - change, view
+    Each new user will be automaticaly assigned to group 'Editor'
+- Apply fixtures to create Footer and Start page: ./manage.py loaddata customize/fixtures/customize.json
 - Give site a name https://yoursite.com/admin/sites/site/
-- later on assign some user to Editor group. This person will be able to modify Footer and Start page (the one visible before login).

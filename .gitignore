@@ -37,6 +37,5 @@ gen_users.txt
 *.pot
 *.pyc
 __pycache__/
-zzz/settings_prod.py
-zzz/settings.py
 db.sqlite3
+zzz/settings_custom.py

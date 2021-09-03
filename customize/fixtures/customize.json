@@ -1,20 +1,5 @@
 [
     {
-        "model": "auth.group",
-        "pk": 1,
-        "fields": {
-            "name": "Editor",
-            "permissions": [
-                93,
-                94,
-                95,
-                96,
-                82,
-                84
-            ]
-        }
-    },
-    {
         "model": "customize.customize",
         "pk": 1,
         "fields": {

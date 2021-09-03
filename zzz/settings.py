@@ -1,5 +1,6 @@
 from os import path
 import os
+from .settings_custom import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -10,13 +11,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "media"),)
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
-
-DEBUG = False
-SECRET_KEY = 'Change_This_To_Random_Chars'
-
-ALLOWED_HOSTS = ['*']  # Change_This
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DATABASES = {
     'default': {
@@ -24,9 +20,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-TIME_ZONE = 'Europe/Warsaw'
-LANGUAGE_CODE = 'pl'
 
 SITE_ID = 1
 
@@ -49,11 +42,18 @@ STATICFILES_FINDERS = (
 MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',  # zakomentowanie powoduje, że emaile wysyłają się po angielsku
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',  # filebrowser się nie otwiera jak to jest włączone
+    # Na produkcji w nginx dodać:
+    # add_header X-Frame-Options SAMEORIGIN;
+    # albo w settings.py:
+    # X_FRAME_OPTIONS = 'SAMEORIGIN'
+    # X_FRAME_OPTIONS = 'ALLOW'
+    # XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
 )
 
 ROOT_URLCONF = 'zzz.urls'
@@ -92,7 +92,6 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'django.contrib.admindocs',
     'django_extensions',
     'crispy_forms',
@@ -102,7 +101,26 @@ INSTALLED_APPS = (
     'home',
     'chat',
     'bootstrap4',
+    'customize',
+    'taggit',
+    'article',
+    'tinymce',
+    'grappelli',
+    'filebrowser',
+    'django.contrib.admin',
 )
+
+TINYMCE_DEFAULT_CONFIG = {
+    "theme": "silver",
+    "height": 500,
+    "menubar": False,
+    "plugins": "advlist,autolink,lists,link,image,charmap,print,preview,anchor,"
+    "searchreplace,visualblocks,code,fullscreen,insertdatetime,media,table,paste,"
+    "code,help,wordcount",
+    "toolbar": "undo redo | bold italic underline | formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | forecolor backcolor removeformat  | charmap | fullscreen | insertfile image media pageembed template link anchor codesample",
+}
+
+FILEBROWSER_DIRECTORY = 'uploads/'
 
 LOGGING = {
     'version': 1,
@@ -135,53 +153,23 @@ LOGOUT_REDIRECT_URL = '/login/'
 DATE_FORMAT = "Y-m-d"
 INTERNAL_IPS = '127.0.0.1'
 
-EMAIL_HOST = 'example.imap.gmail.com'  # Change_This
-EMAIL_PORT = 587  # Change_This
-EMAIL_HOST_USER = 'example@gmail.com'  # Change_This
-EMAIL_HOST_PASSWORD = 'example'  # Change_This
-EMAIL_USE_SSL = False
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'example <example@gmail.com>'  # Change_This
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # This will display the mail on the console for easy verification.
+# EMAIL_HOST = 'imap.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'melman439@gmail.com'
+# EMAIL_HOST_PASSWORD = 'jasnygwintcozaswinie'
+# EMAIL_USE_SSL = False
+# EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Wikikracja.pl <melman439@gmail.com>'
+
+# This will display the mail on the console for Easy Verification:
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 X_FRAME_OPTIONS = 'DENY'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'  # TODO: template?
 
-# Channels
-ASGI_APPLICATION = "zzz.routing.application"
 # WSGI_APPLICATION = 'zzz.wsgi.application'
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': ['redis://127.0.0.1:6379/4',],  # change 4 to something different for many instances
-#            "capacity": 1500,  # default 100
-#            "expiry": 10,  # default 60
-        },
-    },
-}
+ASGI_APPLICATION = 'zzz.routing.application'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
-
-# INSTANCE SPECIFIC PARAMETERS
-
-# citizens
-# Higher = harder to accept new person. Higher = easier to ban existing person.
-# Above ~0.72 SECOND person in group requires 2 points of acceptance which is a paradox.
-# Be careful changing this formula - people rarely accept each other.
-ACCEPTANCE_MULTIPLIER = 0.72
-
-# voting
-WYMAGANYCH_PODPISOW = 2             # Number of signatures needed to approve request for referendum.
-CZAS_NA_ZEBRANIE_PODPISOW = 365     # default 365 days
-KOLEJKA = 7                         # default 7 days. Discussion before referendum.
-CZAS_TRWANIA_REFERENDUM = 7         # default 7 days
-VACATIO_LEGIS = 7                   # default 7 days
-
-# chat
-ARCHIVE_CHAT_ROOM = 90              # default 90 days
-DELETE_CHAT_ROOM = 365              # default 365 days

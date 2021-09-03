@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 20:32+0200\n"
+"POT-Creation-Date: 2021-09-03 16:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1022,11 +1022,11 @@ msgstr "Django site admin"
 msgid "Wikicracy Administration"
 msgstr "Wikicracy Administration"
 
-#: zzz/settings.py:40 zzz/settings_example.py:40 zzz/settings_prod.py:40
+#: zzz/settings.py:33
 msgid "English"
 msgstr "Angielski"
 
-#: zzz/settings.py:41 zzz/settings_example.py:41 zzz/settings_prod.py:41
+#: zzz/settings.py:34
 msgid "Polish"
 msgstr "Polski"
 
