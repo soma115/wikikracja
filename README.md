@@ -35,7 +35,7 @@ Smallest KVM VM is enough.
 - Pillow issue: check requirements.txt version vs. OS version
 
 ## After installation
-- run scripts/run_dev.py - it will apply all migrations
+- Copy settings_custom_template.py to settings_custom.py and adjust its content
 - Create superuser (superuser will be eliminated in future versions)
 - Create 'Editor' group and assign rights:
     - Article - add, change, view, delete

@@ -1,9 +1,9 @@
 # INSTANCE SPECIFIC PARAMETERS
 
-ALLOWED_HOSTS = ['your_domain.com', '*']
+ALLOWED_HOSTS = ['domain.com']
 
-DEBUG = True
-SECRET_KEY = 'your_secret_alphanumeric_key'
+DEBUG = False
+SECRET_KEY = 'your_secret_key'
 
 TIME_ZONE = 'Europe/Warsaw'
 LANGUAGE_CODE = 'pl'
