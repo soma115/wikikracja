@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 18:35+0200\n"
+"POT-Creation-Date: 2021-09-04 15:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,8 +184,12 @@ msgid "Reasoning"
 msgstr "Uzasadnienie"
 
 #: glosowania/models.py:34
+#, fuzzy
+#| msgid ""
+#| "What events inspired this the bill? What are we going to achieve with it?"
 msgid "What events inspired this bill? What are we going to achieve with it?"
 msgstr ""
+"Jakie wydarzenia zainspirowały projekt ustawy? Co dzięki temu osiągniemy?"
 
 #: glosowania/models.py:39
 msgid "Positive Aspects of the Idea"
@@ -220,33 +224,41 @@ msgstr ""
 msgid "Add new law proposition"
 msgstr "Nowa propozycja przepisu"
 
-#: glosowania/templates/glosowania/menu.html:14
+#: glosowania/templates/glosowania/menu.html:13
 msgid "Propositions"
 msgstr "Nowe propozycje"
 
-#: glosowania/templates/glosowania/menu.html:30
+#: glosowania/templates/glosowania/menu.html:29
 msgid "No endorsement"
 msgstr "Brak poparcia"
 
-#: glosowania/templates/glosowania/menu.html:38
+#: glosowania/templates/glosowania/menu.html:37
 msgid "Queued"
 msgstr "W kolejce"
 
-#: glosowania/templates/glosowania/menu.html:46
+#: glosowania/templates/glosowania/menu.html:45
 msgid "Referendum"
 msgstr "Referendum"
 
-#: glosowania/templates/glosowania/menu.html:54
+#: glosowania/templates/glosowania/menu.html:53
 msgid "Rejected"
 msgstr "Odrzucone"
 
-#: glosowania/templates/glosowania/menu.html:62
+#: glosowania/templates/glosowania/menu.html:61
 msgid "Vacatio Legis"
 msgstr "Vacatio Legis"
 
-#: glosowania/templates/glosowania/menu.html:70
+#: glosowania/templates/glosowania/menu.html:69
 msgid "Governing Law"
 msgstr "Obowiązujące"
+
+#: glosowania/templates/glosowania/menu.html:75
+msgid ""
+"A referendum is not a one-off decision. The referendum is to pass a law that "
+"will be in force all the time."
+msgstr ""
+"Referendum nie służy do podejmowania jednorazowych decyzji. Referendum jest "
+"po to żeby uchwalić prawo, który będzie obowiązywało cały czas."
 
 #: glosowania/templates/glosowania/status.html:15
 msgid "There is no proposition with this status"
@@ -518,7 +530,7 @@ msgstr "Start"
 
 #: home/templates/home/base.html:39
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
 #: home/templates/home/base.html:42 home/templates/home/home.html:12
 #: home/templates/home/login.html:4 home/templates/home/login.html:14
@@ -549,7 +561,7 @@ msgstr "profil"
 
 #: home/templates/home/base.html:57
 msgid "admin"
-msgstr ""
+msgstr "admin"
 
 #: home/templates/home/base.html:59
 msgid "logout"

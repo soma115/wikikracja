@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-03 18:35+0200\n"
+"POT-Creation-Date: 2021-09-04 15:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,32 +209,38 @@ msgstr ""
 msgid "Add new law proposition"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:14
+#: glosowania/templates/glosowania/menu.html:13
 msgid "Propositions"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:30
+#: glosowania/templates/glosowania/menu.html:29
 msgid "No endorsement"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:38
+#: glosowania/templates/glosowania/menu.html:37
 msgid "Queued"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:46
+#: glosowania/templates/glosowania/menu.html:45
 msgid "Referendum"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:54
+#: glosowania/templates/glosowania/menu.html:53
 msgid "Rejected"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:62
+#: glosowania/templates/glosowania/menu.html:61
 msgid "Vacatio Legis"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:70
+#: glosowania/templates/glosowania/menu.html:69
 msgid "Governing Law"
+msgstr ""
+
+#: glosowania/templates/glosowania/menu.html:75
+msgid ""
+"A referendum is not a one-off decision. The referendum is to pass a law that "
+"will be in force all the time."
 msgstr ""
 
 #: glosowania/templates/glosowania/status.html:15
