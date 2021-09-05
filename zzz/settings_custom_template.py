@@ -24,7 +24,6 @@ EMAIL_HOST_PASSWORD = 'secret_password'
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'your_page.com <login@gmail.com>'
-# SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # This will display the mail on the console for Easy Verification:
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
