@@ -7,6 +7,12 @@ SECRET_KEY = 'your_secret_key'
 
 TIME_ZONE = 'Europe/Warsaw'
 LANGUAGE_CODE = 'pl'
+ugettext = lambda s: s
+LANGUAGES = (
+    # Turn on more than one only for multi language sites. Normaly use just one
+    # ('en', ugettext('English')),
+    ('pl', ugettext('Polish')),
+)
 
 CHANNEL_LAYERS = {
     'default': {

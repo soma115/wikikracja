@@ -28,11 +28,6 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
-ugettext = lambda s: s
-LANGUAGES = (
-    ('en', ugettext('English')),
-    ('pl', ugettext('Polish')),
-)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -42,7 +37,7 @@ STATICFILES_FINDERS = (
 MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'django.middleware.locale.LocaleMiddleware',  # zakomentowanie powoduje, że emaile wysyłają się po angielsku
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sites.middleware.CurrentSiteMiddleware',
