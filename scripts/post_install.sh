@@ -5,7 +5,7 @@
 # TODO: grep settings.py to find out which language should be deployed
 # Dump: ./manage.py dumpdata customize.customize > customize.json  # customize.customize is a table
 # ./manage.py loaddata article/fixtures/articles.json
-./manage.py loaddata customize/fixtures/customize.json
+../venv/bin/python ./manage.py loaddata customize/fixtures/customize.json
 
 # SITE NAME
 # Change example.com to actuall domain name
@@ -17,7 +17,7 @@ certbot --nginx --quiet --agree-tos --domains ${DOMAIN}
 
 # VOTINGS
 # Fixtures z początkowymi głosowaniami do wiki
-./manage.py loaddata glosowania/fixtures/votings.json
+../venv/bin/python ./manage.py loaddata glosowania/fixtures/votings.json
 
 # RESTART INSTANCE
 APP=`echo ${DOMAIN} | cut -d '.' -f 1`

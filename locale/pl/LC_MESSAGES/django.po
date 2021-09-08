@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-05 22:03+0200\n"
+"POT-Creation-Date: 2021-09-08 13:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,12 +184,9 @@ msgid "Reasoning"
 msgstr "Uzasadnienie"
 
 #: glosowania/models.py:34
-#, fuzzy
-#| msgid ""
-#| "What events inspired this the bill? What are we going to achieve with it?"
 msgid "What events inspired this bill? What are we going to achieve with it?"
 msgstr ""
-"Jakie wydarzenia zainspirowały projekt ustawy? Co dzięki temu osiągniemy?"
+"Jakie wydarzenia zainspirowały projekt ustawy? Co dzięki niej osiągniemy?"
 
 #: glosowania/models.py:39
 msgid "Positive Aspects of the Idea"
@@ -221,12 +218,12 @@ msgstr ""
 "Jeśli proponowane prawo zastępuje inne przepisy, wprowadź tutaj ich numery."
 
 #: glosowania/templates/glosowania/dodaj.html:7
-msgid "Add new law proposition"
-msgstr "Nowa propozycja przepisu"
+msgid "Add new law proposal"
+msgstr "Dodaj nową propozycję przepisu"
 
 #: glosowania/templates/glosowania/menu.html:13
-msgid "Propositions"
-msgstr "Nowe propozycje"
+msgid "Proposals"
+msgstr "Propozyce"
 
 #: glosowania/templates/glosowania/menu.html:29
 msgid "No endorsement"
@@ -261,7 +258,7 @@ msgstr ""
 "po to żeby uchwalić prawo, które będzie obowiązywało cały czas."
 
 #: glosowania/templates/glosowania/status.html:15
-msgid "There is no proposition with this status"
+msgid "There is no proposal with this status"
 msgstr "Nie ma propozycji o tym statusie"
 
 #: glosowania/templates/glosowania/status.html:28
@@ -269,7 +266,7 @@ msgid "Voting parameters"
 msgstr "Parametry głosowań"
 
 #: glosowania/templates/glosowania/status.html:37
-msgid "New proposition needs to gather"
+msgid "New proposal needs to gather"
 msgstr "Nowa propozycja musi zebrać"
 
 #: glosowania/templates/glosowania/status.html:39
@@ -288,7 +285,7 @@ msgstr "Maksymalny czas na zebranie podpisów to"
 
 #: glosowania/templates/glosowania/status.html:44
 msgid ""
-"days. If there is not enough signatures - after this time, proposition is "
+"days. If there is not enough signatures - after this time, proposal is "
 "rejected."
 msgstr ""
 "dni. Jeśli nie ma wystarczającej liczby podpisów - po tym czasie propozycja "
@@ -388,7 +385,7 @@ msgid "Yes, I sign"
 msgstr "Tak, podpisuję"
 
 #: glosowania/templates/glosowania/szczegoly.html:40
-msgid "You already signed this proposition."
+msgid "You already signed this proposal."
 msgstr "Już podpisałeś tę propozycję."
 
 #: glosowania/templates/glosowania/szczegoly.html:48
@@ -408,16 +405,16 @@ msgid "You already voted."
 msgstr "Już głosowałeś."
 
 #: glosowania/views.py:41
-msgid "New proposition has been saved."
-msgstr "Nowa propozycja została zapisana"
+msgid "New proposal has been saved."
+msgstr "Nowa propozycja została zapisana."
 
 #: glosowania/views.py:45
-msgid "New law proposition"
+msgid "New law proposal"
 msgstr "Nowa propozycja przepisu"
 
 #: glosowania/views.py:46
 msgid ""
-"added new law proposition\n"
+"added new law proposal\n"
 "You can read it here:"
 msgstr ""
 "dodał/a nową propozycję przepisu\n"
@@ -435,94 +432,110 @@ msgstr "Twój podpis został zapisany. Zagłosowałeś na Tak."
 msgid "Your vote has been saved. You voted No."
 msgstr "Twój podpis został zapisany. Zagłosowałeś na Nie."
 
+#: glosowania/views.py:165 glosowania/views.py:166 glosowania/views.py:181
+#: glosowania/views.py:182 glosowania/views.py:210 glosowania/views.py:211
+#: glosowania/views.py:222 glosowania/views.py:223 glosowania/views.py:235
+#: glosowania/views.py:236
+msgid "Proposal no. "
+msgstr "Propozycja nr. "
+
 #: glosowania/views.py:165
-msgid "Proposition {str(i.id)} approved for referendum"
-msgstr "Propozycja referendum nr. {str(i.id)} została zatwierdzona"
+msgid " is approved for referendum"
+msgstr " zostanie poddana pod referendum"
 
-#: glosowania/views.py:166
-msgid ""
-"Proposition {str(i.id)} gathered required amount of signatures and will be "
-"voted from {i.data_referendum_start} to {i.data_referendum_stop}.\n"
-"Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
+#: glosowania/views.py:167
+msgid " gathered required amount of signatures and will be voted from "
 msgstr ""
-"Propozycja {str(i.id)} zebrała wymaganą liczbę podpisów i będzie głosowana "
-"od dnia {i.data_referendum_start} do dnia {i.data_referendum_stop.\n"
-"Kliknij tutaj, aby przeczytać propozycję: http://{HOST}/glosowania/{str(i."
-"id)}"
+" zebrała wymaganą liczbę podpisów i zostania poddana pod głosowanie pomiędzy "
 
-#: glosowania/views.py:176
-msgid "Proposition {str(i.id)} didn't gathered required amount of signatures"
-msgstr "Propozycja {str(i.id)} nie zebrała wymaganej liczby podpisów"
+#: glosowania/views.py:181
+msgid " didn't gathered required amount of signatures"
+msgstr " nie zebrała wymaganej liczby podpisów"
 
-#: glosowania/views.py:177
+#: glosowania/views.py:183
 msgid ""
-"Proposition {str(i.id)} didn't gathered required amount of signatures and "
-"was removed from queue. Feel free to improve it and send it again.\n"
-"Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
+" didn't gathered required amount of signatures and was removed from queue. "
+"Feel free to improve it and send it again.\n"
+"Click here to read proposal: http://"
 msgstr ""
-"Propozycja {str(i.id)} nie zebrała wymaganej liczby podpisów i została "
-"usunięta z kolejki. Spróbuj ją ulepszyć i wysłać ponownie.\n"
-"Kliknij tutaj, aby przeczytać propozycję: http://{HOST}/glosowania/{str(i."
-"id)}"
+" nie zebrała wymaganej liczby podpisów i została usunięta z kolejki. Spróbuj "
+"ją ulepszyć i wysłać ponownie.\n"
+"Kliknij tutaj, aby przeczytać propozycję: http://"
 
-#: glosowania/views.py:187
-msgid "Referendum on proposition {str(i.id)} starting now"
-msgstr "Referendum nad propozycją {str(i.id)} właśnie startuje"
+#: glosowania/views.py:194
+msgid "Referendum on proposal no. "
+msgstr "Referendum nad propozycją nr. "
 
-#: glosowania/views.py:188
+#: glosowania/views.py:194
+msgid " is starting now"
+msgstr " właśnie się rozpoczęło"
+
+#: glosowania/views.py:195
+msgid "It is time to vote on proposal no. "
+msgstr "Nadszedł czas żeby zagłosować nad propozycją nr. "
+
+#: glosowania/views.py:195
 msgid ""
-"It is time to vote on proposition {str(i.id)}.\n"
-"Referendum ends at {i.data_referendum_stop}.\n"
-"Click here to vote: http://{HOST}/glosowania/details/{str(i.id)}"
+".\n"
+"Referendum ends at "
 msgstr ""
-"Czas zagłosować nad propozycją {str (i.id)}.\n"
-"Referendum kończy się dnia {i.data_referendum_stop}.\n"
-"Kliknij tutaj aby zagłosować: http://{HOST}/glosowania/{str(i.id)}"
+".\n"
+"Referendum kończy się "
 
-#: glosowania/views.py:201
-msgid "Proposition {str(i.id)} approved"
-msgstr "Propozycja {str(i.id)} została zatwierdzona"
-
-#: glosowania/views.py:202
+#: glosowania/views.py:196
 msgid ""
-"Proposition {str(i.id)} was approved in referendum and is now in Vacatio "
-"Legis period.\n"
-"The law will take effect on {i.data_obowiazuje_od}.\n"
-"Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
+".\n"
+"Click here to vote: http://"
 msgstr ""
-"Propozycja {str(i.id)} została zatwierdzona w referendum i jest obecnie w "
-"okresie Vacatio Legis.\n"
-"Przepis wejdzie w życie {i.data_obowiazuje_od}.\n"
-"Kliknij tutaj, aby przeczytać treść przepisu: http://{HOST}/glosowania/"
-"{str(i.id)}"
+".\n"
+"Kliknij tutaj aby zagłosować: http://"
 
 #: glosowania/views.py:210
-msgid "Proposition {str(i.id)} rejected"
-msgstr "Propozycja {str(i.id)} została odrzucona"
+msgid "was approved"
+msgstr "została zatwierdzona"
 
-#: glosowania/views.py:211
+#: glosowania/views.py:212
 msgid ""
-"Proposition {str(i.id)} was rejected in referendum.\n"
-"Feel free to improve it and send it again.\n"
-"Click here to read proposition: http://{HOST}/glosowania/{str(i.id)}"
+"was approved in referendum and is now in Vacatio Legis period.\n"
+"The law will take effect on"
 msgstr ""
-"Propozycja {str(i.id)} została odrzucona w referendum.\n"
-"Spróbuj ją ulepszyć i wysłać ponownie\n"
-"Kliknij tutaj, aby przeczytać propozycję: http://{HOST}/glosowania/{str (i."
-"id)}"
+"została zatwierdzona w referendum i znajduje się obecnie w okresie Vacatio "
+"Legis.\n"
+"Nowe prawo zacznie obowiązywać od"
 
-#: glosowania/views.py:221
-msgid "Proposition {str(i.id)} is in efect from today"
-msgstr "Propozycja {str(i.id)} obowiązuje od dzisiaj"
+#: glosowania/views.py:213
+msgid ""
+".\n"
+"Click here to read proposal: http://"
+msgstr ""
+".\n"
+"Kliknij tutaj aby zobaczyć nową propozycję: http://"
 
 #: glosowania/views.py:222
+msgid "was rejected"
+msgstr "została odrzucona"
+
+#: glosowania/views.py:224
 msgid ""
-"Proposition {str(i.id)} became abiding law today.\n"
-"Click here to read proposition: http://{HOST}/glosowania/details/{str(i.id)}"
+" was rejected in referendum.\n"
+"Feel free to improve it and send it again.\n"
+"Click here to read proposal: http://"
 msgstr ""
-"Propozycja {str(i.id)} stała się dziś obowiązującym prawem.\n"
-"Kliknij tutaj aby przeczytać propozycję: http://{HOST}/glosowania/{str (i."
-"id)}"
+" została odrzucona w referendum.\n"
+"Spróbuj ją ulepszyć i wysłać ponownie\n"
+"Kliknij tutaj, aby przeczytać propozycję: http://"
+
+#: glosowania/views.py:235
+msgid " is in efect from today"
+msgstr " obowiązuje od dzisiaj"
+
+#: glosowania/views.py:236
+msgid ""
+" became abiding law today.\n"
+"Click here to read proposal: http://"
+msgstr ""
+" stała się dziś obowiązującym prawem.\n"
+"Kliknij tutaj aby przeczytać propozycję: http://"
 
 #: home/templates/home/base.html:38 home/templates/home/home.html:40
 msgid "Start"
@@ -1034,118 +1047,10 @@ msgstr "Django site admin"
 msgid "Wikicracy Administration"
 msgstr "Wikicracy Administration"
 
+#: zzz/settings_custom.py:13 zzz/settings_custom_template.py:13
+msgid "English"
+msgstr "Angielski"
+
 #: zzz/settings_custom.py:14 zzz/settings_custom_template.py:14
 msgid "Polish"
 msgstr "Polski"
-
-#~ msgid "English"
-#~ msgstr "Angielski"
-
-#~ msgid ""
-#~ "What is the purpose of this law? Why was it created? What are we going to "
-#~ "achieve with it? What event caused it to arise?"
-#~ msgstr ""
-#~ "Jaki jest cel tego prawa? Dlaczego zostało stworzone? Co dzięki niemu "
-#~ "osiągniemy? Jakie wydarzenie spowodowało jego powstanie?"
-
-#~ msgid "Contact"
-#~ msgstr "Kontakt"
-
-#~ msgid "About project"
-#~ msgstr "O projekcie"
-
-#~ msgid "System description"
-#~ msgstr "Opis systemu"
-
-#~ msgid "Possible use cases"
-#~ msgstr "Możliwe zastosowania"
-
-#~ msgid "Welcome to Wikicracy!"
-#~ msgstr "Witamy w Wikikracji"
-
-#~ msgid ""
-#~ "The purpose of Wikicracy is to allow the community to decide for itself."
-#~ msgstr ""
-#~ "Celem Wikicracy jest umożliwienie społeczności samodzielnego decydowania "
-#~ "o sobie."
-
-#~ msgid ""
-#~ "Being able to manage our own destiny should lead us to create principles "
-#~ "that reward justice, noble attitudes, broad horizons, unconditional love, "
-#~ "compassion, friendly attitude, and correct statements and predictions."
-#~ msgstr ""
-#~ "Umiejętność kierowania własnym losem powinna doprowadzić nas do "
-#~ "utworzenia zasad nagradzających sprawiedliwość, szlachetne postawy, "
-#~ "szerokie horyzonty, bezwarunkową miłość, współczucie, przyjazne "
-#~ "nastawienie oraz prawidłowe twierdzenia i przewidywania."
-
-#~ msgid "Read more..."
-#~ msgstr "Czytaj dalej..."
-
-#~ msgid "What is Wikicracy?"
-#~ msgstr "Czym jest Wikikracja"
-
-#~ msgid ""
-#~ "Wikicracy is a voting system that allows the community to manage itself - "
-#~ "without the help of representatives or administrators."
-#~ msgstr ""
-#~ "Wikikracja to system do głosowania, który pozwala społeczności zarządzać "
-#~ "sobą - bez pomocy przedstawicieli i administratorów."
-
-#~ msgid "Main features of the system"
-#~ msgstr "Główne cechy systemu"
-
-#~ msgid "each person has one vote"
-#~ msgstr "każda osoba ma jeden głos"
-
-#~ msgid "every vote is equal"
-#~ msgstr "każdy głos jest tak samo ważny"
-
-#~ msgid "decisions are taken by simple majority of votes"
-#~ msgstr "decyzje są podejmowane zwykłą większością głosów"
-
-#~ msgid "votes are anonymous"
-#~ msgstr "głosy są anonimowe"
-
-#~ msgid ""
-#~ "voting is similar to the Swiss system - after collecting the signatures, "
-#~ "the time for discussion begins and then a referendum follows"
-#~ msgstr ""
-#~ "głosowanie przebiega podobnie jak w systemie szwajcarskim - po zebraniu "
-#~ "podpisów rozpoczyna się czas dyskusji, a następnie referendum"
-
-#~ msgid "the membership is managed by the whole group by accepting new people"
-#~ msgstr "członkostwem zarządza cała grupa poprzez kceptowanie nowych osób"
-
-#~ msgid "it is also possible to remove a disruptive person by popular vote"
-#~ msgstr ""
-#~ "możliwe jest również usunięcie przeszkadzającej osoby w głosowaniu "
-#~ "powszechnym"
-
-#~ msgid ""
-#~ "The application is written so that there is no hierarchy in it. No "
-#~ "administrator is needed. The users themselves decide who belongs to the "
-#~ "group and what rules apply to it. This means full equality and true "
-#~ "democracy that cannot be disabled."
-#~ msgstr ""
-#~ "Aplikacja jest napisana w taki sposób, że nie ma w niej hierarchii. Nie "
-#~ "jest potrzebny żaden administrator. Użytkownicy sami decydują, kto należy "
-#~ "do grupy i jakie zasady jej dotyczą. Oznacza to pełną równość i prawdziwą "
-#~ "demokrację, której nie można wyłączyć."
-
-#~ msgid "Arguments for"
-#~ msgstr "Argumenty Za"
-
-#~ msgid "Why should have this law? What will it give us?"
-#~ msgstr "Po co to prawo? Co nam to da?"
-
-#~ msgid "Arguments against"
-#~ msgstr "Argumenty Przeciw"
-
-#~ msgid "What can go wrong if we will have it? What are the risks?"
-#~ msgstr ""
-#~ "Co może się nie udać jeśli będziemy mieć ten przepis? Jakie są "
-#~ "niebezpieczeństwa?"
-
-#~ msgid "Law"
-#~ msgstr "Przepisy"

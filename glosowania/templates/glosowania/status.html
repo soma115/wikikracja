@@ -12,7 +12,7 @@
 	{% for i in filtered_glosowania %}
 		<p><a href="{% url 'glosowania:details' pk=i.pk %}">{{ i.pk }}. {{ i.title }}<br>{{ i.tresc }}</a></p>
 	{% empty %}
-		<div class="alert alert-light">({% trans 'There is no proposition with this status' %})</div>
+		<div class="alert alert-light">({% trans 'There is no proposal with this status' %})</div>
 	{% endfor %}
 </p>
 
@@ -34,14 +34,14 @@
 <div class="collapse" id="collapseExample">
 	<ul class="list-group"></ul>
 		<li class="list-group-item">
-			{% trans "New proposition needs to gather" %}
+			{% trans "New proposal needs to gather" %}
 			<span class="badge badge-primary badge-pill">{{ signatures }}</span>
 			{% trans "signatures in order to trigger referendum. This number should remain low enough for any sensible proposal to be voted on, and only high enough to filter out obvious spam." %}
 		</li>
 		<li class="list-group-item">
 			{% trans "Maximum time to gather signatures is" %}
 			<span class="badge badge-primary badge-pill">{{ signatures_span }}</span>
-			{% trans "days. If there is not enough signatures - after this time, proposition is rejected." %}
+			{% trans "days. If there is not enough signatures - after this time, proposal is rejected." %}
 		</li>
 		<li class="list-group-item">
 			{% trans "Queue and discussion before referendum lasts" %}

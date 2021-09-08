@@ -21,12 +21,8 @@ pip install -q -r requirements.txt
 ./manage.py makemessages -l 'en' --ignore=.git/* --ignore=static/* --ignore=.mypy_cache/*
 ./manage.py makemessages -l 'pl' --ignore=.git/* --ignore=static/* --ignore=.mypy_cache/*
 ./manage.py compilemessages --ignore=.git/* --ignore=static/* --ignore=.mypy_cache/*
-# ./manage.py compilemessages
 
 # run if needed:
-# ./manage.py collectstatic --no-input -c -v 0
-
-# this one needs to be run first time instance is installed
-# ./manage.py loaddata customize/fixtures/customize.json
+./manage.py collectstatic --no-input -c -v 0
 
 ./manage.py runserver
