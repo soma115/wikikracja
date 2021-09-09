@@ -1,3 +1,7 @@
+'''
+Put emails in to gen_users.txt file, one per line
+'''
+
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "zzz.settings")
 import django
@@ -7,9 +11,8 @@ import csv
 import random
 from django.db import IntegrityError
 
-with open('gen_users_out.txt', 'w') as dest:
-    dest.writelines(['username','   ','password','   ','email','\n'])  # headers
-
+with open('gen_users_out.txt', 'a') as dest:
+    # dest.writelines(['username','   ','password','   ','email','\n'])  # headers
     with open('gen_users.txt', 'r') as source:
         read_data = csv.reader(source)
         # next(read_data, None)  # skip the headers
@@ -17,9 +20,9 @@ with open('gen_users_out.txt', 'w') as dest:
             email = i[0]
             username = i[0].split('@')[0]
             password = ''.join([random.SystemRandom().choice('abcdefghjkmnoprstuvwxyz23456789!@#$%=+') for i in range(8)])
-            dest.writelines([username,'   ',password,'   ',email,'\n'])
             try:
                 user = User.objects.create_user(username=username, email=email, password=password, is_active=False)
+                dest.writelines([username,'   ',password,'   ',email,'\n'])
             except IntegrityError as e:
                 print(f"Username '{username}' or email '{email}' already exist. Skipping...")
                 continue
