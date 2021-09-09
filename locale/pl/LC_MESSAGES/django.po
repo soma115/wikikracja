@@ -160,12 +160,12 @@ msgstr "Wpisz krótki tytuł opisujący nowe prawo"
 
 #: glosowania/models.py:21
 msgid "Law text"
-msgstr "Treść przepisu"
+msgstr "Treść propozycji"
 
 #: glosowania/models.py:22
 msgid "Enter the exact wording of the law as it is to be applied."
 msgstr ""
-"Wpisz treść przepisu dokładnie w takim brzmieniu w jakim ma obowiązywać."
+"Wpisz treść propozycji dokładnie w takim brzmieniu w jakim ma obowiązywać."
 
 #: glosowania/models.py:27
 msgid "Penalty"
@@ -210,16 +210,16 @@ msgstr "Określ potencjalne zagrożenie związane z propozycją."
 
 #: glosowania/models.py:53
 msgid "Abolishes the rules"
-msgstr "Znosi przepis/y"
+msgstr "Znosi propozycję"
 
 #: glosowania/models.py:54
 msgid "If the proposed law supersedes other recipes, enter their numbers here."
 msgstr ""
-"Jeśli proponowane prawo zastępuje inne przepisy, wprowadź tutaj ich numery."
+"Jeśli proponowane prawo zastępuje inną propozycję, wprowadź tutaj ich numery."
 
 #: glosowania/templates/glosowania/dodaj.html:7
 msgid "Add new law proposal"
-msgstr "Dodaj nową propozycję przepisu"
+msgstr "Dodaj nową propozycję propozycji"
 
 #: glosowania/templates/glosowania/menu.html:13
 msgid "Proposals"
@@ -314,7 +314,7 @@ msgstr "dni. Po tym czasie prawo obowiązuje."
 
 #: glosowania/templates/glosowania/szczegoly.html:7
 msgid "Bill number"
-msgstr "Numer przepisu"
+msgstr "Numer propozycji"
 
 #: glosowania/templates/glosowania/szczegoly.html:8
 msgid "Bill title"
@@ -322,7 +322,7 @@ msgstr "Tytuł"
 
 #: glosowania/templates/glosowania/szczegoly.html:9
 msgid "Bill text"
-msgstr "Treść przepisu"
+msgstr "Treść propozycji"
 
 #: glosowania/templates/glosowania/szczegoly.html:10
 msgid "Penalty for non-compliance"
@@ -342,7 +342,7 @@ msgstr "Argumenty przeciw"
 
 #: glosowania/templates/glosowania/szczegoly.html:14
 msgid "This law supersedes the following bills"
-msgstr "Ta propozycja znosi następujące przepisy"
+msgstr "Ta propozycja znosi następującą propozycję"
 
 #: glosowania/templates/glosowania/szczegoly.html:18
 msgid "Number of people signed the motion for a referendum"
@@ -378,7 +378,7 @@ msgstr "Zasada obowiązuje od"
 
 #: glosowania/templates/glosowania/szczegoly.html:36
 msgid "Do you want a referendum on this law?"
-msgstr "Czy chcesz referendum w sprawie tego przepisu?"
+msgstr "Czy chcesz referendum w sprawie tego propozycji?"
 
 #: glosowania/templates/glosowania/szczegoly.html:37
 msgid "Yes, I sign"
@@ -390,7 +390,7 @@ msgstr "Już podpisałeś tę propozycję."
 
 #: glosowania/templates/glosowania/szczegoly.html:48
 msgid "Do you want to implement this law?"
-msgstr "Czy chcesz wprowadzenia tego przepisu?"
+msgstr "Czy chcesz wprowadzenia tego propozycji?"
 
 #: glosowania/templates/glosowania/szczegoly.html:49
 msgid "Yes"
@@ -410,14 +410,14 @@ msgstr "Nowa propozycja została zapisana."
 
 #: glosowania/views.py:45
 msgid "New law proposal"
-msgstr "Nowa propozycja przepisu"
+msgstr "Nowa propozycja propozycji"
 
 #: glosowania/views.py:46
 msgid ""
 "added new law proposal\n"
 "You can read it here:"
 msgstr ""
-"dodał/a nową propozycję przepisu\n"
+"dodał/a nową propozycję propozycji\n"
 "Możesz ją zobaczyć tutaj:"
 
 #: glosowania/views.py:100
