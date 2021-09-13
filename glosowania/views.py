@@ -43,7 +43,7 @@ def dodaj(request):
 
             SendEmail(
                 _('New law proposal'),
-                f'{request.user.username.capitalize()} ' + str(_('added new law proposal\nYou can read it here:')) + f' http://{HOST}/glosowania/{str(form.id)}'
+                f'{request.user.username.capitalize()} ' + str(_('added new law proposal\nYou can read it here:')) + f' http://{HOST}/glosowania/details/{str(form.id)}'
                 )
             return redirect('glosowania:status', 1)
     else:
@@ -222,7 +222,7 @@ def zliczaj_wszystko():
                     str(_("Proposal no. ")) + str(i.id) + str(_("was rejected")),
                     str(_("Proposal no. ")) + str(i.id) +
                     str(_(" was rejected in referendum.\nFeel free to improve it and send it again.\nClick here to read proposal: http://")) + 
-                    f"{HOST}/glosowania/{str(i.id)}"
+                    f"{HOST}/glosowania/details/{str(i.id)}"
                     )
                     continue
 
