@@ -233,7 +233,7 @@ def zliczaj_wszystko():
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
                 SendEmail(
                 str(_("Proposal no. ")) + str(i.id) + str(_(" is in efect from today")),
-                str(_("Proposal no. ")) + str(i.id) + str(_(" became abiding law today.\nClick here to read proposal: http://")) + 
+                str(_("Proposal no. ")) + str(i.id) + str(_(" became abiding law today.\nClick here to read it: http://")) + 
                 f"{HOST}/glosowania/details/{str(i.id)}"
                 )
                 continue
