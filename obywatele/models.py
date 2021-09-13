@@ -17,6 +17,7 @@ class Uzytkownik(models.Model):
     polecajacy = models.CharField(editable=False, null=True, max_length=64)
     data_przyjecia = models.DateField(null=True, editable=False)
 
+    phone = models.CharField(null=True, blank=True, max_length=20, help_text=_('Phone number i.e. +48 123 456 789'), verbose_name=_('Phone number'))
     responsibilities = models.TextField(null=True, blank=True, max_length=2000, help_text=_('Tasks performed in our group'), verbose_name=_('Responsibilities'))
     city = models.CharField(null=True, blank=True, max_length=100, help_text=_('Where one spend most of their time'), verbose_name=_('City'))
     hobby = models.CharField(null=True, blank=True, max_length=200, help_text=_('Hobbies one have'), verbose_name=_('Hobby'))

@@ -7,11 +7,14 @@
 
 <form action="." method="POST" class="post-form">{% csrf_token %}
 	<div class="row">
-		<div class="col-6">
+		<div class="col-4">
 			{{ user_form.username|as_crispy_field }}
 		</div>
-		<div class="col-6">
+		<div class="col-4">
 			{{ user_form.email|as_crispy_field }}
+		</div>
+		<div class="col-4">
+			{{ profile_form.phone|as_crispy_field }}
 		</div>
 	</div>
 

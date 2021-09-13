@@ -24,6 +24,7 @@
 	
 	<p><table class="table table-striped table-sm"><tbody>    
 		<tr><th scope="col" class="col-md-2">{% trans "Responsibilities" %}</th><td scope="col">{{ profile.responsibilities|default:"-" }}</td></tr>
+		<tr><th scope="col">{% trans "Phone" %}</th><td scope="col">{{ profile.phone|default:"-" }}</td></tr>
 		<tr><th scope="col">{% trans "City" %}</th><td scope="col">{{ profile.city|default:"-" }}</td></tr>
 		<tr><th scope="col">{% trans "Hobby" %}</th><td scope="col">{{ profile.hobby|default:"-" }}</td></tr>
 		<tr><th scope="col">{% trans "To give away" %}</th><td scope="col">{{ profile.to_give_away|default:"-" }}</td></tr>

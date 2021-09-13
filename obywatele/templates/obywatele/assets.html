@@ -8,6 +8,7 @@
 		<thead>
 			<tr class="text-center">
 				<th scope="col">{% trans "Name" %}</th>
+				<th scope="col">{% trans "Phone" %}</th>
 				<th scope="col">{% trans "Responsibilities" %}</th>
 				<th scope="col">{% trans "City" %}</th>
 				<th scope="col">{% trans "Hobby" %}</th>
@@ -31,6 +32,7 @@
 					<td scope="col">
 						<a href="{% url 'obywatele:obywatele' %}{{ asset.pk }}">{{ asset.uid }}</a>
 					</td>
+					<td scope="col">{{ asset.phone|default:"-" }}</td>
 					<td scope="col">{{ asset.responsibilities|default:"-" }}</td>
 					<td scope="col">{{ asset.city|default:"-" }}</td>
 					<td scope="col">{{ asset.hobby|default:"-" }}</td>

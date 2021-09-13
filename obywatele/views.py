@@ -102,6 +102,7 @@ def dodaj(request):
                 # CANDIDATE
                 candidate_profile = Uzytkownik.objects.get(id=candidate.id)
                 candidate_profile.polecajacy = request.user.username
+                candidate_profile.phone = profile_form.cleaned_data['phone']
                 candidate_profile.responsibilities = profile_form.cleaned_data['responsibilities']
                 candidate_profile.city = profile_form.cleaned_data['city']
                 candidate_profile.hobby = profile_form.cleaned_data['hobby']
@@ -155,6 +156,7 @@ def my_assets(request):
 
     if request.method == 'POST':
         if form.is_valid():
+            profile.phone = form.cleaned_data['phone']
             profile.responsibilities = form.cleaned_data['responsibilities']
             profile.city = form.cleaned_data['city']
             profile.hobby = form.cleaned_data['hobby']
@@ -196,6 +198,7 @@ def my_assets(request):
             )
     else:  # request.method != 'POST':
         form = ProfileForm(initial={  # pre-populate fields from database
+            'phone': profile.phone,
             'responsibilities': profile.responsibilities,
             'city': profile.city,
             'hobby': profile.hobby,
@@ -228,6 +231,7 @@ def my_assets(request):
 def assets(request):
     zliczaj_obywateli(request)
     all_assets = Uzytkownik.objects.filter(uid__is_active=True).exclude(
+                                phone__isnull=True,
                                 responsibilities__isnull=True,
                                 city__isnull=True,
                                 hobby__isnull=True,

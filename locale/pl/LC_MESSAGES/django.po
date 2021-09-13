@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 00:32+0200\n"
+"POT-Creation-Date: 2021-09-13 16:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,8 +80,8 @@ msgstr "Zapisz"
 #: glosowania/templates/glosowania/szczegoly.html:42
 #: glosowania/templates/glosowania/szczegoly.html:55
 #: glosowania/templates/glosowania/szczegoly.html:59
-#: obywatele/templates/obywatele/dodaj.html:61
-#: obywatele/templates/obywatele/szczegoly.html:47
+#: obywatele/templates/obywatele/dodaj.html:64
+#: obywatele/templates/obywatele/szczegoly.html:48
 msgid "Back"
 msgstr "Wróć"
 
@@ -551,7 +551,7 @@ msgstr "Blog"
 msgid "Login"
 msgstr "Zaloguj"
 
-#: home/templates/home/base.html:46 obywatele/models.py:39
+#: home/templates/home/base.html:46 obywatele/models.py:40
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
 msgstr "Obywatele"
@@ -699,156 +699,164 @@ msgid "New email address confirmation"
 msgstr "Potwierdź nowy email"
 
 #: obywatele/models.py:20
+msgid "Phone number i.e. +48 123 456 789"
+msgstr "Numer telefonu np. +48 123 456 789"
+
+#: obywatele/models.py:20
+msgid "Phone number"
+msgstr "Numer telefonu"
+
+#: obywatele/models.py:21
 msgid "Tasks performed in our group"
 msgstr "Zadania wykonywane w naszej grupie"
 
-#: obywatele/models.py:20 obywatele/templates/obywatele/assets.html:11
+#: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:12
 #: obywatele/templates/obywatele/my_profile.html:26
 #: obywatele/templates/obywatele/szczegoly.html:29
 msgid "Responsibilities"
 msgstr "Zadania"
 
-#: obywatele/models.py:21
+#: obywatele/models.py:22
 msgid "Where one spend most of their time"
 msgstr "Gdzie spędza się większość czasu"
-
-#: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:12
-#: obywatele/templates/obywatele/my_profile.html:27
-#: obywatele/templates/obywatele/szczegoly.html:30
-msgid "City"
-msgstr "Miasto"
-
-#: obywatele/models.py:22
-msgid "Hobbies one have"
-msgstr "Hobby"
 
 #: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
 #: obywatele/templates/obywatele/my_profile.html:28
 #: obywatele/templates/obywatele/szczegoly.html:31
-msgid "Hobby"
-msgstr "Hobby"
+msgid "City"
+msgstr "Miasto"
 
 #: obywatele/models.py:23
-msgid "Things you are willing to give away for free"
-msgstr "Przedmioty, które chcesz oddać za darmo"
+msgid "Hobbies one have"
+msgstr "Hobby"
 
 #: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:14
 #: obywatele/templates/obywatele/my_profile.html:29
 #: obywatele/templates/obywatele/szczegoly.html:32
-msgid "To give away"
-msgstr "Do oddania"
+msgid "Hobby"
+msgstr "Hobby"
 
 #: obywatele/models.py:24
-msgid "Stuff you can borrow to others"
-msgstr "Przedmioty, które możesz pożyczyć"
+msgid "Things you are willing to give away for free"
+msgstr "Przedmioty, które chcesz oddać za darmo"
 
 #: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:15
 #: obywatele/templates/obywatele/my_profile.html:30
 #: obywatele/templates/obywatele/szczegoly.html:33
-msgid "To borrow"
-msgstr "Do pożyczenia"
+msgid "To give away"
+msgstr "Do oddania"
 
 #: obywatele/models.py:25
-msgid "Stuff you have for sale"
-msgstr "Przedmioty, które chcesz sprzedać"
+msgid "Stuff you can borrow to others"
+msgstr "Przedmioty, które możesz pożyczyć"
 
 #: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:16
 #: obywatele/templates/obywatele/my_profile.html:31
 #: obywatele/templates/obywatele/szczegoly.html:34
-msgid "For sale"
-msgstr "Do sprzedania"
+msgid "To borrow"
+msgstr "Do pożyczenia"
 
 #: obywatele/models.py:26
-msgid "What do you need"
-msgstr "Czego potrzebujesz"
+msgid "Stuff you have for sale"
+msgstr "Przedmioty, które chcesz sprzedać"
 
 #: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:17
 #: obywatele/templates/obywatele/my_profile.html:32
 #: obywatele/templates/obywatele/szczegoly.html:35
-msgid "I need"
-msgstr "Potrzebuję"
+msgid "For sale"
+msgstr "Do sprzedania"
 
 #: obywatele/models.py:27
-msgid "Practical skills one have"
-msgstr "Praktyczne umiejętności"
+msgid "What do you need"
+msgstr "Czego potrzebujesz"
 
 #: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:18
 #: obywatele/templates/obywatele/my_profile.html:33
 #: obywatele/templates/obywatele/szczegoly.html:36
-msgid "Skills"
-msgstr "Umiejętności"
+msgid "I need"
+msgstr "Potrzebuję"
 
 #: obywatele/models.py:28
-msgid "Knowledge one have"
-msgstr "Wiedza"
+msgid "Practical skills one have"
+msgstr "Praktyczne umiejętności"
 
 #: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:19
 #: obywatele/templates/obywatele/my_profile.html:34
 #: obywatele/templates/obywatele/szczegoly.html:37
-msgid "Knowledge"
-msgstr "Wiedza"
+msgid "Skills"
+msgstr "Umiejętności"
 
 #: obywatele/models.py:29
-msgid "Things one would like to learn"
-msgstr "Czego chciałby się nauczyć"
+msgid "Knowledge one have"
+msgstr "Wiedza"
 
 #: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:20
 #: obywatele/templates/obywatele/my_profile.html:35
 #: obywatele/templates/obywatele/szczegoly.html:38
-msgid "I want to learn"
-msgstr "Chcę się nauczyć"
+msgid "Knowledge"
+msgstr "Wiedza"
 
 #: obywatele/models.py:30
-msgid "If running a business"
-msgstr "Jaki prowadzisz biznes"
+msgid "Things one would like to learn"
+msgstr "Czego chciałby się nauczyć"
 
 #: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:21
 #: obywatele/templates/obywatele/my_profile.html:36
 #: obywatele/templates/obywatele/szczegoly.html:39
-msgid "Business"
-msgstr "Biznes"
+msgid "I want to learn"
+msgstr "Chcę się nauczyć"
 
 #: obywatele/models.py:31
-msgid "Profession"
-msgstr "Wykonywany zawód"
+msgid "If running a business"
+msgstr "Jaki prowadzisz biznes"
 
 #: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:22
 #: obywatele/templates/obywatele/my_profile.html:37
 #: obywatele/templates/obywatele/szczegoly.html:40
-msgid "Job"
-msgstr "Zawód"
+msgid "Business"
+msgstr "Biznes"
 
 #: obywatele/models.py:32
-msgid "Link to Facebook profile"
-msgstr "Link do profilu na Facebooku"
+msgid "Profession"
+msgstr "Wykonywany zawód"
 
 #: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:23
 #: obywatele/templates/obywatele/my_profile.html:38
 #: obywatele/templates/obywatele/szczegoly.html:41
-msgid "Facebook"
-msgstr "Facebook"
+msgid "Job"
+msgstr "Zawód"
 
 #: obywatele/models.py:33
-msgid "What gift would you like to receive"
-msgstr "Jaki prazent chciałbyś dostać"
+msgid "Link to Facebook profile"
+msgstr "Link do profilu na Facebooku"
 
 #: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:24
 #: obywatele/templates/obywatele/my_profile.html:39
 #: obywatele/templates/obywatele/szczegoly.html:42
-msgid "Gift"
-msgstr "Prezent"
+msgid "Facebook"
+msgstr "Facebook"
 
 #: obywatele/models.py:34
-msgid "Other things worth mentioning"
-msgstr "Inne rzeczy warte wzmianki"
+msgid "What gift would you like to receive"
+msgstr "Jaki prazent chciałbyś dostać"
 
 #: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:25
 #: obywatele/templates/obywatele/my_profile.html:40
 #: obywatele/templates/obywatele/szczegoly.html:43
+msgid "Gift"
+msgstr "Prezent"
+
+#: obywatele/models.py:35
+msgid "Other things worth mentioning"
+msgstr "Inne rzeczy warte wzmianki"
+
+#: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:26
+#: obywatele/templates/obywatele/my_profile.html:41
+#: obywatele/templates/obywatele/szczegoly.html:44
 msgid "Other"
 msgstr "Inne"
 
-#: obywatele/models.py:38
+#: obywatele/models.py:39
 msgid "Citizen"
 msgstr "Obywatel"
 
@@ -856,7 +864,13 @@ msgstr "Obywatel"
 msgid "Name"
 msgstr "Imię"
 
-#: obywatele/templates/obywatele/dodaj.html:19
+#: obywatele/templates/obywatele/assets.html:11
+#: obywatele/templates/obywatele/my_profile.html:27
+#: obywatele/templates/obywatele/szczegoly.html:30
+msgid "Phone"
+msgstr "Telefon"
+
+#: obywatele/templates/obywatele/dodaj.html:22
 msgid ""
 "Below fields are not mandatory but filling them out will help us make the "
 "right decision when accepting a new person."
@@ -864,7 +878,7 @@ msgstr ""
 "Poniższe pola nie są obowiązkowe, ale ich wypełnienie pomoże nam podjąć "
 "właściwą decyzję przy przyjmowaniu nowej osoby."
 
-#: obywatele/templates/obywatele/dodaj.html:60
+#: obywatele/templates/obywatele/dodaj.html:63
 #: obywatele/templates/obywatele/my_assets.html:12
 msgid "Submit"
 msgstr "Wyślij"
@@ -930,7 +944,7 @@ msgstr ""
 "lepiej będziemy mogli nawzajem sobie pomóc. Dzięki tym informacjom również "
 "lepiej się poznamy."
 
-#: obywatele/templates/obywatele/my_profile.html:43
+#: obywatele/templates/obywatele/my_profile.html:44
 msgid "Edit my assets"
 msgstr "Edytuj moje zasoby"
 
@@ -975,6 +989,12 @@ msgstr ""
 "Nowa osoba zostanie zaakceptowana powyżej wymaganego progu reputacji. "
 "Istniejąca osoba zostanie zbanowana poniżej tego progu."
 
+#: obywatele/templates/obywatele/start.html:44
+msgid ""
+"Information about who gave and took away someone's reputation is not "
+"presented anywhere."
+msgstr "Informacje o tym, kto dał i odebrał komuś reputację, nie są nigdzie prezentowane."
+
 #: obywatele/templates/obywatele/szczegoly.html:8
 msgid "Introduced by"
 msgstr "Polecony przez"
@@ -1015,27 +1035,27 @@ msgstr "Twój nowy email został zapisany."
 msgid "Email already exist"
 msgstr "Email już został użyty"
 
-#: obywatele/views.py:127
+#: obywatele/views.py:128
 msgid "The new user has been saved"
 msgstr "Nowy użytkownik został zapisany."
 
-#: obywatele/views.py:179
+#: obywatele/views.py:181
 msgid "Changes was saved"
 msgstr "Zmiany zostały zapisane"
 
-#: obywatele/views.py:192
+#: obywatele/views.py:194
 msgid "Form is not valid!"
 msgstr "Formularz zawiera błędy"
 
-#: obywatele/views.py:282
+#: obywatele/views.py:286
 msgid "positive"
 msgstr "pozytywny"
 
-#: obywatele/views.py:289
+#: obywatele/views.py:293
 msgid "negative"
 msgstr "negatywny"
 
-#: obywatele/views.py:296
+#: obywatele/views.py:300
 msgid "neutral"
 msgstr "obojętny"
 

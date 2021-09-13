@@ -109,6 +109,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     # "message": t+': '+message['text'], 
                     "message": message['text'], 
                     # "time": message['time'], 
+                    # "time": 'asd', 
                 }
             )
 
@@ -187,7 +188,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "message": event["message"],  # goes only from DB to chat. Display alteration possible but only from DB.
                 # "time": event["time"],
                 # "time": dt.now(),
-                "time": str(dt.now()),  # to podejście jest ok
+                "time": str(dt.now()),  # tylko to dziala
                 # "time": 'czas',
             },
         )

@@ -84,6 +84,8 @@
     {% comment %} HERE CHATS WILL APPEAR {% endcomment %}
     <div id="chats" class="col-md-12"></div>
 
+
+
 {% endblock content %}
 
 {% block extra_body %}
@@ -144,7 +146,8 @@
                 } else if (data.message != 0) {
                     var msgdiv = $("#room-" + data.room + " .messages");
                     var ok_msg = "<div class='message'>" +
-                                    "<span class='body'>" + data.time.slice(0,19) + " " + "</span>" +
+                                    // "<span class='body'>" + data.time.slice(0,19) + " " + "</span>" +
+                                    //"<span class='body'>" + data.time + " " + "</span>" +
                                     "<span class='body'>" + data.username + ": " + "</span>" +
                                     "<span class='username'>" + data.message + "</span>" +
                                     "</div>";

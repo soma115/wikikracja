@@ -35,10 +35,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # citizens
-# Higher = harder to accept new person. Higher = easier to ban existing person.
-# Above ~0.72 SECOND person in group requires 2 points of acceptance which is a paradox.
-# Be careful changing this formula - people rarely accept each other.
-ACCEPTANCE_MULTIPLIER = 0.72
+ACCEPTANCE_MULTIPLIER = 2.164
 
 # voting
 WYMAGANYCH_PODPISOW = 2             # Number of signatures needed to approve request for referendum.
