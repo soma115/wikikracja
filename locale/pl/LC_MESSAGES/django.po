@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-13 17:27+0200\n"
+"POT-Creation-Date: 2021-09-14 22:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -433,9 +433,9 @@ msgid "Your vote has been saved. You voted No."
 msgstr "Twój podpis został zapisany. Zagłosowałeś na Nie."
 
 #: glosowania/views.py:165 glosowania/views.py:166 glosowania/views.py:181
-#: glosowania/views.py:182 glosowania/views.py:210 glosowania/views.py:211
-#: glosowania/views.py:222 glosowania/views.py:223 glosowania/views.py:235
-#: glosowania/views.py:236
+#: glosowania/views.py:182 glosowania/views.py:214 glosowania/views.py:215
+#: glosowania/views.py:227 glosowania/views.py:228 glosowania/views.py:242
+#: glosowania/views.py:243
 msgid "Proposal no. "
 msgstr "Propozycja nr. "
 
@@ -446,96 +446,106 @@ msgstr " zostanie poddana pod referendum"
 #: glosowania/views.py:167
 msgid " gathered required amount of signatures and will be voted from "
 msgstr ""
-" zebrała wymaganą liczbę podpisów i zostania poddana pod głosowanie pomiędzy "
+" zebrała wymaganą liczbę podpisów i zostania poddana pod głosowanie od "
 
-#: glosowania/views.py:181
+#: glosowania/views.py:168
+msgid " to "
+msgstr " do "
+
+#: glosowania/views.py:169 glosowania/views.py:185 glosowania/views.py:218
+#: glosowania/views.py:231
+msgid "Click here to read proposal: http://"
+msgstr "Kliknij tutaj aby zobaczyć propozycję: http://"
+
+#: glosowania/views.py:181 glosowania/views.py:183
 msgid " didn't gathered required amount of signatures"
 msgstr " nie zebrała wymaganej liczby podpisów"
 
 #: glosowania/views.py:183
-msgid ""
-" didn't gathered required amount of signatures and was removed from queue. "
-"Feel free to improve it and send it again.\n"
-"Click here to read proposal: http://"
+msgid " and was removed from queue. "
 msgstr ""
-" nie zebrała wymaganej liczby podpisów i została usunięta z kolejki. Spróbuj "
-"ją ulepszyć i wysłać ponownie.\n"
-"Kliknij tutaj, aby przeczytać propozycję: http://"
 
-#: glosowania/views.py:194
+#: glosowania/views.py:184 glosowania/views.py:230
+msgid "Feel free to improve it and send it again."
+msgstr "Możesz ją ulepszyć i wysłać ponownie."
+
+#: glosowania/views.py:196
 msgid "Referendum on proposal no. "
 msgstr "Referendum nad propozycją nr. "
 
-#: glosowania/views.py:194
+#: glosowania/views.py:196
 msgid " is starting now"
 msgstr " właśnie się rozpoczęło"
 
-#: glosowania/views.py:195
+#: glosowania/views.py:197
 msgid "It is time to vote on proposal no. "
 msgstr "Nadszedł czas żeby zagłosować nad propozycją nr. "
 
-#: glosowania/views.py:195
-msgid ""
-".\n"
-"Referendum ends at "
-msgstr ""
-".\n"
-"Referendum kończy się "
+#: glosowania/views.py:198
+msgid "Referendum ends at "
+msgstr "Referendum kończy się "
 
-#: glosowania/views.py:196
-msgid ""
-".\n"
-"Click here to vote: http://"
-msgstr ""
-".\n"
-"Kliknij tutaj aby zagłosować: http://"
+#: glosowania/views.py:200
+msgid "Click here to vote: http://"
+msgstr "Kliknij tutaj aby zagłosować: http://"
 
-#: glosowania/views.py:210
+#: glosowania/views.py:214
 msgid "was approved"
 msgstr "została zatwierdzona"
 
-#: glosowania/views.py:212
-msgid ""
-"was approved in referendum and is now in Vacatio Legis period.\n"
-"The law will take effect on"
+#: glosowania/views.py:216
+msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
 "została zatwierdzona w referendum i znajduje się obecnie w okresie Vacatio "
-"Legis.\n"
-"Nowe prawo zacznie obowiązywać od"
+"Legis."
 
-#: glosowania/views.py:213
-msgid ""
-".\n"
-"Click here to read proposal: http://"
-msgstr ""
-".\n"
-"Kliknij tutaj aby zobaczyć nową propozycję: http://"
+#: glosowania/views.py:217
+msgid "The law will take effect on"
+msgstr "Nowe prawo zacznie obowiązywać od"
 
-#: glosowania/views.py:222
+#: glosowania/views.py:227
 msgid "was rejected"
 msgstr "została odrzucona"
 
-#: glosowania/views.py:224
-msgid ""
-" was rejected in referendum.\n"
-"Feel free to improve it and send it again.\n"
-"Click here to read proposal: http://"
-msgstr ""
-" została odrzucona w referendum.\n"
-"Spróbuj ją ulepszyć i wysłać ponownie\n"
-"Kliknij tutaj, aby przeczytać propozycję: http://"
+#: glosowania/views.py:229
+msgid " was rejected in referendum."
+msgstr " została odrzucona w referendum."
 
-#: glosowania/views.py:235
+#: glosowania/views.py:242
 msgid " is in efect from today"
 msgstr " obowiązuje od dzisiaj"
 
-#: glosowania/views.py:236
+#: glosowania/views.py:243
+msgid " became abiding law today"
+msgstr " stała się dziś obowiązującym prawem"
+
+#: glosowania/views.py:244
+msgid "Click here to read it: http://"
+msgstr "Kliknij tutaj aby ją przeczytać: http://"
+
+#: grappelli/templates/registration/password_reset_email.html:2
 msgid ""
-" became abiding law today.\n"
-"Click here to read it: http://"
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
 msgstr ""
-" stała się dziś obowiązującym prawem.\n"
-"Kliknij tutaj aby ją przeczytać: http://"
+"Otrzymujesz tę wiadomość e-mail, ponieważ poprosiłeś(aś) o zresetowanie "
+"hasła na stronie %(site_name)."
+
+#: grappelli/templates/registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "Przejdź do następującej strony i wybierz nowe hasło:"
+
+#: grappelli/templates/registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr "Twoja nazwa użytkownika, na wypadek gdybyś zapomniał(a):"
+
+#: grappelli/templates/registration/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr "Dziękujemy za używanie naszej strony!"
+
+#: grappelli/templates/registration/password_reset_email.html:12
+msgid "The %(site_name)s team"
+msgstr "Zespół %(site_name)"
 
 #: home/templates/home/base.html:38 home/templates/home/home.html:40
 msgid "Start"

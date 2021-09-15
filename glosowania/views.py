@@ -165,8 +165,8 @@ def zliczaj_wszystko():
                     str(_("Proposal no. ")) + str(i.id) + str(_(" is approved for referendum")),
                     str(_("Proposal no. ")) + str(i.id) +
                     str(_(" gathered required amount of signatures and will be voted from ")) +
-                    str(i.data_referendum_start) + ' to ' + str(i.data_referendum_stop) +
-                    '\nClick here to read proposal: http://' +
+                    str(i.data_referendum_start) + str(_(' to ')) + str(i.data_referendum_stop) +
+                    '\n' + str(_("Click here to read proposal: http://")) +
                     f"{HOST}/glosowania/details/{str(i.id)}"
                 )
                 continue
@@ -177,10 +177,12 @@ def zliczaj_wszystko():
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
                 SendEmail(
-                    # _(f"Proposal {str(i.id)} didn't gathered required amount of signatures"),  # translation doesn't work
+                    # _(f"Proposal {str(i.id)} didn't gathered required amount of signatures"),  # translation doesn't work this way
                     str(_("Proposal no. ")) + str(i.id) + str(_(" didn't gathered required amount of signatures")),
                     str(_("Proposal no. ")) + str(i.id) +
-                    str(_(" didn't gathered required amount of signatures and was removed from queue. Feel free to improve it and send it again.\nClick here to read proposal: http://")) +
+                    str(_(" didn't gathered required amount of signatures")) + str(_(" and was removed from queue. ")) +
+                    str(_("Feel free to improve it and send it again.")) +
+                    '\n' + str(_("Click here to read proposal: http://")) +
                     f"{HOST}/glosowania/details/{str(i.id)}"
                 )
                 continue
@@ -192,8 +194,10 @@ def zliczaj_wszystko():
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
                 SendEmail(
                     str(_("Referendum on proposal no. ")) + str(i.id) + str(_(" is starting now")),
-                    str(_("It is time to vote on proposal no. ")) + str(i.id) + str(_(".\nReferendum ends at ")) + 
-                    str(i.data_referendum_stop) + str(_(".\nClick here to vote: http://")) + 
+                    str(_("It is time to vote on proposal no. ")) + str(i.id) + '\n' +
+                    str(_("Referendum ends at ")) + 
+                    str(i.data_referendum_stop) + '\n' +
+                    str(_("Click here to vote: http://")) + 
                     f"{HOST}/glosowania/details/{str(i.id)}"
                 )
                 continue
@@ -209,8 +213,9 @@ def zliczaj_wszystko():
                     SendEmail(
                     str(_("Proposal no. ")) + str(i.id) + str(_("was approved")),
                     str(_("Proposal no. ")) + str(i.id) + 
-                    str(_("was approved in referendum and is now in Vacatio Legis period.\nThe law will take effect on")) + 
-                    i.data_obowiazuje_od + str(_(".\nClick here to read proposal: http://")) + 
+                    str(_("was approved in referendum and is now in Vacatio Legis period")) + '.\n' +
+                    str(_("The law will take effect on")) + 
+                    i.data_obowiazuje_od + '\n' + str(_("Click here to read proposal: http://")) + 
                     f"{HOST}/glosowania/details/{str(i.id)}"
                     )
                     continue
@@ -221,7 +226,9 @@ def zliczaj_wszystko():
                     SendEmail(
                     str(_("Proposal no. ")) + str(i.id) + str(_("was rejected")),
                     str(_("Proposal no. ")) + str(i.id) +
-                    str(_(" was rejected in referendum.\nFeel free to improve it and send it again.\nClick here to read proposal: http://")) + 
+                    str(_(" was rejected in referendum.")) + '\n' + 
+                    str(_("Feel free to improve it and send it again.")) +
+                    '\n' + str(_("Click here to read proposal: http://")) + 
                     f"{HOST}/glosowania/details/{str(i.id)}"
                     )
                     continue
@@ -233,7 +240,8 @@ def zliczaj_wszystko():
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
                 SendEmail(
                 str(_("Proposal no. ")) + str(i.id) + str(_(" is in efect from today")),
-                str(_("Proposal no. ")) + str(i.id) + str(_(" became abiding law today.\nClick here to read it: http://")) + 
+                str(_("Proposal no. ")) + str(i.id) + str(_(" became abiding law today")) + '.\n' + 
+                str(_("Click here to read it: http://")) + 
                 f"{HOST}/glosowania/details/{str(i.id)}"
                 )
                 continue

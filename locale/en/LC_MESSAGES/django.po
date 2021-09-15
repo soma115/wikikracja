@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-13 17:27+0200\n"
+"POT-Creation-Date: 2021-09-14 22:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -412,9 +412,9 @@ msgid "Your vote has been saved. You voted No."
 msgstr ""
 
 #: glosowania/views.py:165 glosowania/views.py:166 glosowania/views.py:181
-#: glosowania/views.py:182 glosowania/views.py:210 glosowania/views.py:211
-#: glosowania/views.py:222 glosowania/views.py:223 glosowania/views.py:235
-#: glosowania/views.py:236
+#: glosowania/views.py:182 glosowania/views.py:214 glosowania/views.py:215
+#: glosowania/views.py:227 glosowania/views.py:228 glosowania/views.py:242
+#: glosowania/views.py:243
 msgid "Proposal no. "
 msgstr ""
 
@@ -426,76 +426,101 @@ msgstr ""
 msgid " gathered required amount of signatures and will be voted from "
 msgstr ""
 
-#: glosowania/views.py:181
+#: glosowania/views.py:168
+msgid " to "
+msgstr ""
+
+#: glosowania/views.py:169 glosowania/views.py:185 glosowania/views.py:218
+#: glosowania/views.py:231
+msgid "Click here to read proposal: http://"
+msgstr ""
+
+#: glosowania/views.py:181 glosowania/views.py:183
 msgid " didn't gathered required amount of signatures"
 msgstr ""
 
 #: glosowania/views.py:183
-msgid ""
-" didn't gathered required amount of signatures and was removed from queue. "
-"Feel free to improve it and send it again.\n"
-"Click here to read proposal: http://"
+msgid " and was removed from queue. "
 msgstr ""
 
-#: glosowania/views.py:194
-msgid "Referendum on proposal no. "
-msgstr ""
-
-#: glosowania/views.py:194
-msgid " is starting now"
-msgstr ""
-
-#: glosowania/views.py:195
-msgid "It is time to vote on proposal no. "
-msgstr ""
-
-#: glosowania/views.py:195
-msgid ""
-".\n"
-"Referendum ends at "
+#: glosowania/views.py:184 glosowania/views.py:230
+msgid "Feel free to improve it and send it again."
 msgstr ""
 
 #: glosowania/views.py:196
-msgid ""
-".\n"
-"Click here to vote: http://"
+msgid "Referendum on proposal no. "
 msgstr ""
 
-#: glosowania/views.py:210
+#: glosowania/views.py:196
+msgid " is starting now"
+msgstr ""
+
+#: glosowania/views.py:197
+msgid "It is time to vote on proposal no. "
+msgstr ""
+
+#: glosowania/views.py:198
+msgid "Referendum ends at "
+msgstr ""
+
+#: glosowania/views.py:200
+msgid "Click here to vote: http://"
+msgstr ""
+
+#: glosowania/views.py:214
 msgid "was approved"
 msgstr ""
 
-#: glosowania/views.py:212
-msgid ""
-"was approved in referendum and is now in Vacatio Legis period.\n"
-"The law will take effect on"
+#: glosowania/views.py:216
+msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
 
-#: glosowania/views.py:213
-msgid ""
-".\n"
-"Click here to read proposal: http://"
+#: glosowania/views.py:217
+msgid "The law will take effect on"
 msgstr ""
 
-#: glosowania/views.py:222
+#: glosowania/views.py:227
 msgid "was rejected"
 msgstr ""
 
-#: glosowania/views.py:224
-msgid ""
-" was rejected in referendum.\n"
-"Feel free to improve it and send it again.\n"
-"Click here to read proposal: http://"
+#: glosowania/views.py:229
+msgid " was rejected in referendum."
 msgstr ""
 
-#: glosowania/views.py:235
+#: glosowania/views.py:242
 msgid " is in efect from today"
 msgstr ""
 
-#: glosowania/views.py:236
+#: glosowania/views.py:243
+msgid " became abiding law today"
+msgstr ""
+
+#: glosowania/views.py:244
+msgid "Click here to read it: http://"
+msgstr ""
+
+#: grappelli/templates/registration/password_reset_email.html:2
+#, python-format
 msgid ""
-" became abiding law today.\n"
-"Click here to read it: http://"
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: grappelli/templates/registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: grappelli/templates/registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: grappelli/templates/registration/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: grappelli/templates/registration/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
 msgstr ""
 
 #: home/templates/home/base.html:38 home/templates/home/home.html:40
