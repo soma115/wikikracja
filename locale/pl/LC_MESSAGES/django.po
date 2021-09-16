@@ -219,7 +219,7 @@ msgstr ""
 
 #: glosowania/templates/glosowania/dodaj.html:7
 msgid "Add new law proposal"
-msgstr "Dodaj nową propozycję propozycji"
+msgstr "Dodaj nową propozycję"
 
 #: glosowania/templates/glosowania/menu.html:13
 msgid "Proposals"
