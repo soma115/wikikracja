@@ -5,7 +5,7 @@
 
 {% block citizens %}
 
-<form action="." method="POST" class="post-form">{% csrf_token %}
+<form action="." method="POST" enctype="multipart/form-data" class="post-form">{% csrf_token %}
 	<div class="row">
 		<div class="col-4">
 			{{ user_form.username|as_crispy_field }}

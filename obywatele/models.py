@@ -16,7 +16,7 @@ class Uzytkownik(models.Model):
     reputation = models.SmallIntegerField(null=True, default=0)
     polecajacy = models.CharField(editable=False, null=True, max_length=64)
     data_przyjecia = models.DateField(null=True, editable=False)
-
+    foto = models.ImageField(upload_to='obywatele', default='obywatele/anonymous.png', null=True, blank=True, verbose_name=_('Foto'))
     phone = models.CharField(null=True, blank=True, max_length=20, help_text=_('Phone number i.e. +48 123 456 789'), verbose_name=_('Phone number'))
     responsibilities = models.TextField(null=True, blank=True, max_length=2000, help_text=_('Tasks performed in our group'), verbose_name=_('Responsibilities'))
     city = models.CharField(null=True, blank=True, max_length=100, help_text=_('Where one spend most of their time'), verbose_name=_('City'))
@@ -33,7 +33,6 @@ class Uzytkownik(models.Model):
     fb = models.CharField(null=True, blank=True, max_length=500, help_text=_('Link to Facebook profile'), verbose_name=_('Facebook'))
     gift = models.CharField(null=True, blank=True, max_length=500, help_text=_('What gift would you like to receive'), verbose_name=_('Gift'))
     other = models.TextField(null=True, blank=True, max_length=500, help_text=_('Other things worth mentioning'), verbose_name=_('Other'))
-    # foto = models.CharField(null=True, blank=True, max_length=500)
     # i_know_personally_those_important_people = models.CharField(null=True, blank=True, max_length=500)
     class Meta:
         verbose_name = _("Citizen")

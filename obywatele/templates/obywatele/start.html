@@ -21,30 +21,6 @@
 		</div>
 	</div>
 
-	<div class="collapse" id="collapseExample">
-		<ul class="list-group">
-			<li class="list-group-item d-flex justify-content-between align-items-center">
-				{% trans "Population" %}
-			  <span class="badge badge-primary badge-pill">{{ population }}</span>
-			</li>
-			<li class="list-group-item d-flex justify-content-between align-items-center">
-				{% trans "Multiplier" %}
-			  <span class="badge badge-primary badge-pill">{{ acceptance }}</span>
-			</li>
-			<li class="list-group-item d-flex justify-content-between align-items-center">
-				{% trans "Acceptance formula: required_reputation = round(log(Population) * Multiplier)" %}
-			  <span class="badge badge-primary badge-pill"></span>
-			</li>
-			<li class="list-group-item d-flex justify-content-between align-items-center">
-				{% trans "Currently required_reputation" %}
-			  <span class="badge badge-primary badge-pill">{{ required_reputation }}</span>
-			</li>
-			<li class="list-group-item text-center align-items-center font-weight-bold">
-				{% trans "New person will be accepted above required_reputation threshold. Existing person will be banned bellow that threshold." %}
-				{% trans "Information about who gave and took away someone's reputation is not presented anywhere." %}
-			  <span class="badge badge-primary badge-pill"></span>
-			</li>
-		  </ul>
-	</div>
+
 {% endblock citizens %}
 

@@ -5,9 +5,9 @@
 
 {% block content %}
 
-<p>{% trans 'Those are your assets' %} <b>{{ user }}</b></p>
+<p>{% trans 'Here you can edit your assets' %} <b>{{ user }}</b></p>
 
-<form action="#" method="POST">{% csrf_token %}
+<form action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}
 	{{ form|crispy }}
 	<button type="submit" class="btn btn-primary btn-sm">{% trans 'Submit' %}</button>
 </form>

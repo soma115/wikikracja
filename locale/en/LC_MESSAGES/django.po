@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-14 22:26+0200\n"
+"POT-Creation-Date: 2021-09-17 15:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: article/models.py:13 glosowania/models.py:15
+#: article/models.py:13 elibrary/models.py:10 glosowania/models.py:15
 msgid "Title"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgstr ""
 #: glosowania/templates/glosowania/szczegoly.html:55
 #: glosowania/templates/glosowania/szczegoly.html:59
 #: obywatele/templates/obywatele/dodaj.html:64
-#: obywatele/templates/obywatele/szczegoly.html:48
+#: obywatele/templates/obywatele/szczegoly.html:103
 msgid "Back"
 msgstr ""
 
@@ -117,6 +117,22 @@ msgstr ""
 
 #: chat/templates/chat/chat.html:62
 msgid "days"
+msgstr ""
+
+#: elibrary/models.py:11
+msgid "Cover"
+msgstr ""
+
+#: elibrary/models.py:12
+msgid "File1"
+msgstr ""
+
+#: elibrary/models.py:13
+msgid "File2"
+msgstr ""
+
+#: elibrary/models.py:14
+msgid "File3"
 msgstr ""
 
 #: elibrary/templates/elibrary/add.html:6
@@ -537,7 +553,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/base.html:46 obywatele/models.py:40
+#: home/templates/home/base.html:46 obywatele/models.py:39
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
 msgstr ""
@@ -569,7 +585,7 @@ msgstr ""
 #: home/templates/home/haslo.html:7
 #: home/templates/home/password_reset_confirm.html:7
 #: home/templates/home/password_reset_confirm.html:11
-#: obywatele/templates/obywatele/my_profile.html:16
+#: obywatele/templates/obywatele/my_profile.html:10
 msgid "Change password"
 msgstr ""
 
@@ -660,20 +676,24 @@ msgstr ""
 msgid "You typed something wrong. See what error appeared above and try again."
 msgstr ""
 
-#: obywatele/forms.py:26
+#: obywatele/forms.py:29
 msgid "The two email addresses fields didn't match."
 msgstr ""
 
-#: obywatele/forms.py:27
+#: obywatele/forms.py:30
 msgid "The email address is the same as the one already defined."
 msgstr ""
 
-#: obywatele/forms.py:31
+#: obywatele/forms.py:34
 msgid "New email address"
 msgstr ""
 
-#: obywatele/forms.py:36
+#: obywatele/forms.py:39
 msgid "New email address confirmation"
+msgstr ""
+
+#: obywatele/models.py:19
+msgid "Foto"
 msgstr ""
 
 #: obywatele/models.py:20
@@ -689,8 +709,8 @@ msgid "Tasks performed in our group"
 msgstr ""
 
 #: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:12
-#: obywatele/templates/obywatele/my_profile.html:26
-#: obywatele/templates/obywatele/szczegoly.html:29
+#: obywatele/templates/obywatele/my_profile.html:25
+#: obywatele/templates/obywatele/szczegoly.html:36
 msgid "Responsibilities"
 msgstr ""
 
@@ -699,8 +719,8 @@ msgid "Where one spend most of their time"
 msgstr ""
 
 #: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
-#: obywatele/templates/obywatele/my_profile.html:28
-#: obywatele/templates/obywatele/szczegoly.html:31
+#: obywatele/templates/obywatele/my_profile.html:33
+#: obywatele/templates/obywatele/szczegoly.html:44
 msgid "City"
 msgstr ""
 
@@ -709,8 +729,8 @@ msgid "Hobbies one have"
 msgstr ""
 
 #: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:14
-#: obywatele/templates/obywatele/my_profile.html:29
-#: obywatele/templates/obywatele/szczegoly.html:32
+#: obywatele/templates/obywatele/my_profile.html:37
+#: obywatele/templates/obywatele/szczegoly.html:48
 msgid "Hobby"
 msgstr ""
 
@@ -719,8 +739,8 @@ msgid "Things you are willing to give away for free"
 msgstr ""
 
 #: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:15
-#: obywatele/templates/obywatele/my_profile.html:30
-#: obywatele/templates/obywatele/szczegoly.html:33
+#: obywatele/templates/obywatele/my_profile.html:41
+#: obywatele/templates/obywatele/szczegoly.html:52
 msgid "To give away"
 msgstr ""
 
@@ -729,8 +749,8 @@ msgid "Stuff you can borrow to others"
 msgstr ""
 
 #: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:16
-#: obywatele/templates/obywatele/my_profile.html:31
-#: obywatele/templates/obywatele/szczegoly.html:34
+#: obywatele/templates/obywatele/my_profile.html:45
+#: obywatele/templates/obywatele/szczegoly.html:56
 msgid "To borrow"
 msgstr ""
 
@@ -739,8 +759,8 @@ msgid "Stuff you have for sale"
 msgstr ""
 
 #: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:17
-#: obywatele/templates/obywatele/my_profile.html:32
-#: obywatele/templates/obywatele/szczegoly.html:35
+#: obywatele/templates/obywatele/my_profile.html:49
+#: obywatele/templates/obywatele/szczegoly.html:60
 msgid "For sale"
 msgstr ""
 
@@ -749,8 +769,8 @@ msgid "What do you need"
 msgstr ""
 
 #: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:18
-#: obywatele/templates/obywatele/my_profile.html:33
-#: obywatele/templates/obywatele/szczegoly.html:36
+#: obywatele/templates/obywatele/my_profile.html:53
+#: obywatele/templates/obywatele/szczegoly.html:64
 msgid "I need"
 msgstr ""
 
@@ -759,8 +779,8 @@ msgid "Practical skills one have"
 msgstr ""
 
 #: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:19
-#: obywatele/templates/obywatele/my_profile.html:34
-#: obywatele/templates/obywatele/szczegoly.html:37
+#: obywatele/templates/obywatele/my_profile.html:57
+#: obywatele/templates/obywatele/szczegoly.html:68
 msgid "Skills"
 msgstr ""
 
@@ -769,8 +789,8 @@ msgid "Knowledge one have"
 msgstr ""
 
 #: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:20
-#: obywatele/templates/obywatele/my_profile.html:35
-#: obywatele/templates/obywatele/szczegoly.html:38
+#: obywatele/templates/obywatele/my_profile.html:61
+#: obywatele/templates/obywatele/szczegoly.html:72
 msgid "Knowledge"
 msgstr ""
 
@@ -779,8 +799,8 @@ msgid "Things one would like to learn"
 msgstr ""
 
 #: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:21
-#: obywatele/templates/obywatele/my_profile.html:36
-#: obywatele/templates/obywatele/szczegoly.html:39
+#: obywatele/templates/obywatele/my_profile.html:65
+#: obywatele/templates/obywatele/szczegoly.html:76
 msgid "I want to learn"
 msgstr ""
 
@@ -789,8 +809,8 @@ msgid "If running a business"
 msgstr ""
 
 #: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:22
-#: obywatele/templates/obywatele/my_profile.html:37
-#: obywatele/templates/obywatele/szczegoly.html:40
+#: obywatele/templates/obywatele/my_profile.html:69
+#: obywatele/templates/obywatele/szczegoly.html:80
 msgid "Business"
 msgstr ""
 
@@ -799,8 +819,8 @@ msgid "Profession"
 msgstr ""
 
 #: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:23
-#: obywatele/templates/obywatele/my_profile.html:38
-#: obywatele/templates/obywatele/szczegoly.html:41
+#: obywatele/templates/obywatele/my_profile.html:73
+#: obywatele/templates/obywatele/szczegoly.html:84
 msgid "Job"
 msgstr ""
 
@@ -809,8 +829,8 @@ msgid "Link to Facebook profile"
 msgstr ""
 
 #: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:24
-#: obywatele/templates/obywatele/my_profile.html:39
-#: obywatele/templates/obywatele/szczegoly.html:42
+#: obywatele/templates/obywatele/my_profile.html:77
+#: obywatele/templates/obywatele/szczegoly.html:88
 msgid "Facebook"
 msgstr ""
 
@@ -819,8 +839,8 @@ msgid "What gift would you like to receive"
 msgstr ""
 
 #: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:25
-#: obywatele/templates/obywatele/my_profile.html:40
-#: obywatele/templates/obywatele/szczegoly.html:43
+#: obywatele/templates/obywatele/my_profile.html:81
+#: obywatele/templates/obywatele/szczegoly.html:92
 msgid "Gift"
 msgstr ""
 
@@ -829,12 +849,12 @@ msgid "Other things worth mentioning"
 msgstr ""
 
 #: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:26
-#: obywatele/templates/obywatele/my_profile.html:41
-#: obywatele/templates/obywatele/szczegoly.html:44
+#: obywatele/templates/obywatele/my_profile.html:85
+#: obywatele/templates/obywatele/szczegoly.html:96
 msgid "Other"
 msgstr ""
 
-#: obywatele/models.py:39
+#: obywatele/models.py:38
 msgid "Citizen"
 msgstr ""
 
@@ -843,8 +863,8 @@ msgid "Name"
 msgstr ""
 
 #: obywatele/templates/obywatele/assets.html:11
-#: obywatele/templates/obywatele/my_profile.html:27
-#: obywatele/templates/obywatele/szczegoly.html:30
+#: obywatele/templates/obywatele/my_profile.html:29
+#: obywatele/templates/obywatele/szczegoly.html:40
 msgid "Phone"
 msgstr ""
 
@@ -860,7 +880,7 @@ msgid "Submit"
 msgstr ""
 
 #: obywatele/templates/obywatele/email_change.html:7
-#: obywatele/templates/obywatele/my_profile.html:17
+#: obywatele/templates/obywatele/my_profile.html:11
 msgid "Change email"
 msgstr ""
 
@@ -880,44 +900,82 @@ msgstr ""
 msgid "Assets"
 msgstr ""
 
-#: obywatele/templates/obywatele/my_assets.html:8
-#: obywatele/templates/obywatele/my_profile.html:21
-msgid "Those are your assets"
+#: obywatele/templates/obywatele/menu.html:50
+msgid "Population"
 msgstr ""
 
-#: obywatele/templates/obywatele/my_profile.html:8
+#: obywatele/templates/obywatele/menu.html:54
+msgid "Multiplier"
+msgstr ""
+
+#: obywatele/templates/obywatele/menu.html:58
+msgid ""
+"Acceptance formula: required_reputation = round(log(Population) * Multiplier)"
+msgstr ""
+
+#: obywatele/templates/obywatele/menu.html:62
+msgid "Currently required_reputation"
+msgstr ""
+
+#: obywatele/templates/obywatele/menu.html:66
+msgid "New person will be accepted above required_reputation threshold."
+msgstr ""
+
+#: obywatele/templates/obywatele/menu.html:67
+msgid "Existing person will be banned bellow that threshold."
+msgstr ""
+
+#: obywatele/templates/obywatele/menu.html:68
+msgid ""
+"Information about who gave and took away someone's reputation is not "
+"presented anywhere."
+msgstr ""
+
+#: obywatele/templates/obywatele/menu.html:73
+msgid "Read more"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_assets.html:8
+msgid "Here you can edit your assets"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:5
 msgid "This is your profile"
 msgstr ""
 
-#: obywatele/templates/obywatele/my_profile.html:9
+#: obywatele/templates/obywatele/my_profile.html:6
 msgid "Your email"
 msgstr ""
 
-#: obywatele/templates/obywatele/my_profile.html:10
+#: obywatele/templates/obywatele/my_profile.html:7
 msgid "Your reputation"
 msgstr ""
 
-#: obywatele/templates/obywatele/my_profile.html:10
+#: obywatele/templates/obywatele/my_profile.html:7
 msgid "required reputation"
 msgstr ""
 
-#: obywatele/templates/obywatele/my_profile.html:11
+#: obywatele/templates/obywatele/my_profile.html:8
 msgid "You've been introduced by"
 msgstr ""
 
-#: obywatele/templates/obywatele/my_profile.html:12
+#: obywatele/templates/obywatele/my_profile.html:9
 msgid "You've joined"
 msgstr ""
 
-#: obywatele/templates/obywatele/my_profile.html:22
+#: obywatele/templates/obywatele/my_profile.html:19
+msgid "Those are your assets"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:20
 msgid ""
-"You don't have to fill all of them but the more information you give - the "
-"more profit each one of us and whole group will gain. Those information will "
+"You don't have to fill all of them but the more information you'll give - "
+"the better of we will be individually and as a group. Those information will "
 "be also usefull for new people in the group. We will know each other better "
 "and we will be able to fullfill our needs better."
 msgstr ""
 
-#: obywatele/templates/obywatele/my_profile.html:44
+#: obywatele/templates/obywatele/my_profile.html:91
 msgid "Edit my assets"
 msgstr ""
 
@@ -930,101 +988,67 @@ msgstr ""
 msgid "System parameters"
 msgstr ""
 
-#: obywatele/templates/obywatele/poczekalnia.html:27
-#: obywatele/templates/obywatele/start.html:27
-msgid "Population"
-msgstr ""
-
-#: obywatele/templates/obywatele/poczekalnia.html:31
-#: obywatele/templates/obywatele/start.html:31
-msgid "Multiplier"
-msgstr ""
-
-#: obywatele/templates/obywatele/poczekalnia.html:35
-#: obywatele/templates/obywatele/start.html:35
-msgid ""
-"Acceptance formula: required_reputation = round(log(Population) * Multiplier)"
-msgstr ""
-
-#: obywatele/templates/obywatele/poczekalnia.html:39
-#: obywatele/templates/obywatele/start.html:39
-msgid "Currently required_reputation"
-msgstr ""
-
-#: obywatele/templates/obywatele/poczekalnia.html:43
-#: obywatele/templates/obywatele/start.html:43
-msgid ""
-"New person will be accepted above required_reputation threshold. Existing "
-"person will be banned bellow that threshold."
-msgstr ""
-
-#: obywatele/templates/obywatele/start.html:44
-msgid ""
-"Information about who gave and took away someone's reputation is not "
-"presented anywhere."
-msgstr ""
-
-#: obywatele/templates/obywatele/szczegoly.html:8
+#: obywatele/templates/obywatele/szczegoly.html:7
 msgid "Introduced by"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:8
+#: obywatele/templates/obywatele/szczegoly.html:7
 msgid "Joined"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:13
+#: obywatele/templates/obywatele/szczegoly.html:11
 msgid "This is you"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:14
+#: obywatele/templates/obywatele/szczegoly.html:12
 msgid "You can find more setting in your profile"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:19
+#: obywatele/templates/obywatele/szczegoly.html:17
 msgid "Your relationship to this person is"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:21
+#: obywatele/templates/obywatele/szczegoly.html:19
 msgid "I accept this person"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:22
+#: obywatele/templates/obywatele/szczegoly.html:20
 msgid "Indifferent"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:23
-msgid "I do not accept this person"
+#: obywatele/templates/obywatele/szczegoly.html:21
+msgid " I do not accept this person "
 msgstr ""
 
-#: obywatele/views.py:43
+#: obywatele/views.py:45
 msgid "Your new email has been saved."
 msgstr ""
 
-#: obywatele/views.py:91
+#: obywatele/views.py:93
 msgid "Email already exist"
 msgstr ""
 
-#: obywatele/views.py:128
+#: obywatele/views.py:129
 msgid "The new user has been saved"
 msgstr ""
 
-#: obywatele/views.py:181
+#: obywatele/views.py:196
 msgid "Changes was saved"
 msgstr ""
 
-#: obywatele/views.py:194
+#: obywatele/views.py:209
 msgid "Form is not valid!"
 msgstr ""
 
-#: obywatele/views.py:286
+#: obywatele/views.py:283
 msgid "positive"
 msgstr ""
 
-#: obywatele/views.py:293
+#: obywatele/views.py:290
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:300
+#: obywatele/views.py:297
 msgid "neutral"
 msgstr ""
 

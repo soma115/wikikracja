@@ -18,6 +18,8 @@ import logging as l
 from obywatele.forms import UserForm, ProfileForm, EmailChangeForm
 from obywatele.models import Uzytkownik, Rate
 from django.contrib.auth.models import Group
+from PIL import Image
+import os
 
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
@@ -79,7 +81,7 @@ def poczekalnia(request):
 def dodaj(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.POST)
+        profile_form = ProfileForm(request.POST, request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
             # USER
@@ -113,7 +115,6 @@ def dodaj(request):
                 candidate_profile.job = profile_form.cleaned_data['job']
                 candidate_profile.fb = profile_form.cleaned_data['fb']
                 candidate_profile.other = profile_form.cleaned_data['other']
-
                 candidate_profile.save()
 
                 # Since you proposed new person,
@@ -152,10 +153,11 @@ def my_assets(request):
     pk=request.user.id
     profile = Uzytkownik.objects.get(pk=pk)
     user = User.objects.get(pk=pk)
-    form = ProfileForm(request.POST)
+    form = ProfileForm(request.POST, request.FILES)
 
     if request.method == 'POST':
         if form.is_valid():
+            profile.foto = form.cleaned_data['foto']
             profile.phone = form.cleaned_data['phone']
             profile.responsibilities = form.cleaned_data['responsibilities']
             profile.city = form.cleaned_data['city']
@@ -173,6 +175,19 @@ def my_assets(request):
             profile.gift = form.cleaned_data['gift']
             profile.other = form.cleaned_data['other']
             profile.save()
+
+            image = Image.open(profile.foto)
+            width, height = image.width, image.height
+            dest_height = 300
+            factor = height / dest_height
+            new_height = round(height / factor)
+            new_width = round(width / factor)
+            image = image.resize((new_width, new_height), Image.ANTIALIAS)
+            upload_file_name = profile.foto.file.name
+            image.save('media/obywatele/' + str(user.id) + '.png')
+            profile.foto.name = 'obywatele/' + str(user.id) + '.png'
+            profile.save()
+            os.remove(upload_file_name)  # delete original file
 
             return render(
                 request,
@@ -198,6 +213,7 @@ def my_assets(request):
             )
     else:  # request.method != 'POST':
         form = ProfileForm(initial={  # pre-populate fields from database
+            'foto': profile.foto,
             'phone': profile.phone,
             'responsibilities': profile.responsibilities,
             'city': profile.city,
@@ -230,23 +246,7 @@ def my_assets(request):
 @login_required
 def assets(request):
     zliczaj_obywateli(request)
-    all_assets = Uzytkownik.objects.filter(uid__is_active=True).exclude(
-                                phone__isnull=True,
-                                responsibilities__isnull=True,
-                                city__isnull=True,
-                                hobby__isnull=True,
-                                to_give_away__isnull=True,
-                                to_borrow__isnull=True,
-                                for_sale__isnull=True,
-                                i_need__isnull=True,
-                                skills__isnull=True,
-                                knowledge__isnull=True,
-                                want_to_learn__isnull=True,
-                                business__isnull=True,
-                                job__isnull=True,
-                                fb__isnull=True,
-                                other__isnull=True,
-                                )
+    all_assets = Uzytkownik.objects.filter(uid__is_active=True)
     return render(
         request,
         'obywatele/assets.html',
@@ -271,13 +271,10 @@ def obywatele_szczegoly(request, pk):
     -[x] New person increase population so also increase reputation requirements for existing citizens. Therefore every time new person is accepted - every other old member should have his reputation increased autmatically. And vice versa - if somebody is banned - everyone else should loose one point of reputation from banned person.
     '''
 
-    citizen_profile = Uzytkownik.objects.get(pk=request.user.id)
-
     candidate_profile = get_object_or_404(Uzytkownik, pk=pk)
     candidate_user = User.objects.get(pk=pk)
-
+    citizen_profile = Uzytkownik.objects.get(pk=request.user.id)
     citizen_reputation = citizen_profile.reputation
-
     polecajacy = citizen_profile.polecajacy
 
     rate = Rate.objects.get_or_create(kandydat=candidate_profile, obywatel=citizen_profile)[0]
