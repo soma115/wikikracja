@@ -12,13 +12,13 @@
 		<h1>{{ object.title }}</h1>
 		{% comment %} <a href="{% static object.tag %}">epub</a> {% endcomment %}
 		{% if object.file_epub != '' %}
-			<a href="{% static object.file_epub %}">epub</a>
+			<a href="{% get_media_prefix %}{{ object.file_epub }}">epub</a>
 		{% endif %}
 		{% if object.file_mobi != '' %}
-			<a href="{% static object.file_mobi %}">mobi</a>
+			<a href="{% get_media_prefix %}{{ object.file_mobi }}">mobi</a>
 		{% endif %}
 		{% if object.file_pdf != '' %}
-			<a href="{% static object.file_pdf %}">pdf</a>
+			<a href="{% get_media_prefix %}{{ object.file_pdf }}">pdf</a>
 		{% endif %}
 
 		{% if object.uploader == request.user %}
