@@ -1,42 +1,81 @@
-from elibrary.forms import UploadFileForm
-from elibrary.models import Ebook
+from elibrary.forms import UpdateBookForm
+from elibrary.models import Book
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.views.generic.edit import DeleteView
+from django.views.generic import FormView, CreateView, UpdateView, DeleteView, DetailView, ListView
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.models import User
 # from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.decorators import login_required
-
-
-class IndexView(generic.ListView):
-    template_name = 'elibrary/elibrary.html'
-
-    def get_queryset(self):
-        return Ebook.objects.all()
+from PIL import Image
+import os
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse, reverse_lazy
 
 
 @login_required
 def add(request):
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-
+        form = UpdateBookForm(request.POST, request.FILES)
         if form.is_valid():
-            form = form.save(commit=False)
-            form.uploader = User.objects.get(username=request.user.username)
-            form.title = str(
-                request.FILES.getlist('file')).rsplit(
-                    ':')[1].replace('>]', '').rsplit(
-                        '(')[0].strip().replace('[', '').replace(']', '')
-            form.save()
-            return redirect('elibrary:elibrary')
+            obj = form.save(commit=False)
+            obj.uploader = User.objects.get(username=request.user.username)
+            obj.save()
+
+            image = Image.open(obj.cover)
+            image = image.resize((200, 300), Image.ANTIALIAS)
+            # upload_file_name = obj.cover.file.name
+            # print(upload_file_name)
+            image.save('media/elibrary/' + str(obj.id) + '.png')
+            obj.cover.name = 'elibrary/' + str(obj.id) + '.png'
+            # form.save_m2m()  # taggit
+            # os.remove(upload_file_name)  # delete original file
+            obj.save()
+            return redirect('elibrary:book-list')
     else:
-        form = UploadFileForm()
+        form = UpdateBookForm()
     return render(request, 'elibrary/add.html', {'form': form})
 
 
-class BookDelete(DeleteView):
-    model = Ebook
-    # Files are not physicaly deleted. Maybe it is not a bad thing.
-    success_url = reverse_lazy('elibrary:elibrary')
+class BookList(LoginRequiredMixin, ListView):
+    # template_name = 'elibrary/elibrary.html'
+
+    def get_queryset(self):
+        return Book.objects.all()
+
+
+class BookDeleteView(LoginRequiredMixin, DeleteView):
+    model = Book
+    # print(request.object.id)
+    # Files are not physicaly deleted. This needs to be changed
+    success_url = reverse_lazy('elibrary:book-list')
+
+
+class BookDetailView(LoginRequiredMixin, DetailView):
+    model = Book
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['book_list'] = Book.objects.all()
+        return context
+
+    # success_url = reverse_lazy('elibrary:elibrary')
+    
+    queryset = Book.objects.all()
+
+    def get_object(self):
+        obj = super().get_object()
+        # Record the last accessed date
+        return obj
+
+
+class BookUpdateView(LoginRequiredMixin, UpdateView):
+    model = Book
+    fields = ['title', 'author', 'cover', 'file_epub', 'file_mobi', 'file_pdf']
+    # template_name_suffix = '_update_form'   
+
+    def get_success_url(self):
+        return reverse('elibrary:book-detail', kwargs={'pk': self.object.pk})

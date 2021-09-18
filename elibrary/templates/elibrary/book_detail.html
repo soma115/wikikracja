@@ -1,0 +1,44 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-sm">
+		<h3>{{ object.author }}</h3>
+		<h1>{{ object.title }}</h1>
+		{% comment %} <a href="{% static object.tag %}">epub</a> {% endcomment %}
+		{% if object.file_epub != '' %}
+			<a href="{% static object.file_epub %}">epub</a>
+		{% endif %}
+		{% if object.file_mobi != '' %}
+			<a href="{% static object.file_mobi %}">mobi</a>
+		{% endif %}
+		{% if object.file_pdf != '' %}
+			<a href="{% static object.file_pdf %}">pdf</a>
+		{% endif %}
+
+		{% if object.uploader == request.user %}
+			<p>
+				<form action="{% url 'elibrary:book-delete' object.id %}" method='post'>
+					{% csrf_token %}
+					<button type="submit" class="btn btn-danger">
+						{% trans 'Delete' %}
+					</button>
+				<a class="btn btn-success" href="{% url 'elibrary:book-update' object.id %}">{% trans "Edit" %}</a>
+				</form>
+			</p>
+	 	{% endif %}
+	</div>
+
+    <div class="col-sm">
+      <img class="img-fluid col-sm-8 offset-sm-1" src="{% static object.cover %}">
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

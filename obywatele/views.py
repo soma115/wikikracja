@@ -21,8 +21,8 @@ from django.contrib.auth.models import Group
 from PIL import Image
 import os
 
-
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
+
 
 def population():
     try:
@@ -31,6 +31,7 @@ def population():
     except:
         pass
         l.error(f"Population zero, I don't know what to do.")
+
 
 def required_reputation():
     return round(log(population()) * s.ACCEPTANCE_MULTIPLIER)

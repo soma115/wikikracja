@@ -5,19 +5,15 @@
 
 {% block content %}
 	<h1>
-		{% trans 'Upload Book' %}
+		{% trans 'Edit Book' %}
 	</h1>
-	<form method="post" enctype="multipart/form-data">{% csrf_token %}
+	<form method="post" enctype="multipart/form-data" action="{% url 'elibrary:book-update' view.object.pk %}">{% csrf_token %}
 		<div class="container">
 			<div class="row">
 				<div class="col-sm ">
 					{{ form.author|as_crispy_field }}
 					{{ form.title|as_crispy_field }}
 					{{ form.cover|as_crispy_field }}
-					
-					{% comment %}Workaround because help_test in models doesn't work{% endcomment %}
-					<p>{% trans 'Cover proportions should be 2/3. I.E. width x 1.5 = height' %}</p>
-
 					{% comment %} {{ form.tag|as_crispy_field }} {% endcomment %}
 				</div>
 				<div class="col-sm">
@@ -29,5 +25,5 @@
 		</div>
 		<button type='file' class="btn btn-primary btn-sm">{% trans 'Save' %}</button>
 		<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
-	</form>
+	</form>	
 {% endblock %}

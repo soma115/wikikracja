@@ -1,0 +1,16 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+  <div class="col-md-2 p-3">
+    <a class="btn btn-info btn-sm" href="{% url 'elibrary:add' %}">+{% trans 'Add eBook' %}</a>
+  </div>
+  <div class="row">
+    {% for i in object_list %}
+      <div class="col-3 justify-content-center p-3">
+        <a href="{{ i.get_absolute_url }}"><img class="img-fluid" src="{% static i.cover %}"></a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
