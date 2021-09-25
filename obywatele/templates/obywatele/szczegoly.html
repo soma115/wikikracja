@@ -24,9 +24,7 @@
             {% endif %}
         </div>
         <div class="col-md-6 p-3">
-            <img class="img-fluid" src="{% static b.foto %}">
-	{% comment %} <img class="img-fluid" src={% get_media_prefix %}/{{ profile.foto }}> {% endcomment %}
-
+        	<img class="img-fluid" src={% get_media_prefix %}{{ b.foto }}>
         </div>
     </div>
     <div class="row">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-21 09:28+0200\n"
+"POT-Creation-Date: 2021-09-25 02:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,7 +85,7 @@ msgstr "Zapisz"
 #: glosowania/templates/glosowania/szczegoly.html:55
 #: glosowania/templates/glosowania/szczegoly.html:59
 #: obywatele/templates/obywatele/dodaj.html:64
-#: obywatele/templates/obywatele/szczegoly.html:106
+#: obywatele/templates/obywatele/szczegoly.html:105
 msgid "Back"
 msgstr "Wróć"
 
@@ -445,106 +445,106 @@ msgstr ""
 "dodał/a nową propozycję przepisu\n"
 "Możesz ją zobaczyć tutaj:"
 
-#: glosowania/views.py:100
+#: glosowania/views.py:84
 msgid "Your signature has been saved."
 msgstr "Twój podpis został zapisany."
 
-#: glosowania/views.py:111
+#: glosowania/views.py:95
 msgid "Your vote has been saved. You voted Yes."
 msgstr "Twój podpis został zapisany. Zagłosowałeś na Tak."
 
-#: glosowania/views.py:122
+#: glosowania/views.py:106
 msgid "Your vote has been saved. You voted No."
 msgstr "Twój podpis został zapisany. Zagłosowałeś na Nie."
 
-#: glosowania/views.py:165 glosowania/views.py:166 glosowania/views.py:181
-#: glosowania/views.py:182 glosowania/views.py:214 glosowania/views.py:215
-#: glosowania/views.py:227 glosowania/views.py:228 glosowania/views.py:242
-#: glosowania/views.py:243
+#: glosowania/views.py:149 glosowania/views.py:150 glosowania/views.py:165
+#: glosowania/views.py:166 glosowania/views.py:198 glosowania/views.py:199
+#: glosowania/views.py:211 glosowania/views.py:212 glosowania/views.py:226
+#: glosowania/views.py:227
 msgid "Proposal no. "
 msgstr "Propozycja nr. "
 
-#: glosowania/views.py:165
+#: glosowania/views.py:149
 msgid " is approved for referendum"
 msgstr " zostanie poddana pod referendum"
 
-#: glosowania/views.py:167
+#: glosowania/views.py:151
 msgid " gathered required amount of signatures and will be voted from "
 msgstr ""
 " zebrała wymaganą liczbę podpisów i zostania poddana pod głosowanie od "
 
-#: glosowania/views.py:168
+#: glosowania/views.py:152
 msgid " to "
 msgstr " do "
 
-#: glosowania/views.py:169 glosowania/views.py:185 glosowania/views.py:218
-#: glosowania/views.py:231
+#: glosowania/views.py:153 glosowania/views.py:169 glosowania/views.py:202
+#: glosowania/views.py:215
 msgid "Click here to read proposal: http://"
 msgstr "Kliknij tutaj aby zobaczyć propozycję: http://"
 
-#: glosowania/views.py:181 glosowania/views.py:183
+#: glosowania/views.py:165 glosowania/views.py:167
 msgid " didn't gathered required amount of signatures"
 msgstr " nie zebrała wymaganej liczby podpisów"
 
-#: glosowania/views.py:183
+#: glosowania/views.py:167
 msgid " and was removed from queue. "
 msgstr ""
 
-#: glosowania/views.py:184 glosowania/views.py:230
+#: glosowania/views.py:168 glosowania/views.py:214
 msgid "Feel free to improve it and send it again."
 msgstr "Możesz ją ulepszyć i wysłać ponownie."
 
-#: glosowania/views.py:196
+#: glosowania/views.py:180
 msgid "Referendum on proposal no. "
 msgstr "Referendum nad propozycją nr. "
 
-#: glosowania/views.py:196
+#: glosowania/views.py:180
 msgid " is starting now"
 msgstr " właśnie się rozpoczęło"
 
-#: glosowania/views.py:197
+#: glosowania/views.py:181
 msgid "It is time to vote on proposal no. "
 msgstr "Nadszedł czas żeby zagłosować nad propozycją nr. "
 
-#: glosowania/views.py:198
+#: glosowania/views.py:182
 msgid "Referendum ends at "
 msgstr "Referendum kończy się "
 
-#: glosowania/views.py:200
+#: glosowania/views.py:184
 msgid "Click here to vote: http://"
 msgstr "Kliknij tutaj aby zagłosować: http://"
 
-#: glosowania/views.py:214
+#: glosowania/views.py:198
 msgid "was approved"
 msgstr "została zatwierdzona"
 
-#: glosowania/views.py:216
+#: glosowania/views.py:200
 msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
 "została zatwierdzona w referendum i znajduje się obecnie w okresie Vacatio "
 "Legis."
 
-#: glosowania/views.py:217
+#: glosowania/views.py:201
 msgid "The law will take effect on"
 msgstr "Nowe prawo zacznie obowiązywać od"
 
-#: glosowania/views.py:227
+#: glosowania/views.py:211
 msgid "was rejected"
 msgstr "została odrzucona"
 
-#: glosowania/views.py:229
+#: glosowania/views.py:213
 msgid " was rejected in referendum."
 msgstr " została odrzucona w referendum."
 
-#: glosowania/views.py:242
+#: glosowania/views.py:226
 msgid " is in efect from today"
 msgstr " obowiązuje od dzisiaj"
 
-#: glosowania/views.py:243
+#: glosowania/views.py:227
 msgid " became abiding law today"
 msgstr " stała się dziś obowiązującym prawem"
 
-#: glosowania/views.py:244
+#: glosowania/views.py:228
 msgid "Click here to read it: http://"
 msgstr "Kliknij tutaj aby ją przeczytać: http://"
 
@@ -760,8 +760,8 @@ msgid "Tasks performed in our group"
 msgstr "Zadania wykonywane w naszej grupie"
 
 #: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:12
-#: obywatele/templates/obywatele/my_profile.html:26
-#: obywatele/templates/obywatele/szczegoly.html:39
+#: obywatele/templates/obywatele/my_profile.html:27
+#: obywatele/templates/obywatele/szczegoly.html:38
 msgid "Responsibilities"
 msgstr "Zadania"
 
@@ -770,8 +770,8 @@ msgid "Where one spend most of their time"
 msgstr "Gdzie spędza się większość czasu"
 
 #: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
-#: obywatele/templates/obywatele/my_profile.html:34
-#: obywatele/templates/obywatele/szczegoly.html:47
+#: obywatele/templates/obywatele/my_profile.html:35
+#: obywatele/templates/obywatele/szczegoly.html:46
 msgid "City"
 msgstr "Miasto"
 
@@ -780,8 +780,8 @@ msgid "Hobbies one have"
 msgstr "Hobby"
 
 #: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:14
-#: obywatele/templates/obywatele/my_profile.html:38
-#: obywatele/templates/obywatele/szczegoly.html:51
+#: obywatele/templates/obywatele/my_profile.html:39
+#: obywatele/templates/obywatele/szczegoly.html:50
 msgid "Hobby"
 msgstr "Hobby"
 
@@ -790,8 +790,8 @@ msgid "Things you are willing to give away for free"
 msgstr "Przedmioty, które chcesz oddać za darmo"
 
 #: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:15
-#: obywatele/templates/obywatele/my_profile.html:42
-#: obywatele/templates/obywatele/szczegoly.html:55
+#: obywatele/templates/obywatele/my_profile.html:43
+#: obywatele/templates/obywatele/szczegoly.html:54
 msgid "To give away"
 msgstr "Do oddania"
 
@@ -800,8 +800,8 @@ msgid "Stuff you can borrow to others"
 msgstr "Przedmioty, które możesz pożyczyć"
 
 #: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:16
-#: obywatele/templates/obywatele/my_profile.html:46
-#: obywatele/templates/obywatele/szczegoly.html:59
+#: obywatele/templates/obywatele/my_profile.html:47
+#: obywatele/templates/obywatele/szczegoly.html:58
 msgid "To borrow"
 msgstr "Do pożyczenia"
 
@@ -810,8 +810,8 @@ msgid "Stuff you have for sale"
 msgstr "Przedmioty, które chcesz sprzedać"
 
 #: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:17
-#: obywatele/templates/obywatele/my_profile.html:50
-#: obywatele/templates/obywatele/szczegoly.html:63
+#: obywatele/templates/obywatele/my_profile.html:51
+#: obywatele/templates/obywatele/szczegoly.html:62
 msgid "For sale"
 msgstr "Do sprzedania"
 
@@ -820,8 +820,8 @@ msgid "What do you need"
 msgstr "Czego potrzebujesz"
 
 #: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:18
-#: obywatele/templates/obywatele/my_profile.html:54
-#: obywatele/templates/obywatele/szczegoly.html:67
+#: obywatele/templates/obywatele/my_profile.html:55
+#: obywatele/templates/obywatele/szczegoly.html:66
 msgid "I need"
 msgstr "Potrzebuję"
 
@@ -830,8 +830,8 @@ msgid "Practical skills one have"
 msgstr "Praktyczne umiejętności"
 
 #: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:19
-#: obywatele/templates/obywatele/my_profile.html:58
-#: obywatele/templates/obywatele/szczegoly.html:71
+#: obywatele/templates/obywatele/my_profile.html:59
+#: obywatele/templates/obywatele/szczegoly.html:70
 msgid "Skills"
 msgstr "Umiejętności"
 
@@ -840,8 +840,8 @@ msgid "Knowledge one have"
 msgstr "Wiedza"
 
 #: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:20
-#: obywatele/templates/obywatele/my_profile.html:62
-#: obywatele/templates/obywatele/szczegoly.html:75
+#: obywatele/templates/obywatele/my_profile.html:63
+#: obywatele/templates/obywatele/szczegoly.html:74
 msgid "Knowledge"
 msgstr "Wiedza"
 
@@ -850,8 +850,8 @@ msgid "Things one would like to learn"
 msgstr "Czego chciałby się nauczyć"
 
 #: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:21
-#: obywatele/templates/obywatele/my_profile.html:66
-#: obywatele/templates/obywatele/szczegoly.html:79
+#: obywatele/templates/obywatele/my_profile.html:67
+#: obywatele/templates/obywatele/szczegoly.html:78
 msgid "I want to learn"
 msgstr "Chcę się nauczyć"
 
@@ -860,8 +860,8 @@ msgid "If running a business"
 msgstr "Jaki prowadzisz biznes"
 
 #: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:22
-#: obywatele/templates/obywatele/my_profile.html:70
-#: obywatele/templates/obywatele/szczegoly.html:83
+#: obywatele/templates/obywatele/my_profile.html:71
+#: obywatele/templates/obywatele/szczegoly.html:82
 msgid "Business"
 msgstr "Biznes"
 
@@ -870,8 +870,8 @@ msgid "Profession"
 msgstr "Wykonywany zawód"
 
 #: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:23
-#: obywatele/templates/obywatele/my_profile.html:74
-#: obywatele/templates/obywatele/szczegoly.html:87
+#: obywatele/templates/obywatele/my_profile.html:75
+#: obywatele/templates/obywatele/szczegoly.html:86
 msgid "Job"
 msgstr "Zawód"
 
@@ -880,8 +880,8 @@ msgid "Link to Facebook profile"
 msgstr "Link do profilu na Facebooku"
 
 #: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:24
-#: obywatele/templates/obywatele/my_profile.html:78
-#: obywatele/templates/obywatele/szczegoly.html:91
+#: obywatele/templates/obywatele/my_profile.html:79
+#: obywatele/templates/obywatele/szczegoly.html:90
 msgid "Facebook"
 msgstr "Facebook"
 
@@ -890,8 +890,8 @@ msgid "What gift would you like to receive"
 msgstr "Jaki prazent chciałbyś dostać"
 
 #: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:25
-#: obywatele/templates/obywatele/my_profile.html:82
-#: obywatele/templates/obywatele/szczegoly.html:95
+#: obywatele/templates/obywatele/my_profile.html:83
+#: obywatele/templates/obywatele/szczegoly.html:94
 msgid "Gift"
 msgstr "Prezent"
 
@@ -900,8 +900,8 @@ msgid "Other things worth mentioning"
 msgstr "Inne rzeczy warte wzmianki"
 
 #: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:26
-#: obywatele/templates/obywatele/my_profile.html:86
-#: obywatele/templates/obywatele/szczegoly.html:99
+#: obywatele/templates/obywatele/my_profile.html:87
+#: obywatele/templates/obywatele/szczegoly.html:98
 msgid "Other"
 msgstr "Inne"
 
@@ -914,8 +914,8 @@ msgid "Name"
 msgstr "Imię"
 
 #: obywatele/templates/obywatele/assets.html:11
-#: obywatele/templates/obywatele/my_profile.html:30
-#: obywatele/templates/obywatele/szczegoly.html:43
+#: obywatele/templates/obywatele/my_profile.html:31
+#: obywatele/templates/obywatele/szczegoly.html:42
 msgid "Phone"
 msgstr "Telefon"
 
@@ -1020,23 +1020,23 @@ msgstr "Polecony przez"
 msgid "You've joined"
 msgstr "Przyłączyłeś się"
 
-#: obywatele/templates/obywatele/my_profile.html:15
-msgid "If picture is not updating - use ctrl+shift+r"
-msgstr "Jeśli nowy obrazek się nie wyświetla - use ctrl+shift+r"
-
-#: obywatele/templates/obywatele/my_profile.html:20
+#: obywatele/templates/obywatele/my_profile.html:21
 msgid "Those are your assets"
 msgstr "To są twoje zasoby"
 
-#: obywatele/templates/obywatele/my_profile.html:21
+#: obywatele/templates/obywatele/my_profile.html:22
 msgid ""
 "You don't have to fill all of them but the more information you'll give - "
 "the better of we will be individually and as a group. Those information will "
 "be also usefull for new people in the group. We will know each other better "
 "and we will be able to fullfill our needs better."
 msgstr ""
+"Nie musisz wypełniać ich wszystkich, ale im więcej informacji podasz tym "
+"lepiej dla każdego z nas i dla całej grupy. Informacje te przydadzą się "
+"również nowym osobom w grupie. Lepiej się poznamy i będziemy mogli łatwiej "
+"zaspokajać nasze potrzeby."
 
-#: obywatele/templates/obywatele/my_profile.html:92
+#: obywatele/templates/obywatele/my_profile.html:93
 msgid "Edit my assets"
 msgstr "Edytuj moje zasoby"
 
@@ -1128,3 +1128,6 @@ msgstr "Angielski"
 #: zzz/settings_custom.py:14 zzz/settings_custom_template.py:14
 msgid "Polish"
 msgstr "Polski"
+
+#~ msgid "If picture is not updating - use ctrl+shift+r"
+#~ msgstr "Jeśli nowy obrazek się nie wyświetla - use ctrl+shift+r"

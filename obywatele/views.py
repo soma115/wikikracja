@@ -179,7 +179,7 @@ def my_assets(request):
 
             image = Image.open(profile.foto)
             width, height = image.width, image.height
-            dest_height = 300
+            dest_height = 200
             factor = height / dest_height
             new_height = round(height / factor)
             new_width = round(width / factor)

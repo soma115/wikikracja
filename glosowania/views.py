@@ -51,22 +51,6 @@ def dodaj(request):
     return render(request, 'glosowania/dodaj.html', {'form': form})
 
 
-@login_required
-def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    username = None
-
-    if request.user.is_authenticated():
-        username = request.user.username
-
-    with open('access.log', 'a') as log:
-        log.writelines(f"{datetime.now()} {ip} {username}\n")
-
-
 # Wyświetl głosowania:
 @login_required
 def status(request, pk):
