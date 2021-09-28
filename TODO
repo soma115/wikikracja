@@ -12,6 +12,7 @@ List of requirements:
 - If there are new messages - system sends email at the end of day. From public chanels email is send to everybody. From private channels email is send only to involved users.
 - Inactive rooms are archived - it is already implemented and should be kept.
 - Look and feel can be similar to Slack
+- Slowmode
 
 Chat will not be heavily utilized so scalability is not required but simplicity and clean code is. That's because chat will be developed much further in the future. Code should be over-commented.
 

@@ -248,7 +248,7 @@ msgstr "Dodaj nową propozycję przepisu"
 
 #: glosowania/templates/glosowania/menu.html:13
 msgid "Proposals"
-msgstr "Propozyce"
+msgstr "Propozycje"
 
 #: glosowania/templates/glosowania/menu.html:29
 msgid "No endorsement"
