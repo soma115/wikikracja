@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 20:24+0200\n"
+"POT-Creation-Date: 2021-09-30 23:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,8 +82,8 @@ msgstr ""
 #: glosowania/templates/glosowania/szczegoly.html:42
 #: glosowania/templates/glosowania/szczegoly.html:55
 #: glosowania/templates/glosowania/szczegoly.html:59
-#: obywatele/templates/obywatele/dodaj.html:64
-#: obywatele/templates/obywatele/szczegoly.html:103
+#: obywatele/templates/obywatele/dodaj.html:61
+#: obywatele/templates/obywatele/szczegoly.html:99
 msgid "Back"
 msgstr ""
 
@@ -563,7 +563,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/base.html:46 obywatele/models.py:39
+#: home/templates/home/base.html:46 obywatele/models.py:38
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
 msgstr ""
@@ -601,7 +601,7 @@ msgstr ""
 
 #: home/templates/home/haslo.html:26
 #: obywatele/templates/obywatele/email_change.html:24
-#: obywatele/templates/obywatele/my_assets.html:16
+#: obywatele/templates/obywatele/my_assets.html:96
 msgid "Cancel"
 msgstr ""
 
@@ -719,23 +719,23 @@ msgid "Phone number"
 msgstr ""
 
 #: obywatele/models.py:21
-msgid "Tasks performed in our group"
-msgstr ""
-
-#: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:12
-#: obywatele/templates/obywatele/my_profile.html:27
-#: obywatele/templates/obywatele/szczegoly.html:36
-msgid "Responsibilities"
-msgstr ""
-
-#: obywatele/models.py:22
 msgid "Where one spend most of their time"
 msgstr ""
 
-#: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
+#: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:13
 #: obywatele/templates/obywatele/my_profile.html:35
 #: obywatele/templates/obywatele/szczegoly.html:44
 msgid "City"
+msgstr ""
+
+#: obywatele/models.py:22
+msgid "Tasks performed in our group"
+msgstr ""
+
+#: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:12
+#: obywatele/templates/obywatele/my_profile.html:27
+#: obywatele/templates/obywatele/szczegoly.html:36
+msgid "Responsibilities"
 msgstr ""
 
 #: obywatele/models.py:23
@@ -839,36 +839,26 @@ msgid "Job"
 msgstr ""
 
 #: obywatele/models.py:33
-msgid "Link to Facebook profile"
+msgid "What gift would you like to receive"
 msgstr ""
 
 #: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:24
 #: obywatele/templates/obywatele/my_profile.html:79
 #: obywatele/templates/obywatele/szczegoly.html:88
-msgid "Facebook"
+msgid "Gift"
 msgstr ""
 
 #: obywatele/models.py:34
-msgid "What gift would you like to receive"
+msgid "Other things worth mentioning"
 msgstr ""
 
 #: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:25
 #: obywatele/templates/obywatele/my_profile.html:83
 #: obywatele/templates/obywatele/szczegoly.html:92
-msgid "Gift"
-msgstr ""
-
-#: obywatele/models.py:35
-msgid "Other things worth mentioning"
-msgstr ""
-
-#: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:26
-#: obywatele/templates/obywatele/my_profile.html:87
-#: obywatele/templates/obywatele/szczegoly.html:96
 msgid "Other"
 msgstr ""
 
-#: obywatele/models.py:38
+#: obywatele/models.py:37
 msgid "Citizen"
 msgstr ""
 
@@ -888,8 +878,8 @@ msgid ""
 "right decision when accepting a new person."
 msgstr ""
 
-#: obywatele/templates/obywatele/dodaj.html:63
-#: obywatele/templates/obywatele/my_assets.html:12
+#: obywatele/templates/obywatele/dodaj.html:60
+#: obywatele/templates/obywatele/my_assets.html:95
 msgid "Submit"
 msgstr ""
 
@@ -984,12 +974,11 @@ msgstr ""
 #: obywatele/templates/obywatele/my_profile.html:22
 msgid ""
 "You don't have to fill all of them but the more information you'll give - "
-"the better of we will be individually and as a group. Those information will "
-"be also usefull for new people in the group. We will know each other better "
-"and we will be able to fullfill our needs better."
+"the better we will be able to fullfill our needs. Also we will know each "
+"other better."
 msgstr ""
 
-#: obywatele/templates/obywatele/my_profile.html:93
+#: obywatele/templates/obywatele/my_profile.html:89
 msgid "Edit my assets"
 msgstr ""
 
@@ -1046,23 +1035,23 @@ msgstr ""
 msgid "The new user has been saved"
 msgstr ""
 
-#: obywatele/views.py:224
+#: obywatele/views.py:204
 msgid "Changes was saved"
 msgstr ""
 
-#: obywatele/views.py:237
+#: obywatele/views.py:217
 msgid "Form is not valid!"
 msgstr ""
 
-#: obywatele/views.py:311
+#: obywatele/views.py:290
 msgid "positive"
 msgstr ""
 
-#: obywatele/views.py:318
+#: obywatele/views.py:297
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:325
+#: obywatele/views.py:304
 msgid "neutral"
 msgstr ""
 

@@ -17,7 +17,7 @@ class ProfileForm(forms.ModelForm):
         fields = ('foto', 'phone', 'responsibilities', 'city', 'hobby',
                   'to_give_away', 'to_borrow', 'for_sale', 'i_need',
                   'skills', 'knowledge', 'want_to_learn', 'business',
-                  'job', 'fb', 'gift', 'other')
+                  'job', 'gift', 'other')
 
 
 class EmailChangeForm(forms.Form):

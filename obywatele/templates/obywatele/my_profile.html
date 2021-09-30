@@ -18,25 +18,33 @@
 <div class="row">
 <div class="col-md-12 p-3">
 	<b>{% trans "Those are your assets" %}</b>
-	<div>{% trans "You don't have to fill all of them but the more information you'll give - the better of we will be individually and as a group. Those information will be also usefull for new people in the group. We will know each other better and we will be able to fullfill our needs better." %}</div>
+	<div>{% trans "You don't have to fill all of them but the more information you'll give - the better we will be able to fullfill our needs. Also we will know each other better." %}</div>
 	<p>
 		<table class="table table-striped table-sm">
 			<tbody>
 				<tr>
-					<th scope="col" class="col-md-2">{% trans "Responsibilities" %}</th>
-					<td scope="col">{{ profile.responsibilities|default:"-" }}</td>
+					<th scope="col">{% trans "City" %}</th>
+					<td scope="col">{{ profile.city|default:"-" }}</td>
 				</tr>
 				<tr>
 					<th scope="col">{% trans "Phone" %}</th>
 					<td scope="col">{{ profile.phone|default:"-" }}</td>
 				</tr>
 				<tr>
-					<th scope="col">{% trans "City" %}</th>
-					<td scope="col">{{ profile.city|default:"-" }}</td>
+					<th scope="col">{% trans "Responsibilities" %}</th>
+					<td scope="col">{{ profile.responsibilities|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Job" %}</th>
+					<td scope="col">{{ profile.job|default:"-" }}</td>
 				</tr>
 				<tr>
 					<th scope="col">{% trans "Hobby" %}</th>
 					<td scope="col">{{ profile.hobby|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Business" %}</th>
+					<td scope="col">{{ profile.business|default:"-" }}</td>
 				</tr>
 				<tr>
 					<th scope="col">{% trans "To give away" %}</th>
@@ -55,28 +63,16 @@
 					<td scope="col">{{ profile.i_need|default:"-" }}</td>
 				</tr>
 				<tr>
+					<th scope="col">{% trans "I want to learn" %}</th>
+					<td scope="col">{{ profile.want_to_learn|default:"-" }}</td>
+				</tr>
+				<tr>
 					<th scope="col">{% trans "Skills" %}</th>
 					<td scope="col">{{ profile.skills|default:"-" }}</td>
 				</tr>
 				<tr>
 					<th scope="col">{% trans "Knowledge" %}</th>
 					<td scope="col">{{ profile.knowledge|default:"-" }}</td>
-				</tr>
-				<tr>
-					<th scope="col">{% trans "I want to learn" %}</th>
-					<td scope="col">{{ profile.want_to_learn|default:"-" }}</td>
-				</tr>
-				<tr>
-					<th scope="col">{% trans "Business" %}</th>
-					<td scope="col">{{ profile.business|default:"-" }}</td>
-				</tr>
-				<tr>
-					<th scope="col">{% trans "Job" %}</th>
-					<td scope="col">{{ profile.job|default:"-" }}</td>
-				</tr>
-				<tr>
-					<th scope="col">{% trans "Facebook" %}</th>
-					<td scope="col">{{ profile.fb|default:"-" }}</td>
 				</tr>
 				<tr>
 					<th scope="col">{% trans "Gift" %}</th>
@@ -94,7 +90,5 @@
 
 </div>
 </div>
-
-
 
 {% endblock %}

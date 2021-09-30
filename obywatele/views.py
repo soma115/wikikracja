@@ -180,7 +180,6 @@ def my_assets(request):
             profile.want_to_learn = form.cleaned_data['want_to_learn']
             profile.business = form.cleaned_data['business']
             profile.job = form.cleaned_data['job']
-            profile.fb = form.cleaned_data['fb']
             profile.gift = form.cleaned_data['gift']
             profile.other = form.cleaned_data['other']
             profile.save()
@@ -236,7 +235,6 @@ def my_assets(request):
             'want_to_learn': profile.want_to_learn,
             'business': profile.business,
             'job': profile.job,
-            'fb': profile.fb,
             'other': profile.other,
             }
         )
