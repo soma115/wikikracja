@@ -35,7 +35,7 @@
 	</div>
 
     <div class="col-sm">
-      <img class="img-fluid col-sm-8 offset-sm-1" src="{% static object.cover %}">
+      <img class="img-fluid col-sm-8 offset-sm-1" src="{% get_media_prefix %}{{ object.cover }}">
     </div>
 
   </div>
