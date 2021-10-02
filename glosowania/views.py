@@ -140,7 +140,7 @@ def zliczaj_wszystko():
                 i.status = w_kolejce
                 i.data_zebrania_podpisow = dzisiaj
 
-                # TODO: Referendum odbędzie się za 1 tydzień w niedzielę
+                # TODO: Referendum rozpocznie się za 1 tydzień w poniedziałek
                 # 0 = monday, 1 = tuesday, ..., 6 = sunday
                 i.data_referendum_start = i.data_zebrania_podpisow + timedelta(days=s.KOLEJKA) + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
                 i.data_referendum_stop = i.data_referendum_start + timedelta(days=s.CZAS_TRWANIA_REFERENDUM)
