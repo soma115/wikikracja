@@ -8,7 +8,26 @@ from django.utils.translation import ugettext_lazy as _
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ('username', 'email', 'first_name', 'last_name')
+
+
+class NameChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(NameChangeForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        first_name = self.cleaned_data["first_name"]
+        last_name = self.cleaned_data["last_name"]
+        self.user.first_name = first_name
+        self.user.last_name = last_name
+        if commit:
+            self.user.save()
+        return self.user
 
 
 class ProfileForm(forms.ModelForm):

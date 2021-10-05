@@ -4,19 +4,20 @@
 {% load i18n %}
 
 {% block content %}
-<h3>{% trans 'Change email' %}</h3>
+<h3>{% trans 'Change your name' %}</h3>
 
-<p class="font-weight-bold">{% trans "Your current email" %}: {{ request.user.email }}</p>
+<p class="font-weight-bold">{% trans "First name" %}: {{ request.user.first_name }}</p>
+<p class="font-weight-bold">{% trans "Last name" %}: {{ request.user.last_name }}</p>
 
-<form class="post-form" method="post" action="{% url 'email_change' %}">{% csrf_token %}
+<form class="post-form" method="post" action="{% url 'obywatele:change_name' %}">{% csrf_token %}
     <div class="row">
         <div class="col-md-3">
-            {{ form.new_email1|as_crispy_field }}
+            {{ form.first_name|as_crispy_field }}
         </div>
     </div>
     <div class="row">
         <div class="col-md-3">
-            {{ form.new_email2|as_crispy_field }}
+            {{ form.last_name|as_crispy_field }}
         </div>
     </div>
 

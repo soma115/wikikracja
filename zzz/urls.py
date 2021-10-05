@@ -18,7 +18,7 @@ urlpatterns = [
     path('elibrary/', include('elibrary.urls', namespace='elibrary')),
     path('chat/', include('chat.urls', namespace='chat')),
     path('obywatele/', include('obywatele.urls', namespace='obywatele')),
-    path('email_change/', ov.email_change, name='email_change'),
+    path('change_email/', ov.change_email, name='change_email'),
     path('accounts/', include('allauth.urls')),
     path('blog/', include('article.urls')),
     path('tinymce/', include('tinymce.urls')),

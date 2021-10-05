@@ -4,11 +4,14 @@
 <div class="col-md-5 p-3">
 	<b>{% trans "This is your profile" %} {{ user }}</b>
 	<div>{% trans "Your email" %}: {{ user.email }}</div>
+	<div>{% trans "First name" %}: {{ user.first_name }}</div>
+	<div>{% trans "Last name" %}: {{ user.last_name }}</div>
 	<div>{% trans "Your reputation" %}: {{ profile.reputation }} ({% trans "required reputation" %}: {{ required_reputation }})</div>
 	<div>{% trans "You've been introduced by" %}: {{ profile.polecajacy }}</div>
 	<div>{% trans "You've joined" %}: {{ profile.data_przyjecia|date:"Y-m-d" }}</div>
 	<a class="btn btn-primary btn-sm" href="{% url 'haslo'%}">{% trans 'Change password' %}</a>
-	<a class="btn btn-primary btn-sm" href="{% url 'email_change'%}">{% trans 'Change email' %}</a>
+	<a class="btn btn-primary btn-sm" href="{% url 'change_email'%}">{% trans 'Change email' %}</a>
+	<a class="btn btn-primary btn-sm" href="{% url 'obywatele:change_name'%}">{% trans 'Change name' %}</a>
 </div>
 <div class="col-md-7 p-3">
 	<img class="img-fluid" src={% get_media_prefix %}{{ profile.foto }}>

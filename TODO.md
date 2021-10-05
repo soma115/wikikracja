@@ -1,5 +1,5 @@
 We need working chat application with persistence (messages are saved to DB and presented after login).
-You may use this tutorial (https://channels.readthedocs.io/en/latest/) as a starting point but persistence needs to be added.
+
 
 List of requirements:
 
@@ -12,7 +12,7 @@ List of requirements:
     current state: The problem is that all messages are loaded as a whole each time chat is reloaded. In this setup creating notifications (about new message) is not possible.
 
 - Slowmode
-    expected state: Some public rooms should have slowmode (cooldown time before next message will be allowed). Room name and cooldown time is set up in settings_custom.py per room. Small counter shows when user can send next message.
+    expected state: Some public rooms should have slowmode (cooldown time before next message can be send). Room name and cooldown time is set up in settings_custom.py per room name. Small counter shows when user can send next message.
     current state: functionality does not exists
 
 - Anonymous message
@@ -21,7 +21,7 @@ List of requirements:
 
 - 1 to 1 messages
     expected state: If user is present his name changes color. Click username to open 1to1 chat
-    current state: Currently usernames are displayed incorrectly. Other than 1to1 is mostly implemented.
+    current state: Currently usernames are displayed incorrectly. Other than that 1to1 is mostly implemented.
 
 - Mark channel as 'read'
     expected state: Mark channel as 'read' after 5 seconds after it was opened
@@ -32,7 +32,7 @@ List of requirements:
     current state: functionality does not exists
 
 - Edit message
-    expected state: Ability to edit already send messages. Old version is kept in DB. Small link next to message opens new tab with history. Timestamps for each one.
+    expected state: Ability to edit already send messages. Old version is kept in DB. If message was edited there is small link next to a message which opens new tab with history. Timestamps for each one.
     current state: functionality does not exists
 
 - Clickable links
@@ -67,7 +67,7 @@ Other requirements
 - Prefereably clean JS. If framework has to be used - we need to negotiate which one will it be.
 - Look and feel can be similar to Slack
 - modification chat/models.py is allowed
-- all global settings variables in settings_custom.py
+- all global variables in settings_custom.py
 - Simplicity and clean code is very much apriecited. That's because chat will be developed much further in the future. Code should be over-commented.
 
 Requirements
@@ -86,3 +86,8 @@ Next version:
 - number of new messages should be presented
 - if there are new messages - chat windows should be scrolled to first new message.
 - Users should use picters from profile
+
+
+
+
+

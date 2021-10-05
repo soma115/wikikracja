@@ -15,7 +15,7 @@ from random import choice
 from string import ascii_letters, digits
 from math import log
 import logging as l
-from obywatele.forms import UserForm, ProfileForm, EmailChangeForm
+from obywatele.forms import UserForm, ProfileForm, EmailChangeForm, NameChangeForm
 from obywatele.models import Uzytkownik, Rate
 from django.contrib.auth.models import Group
 from PIL import Image
@@ -36,8 +36,9 @@ def population():
 def required_reputation():
     return round(log(population()) * s.ACCEPTANCE_MULTIPLIER)
 
+
 @login_required() 
-def email_change(request):
+def change_email(request):
     form = EmailChangeForm(request.user)
     if request.method=='POST':
         form = EmailChangeForm(request.user, request.POST)
@@ -51,7 +52,26 @@ def email_change(request):
             error(request, (message))
             return redirect('obywatele:my_profile')
     else:
-        return render(request, 'obywatele/email_change.html', {'form':form})
+        return render(request, 'obywatele/change_email.html', {'form':form})
+
+
+@login_required() 
+def change_name(request):
+    form = NameChangeForm(request.POST)
+    if request.method=='POST':
+        # form = NameChangeForm(request.POST, request.user)
+        form = NameChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            message = _("Your name has been saved.")
+            success(request, (message))
+            return redirect('obywatele:my_profile')
+        else:
+            message = form.errors
+            error(request, (message))
+            return redirect('obywatele:my_profile')
+    else:
+        return render(request, 'obywatele/change_name.html', {'form':form})
 
 
 @login_required
@@ -85,10 +105,13 @@ def dodaj(request):
         profile_form = ProfileForm(request.POST, request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
+            
             # USER
-            mail = user_form.cleaned_data['email']
             nick = user_form.cleaned_data['username']
+            first_name = user_form.cleaned_data['first_name']
+            last_name = user_form.cleaned_data['last_name']
 
+            mail = user_form.cleaned_data['email']
             if User.objects.filter(email=mail).exists():
                 # is_valid doesn't check if email exist
                 message = _('Email already exist')
