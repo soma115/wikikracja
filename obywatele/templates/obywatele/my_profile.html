@@ -1,7 +1,7 @@
 {% extends 'home/base.html' %} {% load static %} {% load i18n %} {% block content %}
 <div class="container">
 <div class="row">
-<div class="col-md-5 p-3">
+<div class="col-md-9 p-4">
 	<b>{% trans "This is your profile" %} {{ user }}</b>
 	<div>{% trans "Your email" %}: {{ user.email }}</div>
 	<div>{% trans "First name" %}: {{ user.first_name }}</div>
@@ -12,8 +12,12 @@
 	<a class="btn btn-primary btn-sm" href="{% url 'haslo'%}">{% trans 'Change password' %}</a>
 	<a class="btn btn-primary btn-sm" href="{% url 'change_email'%}">{% trans 'Change email' %}</a>
 	<a class="btn btn-primary btn-sm" href="{% url 'obywatele:change_name'%}">{% trans 'Change name' %}</a>
+
+	{% comment %} For now username can't be changed because it has unintended consequences in chat {% endcomment %}
+	{% comment %} <a class="btn btn-primary btn-sm" href="{% url 'obywatele:change_username'%}">{% trans 'Change username' %}</a> {% endcomment %}
+
 </div>
-<div class="col-md-7 p-3">
+<div class="col-md-3 p-3">
 	<img class="img-fluid" src={% get_media_prefix %}{{ profile.foto }}>
 	{% comment %} <p style="color:blue;font-size:12px;">{% trans "If picture is not updating - use ctrl+shift+r" %}</p> {% endcomment %}
 </div>

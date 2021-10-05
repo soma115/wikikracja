@@ -1,0 +1,23 @@
+{% extends "home/base.html" %}
+{% block title %}Hasło{% endblock %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content %}
+<h3>{% trans 'Change your username' %}</h3>
+
+<p class="font-weight-bold">{% trans "Username" %}: {{ request.user.username }}</p>
+
+<form class="post-form" method="post" action="{% url 'obywatele:change_username' %}">{% csrf_token %}
+    <div class="row">
+        <div class="col-md-3">
+            {{ form.username|as_crispy_field }}
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-danger btn-sm">{% trans 'Save' %}</button>
+    <a href="{% url 'obywatele:my_profile' %}" class="btn btn-warning btn-sm">{% trans 'Cancel' %}</a>
+</form>
+
+{% endblock %}
+

@@ -15,7 +15,7 @@ from random import choice
 from string import ascii_letters, digits
 from math import log
 import logging as l
-from obywatele.forms import UserForm, ProfileForm, EmailChangeForm, NameChangeForm
+from obywatele.forms import UserForm, ProfileForm, EmailChangeForm, NameChangeForm, UsernameChangeForm
 from obywatele.models import Uzytkownik, Rate
 from django.contrib.auth.models import Group
 from PIL import Image
@@ -72,6 +72,24 @@ def change_name(request):
             return redirect('obywatele:my_profile')
     else:
         return render(request, 'obywatele/change_name.html', {'form':form})
+
+
+@login_required() 
+def change_username(request):
+    form = UsernameChangeForm(request.POST)
+    if request.method=='POST':
+        form = UsernameChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            message = _("Your name has been saved.")
+            success(request, (message))
+            return redirect('obywatele:my_profile')
+        else:
+            message = form.errors
+            error(request, (message))
+            return redirect('obywatele:my_profile')
+    else:
+        return render(request, 'obywatele/change_username.html', {'form':form})
 
 
 @login_required

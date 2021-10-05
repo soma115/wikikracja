@@ -30,6 +30,23 @@ class NameChangeForm(forms.ModelForm):
         return self.user
 
 
+class UsernameChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username',)
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(UsernameChangeForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        username = self.cleaned_data["username"]
+        self.user.username = username
+        if commit:
+            self.user.save()
+        return self.user
+
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Uzytkownik

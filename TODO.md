@@ -4,8 +4,8 @@ We need working chat application with persistence (messages are saved to DB and 
 List of requirements:
 
 - Integration
-    expected state: Integration with Diango must be kept.
-    current state: Chat is integrated with existing Django project https://github.com/soma115/wikikracja
+    expected state: Integration with Diango must be kept. Chat should not use usernames for identification but user id's. Usernames should be presented in the UI.
+    current state: Chat is integrated with existing Django project https://github.com/soma115/wikikracja. Curently chat uses usernames as idetifiers which is incorrect.
 
 - Persistance
     expected state: Currently implemented persistance is not corect and needs to be modify probably from scratch.

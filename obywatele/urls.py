@@ -13,5 +13,5 @@ urlpatterns = (
     path('assets/', v.assets, name='assets'),
     path('nowy/', v.dodaj, name='zaproponuj_osobe'),
     path('change_name/', v.change_name, name='change_name'),
-
+    path('change_username/', v.change_username, name='change_username'),
 )
