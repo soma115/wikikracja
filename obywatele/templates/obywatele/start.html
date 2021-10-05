@@ -6,7 +6,7 @@
 
 	<ul class="list-group-flush">
 		{% for i in uid %}
-			<li class="list-group-item"><a href="{{ i.pk }}">{{ i.username }} | {{ i.email }}</a></li>
+			<li class="list-group-item"><a href="{{ i.pk }}">{{ i.username }} | {{ i.email }} {{ i.first_name }} {{ i.last_name }}</a></li>
 		{% endfor %}
 	</ul>
 

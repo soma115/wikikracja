@@ -1,4 +1,6 @@
 '''
+This shit doesn't work at all
+
 Put emails in to gen_users.txt file, one per line
 '''
 
@@ -35,6 +37,8 @@ with open('gen_users_out.txt', 'a') as dest:
 # first.is_active=True
 # first.save()
 # print(f"User '{first.username}' '{first.email}' set as introducer.")
+
+# Doesn't work because reputation level is growing but reputation is not given out
 all_users = User.objects.all()
 for i in all_users:
     i.is_active = True
