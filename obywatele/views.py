@@ -155,7 +155,6 @@ def dodaj(request):
                 candidate_profile.want_to_learn = profile_form.cleaned_data['want_to_learn']
                 candidate_profile.business = profile_form.cleaned_data['business']
                 candidate_profile.job = profile_form.cleaned_data['job']
-                candidate_profile.fb = profile_form.cleaned_data['fb']
                 candidate_profile.other = profile_form.cleaned_data['other']
                 candidate_profile.save()
 

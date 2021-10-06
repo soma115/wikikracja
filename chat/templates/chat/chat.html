@@ -29,8 +29,12 @@
         {% endfor %}
     </ul>
 
-    {% comment %} ARCHIVED PUBLIC ROOMS {% endcomment %}
+    <p>
+        {% comment %} HERE CHATS WILL APPEAR {% endcomment %}
+        <div id="chats" class="col-md-12"></div>
+    </p>
 
+    {% comment %} ARCHIVED PUBLIC ROOMS {% endcomment %}
     <div class="container">
         <div class="row">
             <div class="col text-center">
@@ -78,13 +82,6 @@
             {% endfor %}
         </ul>
     </div>
-
-
-
-    {% comment %} HERE CHATS WILL APPEAR {% endcomment %}
-    <div id="chats" class="col-md-12"></div>
-
-
 
 {% endblock content %}
 
