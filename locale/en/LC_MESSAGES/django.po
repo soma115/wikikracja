@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-08 10:34+0200\n"
+"POT-Creation-Date: 2021-10-08 16:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1053,39 +1053,39 @@ msgstr ""
 msgid " I do not accept this person "
 msgstr ""
 
-#: obywatele/views.py:48
+#: obywatele/views.py:50
 msgid "Your new email has been saved."
 msgstr ""
 
-#: obywatele/views.py:67 obywatele/views.py:85
+#: obywatele/views.py:69 obywatele/views.py:87
 msgid "Your name has been saved."
 msgstr ""
 
-#: obywatele/views.py:136
+#: obywatele/views.py:138
 msgid "Email already exist"
 msgstr ""
 
-#: obywatele/views.py:171
+#: obywatele/views.py:173
 msgid "The new user has been saved"
 msgstr ""
 
-#: obywatele/views.py:245
+#: obywatele/views.py:247
 msgid "Changes was saved"
 msgstr ""
 
-#: obywatele/views.py:258
+#: obywatele/views.py:260
 msgid "Form is not valid!"
 msgstr ""
 
-#: obywatele/views.py:331
+#: obywatele/views.py:333
 msgid "positive"
 msgstr ""
 
-#: obywatele/views.py:338
+#: obywatele/views.py:340
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:345
+#: obywatele/views.py:347
 msgid "neutral"
 msgstr ""
 

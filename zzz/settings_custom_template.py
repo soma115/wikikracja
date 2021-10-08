@@ -35,6 +35,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # citizens
+# Sane range 1.6 - 2.7
 ACCEPTANCE_MULTIPLIER = 2.7
 
 # voting
