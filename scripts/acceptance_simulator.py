@@ -8,9 +8,19 @@ Higher = harder to accept new person AND easier to ban existing person.
 Lower = easier to accept new person AND harder to ban existing person.
 '''
 
-from math import log
-ACCEPTANCE_MULTIPLIER = 2.164  # Sane values: min:0.46 max:2.164042561333445080506976
+from math import log, floor, ceil
+'''
+max_possible_acceptance = n_users - 2
+-2 is there because first 3 users needs to be accepted without explicit approval from others. First 3 users are usualy bulk-generated.
+Sane range 1.6 - 2.7
+'''
+# ACCEPTANCE_MULTIPLIER = 2.2
+ACCEPTANCE_MULTIPLIER = 2.7
 
 print('Population | Required acceptance')
 for i in range(1, 20):
-    print(f'{str(i).rjust(10)} | {str(round(log(i)*ACCEPTANCE_MULTIPLIER)).rjust(1)}')
+    a = floor(log(i)*ACCEPTANCE_MULTIPLIER)-2
+    # a = floor(i*ACCEPTANCE_MULTIPLIER)
+    print(f'{str(i).rjust(10)} | {str(a).rjust(1)}')
+    if i <= a:
+        print('error')

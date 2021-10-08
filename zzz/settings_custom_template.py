@@ -35,7 +35,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # citizens
-ACCEPTANCE_MULTIPLIER = 2.164
+ACCEPTANCE_MULTIPLIER = 2.7
 
 # voting
 WYMAGANYCH_PODPISOW = 2             # Number of signatures needed to approve request for referendum.

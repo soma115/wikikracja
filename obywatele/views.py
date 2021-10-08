@@ -13,7 +13,7 @@ from django.utils.timezone import now as dzis
 from django.utils.translation import ugettext_lazy as _
 from random import choice
 from string import ascii_letters, digits
-from math import log
+from math import log, floor
 import logging as l
 from obywatele.forms import UserForm, ProfileForm, EmailChangeForm, NameChangeForm, UsernameChangeForm
 from obywatele.models import Uzytkownik, Rate
@@ -34,7 +34,10 @@ def population():
 
 
 def required_reputation():
-    return round(log(population()) * s.ACCEPTANCE_MULTIPLIER)
+    # return round(log(population()) * s.ACCEPTANCE_MULTIPLIER)
+    # -2 is needed because first 3 users needs to be accepted without explicit action from introducer and second user. Without -2 second user is banned automatically.
+    # floor is used to further lower required reputation lewel at the group start.
+    return floor(log(population() * s.ACCEPTANCE_MULTIPLIER))-2
 
 
 @login_required() 
@@ -75,7 +78,7 @@ def change_name(request):
 
 
 @login_required() 
-def change_username(request):
+def change_username(request):  # not in use for now. Unintendet consequence is that private chat names are not updated.
     form = UsernameChangeForm(request.POST)
     if request.method=='POST':
         form = UsernameChangeForm(request.user, request.POST)
@@ -374,7 +377,6 @@ def zliczaj_obywateli(request):
 
     # Count everyones reputation from Rate model and put it in to Uzytkownik
     for i in Uzytkownik.objects.all():
-
         if Rate.objects.filter(kandydat=i).exists():
             reputation = Rate.objects.filter(kandydat=i).aggregate(Sum('rate'))
             i.reputation = list(reputation.values())[0]
@@ -403,6 +405,7 @@ def zliczaj_obywateli(request):
                 if i == k:    # but not yourself
                     continue
                 obj, created = Rate.objects.update_or_create(obywatel = i, kandydat = k, defaults={'rate': '1'})
+                obj.save()
 
             subject = request.get_host() + ' - Twoje konto zostało włączone'
             uname = str(i.uid.username)

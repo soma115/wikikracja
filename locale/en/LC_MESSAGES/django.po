@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-05 23:37+0200\n"
+"POT-Creation-Date: 2021-10-08 10:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,27 +101,27 @@ msgstr ""
 msgid "Private messages"
 msgstr ""
 
-#: chat/templates/chat/chat.html:43
+#: chat/templates/chat/chat.html:48
 msgid "Archived chats"
 msgstr ""
 
-#: chat/templates/chat/chat.html:66
+#: chat/templates/chat/chat.html:58
 msgid "Public chat rooms are archived if they are not used for"
 msgstr ""
 
-#: chat/templates/chat/chat.html:68
+#: chat/templates/chat/chat.html:60
 msgid "days. After"
 msgstr ""
 
-#: chat/templates/chat/chat.html:70
+#: chat/templates/chat/chat.html:62
 msgid "days they are deleted."
 msgstr ""
 
-#: chat/templates/chat/chat.html:73
+#: chat/templates/chat/chat.html:65
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
 
-#: chat/templates/chat/chat.html:75
+#: chat/templates/chat/chat.html:67
 msgid "days"
 msgstr ""
 
@@ -1053,15 +1053,15 @@ msgstr ""
 msgid " I do not accept this person "
 msgstr ""
 
-#: obywatele/views.py:47
+#: obywatele/views.py:48
 msgid "Your new email has been saved."
 msgstr ""
 
-#: obywatele/views.py:66 obywatele/views.py:84
+#: obywatele/views.py:67 obywatele/views.py:85
 msgid "Your name has been saved."
 msgstr ""
 
-#: obywatele/views.py:135
+#: obywatele/views.py:136
 msgid "Email already exist"
 msgstr ""
 

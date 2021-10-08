@@ -33,16 +33,17 @@ with open('gen_users_out.txt', 'a') as dest:
                 continue
             print(f"Username '{username}' with email '{email}' - created")
 
-# first = User.objects.get(id=1)
-# first.is_active=True
-# first.save()
-# print(f"User '{first.username}' '{first.email}' set as introducer.")
+# First user is intruducer. Only this one can be active because all other users needs to be approved by system. Only then reputation is assigned correctly by the system.
+first = User.objects.get(id=1)
+first.is_active=True
+first.save()
+print(f"User '{first.username}' '{first.email}' set as introducer.")
 
 # Doesn't work because reputation level is growing but reputation is not given out
-all_users = User.objects.all()
-for i in all_users:
-    i.is_active = True
-    i.save()
+# all_users = User.objects.all()
+# for i in all_users:
+#     i.is_active = True
+#     i.save()
 
 
 '''
