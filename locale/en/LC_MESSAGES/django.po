@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-10 21:31+0200\n"
+"POT-Creation-Date: 2021-10-10 21:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -383,6 +383,10 @@ msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:26
 msgid "The rule applies from"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:33
+msgid "Protocol"
 msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:38

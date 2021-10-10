@@ -28,20 +28,19 @@
 				{% comment %} Status: {{ id.status }} {% endcomment %}
 			</p>
 
-{% if id.status == 5 or id.status == 6 or id.status == 7 %}
-				<p><h5>Protokuł z głosowania:</h5></p>
+		{% if id.status == 5 or id.status == 6 or id.status == 7 %}
+				<p><h5>{% trans 'Protocol' %}:</h5></p>
 				<p>
-				{% for i in report %}
-					{{ i.code }}
-					{% comment %} {{ i.vote }} {% endcomment %}
-					{% if i.vote %}
-						{% trans "Yes" %}
-					{% else %}
-						{% trans "No" %}
-					{% endif %}<br>
-				{% endfor %}
+					{% for i in report %}
+						{{ i.code }}
+						{% if i.vote %}
+							{% trans "Yes" %}
+						{% else %}
+							{% trans "No" %}
+						{% endif %}<br>
+					{% endfor %}
 				</p>
-{% endif %}
+		{% endif %}
 
 	</div>
 
