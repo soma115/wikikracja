@@ -1,7 +1,9 @@
+import datetime
+
 from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from .exceptions import ClientError
-from .utils import get_room_or_error
+from .utils import get_room_or_error, get_slow_mode_delay
 from .models import Message, Room
 from datetime import datetime as dt
 from django.contrib.auth.models import User
@@ -91,6 +93,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         await self.send_json({
             "join": str(room.id),  # 1
             "title": room.title,   # "Room 1"
+            "slow_mode_delay": get_slow_mode_delay(room),  # delay in seconds or None if slow mode is disabled
         })
 
         # Load all messages from DB to Chat
@@ -139,13 +142,24 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         Called by receive_json when someone
         sends a message to a room.
         """
-        print(f"someone sends message: {room_id}, {message}")
+
         # Check they are in this room
         if room_id not in self.rooms:
             raise ClientError("ROOM_ACCESS_DENIED")
 
         # Get the room...
         room = await get_room_or_error(room_id, self.scope["user"])
+
+        # make sure enough time has passed if slow mode enabled in it
+        time_now = datetime.datetime.now()
+        last_message_by_user = await self.get_latest_message_by_user(room, self.scope['user'])
+        delay = get_slow_mode_delay(room)
+
+        if last_message_by_user is not None \
+            and delay is not None \
+                and time_now.timestamp() - last_message_by_user.time.timestamp() < delay:
+            raise ClientError("SLOW_MODE")
+
         # ...and send to the group info about it
         await self.channel_layer.group_send(
             room.group_name,
@@ -226,3 +240,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     def save_message(self, message):
         if message.text:
             message.save()
+
+    @database_sync_to_async
+    def get_latest_message_by_user(self, room, user):
+        return room.messages.filter(sender=self.scope['user']).order_by("-time").first()

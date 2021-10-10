@@ -1,6 +1,9 @@
+from typing import Union
+
 from channels.db import database_sync_to_async
 from .exceptions import ClientError
 from .models import Room
+from django.conf import settings
 
 
 # This decorator turns this function from a synchronous function into an async
@@ -20,3 +23,9 @@ def get_room_or_error(room_id, user):
     except Room.DoesNotExist:
         raise ClientError("ROOM_INVALID")
     return room
+
+
+def get_slow_mode_delay(room) -> Union[int, None]:
+    """ Returns amount of seconds required between messages by configuration """
+    slow_mode_config = settings.SLOW_MODE
+    return slow_mode_config.get(room.title) or slow_mode_config.get('*')
