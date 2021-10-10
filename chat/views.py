@@ -33,7 +33,6 @@ def chat(request):
     Root page view. This is essentially a single-page app, if you ignore the
     login and admin parts.
     """
-
     # Create all 1to1 rooms
     active_users = User.objects.filter(is_active=True)
     for i in active_users:
@@ -42,9 +41,18 @@ def chat(request):
             if i == j:  
                 continue
             # Avoid A-B B-A because it is the same thing
-            t=sorted([i.username, j.username])  
-            r, created = Room.objects.get_or_create(title='-'.join(t), public=False)
-            r.allowed.set((i, j,))
+            t=sorted([i.username, j.username])
+            title = '-'.join(t)
+
+            existing_room = Room.find_with_users(i, j)
+
+            # check if room for user i and j exists, if so make sure room name is correct
+            if existing_room:
+                existing_room.title = title
+            # if not, create room
+            else:
+                r = Room.objects.create(title=title, public=False)
+                r.allowed.set((i, j,))
 
     # Add all active_users to public_rooms.
     # It is done here because it is needed when:

@@ -29,6 +29,20 @@ class Room(models.Model):
         """
         return "room-%s" % self.id
 
+    @staticmethod
+    def find_with_users(*users):
+        """
+        Returns Room object
+        """
+        # TODO: replace with better query
+        for room in Room.objects.filter(public=False):
+            room_members = room.allowed.all()
+            for user in users:
+                assert isinstance(user, User)
+                if user not in room_members:
+                    return None
+            return room
+
 
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
