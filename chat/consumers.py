@@ -182,7 +182,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Save message to DB
         u = await self.get_user_by_name(self.scope["user"].username)
         r = await self.get_room(room_id)
-        msg = Message(sender=u, text=message, room=r, anonymous=True)  # time is added in a models.py
+        msg = Message(sender=u, text=message, room=r, anonymous=is_anonymous)  # time is added in a models.py
         await self.save_message(msg)
 
     ###########################################################
