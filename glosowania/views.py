@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
-from glosowania.models import Decyzja, ZebranePodpisy, KtoJuzGlosowal
+from glosowania.models import Decyzja, ZebranePodpisy, KtoJuzGlosowal, VoteCode
+from glosowania.forms import DecyzjaForm
 from django.shortcuts import get_object_or_404
 from django.db import IntegrityError
 from django.shortcuts import render
-from glosowania.forms import DecyzjaForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
@@ -18,6 +18,7 @@ from django.shortcuts import redirect
 import logging as l
 from django.utils import translation
 import threading
+import random
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
@@ -70,6 +71,9 @@ def status(request, pk):
     })
 
 
+def generate_code():
+    return''.join([random.SystemRandom().choice('abcdefghjkmnoprstuvwxyz23456789') for i in range(6)])
+
 # Pokaż szczegóły przepisu
 @login_required
 def details(request, pk):
@@ -89,12 +93,32 @@ def details(request, pk):
     if request.GET.get('tak'):
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_glosujaca = request.user
-        glos = KtoJuzGlosowal(projekt=nowy_projekt, ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
+        glos = KtoJuzGlosowal(
+                              projekt=nowy_projekt,
+                              ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca
+                             )
         nowy_projekt.za += 1
         glos.save()
         nowy_projekt.save()
-        message = _('Your vote has been saved. You voted Yes.')
-        messages.success(request, (message))
+        
+        # TODO: Kod oddanego głosu
+        # - wygeneruj kod
+        # - tak
+        # - projekt
+        # - zapisz
+        # - wyswietl
+        code = generate_code()
+        report = VoteCode.objects.create(project=nowy_projekt, code=code, vote=True)
+
+        message1 = str(_('Your vote has been saved. You voted Yes.'))
+        messages.success(request, (message1))
+
+        message2 = str(_('Your verification code is:') + f' {code} ')
+        messages.error(request, (message2))
+
+        message3 = str(_('Write down your code or create screenshot to verify it when the referendum is over. This code will be presented just once and will be not related to you.'))
+        messages.info(request, (message3))
+
         return redirect('glosowania:details', pk)
 
     if request.GET.get('nie'):
@@ -104,8 +128,25 @@ def details(request, pk):
         nowy_projekt.przeciw += 1
         glos.save()
         nowy_projekt.save()
-        message = _('Your vote has been saved. You voted No.')
-        messages.success(request, (message))
+
+        # TODO: Kod oddanego głosu
+        # - wygeneruj kod
+        # - nie
+        # - projekt
+        # - zapisz
+        # - wyswietl
+        code = generate_code()
+        report = VoteCode.objects.create(project=nowy_projekt, code=code, vote=False)
+
+        message1 = str(_('Your vote has been saved. You voted No.'))
+        messages.success(request, (message1))
+
+        message2 = str(_('Your verification code is:') + f' {code} ')
+        messages.error(request, (message2))
+
+        message3 = str(_('Write down your code or create screenshot to verify it when the referendum is over. This code will be presented just once and will be not related to you.'))
+        messages.info(request, (message3))
+
         return redirect('glosowania:details', pk)
 
     # check if already signed
@@ -114,7 +155,10 @@ def details(request, pk):
     # check if already voted
     voted = KtoJuzGlosowal.objects.filter(projekt=pk, ktory_uzytkownik_juz_zaglosowal=request.user).exists()
 
-    return render(request, 'glosowania/szczegoly.html', {'id': szczegoly, 'signed': signed, 'voted': voted})
+    # Report
+    report = VoteCode.objects.filter(project_id=pk)
+
+    return render(request, 'glosowania/szczegoly.html', {'id': szczegoly, 'signed': signed, 'voted': voted, 'report': report})
 
 
 def zliczaj_wszystko():
@@ -200,7 +244,7 @@ def zliczaj_wszystko():
                     str(_("Proposal no. ")) + str(i.id) + 
                     str(_("was approved in referendum and is now in Vacatio Legis period")) + '.\n' +
                     str(_("The law will take effect on")) + 
-                    i.data_obowiazuje_od + '\n' + str(_("Click here to read proposal: http://")) + 
+                    str(i.data_obowiazuje_od) + '\n' + str(_("Click here to read proposal: http://")) + 
                     f"{HOST}/glosowania/details/{str(i.id)}"
                     )
                     continue

@@ -94,3 +94,14 @@ class KtoJuzGlosowal(models.Model):
 
     class Meta:
         unique_together = ('projekt', 'ktory_uzytkownik_juz_zaglosowal')
+
+
+class VoteCode(models.Model):
+    '''
+    - Jednorazowy kod
+    - Tak/Nie
+    '''
+    project = models.ForeignKey(Decyzja, on_delete=models.CASCADE)
+    code = models.CharField(editable=False, null=True, max_length=20)
+    vote = models.BooleanField(editable=False, null=True)
+    

@@ -178,7 +178,6 @@ def dodaj(request):
                 message = _('The new user has been saved')
                 success(request, (message))
 
-                # TODO: Send email
                 SendEmailToAll(
                           _('New citizen has been proposed'),
                           f'{request.user.username} ' + str(_('proposed new citizen\nYou can approve him/her here:')) + f' http://{HOST}/obywatele/poczekalnia/{str(candidate_profile.id)}'

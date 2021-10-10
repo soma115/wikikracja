@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-10 17:20+0200\n"
+"POT-Creation-Date: 2021-10-10 21:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,9 +81,9 @@ msgstr ""
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:33
 #: elibrary/templates/elibrary/book_form.html:28
 #: glosowania/templates/glosowania/dodaj.html:35
-#: glosowania/templates/glosowania/szczegoly.html:42
-#: glosowania/templates/glosowania/szczegoly.html:55
-#: glosowania/templates/glosowania/szczegoly.html:59
+#: glosowania/templates/glosowania/szczegoly.html:57
+#: glosowania/templates/glosowania/szczegoly.html:70
+#: glosowania/templates/glosowania/szczegoly.html:74
 #: obywatele/templates/obywatele/dodaj.html:70
 #: obywatele/templates/obywatele/szczegoly.html:99
 msgid "Back"
@@ -385,145 +385,158 @@ msgstr ""
 msgid "The rule applies from"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:36
-msgid "Do you want a referendum on this law?"
-msgstr ""
-
-#: glosowania/templates/glosowania/szczegoly.html:37
-msgid "Yes, I sign"
-msgstr ""
-
-#: glosowania/templates/glosowania/szczegoly.html:40
-msgid "You already signed this proposal."
-msgstr ""
-
-#: glosowania/templates/glosowania/szczegoly.html:48
-msgid "Do you want to implement this law?"
-msgstr ""
-
-#: glosowania/templates/glosowania/szczegoly.html:49
+#: glosowania/templates/glosowania/szczegoly.html:38
+#: glosowania/templates/glosowania/szczegoly.html:64
 msgid "Yes"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:50
+#: glosowania/templates/glosowania/szczegoly.html:40
+#: glosowania/templates/glosowania/szczegoly.html:65
 msgid "No"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:53
+#: glosowania/templates/glosowania/szczegoly.html:51
+msgid "Do you want a referendum on this law?"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:52
+msgid "Yes, I sign"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:55
+msgid "You already signed this proposal."
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:63
+msgid "Do you want to implement this law?"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:68
 msgid "You already voted."
 msgstr ""
 
-#: glosowania/views.py:42
+#: glosowania/views.py:43
 msgid "New proposal has been saved."
 msgstr ""
 
-#: glosowania/views.py:46
+#: glosowania/views.py:47
 msgid "New law proposal"
 msgstr ""
 
-#: glosowania/views.py:47
+#: glosowania/views.py:48
 msgid ""
 "added new law proposal\n"
 "You can read it here:"
 msgstr ""
 
-#: glosowania/views.py:85
+#: glosowania/views.py:89
 msgid "Your signature has been saved."
 msgstr ""
 
-#: glosowania/views.py:96
+#: glosowania/views.py:113
 msgid "Your vote has been saved. You voted Yes."
 msgstr ""
 
-#: glosowania/views.py:107
+#: glosowania/views.py:116 glosowania/views.py:144
+msgid "Your verification code is:"
+msgstr ""
+
+#: glosowania/views.py:119 glosowania/views.py:147
+msgid ""
+"Write down your code or create screenshot to verify it when the referendum "
+"is over. This code will be presented just once and will be not related to "
+"you."
+msgstr ""
+
+#: glosowania/views.py:141
 msgid "Your vote has been saved. You voted No."
 msgstr ""
 
-#: glosowania/views.py:150 glosowania/views.py:151 glosowania/views.py:166
-#: glosowania/views.py:167 glosowania/views.py:199 glosowania/views.py:200
-#: glosowania/views.py:212 glosowania/views.py:213 glosowania/views.py:227
-#: glosowania/views.py:228
+#: glosowania/views.py:194 glosowania/views.py:195 glosowania/views.py:210
+#: glosowania/views.py:211 glosowania/views.py:243 glosowania/views.py:244
+#: glosowania/views.py:256 glosowania/views.py:257 glosowania/views.py:271
+#: glosowania/views.py:272
 msgid "Proposal no. "
 msgstr ""
 
-#: glosowania/views.py:150
+#: glosowania/views.py:194
 msgid " is approved for referendum"
 msgstr ""
 
-#: glosowania/views.py:152
+#: glosowania/views.py:196
 msgid " gathered required amount of signatures and will be voted from "
 msgstr ""
 
-#: glosowania/views.py:153
+#: glosowania/views.py:197
 msgid " to "
 msgstr ""
 
-#: glosowania/views.py:154 glosowania/views.py:170 glosowania/views.py:203
-#: glosowania/views.py:216
+#: glosowania/views.py:198 glosowania/views.py:214 glosowania/views.py:247
+#: glosowania/views.py:260
 msgid "Click here to read proposal: http://"
 msgstr ""
 
-#: glosowania/views.py:166 glosowania/views.py:168
+#: glosowania/views.py:210 glosowania/views.py:212
 msgid " didn't gathered required amount of signatures"
 msgstr ""
 
-#: glosowania/views.py:168
+#: glosowania/views.py:212
 msgid " and was removed from queue. "
 msgstr ""
 
-#: glosowania/views.py:169 glosowania/views.py:215
+#: glosowania/views.py:213 glosowania/views.py:259
 msgid "Feel free to improve it and send it again."
 msgstr ""
 
-#: glosowania/views.py:181
+#: glosowania/views.py:225
 msgid "Referendum on proposal no. "
 msgstr ""
 
-#: glosowania/views.py:181
+#: glosowania/views.py:225
 msgid " is starting now"
 msgstr ""
 
-#: glosowania/views.py:182
+#: glosowania/views.py:226
 msgid "It is time to vote on proposal no. "
 msgstr ""
 
-#: glosowania/views.py:183
+#: glosowania/views.py:227
 msgid "Referendum ends at "
 msgstr ""
 
-#: glosowania/views.py:185
+#: glosowania/views.py:229
 msgid "Click here to vote: http://"
 msgstr ""
 
-#: glosowania/views.py:199
+#: glosowania/views.py:243
 msgid "was approved"
 msgstr ""
 
-#: glosowania/views.py:201
+#: glosowania/views.py:245
 msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
 
-#: glosowania/views.py:202
+#: glosowania/views.py:246
 msgid "The law will take effect on"
 msgstr ""
 
-#: glosowania/views.py:212
+#: glosowania/views.py:256
 msgid "was rejected"
 msgstr ""
 
-#: glosowania/views.py:214
+#: glosowania/views.py:258
 msgid " was rejected in referendum."
 msgstr ""
 
-#: glosowania/views.py:227
+#: glosowania/views.py:271
 msgid " is in efect from today"
 msgstr ""
 
-#: glosowania/views.py:228
+#: glosowania/views.py:272
 msgid " became abiding law today"
 msgstr ""
 
-#: glosowania/views.py:229
+#: glosowania/views.py:273
 msgid "Click here to read it: http://"
 msgstr ""
 
@@ -1069,57 +1082,57 @@ msgstr ""
 msgid "The new user has been saved"
 msgstr ""
 
-#: obywatele/views.py:183
+#: obywatele/views.py:182
 msgid "New citizen has been proposed"
 msgstr ""
 
-#: obywatele/views.py:184
+#: obywatele/views.py:183
 msgid ""
 "proposed new citizen\n"
 "You can approve him/her here:"
 msgstr ""
 
-#: obywatele/views.py:259
+#: obywatele/views.py:258
 msgid "Changes was saved"
 msgstr ""
 
-#: obywatele/views.py:272
+#: obywatele/views.py:271
 msgid "Form is not valid!"
 msgstr ""
 
-#: obywatele/views.py:345
+#: obywatele/views.py:344
 msgid "positive"
 msgstr ""
 
-#: obywatele/views.py:352
+#: obywatele/views.py:351
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:359
+#: obywatele/views.py:358
 msgid "neutral"
 msgstr ""
 
-#: obywatele/views.py:443
+#: obywatele/views.py:442
 msgid "Your account has been blocked"
 msgstr ""
 
-#: obywatele/views.py:444
+#: obywatele/views.py:443
 msgid "Welcome"
 msgstr ""
 
-#: obywatele/views.py:444
+#: obywatele/views.py:443
 msgid "Your account on page"
 msgstr ""
 
-#: obywatele/views.py:444 obywatele/views.py:453
+#: obywatele/views.py:443 obywatele/views.py:452
 msgid "has been blocked."
 msgstr ""
 
-#: obywatele/views.py:452
+#: obywatele/views.py:451
 msgid "Citizen has been banned"
 msgstr ""
 
-#: obywatele/views.py:453
+#: obywatele/views.py:452
 msgid "Account"
 msgstr ""
 
