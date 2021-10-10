@@ -20,16 +20,20 @@ from obywatele.models import Uzytkownik, Rate
 from django.contrib.auth.models import Group
 from PIL import Image
 import os
+from django.utils import translation
+from django.utils.translation import get_language
+from django.core.mail import EmailMessage
+import threading
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
+HOST = s.ALLOWED_HOSTS[0]
 
 def population():
     try:
         population = User.objects.filter(is_active=True).count()
         return population
     except:
-        pass
         l.error(f"Population zero, I don't know what to do.")
 
 
@@ -37,7 +41,8 @@ def required_reputation():
     # return round(log(population()) * s.ACCEPTANCE_MULTIPLIER)
     # -2 is needed because first 3 users needs to be accepted without explicit action from introducer and second user. Without -2 second user is banned automatically.
     # floor is used to further lower required reputation lewel at the group start.
-    return floor(log(population() * s.ACCEPTANCE_MULTIPLIER))-2
+    result = floor(log(population() * s.ACCEPTANCE_MULTIPLIER + 1))-2
+    return result
 
 
 @login_required() 
@@ -172,6 +177,13 @@ def dodaj(request):
 
                 message = _('The new user has been saved')
                 success(request, (message))
+
+                # TODO: Send email
+                SendEmailToAll(
+                          _('New citizen has been proposed'),
+                          f'{request.user.username} ' + str(_('proposed new citizen\nYou can approve him/her here:')) + f' http://{HOST}/obywatele/poczekalnia/{str(candidate_profile.id)}'
+                )
+
                 return redirect('obywatele:poczekalnia')
         else:
             message = user_form.errors.get_json_data()['username'][0]['message']
@@ -428,13 +440,18 @@ def zliczaj_obywateli(request):
             Rate.objects.filter(obywatel=i.id).update(rate=0)
 
             send_mail(
-                f'{str(request.get_host())} - Twoje konto zostało zablokowane',
-                f'Witaj {i.uid.username}\nTwoje konto na {str(request.get_host())} zostało zablokowane.',
+                f'{str(request.get_host())} - ' + str(_('Your account has been blocked')),
+                str(_('Welcome')) + f' {i.uid.username}\n' + str(_('Your account on page')) + f' {str(request.get_host())} ' + str(_('has been blocked.')),
                 str(s.DEFAULT_FROM_EMAIL),
                 [i.uid.email],
                 fail_silently=False,
             )
             # We are not deleting user bacuse he may come back.
+
+            SendEmailToAll(
+                        _('Citizen has been banned'),
+                        str(_('Account')) + f' {i.uid.username} ' + str(_('has been blocked.'))
+            )
 
     # l.info(f'Population: {POPULATION}. Required reputation: {REQUIRED_REPUTATION}')
 
@@ -458,3 +475,25 @@ def change_password(request):
 
 def password_generator(size=8, chars=ascii_letters + digits):
     return ''.join(choice(chars) for i in range(size))
+
+
+def SendEmailToAll(subject, message):
+    # bcc: all active users
+    # subject: Custom
+    # message: Custom
+    translation.activate(s.LANGUAGE_CODE)
+
+    email_message = EmailMessage(
+        from_email=str(s.DEFAULT_FROM_EMAIL),
+        bcc = list(User.objects.filter(is_active=True).values_list('email', flat=True)),
+        subject=f'{HOST} - {subject}',
+        body=message,
+        )
+    # l.warning(f'subject: {subject} \n message: {message}')
+    
+    t = threading.Thread(
+                         target=email_message.send,
+                         args=("fail_silently=False",)
+                        )
+    t.setDaemon(True)
+    t.start()

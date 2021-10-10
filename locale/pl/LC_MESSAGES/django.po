@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-10 12:15+0200\n"
+"POT-Creation-Date: 2021-10-10 17:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -431,15 +431,15 @@ msgstr "Nie"
 msgid "You already voted."
 msgstr "Już głosowałeś."
 
-#: glosowania/views.py:41
+#: glosowania/views.py:42
 msgid "New proposal has been saved."
 msgstr "Nowa propozycja została zapisana."
 
-#: glosowania/views.py:45
+#: glosowania/views.py:46
 msgid "New law proposal"
 msgstr "Nowa propozycja przepisu"
 
-#: glosowania/views.py:46
+#: glosowania/views.py:47
 msgid ""
 "added new law proposal\n"
 "You can read it here:"
@@ -447,106 +447,106 @@ msgstr ""
 "dodał/a nową propozycję przepisu\n"
 "Możesz ją zobaczyć tutaj:"
 
-#: glosowania/views.py:84
+#: glosowania/views.py:85
 msgid "Your signature has been saved."
 msgstr "Twój podpis został zapisany."
 
-#: glosowania/views.py:95
+#: glosowania/views.py:96
 msgid "Your vote has been saved. You voted Yes."
 msgstr "Twój podpis został zapisany. Zagłosowałeś na Tak."
 
-#: glosowania/views.py:106
+#: glosowania/views.py:107
 msgid "Your vote has been saved. You voted No."
 msgstr "Twój podpis został zapisany. Zagłosowałeś na Nie."
 
-#: glosowania/views.py:149 glosowania/views.py:150 glosowania/views.py:165
-#: glosowania/views.py:166 glosowania/views.py:198 glosowania/views.py:199
-#: glosowania/views.py:211 glosowania/views.py:212 glosowania/views.py:226
-#: glosowania/views.py:227
+#: glosowania/views.py:150 glosowania/views.py:151 glosowania/views.py:166
+#: glosowania/views.py:167 glosowania/views.py:199 glosowania/views.py:200
+#: glosowania/views.py:212 glosowania/views.py:213 glosowania/views.py:227
+#: glosowania/views.py:228
 msgid "Proposal no. "
 msgstr "Propozycja nr. "
 
-#: glosowania/views.py:149
+#: glosowania/views.py:150
 msgid " is approved for referendum"
 msgstr " zostanie poddana pod referendum"
 
-#: glosowania/views.py:151
+#: glosowania/views.py:152
 msgid " gathered required amount of signatures and will be voted from "
 msgstr ""
 " zebrała wymaganą liczbę podpisów i zostania poddana pod głosowanie od "
 
-#: glosowania/views.py:152
+#: glosowania/views.py:153
 msgid " to "
 msgstr " do "
 
-#: glosowania/views.py:153 glosowania/views.py:169 glosowania/views.py:202
-#: glosowania/views.py:215
+#: glosowania/views.py:154 glosowania/views.py:170 glosowania/views.py:203
+#: glosowania/views.py:216
 msgid "Click here to read proposal: http://"
 msgstr "Kliknij tutaj aby zobaczyć propozycję: http://"
 
-#: glosowania/views.py:165 glosowania/views.py:167
+#: glosowania/views.py:166 glosowania/views.py:168
 msgid " didn't gathered required amount of signatures"
 msgstr " nie zebrała wymaganej liczby podpisów"
 
-#: glosowania/views.py:167
+#: glosowania/views.py:168
 msgid " and was removed from queue. "
 msgstr ""
 
-#: glosowania/views.py:168 glosowania/views.py:214
+#: glosowania/views.py:169 glosowania/views.py:215
 msgid "Feel free to improve it and send it again."
 msgstr "Możesz ją ulepszyć i wysłać ponownie."
 
-#: glosowania/views.py:180
+#: glosowania/views.py:181
 msgid "Referendum on proposal no. "
 msgstr "Referendum nad propozycją nr. "
 
-#: glosowania/views.py:180
+#: glosowania/views.py:181
 msgid " is starting now"
 msgstr " właśnie się rozpoczęło"
 
-#: glosowania/views.py:181
+#: glosowania/views.py:182
 msgid "It is time to vote on proposal no. "
 msgstr "Nadszedł czas żeby zagłosować nad propozycją nr. "
 
-#: glosowania/views.py:182
+#: glosowania/views.py:183
 msgid "Referendum ends at "
 msgstr "Referendum kończy się "
 
-#: glosowania/views.py:184
+#: glosowania/views.py:185
 msgid "Click here to vote: http://"
 msgstr "Kliknij tutaj aby zagłosować: http://"
 
-#: glosowania/views.py:198
+#: glosowania/views.py:199
 msgid "was approved"
 msgstr "została zatwierdzona"
 
-#: glosowania/views.py:200
+#: glosowania/views.py:201
 msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
 "została zatwierdzona w referendum i znajduje się obecnie w okresie Vacatio "
 "Legis."
 
-#: glosowania/views.py:201
+#: glosowania/views.py:202
 msgid "The law will take effect on"
 msgstr "Nowe prawo zacznie obowiązywać od"
 
-#: glosowania/views.py:211
+#: glosowania/views.py:212
 msgid "was rejected"
 msgstr "została odrzucona"
 
-#: glosowania/views.py:213
+#: glosowania/views.py:214
 msgid " was rejected in referendum."
 msgstr " została odrzucona w referendum."
 
-#: glosowania/views.py:226
+#: glosowania/views.py:227
 msgid " is in efect from today"
 msgstr " obowiązuje od dzisiaj"
 
-#: glosowania/views.py:227
+#: glosowania/views.py:228
 msgid " became abiding law today"
 msgstr " stała się dziś obowiązującym prawem"
 
-#: glosowania/views.py:228
+#: glosowania/views.py:229
 msgid "Click here to read it: http://"
 msgstr "Kliknij tutaj aby ją przeczytać: http://"
 
@@ -923,8 +923,6 @@ msgid "Your current email"
 msgstr "Twój obecny email"
 
 #: obywatele/templates/obywatele/change_name.html:7
-#, fuzzy
-#| msgid "Change name"
 msgid "Change your name"
 msgstr "Zmień imię i nazwisko"
 
@@ -939,10 +937,8 @@ msgid "Last name"
 msgstr "Nazwisko"
 
 #: obywatele/templates/obywatele/change_username.html:7
-#, fuzzy
-#| msgid "Change name"
 msgid "Change your username"
-msgstr "Zmień imię i nazwisko"
+msgstr "Zmień nazwę użytkownika"
 
 #: obywatele/templates/obywatele/change_username.html:9
 msgid "Username"
@@ -1103,41 +1099,77 @@ msgstr "Neutralny"
 msgid " I do not accept this person "
 msgstr "Nie akceptuję tej osoby"
 
-#: obywatele/views.py:50
+#: obywatele/views.py:55
 msgid "Your new email has been saved."
 msgstr "Twój nowy email został zapisany."
 
-#: obywatele/views.py:69 obywatele/views.py:87
+#: obywatele/views.py:74 obywatele/views.py:92
 msgid "Your name has been saved."
 msgstr "Twój imię i nazwisko zostały zapisane."
 
-#: obywatele/views.py:138
+#: obywatele/views.py:143
 msgid "Email already exist"
 msgstr "Email już został użyty"
 
-#: obywatele/views.py:173
+#: obywatele/views.py:178
 msgid "The new user has been saved"
 msgstr "Nowy użytkownik został zapisany."
 
-#: obywatele/views.py:247
+#: obywatele/views.py:183
+msgid "New citizen has been proposed"
+msgstr "Został zaproponowany nowy użytkownik"
+
+#: obywatele/views.py:184
+msgid ""
+"proposed new citizen\n"
+"You can approve him/her here:"
+msgstr ""
+"zaproponował/a nową osobę\n"
+"Może ją zatwierdzić tutaj:"
+
+#: obywatele/views.py:259
 msgid "Changes was saved"
 msgstr "Zmiany zostały zapisane"
 
-#: obywatele/views.py:260
+#: obywatele/views.py:272
 msgid "Form is not valid!"
 msgstr "Formularz zawiera błędy"
 
-#: obywatele/views.py:333
+#: obywatele/views.py:345
 msgid "positive"
 msgstr "pozytywny"
 
-#: obywatele/views.py:340
+#: obywatele/views.py:352
 msgid "negative"
 msgstr "negatywny"
 
-#: obywatele/views.py:347
+#: obywatele/views.py:359
 msgid "neutral"
 msgstr "obojętny"
+
+#: obywatele/views.py:443
+msgid "Your account has been blocked"
+msgstr "Twoje konto zostało zablokowane."
+
+#: obywatele/views.py:444
+msgid "Welcome"
+msgstr "Witaj"
+
+#: obywatele/views.py:444
+msgid "Your account on page"
+msgstr "Twoje konto na stronie"
+
+#: obywatele/views.py:444 obywatele/views.py:453
+msgid "has been blocked."
+msgstr "zostało zablokowane."
+
+#: obywatele/views.py:452
+msgid "Citizen has been banned"
+msgstr "Obywatel został zbanowany"
+
+#: obywatele/views.py:453
+msgid "Account"
+msgstr "Konto"
 
 #: templates/admin/base_site.html:3
 msgid "Django site admin"
@@ -1154,8 +1186,3 @@ msgstr "Angielski"
 #: zzz/settings_custom.py:14 zzz/settings_custom_template.py:14
 msgid "Polish"
 msgstr "Polski"
-
-#, fuzzy
-#~| msgid "Change name"
-#~ msgid "Change user"
-#~ msgstr "Zmień imię i nazwisko"

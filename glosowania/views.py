@@ -17,6 +17,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 import logging as l
 from django.utils import translation
+import threading
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
@@ -244,4 +245,10 @@ def SendEmail(subject, message):
         body=message,
         )
     # l.warning(f'subject: {subject} \n message: {message}')
-    email_message.send(fail_silently=False)
+    
+    t = threading.Thread(
+                         target=email_message.send,
+                         args=("fail_silently=False",)
+                        )
+    t.setDaemon(True)
+    t.start()
