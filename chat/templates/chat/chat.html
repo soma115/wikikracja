@@ -115,7 +115,7 @@
                         "<div class='room' id='room-" + data.join + "'>" +
                         "<h5>" + data.title + "</h5>" +
                         "<div class='messages'></div>" +
-                        "<form class='d-flex'><input class='col-12 col-sm'><button class='btn btn-danger btn-sm'>↲</button></form>" +
+                        "<form class='d-flex'><input class='col-12 col-sm'><input class='anonymous-switch' type='checkbox' /><button class='btn btn-danger btn-sm'>↲</button></form>" +
                         "</div>"
                         );
 
@@ -127,6 +127,7 @@
                                     "command": "send",
                                     "room": data.join,  // room number
                                     "message": roomdiv.find("input").val(),  // value, message to send
+                                    is_anonymous: roomdiv.find(".anonymous-switch").is(":checked") // get bool from checkbox
                         }));
 
                         // Clears input field

@@ -63,7 +63,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 # Leave the room
                 await self.leave_room(content["room"])
             elif command == "send":
-                await self.send_room(content["room"], content["message"])  # goes to chat and DB
+                await self.send_room(content["room"], content["message"], content["is_anonymous"])  # goes to chat and DB
                 # await self.send_room(content["room"], str(content["message"]+'===='))
         except ClientError as e:
             # Catch any errors and send it back
@@ -108,7 +108,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 {
                     "type": "chat.message",
                     "room_id": room_id,
-                    "username": u.username,
+                    "user_id": u.id,
+                    "anonymous": message['anonymous'],
                     # "message": t+': '+message['text'], 
                     "message": message['text'],
                     "new": False,
@@ -137,7 +138,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "leave": str(room.id),
         })
 
-    async def send_room(self, room_id, message):
+    async def send_room(self, room_id, message, is_anonymous=False):
         """
         Called by receive_json when someone
         sends a message to a room.
@@ -149,6 +150,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
         # Get the room...
         room = await get_room_or_error(room_id, self.scope["user"])
+
+        # impossible to send anonymous messages in private chat
+        if not room.public and is_anonymous:
+            raise ClientError("ANONYMOUS_IN_PRIVATE")
 
         # make sure enough time has passed if slow mode enabled in it
         time_now = datetime.datetime.now()
@@ -166,7 +171,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             {
                 "type": "chat.message",
                 "room_id": room_id,
-                "username": self.scope["user"].username,
+                "user_id": self.scope["user"].id,
+                "anonymous": is_anonymous,
                 "message": message,  # goes to chat and DB
                 "new": True,
                 # "time": dt.now(),
@@ -176,7 +182,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Save message to DB
         u = await self.get_user_by_name(self.scope["user"].username)
         r = await self.get_room(room_id)
-        msg = Message(sender=u, text=message, room=r)  # time is added in a models.py
+        msg = Message(sender=u, text=message, room=r, anonymous=True)  # time is added in a models.py
         await self.save_message(msg)
 
     ###########################################################
@@ -197,17 +203,19 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         #     print(i)
         # print(event)
         # Send a message down to the client
+        user = await self.get_user_by_id(event["user_id"])
         await self.send_json( 
             {
                 # type, room_id, username, message
                 "room": event["room_id"],
-                "username": event["username"],
+                # Hide username if message is anonymous
+                "username": 'Anonymous User' if event["anonymous"] else user.username,
                 "message": event["message"],  # goes only from DB to chat. Display alteration possible but only from DB.
                 # "time": event["time"],
                 # "time": dt.now(),
                 "time": str(dt.now()),  # tylko to dziala
                 # let client know if message was sent by a another user (True) or loaded from database (False)
-                "new": event["new"] if self.scope['user'].username != event["username"] else False,
+                "new": event["new"] if self.scope['user'] != user else False,
                 # "time": 'czas',
             },
         )
