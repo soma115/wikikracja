@@ -72,10 +72,15 @@ class BookDetailView(LoginRequiredMixin, DetailView):
         return obj
 
 
+
 class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
     fields = ['title', 'author', 'cover', 'file_epub', 'file_mobi', 'file_pdf']
-    # template_name_suffix = '_update_form'   
+
+    def form_valid(self, form):
+        if form.instance.cover == "":
+            form.instance.cover = 'elibrary/default.png'
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('elibrary:book-detail', kwargs={'pk': self.object.pk})
