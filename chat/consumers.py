@@ -107,7 +107,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "room_id": room_id,
                     "username": u.username,
                     # "message": t+': '+message['text'], 
-                    "message": message['text'], 
+                    "message": message['text'],
+                    "new": False,
                     # "time": message['time'], 
                     # "time": 'asd', 
                 }
@@ -138,6 +139,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         Called by receive_json when someone
         sends a message to a room.
         """
+        print(f"someone sends message: {room_id}, {message}")
         # Check they are in this room
         if room_id not in self.rooms:
             raise ClientError("ROOM_ACCESS_DENIED")
@@ -152,6 +154,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "room_id": room_id,
                 "username": self.scope["user"].username,
                 "message": message,  # goes to chat and DB
+                "new": True,
                 # "time": dt.now(),
             }
         )
@@ -189,6 +192,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 # "time": event["time"],
                 # "time": dt.now(),
                 "time": str(dt.now()),  # tylko to dziala
+                # let client know if message was sent by a another user (True) or loaded from database (False)
+                "new": event["new"] if self.scope['user'].username != event["username"] else False,
                 # "time": 'czas',
             },
         )

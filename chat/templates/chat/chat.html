@@ -153,6 +153,9 @@
                                     "</div>";
                     msgdiv.append(ok_msg);
                     msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
+                    if (data.new) {
+                        alert("New Message");
+                    }
                 } else {
                     console.log("Cannot handle message!");  // i.e. empty message
                 }
