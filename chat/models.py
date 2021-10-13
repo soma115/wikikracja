@@ -21,6 +21,20 @@ class Room(models.Model):
     def __str__(self):
         return self.title
 
+    def get_other(self, user):
+        # TODO: nice query
+        for member in self.allowed.all():
+            if member != user:
+                return member
+        raise ValueError("Only one member in private room")
+
+    # Name that user will see in chats list
+    def displayed_name(self, user):
+        if self.public:
+            return self.title
+        else:
+            return self.get_other(user).username
+
     @property  # adds 'getter', 'setter' and 'deleter' methods
     def group_name(self):
         """
@@ -30,9 +44,9 @@ class Room(models.Model):
         return "room-%s" % self.id
 
     @staticmethod
-    def find_with_users(*users):
+    def find_all_with_users(*users):
         """
-        Returns Room object
+        Returns generator of Room objects
         """
         # TODO: replace with better query
         for room in Room.objects.filter(public=False):
@@ -41,6 +55,14 @@ class Room(models.Model):
                 assert isinstance(user, User)
                 if user not in room_members:
                     return None
+            yield room
+
+    @staticmethod
+    def find_with_users(*users):
+        """
+        Returns first matching room.
+        """
+        for room in Room.find_all_with_users(*users):
             return room
 
 

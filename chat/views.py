@@ -104,6 +104,7 @@ def chat(request):
     # Render that in the chat template
     return render(request, "chat/chat.html", {
         'allowed_rooms': allowed_rooms,
+        'user': request.user,
         'ARCHIVE_CHAT_ROOM': td(days=s.ARCHIVE_CHAT_ROOM).days,
         'DELETE_CHAT_ROOM': td(days=s.DELETE_CHAT_ROOM).days,
     })

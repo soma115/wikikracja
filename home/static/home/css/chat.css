@@ -38,3 +38,11 @@
         width: 100px;
         font-weight: bold;
     }
+
+.offline {
+    color: gray;
+}
+
+.online {
+    color: green;
+}

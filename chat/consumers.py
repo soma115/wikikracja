@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from .exceptions import ClientError
-from .utils import get_room_or_error, get_slow_mode_delay
+from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry
 from .models import Message, Room
 from datetime import datetime as dt
 from django.contrib.auth.models import User
@@ -21,6 +21,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     http://channels.readthedocs.io/en/latest/topics/consumers.html
     """
 
+    online_registry = OnlineUserRegistry()
+
     # WebSocket event handlers
 
     async def connect(self):
@@ -34,6 +36,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         else:
             # Accept the connection
             await self.accept()
+
+            # register user as online
+            ChatConsumer.online_registry.make_online(self.scope['user'], self)
+            await self.send_online_update(True)
+
         # Store which rooms the user has joined on this connection
         self.rooms = set()
 
@@ -47,6 +54,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 await self.leave_room(room_id)
             except ClientError:
                 pass
+
+        # remove user from online list
+        ChatConsumer.online_registry.make_offline(self.scope['user'])
+        await self.send_online_update(False)
 
     async def receive_json(self, content):
         """
@@ -65,6 +76,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             elif command == "send":
                 await self.send_room(content["room"], content["message"], content["is_anonymous"])  # goes to chat and DB
                 # await self.send_room(content["room"], str(content["message"]+'===='))
+            elif command == "get-online-users":
+                await self.send_online_users()
+
         except ClientError as e:
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
@@ -185,6 +199,45 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         msg = Message(sender=u, text=message, room=r, anonymous=is_anonymous)  # time is added in a models.py
         await self.save_message(msg)
 
+    async def send_online_users(self):
+        """ Send list of private chats with online user in it. Sent on request. """
+        online_data = []
+        for online_user_id in ChatConsumer.online_registry.get_online():
+            if online_user_id == self.scope['user'].id:
+                continue
+
+            user = await self.get_user_by_id(online_user_id)
+            private_chat = await self.find_room_with(user, self.scope['user'])
+            online_data.append({
+                'user_id': user.id,
+                'room_id': private_chat.id,
+                'online': True,
+            })
+
+        await self.send_json({
+            'online_data': online_data
+        })
+
+    async def send_online_update(self, is_online):
+        updated_user = self.scope['user']
+        for room_with_user in await self.find_rooms_with(updated_user):
+
+            user_to_notify = await database_sync_to_async(
+                lambda x: room_with_user.get_other(x)
+            )(updated_user)
+
+            if not ChatConsumer.online_registry.is_online(user_to_notify):
+                continue
+
+            consumer = ChatConsumer.online_registry.get_consumer(user_to_notify)
+            await consumer.send_json({
+                'online_data': [{
+                    'user_id': updated_user.id,
+                    'room_id': room_with_user.id,
+                    'online': is_online
+                }]
+            })
+
     ###########################################################
     # Handlers for messages sent over the channel layer       #
     #                                                         #
@@ -233,6 +286,17 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     def get_room(self, room_id):
         r = Room.objects.get(id=room_id)
         return r
+
+    @database_sync_to_async
+    def find_room_with(self, *users):
+        """ Find private 1 to 1 room with given users """
+        return Room.find_with_users(*users)
+
+    @database_sync_to_async
+    def find_rooms_with(self, *users):
+        """ Find private 1 to 1 room with given users """
+        # convert to list to avoid lazy evaluation inside async context
+        return list(Room.find_all_with_users(*users))
 
     @database_sync_to_async
     def get_user_by_id(self, id):
