@@ -332,6 +332,8 @@ def obywatele_szczegoly(request, pk):
     -[x] New person increase population so also increase reputation requirements for existing citizens. Therefore every time new person is accepted - every other old member should have his reputation increased autmatically. And vice versa - if somebody is banned - everyone else should loose one point of reputation from banned person.
     '''
 
+    zliczaj_obywateli(request)  # run reputation counting because a lot can change in the meanwhile
+
     candidate_profile = get_object_or_404(Uzytkownik, pk=pk)
     candidate_user = User.objects.get(pk=pk)
     citizen_profile = Uzytkownik.objects.get(pk=request.user.id)

@@ -53,6 +53,45 @@ def dodaj(request):
     return render(request, 'glosowania/dodaj.html', {'form': form})
 
 
+@login_required
+def edit(request, pk):
+    decision = Decyzja.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = DecyzjaForm(request.POST)
+        if form.is_valid():
+            decision.autor = request.user
+            decision.title = form.cleaned_data['title']
+            decision.tresc = form.cleaned_data['tresc']
+            decision.kara = form.cleaned_data['kara']
+            decision.uzasadnienie = form.cleaned_data['uzasadnienie']
+            decision.args_for = form.cleaned_data['args_for']
+            decision.args_against = form.cleaned_data['args_against']
+            decision.znosi = form.cleaned_data['znosi']
+            decision.save()
+            message = _("Saved.")
+            messages.success(request, (message))
+
+            SendEmail(
+                str(_('Proposal')) + f' {str(decision.id)}' + str(_(' has been modified')),
+                f'{request.user.username.capitalize()} ' + str(_('modified proposal\nYou can read new version here:')) + f' http://{HOST}/glosowania/details/{str(decision.id)}'
+                )
+            return redirect('glosowania:status', 1)
+    else:  # request.method != 'POST':
+        form = DecyzjaForm(initial={
+            'autor': decision.autor,
+            'title': decision.title,
+            'tresc': decision.tresc,
+            'kara': decision.kara,
+            'uzasadnienie': decision.uzasadnienie,
+            'args_for': decision.args_for,
+            'args_against': decision.args_against,
+            'znosi': decision.znosi,
+        }
+        )
+    return render(request, 'glosowania/edit.html', {'form': form})
+
+
 # Wyświetl głosowania:
 @login_required
 def status(request, pk):
@@ -74,19 +113,34 @@ def status(request, pk):
 def generate_code():
     return''.join([random.SystemRandom().choice('abcdefghjkmnoprstuvwxyz23456789') for i in range(6)])
 
+
 # Pokaż szczegóły przepisu
 @login_required
 def details(request, pk):
+
+    zliczaj_wszystko()  # when link from email is used - this is only place Referendum status can be recounted.
+
     szczegoly = get_object_or_404(Decyzja, pk=pk)
 
-    if request.GET.get('podpisz'):
+    if request.GET.get('sign'):
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_podpisujaca = request.user
         podpis = ZebranePodpisy(projekt=nowy_projekt, podpis_uzytkownika=osoba_podpisujaca)
         nowy_projekt.ile_osob_podpisalo += 1
         podpis.save()
         nowy_projekt.save()
-        message = _('Your signature has been saved.')
+        message = _('You signed this motion for a referendum.')
+        messages.success(request, (message))
+        return redirect('glosowania:details', pk)
+
+    if request.GET.get('withdraw'):
+        nowy_projekt = Decyzja.objects.get(pk=pk)
+        osoba_podpisujaca = request.user
+        podpis = ZebranePodpisy.objects.get(projekt=nowy_projekt, podpis_uzytkownika=osoba_podpisujaca)
+        podpis.delete()
+        nowy_projekt.ile_osob_podpisalo -= 1
+        nowy_projekt.save()
+        message = _('Not signed.')
         messages.success(request, (message))
         return redirect('glosowania:details', pk)
 
@@ -158,7 +212,14 @@ def details(request, pk):
     # Report
     report = VoteCode.objects.filter(project_id=pk)
 
-    return render(request, 'glosowania/szczegoly.html', {'id': szczegoly, 'signed': signed, 'voted': voted, 'report': report})
+    state = {1: _('Proposal'), 2: _('No endorsement'), 3: _('Queued'), 4: _('Referendum'), 5: _('Rejected'), 6: _('Vacatio Legis'), 7: _('Governing Law'), }
+    
+    return render(request, 'glosowania/szczegoly.html', {'id': szczegoly,
+                                                         'signed': signed,
+                                                         'voted': voted,
+                                                         'report': report,
+                                                         'current_user': request.user,
+                                                         'state': state[szczegoly.status],})
 
 
 def zliczaj_wszystko():

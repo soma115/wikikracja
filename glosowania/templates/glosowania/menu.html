@@ -14,9 +14,9 @@
 	</li>
 	<li class="nav-item" >
 		<a {% if request.path_info == '/glosowania/nowy/' %}
-			class="btn mr-1 btn-sm btn-danger text-white font-weight-bold" 
+			class="btn mr-1 btn-sm btn-danger text-red font-weight-bold" 
 		{% else %}
-			class="btn mr-1 btn-sm btn-danger text-white font-weight-bold"
+			class="btn mr-1 btn-sm btn-outline-danger text-red font-weight-bold"
 		{% endif %}
 			href="{% url 'glosowania:dodaj_nowy' %}">+</a>
 	</li>

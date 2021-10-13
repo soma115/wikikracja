@@ -8,7 +8,8 @@ base_dir = os.path.abspath('.')
 
 
 class Decyzja(models.Model):
-    autor = models.CharField(max_length=200)
+    # autor = models.CharField(max_length=200)
+    autor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.TextField(
     max_length=200,
     null=True,
@@ -66,8 +67,8 @@ class Decyzja(models.Model):
     przeciw = models.SmallIntegerField(default=0, editable=False)
     status = models.SmallIntegerField(default=1, editable=False)
 
-    # 0.Propozycja, 1.Brak poparcia, 2.W kolejce, 3.Referendum, 4.Odrzucone,
-    # 5.Zatwierdzone/Vacatio Legis, 6.Obowiązuje
+    # 1.Propozycja, 2.Brak poparcia, 3.W kolejce, 4.Referendum, 5.Odrzucone,
+    # 6.Zatwierdzone/Vacatio Legis, 7.Obowiązuje
 
     def __str__(self):
         return '%s: %s on %s' % (self.pk, self.tresc, self.status)
