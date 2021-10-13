@@ -218,12 +218,16 @@ def details(request, pk):
 
     state = {1: _('Proposal'), 2: _('Rejected'), 3: _('Queued'), 4: _('Referendum'), 5: _('Rejected'), 6: _('Vacatio Legis'), 7: _('Governing Law'), }
     
+    corrected_data_referendum_stop = szczegoly.data_referendum_stop - timedelta(days=1)
+
     return render(request, 'glosowania/szczegoly.html', {'id': szczegoly,
                                                          'signed': signed,
                                                          'voted': voted,
                                                          'report': report,
                                                          'current_user': request.user,
-                                                         'state': state[szczegoly.status],})
+                                                         'state': state[szczegoly.status],
+                                                         'corrected_data_referendum_stop': corrected_data_referendum_stop,
+                                                         })
 
 
 def zliczaj_wszystko():

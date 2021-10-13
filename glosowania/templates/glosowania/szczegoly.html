@@ -23,7 +23,7 @@
 				{% if id.data_powstania %} {% trans 'Date created' %}: {{ id.data_powstania }} {% endif %}
 				{% if id.data_zebrania_podpisow %} | {% trans 'Date of collecting signatures' %}: {{ id.data_zebrania_podpisow }} {% endif %}
 				{% if id.data_referendum_start %} | {% trans 'Start referendum' %}: {{ id.data_referendum_start }} {% endif %}
-				{% if id.data_referendum_stop %} | {% trans 'End referendum' %}: {{ id.data_referendum_stop }} (wyłącznie) {% endif %}
+				{% if id.data_referendum_stop %} | {% trans 'End referendum' %}: {{ corrected_data_referendum_stop }} {% endif %}
 				{% if id.data_obowiazuje_od %} <br> <b>{% trans 'The rule applies from' %}: {{ id.data_obowiazuje_od }}</b> {% endif %}
 				</small>
 				{% comment %} Status: {{ id.status }} {% endcomment %}
