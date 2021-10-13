@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 17:58+0200\n"
+"POT-Creation-Date: 2021-10-13 19:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -507,91 +507,91 @@ msgstr ""
 msgid "Your vote has been saved. You voted No."
 msgstr ""
 
-#: glosowania/views.py:259 glosowania/views.py:260 glosowania/views.py:275
-#: glosowania/views.py:276 glosowania/views.py:308 glosowania/views.py:309
-#: glosowania/views.py:321 glosowania/views.py:322 glosowania/views.py:341
-#: glosowania/views.py:342
+#: glosowania/views.py:263 glosowania/views.py:264 glosowania/views.py:279
+#: glosowania/views.py:280 glosowania/views.py:312 glosowania/views.py:313
+#: glosowania/views.py:325 glosowania/views.py:326 glosowania/views.py:345
+#: glosowania/views.py:346
 msgid "Proposal no."
 msgstr ""
 
-#: glosowania/views.py:259
+#: glosowania/views.py:263
 msgid "is approved for referendum"
 msgstr ""
 
-#: glosowania/views.py:261
+#: glosowania/views.py:265
 msgid "gathered required amount of signatures and will be voted from"
 msgstr ""
 
-#: glosowania/views.py:262
+#: glosowania/views.py:266
 msgid "to"
 msgstr ""
 
-#: glosowania/views.py:263 glosowania/views.py:279 glosowania/views.py:312
-#: glosowania/views.py:325
+#: glosowania/views.py:267 glosowania/views.py:283 glosowania/views.py:316
+#: glosowania/views.py:329
 msgid "Click here to read proposal: http://"
 msgstr ""
 
-#: glosowania/views.py:275 glosowania/views.py:277
+#: glosowania/views.py:279 glosowania/views.py:281
 msgid "didn't gathered required amount of signatures"
 msgstr ""
 
-#: glosowania/views.py:277
+#: glosowania/views.py:281
 msgid "and was removed from queue."
 msgstr ""
 
-#: glosowania/views.py:278 glosowania/views.py:324
+#: glosowania/views.py:282 glosowania/views.py:328
 msgid "Feel free to improve it and send it again."
 msgstr ""
 
-#: glosowania/views.py:290
+#: glosowania/views.py:294
 msgid "Referendum on proposal no."
 msgstr ""
 
-#: glosowania/views.py:290
+#: glosowania/views.py:294
 msgid "is starting now"
 msgstr ""
 
-#: glosowania/views.py:291
+#: glosowania/views.py:295
 msgid "It is time to vote on proposal no."
 msgstr ""
 
-#: glosowania/views.py:292
+#: glosowania/views.py:296
 msgid "Referendum ends at"
 msgstr ""
 
-#: glosowania/views.py:294
+#: glosowania/views.py:298
 msgid "Click here to vote: http://"
 msgstr ""
 
-#: glosowania/views.py:308
+#: glosowania/views.py:312
 msgid "was approved"
 msgstr ""
 
-#: glosowania/views.py:310
+#: glosowania/views.py:314
 msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
 
-#: glosowania/views.py:311
+#: glosowania/views.py:315
 msgid "The law will take effect on"
 msgstr ""
 
-#: glosowania/views.py:321
+#: glosowania/views.py:325
 msgid "was rejected"
 msgstr ""
 
-#: glosowania/views.py:323
+#: glosowania/views.py:327
 msgid "was rejected in referendum."
 msgstr ""
 
-#: glosowania/views.py:341
+#: glosowania/views.py:345
 msgid "is in efect from today"
 msgstr ""
 
-#: glosowania/views.py:342
+#: glosowania/views.py:346
 msgid "became abiding law today"
 msgstr ""
 
-#: glosowania/views.py:343
+#: glosowania/views.py:347
 msgid "Click here to read it: http://"
 msgstr ""
 
@@ -663,8 +663,8 @@ msgid "logout"
 msgstr ""
 
 #: home/templates/home/haslo.html:7
-#: home/templates/home/password_reset_confirm.html:7
-#: home/templates/home/password_reset_confirm.html:11
+#: home/templates/home/password_reset_confirm.html:9
+#: home/templates/home/password_reset_confirm.html:24
 #: obywatele/templates/obywatele/my_profile.html:12
 msgid "Change password"
 msgstr ""
@@ -717,16 +717,16 @@ msgid "A new password has been set. You can log in"
 msgstr ""
 
 #: home/templates/home/password_reset_complete.html:7
-#: home/templates/home/password_reset_confirm.html:17
+#: home/templates/home/password_reset_confirm.html:30
 msgid "here"
 msgstr ""
 
-#: home/templates/home/password_reset_confirm.html:16
+#: home/templates/home/password_reset_confirm.html:29
 msgid ""
 "The link you used is invalid, possibly because it has already been used."
 msgstr ""
 
-#: home/templates/home/password_reset_confirm.html:17
+#: home/templates/home/password_reset_confirm.html:30
 msgid "You must restart the password change process"
 msgstr ""
 
