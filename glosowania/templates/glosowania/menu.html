@@ -26,7 +26,7 @@
 		{% else %}
 			class="btn mr-1 btn-sm btn-outline-primary"
 		{% endif %}
-			href="{% url 'glosowania:status' pk=2 %}">{% trans "No endorsement" %}</a>
+			href="{% url 'glosowania:status' pk=2 %}">{% trans "Rejected" %}</a>
 	</li>
 	<li class="nav-item" >
 		<a {% if request.path_info == '/glosowania/status/3/' %}

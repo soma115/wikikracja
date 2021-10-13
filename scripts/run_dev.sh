@@ -25,6 +25,7 @@ pip install -q -r requirements.txt
 # run if needed:
 ./manage.py collectstatic --no-input -c -v 0
 
-./scripts/post_install_dev.sh
+# Overwrites votings and customize:
+# ./scripts/post_install_dev.sh
 
 ./manage.py runserver

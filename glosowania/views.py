@@ -19,6 +19,8 @@ import logging as l
 from django.utils import translation
 import threading
 import random
+import re
+
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
@@ -48,6 +50,8 @@ def dodaj(request):
                 f'{request.user.username.capitalize()} ' + str(_('added new law proposal\nYou can read it here:')) + f' http://{HOST}/glosowania/details/{str(form.id)}'
                 )
             return redirect('glosowania:status', 1)
+        else:
+            return render(request, 'glosowania/dodaj.html', {'form': form})
     else:
         form = DecyzjaForm()
     return render(request, 'glosowania/dodaj.html', {'form': form})
@@ -212,7 +216,7 @@ def details(request, pk):
     # Report
     report = VoteCode.objects.filter(project_id=pk)
 
-    state = {1: _('Proposal'), 2: _('No endorsement'), 3: _('Queued'), 4: _('Referendum'), 5: _('Rejected'), 6: _('Vacatio Legis'), 7: _('Governing Law'), }
+    state = {1: _('Proposal'), 2: _('Rejected'), 3: _('Queued'), 4: _('Referendum'), 5: _('Rejected'), 6: _('Vacatio Legis'), 7: _('Governing Law'), }
     
     return render(request, 'glosowania/szczegoly.html', {'id': szczegoly,
                                                          'signed': signed,
@@ -252,10 +256,10 @@ def zliczaj_wszystko():
                 i.data_referendum_stop = i.data_referendum_start + timedelta(days=s.CZAS_TRWANIA_REFERENDUM)
                 i.save()
                 SendEmail(
-                    str(_("Proposal no. ")) + str(i.id) + str(_(" is approved for referendum")),
-                    str(_("Proposal no. ")) + str(i.id) +
-                    str(_(" gathered required amount of signatures and will be voted from ")) +
-                    str(i.data_referendum_start) + str(_(' to ')) + str(i.data_referendum_stop) +
+                    str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("is approved for referendum")),
+                    str(_("Proposal no.")) + " " + str(i.id) + " " +
+                    str(_("gathered required amount of signatures and will be voted from")) + " " +
+                    str(i.data_referendum_start) + " " + str(_('to')) + " " + str(i.data_referendum_stop) +
                     '\n' + str(_("Click here to read proposal: http://")) +
                     f"{HOST}/glosowania/details/{str(i.id)}"
                 )
@@ -268,9 +272,9 @@ def zliczaj_wszystko():
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
                 SendEmail(
                     # _(f"Proposal {str(i.id)} didn't gathered required amount of signatures"),  # translation doesn't work this way
-                    str(_("Proposal no. ")) + str(i.id) + str(_(" didn't gathered required amount of signatures")),
-                    str(_("Proposal no. ")) + str(i.id) +
-                    str(_(" didn't gathered required amount of signatures")) + str(_(" and was removed from queue. ")) +
+                    str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("didn't gathered required amount of signatures")),
+                    str(_("Proposal no.")) + " " + str(i.id) + " " +
+                    str(_("didn't gathered required amount of signatures")) + " " + str(_("and was removed from queue.")) + " " +
                     str(_("Feel free to improve it and send it again.")) +
                     '\n' + str(_("Click here to read proposal: http://")) +
                     f"{HOST}/glosowania/details/{str(i.id)}"
@@ -283,9 +287,9 @@ def zliczaj_wszystko():
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
                 SendEmail(
-                    str(_("Referendum on proposal no. ")) + str(i.id) + str(_(" is starting now")),
-                    str(_("It is time to vote on proposal no. ")) + str(i.id) + '\n' +
-                    str(_("Referendum ends at ")) + 
+                    str(_("Referendum on proposal no.")) + " " + str(i.id) + " " + str(_("is starting now")),
+                    str(_("It is time to vote on proposal no.")) + " " + str(i.id) + '\n' +
+                    str(_("Referendum ends at")) + " " +
                     str(i.data_referendum_stop) + '\n' +
                     str(_("Click here to vote: http://")) + 
                     f"{HOST}/glosowania/details/{str(i.id)}"
@@ -301,8 +305,8 @@ def zliczaj_wszystko():
                     i.save()
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
                     SendEmail(
-                    str(_("Proposal no. ")) + str(i.id) + str(_("was approved")),
-                    str(_("Proposal no. ")) + str(i.id) + 
+                    str(_("Proposal no.")) + " " + str(i.id) + str(_("was approved")),
+                    str(_("Proposal no.")) + " " + str(i.id) + " " +
                     str(_("was approved in referendum and is now in Vacatio Legis period")) + '.\n' +
                     str(_("The law will take effect on")) + 
                     str(i.data_obowiazuje_od) + '\n' + str(_("Click here to read proposal: http://")) + 
@@ -314,9 +318,9 @@ def zliczaj_wszystko():
                     i.save()
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
                     SendEmail(
-                    str(_("Proposal no. ")) + str(i.id) + str(_("was rejected")),
-                    str(_("Proposal no. ")) + str(i.id) +
-                    str(_(" was rejected in referendum.")) + '\n' + 
+                    str(_("Proposal no.")) + " " + str(i.id) + str(_("was rejected")),
+                    str(_("Proposal no.")) + " " + str(i.id) + " " +
+                    str(_("was rejected in referendum.")) + '\n' + 
                     str(_("Feel free to improve it and send it again.")) +
                     '\n' + str(_("Click here to read proposal: http://")) + 
                     f"{HOST}/glosowania/details/{str(i.id)}"
@@ -326,11 +330,16 @@ def zliczaj_wszystko():
             # FROM VACATIO_LEGIS TO LAW
             if i.status == zatwierdzone and i.data_obowiazuje_od <= dzisiaj:
                 i.status = obowiazuje
+                separated = re.split('\W+', i.znosi.strip(' ').strip(',').strip(' ').strip(',').strip(' ').strip(',').strip(' ').strip(','))
+                for z in separated:
+                    abolish = Decyzja.objects.get(pk=str(z))
+                    abolish.status = 2
+                    abolish.save()
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
                 SendEmail(
-                str(_("Proposal no. ")) + str(i.id) + str(_(" is in efect from today")),
-                str(_("Proposal no. ")) + str(i.id) + str(_(" became abiding law today")) + '.\n' + 
+                str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("is in efect from today")),
+                str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("became abiding law today")) + '.\n' + 
                 str(_("Click here to read it: http://")) + 
                 f"{HOST}/glosowania/details/{str(i.id)}"
                 )

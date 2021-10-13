@@ -3,9 +3,20 @@ from django.db import models
 import datetime
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_comma_separated_integer_list
+import re
 
 base_dir = os.path.abspath('.')
 
+def does_it_exist(value):
+    x = re.split('\W+', value.strip(' ').strip(',').strip(' ').strip(',').strip(' ').strip(',').strip(' ').strip(','))
+    for i in x:
+        try:
+            existing = Decyzja.objects.get(pk=int(i))  # all existing for now
+        except Exception as e:
+            raise ValidationError(_("Enter only existing bill numbers here"))
+    return True
 
 class Decyzja(models.Model):
     # autor = models.CharField(max_length=200)
@@ -47,13 +58,16 @@ class Decyzja(models.Model):
         verbose_name=_('Negative Aspects of the Idea'),
         help_text=_('Enter the potential threat associated with the proposal.')
         )
+    
     znosi = models.CharField(
-        max_length=500,
+        max_length=50,
         null=True,
         blank=True,
         verbose_name=_('Abolishes the rules'),
-        help_text=_('If the proposed law supersedes other recipes, enter their numbers here.')
+        help_text=_('If the proposed law supersedes other bills, enter their numbers here.'),
+        validators=[validate_comma_separated_integer_list, does_it_exist],
         )
+
     ile_osob_podpisalo = models.SmallIntegerField(editable=False, default=0)
     data_powstania = models.DateField(auto_now_add=True,
                                       editable=False,
