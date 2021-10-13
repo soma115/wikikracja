@@ -1,5 +1,16 @@
 {% extends 'obywatele/menu.html' %} {% load static %} {% load i18n %} {% block citizens %}
 
+    <!--prev & next for citizens and candidates separatelly -->
+    <p>
+    {% if active %}
+        {% if prev %} <a href="{% url 'obywatele:obywatele_szczegoly' pk=prev.id %}"><< {% trans 'prev' %}</a> {% else %} << {% trans 'prev' %} {% endif %}
+        {% if next %} <a href="{% url 'obywatele:obywatele_szczegoly' pk=next.id %}">{% trans 'next' %} >></a> {% else %} {% trans 'next' %} >> {% endif %}
+    {% else %}
+        {% if prev %} <a href="{% url 'obywatele:poczekalnia_szczegoly' pk=prev.id %}"><< {% trans 'prev' %}</a> {% else %} << {% trans 'prev' %} {% endif %}
+        {% if next %} <a href="{% url 'obywatele:poczekalnia_szczegoly' pk=next.id %}">{% trans 'next' %} >></a> {% else %} {% trans 'next' %} >> {% endif %}
+    {% endif %}
+    </p>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6 p-3">

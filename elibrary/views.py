@@ -12,6 +12,7 @@ from PIL import Image
 import os
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404
 
 
 @login_required
@@ -60,17 +61,25 @@ class BookDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['book_list'] = Book.objects.all()
+
+        # Previous and Next
+        obj = get_object_or_404(Book, pk=self.kwargs['pk'])
+        # kandydaci czy obywatele? Na razie wszyscy
+        prev = Book.objects.filter(pk__lt=obj.pk).order_by('-pk').first()
+        next = Book.objects.filter(pk__gt=obj.pk).order_by('pk').first()
+
+        context['prev'] = prev
+        context['next'] = next
+
         return context
 
     # success_url = reverse_lazy('elibrary:elibrary')
-    
     queryset = Book.objects.all()
 
     def get_object(self):
         obj = super().get_object()
         # Record the last accessed date
         return obj
-
 
 
 class BookUpdateView(LoginRequiredMixin, UpdateView):

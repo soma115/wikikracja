@@ -216,10 +216,19 @@ def details(request, pk):
     # Report
     report = VoteCode.objects.filter(project_id=pk)
 
+    # State dictionary
     state = {1: _('Proposal'), 2: _('Rejected'), 3: _('Queued'), 4: _('Referendum'), 5: _('Rejected'), 6: _('Vacatio Legis'), 7: _('Governing Law'), }
-    
-    corrected_data_referendum_stop = szczegoly.data_referendum_stop - timedelta(days=1)
 
+    # Corrected data_referendum_stop
+    corrected_data_referendum_stop = None
+    if szczegoly.data_referendum_stop:
+        corrected_data_referendum_stop = szczegoly.data_referendum_stop - timedelta(days=1)
+
+    # Previous and Next
+    obj = get_object_or_404(Decyzja, pk=pk)
+    prev = Decyzja.objects.filter(pk__lt=obj.pk, status = szczegoly.status).order_by('-pk').first()
+    next = Decyzja.objects.filter(pk__gt=obj.pk, status = szczegoly.status).order_by('pk').first()
+    
     return render(request, 'glosowania/szczegoly.html', {'id': szczegoly,
                                                          'signed': signed,
                                                          'voted': voted,
@@ -227,6 +236,8 @@ def details(request, pk):
                                                          'current_user': request.user,
                                                          'state': state[szczegoly.status],
                                                          'corrected_data_referendum_stop': corrected_data_referendum_stop,
+                                                         'prev': prev,
+                                                         'next': next,
                                                          })
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 19:15+0200\n"
+"POT-Creation-Date: 2021-10-14 00:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,7 @@ msgid "Title"
 msgstr ""
 
 #: article/models.py:14 elibrary/forms.py:7 elibrary/models.py:13
-#: glosowania/templates/glosowania/szczegoly.html:19
+#: glosowania/templates/glosowania/szczegoly.html:31
 msgid "Author"
 msgstr ""
 
@@ -84,7 +84,7 @@ msgstr ""
 #: glosowania/templates/glosowania/dodaj.html:35
 #: glosowania/templates/glosowania/edit.html:34
 #: obywatele/templates/obywatele/dodaj.html:70
-#: obywatele/templates/obywatele/szczegoly.html:99
+#: obywatele/templates/obywatele/szczegoly.html:110
 msgid "Back"
 msgstr ""
 
@@ -160,12 +160,28 @@ msgstr ""
 msgid "Upload Book"
 msgstr ""
 
-#: elibrary/templates/elibrary/book_detail.html:30
+#: elibrary/templates/elibrary/book_detail.html:9
+#: glosowania/templates/glosowania/szczegoly.html:9
+#: glosowania/templates/glosowania/szczegoly.html:10
+#: obywatele/templates/obywatele/szczegoly.html:6
+#: obywatele/templates/obywatele/szczegoly.html:9
+msgid "prev"
+msgstr ""
+
+#: elibrary/templates/elibrary/book_detail.html:10
+#: glosowania/templates/glosowania/szczegoly.html:13
+#: glosowania/templates/glosowania/szczegoly.html:14
+#: obywatele/templates/obywatele/szczegoly.html:7
+#: obywatele/templates/obywatele/szczegoly.html:10
+msgid "next"
+msgstr ""
+
+#: elibrary/templates/elibrary/book_detail.html:37
 msgid "Delete"
 msgstr ""
 
-#: elibrary/templates/elibrary/book_detail.html:32
-#: glosowania/templates/glosowania/szczegoly.html:64
+#: elibrary/templates/elibrary/book_detail.html:39
+#: glosowania/templates/glosowania/szczegoly.html:76
 msgid "Edit"
 msgstr ""
 
@@ -250,23 +266,23 @@ msgid "Proposals"
 msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:29
-#: glosowania/templates/glosowania/menu.html:53 glosowania/views.py:219
+#: glosowania/templates/glosowania/menu.html:53 glosowania/views.py:220
 msgid "Rejected"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:37 glosowania/views.py:219
+#: glosowania/templates/glosowania/menu.html:37 glosowania/views.py:220
 msgid "Queued"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:45 glosowania/views.py:219
+#: glosowania/templates/glosowania/menu.html:45 glosowania/views.py:220
 msgid "Referendum"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:61 glosowania/views.py:219
+#: glosowania/templates/glosowania/menu.html:61 glosowania/views.py:220
 msgid "Vacatio Legis"
 msgstr ""
 
-#: glosowania/templates/glosowania/menu.html:69 glosowania/views.py:219
+#: glosowania/templates/glosowania/menu.html:69 glosowania/views.py:220
 msgid "Governing Law"
 msgstr ""
 
@@ -342,109 +358,109 @@ msgid ""
 "parameters - create referendum and show its result to your administrator."
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:9
+#: glosowania/templates/glosowania/szczegoly.html:21
 msgid "Bill number"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:10
+#: glosowania/templates/glosowania/szczegoly.html:22
 msgid "Bill title"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:11
+#: glosowania/templates/glosowania/szczegoly.html:23
 msgid "Bill state"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:12
+#: glosowania/templates/glosowania/szczegoly.html:24
 msgid "Bill text"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:13
+#: glosowania/templates/glosowania/szczegoly.html:25
 msgid "Penalty for non-compliance"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:14
+#: glosowania/templates/glosowania/szczegoly.html:26
 msgid "Reason"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:15
+#: glosowania/templates/glosowania/szczegoly.html:27
 msgid "Positives"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:16
+#: glosowania/templates/glosowania/szczegoly.html:28
 msgid "Negatives"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:17
+#: glosowania/templates/glosowania/szczegoly.html:29
 msgid "This law supersedes the following bills"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:19
+#: glosowania/templates/glosowania/szczegoly.html:31
 msgid "Number of people signed the motion for a referendum"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:20
+#: glosowania/templates/glosowania/szczegoly.html:32
 msgid "For"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:20
+#: glosowania/templates/glosowania/szczegoly.html:32
 msgid "Against"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:23
+#: glosowania/templates/glosowania/szczegoly.html:35
 msgid "Date created"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:24
+#: glosowania/templates/glosowania/szczegoly.html:36
 msgid "Date of collecting signatures"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:25
+#: glosowania/templates/glosowania/szczegoly.html:37
 msgid "Start referendum"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:26
+#: glosowania/templates/glosowania/szczegoly.html:38
 msgid "End referendum"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:27
+#: glosowania/templates/glosowania/szczegoly.html:39
 msgid "The rule applies from"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:35
+#: glosowania/templates/glosowania/szczegoly.html:47
 msgid "Protocol"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:41
-#: glosowania/templates/glosowania/szczegoly.html:72
+#: glosowania/templates/glosowania/szczegoly.html:53
+#: glosowania/templates/glosowania/szczegoly.html:84
 msgid "Yes"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:43
-#: glosowania/templates/glosowania/szczegoly.html:73
+#: glosowania/templates/glosowania/szczegoly.html:55
+#: glosowania/templates/glosowania/szczegoly.html:85
 msgid "No"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:53
+#: glosowania/templates/glosowania/szczegoly.html:65
 msgid "Do you want a referendum on this law?"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:54
+#: glosowania/templates/glosowania/szczegoly.html:66
 msgid "Yes, I sign"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:57
+#: glosowania/templates/glosowania/szczegoly.html:69
 msgid "You already signed this proposal."
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:59
+#: glosowania/templates/glosowania/szczegoly.html:71
 msgid "Withdraw your sign"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:71
+#: glosowania/templates/glosowania/szczegoly.html:83
 msgid "Do you want to implement this law?"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:76
+#: glosowania/templates/glosowania/szczegoly.html:88
 msgid "You already voted."
 msgstr ""
 
@@ -466,7 +482,7 @@ msgstr ""
 msgid "Saved."
 msgstr ""
 
-#: glosowania/views.py:80 glosowania/views.py:219
+#: glosowania/views.py:80 glosowania/views.py:220
 msgid "Proposal"
 msgstr ""
 
@@ -507,91 +523,91 @@ msgstr ""
 msgid "Your vote has been saved. You voted No."
 msgstr ""
 
-#: glosowania/views.py:263 glosowania/views.py:264 glosowania/views.py:279
-#: glosowania/views.py:280 glosowania/views.py:312 glosowania/views.py:313
-#: glosowania/views.py:325 glosowania/views.py:326 glosowania/views.py:345
-#: glosowania/views.py:346
+#: glosowania/views.py:274 glosowania/views.py:275 glosowania/views.py:290
+#: glosowania/views.py:291 glosowania/views.py:323 glosowania/views.py:324
+#: glosowania/views.py:336 glosowania/views.py:337 glosowania/views.py:356
+#: glosowania/views.py:357
 msgid "Proposal no."
 msgstr ""
 
-#: glosowania/views.py:263
+#: glosowania/views.py:274
 msgid "is approved for referendum"
 msgstr ""
 
-#: glosowania/views.py:265
+#: glosowania/views.py:276
 msgid "gathered required amount of signatures and will be voted from"
 msgstr ""
 
-#: glosowania/views.py:266
+#: glosowania/views.py:277
 msgid "to"
 msgstr ""
 
-#: glosowania/views.py:267 glosowania/views.py:283 glosowania/views.py:316
-#: glosowania/views.py:329
+#: glosowania/views.py:278 glosowania/views.py:294 glosowania/views.py:327
+#: glosowania/views.py:340
 msgid "Click here to read proposal: http://"
 msgstr ""
 
-#: glosowania/views.py:279 glosowania/views.py:281
+#: glosowania/views.py:290 glosowania/views.py:292
 msgid "didn't gathered required amount of signatures"
 msgstr ""
 
-#: glosowania/views.py:281
+#: glosowania/views.py:292
 msgid "and was removed from queue."
 msgstr ""
 
-#: glosowania/views.py:282 glosowania/views.py:328
+#: glosowania/views.py:293 glosowania/views.py:339
 msgid "Feel free to improve it and send it again."
 msgstr ""
 
-#: glosowania/views.py:294
+#: glosowania/views.py:305
 msgid "Referendum on proposal no."
 msgstr ""
 
-#: glosowania/views.py:294
+#: glosowania/views.py:305
 msgid "is starting now"
 msgstr ""
 
-#: glosowania/views.py:295
+#: glosowania/views.py:306
 msgid "It is time to vote on proposal no."
 msgstr ""
 
-#: glosowania/views.py:296
+#: glosowania/views.py:307
 msgid "Referendum ends at"
 msgstr ""
 
-#: glosowania/views.py:298
+#: glosowania/views.py:309
 msgid "Click here to vote: http://"
 msgstr ""
 
-#: glosowania/views.py:312
+#: glosowania/views.py:323
 msgid "was approved"
 msgstr ""
 
-#: glosowania/views.py:314
+#: glosowania/views.py:325
 msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
 
-#: glosowania/views.py:315
+#: glosowania/views.py:326
 msgid "The law will take effect on"
 msgstr ""
 
-#: glosowania/views.py:325
+#: glosowania/views.py:336
 msgid "was rejected"
 msgstr ""
 
-#: glosowania/views.py:327
+#: glosowania/views.py:338
 msgid "was rejected in referendum."
 msgstr ""
 
-#: glosowania/views.py:345
+#: glosowania/views.py:356
 msgid "is in efect from today"
 msgstr ""
 
-#: glosowania/views.py:346
+#: glosowania/views.py:357
 msgid "became abiding law today"
 msgstr ""
 
-#: glosowania/views.py:347
+#: glosowania/views.py:358
 msgid "Click here to read it: http://"
 msgstr ""
 
@@ -663,8 +679,8 @@ msgid "logout"
 msgstr ""
 
 #: home/templates/home/haslo.html:7
-#: home/templates/home/password_reset_confirm.html:9
-#: home/templates/home/password_reset_confirm.html:24
+#: home/templates/home/password_reset_confirm.html:7
+#: home/templates/home/password_reset_confirm.html:20
 #: obywatele/templates/obywatele/my_profile.html:12
 msgid "Change password"
 msgstr ""
@@ -717,16 +733,16 @@ msgid "A new password has been set. You can log in"
 msgstr ""
 
 #: home/templates/home/password_reset_complete.html:7
-#: home/templates/home/password_reset_confirm.html:30
+#: home/templates/home/password_reset_confirm.html:25
 msgid "here"
 msgstr ""
 
-#: home/templates/home/password_reset_confirm.html:29
+#: home/templates/home/password_reset_confirm.html:24
 msgid ""
 "The link you used is invalid, possibly because it has already been used."
 msgstr ""
 
-#: home/templates/home/password_reset_confirm.html:30
+#: home/templates/home/password_reset_confirm.html:25
 msgid "You must restart the password change process"
 msgstr ""
 
@@ -796,7 +812,7 @@ msgstr ""
 
 #: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
 #: obywatele/templates/obywatele/my_profile.html:36
-#: obywatele/templates/obywatele/szczegoly.html:44
+#: obywatele/templates/obywatele/szczegoly.html:55
 msgid "City"
 msgstr ""
 
@@ -806,7 +822,7 @@ msgstr ""
 
 #: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:12
 #: obywatele/templates/obywatele/my_profile.html:44
-#: obywatele/templates/obywatele/szczegoly.html:36
+#: obywatele/templates/obywatele/szczegoly.html:47
 msgid "Responsibilities"
 msgstr ""
 
@@ -816,7 +832,7 @@ msgstr ""
 
 #: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:14
 #: obywatele/templates/obywatele/my_profile.html:52
-#: obywatele/templates/obywatele/szczegoly.html:48
+#: obywatele/templates/obywatele/szczegoly.html:59
 msgid "Hobby"
 msgstr ""
 
@@ -826,7 +842,7 @@ msgstr ""
 
 #: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:15
 #: obywatele/templates/obywatele/my_profile.html:60
-#: obywatele/templates/obywatele/szczegoly.html:52
+#: obywatele/templates/obywatele/szczegoly.html:63
 msgid "To give away"
 msgstr ""
 
@@ -836,7 +852,7 @@ msgstr ""
 
 #: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:16
 #: obywatele/templates/obywatele/my_profile.html:64
-#: obywatele/templates/obywatele/szczegoly.html:56
+#: obywatele/templates/obywatele/szczegoly.html:67
 msgid "To borrow"
 msgstr ""
 
@@ -846,7 +862,7 @@ msgstr ""
 
 #: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:17
 #: obywatele/templates/obywatele/my_profile.html:68
-#: obywatele/templates/obywatele/szczegoly.html:60
+#: obywatele/templates/obywatele/szczegoly.html:71
 msgid "For sale"
 msgstr ""
 
@@ -856,7 +872,7 @@ msgstr ""
 
 #: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:18
 #: obywatele/templates/obywatele/my_profile.html:72
-#: obywatele/templates/obywatele/szczegoly.html:64
+#: obywatele/templates/obywatele/szczegoly.html:75
 msgid "I need"
 msgstr ""
 
@@ -866,7 +882,7 @@ msgstr ""
 
 #: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:19
 #: obywatele/templates/obywatele/my_profile.html:80
-#: obywatele/templates/obywatele/szczegoly.html:68
+#: obywatele/templates/obywatele/szczegoly.html:79
 msgid "Skills"
 msgstr ""
 
@@ -876,7 +892,7 @@ msgstr ""
 
 #: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:20
 #: obywatele/templates/obywatele/my_profile.html:84
-#: obywatele/templates/obywatele/szczegoly.html:72
+#: obywatele/templates/obywatele/szczegoly.html:83
 msgid "Knowledge"
 msgstr ""
 
@@ -886,7 +902,7 @@ msgstr ""
 
 #: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:21
 #: obywatele/templates/obywatele/my_profile.html:76
-#: obywatele/templates/obywatele/szczegoly.html:76
+#: obywatele/templates/obywatele/szczegoly.html:87
 msgid "I want to learn"
 msgstr ""
 
@@ -896,7 +912,7 @@ msgstr ""
 
 #: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:22
 #: obywatele/templates/obywatele/my_profile.html:56
-#: obywatele/templates/obywatele/szczegoly.html:80
+#: obywatele/templates/obywatele/szczegoly.html:91
 msgid "Business"
 msgstr ""
 
@@ -906,7 +922,7 @@ msgstr ""
 
 #: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:23
 #: obywatele/templates/obywatele/my_profile.html:48
-#: obywatele/templates/obywatele/szczegoly.html:84
+#: obywatele/templates/obywatele/szczegoly.html:95
 msgid "Job"
 msgstr ""
 
@@ -916,7 +932,7 @@ msgstr ""
 
 #: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:24
 #: obywatele/templates/obywatele/my_profile.html:88
-#: obywatele/templates/obywatele/szczegoly.html:88
+#: obywatele/templates/obywatele/szczegoly.html:99
 msgid "Gift"
 msgstr ""
 
@@ -926,7 +942,7 @@ msgstr ""
 
 #: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:25
 #: obywatele/templates/obywatele/my_profile.html:92
-#: obywatele/templates/obywatele/szczegoly.html:92
+#: obywatele/templates/obywatele/szczegoly.html:103
 msgid "Other"
 msgstr ""
 
@@ -940,7 +956,7 @@ msgstr ""
 
 #: obywatele/templates/obywatele/assets.html:11
 #: obywatele/templates/obywatele/my_profile.html:40
-#: obywatele/templates/obywatele/szczegoly.html:40
+#: obywatele/templates/obywatele/szczegoly.html:51
 msgid "Phone"
 msgstr ""
 
@@ -1089,35 +1105,35 @@ msgstr ""
 msgid "System parameters"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:7
+#: obywatele/templates/obywatele/szczegoly.html:18
 msgid "Introduced by"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:7
+#: obywatele/templates/obywatele/szczegoly.html:18
 msgid "Joined"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:11
+#: obywatele/templates/obywatele/szczegoly.html:22
 msgid "This is you"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:12
+#: obywatele/templates/obywatele/szczegoly.html:23
 msgid "You can find more setting in your profile"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:17
+#: obywatele/templates/obywatele/szczegoly.html:28
 msgid "Your relationship to this person is"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:19
+#: obywatele/templates/obywatele/szczegoly.html:30
 msgid "I accept this person"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:20
+#: obywatele/templates/obywatele/szczegoly.html:31
 msgid "Indifferent"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:21
+#: obywatele/templates/obywatele/szczegoly.html:32
 msgid " I do not accept this person "
 msgstr ""
 
@@ -1167,27 +1183,27 @@ msgstr ""
 msgid "neutral"
 msgstr ""
 
-#: obywatele/views.py:444
+#: obywatele/views.py:453
 msgid "Your account has been blocked"
 msgstr ""
 
-#: obywatele/views.py:445
+#: obywatele/views.py:454
 msgid "Welcome"
 msgstr ""
 
-#: obywatele/views.py:445
+#: obywatele/views.py:454
 msgid "Your account on page"
 msgstr ""
 
-#: obywatele/views.py:445 obywatele/views.py:454
+#: obywatele/views.py:454 obywatele/views.py:463
 msgid "has been blocked."
 msgstr ""
 
-#: obywatele/views.py:453
+#: obywatele/views.py:462
 msgid "Citizen has been banned"
 msgstr ""
 
-#: obywatele/views.py:454
+#: obywatele/views.py:463
 msgid "Account"
 msgstr ""
 

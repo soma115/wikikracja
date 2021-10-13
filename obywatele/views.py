@@ -363,6 +363,12 @@ def obywatele_szczegoly(request, pk):
         rate.save()
         return redirect('obywatele:obywatele_szczegoly', pk)
 
+    # Previous and Next
+    obj = get_object_or_404(User, pk=pk)
+    # kandydaci czy obywatele? Na razie wszyscy
+    prev = User.objects.filter(pk__lt=obj.pk, is_active=obj.is_active).order_by('-pk').first()
+    next = User.objects.filter(pk__gt=obj.pk, is_active=obj.is_active).order_by('pk').first()
+  
     return render(
         request,
         'obywatele/szczegoly.html',
@@ -372,7 +378,10 @@ def obywatele_szczegoly(request, pk):
             'tr': citizen_reputation,
             'wr': required_reputation(),
             'rate': r1,
-            'p': polecajacy
+            'p': polecajacy,
+            'prev': prev,
+            'next': next,
+            'active': obj.is_active,
         })
 
 

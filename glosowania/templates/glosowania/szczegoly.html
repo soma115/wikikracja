@@ -5,6 +5,18 @@
 
 {% block glosowania %}
 
+
+{% if prev %} <a href="{% url 'glosowania:details' pk=prev.id %}"><< {% trans 'prev' %}</a> 
+{% else %} << {% trans 'prev' %}
+{% endif %}
+
+{% if next %} <a href="{% url 'glosowania:details' pk=next.id %}">{% trans 'next' %} >></a>
+{% else %} {% trans 'next' %} >>
+{% endif %}
+
+
+
+
 	<div>
 		<h5>{% trans 'Bill number' %}: {{ id.id }}</h5>
 		<h5>{% trans 'Bill title' %}: {{ id.title }}</h5>

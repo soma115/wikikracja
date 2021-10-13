@@ -4,6 +4,13 @@
 
 {% block content %}
 
+    <!--prev & next -->
+	<p>
+	{% if prev %} <a href="{% url 'elibrary:book-detail' pk=prev.id %}"><< {% trans 'prev' %}</a> {% else %} << {% trans 'prev' %} {% endif %}
+    {% if next %} <a href="{% url 'elibrary:book-detail' pk=next.id %}">{% trans 'next' %} >></a> {% else %} {% trans 'next' %} >> {% endif %}
+	</p>
+
+
 <div class="container">
   <div class="row">
 
