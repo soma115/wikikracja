@@ -21,6 +21,17 @@ socket.onmessage = function (message) {
     // Handle joining
     if (data.join) {
         console.log("Joining room " + data.join);
+
+        // TODO: send seen confirmation to server after a little while
+
+        socket.send(JSON.stringify({
+            "command": "room-seen",
+            "room_id": data.join
+        }));
+
+        let room_icon = $(`.room-link[data-room-id="${data.join}"]`);
+        room_icon.addClass('seen');
+
         var roomdiv = $(  // roomdiv is whole frame with one chat
             "<div class='room' id='room-" + data.join + "'>" +
             "<h5>" + data.title + "</h5>" +
@@ -69,13 +80,20 @@ socket.onmessage = function (message) {
         }
     } else if (data.online_data) {
       for (let user of data.online_data) {
-        let elem = $(`.room-link[data-room-id="${user.room_id}"]`);
+        let room_icon = $(`.room-link[data-room-id="${user.room_id}"]`);
         if (user.online) {
-          elem.removeClass('offline').addClass('online');
+          room_icon.removeClass('offline').addClass('online');
         } else {
-          elem.removeClass('online').addClass('offline');
+          room_icon.removeClass('online').addClass('offline');
         }
       }
+    } else if (data.unsee_room) {
+      // room is seen if we are in it
+      if ( inRoom(data.unsee_room) ) {
+        return;
+      }
+      let room_icon = $(`.room-link[data-room-id="${data.unsee_room}"]`);
+      room_icon.removeClass("seen");
     } else {
         console.log("Cannot handle message!");  // i.e. empty message
     }

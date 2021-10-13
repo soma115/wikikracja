@@ -46,3 +46,7 @@
 .online {
     color: green;
 }
+
+.seen {
+    background-color: #37d27c!important;
+}

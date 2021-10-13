@@ -18,6 +18,9 @@ class Room(models.Model):
     # Room title
     title = models.CharField(max_length=255, unique=True)
 
+    # List of users who saw all messages in this chat
+    seen_by = models.ManyToManyField(User, related_name="seen_rooms")
+
     def __str__(self):
         return self.title
 
@@ -49,13 +52,19 @@ class Room(models.Model):
         Returns generator of Room objects
         """
         # TODO: replace with better query
+        # look through all rooms
         for room in Room.objects.filter(public=False):
+            # get all members of the room
             room_members = room.allowed.all()
+            # look through users, who must be present in the room
+            all_in = True
             for user in users:
                 assert isinstance(user, User)
                 if user not in room_members:
-                    return None
-            yield room
+                    all_in = False
+                    break
+            if all_in:
+                yield room
 
     @staticmethod
     def find_with_users(*users):

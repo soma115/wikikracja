@@ -5,6 +5,8 @@ from .exceptions import ClientError
 from .models import Room
 from django.conf import settings
 
+import datetime
+
 
 # This decorator turns this function from a synchronous function into an async
 # one we can call from our async consumers, that handles Django DBs correctly.
@@ -31,6 +33,8 @@ def get_slow_mode_delay(room) -> Union[int, None]:
     return slow_mode_config.get(room.title) or slow_mode_config.get('*')
 
 
+# added those wrappers to encapsulate underlying data structure
+# in case we want to change a way data is stored
 class OnlineUserRegistry:
     """ Utility class to keep track of users who are currently connected to websocket """
     def __init__(self):
@@ -51,3 +55,20 @@ class OnlineUserRegistry:
     def get_consumer(self, user):
         return self._reg[user.id]
 
+
+class RoomRegistry:
+    def __init__(self):
+        self._reg = {}
+
+    def join(self, room_id):
+        self._reg[int(room_id)] = {'joined_at': datetime.datetime.now()}
+
+    def leave(self, room_id):
+        if self._reg.get(int(room_id)):
+            del self._reg[int(room_id)]
+
+    def present(self, room):
+        return self._reg.get(room.id) is not None
+
+    def items(self):
+        return list(self._reg.keys())

@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from .exceptions import ClientError
-from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry
+from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry, RoomRegistry
 from .models import Message, Room
 from datetime import datetime as dt
 from django.contrib.auth.models import User
@@ -42,14 +42,14 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             await self.send_online_update(True)
 
         # Store which rooms the user has joined on this connection
-        self.rooms = set()
+        self.rooms = RoomRegistry()
 
     async def disconnect(self, code):
         """
         Called when the WebSocket closes for any reason.
         """
         # Leave all the rooms we are still in
-        for room_id in list(self.rooms):
+        for room_id in self.rooms.items():
             try:
                 await self.leave_room(room_id)
             except ClientError:
@@ -78,6 +78,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 # await self.send_room(content["room"], str(content["message"]+'===='))
             elif command == "get-online-users":
                 await self.send_online_users()
+            elif command == "room-seen":
+                await self.handle_seen_room(content['room_id'])
 
         except ClientError as e:
             # Catch any errors and send it back
@@ -96,7 +98,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         room = await get_room_or_error(room_id, self.scope["user"])
 
         # Store that we're in the room
-        self.rooms.add(room_id)  # 1
+        self.rooms.join(room_id)  # 1
 
         # Add them to the group so they get room messages
         await self.channel_layer.group_add(
@@ -141,7 +143,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         room = await get_room_or_error(room_id, self.scope["user"])
 
         # Remove info that we're in the room
-        self.rooms.discard(room_id)
+        self.rooms.leave(room_id)
         # Remove them from the group so they no longer get room messages
         await self.channel_layer.group_discard(
             room.group_name,
@@ -159,7 +161,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
 
         # Check they are in this room
-        if room_id not in self.rooms:
+        if int(room_id) not in self.rooms.items():
             raise ClientError("ROOM_ACCESS_DENIED")
 
         # Get the room...
@@ -192,6 +194,21 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 # "time": dt.now(),
             }
         )
+
+        # Make rooms appear unseen for some users
+        # additional handling is done in event handler
+        for member in await database_sync_to_async(lambda x: list(x.allowed.all()))(room):
+            if not ChatConsumer.online_registry.is_online(member):
+                continue
+
+            if member == self.scope['user']:
+                continue
+
+            consumer = ChatConsumer.online_registry.get_consumer(member)
+            if consumer.rooms.present(room):
+                continue
+
+            await consumer.send_unsee_room(room)
 
         # Save message to DB
         u = await self.get_user_by_name(self.scope["user"].username)
@@ -237,6 +254,32 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     'online': is_online
                 }]
             })
+
+    async def handle_seen_room(self, room_id):
+        """ Handle user reading channel """
+        room = await self.get_room(room_id)
+
+        if not await self.room_is_seen(room):
+            await self.see_room(room)
+
+    async def send_unsee_room(self, room):
+        """ Make room appear not seen for user """
+
+        # if user is in this room right now do not send
+        if self.rooms.present(room):
+            return
+
+        # room is not seen at the moment
+        if not self.room_is_seen(room):
+            return
+
+        # update database
+        await self.unsee_room(room)
+
+        # send update to user
+        await self.send_json({
+            "unsee_room": room.id
+        })
 
     ###########################################################
     # Handlers for messages sent over the channel layer       #
@@ -316,3 +359,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def get_latest_message_by_user(self, room, user):
         return room.messages.filter(sender=self.scope['user']).order_by("-time").first()
+
+    @database_sync_to_async
+    def room_is_seen(self, room):
+        return self.scope['user'].seen_rooms.filter(id=room.id).exists()
+
+    @database_sync_to_async
+    def see_room(self, room):
+        room.seen_by.add(self.scope['user'])
+
+    @database_sync_to_async
+    def unsee_room(self, room):
+        room.seen_by.remove(self.scope['user'])
+
