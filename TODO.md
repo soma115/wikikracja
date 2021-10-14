@@ -130,6 +130,7 @@ Next version:
 - number of new messages should be presented
 - if there are new messages - chat windows should be scrolled to first new message.
 - Users should use picters from profile
+- @ woła osobę
 
 
 
