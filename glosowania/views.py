@@ -35,13 +35,13 @@ def dodaj(request):
         form = DecyzjaForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
-            form.autor = request.user
+            form.author = request.user
             form.data_powstania = datetime.today()
             form.ile_osob_podpisalo += 1
             form.save()
             signed = ZebranePodpisy.objects.create(projekt=form, podpis_uzytkownika = request.user)
             
-            # l.warning(f"{form.autor} _('added new law proposal:' form.tresc)")
+            # l.warning(f"{form.author} _('added new law proposal:' form.tresc)")
             message = _("New proposal has been saved.")
             messages.success(request, (message))
 
@@ -64,7 +64,7 @@ def edit(request, pk):
     if request.method == 'POST':
         form = DecyzjaForm(request.POST)
         if form.is_valid():
-            decision.autor = request.user
+            decision.author = request.user
             decision.title = form.cleaned_data['title']
             decision.tresc = form.cleaned_data['tresc']
             decision.kara = form.cleaned_data['kara']
@@ -83,7 +83,7 @@ def edit(request, pk):
             return redirect('glosowania:status', 1)
     else:  # request.method != 'POST':
         form = DecyzjaForm(initial={
-            'autor': decision.autor,
+            'author': decision.author,
             'title': decision.title,
             'tresc': decision.tresc,
             'kara': decision.kara,

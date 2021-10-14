@@ -5,17 +5,8 @@
 
 {% block glosowania %}
 
-
-{% if prev %} <a href="{% url 'glosowania:details' pk=prev.id %}"><< {% trans 'prev' %}</a> 
-{% else %} << {% trans 'prev' %}
-{% endif %}
-
-{% if next %} <a href="{% url 'glosowania:details' pk=next.id %}">{% trans 'next' %} >></a>
-{% else %} {% trans 'next' %} >>
-{% endif %}
-
-
-
+	{% if prev %} <a href="{% url 'glosowania:details' pk=prev.id %}"><< {% trans 'prev' %}</a> {% else %} << {% trans 'prev' %} {% endif %}
+	{% if next %} <a href="{% url 'glosowania:details' pk=next.id %}">{% trans 'next' %} >></a> {% else %} {% trans 'next' %} >> {% endif %}
 
 	<div>
 		<h5>{% trans 'Bill number' %}: {{ id.id }}</h5>
@@ -28,7 +19,7 @@
 		<h5>{% trans 'Negatives' %}:</h5><p>{{ id.args_against }}</p>
         <h5>{% trans 'This law supersedes the following bills' %}:</h5><p>{{ id.znosi }}</p>
 			<p>
-				{% trans 'Author' %}: {{ id.autor }} | {% trans 'Number of people signed the motion for a referendum' %}: {{ id.ile_osob_podpisalo }}
+				{% trans 'Author' %}: {{ id.author }} | {% trans 'Number of people signed the motion for a referendum' %}: {{ id.ile_osob_podpisalo }}
 				{% if id.status >= 6 %} | {% trans 'For' %}: {{ id.za }} | {% trans 'Against' %}: {{ id.przeciw }} {% endif %}
 				
 				<br><small>
@@ -71,7 +62,7 @@
 			</form>
 		{% endif %}
 
-		{% if id.autor == None or id.autor == current_user %}
+		{% if id.author == None or id.author == current_user %}
 			<a class="btn btn-primary btn-sm" href="{% url 'glosowania:edit' id.pk %}">{% trans 'Edit' %}</a>
 		{% endif %}
 	{% endif %}

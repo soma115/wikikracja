@@ -19,8 +19,7 @@ def does_it_exist(value):
     return True
 
 class Decyzja(models.Model):
-    # autor = models.CharField(max_length=200)
-    autor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, blank=True)
     title = models.TextField(
     max_length=200,
     null=True,
