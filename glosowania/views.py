@@ -348,7 +348,7 @@ def zliczaj_wszystko():
                 separated = re.split('\W+', i.znosi.strip(' ').strip(',').strip(' ').strip(',').strip(' ').strip(',').strip(' ').strip(','))
                 for z in separated:
                     abolish = Decyzja.objects.get(pk=str(z))
-                    abolish.status = 2
+                    abolish.status = 5
                     abolish.save()
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')

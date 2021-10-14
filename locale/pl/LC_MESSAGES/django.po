@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-14 16:04+0200\n"
+"POT-Creation-Date: 2021-10-14 19:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,9 +258,14 @@ msgid "Abolishes the rules"
 msgstr "Znosi przepis/y"
 
 #: glosowania/models.py:66
-msgid "If the proposed law supersedes other bills, enter their numbers here."
+#, fuzzy
+#| msgid ""
+#| "If the proposed law supersedes other bills, enter their numbers here."
+msgid ""
+"If the proposed law supersedes other bills, enter their comma separated "
+"numbers here."
 msgstr ""
-"Jeśli proponowane prawo zastępuje inne przepisy, wprowadź tutaj ich numery."
+"Jeśli proponowane prawo zastępuje inne przepisy, wprowadź tutaj ich numery rozdzielone przecinkami."
 
 #: glosowania/templates/glosowania/dodaj.html:7
 msgid "Add new law proposal"
@@ -275,9 +280,8 @@ msgid "Proposals"
 msgstr "Propozycje"
 
 #: glosowania/templates/glosowania/menu.html:29
-#: glosowania/templates/glosowania/menu.html:53 glosowania/views.py:220
-msgid "Rejected"
-msgstr "Odrzucone"
+msgid "No endorsement"
+msgstr "Brak poparcia"
 
 #: glosowania/templates/glosowania/menu.html:37 glosowania/views.py:220
 msgid "Queued"
@@ -286,6 +290,10 @@ msgstr "W kolejce"
 #: glosowania/templates/glosowania/menu.html:45 glosowania/views.py:220
 msgid "Referendum"
 msgstr "Referendum"
+
+#: glosowania/templates/glosowania/menu.html:53 glosowania/views.py:220
+msgid "Rejected"
+msgstr "Odrzucone"
 
 #: glosowania/templates/glosowania/menu.html:61 glosowania/views.py:220
 msgid "Vacatio Legis"

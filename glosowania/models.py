@@ -63,7 +63,7 @@ class Decyzja(models.Model):
         null=True,
         blank=True,
         verbose_name=_('Abolishes the rules'),
-        help_text=_('If the proposed law supersedes other bills, enter their numbers here.'),
+        help_text=_('If the proposed law supersedes other bills, enter their comma separated numbers here.'),
         validators=[validate_comma_separated_integer_list, does_it_exist],
         # validators=[validate_comma_separated_integer_list],
         )
@@ -81,8 +81,14 @@ class Decyzja(models.Model):
     przeciw = models.SmallIntegerField(default=0, editable=False)
     status = models.SmallIntegerField(default=1, editable=False)
 
-    # 1.Propozycja, 2.Brak poparcia, 3.W kolejce, 4.Referendum, 5.Odrzucone,
-    # 6.Zatwierdzone/Vacatio Legis, 7.Obowiązuje
+    # 1.Propozycja
+    # 2.Brak poparcia
+    # 3.W kolejce
+    # 4.Referendum
+    # 5.Odrzucone
+    # 6.Zatwierdzone/Vacatio Legis
+    # 7.Obowiązuje
+
 
     def __str__(self):
         return '%s: %s on %s' % (self.pk, self.tresc, self.status)
