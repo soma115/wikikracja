@@ -13,7 +13,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6 p-3">
+        <div class="col-md-8 p-3">
             <p>
                 {{ b.uid }} | {{ b.uid.email }} | {% trans 'Introduced by' %}: {{ b.polecajacy|default:"-" }} | {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d"|default:"-" }}
             </p>
@@ -34,7 +34,7 @@
             </p>
             {% endif %}
         </div>
-        <div class="col-md-6 p-3">
+        <div class="col-md-4 p-3">
         	<img class="img-fluid" src={% get_media_prefix %}{{ b.foto }}>
         </div>
     </div>
