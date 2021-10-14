@@ -40,7 +40,6 @@ def chat(request):
             # User A will not talk to user A
             if i == j:  
                 continue
-            print(f"handle {i} - {j} room")
             # Avoid A-B B-A because it is the same thing
             t=sorted([i.username, j.username])
             title = '-'.join(t)
@@ -53,7 +52,6 @@ def chat(request):
                 existing_room.save()
             # if not, create room
             else:
-                print(f"room with users {i}, {j} does not exist. create {title}")
                 r = Room.objects.create(title=title, public=False)
                 r.allowed.set((i, j,))
 

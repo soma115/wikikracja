@@ -23,7 +23,6 @@ socket.onmessage = function (message) {
         console.log("Joining room " + data.join);
 
         // TODO: send seen confirmation to server after a little while
-
         socket.send(JSON.stringify({
             "command": "room-seen",
             "room_id": data.join
@@ -36,9 +35,12 @@ socket.onmessage = function (message) {
             "<div class='room' id='room-" + data.join + "'>" +
             "<h5>" + data.title + "</h5>" +
             "<div class='messages'></div>" +
-            "<form class='d-flex'><input class='col-12 col-sm'><input class='anonymous-switch' type='checkbox' /><button class='btn btn-danger btn-sm'>↲</button></form>" +
+            "<form class='d-flex'>" +
+            "<input class='col-12 col-sm'>" +
+            (data.public ? "<input class='anonymous-switch' type='checkbox' />" : "") +
+            "<button class='btn btn-danger btn-sm'>↲</button></form>" +
             "</div>"
-            );
+        );
 
         // Hook up send button to send a message
         roomdiv.find("form").on("submit", function () {
@@ -66,17 +68,31 @@ socket.onmessage = function (message) {
 
     // Handle getting a message
   } else if (data.message) {
+        let type = $(`.room-link[data-room-id="${data.room}"`).attr("data-room-type");
         var msgdiv = $("#room-" + data.room + " .messages");
-        var ok_msg = "<div class='message'>" +
+        var ok_msg = `<div class='message' data-message-id=${data.message_id}>` +
                         // "<span class='body'>" + data.time.slice(0,19) + " " + "</span>" +
                         //"<span class='body'>" + data.time + " " + "</span>" +
                         "<span class='body'>" + data.username + ": " + "</span>" +
                         "<span class='username'>" + data.message + "</span>" +
+                        (type == "public" ?
+                        `<i data-event-name="upvote" data-message-id="${data.message_id}" class="msg-vote fas fa-check"></i>
+                         <i data-event-name="downvote" data-message-id="${data.message_id}" class="msg-vote fas fa-times"></i>
+                         <div class='msg-upvotes'>${data.upvotes}</div>
+                         <div class='msg-downvotes'>${data.downvotes}</div>` : "") +
                         "</div>";
         msgdiv.append(ok_msg);
+
         msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
+
         if (data.new) {
             alert("New Message");
+        }
+        if (data.your_vote /* You voted for this message e.g. 'upvote' or 'downvote' */) {
+            // find message div and make button appear active
+            let message_div = $(`.message[data-message-id="${data.message_id}"]`);
+            let active_btn = message_div.find(`.msg-vote[data-event-name="${data.your_vote}"]`);
+            active_btn.addClass('active');
         }
     } else if (data.online_data) {
       for (let user of data.online_data) {
@@ -94,6 +110,32 @@ socket.onmessage = function (message) {
       }
       let room_icon = $(`.room-link[data-room-id="${data.unsee_room}"]`);
       room_icon.removeClass("seen");
+    } else if (data.update_votes) {
+      let event = data.update_votes;
+      // find message on page by id and update counters
+      let message_div = $(`.message[data-message-id="${event.message_id}"]`);
+
+      console.log(message_div, event);
+      message_div.find(".msg-upvotes").text(event.upvotes);
+      message_div.find(".msg-downvotes").text(event.downvotes);
+
+      if (data.your_vote /* vote type e.g. upvote or downvote or null if it wasn't you who triggered */ ) {
+        // find vote button you pressed
+        let active_btn = message_div.find(`.msg-vote[data-event-name="${data.your_vote}"]`);
+        console.log("you voted " + data.your_vote, "make active", active_btn);
+
+        // make all vote buttons appear incative
+        message_div.find('.msg-vote').removeClass('active');
+
+        // vote was added
+        if (data.add) {
+          active_btn.addClass('active');
+        } /* vote was removed */ else {
+          // do nothing, all buttons are inactive
+        }
+
+      }
+
     } else {
         console.log("Cannot handle message!");  // i.e. empty message
     }
@@ -104,9 +146,28 @@ inRoom = function (roomId) {
     return $("#room-" + roomId).length > 0;
 };
 
+//class='msg-vote' data-event-name="upwote" data-message-id="${data.message_id}"
+$(document).on("click",".msg-vote", function () {
+  let event_type = $(this).data("event-name"); // upvote / downvote
+  let message_id = $(this).data("message-id");
+  // if is active and pressed it means vote has to be removed
+  let is_add = !$(this).hasClass('active');
+
+  // toggle button's state
+  $(this).toggleClass('active');
+
+  socket.send(JSON.stringify({
+    "command": (is_add ? "message-add-vote" : "message-remove-vote"),
+    "event": event_type,
+    "message_id": message_id,
+  }))
+});
+
+
 // Room join/leave
 $("li.room-link").click(function () {
         roomId = $(this).attr("data-room-id");  // Here is  <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li> used
+
     if (inRoom(roomId)) {
         // Leave room
         $(this).removeClass("joined");

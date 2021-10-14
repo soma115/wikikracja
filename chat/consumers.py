@@ -4,7 +4,7 @@ from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from .exceptions import ClientError
 from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry, RoomRegistry
-from .models import Message, Room
+from .models import Message, Room, MessageVote
 from datetime import datetime as dt
 from django.contrib.auth.models import User
 from channels.db import database_sync_to_async
@@ -80,7 +80,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 await self.send_online_users()
             elif command == "room-seen":
                 await self.handle_seen_room(content['room_id'])
-
+            elif command == "message-add-vote":
+                await self.handle_add_vote(content['event'], content['message_id'])
+            elif command == "message-remove-vote":
+                await self.handle_remove_vote(content['event'], content['message_id'])
         except ClientError as e:
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
@@ -110,6 +113,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "join": str(room.id),  # 1
             "title": room.title,   # "Room 1"
             "slow_mode_delay": get_slow_mode_delay(room),  # delay in seconds or None if slow mode is disabled
+            "public": room.public,
         })
 
         # Load all messages from DB to Chat
@@ -117,6 +121,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         messages = await self.get_messages(room_id)
         for message in messages:
             u = await self.get_user_by_id(message['sender_id'])
+            upvotes, downvotes = await self.count_votes(message['id'])
             # message: id, sender_id, time, text, room_id
             # t=str(message['time'])[0:19]
             await self.channel_layer.send(
@@ -126,11 +131,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "room_id": room_id,
                     "user_id": u.id,
                     "anonymous": message['anonymous'],
-                    # "message": t+': '+message['text'], 
                     "message": message['text'],
                     "new": False,
-                    # "time": message['time'], 
-                    # "time": 'asd', 
+                    "message_id": message['id'],
+                    "upvotes": upvotes,
+                    "downvotes": downvotes,
                 }
             )
 
@@ -173,13 +178,22 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
         # make sure enough time has passed if slow mode enabled in it
         time_now = datetime.datetime.now()
-        last_message_by_user = await self.get_latest_message_by_user(room, self.scope['user'])
+        last_message_by_user = await self.get_own_latest_message(room)
         delay = get_slow_mode_delay(room)
 
         if last_message_by_user is not None \
             and delay is not None \
                 and time_now.timestamp() - last_message_by_user.time.timestamp() < delay:
             raise ClientError("SLOW_MODE")
+
+        # Save message to DB
+        u = await self.get_user_by_name(self.scope["user"].username)  # ???
+        r = await self.get_room(room_id)
+        msg = Message(sender=u, text=message, room=r, anonymous=is_anonymous)  # time is added in a models.py
+        message_id = await self.save_message(msg)
+
+        # Add upvote by author (default behaviour)
+        upvotes, downvotes = await self.add_vote("upvote", message_id)
 
         # ...and send to the group info about it
         await self.channel_layer.group_send(
@@ -190,13 +204,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "user_id": self.scope["user"].id,
                 "anonymous": is_anonymous,
                 "message": message,  # goes to chat and DB
+                "message_id": message_id,
+                "upvotes": upvotes,
+                "downvotes": downvotes,
                 "new": True,
                 # "time": dt.now(),
             }
         )
 
         # Make rooms appear unseen for some users
-        # additional handling is done in event handler
         for member in await database_sync_to_async(lambda x: list(x.allowed.all()))(room):
             if not ChatConsumer.online_registry.is_online(member):
                 continue
@@ -209,12 +225,6 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 continue
 
             await consumer.send_unsee_room(room)
-
-        # Save message to DB
-        u = await self.get_user_by_name(self.scope["user"].username)
-        r = await self.get_room(room_id)
-        msg = Message(sender=u, text=message, room=r, anonymous=is_anonymous)  # time is added in a models.py
-        await self.save_message(msg)
 
     async def send_online_users(self):
         """ Send list of private chats with online user in it. Sent on request. """
@@ -281,6 +291,65 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "unsee_room": room.id
         })
 
+    async def handle_add_vote(self, event: str, message_id: int):
+        existing_vote = await self.get_vote(message_id)
+        opposite_vote_events = {
+            "upvote": "downvote",
+            "downvote": "upvote",
+        }
+
+        if existing_vote is not None:
+            # Prevent duplicate votes
+            if existing_vote.vote == event:
+                return
+
+            opposite_event = opposite_vote_events.get(event)
+            # If two vote events conflict with each other e.g. (upvote and downvote)
+            # remove conflicting vote and then add new one
+            if opposite_event is not None:
+                await self.remove_vote(opposite_event, message_id)
+
+        upvotes, downvotes = await self.add_vote(event, message_id)
+        room = await self.get_room_by_message(message_id)
+
+        await self.channel_layer.group_send(
+            room.group_name,
+            {
+                "type": "chat.vote",
+                "update_votes": {
+                    "message_id": message_id,
+                    "upvotes": upvotes,
+                    "downvotes": downvotes,
+                    "user_id": self.scope['user'].id,
+                    "vote": event,
+                    "add": True,
+                }
+            }
+        )
+
+    async def handle_remove_vote(self, vote: str, message_id: int):
+        upvotes, downvotes = await self.remove_vote(vote, message_id)
+
+        room = await self.get_room_by_message(message_id)
+
+        await self.channel_layer.group_send(
+            room.group_name,
+            {
+                "type": "chat.vote",
+                "update_votes": {
+                    "message_id": message_id,
+                    "upvotes": upvotes,
+                    "downvotes": downvotes,
+                    "user_id": self.scope['user'].id,
+                    "vote": vote,
+                    "add": False,
+                }
+            }
+        )
+
+    async def send_remove_vote(self, message_id: int, vote: str):
+        pass
+
     ###########################################################
     # Handlers for messages sent over the channel layer       #
     #                                                         #
@@ -288,6 +357,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     # we send - so: chat.join    becomes chat_join (removed)  #
     #               chat.leave   becomes chat_leave (removed) #
     #               chat.message becomes chat_message         #
+    #               chat.vote    becomes chat_vote            #
     ###########################################################
 
     async def chat_message(self, event):
@@ -300,6 +370,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # print(event)
         # Send a message down to the client
         user = await self.get_user_by_id(event["user_id"])
+        vote = await self.get_vote(event['message_id'])
+
         await self.send_json( 
             {
                 # type, room_id, username, message
@@ -312,9 +384,34 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "time": str(dt.now()),  # tylko to dziala
                 # let client know if message was sent by a another user (True) or loaded from database (False)
                 "new": event["new"] if self.scope['user'] != user else False,
+                "message_id": event['message_id'],  # send message id to identify upvotes
+                "upvotes": event['upvotes'],
+                "downvotes": event['downvotes'],
+                "your_vote": vote.vote if vote is not None else None
                 # "time": 'czas',
             },
         )
+
+    async def chat_vote(self, event):
+        """
+        Send vote updates to each interested client.
+        """
+
+        # copy sub dictionary, just in case
+        update = {**event['update_votes']}
+
+        who_triggered = update['user_id']
+
+        # Tell client if it was this client who triggered update to highlight button
+        # None if it was not this client, event name string e.g. 'upvote' if it was
+        update["your_vote"] = update['vote'] if who_triggered == self.scope["user"].id else None
+
+        # delete unused field
+        del update['vote']
+
+        await self.send_json({
+            "update_votes": update,
+        })
 
     ###########################
     # Sync to async functions #
@@ -353,11 +450,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     @database_sync_to_async
     def save_message(self, message):
-        if message.text:
-            message.save()
+        message.save()
+        return message.id
 
     @database_sync_to_async
-    def get_latest_message_by_user(self, room, user):
+    def get_own_latest_message(self, room):
         return room.messages.filter(sender=self.scope['user']).order_by("-time").first()
 
     @database_sync_to_async
@@ -371,4 +468,35 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def unsee_room(self, room):
         room.seen_by.remove(self.scope['user'])
+
+    @database_sync_to_async
+    def get_message(self, message_id):
+        return Message.objects.get(pk=message_id)
+
+    @database_sync_to_async
+    def add_vote(self, event: str, message_id: int):
+        vote = MessageVote(vote=event, message_id=message_id, user=self.scope['user'])
+        vote.full_clean()  # to enforce validation of event name according to choices of MessageVote
+        vote.save()
+        m = Message.objects.get(pk=message_id)
+        return m.votes.filter(vote="upvote").count(), m.votes.filter(vote="downvote").count()
+
+    @database_sync_to_async
+    def remove_vote(self, event: str, message_id: int):
+        MessageVote.objects.filter(vote=event, message_id=message_id, user=self.scope['user']).delete()
+        m = Message.objects.get(pk=message_id)
+        return m.votes.filter(vote="upvote").count(), m.votes.filter(vote="downvote").count()
+
+    @database_sync_to_async
+    def count_votes(self, message_id):
+        m = Message.objects.get(pk=message_id)
+        return m.votes.filter(vote="upvote").count(), m.votes.filter(vote="downvote").count()
+
+    @database_sync_to_async
+    def get_vote(self, message_id: int):
+        return MessageVote.objects.filter(message_id=message_id, user=self.scope['user']).first()
+
+    @database_sync_to_async
+    def get_room_by_message(self, message_id: int):
+        return Message.objects.get(pk=message_id).room
 

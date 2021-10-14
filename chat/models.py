@@ -85,3 +85,15 @@ class Message(models.Model):
 
     class Meta:
         unique_together = ('sender', 'text', 'room', 'time')
+
+
+class MessageVote(models.Model):
+    user = models.ForeignKey(User, related_name="votes", on_delete=models.CASCADE)
+    message = models.ForeignKey(Message, related_name="votes", on_delete=models.CASCADE)
+
+    vote_types = [('upvote', 'Upvote'), ('downvote', 'Downvote')]
+    vote = models.CharField(choices=vote_types, max_length=50)
+
+    class Meta:
+        # can be removed in future to make possible reactions or something like that
+        unique_together = ('user', 'message')

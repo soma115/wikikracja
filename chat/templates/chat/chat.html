@@ -5,6 +5,11 @@
 
 {% block content %}
 
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+          crossorigin="anonymous"/>
+
     {% comment %} ADD ROOM {% endcomment %}
     <div class="col-md-2 offset-8">
         <a class="btn btn-info btn-sm" href="{% url 'chat:add_room' %}">+{% trans 'Add Room' %}</a>
@@ -15,7 +20,9 @@
         <h4>{% trans 'Public chat rooms' %}</h4>
         {% for room in allowed_rooms %}
             {% if room.public == True and room.archived == False %}
-                <li class="room-link text-uppercase {{ room|seen_by:user }}" data-room-id="{{ room.id }}">{{ room|name_for:user }}</li>
+                <li class="room-link text-uppercase {{ room|seen_by:user }}"
+                    data-room-type="public"
+                    data-room-id="{{ room.id }}">{{ room|name_for:user }}</li>
             {% endif %}
         {% endfor %}
     </ul>
@@ -25,8 +32,9 @@
         <h4>{% trans 'Private messages' %}</h4>
         {% for room in allowed_rooms %}
             {% if room.public == False and room.archived == False %}
-        <p>private</p>
-                <li class="room-link offline {{ room|seen_by:user }}" data-room-id="{{ room.id }}">{{ room|name_for:user }}</li>
+                <li class="room-link offline {{ room|seen_by:user }}"
+                    data-room-type="private"
+                    data-room-id="{{ room.id }}">{{ room|name_for:user }}</li>
             {% endif %}
         {% endfor %}
     </ul>
