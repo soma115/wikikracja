@@ -64,8 +64,8 @@ class Decyzja(models.Model):
         blank=True,
         verbose_name=_('Abolishes the rules'),
         help_text=_('If the proposed law supersedes other bills, enter their numbers here.'),
-        # validators=[validate_comma_separated_integer_list, does_it_exist],
-        validators=[validate_comma_separated_integer_list],
+        validators=[validate_comma_separated_integer_list, does_it_exist],
+        # validators=[validate_comma_separated_integer_list],
         )
 
     ile_osob_podpisalo = models.SmallIntegerField(editable=False, default=0)
