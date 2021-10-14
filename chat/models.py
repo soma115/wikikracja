@@ -97,3 +97,20 @@ class MessageVote(models.Model):
     class Meta:
         # can be removed in future to make possible reactions or something like that
         unique_together = ('user', 'message')
+
+
+# Store message history separately,
+# so you don't have to deal with it unless you need it
+class MessageHistory(models.Model):
+    """
+    All states of given message will be associated with this object.
+    They can be easily retrieved like MessageHistory#entries.
+    """
+    message = models.OneToOneField(Message, on_delete=models.CASCADE)
+
+
+class MessageHistoryEntry(models.Model):
+    """ Stores state of message that is no longer relevant """
+    history = models.ForeignKey(MessageHistory, on_delete=models.CASCADE, related_name="entries")
+    text = models.TextField()
+    time = models.DateTimeField(auto_now=True)

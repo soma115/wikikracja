@@ -50,3 +50,8 @@
 .seen {
     background-color: #37d27c!important;
 }
+
+.msg-vote.active {
+    font-weight: bold;
+    color: blue;
+}

@@ -4,7 +4,7 @@ from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from .exceptions import ClientError
 from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry, RoomRegistry
-from .models import Message, Room, MessageVote
+from .models import Message, Room, MessageVote, MessageHistory, MessageHistoryEntry
 from datetime import datetime as dt
 from django.contrib.auth.models import User
 from channels.db import database_sync_to_async
@@ -84,6 +84,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 await self.handle_add_vote(content['event'], content['message_id'])
             elif command == "message-remove-vote":
                 await self.handle_remove_vote(content['event'], content['message_id'])
+            elif command == "edit-message":
+                await self.handle_edit_message(content['message_id'], content['message'])
         except ClientError as e:
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
@@ -136,6 +138,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "message_id": message['id'],
                     "upvotes": upvotes,
                     "downvotes": downvotes,
+                    "edited": await self.was_message_edited(message['id'])
                 }
             )
 
@@ -208,6 +211,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "upvotes": upvotes,
                 "downvotes": downvotes,
                 "new": True,
+                "edited": False,  # not necessary but let it be
                 # "time": dt.now(),
             }
         )
@@ -347,6 +351,36 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             }
         )
 
+    async def handle_edit_message(self, message_id: int, new_message: str):
+        message = await self.get_message(message_id)
+
+        # only sender can edit own message
+        if await self.get_message_sender(message) != self.scope['user']:
+            print(f"users not equal{await self.get_message_sender(message)} and {self.scope['user']}")
+            return
+
+        # if new message is same don't save it
+        if message.text == new_message:
+            print("message is same")
+            return
+
+        room = await self.get_room_by_message(message_id)
+
+        await self.channel_layer.group_send(
+            room.group_name,
+            {
+                "type": "chat.edit",
+                "edit_message": {
+                    "message_id": message_id,
+                    "user_id": self.scope['user'].id,
+                    "text": new_message,
+                }
+            }
+        )
+
+        # Save old state and update current state in database
+        await self.edit_message_and_history(message_id, new_message)
+
     async def send_remove_vote(self, message_id: int, vote: str):
         pass
 
@@ -387,7 +421,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "message_id": event['message_id'],  # send message id to identify upvotes
                 "upvotes": event['upvotes'],
                 "downvotes": event['downvotes'],
-                "your_vote": vote.vote if vote is not None else None
+                "your_vote": vote.vote if vote is not None else None,
+                "edited": event['edited'],
                 # "time": 'czas',
             },
         )
@@ -411,6 +446,12 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
         await self.send_json({
             "update_votes": update,
+        })
+
+    async def chat_edit(self, event):
+        edit = event['edit_message']
+        await self.send_json({
+            "edit_message": edit,
         })
 
     ###########################
@@ -500,3 +541,27 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     def get_room_by_message(self, message_id: int):
         return Message.objects.get(pk=message_id).room
 
+    @database_sync_to_async
+    def edit_message_and_history(self, message_id: int, new_message: str):
+        """
+        Save current message state as old and update message text
+        """
+        message = Message.objects.get(pk=message_id)
+
+        # Each message has one associated history object
+        msg_history, created = MessageHistory.objects.get_or_create(message=message)
+
+        # Create old message state based on current message text
+        MessageHistoryEntry.objects.create(history=msg_history, text=message.text)
+
+        # Update current text
+        message.text = new_message
+        message.save()
+
+    @database_sync_to_async
+    def get_message_sender(self, message):
+        return message.sender
+
+    @database_sync_to_async
+    def was_message_edited(self, message_id):
+        return MessageHistory.objects.filter(message_id=message_id).exists()

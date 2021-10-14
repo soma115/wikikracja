@@ -32,11 +32,11 @@ socket.onmessage = function (message) {
         room_icon.addClass('seen');
 
         var roomdiv = $(  // roomdiv is whole frame with one chat
-            "<div class='room' id='room-" + data.join + "'>" +
+            "<div class='room' data-room-id='" + data.join + "' id='room-" + data.join + "'>" +
             "<h5>" + data.title + "</h5>" +
             "<div class='messages'></div>" +
             "<form class='d-flex'>" +
-            "<input class='col-12 col-sm'>" +
+            "<input class='col-12 col-sm message-input'>" +
             (data.public ? "<input class='anonymous-switch' type='checkbox' />" : "") +
             "<button class='btn btn-danger btn-sm'>↲</button></form>" +
             "</div>"
@@ -44,17 +44,31 @@ socket.onmessage = function (message) {
 
         // Hook up send button to send a message
         roomdiv.find("form").on("submit", function () {
-            socket.send(
-                JSON.stringify(
-                    {
-                        "command": "send",
-                        "room": data.join,  // room number
-                        "message": roomdiv.find("input").val(),  // value, message to send
-                        is_anonymous: roomdiv.find(".anonymous-switch").is(":checked") // get bool from checkbox
-            }));
+            let edit_message_id = roomdiv.find("input.message-input").data('edit-message');
+            let to_send;
+
+            // message being edited
+            if (edit_message_id) {
+              to_send = {
+                "command": "edit-message",
+                "message_id": edit_message_id,
+                "message": roomdiv.find("input.message-input").val()
+              }
+            } else {
+              to_send = {
+                  "command": "send",
+                  "room": data.join,  // room number
+                  "message": roomdiv.find("input.message-input").val(),  // value, message to send
+                  is_anonymous: roomdiv.find(".anonymous-switch").is(":checked") // get bool from checkbox
+              }
+            }
+            socket.send(JSON.stringify(to_send));
+
+            // remove data about editing message
+            roomdiv.find("input.message-input").removeData('edit-message');
 
             // Clears input field
-            roomdiv.find("input").val(""); // TODO: Here we can plugin edititing old messages (with val)
+            roomdiv.find("input.message-input").val(""); // TODO: Here we can plugin edititing old messages (with val)
             return false;
         });
 
@@ -73,13 +87,15 @@ socket.onmessage = function (message) {
         var ok_msg = `<div class='message' data-message-id=${data.message_id}>` +
                         // "<span class='body'>" + data.time.slice(0,19) + " " + "</span>" +
                         //"<span class='body'>" + data.time + " " + "</span>" +
-                        "<span class='body'>" + data.username + ": " + "</span>" +
-                        "<span class='username'>" + data.message + "</span>" +
+                        "<span class='username'>" + data.username + ": " + "</span>" +
+                        "<span class='body'>" + data.message + "</span>" +
                         (type == "public" ?
                         `<i data-event-name="upvote" data-message-id="${data.message_id}" class="msg-vote fas fa-check"></i>
                          <i data-event-name="downvote" data-message-id="${data.message_id}" class="msg-vote fas fa-times"></i>
                          <div class='msg-upvotes'>${data.upvotes}</div>
                          <div class='msg-downvotes'>${data.downvotes}</div>` : "") +
+                         `<div class='edit-message' data-message-id='${data.message_id}'>edit</div>` +
+                         `<div class='show-history' ${data.edited ? "" : "style='display:none'"} data-message-id='${data.message_id}'>show history</div>` +
                         "</div>";
         msgdiv.append(ok_msg);
 
@@ -122,7 +138,6 @@ socket.onmessage = function (message) {
       if (data.your_vote /* vote type e.g. upvote or downvote or null if it wasn't you who triggered */ ) {
         // find vote button you pressed
         let active_btn = message_div.find(`.msg-vote[data-event-name="${data.your_vote}"]`);
-        console.log("you voted " + data.your_vote, "make active", active_btn);
 
         // make all vote buttons appear incative
         message_div.find('.msg-vote').removeClass('active');
@@ -136,6 +151,14 @@ socket.onmessage = function (message) {
 
       }
 
+    } else if (data.edit_message) {
+      let edit = data.edit_message;
+      let message_div = $(`.message[data-message-id="${edit.message_id}"]`);
+      // update text of message
+      message_div.find("span.body").text(edit.text);
+      //show history button
+      message_div.find(".show-history").show();
+
     } else {
         console.log("Cannot handle message!");  // i.e. empty message
     }
@@ -147,6 +170,7 @@ inRoom = function (roomId) {
 };
 
 //class='msg-vote' data-event-name="upwote" data-message-id="${data.message_id}"
+// Vote button handler
 $(document).on("click",".msg-vote", function () {
   let event_type = $(this).data("event-name"); // upvote / downvote
   let message_id = $(this).data("message-id");
@@ -163,6 +187,21 @@ $(document).on("click",".msg-vote", function () {
   }))
 });
 
+// Show history button
+$(document).on("click",".show-history", function () {
+  socket.send(JSON.stringify({
+    "get-message-history": $(this).data('message-id')
+  }))
+});
+
+// Edit button handler
+$(document).on("click",".edit-message", function () {
+  let message_id = $(this).data("message-id");
+  let text = $(`.message[data-message-id="${message_id}"]`).find("span.body").text();
+  let msg_inp = $(this).closest('.room').find(".message-input");
+  msg_inp.val(text);
+  msg_inp.data('edit-message', message_id);
+});
 
 // Room join/leave
 $("li.room-link").click(function () {
