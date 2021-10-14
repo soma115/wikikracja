@@ -94,7 +94,7 @@ socket.onmessage = function (message) {
                          <i data-event-name="downvote" data-message-id="${data.message_id}" class="msg-vote fas fa-times"></i>
                          <div class='msg-upvotes'>${data.upvotes}</div>
                          <div class='msg-downvotes'>${data.downvotes}</div>` : "") +
-                         `<div class='edit-message' data-message-id='${data.message_id}'>edit</div>` +
+                         (data.own ? `<div class='edit-message' data-message-id='${data.message_id}'>edit</div>` : "") +
                          `<div class='show-history' ${data.edited ? "" : "style='display:none'"} data-message-id='${data.message_id}'>show history</div>` +
                         "</div>";
         msgdiv.append(ok_msg);
@@ -159,6 +159,8 @@ socket.onmessage = function (message) {
       //show history button
       message_div.find(".show-history").show();
 
+    } else if (data.message_history) {
+      // do something with history [{text: '', date: '163423...'}, ...]
     } else {
         console.log("Cannot handle message!");  // i.e. empty message
     }
@@ -190,7 +192,8 @@ $(document).on("click",".msg-vote", function () {
 // Show history button
 $(document).on("click",".show-history", function () {
   socket.send(JSON.stringify({
-    "get-message-history": $(this).data('message-id')
+    "command": "get-message-history",
+    "message_id": $(this).data('message-id')
   }))
 });
 

@@ -86,6 +86,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 await self.handle_remove_vote(content['event'], content['message_id'])
             elif command == "edit-message":
                 await self.handle_edit_message(content['message_id'], content['message'])
+            elif command == "get-message-history":
+                await self.send_message_history(content['message_id'])
         except ClientError as e:
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
@@ -381,8 +383,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Save old state and update current state in database
         await self.edit_message_and_history(message_id, new_message)
 
-    async def send_remove_vote(self, message_id: int, vote: str):
-        pass
+    async def send_message_history(self, message_id):
+        message_states = await self.get_message_states(message_id)
+        await self.send_json({"message_history": message_states})
 
     ###########################################################
     # Handlers for messages sent over the channel layer       #
@@ -423,6 +426,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "downvotes": event['downvotes'],
                 "your_vote": vote.vote if vote is not None else None,
                 "edited": event['edited'],
+                "own": self.scope['user'] == user,
                 # "time": 'czas',
             },
         )
@@ -565,3 +569,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def was_message_edited(self, message_id):
         return MessageHistory.objects.filter(message_id=message_id).exists()
+
+    @database_sync_to_async
+    def get_message_states(self, message_id):
+        history = MessageHistory.objects.filter(message_id=message_id)
+        if not history.exists():
+            return []
+
+        history = history.first()
+
+        states = [
+            {"text": state.text, "date": int(state.time.timestamp())} for state in history.entries.all().order_by("-time")
+        ]
+        return states
