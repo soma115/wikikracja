@@ -82,13 +82,24 @@ socket.onmessage = function (message) {
 
     // Handle getting a message
   } else if (data.message) {
+        // TODO: handle links in edit updates too
+        let URL_REGEX = /(http(s){0,1}:\/\/){0,1}[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)/g;
+        let raw_message = data.message
+        let matches = raw_message.match(URL_REGEX);
+        let formatted = raw_message;
+        if (matches != null){
+          for (let match of matches) {
+            formatted = raw_message.replace(match, `<a href='${match}'>${match}</a>`);
+          }
+        }
+
         let type = $(`.room-link[data-room-id="${data.room}"`).attr("data-room-type");
         var msgdiv = $("#room-" + data.room + " .messages");
         var ok_msg = `<div class='message' data-message-id=${data.message_id}>` +
                         // "<span class='body'>" + data.time.slice(0,19) + " " + "</span>" +
                         //"<span class='body'>" + data.time + " " + "</span>" +
                         "<span class='username'>" + data.username + ": " + "</span>" +
-                        "<span class='body'>" + data.message + "</span>" +
+                        "<span class='body'>" + formatted + "</span>" +
                         (type == "public" ?
                         `<i data-event-name="upvote" data-message-id="${data.message_id}" class="msg-vote fas fa-check"></i>
                          <i data-event-name="downvote" data-message-id="${data.message_id}" class="msg-vote fas fa-times"></i>
