@@ -1,3 +1,4 @@
+import inspect
 from typing import Union
 
 from channels.db import database_sync_to_async
@@ -72,3 +73,51 @@ class RoomRegistry:
 
     def items(self):
         return list(self._reg.keys())
+
+
+class HandledMessage:
+    def __init__(self):
+        self.messages = []
+
+    def send_json(self, message: dict, to_consumer=None, ignore_trace=False):
+        self.messages.append([None, message, to_consumer, ignore_trace])
+
+    def group_send(self, group: str, message: dict, ignore_trace=False):
+        self.messages.append([group, message, None, ignore_trace])
+
+    def get_messages(self):
+        return self.messages
+
+    # TODO: perhaps passing lambda to handle message and perform post-processing is a good idea
+    async def send_all(self, consumer):
+        """
+        Sends all prepared messages in case post-processing is not needed.
+        """
+        for group, message, receiver, _ in self.messages:
+            if group is not None:
+                await consumer.channel_layer.group_send(group, message)
+                return
+
+            if receiver is not None:
+                await receiver.send_json(message)
+                return
+
+            await consumer.send_json(message)
+
+
+class Handlers:
+    def __init__(self):
+        self.map = {}
+
+    def register(self, command):
+        def inner(func):
+            x = inspect.getfullargspec(func)
+            positional = x.args
+            args = x.varargs
+            kwargs = x.varkw
+            assert positional[1] == "proxy"
+            assert args is None
+            assert kwargs is None
+            self.map[command] = {'handler': func, 'args': positional[2:]}
+            return func
+        return inner

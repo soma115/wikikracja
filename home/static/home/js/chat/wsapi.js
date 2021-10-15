@@ -22,7 +22,7 @@ export default class WsApi {
       }
 
       if (data.__TRACE_ID) {
-        receiveAsync(data);
+        this.receiveAsync(data);
       } else {
         this.receiveSync(data);
       }
@@ -72,8 +72,8 @@ export default class WsApi {
 
   receiveAsync(obj) {
     let ID = obj.__TRACE_ID;
-    window.chat_promises[ID].resolve(obj);
-    delete window.chat_promises[ID];
+    this.promises[ID].resolve(obj);
+    delete this.promises[ID];
   }
 
 
@@ -81,7 +81,7 @@ export default class WsApi {
   joinRoom(room_id) {
     this.sendJson({
         "command": "join",
-        "room": room_id
+        "room_id": room_id
     });
   }
 
@@ -95,7 +95,7 @@ export default class WsApi {
   sendMessage(room_id, message, is_anonymous) {
     this.sendJson({
         "command": "send",
-        "room": room_id,  // room number
+        "room_id": room_id,  // room number
         "message": message,  // value, message to send
         is_anonymous: is_anonymous // get bool from checkbox
     });
@@ -105,14 +105,14 @@ export default class WsApi {
       this.sendJson({
         "command": "edit-message",
         "message_id": message_id,
-        "message": message
+        "new_message": message
       });
   }
 
   addVote(vote, message_id) {
     this.sendJson({
       "command": "message-add-vote",
-      "event": vote,
+      "vote": vote,
       "message_id": message_id
     });
   }
@@ -120,7 +120,7 @@ export default class WsApi {
   removeVote(vote, message_id) {
     this.sendJson({
       "command": "message-remove-vote",
-      "event": vote,
+      "vote": vote,
       "message_id": message_id
     });
   }
@@ -128,7 +128,7 @@ export default class WsApi {
   leaveRoom(room_id) {
     this.sendJson({
       "command": "leave",
-      "room": room_id
+      "room_id": room_id
     });
   }
 

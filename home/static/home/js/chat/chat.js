@@ -163,13 +163,11 @@ WS_API.receiveSync = (data) => {
     if (event.your_vote /* vote type e.g. upvote or downvote or null if it wasn't you who triggered */ ) {
       // find vote button you pressed
       let active_btn = $(`.msg-vote[data-event-name="${event.your_vote}"][data-message-id="${event.message_id}"]`);
-      console.log("make all inactive");
       // make all vote buttons appear incative
       message_div.find('.msg-vote').removeClass('active');
 
       // vote was added
       if (event.add) {
-        console.log("activate my vote", active_btn);
         active_btn.addClass('active');
       } /* vote was removed */ else {
         // do nothing, all buttons are inactive
@@ -194,7 +192,8 @@ WS_API.receiveSync = (data) => {
 
 WS_API.wsOnConnect = async () => {
   // Request data about who is online
-  online = await WS_API.getOnlineUsers();
+  let response = await WS_API.getOnlineUsers();
+  let online = response.online_data;
   for (let user of online) {
     let room_icon = $(`.room-link[data-room-id="${user.room_id}"]`);
     if (user.online) {

@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from .exceptions import ClientError
-from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry, RoomRegistry
+from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry, RoomRegistry, HandledMessage, Handlers
 from .models import Message, Room, MessageVote, MessageHistory, MessageHistoryEntry
 from datetime import datetime as dt
 from django.contrib.auth.models import User
@@ -23,6 +23,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     http://channels.readthedocs.io/en/latest/topics/consumers.html
     """
 
+    # map of commands and handlers
+    handlers = Handlers()
+
     online_registry = OnlineUserRegistry()
 
     # WebSocket event handlers
@@ -41,7 +44,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
             # register user as online
             ChatConsumer.online_registry.make_online(self.scope['user'], self)
-            await self.send_online_update(True)
+
+            proxy = HandledMessage()
+            await self.send_online_update(proxy, True)
+            await proxy.send_all(self)
 
         # Store which rooms the user has joined on this connection
         self.rooms = RoomRegistry()
@@ -59,7 +65,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
         # remove user from online list
         ChatConsumer.online_registry.make_offline(self.scope['user'])
-        await self.send_online_update(False)
+
+        proxy = HandledMessage()
+        await self.send_online_update(proxy, False)
+        await proxy.send_all(self)
 
     async def receive_json(self, content):
         """
@@ -68,28 +77,89 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         # Messages will have a "command" key we can switch on
         command = content.get("command", None)
+
+        # trace id is a identifier attached to the message by client,
+        # that makes request and hopes to get response back with same trace id.
+        # therefore, trace id must be attached to the message sent to client
+        # who sent message containing it.
+        trace_id = content.get("__TRACE_ID")
+
+        # handler_map = {
+        #     "join": {
+        #         "handler": self.join_room,
+        #         "args": ["room"]
+        #     },
+        #     "leave": {
+        #         "handler": self.leave_room,
+        #         "args": ["room"]
+        #     },
+        #     "send": {
+        #         "handler": self.send_room,
+        #         "args": ["room", "message", "is_anonymous"]
+        #     },
+        #     "get-online-users": {
+        #         "handler": self.send_online_users,
+        #         "args": []
+        #     },
+        #     "room-seen": {
+        #         "handler": self.handle_seen_room,
+        #         "args": ["room_id"]
+        #     },
+        #     "message-add-vote": {
+        #         "handler": self.handle_add_vote,
+        #         "args": ["event", "message_id"]
+        #     },
+        #     "message-remove-vote": {
+        #         "handler": self.handle_remove_vote,
+        #         "args": ["event", "message_id"]
+        #     },
+        #     "edit-message": {
+        #         "handler": self.handle_edit_message,
+        #         "args": ["message_id", "message"]
+        #     },
+        #     "get-message-history": {
+        #         "handler": self.send_message_history,
+        #         "args": ["message_id"]
+        #     },
+        # }
+
+        handler_data = ChatConsumer.handlers.map.get(command)
+        # Unknown command
+        if handler_data is None:
+            return
+
+        handler = handler_data.get('handler')
+        arg_names = handler_data.get('args')
+        args = {arg_name: content[arg_name] for arg_name in arg_names}
+
         try:
-            if command == "join":
-                # Make them join the room
-                await self.join_room(content["room"])
-            elif command == "leave":
-                # Leave the room
-                await self.leave_room(content["room"])
-            elif command == "send":
-                await self.send_room(content["room"], content["message"], content["is_anonymous"])  # goes to chat and DB
-                # await self.send_room(content["room"], str(content["message"]+'===='))
-            elif command == "get-online-users":
-                await self.send_online_users()
-            elif command == "room-seen":
-                await self.handle_seen_room(content['room_id'])
-            elif command == "message-add-vote":
-                await self.handle_add_vote(content['event'], content['message_id'])
-            elif command == "message-remove-vote":
-                await self.handle_remove_vote(content['event'], content['message_id'])
-            elif command == "edit-message":
-                await self.handle_edit_message(content['message_id'], content['message'])
-            elif command == "get-message-history":
-                await self.send_message_history(content['message_id'])
+            result = HandledMessage()
+            # Each handler must have named argument 'proxy', that will collect prepared ws messages for post-processing.
+            # After handler has executed and prepared all the messages, we can insert trace ID to the messages,
+            # unless it was explicitly specified not to.
+            # It is done to prevent some messages sent by handler to be treated as response to request.
+            # For example, client asks for messages history and server needs to notify everyone
+            # that user fetches message history. It will be done in same handler, but notification will not have trace id,
+            # unlike message history sent to user.
+            # bruh that's a lot of text.
+            await handler(self=self, proxy=result, **args)
+            # there are 3 possible scenarios:
+            #  1) handler sends message to the consumer who sent command
+            #  2) handler sends message to another consumer
+            #  3) handler sends message to group
+            for group, message, to_consumer, ignore_trace in result.get_messages():
+                if group is None:
+                    if to_consumer:
+                        await to_consumer.send_json(message)
+                    else:
+                        # Attach trace id only to messages sent to same client,
+                        # As it is the one awaiting this response
+                        if not ignore_trace:
+                            message['__TRACE_ID'] = trace_id
+                        await self.send_json(message)
+                else:
+                    print(group)
+                    await self.channel_layer.group_send(group, message)
         except ClientError as e:
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
@@ -98,7 +168,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     # Command helper methods called by receive_json #
     #################################################
 
-    async def join_room(self, room_id):  # and scope{user, }!
+    @handlers.register("join")
+    async def join_room(self, proxy: HandledMessage, room_id: int):  # and scope{user, }!
         """
         Called by receive_json when someone sent a join command.
         """
@@ -114,8 +185,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             room.group_name,    # room-1
             self.channel_name,  # specific.BZcPrnWw!vvvelNWGEgbE
         )
+
         # Instruct their client to finish opening the room
-        await self.send_json({
+        proxy.send_json({
             "join": str(room.id),  # 1
             "title": room.title,   # "Room 1"
             "slow_mode_delay": get_slow_mode_delay(room),  # delay in seconds or None if slow mode is disabled
@@ -131,24 +203,23 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             # message: id, sender_id, time, text, room_id
             # t=str(message['time'])[0:19]
             data = format_chat_message(
-                    room_id=room_id,
-                    user_id=u.id,
-                    anonymous=message['anonymous'],
-                    message=message['text'],
-                    message_id=message['id'],
-                    new=False,
-                    upvotes=upvotes,
-                    downvotes=downvotes,
-                    edited=await self.was_message_edited(message['id']),
-                    date=message['time']
-                )
-            print(data)
-            await self.channel_layer.send(
-                cn,
-                data
+                room_id=room_id,
+                user_id=u.id,
+                anonymous=message['anonymous'],
+                message=message['text'],
+                message_id=message['id'],
+                new=False,
+                upvotes=upvotes,
+                downvotes=downvotes,
+                edited=await self.was_message_edited(message['id']),
+                date=message['time'],
             )
+            proxy.send_json(await self.format_chat_message_data(data))
 
-    async def leave_room(self, room_id):
+        return messages
+
+    @handlers.register("leave")
+    async def leave_room(self, proxy: HandledMessage, room_id):
         """
         Called by receive_json when someone sent a leave command.
         """
@@ -164,11 +235,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             self.channel_name,
         )
         # Instruct their client to finish closing the room
-        await self.send_json({
-            "leave": str(room.id),
-        })
+        proxy.send_json({"leave": str(room.id)})
 
-    async def send_room(self, room_id, message, is_anonymous=False):
+    @handlers.register("send")
+    async def send_room(self, proxy: HandledMessage, room_id, message, is_anonymous=False):
         """
         Called by receive_json when someone
         sends a message to a room.
@@ -205,7 +275,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         upvotes, downvotes = await self.add_vote("upvote", message_id)
 
         # ...and send to the group info about it
-        await self.channel_layer.group_send(
+        proxy.group_send(
             room.group_name,
             format_chat_message(
                 room_id=room_id,
@@ -233,9 +303,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             if consumer.rooms.present(room):
                 continue
 
-            await consumer.send_unsee_room(room)
+            await consumer.send_unsee_room(proxy=proxy, room=room)
 
-    async def send_online_users(self):
+    @handlers.register("get-online-users")
+    async def send_online_users(self, proxy: HandledMessage):
         """ Send list of private chats with online user in it. Sent on request. """
         online_data = []
         for online_user_id in ChatConsumer.online_registry.get_online():
@@ -250,57 +321,20 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 'online': True,
             })
 
-        await self.send_json({
+        proxy.send_json({
             'online_data': online_data
         })
 
-    async def send_online_update(self, is_online):
-        updated_user = self.scope['user']
-        for room_with_user in await self.find_rooms_with(updated_user):
-
-            user_to_notify = await database_sync_to_async(
-                lambda x: room_with_user.get_other(x)
-            )(updated_user)
-
-            if not ChatConsumer.online_registry.is_online(user_to_notify):
-                continue
-
-            consumer = ChatConsumer.online_registry.get_consumer(user_to_notify)
-            await consumer.send_json({
-                'online_data': [{
-                    'user_id': updated_user.id,
-                    'room_id': room_with_user.id,
-                    'online': is_online
-                }]
-            })
-
-    async def handle_seen_room(self, room_id):
+    @handlers.register("room-seen")
+    async def handle_seen_room(self, proxy: HandledMessage, room_id):
         """ Handle user reading channel """
         room = await self.get_room(room_id)
 
         if not await self.room_is_seen(room):
             await self.see_room(room)
 
-    async def send_unsee_room(self, room):
-        """ Make room appear not seen for user """
-
-        # if user is in this room right now do not send
-        if self.rooms.present(room):
-            return
-
-        # room is not seen at the moment
-        if not self.room_is_seen(room):
-            return
-
-        # update database
-        await self.unsee_room(room)
-
-        # send update to user
-        await self.send_json({
-            "unsee_room": room.id
-        })
-
-    async def handle_add_vote(self, event: str, message_id: int):
+    @handlers.register("message-add-vote")
+    async def handle_add_vote(self, proxy: HandledMessage, vote: str, message_id: int):
         existing_vote = await self.get_vote(message_id)
         opposite_vote_events = {
             "upvote": "downvote",
@@ -309,19 +343,19 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
         if existing_vote is not None:
             # Prevent duplicate votes
-            if existing_vote.vote == event:
+            if existing_vote.vote == vote:
                 return
 
-            opposite_event = opposite_vote_events.get(event)
+            opposite_event = opposite_vote_events.get(vote)
             # If two vote events conflict with each other e.g. (upvote and downvote)
             # remove conflicting vote and then add new one
             if opposite_event is not None:
                 await self.remove_vote(opposite_event, message_id)
 
-        upvotes, downvotes = await self.add_vote(event, message_id)
+        upvotes, downvotes = await self.add_vote(vote, message_id)
         room = await self.get_room_by_message(message_id)
 
-        await self.channel_layer.group_send(
+        proxy.group_send(
             room.group_name,
             {
                 "type": "chat.vote",
@@ -330,18 +364,19 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "upvotes": upvotes,
                     "downvotes": downvotes,
                     "user_id": self.scope['user'].id,
-                    "vote": event,
+                    "vote": vote,
                     "add": True,
                 }
             }
         )
 
-    async def handle_remove_vote(self, vote: str, message_id: int):
+    @handlers.register("message-remove-vote")
+    async def handle_remove_vote(self, proxy: HandledMessage, vote: str, message_id: int):
         upvotes, downvotes = await self.remove_vote(vote, message_id)
 
         room = await self.get_room_by_message(message_id)
 
-        await self.channel_layer.group_send(
+        proxy.group_send(
             room.group_name,
             {
                 "type": "chat.vote",
@@ -356,22 +391,21 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             }
         )
 
-    async def handle_edit_message(self, message_id: int, new_message: str):
+    @handlers.register("edit-message")
+    async def handle_edit_message(self, proxy: HandledMessage, message_id: int, new_message: str):
         message = await self.get_message(message_id)
 
         # only sender can edit own message
         if await self.get_message_sender(message) != self.scope['user']:
-            print(f"users not equal{await self.get_message_sender(message)} and {self.scope['user']}")
             return
 
         # if new message is same don't save it
         if message.text == new_message:
-            print("message is same")
             return
 
         room = await self.get_room_by_message(message_id)
 
-        await self.channel_layer.group_send(
+        proxy.group_send(
             room.group_name,
             {
                 "type": "chat.edit",
@@ -386,9 +420,66 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Save old state and update current state in database
         await self.edit_message_and_history(message_id, new_message)
 
-    async def send_message_history(self, message_id):
+    @handlers.register("get-message-history")
+    async def send_message_history(self, proxy: HandledMessage, message_id):
         message_states = await self.get_message_states(message_id)
-        await self.send_json({"message_history": message_states})
+        proxy.send_json({"message_history": message_states})
+
+    ##########################################################
+    # Helper functions called by custom or built-in handlers #
+    ##########################################################
+
+    async def send_online_update(self, proxy: HandledMessage, is_online):
+        updated_user = self.scope['user']
+        for room_with_user in await self.find_rooms_with(updated_user):
+
+            user_to_notify = await database_sync_to_async(
+                lambda x: room_with_user.get_other(x)
+            )(updated_user)
+
+            if not ChatConsumer.online_registry.is_online(user_to_notify):
+                continue
+
+            consumer = ChatConsumer.online_registry.get_consumer(user_to_notify)
+
+            proxy.send_json({
+                'online_data': [{
+                    'user_id': updated_user.id,
+                    'room_id': room_with_user.id,
+                    'online': is_online
+                }]
+            }, to_consumer=consumer)
+
+    async def send_unsee_room(self, proxy: HandledMessage, room):
+        """ Make room appear not seen for user """
+
+        # if user is in this room right now do not send
+        if self.rooms.present(room):
+            return
+
+        # room is not seen at the moment
+        if not self.room_is_seen(room):
+            return
+
+        # update database
+        await self.unsee_room(room)
+
+        # send update to user
+        proxy.send_json({
+            "unsee_room": room.id
+        })
+
+    async def format_chat_message_data(self, event):
+        user = await self.get_user_by_id(event["user_id"])
+        vote = await self.get_vote(event['message_id'])
+
+        return {
+            **event,  # copy event
+            # Override some of fields based on receiver
+            'username': 'Anonymous User' if event["anonymous"] else user.username,
+            "new": event["new"] if self.scope['user'] != user else False,
+            "your_vote": vote.vote if vote is not None else None, "own": self.scope['user'] == user
+        }
 
     ###########################################################
     # Handlers for messages sent over the channel layer       #
@@ -404,18 +495,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when someone has messaged our chat
         """
-        user = await self.get_user_by_id(event["user_id"])
-        vote = await self.get_vote(event['message_id'])
 
-        data = {
-            **event,  # copy event
-            # Override some of fields based on receiver
-            'username': 'Anonymous User' if event["anonymous"] else user.username,
-            "new": event["new"] if self.scope['user'] != user else False,
-            "your_vote": vote.vote if vote is not None else None, "own": self.scope['user'] == user
-        }
-
-        await self.send_json(data)
+        await self.send_json(
+            await self.format_chat_message_data(event)
+        )
 
     async def chat_vote(self, event):
         """
