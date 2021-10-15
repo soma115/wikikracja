@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 from channels.db import database_sync_to_async
 from django.db import IntegrityError
 
+from .group_messages import format_chat_message
+
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
     """
@@ -128,20 +130,22 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             upvotes, downvotes = await self.count_votes(message['id'])
             # message: id, sender_id, time, text, room_id
             # t=str(message['time'])[0:19]
+            data = format_chat_message(
+                    room_id=room_id,
+                    user_id=u.id,
+                    anonymous=message['anonymous'],
+                    message=message['text'],
+                    message_id=message['id'],
+                    new=False,
+                    upvotes=upvotes,
+                    downvotes=downvotes,
+                    edited=await self.was_message_edited(message['id']),
+                    date=message['time']
+                )
+            print(data)
             await self.channel_layer.send(
                 cn,
-                {
-                    "type": "chat.message",
-                    "room_id": room_id,
-                    "user_id": u.id,
-                    "anonymous": message['anonymous'],
-                    "message": message['text'],
-                    "new": False,
-                    "message_id": message['id'],
-                    "upvotes": upvotes,
-                    "downvotes": downvotes,
-                    "edited": await self.was_message_edited(message['id'])
-                }
+                data
             )
 
     async def leave_room(self, room_id):
@@ -203,19 +207,18 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # ...and send to the group info about it
         await self.channel_layer.group_send(
             room.group_name,
-            {
-                "type": "chat.message",
-                "room_id": room_id,
-                "user_id": self.scope["user"].id,
-                "anonymous": is_anonymous,
-                "message": message,  # goes to chat and DB
-                "message_id": message_id,
-                "upvotes": upvotes,
-                "downvotes": downvotes,
-                "new": True,
-                "edited": False,  # not necessary but let it be
-                # "time": dt.now(),
-            }
+            format_chat_message(
+                room_id=room_id,
+                user_id=self.scope['user'].id,
+                anonymous=is_anonymous,
+                message=message,
+                message_id=message_id,
+                upvotes=upvotes,
+                downvotes=downvotes,
+                new=True,
+                edited=False,
+                date=msg.time
+            )
         )
 
         # Make rooms appear unseen for some users
@@ -401,35 +404,18 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when someone has messaged our chat
         """
-        # print(event["time"])
-        # for i in event:
-        #     print(i)
-        # print(event)
-        # Send a message down to the client
         user = await self.get_user_by_id(event["user_id"])
         vote = await self.get_vote(event['message_id'])
 
-        await self.send_json( 
-            {
-                # type, room_id, username, message
-                "room": event["room_id"],
-                # Hide username if message is anonymous
-                "username": 'Anonymous User' if event["anonymous"] else user.username,
-                "message": event["message"],  # goes only from DB to chat. Display alteration possible but only from DB.
-                # "time": event["time"],
-                # "time": dt.now(),
-                "time": str(dt.now()),  # tylko to dziala
-                # let client know if message was sent by a another user (True) or loaded from database (False)
-                "new": event["new"] if self.scope['user'] != user else False,
-                "message_id": event['message_id'],  # send message id to identify upvotes
-                "upvotes": event['upvotes'],
-                "downvotes": event['downvotes'],
-                "your_vote": vote.vote if vote is not None else None,
-                "edited": event['edited'],
-                "own": self.scope['user'] == user,
-                # "time": 'czas',
-            },
-        )
+        data = {
+            **event,  # copy event
+            # Override some of fields based on receiver
+            'username': 'Anonymous User' if event["anonymous"] else user.username,
+            "new": event["new"] if self.scope['user'] != user else False,
+            "your_vote": vote.vote if vote is not None else None, "own": self.scope['user'] == user
+        }
+
+        await self.send_json(data)
 
     async def chat_vote(self, event):
         """

@@ -1,5 +1,31 @@
 $(function () {
 
+function formatDate(someDateTimeStamp) {
+    let fulldays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let dt = new Date(someDateTimeStamp),
+        date = dt.getDate(),
+        month = months[dt.getMonth()],
+        timeDiff = someDateTimeStamp - Date.now(),
+        diffDays = new Date().getDate() - date,
+        diffMonths = new Date().getMonth() - dt.getMonth(),
+        diffYears = new Date().getFullYear() - dt.getFullYear();
+
+    if (diffYears === 0 && diffDays === 0 && diffMonths === 0) {
+      return "Today";
+    } else if(diffYears === 0 && diffDays === 1) {
+      return "Yesterday";
+    } else if(diffYears === 0 && diffDays === -1) {
+      return "Tomorrow";
+    } else if(diffYears === 0 && (diffDays < -1 && diffDays > -7)) {
+      return fulldays[dt.getDay()];
+    } else if(diffYears >= 1) {
+      return month + " " + date + ", " + new Date(someDateTimeStamp).getFullYear();
+    } else {
+        return month + " " + date;
+    }
+}
+
 // Correctly decide between ws:// and wss://
 var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
 var ws_path = ws_scheme + '://' + window.location.host + "/chat/stream/";
@@ -87,14 +113,15 @@ socket.onmessage = function (message) {
         let raw_message = data.message
         let matches = raw_message.match(URL_REGEX);
         let formatted = raw_message;
-        if (matches != null){
+        if (matches != null) {
           for (let match of matches) {
             formatted = raw_message.replace(match, `<a href='${match}'>${match}</a>`);
           }
         }
 
-        let type = $(`.room-link[data-room-id="${data.room}"`).attr("data-room-type");
-        var msgdiv = $("#room-" + data.room + " .messages");
+        let type = $(`.room-link[data-room-id="${data.room_id}"`).attr("data-room-type");
+
+        var msgdiv = $("#room-" + data.room_id + " .messages");
         var ok_msg = `<div class='message' data-message-id=${data.message_id}>` +
                         // "<span class='body'>" + data.time.slice(0,19) + " " + "</span>" +
                         //"<span class='body'>" + data.time + " " + "</span>" +
@@ -108,6 +135,16 @@ socket.onmessage = function (message) {
                          (data.own ? `<div class='edit-message' data-message-id='${data.message_id}'>edit</div>` : "") +
                          `<div class='show-history' ${data.edited ? "" : "style='display:none'"} data-message-id='${data.message_id}'>show history</div>` +
                         "</div>";
+
+        let current_banner = formatDate(data.timestamp);
+
+        let previous_banner = $('.date-banner').length ? $('.date-banner').last().text() : null;
+
+        if (previous_banner != current_banner) {
+          console.log();
+          msgdiv.append(`<div class='date-banner'>${current_banner}</div>`);
+        }
+
         msgdiv.append(ok_msg);
 
         msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
