@@ -49,24 +49,31 @@ WS_API.receiveSync = (data) => {
       let roomdiv = DOM_API.createRoomDiv(data.join, data.title, data.public);
 
       // Hook up send button to send a message
-      roomdiv.find("form").on("submit", function () {
+      roomdiv.find("form").on("submit", async function (e) {
+        e.preventDefault();
           let edit_message_id = roomdiv.find("input.message-input").data('edit-message');
-          let to_send;
 
           // message being edited
           if (edit_message_id) {
             let message = roomdiv.find("input.message-input").val();
             WS_API.editMessage(edit_message_id, message);
           } else {
-            to_send = {
-                "command": "send",
-                "room": data.join,  // room number
-                "message": roomdiv.find("input.message-input").val(),  // value, message to send
-                is_anonymous: roomdiv.find(".anonymous-switch").is(":checked") // get bool from checkbox
-            }
+            let attachments = {};
+
             let message = roomdiv.find("input.message-input").val();
             let is_anonymous = roomdiv.find(".anonymous-switch").is(":checked");
-            WS_API.sendMessage(data.join, message, is_anonymous)
+
+            let files = roomdiv.find('input.file-input')[0].files;
+            console.log("files: ", files, roomdiv.find('input.file-input'));
+            if (files.length) {
+              console.log("there are ", files.length, "files");
+              let response = await WS_API.uploadFiles(files);
+              console.log("response", response);
+              console.log("got filenames: ", response.filenames);
+              attachments.images = response.filenames;
+            }
+
+            WS_API.sendMessage(data.join, message, is_anonymous, attachments)
           }
 
 
@@ -75,13 +82,12 @@ WS_API.receiveSync = (data) => {
 
           // Clears input field
           roomdiv.find("input.message-input").val(""); // TODO: Here we can plugin edititing old messages (with val)
-          return false;
       });
 
   // Handle leaving
   } else if (data.leave) {
       console.log("Leaving room " + data.leave);
-      getRoom(data.leave).remove();
+      DOM_API.getRoom(data.leave).remove();
 
   // Handle getting a message
 } else if (data.message) {
@@ -90,7 +96,7 @@ WS_API.receiveSync = (data) => {
         data.room_id, data.message_id,
         data.username, data.message,
         data.upvotes, data.downvotes,
-        data.own, data.edited
+        data.own, data.edited, data.attachments
       );
 
       let current_banner = formatDate(data.timestamp);
@@ -167,6 +173,26 @@ WS_API.wsOnConnect = async () => {
   }
 }
 
+$(document).on("change", ".file-input", function(e) {
+    let room_id = $(this).data('room-id');
+    let files = this.files;
+    let preview_container = DOM_API.getPreviewDiv(room_id);
+    preview_container.empty();
+
+    for (let i = 0; i < files.length; ++i){
+      let file = files.item(i);
+      var fr = new FileReader();
+
+      let preview_id = `preview-id-${i}-${room_id}`;
+
+      preview_container.append("<img class='image-preview' id='" + preview_id + "'>");
+      fr.onload = function(e) {
+        $(`#${preview_id}`)[0].src = this.result;
+      };
+
+      fr.readAsDataURL(file);
+    }
+});
 //class='msg-vote' data-event-name="upwote" data-message-id="${data.message_id}"
 // Vote button handler
 $(document).on("click",".msg-vote", function () {

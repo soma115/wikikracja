@@ -1,9 +1,14 @@
+import imghdr
+import uuid
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Room, Message
 from django.contrib.auth.models import User
 from chat.forms import RoomForm
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from datetime import datetime as dt
 from datetime import timedelta as td
 from django.utils import timezone
@@ -109,3 +114,26 @@ def chat(request):
         'ARCHIVE_CHAT_ROOM': td(days=s.ARCHIVE_CHAT_ROOM).days,
         'DELETE_CHAT_ROOM': td(days=s.DELETE_CHAT_ROOM).days,
     })
+
+
+@csrf_exempt
+def upload_image(request):
+    filenames = []
+    for image in request.FILES.getlist('images'):
+
+        file_type = imghdr.what(image)
+        image.seek(0)
+
+        file_bytes = image.read()
+        if len(file_bytes) > (s.UPLOAD_IMAGE_MAX_SIZE_MB * 1000000 * 2):
+            return JsonResponse({'error': 'file too big'})
+
+        if file_type is None:
+            return JsonResponse({'error': 'bad type'})
+
+        filename = f"{uuid.uuid4()}.{file_type}"
+        with open(f"{s.BASE_DIR}/media/uploads/{filename}", "wb") as f:
+            f.write(file_bytes)
+        filenames.append(filename)
+
+    return JsonResponse({'filenames': filenames})

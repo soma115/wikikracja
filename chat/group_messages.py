@@ -3,7 +3,8 @@ def format_chat_message(
         anonymous,
         message, message_id,
         upvotes, downvotes,
-        new, edited, date):
+        new, edited, date,
+        attachments: dict):
     """
     Return formatted dict with message data.
     Used to format messages loaded from DB or messages sent by user to chat
@@ -19,5 +20,6 @@ def format_chat_message(
         "downvotes": downvotes,
         "new": new,
         "edited": edited,
-        "timestamp": int(date.timestamp()) * 1000  # unix to ms
+        "timestamp": int(date.timestamp()) * 1000,  # unix to ms
+        "attachments": attachments,
     }

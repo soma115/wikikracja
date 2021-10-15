@@ -92,12 +92,13 @@ export default class WsApi {
     });
   }
 
-  sendMessage(room_id, message, is_anonymous) {
+  sendMessage(room_id, message, is_anonymous, attachments) {
     this.sendJson({
         "command": "send",
-        "room_id": room_id,  // room number
-        "message": message,  // value, message to send
-        is_anonymous: is_anonymous // get bool from checkbox
+        room_id,  // room number
+        message,  // value, message to send
+        is_anonymous,
+        attachments
     });
   }
 
@@ -143,5 +144,43 @@ export default class WsApi {
       "command": "get-message-history",
       "message_id": message_id,
     });
+  }
+
+  async uploadFiles(files) {
+    if (files.length == 0) {
+      alert("no files");
+      return new Promise((r, _)=>r({'filenames': []}));
+    }
+
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData();
+
+    let promise_funcs = {};
+
+    xhr.onreadystatechange = function(){
+       if (xhr.readyState==4 && xhr.status==200) {
+          promise_funcs.resolve(JSON.parse(xhr.responseText))
+       }
+    }
+
+    let promise = new Promise( (resolve, reject) => {
+        promise_funcs.resolve = resolve;
+        promise_funcs.reject = reject;
+    });
+
+    xhr.open("POST", "upload/", true);
+    xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
+    for(let i = 0; i < files.length; ++i) {
+        let file = files.item(i);
+        let name = file.name;
+        let size = file.size;
+        if (size > 10000000) {
+          alert("file is too big");
+          continue;
+        }
+        formData.append("images", file);
+    }
+    xhr.send(formData);
+    return promise;
   }
 }

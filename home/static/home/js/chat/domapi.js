@@ -8,8 +8,10 @@ export default class DomApi {
         "<div class='room' data-room-id='" + room_id + "' id='room-" + room_id + "'>" +
         "<h5>" + title + "</h5>" +
         "<div class='messages'></div>" +
-        "<form class='d-flex'>" +
+        `<div class='image-preview-container' data-room-id='${room_id}'></div>` +
+        "<form class='d-flex' onsubmit='false'>" +
         "<input class='col-12 col-sm message-input'>" +
+        `<input type='file' class='file-input' data-room-id='${room_id}' multiple='multiple'>` +
         (is_public ? "<input class='anonymous-switch' type='checkbox' />" : "") +
         "<button class='btn btn-danger btn-sm'>↲</button></form>" +
         "</div>"
@@ -28,12 +30,25 @@ export default class DomApi {
     return this.getRoom(room_id).find('.messages');
   }
 
-  addMessage(room_id, message_id, username, message, upvotes, downvotes, own, edited) {
+  addMessage(room_id, message_id, username, message, upvotes, downvotes, own, edited, attachments) {
     let type = this.getRoomType(room_id);
+
+    let attachments_html = "<div class='attachment-image-container'>";
+
+    for (let filename of attachments?.images || []) {
+      attachments_html += `<img class='attached-image' src='/media/uploads/${filename}'>`
+    }
+    attachments_html += "</div>"
+
     let ok_msg = `
     <div class='message' data-message-id=${message_id}>` +
     "<span class='username'>" + username + ": " + "</span>" +
-    "<span class='body'>" + this.formatMessage(message) + "</span>" +
+    "<div class='body'>" +
+    attachments_html +
+    "<span class='text'>" +
+    this.formatMessage(message) +
+    "</span>" +
+    "</div>" +
     (type == "public" ?
     `<i data-event-name="upvote" data-message-id="${message_id}" class="msg-vote fas fa-check"></i>
      <i data-event-name="downvote" data-message-id="${message_id}" class="msg-vote fas fa-times"></i>
@@ -71,7 +86,7 @@ export default class DomApi {
 
   editMessageText(message_id, text) {
     let f = this.formatMessage(text)
-    return this.getMessageDiv(message_id).find("span.body").html(f);
+    return this.getMessageDiv(message_id).find(".text").html(f);
   }
 
   showHistoryButton(message_id) {
@@ -87,7 +102,7 @@ export default class DomApi {
   }
 
   getMessageText(message_id) {
-    return this.getMessageDiv(message_id).find("span.body").text();
+    return this.getMessageDiv(message_id).find(".text").text();
   }
 
   formatMessage(raw_message) {
@@ -100,5 +115,9 @@ export default class DomApi {
       }
     }
     return formatted;
+  }
+
+  getPreviewDiv(room_id) {
+    return $(".image-preview-container[data-room-id='" + room_id +"']")
   }
 }

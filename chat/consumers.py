@@ -1,10 +1,15 @@
+import base64
 import datetime
+import imghdr
+import io
+import os
+import uuid
 
 from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from .exceptions import ClientError
 from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry, RoomRegistry, HandledMessage, Handlers
-from .models import Message, Room, MessageVote, MessageHistory, MessageHistoryEntry
+from .models import Message, Room, MessageVote, MessageHistory, MessageHistoryEntry, MessageAttachment
 from datetime import datetime as dt
 from django.contrib.auth.models import User
 from channels.db import database_sync_to_async
@@ -59,7 +64,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Leave all the rooms we are still in
         for room_id in self.rooms.items():
             try:
-                await self.leave_room(room_id)
+                proxy = HandledMessage()
+                await self.leave_room(proxy, room_id)
+                await proxy.send_all(self)
             except ClientError:
                 pass
 
@@ -195,7 +202,6 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         })
 
         # Load all messages from DB to Chat
-        cn = self.channel_name
         messages = await self.get_messages(room_id)
         for message in messages:
             u = await self.get_user_by_id(message['sender_id'])
@@ -213,6 +219,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 downvotes=downvotes,
                 edited=await self.was_message_edited(message['id']),
                 date=message['time'],
+                attachments=await self.load_attachments(message['id']),
             )
             proxy.send_json(await self.format_chat_message_data(data))
 
@@ -238,7 +245,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         proxy.send_json({"leave": str(room.id)})
 
     @handlers.register("send")
-    async def send_room(self, proxy: HandledMessage, room_id, message, is_anonymous=False):
+    async def send_room(self, proxy: HandledMessage, room_id, message, is_anonymous, attachments):
         """
         Called by receive_json when someone
         sends a message to a room.
@@ -247,6 +254,14 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Check they are in this room
         if int(room_id) not in self.rooms.items():
             raise ClientError("ROOM_ACCESS_DENIED")
+
+        # verify that all attachments are valid
+        for key, value in attachments.items():
+            if key not in ('images',):
+                raise ClientError("BAD_ATTACHMENT_TYPE")
+            for filename in value:
+                if not os.path.exists(f"{settings.BASE_DIR}/media/uploads/{filename}"):
+                    raise ClientError("FILE_NOT_FOUND")
 
         # Get the room...
         room = await get_room_or_error(room_id, self.scope["user"])
@@ -271,6 +286,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         msg = Message(sender=u, text=message, room=r, anonymous=is_anonymous)  # time is added in a models.py
         message_id = await self.save_message(msg)
 
+        await self.save_attachments(message_id, attachments)
+
         # Add upvote by author (default behaviour)
         upvotes, downvotes = await self.add_vote("upvote", message_id)
 
@@ -287,7 +304,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 downvotes=downvotes,
                 new=True,
                 edited=False,
-                date=msg.time
+                date=msg.time,
+                attachments=attachments,
             )
         )
 
@@ -651,3 +669,18 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             {"text": state.text, "date": int(state.time.timestamp())} for state in history.entries.all().order_by("-time")
         ]
         return states
+
+    @database_sync_to_async
+    def save_attachments(self, message_id, attachments):
+        for attachment_type, filenames in attachments.items():
+            for filename in filenames:
+                MessageAttachment.objects.create(message_id=message_id, type=attachment_type, filename=filename)
+
+    @database_sync_to_async
+    def load_attachments(self, message_id):
+        attachments = {}
+        for attachment in MessageAttachment.objects.filter(message_id=message_id):
+            attachments_of_type = attachments.get(attachment.type, [])
+            attachments_of_type.append(attachment.filename)
+            attachments[attachment.type] = attachments_of_type
+        return attachments

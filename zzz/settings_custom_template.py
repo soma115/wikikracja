@@ -50,3 +50,4 @@ DELETE_CHAT_ROOM = 365              # default 365 days
 SLOW_MODE = {
     "room name or *": 10            # delay between messages in seconds
 }
+UPLOAD_IMAGE_MAX_SIZE_MB = 10       # max size of uploaded image, MB

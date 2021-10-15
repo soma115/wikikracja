@@ -79,7 +79,7 @@ class HandledMessage:
     def __init__(self):
         self.messages = []
 
-    def send_json(self, message: dict, to_consumer=None, ignore_trace=False):
+    def send_json(self, message: Union[dict, str, int, float], to_consumer=None, ignore_trace=False):
         self.messages.append([None, message, to_consumer, ignore_trace])
 
     def group_send(self, group: str, message: dict, ignore_trace=False):

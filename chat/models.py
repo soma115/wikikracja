@@ -114,3 +114,9 @@ class MessageHistoryEntry(models.Model):
     history = models.ForeignKey(MessageHistory, on_delete=models.CASCADE, related_name="entries")
     text = models.TextField()
     time = models.DateTimeField(auto_now=True)
+
+
+class MessageAttachment(models.Model):
+    type = models.CharField(max_length=255)
+    filename = models.CharField(max_length=255)
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name="attachments")
