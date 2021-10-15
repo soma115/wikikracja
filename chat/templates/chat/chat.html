@@ -99,7 +99,7 @@
 {% endblock content %}
 
 {% block extra_body %}
-    <script src="{% static 'home/js/chat/domapi.js' %}"></script>
+    <script type="module" src="{% static 'home/js/chat/domapi.js' %}"></script>
     <script type="module" src="{% static 'home/js/chat/wsapi.js' %}"></script>
     <script type="module" src="{% static 'home/js/chat/chat.js' %}"></script>
 {% endblock extra_body %}
