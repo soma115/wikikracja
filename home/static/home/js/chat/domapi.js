@@ -142,7 +142,7 @@ export default class DomApi {
 
         <!-- it appears newlines and spaces are prererved, so no nice indents for message here -->
         <span class='text'>${this.formatMessage(message)}</span>
-        
+
       </div>
 
       <div class='footer'>
@@ -317,5 +317,22 @@ export default class DomApi {
     this.getMessageInput(room_id).removeData('edit-message');
       this.getMessageInput(room_id).val("")
     console.log(this.getMessageInput(room_id));
+  }
+
+  openBigImage(src) {
+    $('body').append(
+      `<div id="big-image">
+        <img src=${src}>
+        <div class='close-big-image'>
+          <i class="fa fas fa-times"></i>
+        </div>
+      </div>`
+    )
+    $('body').addClass('modal-open');
+  }
+
+  closeBigImage() {
+    $("#big-image").remove();
+    $('body').removeClass('modal-open');
   }
 }

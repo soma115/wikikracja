@@ -206,3 +206,23 @@ input[type='checkbox'] {
   top: 0;
   right: 0;
 }
+
+#big-image {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #bcbcbcb5;
+}
+
+.close-big-image {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 50px;
+}

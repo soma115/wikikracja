@@ -172,6 +172,26 @@ WS_API.wsOnConnect = async () => {
   }
 }
 
+$(document).on('click', '.attached-image', function(e) {
+  DOM_API.openBigImage($(this).attr('src'));
+});
+
+$(document).on('click', '#big-image img', function(e){
+  e.stopPropagation();
+});
+
+$(document).on('click', '.close-big-image', function() {
+  DOM_API.closeBigImage();
+});
+
+$(document).on('keydown', function() {
+  DOM_API.closeBigImage();
+});
+
+$(document).on('click', '#big-image', function(e) {
+  DOM_API.closeBigImage();
+});
+
 $(document).on('input', '.notifications-switch', function() {
   let room_id = $(this).data('room-id');
   WS_API.toggleNotifications(room_id, $(this).is(":checked"));
