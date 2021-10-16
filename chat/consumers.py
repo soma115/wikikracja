@@ -8,7 +8,8 @@ import uuid
 from django.conf import settings
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from .exceptions import ClientError
-from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry, RoomRegistry, HandledMessage, Handlers
+from .utils import get_room_or_error, get_slow_mode_delay, OnlineUserRegistry, RoomRegistry, HandledMessage, Handlers, \
+    helper_method
 from .models import Message, Room, MessageVote, MessageHistory, MessageHistoryEntry, MessageAttachment
 from datetime import datetime as dt
 from django.contrib.auth.models import User
@@ -98,7 +99,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
         handler = handler_data.get('handler')
         arg_names = handler_data.get('args')
-        args = {arg_name: content[arg_name] for arg_name in arg_names}
+        args = {}
+
+        for arg_name in arg_names:
+            arg = content.get(arg_name)
+            if arg is None:
+                return await self.send_json({"error": "DATA_MISSING"})
+
+            args[arg_name] = arg
+
         try:
             result = HandledMessage()
             # Each handler must have named argument 'proxy', that will collect prepared ws messages for post-processing.
@@ -163,6 +172,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
         # Load all messages from DB to Chat
         messages = await self.get_messages(room_id)
+        to_send = []
         for message in messages:
             latest_message_version = None
             history = await self.get_message_history(message['id'])
@@ -187,9 +197,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 latest_date=latest_message_version.time if latest_message_version else message['time'],
                 attachments=await self.load_attachments(message['id']),
             )
-            proxy.send_json(await self.format_chat_message_data(data))
-
-        return messages
+            to_send.append(await self.format_chat_message_data(data))
+        proxy.send_json({'messages': to_send})
 
     @handlers.register("leave")
     async def leave_room(self, proxy: HandledMessage, room_id):
@@ -436,6 +445,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     # Helper functions called by custom or built-in handlers #
     ##########################################################
 
+    @helper_method
     async def send_online_update(self, proxy: HandledMessage, is_online):
         updated_user = self.scope['user']
         for room_with_user in await self.find_rooms_with(updated_user):
@@ -457,6 +467,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 }]
             }, to_consumer=consumer)
 
+    @helper_method
     async def send_notification(self, proxy: HandledMessage, message_id):
         message = await self.get_message(message_id)
         sender = await self.get_message_sender(message_id)
@@ -467,10 +478,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 'body': message.text[:100],
                 'link': None,
             }
-        },
-            to_consumer=self
-        )
+        })
 
+    @helper_method
     async def send_unsee_room(self, proxy, room):
         # if user is in this room right now do not send
         if self.rooms.present(room):
@@ -479,20 +489,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # send update to user
         proxy.send_json({
             "unsee_room": room.id,
-        },
-            # we have to specify receiver because
-            # this is a utility method
-            # and can be called for any consumer,
-            # but proxy does not know about it
-            # and will call consumer.send_json()
-            # for consumer associated with handler
-            # TODO: decorator for utility methods
-            to_consumer=self
-        )
+        })
+
+    ###################
+    # Utility methods #
+    ###################
 
     async def format_chat_message_data(self, event):
         user = await self.get_user_by_id(event["user_id"])
         vote = await self.get_vote(event['message_id'])
+        del event['type']
 
         return {
             **event,  # copy event
@@ -516,10 +522,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when someone has messaged our chat
         """
-
-        await self.send_json(
-            await self.format_chat_message_data(event)
-        )
+        message = await self.format_chat_message_data(event)
+        await self.send_json({
+            "messages": [message],
+        })
 
     async def chat_vote(self, event):
         """

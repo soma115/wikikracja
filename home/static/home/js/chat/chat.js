@@ -29,11 +29,12 @@ WS_API.receiveSync = (data) => {
         let edit_message_id = DOM_API.getEditedMessageId(room_id);
 
         let message = DOM_API.getEnteredText(room_id);
+        console.log("message: ", message);
 
         // message being edited
         if (edit_message_id) {
-
           WS_API.editMessage(edit_message_id, message);
+          DOM_API.stopEditing(room_id);
         } else {
           let attachments = {};
           let is_anonymous = DOM_API.getAnonymousValue(room_id);
@@ -56,9 +57,6 @@ WS_API.receiveSync = (data) => {
         // remove files from input and image preview
         DOM_API.clearFiles(room_id);
 
-        // remove data about editing message
-        room.find("input.message-input").removeData('edit-message');
-
         // Clears input field
         room.find("input.message-input").val("");
       }
@@ -77,36 +75,39 @@ WS_API.receiveSync = (data) => {
       DOM_API.getRoom(data.leave).remove();
 
   // Handle getting a message
-} else if (data.message !== undefined /* empty messages are allowed */) {
-      let type = DOM_API.getRoomType(data.room_id);
+  } else if (data.messages) {
+    let msgdiv = DOM_API.getMessagesDiv(data.messages[0].room_id);
+
+    for (let message of data.messages) {
+      let type = DOM_API.getRoomType(message.room_id);
       DOM_API.addMessage(
-        data.room_id, data.message_id,
-        data.username, data.message,
-        data.upvotes, data.downvotes,
-        data.own, data.edited, data.attachments,
-        data.timestamp, data.latest_timestamp
+        message.room_id, message.message_id,
+        message.username, message.message,
+        message.upvotes, message.downvotes, message.your_vote,
+        message.own, data.edited, message.attachments,
+        message.timestamp, message.latest_timestamp
       );
 
-      let current_banner = formatDate(data.timestamp);
-      let banner_div = DOM_API.getLastMessageBanner(data.room_id);
+      let current_banner = formatDate(message.timestamp);
+      let banner_div = DOM_API.getLastMessageBanner(message.room_id);
       let previous_banner = banner_div.length ? banner_div.last().text() : null;
 
-      let msgdiv = DOM_API.getMessagesDiv(data.room_id);
       if (previous_banner != current_banner) {
         msgdiv.append(`<div class='date-banner'>${current_banner}</div>`);
       }
+    }
 
-      msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
+    msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
 
-      if (data.new) {
-          // handle new message in opened channel somehow
-      }
+    if (data.new) {
+        // handle new message in opened channel somehow
+    }
 
-      if (data.your_vote /* You voted for this message e.g. 'upvote' or 'downvote' */) {
-          // find message div and make button appear active
-          let active_btn = DOM_API.getVoteDiv(data.message_id, data.your_vote);
-          active_btn.addClass('active');
-      }
+    if (data.your_vote /* You voted for this message e.g. 'upvote' or 'downvote' */) {
+        // find message div and make button appear active
+        let active_btn = DOM_API.getVoteDiv(data.message_id, data.your_vote);
+        active_btn.addClass('active');
+    }
   } else if (data.unsee_room) {
     // room is seen if we are in it
     if ( inRoom(data.unsee_room) ) {
@@ -176,6 +177,11 @@ $(document).on('input', '.notifications-switch', function() {
   WS_API.toggleNotifications(room_id, $(this).is(":checked"));
 });
 
+$(document).on('click', ".stop-editing", function(e) {
+  let room_id = $(this).data("room-id");
+  DOM_API.stopEditing(room_id);
+});
+
 $(document).on('click', ".delete-images-preview", function(e) {
   let room_id = $(this).data("room-id");
   DOM_API.clearFiles(room_id);
@@ -231,10 +237,8 @@ $(document).on("click",".show-history", async function () {
 // Edit button handler
 $(document).on("click",".edit-message", function () {
   let message_id = $(this).data("message-id");
-  let text = DOM_API.getMessageText(message_id);
-  let msg_inp = $(this).closest('.room').find(".message-input");
-  msg_inp.val(text);
-  msg_inp.data('edit-message', message_id);
+  let room_id = $(this).data('room-id');
+  DOM_API.setEditing(room_id, message_id);
 });
 
 // Room join/leave

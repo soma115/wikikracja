@@ -24,6 +24,19 @@ export default class DomApi {
             <div class='messages'></div>
 
             <div style='position: relative'>
+
+              <div class='status-container'
+                   data-room-id="${room_id}"
+                   style='display:none!important'>
+
+                <div class='status-message'
+                     data-room-id='${room_id}'>
+                </div>
+                <div class='stop-editing' data-room-id='${room_id}'>
+                   <i class='fas fa fa-times'></i>
+                </div>
+              </div>
+
               <div class='image-preview-container'
                      data-room-id="${room_id}"
                      style='display:none'>
@@ -91,7 +104,12 @@ export default class DomApi {
     return this.getRoom(room_id).find('.messages');
   }
 
-  addMessage(room_id, message_id, username, message, upvotes, downvotes, own, edited, attachments, original_ts, latest_ts) {
+  addMessage(room_id, message_id,
+    username, message,
+    upvotes, downvotes, vote,
+    own, edited,
+    attachments,
+    original_ts, latest_ts) {
     let type = this.getRoomType(room_id);
 
     let attachments_html = "<div class='attachment-image-container'>";
@@ -110,16 +128,21 @@ export default class DomApi {
         <div class='message-info'>
           <div class='show-history' ${edited ? "" : "style='display:none'"} data-message-id='${message_id}'>edited</div>
           <div class='message-timestamp ml-1' data-message-id='${message_id}'>${formatTime(latest_ts)}</div>
-          ${(own ? `<div class='edit-message ml-1' data-message-id='${message_id}'>edit</div>` : "")}
+          ${(own ?
+            `<div class='edit-message ml-1'
+                  data-message-id='${message_id}'
+                  data-room-id='${room_id}'>edit</div>`
+          : "")}
         </div>
       </div>
 
 
       <div class='body'>
         ${attachments_html}
-        <span class='text'>
-          ${this.formatMessage(message)}
-        </span>
+
+        <!-- it appears newlines and spaces are prererved, so no nice indents for message here -->
+        <span class='text'>${this.formatMessage(message)}</span>
+        
       </div>
 
       <div class='footer'>
@@ -140,6 +163,9 @@ export default class DomApi {
       </div>
     </div>`;
     this.getMessagesDiv(room_id).append(ok_msg);
+
+    // make own vote appear active
+    this.getVoteDiv(message_id, vote).addClass('active');
   }
 
   addDateBanner(text) {
@@ -245,8 +271,12 @@ export default class DomApi {
     return $(`.anonymous-switch[data-room-id="${room_id}"]`).is(":checked");
   }
 
+  getFileInput(room_id) {
+    return $(`#file-input-${room_id}`);
+  }
+
   getFiles(room_id) {
-    return $(`#file-input-${room_id}`)[0].files;
+    return this.getFileInput(room_id)[0].files;
   }
 
   clearFiles(room_id) {
@@ -256,6 +286,36 @@ export default class DomApi {
   }
 
   getEditedMessageId(room_id) {
-    return $(`.message-input[data-room-id='${room_id}']`).data('edit-message');
+    return this.getMessageInput(room_id).data('edit-message');
+  }
+
+  getStatusMessageDiv(room_id){
+    return $(`.status-message[data-room-id="${room_id}"`);
+  }
+
+  getStatusMessageContainer(room_id){
+    return $(`.status-container[data-room-id="${room_id}"`);
+  }
+
+  getMessageInput(room_id) {
+    return $(`.message-input[data-room-id='${room_id}']`);
+  }
+
+  setEditing(room_id, message_id) {
+    let text = this.getMessageText(message_id);
+    this.getStatusMessageContainer(room_id).show();
+    this.getStatusMessageDiv(room_id).text(`editing ${text}`);
+    this.getFileInput(room_id).attr('disabled', 'disabled');
+    this.getMessageInput(room_id).data('edit-message', message_id)
+    .val(text);
+    console.log(text);
+  }
+
+  stopEditing(room_id) {
+    this.getStatusMessageContainer(room_id).hide();
+    this.getFileInput(room_id).removeAttr('disabled');
+    this.getMessageInput(room_id).removeData('edit-message');
+      this.getMessageInput(room_id).val("")
+    console.log(this.getMessageInput(room_id));
   }
 }

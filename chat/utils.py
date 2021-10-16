@@ -78,9 +78,17 @@ class RoomRegistry:
 class HandledMessage:
     def __init__(self):
         self.messages = []
+        self._explicit_consumer = None
+
+    def set_explicit_consumer_mode(self, consumer):
+        self._explicit_consumer = consumer
+
+    def set_implicit_consumer_mode(self):
+        self._explicit_consumer = None
 
     def send_json(self, message: Union[dict, str, int, float], to_consumer=None, ignore_trace=False):
-        self.messages.append([None, message, to_consumer, ignore_trace])
+
+        self.messages.append([None, message, to_consumer or self._explicit_consumer, ignore_trace])
 
     def group_send(self, group: str, message: dict, ignore_trace=False):
         self.messages.append([group, message, None, ignore_trace])
@@ -121,3 +129,27 @@ class Handlers:
             self.map[command] = {'handler': func, 'args': positional[2:]}
             return func
         return inner
+
+
+def helper_method(helper):
+    """
+    Helper methods are called from handlers.
+    Problem is every time we add WS message tp proxy-object
+    we don't specify consumer, assuming all messages we send are sent
+    to consumer who sent message to trigger this handler.
+    However it is possible that specific consumer triggered handler
+    that needs to send message to another consumer. If this message is sent from helper method
+    like this 'consumer.some_helper_method(proxy, arg1, arg2, ...)' then proxy will store
+    those requests as if they were for user who triggered handler.
+    This is why consumer has to be specified explicitly.
+    This decoratror will change proxy mode to 'explicit consumer',
+    call handler with this proxy and then change mode back to normal.
+    This way we can avoid the need to specify to_consumer=self every time
+    that would make overall code shorter by half length of this comment.
+    """
+    async def inner(consumer, proxy, *args, **kwargs):
+        proxy.set_explicit_consumer_mode(consumer)
+        return_value = await helper(consumer, proxy, *args, **kwargs)
+        proxy.set_implicit_consumer_mode()
+        return return_value
+    return inner
