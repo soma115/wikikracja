@@ -28,21 +28,26 @@ WS_API.receiveSync = (data) => {
         let room_id = $(this).data('room-id');
         let edit_message_id = DOM_API.getEditedMessageId(room_id);
 
+        let message = DOM_API.getEnteredText(room_id);
+
         // message being edited
         if (edit_message_id) {
-          let message = DOM_API.getEnteredText(room_id);
+
           WS_API.editMessage(edit_message_id, message);
         } else {
           let attachments = {};
-          let message = DOM_API.getEnteredText(room_id);
           let is_anonymous = DOM_API.getAnonymousValue(room_id);
-
           let files = DOM_API.getFiles(room_id);
+
+          if (message.replace(" ", "").length == 0 && files.length == 0) {
+            return;
+          }
 
           if (files.length) {
             let response = await WS_API.uploadFiles(files);
             attachments.images = response.filenames;
           }
+
           WS_API.sendMessage(data.join, message, is_anonymous, attachments);
         }
 
@@ -72,7 +77,7 @@ WS_API.receiveSync = (data) => {
       DOM_API.getRoom(data.leave).remove();
 
   // Handle getting a message
-} else if (data.message) {
+} else if (data.message !== undefined /* empty messages are allowed */) {
       let type = DOM_API.getRoomType(data.room_id);
       DOM_API.addMessage(
         data.room_id, data.message_id,
@@ -153,7 +158,7 @@ WS_API.receiveSync = (data) => {
     }
 
   } else {
-      console.log("Cannot handle message!");  // i.e. empty message
+      console.log("Cannot handle message!");
   }
 }
 

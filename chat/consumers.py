@@ -229,6 +229,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 if not os.path.exists(f"{settings.BASE_DIR}/media/uploads/{filename}"):
                     raise ClientError("FILE_NOT_FOUND")
 
+        if not message.lstrip() and not attachments:
+            raise ClientError("EMPTY_MESSAGE")
+
         # Get the room...
         room = await get_room_or_error(room_id, self.scope["user"])
 
