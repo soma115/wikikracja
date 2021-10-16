@@ -3,7 +3,8 @@ def format_chat_message(
         anonymous,
         message, message_id,
         upvotes, downvotes,
-        new, edited, date,
+        new, edited,
+        date, latest_date,
         attachments: dict):
     """
     Return formatted dict with message data.
@@ -21,5 +22,6 @@ def format_chat_message(
         "new": new,
         "edited": edited,
         "timestamp": int(date.timestamp()) * 1000,  # unix to ms
+        "latest_timestamp": int(latest_date.timestamp()) * 1000,  # unix to ms
         "attachments": attachments,
     }

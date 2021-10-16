@@ -11,4 +11,4 @@ def name_for(room, user):
 
 @register.filter('seen_by')
 def seen_by(room, user):
-    return "seen" if room.seen_by.filter(id=user.id) else ""
+    return "" if room.seen_by.filter(id=user.id) else "room-not-seen"

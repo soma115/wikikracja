@@ -21,6 +21,9 @@ class Room(models.Model):
     # List of users who saw all messages in this chat
     seen_by = models.ManyToManyField(User, related_name="seen_rooms")
 
+    # List of users who disabled notifications
+    muted_by = models.ManyToManyField(User, related_name='muted_rooms')
+
     def __str__(self):
         return self.title
 

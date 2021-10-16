@@ -47,8 +47,8 @@
     color: green;
 }
 
-.seen {
-    background-color: #37d27c!important;
+.room-not-seen {
+    border: 2px solid blue!important;
 }
 
 .msg-vote.active {

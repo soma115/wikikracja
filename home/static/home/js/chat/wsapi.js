@@ -183,4 +183,8 @@ export default class WsApi {
     xhr.send(formData);
     return promise;
   }
+
+  toggleNotifications(room_id, enabled) {
+    this.sendJson({command: 'toggle-notifications', room_id, enabled})
+  }
 }

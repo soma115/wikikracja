@@ -1,9 +1,10 @@
+import { removeNotification, formatTime } from './utility.js';
 export default class DomApi {
   getRoomIcon(room_id) {
     return $(`.room-link[data-room-id="${room_id}"]`);
   }
 
-  createRoomDiv(room_id, title, is_public) {
+  createRoomDiv(room_id, title, is_public, notifs_enabled) {
     let roomdiv = $(  // roomdiv is whole frame with one chat
         "<div class='room' data-room-id='" + room_id + "' id='room-" + room_id + "'>" +
         "<h5>" + title + "</h5>" +
@@ -12,6 +13,7 @@ export default class DomApi {
         "<form class='d-flex' onsubmit='false'>" +
         "<input class='col-12 col-sm message-input'>" +
         `<input type='file' class='file-input' data-room-id='${room_id}' multiple='multiple'>` +
+        `<input type='checkbox' class='notifications-switch' ${notifs_enabled ? 'checked="checked"': ''} data-room-id='${room_id}'>` +
         (is_public ? "<input class='anonymous-switch' type='checkbox' />" : "") +
         "<button class='btn btn-danger btn-sm'>↲</button></form>" +
         "</div>"
@@ -30,7 +32,7 @@ export default class DomApi {
     return this.getRoom(room_id).find('.messages');
   }
 
-  addMessage(room_id, message_id, username, message, upvotes, downvotes, own, edited, attachments) {
+  addMessage(room_id, message_id, username, message, upvotes, downvotes, own, edited, attachments, original_ts, latest_ts) {
     let type = this.getRoomType(room_id);
 
     let attachments_html = "<div class='attachment-image-container'>";
@@ -56,6 +58,7 @@ export default class DomApi {
      <div class='msg-downvotes'>${downvotes}</div>` : "") +
      (own ? `<div class='edit-message' data-message-id='${message_id}'>edit</div>` : "") +
      `<div class='show-history' ${edited ? "" : "style='display:none'"} data-message-id='${message_id}'>show history</div>` +
+     `<div class='message-timestamp' data-message-id='${message_id}'>${formatTime(latest_ts)}</div>`
     "</div>";
     this.getMessagesDiv(room_id).append(ok_msg);
   }
@@ -84,8 +87,10 @@ export default class DomApi {
     return this.getMessageDiv(message_id).find(`.msg-vote[data-event-name="${vote}"]`)
   }
 
-  editMessageText(message_id, text) {
+  editMessageText(message_id, text, ts) {
     let f = this.formatMessage(text)
+    let time = formatTime(ts);
+    this.getMessageTimeDiv(message_id).text(time);
     return this.getMessageDiv(message_id).find(".text").html(f);
   }
 
@@ -119,5 +124,31 @@ export default class DomApi {
 
   getPreviewDiv(room_id) {
     return $(".image-preview-container[data-room-id='" + room_id +"']")
+  }
+
+  seenChat(room_id) {
+    let room_icon = this.getRoomIcon(room_id);
+    room_icon.removeClass("room-not-seen");
+
+    // all rooms are seen, change tab icon back
+    if ($('.room-not-seen').length == 0) {
+      removeNotification();
+    }
+  }
+
+  updateOnline(room_id, is_online) {
+    let room_icon = this.getRoomIcon(room_id);
+    if (is_online) {
+      room_icon.removeClass('offline').addClass('online');
+    } else {
+      room_icon.removeClass('online').addClass('offline');
+    }
+  }
+  setRoomNotifs(room_id, enabled) {
+    $(`.notifications-switch[data-room-id='${room_id}']`).prop('checked', enabled);
+  }
+
+  getMessageTimeDiv(message_id) {
+    return $(`.message-timestamp[data-message-id=${message_id}]`);
   }
 }

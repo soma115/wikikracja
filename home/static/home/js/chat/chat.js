@@ -1,5 +1,6 @@
 import WsApi from './wsapi.js';
 import DomApi from './domapi.js';
+import { makeNotification, formatDate } from './utility.js';
 
 let WS_API = new WsApi();
 let DOM_API = new DomApi();
@@ -9,32 +10,6 @@ function inRoom (roomId) {
     return $("#room-" + roomId).length > 0;
 };
 
-function formatDate(someDateTimeStamp) {
-    let fulldays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let dt = new Date(someDateTimeStamp),
-        date = dt.getDate(),
-        month = months[dt.getMonth()],
-        timeDiff = someDateTimeStamp - Date.now(),
-        diffDays = new Date().getDate() - date,
-        diffMonths = new Date().getMonth() - dt.getMonth(),
-        diffYears = new Date().getFullYear() - dt.getFullYear();
-
-    if (diffYears === 0 && diffDays === 0 && diffMonths === 0) {
-      return "Today";
-    } else if(diffYears === 0 && diffDays === 1) {
-      return "Yesterday";
-    } else if(diffYears === 0 && diffDays === -1) {
-      return "Tomorrow";
-    } else if(diffYears === 0 && (diffDays < -1 && diffDays > -7)) {
-      return fulldays[dt.getDay()];
-    } else if(diffYears >= 1) {
-      return month + " " + date + ", " + new Date(someDateTimeStamp).getFullYear();
-    } else {
-        return month + " " + date;
-    }
-}
-
 // global handler for sync WS messages used by wsapi.js
 WS_API.receiveSync = (data) => {
   // Handle joining
@@ -42,11 +17,11 @@ WS_API.receiveSync = (data) => {
       console.log("Joining room " + data.join);
 
       // TODO: send seen confirmation to server after a little while
+      DOM_API.seenChat(data.join);
       WS_API.seenRoom(data.join);
 
       let room_icon = DOM_API.getRoomIcon(data.join);
-      room_icon.addClass('seen');
-      let roomdiv = DOM_API.createRoomDiv(data.join, data.title, data.public);
+      let roomdiv = DOM_API.createRoomDiv(data.join, data.title, data.public, data.notifications);
 
       // Hook up send button to send a message
       roomdiv.find("form").on("submit", async function (e) {
@@ -96,7 +71,8 @@ WS_API.receiveSync = (data) => {
         data.room_id, data.message_id,
         data.username, data.message,
         data.upvotes, data.downvotes,
-        data.own, data.edited, data.attachments
+        data.own, data.edited, data.attachments,
+        data.timestamp, data.latest_timestamp
       );
 
       let current_banner = formatDate(data.timestamp);
@@ -111,8 +87,9 @@ WS_API.receiveSync = (data) => {
       msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
 
       if (data.new) {
-          alert("New Message");
+          // handle new message in opened channel somehow
       }
+
       if (data.your_vote /* You voted for this message e.g. 'upvote' or 'downvote' */) {
           // find message div and make button appear active
           let active_btn = DOM_API.getVoteDiv(data.message_id, data.your_vote);
@@ -124,7 +101,14 @@ WS_API.receiveSync = (data) => {
       return;
     }
     let room_icon = DOM_API.getRoomIcon(data.unsee_room);
-    room_icon.removeClass("seen");
+    room_icon.addClass("room-not-seen");
+
+
+  } else if (data.notification) {
+
+    let notif = data.notification
+    makeNotification(notif.title, notif.body, notif.link);
+
   } else if (data.update_votes) {
     let event = data.update_votes;
     // find message on page by id and update counters
@@ -151,10 +135,17 @@ WS_API.receiveSync = (data) => {
   } else if (data.edit_message) {
     let edit = data.edit_message;
     // update text of message
-    DOM_API.editMessageText(edit.message_id, edit.text);
+    DOM_API.editMessageText(edit.message_id, edit.text, edit.timestamp);
     //show history button
     DOM_API.showHistoryButton(edit.message_id);
-  }  else {
+  }  else if (data.online_data) {
+
+    let online = data.online_data;
+    for (let user of online) {
+      DOM_API.updateOnline(user.room_id, user.online);
+    }
+
+  } else {
       console.log("Cannot handle message!");  // i.e. empty message
   }
 }
@@ -164,14 +155,14 @@ WS_API.wsOnConnect = async () => {
   let response = await WS_API.getOnlineUsers();
   let online = response.online_data;
   for (let user of online) {
-    let room_icon = DOM_API.getRoomIcon(user.room_id);
-    if (user.online) {
-      room_icon.removeClass('offline').addClass('online');
-    } else {
-      room_icon.removeClass('online').addClass('offline');
-    }
+    DOM_API.updateOnline(user.room_id, user.online);
   }
 }
+
+$(document).on('input', '.notifications-switch', function() {
+  let room_id = $(this).data('room-id');
+  WS_API.toggleNotifications(room_id, $(this).is(":checked"));
+});
 
 $(document).on("change", ".file-input", function(e) {
     let room_id = $(this).data('room-id');
@@ -243,3 +234,11 @@ $("li.room-link").click(function () {
 
     }
 });
+$('.room-link').on('click', function() {
+  if (!Notification) {
+   return;
+  }
+
+  if (Notification.permission !== 'granted')
+   Notification.requestPermission();
+})
