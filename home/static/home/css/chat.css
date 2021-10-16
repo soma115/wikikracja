@@ -66,8 +66,14 @@
 }
 
 .image-preview-container {
+    position: absolute;
     display: flex;
     justify-content: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #e3e3e3bd;
+    padding: .3rem 0;
 }
 
 .image-preview {
@@ -75,7 +81,11 @@
     height: 50px;
     background-color: gray;
     margin: .3rem;
-    object-fit: contain;
+    object-fit: cover;
+}
+
+.preview-images {
+  /* position: absolute; */
 }
 
 .attached-image {

@@ -5,10 +5,10 @@ export default class DomApi {
   }
 
   createRoomDiv(room_id, title, is_public, notifs_enabled) {
-    let roomdiv = $(  // roomdiv is whole frame with one chat
+    let roomdiv = $(
         `<div class='room' data-room-id='${room_id}' id='room-${room_id}'>
 
-            <div class='d-flex justify-content-between p-3'>
+            <div class='d-flex justify-content-between p-3 header'>
               <h5>${title}</h5>
               <div>
                 <input type='checkbox'
@@ -22,45 +22,59 @@ export default class DomApi {
             </div>
 
             <div class='messages'></div>
-            <div class='image-preview-container' data-room-id='${room_id}'></div>
 
+            <div style='position: relative'>
+              <div class='image-preview-container'
+                     data-room-id="${room_id}"
+                     style='display:none'>
 
-              <div class='chat-controls' class='d-flex'>
+                <div class='preview-images' data-room-id='${room_id}'></div>
 
-                <div class='chat-controls-row'>
-                  <input data-room-id='${room_id}'
-                         class='message-input col-12 col-sm message-input mr-1'>
-
-                  <input type='file'
-                         id="file-input-${room_id}"
-                         style='display:none;'
-                         class='file-input'
-                         data-room-id='${room_id}' multiple='multiple'
-                  />
-
-                  <label class='btn btn-primary mr-1 chat-control'
-                         for="file-input-${room_id}">
-                         <i class="fas fa-file-image"></i>
-                  </label>
-
+                <div class='delete-images-preview' data-room-id='${room_id}'>
+                  <i class='fas fa fa-times'></i>
                 </div>
 
-                <button data-room-id='${room_id}'
-                        class='send-message chat-control btn btn-danger btn-sm'>
-                          <i class="fas fa-paper-plane"></i>
-                </button>
+              </div>
+            </div>
+
+
+
+            <div class='chat-controls' class='d-flex'>
+
+              <div class='chat-controls-row'>
+                <input data-room-id='${room_id}'
+                       class='message-input col-12 col-sm message-input mr-1'>
+
+                <input type='file'
+                       id="file-input-${room_id}"
+                       style='display:none;'
+                       class='file-input'
+                       data-room-id='${room_id}' multiple='multiple'
+                />
+
+                <label class='btn btn-primary mr-1 chat-control'
+                       for="file-input-${room_id}">
+                       <i class="fas fa-file-image"></i>
+                </label>
 
               </div>
-              <div class='mt-3'>
-                ${is_public ?
-                  `<input class='anonymous-switch'
-                          data-room-id="${room_id}"
-                          id="anonymous-switch-id-${room_id}"
-                          type='checkbox'
-                  />
-                  <label for='anonymous-switch-id-${room_id}'>Anonymous</label>`
-                : ""}
-              </div>
+
+              <button data-room-id='${room_id}'
+                      class='send-message chat-control btn btn-danger btn-sm'>
+                        <i class="fas fa-paper-plane"></i>
+              </button>
+
+            </div>
+            <div class='mt-3'>
+              ${is_public ?
+                `<input class='anonymous-switch'
+                        data-room-id="${room_id}"
+                        id="anonymous-switch-id-${room_id}"
+                        type='checkbox'
+                />
+                <label for='anonymous-switch-id-${room_id}'>Anonymous</label>`
+              : ""}
+            </div>
         </div>`
     );
 
@@ -187,8 +201,14 @@ export default class DomApi {
     return formatted;
   }
 
+  // container for images
   getPreviewDiv(room_id) {
-    return $(".image-preview-container[data-room-id='" + room_id +"']")
+    return $(".preview-images[data-room-id='" + room_id +"']")
+  }
+
+  // container with all images and close button
+  getPreviewContainer(room_id) {
+    return $(`.image-preview-container[data-room-id="${room_id}"]`)
   }
 
   seenChat(room_id) {
@@ -227,6 +247,12 @@ export default class DomApi {
 
   getFiles(room_id) {
     return $(`#file-input-${room_id}`)[0].files;
+  }
+
+  clearFiles(room_id) {
+    $(`#file-input-${room_id}`).val("");
+    this.getPreviewContainer(room_id).hide();
+    this.getPreviewDiv(room_id).empty();
   }
 
   getEditedMessageId(room_id) {

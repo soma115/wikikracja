@@ -48,13 +48,16 @@ WS_API.receiveSync = (data) => {
 
         let room = DOM_API.getRoom(room_id);
 
+        // remove files from input and image preview
+        DOM_API.clearFiles(room_id);
+
         // remove data about editing message
         room.find("input.message-input").removeData('edit-message');
 
         // Clears input field
         room.find("input.message-input").val("");
       }
-      
+
       // Hook up send button to send a message
       roomdiv.find(".send-message").on("click", submit_handler);
       roomdiv.find(".message-input").on("keypress", function(e) {
@@ -168,11 +171,18 @@ $(document).on('input', '.notifications-switch', function() {
   WS_API.toggleNotifications(room_id, $(this).is(":checked"));
 });
 
+$(document).on('click', ".delete-images-preview", function(e) {
+  let room_id = $(this).data("room-id");
+  DOM_API.clearFiles(room_id);
+});
+
 $(document).on("change", ".file-input", function(e) {
     let room_id = $(this).data('room-id');
     let files = this.files;
     let preview_container = DOM_API.getPreviewDiv(room_id);
     preview_container.empty();
+
+    DOM_API.getPreviewContainer(room_id).show();
 
     for (let i = 0; i < files.length; ++i){
       let file = files.item(i);
