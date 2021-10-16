@@ -6,17 +6,62 @@ export default class DomApi {
 
   createRoomDiv(room_id, title, is_public, notifs_enabled) {
     let roomdiv = $(  // roomdiv is whole frame with one chat
-        "<div class='room' data-room-id='" + room_id + "' id='room-" + room_id + "'>" +
-        "<h5>" + title + "</h5>" +
-        "<div class='messages'></div>" +
-        `<div class='image-preview-container' data-room-id='${room_id}'></div>` +
-        "<form class='d-flex' onsubmit='false'>" +
-        "<input class='col-12 col-sm message-input'>" +
-        `<input type='file' class='file-input' data-room-id='${room_id}' multiple='multiple'>` +
-        `<input type='checkbox' class='notifications-switch' ${notifs_enabled ? 'checked="checked"': ''} data-room-id='${room_id}'>` +
-        (is_public ? "<input class='anonymous-switch' type='checkbox' />" : "") +
-        "<button class='btn btn-danger btn-sm'>↲</button></form>" +
-        "</div>"
+        `<div class='room' data-room-id='${room_id}' id='room-${room_id}'>
+
+            <div class='d-flex justify-content-between p-3'>
+              <h5>${title}</h5>
+              <div>
+                <input type='checkbox'
+                       class='notifications-switch'
+                       id='notif-switch-${room_id}'
+                       ${notifs_enabled ? 'checked="checked"': ''}
+                       data-room-id='${room_id}'
+                />
+                <label for='notif-switch-${room_id}'> Notifications </label>
+              </div>
+            </div>
+
+            <div class='messages'></div>
+            <div class='image-preview-container' data-room-id='${room_id}'></div>
+
+
+              <div class='chat-controls' class='d-flex'>
+
+                <div class='chat-controls-row'>
+                  <input data-room-id='${room_id}'
+                         class='message-input col-12 col-sm message-input mr-1'>
+
+                  <input type='file'
+                         id="file-input-${room_id}"
+                         style='display:none;'
+                         class='file-input'
+                         data-room-id='${room_id}' multiple='multiple'
+                  />
+
+                  <label class='btn btn-primary mr-1 chat-control'
+                         for="file-input-${room_id}">
+                         <i class="fas fa-file-image"></i>
+                  </label>
+
+                </div>
+
+                <button data-room-id='${room_id}'
+                        class='send-message chat-control btn btn-danger btn-sm'>
+                          <i class="fas fa-paper-plane"></i>
+                </button>
+
+              </div>
+              <div class='mt-3'>
+                ${is_public ?
+                  `<input class='anonymous-switch'
+                          data-room-id="${room_id}"
+                          id="anonymous-switch-id-${room_id}"
+                          type='checkbox'
+                  />
+                  <label for='anonymous-switch-id-${room_id}'>Anonymous</label>`
+                : ""}
+              </div>
+        </div>`
     );
 
     // Here is <div id="chats"></div> used
@@ -43,23 +88,43 @@ export default class DomApi {
     attachments_html += "</div>"
 
     let ok_msg = `
-    <div class='message' data-message-id=${message_id}>` +
-    "<span class='username'>" + username + ": " + "</span>" +
-    "<div class='body'>" +
-    attachments_html +
-    "<span class='text'>" +
-    this.formatMessage(message) +
-    "</span>" +
-    "</div>" +
-    (type == "public" ?
-    `<i data-event-name="upvote" data-message-id="${message_id}" class="msg-vote fas fa-check"></i>
-     <i data-event-name="downvote" data-message-id="${message_id}" class="msg-vote fas fa-times"></i>
-     <div class='msg-upvotes'>${upvotes}</div>
-     <div class='msg-downvotes'>${downvotes}</div>` : "") +
-     (own ? `<div class='edit-message' data-message-id='${message_id}'>edit</div>` : "") +
-     `<div class='show-history' ${edited ? "" : "style='display:none'"} data-message-id='${message_id}'>show history</div>` +
-     `<div class='message-timestamp' data-message-id='${message_id}'>${formatTime(latest_ts)}</div>`
-    "</div>";
+    <div class='message ${own ? "own": ""}' data-message-id=${message_id}>
+
+      <div class='header'>
+        <span class='username'>${username}</span>
+
+        <div class='message-info'>
+          <div class='show-history' ${edited ? "" : "style='display:none'"} data-message-id='${message_id}'>edited</div>
+          <div class='message-timestamp ml-1' data-message-id='${message_id}'>${formatTime(latest_ts)}</div>
+          ${(own ? `<div class='edit-message ml-1' data-message-id='${message_id}'>edit</div>` : "")}
+        </div>
+      </div>
+
+
+      <div class='body'>
+        ${attachments_html}
+        <span class='text'>
+          ${this.formatMessage(message)}
+        </span>
+      </div>
+
+      <div class='footer'>
+        ${(type == "public" ?
+        `
+          <div class='d-flex'>
+           <div data-event-name="upvote" data-message-id="${message_id}" class='msg-vote vote-block'>
+            <i class="fas fa-check"></i>
+            <div class='msg-upvotes'>${upvotes}</div>
+           </div>
+
+           <div data-event-name="downvote" data-message-id="${message_id}" class='msg-vote vote-block'>
+            <i class="fas fa-times"></i>
+            <div class='msg-downvotes'>${downvotes}</div>
+          </div>
+        </div>
+        ` : "")}
+      </div>
+    </div>`;
     this.getMessagesDiv(room_id).append(ok_msg);
   }
 
@@ -150,5 +215,21 @@ export default class DomApi {
 
   getMessageTimeDiv(message_id) {
     return $(`.message-timestamp[data-message-id=${message_id}]`);
+  }
+
+  getEnteredText(room_id) {
+    return $(`.message-input[data-room-id='${room_id}']`).val();
+  }
+
+  getAnonymousValue(room_id) {
+    return $(`.anonymous-switch[data-room-id="${room_id}"]`).is(":checked");
+  }
+
+  getFiles(room_id) {
+    return $(`#file-input-${room_id}`)[0].files;
+  }
+
+  getEditedMessageId(room_id) {
+    return $(`.message-input[data-room-id='${room_id}']`).data('edit-message');
   }
 }

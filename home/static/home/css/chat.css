@@ -12,32 +12,34 @@
         border: 1px solid #35485C;
     }
 
-/* 
+/*
     # is an id selector, used to target a single specific element with a unique id, but . is a class selector used to target multiple elements with a particular class.
 */
 #chats {
 }
-    #chats .room {
-        border: 1px solid #ccc;
-        padding: 5px;
-        margin: 30px 0 0 0;
-    }
-    #chats h5 {
-        color: #333;
-        margin: 2px 0 5px 0;
-        font-weight: bold;
-    }
-    #chats .messages {
-        height: 300px;
-        overflow: auto;
-        background: #eee;
-        margin: 2px 0 5px 0;
-    }
-    #chats .username {
-        color: #418AC9;
-        width: 100px;
-        font-weight: bold;
-    }
+
+#chats .room {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 30px 0 0 0;
+}
+#chats h5 {
+    color: #333;
+    margin: 2px 0 5px 0;
+    font-weight: bold;
+}
+#chats .messages {
+    height: 500px;
+    overflow: auto;
+    background: #eee;
+    margin: 2px 0 5px 0;
+    display: flex;
+    flex-direction: column;
+}
+#chats .username {
+    color: #0c80e5;
+    font-weight: bold;
+}
 
 .offline {
     color: gray;
@@ -53,8 +55,16 @@
 
 .msg-vote.active {
     font-weight: bold;
-    color: blue;
 }
+
+.msg-vote.active .fa-check {
+  color: green;
+}
+
+.msg-vote.active .fa-times {
+  color: crimson;
+}
+
 .image-preview-container {
     display: flex;
     justify-content: center;
@@ -72,10 +82,99 @@
     width: 150px;
     height: 150px;
     background-color: gray;
-    object-fit: contain;
+    object-fit: cover;
+    margin: 2px;
 }
 
 .attachment-image-container {
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.vote-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #cfcfcf;
+  border-radius: 5px;
+  padding: 0 3px 0 3px;
+  margin-left: .2rem;
+}
+
+.vote-block i, .vote-block div {
+  padding: .1rem;
+}
+
+.message {
+  background: #f6fff6;
+  margin-bottom: .3rem;
+  width: 70%;
+  padding: .3rem;
+  position: relative;
+}
+
+.message.own {
+  background: white;
+}
+
+.message.own {
+  align-self: end;
+}
+
+.header {
+  margin-bottom: .2rem;
+}
+
+.message-info {
+  position: absolute;
+  display: flex;
+  top: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.date-banner {
+  text-align: center;
+  font-weight: bold;
+  padding: .3rem;
+  background: #dddddd;
+  color: #5b5855;
+  font-size: 1.2rem;
+  margin: .4rem 0 .4rem 0;
+}
+
+.show-history, .edit-message {
+  text-decoration: underline;
+  color: gray;
+  font-size: smaller;
+}
+
+.chat-controls {
+  display: flex;
+}
+
+.chat-controls-row {
+  display: flex;
+  margin-right: 3rem;
+  flex: 1;
+}
+
+
+.chat-control {
+  padding: 1rem;
+}
+
+label {
+  margin: 0;
+}
+
+input[type='checkbox'] {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.message-input {
+  border: 3px solid #dadada;
+  border-radius: .3rem;
 }

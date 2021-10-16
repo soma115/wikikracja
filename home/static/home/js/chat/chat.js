@@ -23,40 +23,44 @@ WS_API.receiveSync = (data) => {
       let room_icon = DOM_API.getRoomIcon(data.join);
       let roomdiv = DOM_API.createRoomDiv(data.join, data.title, data.public, data.notifications);
 
-      // Hook up send button to send a message
-      roomdiv.find("form").on("submit", async function (e) {
-        e.preventDefault();
-          let edit_message_id = roomdiv.find("input.message-input").data('edit-message');
 
-          // message being edited
-          if (edit_message_id) {
-            let message = roomdiv.find("input.message-input").val();
-            WS_API.editMessage(edit_message_id, message);
-          } else {
-            let attachments = {};
+      let submit_handler = async function (e) {
+        let room_id = $(this).data('room-id');
+        let edit_message_id = DOM_API.getEditedMessageId(room_id);
 
-            let message = roomdiv.find("input.message-input").val();
-            let is_anonymous = roomdiv.find(".anonymous-switch").is(":checked");
+        // message being edited
+        if (edit_message_id) {
+          let message = DOM_API.getEnteredText(room_id);
+          WS_API.editMessage(edit_message_id, message);
+        } else {
+          let attachments = {};
+          let message = DOM_API.getEnteredText(room_id);
+          let is_anonymous = DOM_API.getAnonymousValue(room_id);
 
-            let files = roomdiv.find('input.file-input')[0].files;
-            console.log("files: ", files, roomdiv.find('input.file-input'));
-            if (files.length) {
-              console.log("there are ", files.length, "files");
-              let response = await WS_API.uploadFiles(files);
-              console.log("response", response);
-              console.log("got filenames: ", response.filenames);
-              attachments.images = response.filenames;
-            }
+          let files = DOM_API.getFiles(room_id);
 
-            WS_API.sendMessage(data.join, message, is_anonymous, attachments)
+          if (files.length) {
+            let response = await WS_API.uploadFiles(files);
+            attachments.images = response.filenames;
           }
+          WS_API.sendMessage(data.join, message, is_anonymous, attachments);
+        }
 
+        let room = DOM_API.getRoom(room_id);
 
-          // remove data about editing message
-          roomdiv.find("input.message-input").removeData('edit-message');
+        // remove data about editing message
+        room.find("input.message-input").removeData('edit-message');
 
-          // Clears input field
-          roomdiv.find("input.message-input").val(""); // TODO: Here we can plugin edititing old messages (with val)
+        // Clears input field
+        room.find("input.message-input").val("");
+      }
+      
+      // Hook up send button to send a message
+      roomdiv.find(".send-message").on("click", submit_handler);
+      roomdiv.find(".message-input").on("keypress", function(e) {
+        if (e.keyCode == 13) {
+            submit_handler.bind(this)(e);
+        }
       });
 
   // Handle leaving
