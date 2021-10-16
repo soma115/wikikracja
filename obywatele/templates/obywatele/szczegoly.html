@@ -14,24 +14,25 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 p-3">
-            <p>
-                {{ b.uid }} | {{ b.uid.email }} | {% trans 'Introduced by' %}: {{ b.polecajacy|default:"-" }} | {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d"|default:"-" }}
-            </p>
-            {% if b.id == d.id %}
+            {{ b.uid }} | {{ b.uid.email }}<br>
+            {% trans 'Introduced by' %}: {{ b.polecajacy|default:"-" }}<br>
+            {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d"|default:"-" }}<br>
+            
             <!--Podgląd własnego profilu-->
-            <p> {% trans 'This is you' %} {{ b.uid }}.
-                <a href="{% url 'obywatele:my_profile' %}">{% trans 'You can find more setting in your profile' %}</a>
-            </p>
-            {% else %}
-            </p>
+            {% if b.id == d.id %}
+                <br>
+                {% trans 'This is you' %} {{ b.uid }}.
+                    <a href="{% url 'obywatele:my_profile' %}">{% trans 'You can find more setting in your profile' %}</a>
+
             <!--Podgląd cudzego profilu-->
-            {% trans 'Your relationship to this person is' %} <b>{{rate}}</b>
-            <form action="#" method="get">
-                <input class="btn btn-success btn-sm mt-1" type="submit" name="tak" value="{% trans 'I accept this person' %}" />
-                <input class="btn btn-warning btn-sm mt-1" type="submit" name="reset" value="{% trans 'Indifferent' %}" />
-                <input class="btn btn-danger btn-sm mt-1" type="submit" name="nie" value="{% trans " I do not accept this person " %}" />
-            </form>
-            </p>
+            {% else %}
+            <br>
+                {% trans 'Your relationship to this person is' %} <b>{{rate}}</b>
+                <form action="#" method="get">
+                    <input class="btn btn-success btn-sm mt-1" type="submit" name="tak" value="{% trans 'I accept this person' %}" />
+                    <input class="btn btn-warning btn-sm mt-1" type="submit" name="reset" value="{% trans 'Indifferent' %}" />
+                    <input class="btn btn-danger btn-sm mt-1" type="submit" name="nie" value="{% trans " I do not accept this person " %}" />
+                </form>
             {% endif %}
         </div>
         <div class="col-md-4 p-3">
