@@ -463,7 +463,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # send update to user
         proxy.send_json({
             "notification": {
-                'title': f'{sender.username}',
+                'title': "Anonymous User" if message.anonymous else sender.username,
                 'body': message.text[:100],
                 'link': None,
             }
