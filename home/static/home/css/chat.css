@@ -185,7 +185,8 @@
 
 
 .chat-control {
-  padding: 1rem;
+  padding: .5rem;
+  font-size: 1.4rem;
 }
 
 label {
@@ -225,4 +226,10 @@ input[type='checkbox'] {
   top: 1rem;
   right: 1rem;
   font-size: 50px;
+}
+
+input:disabled+label, input:disabled+label:hover {
+  background-color: #8d8d8d;
+  border: 1px solid #555555;
+  color: #d9d9d9;
 }

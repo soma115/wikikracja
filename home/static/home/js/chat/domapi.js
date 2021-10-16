@@ -4,7 +4,7 @@ export default class DomApi {
     return $(`.room-link[data-room-id="${room_id}"]`);
   }
 
-  createRoomDiv(room_id, title, is_public, notifs_enabled) {
+  createRoomDiv(room_id, title, is_public, slow_mode_delay, notifs_enabled) {
     let roomdiv = $(
         `<div class='room' data-room-id='${room_id}' id='room-${room_id}'>
 
@@ -58,24 +58,27 @@ export default class DomApi {
                 <input data-room-id='${room_id}'
                        class='message-input col-12 col-sm message-input mr-1'>
 
-                <input type='file'
-                       id="file-input-${room_id}"
-                       style='display:none;'
-                       class='file-input'
-                       data-room-id='${room_id}' multiple='multiple'
-                />
+                <button data-room-id='${room_id}'
+                        class='send-message chat-control btn btn-primary btn-sm'>
+                          <i class="fas fa-paper-plane"></i>
+                </button>
 
-                <label class='btn btn-primary mr-1 chat-control'
-                       for="file-input-${room_id}">
-                       <i class="fas fa-file-image"></i>
-                </label>
 
               </div>
 
-              <button data-room-id='${room_id}'
-                      class='send-message chat-control btn btn-danger btn-sm'>
-                        <i class="fas fa-paper-plane"></i>
-              </button>
+              <!-- Those two have to go one after another for some CSS trickery -->
+              <input type='file'
+                     id="file-input-${room_id}"
+                     style='display:none;'
+                     class='file-input'
+                     data-room-id='${room_id}' multiple='multiple'
+              />
+
+              <label class='btn btn-primary mr-1 file-input-label chat-control'
+                     for="file-input-${room_id}">
+                     <i class="fas fa-file-image"></i>
+              </label>
+              <!-- Those two-->
 
             </div>
             <div class='mt-3'>
@@ -87,6 +90,15 @@ export default class DomApi {
                 />
                 <label for='anonymous-switch-id-${room_id}'>Anonymous</label>`
               : ""}
+              ${slow_mode_delay ?
+                `<div class='d-flex justify-content-between'>
+                  <div class='slow-mode-hint' data-room-id='${room_id}'></div>
+                  <span data-room-id='${room_id}'
+                        style='align-self: center;'
+                        class="slow-mode-timer badge badge-primary badge-pill">0
+                  </span>
+                </div>`
+              : ''}
             </div>
         </div>`
     );
@@ -334,5 +346,15 @@ export default class DomApi {
   closeBigImage() {
     $("#big-image").remove();
     $('body').removeClass('modal-open');
+  }
+
+  setSlowMode(room_id, delay) {
+    if (delay == 0) return;
+    $(`.slow-mode-hint[data-room-id='${room_id}']`).text(`slow mode is active. you can send messages once in ${delay} seconds.`)
+  }
+
+  setSlowModeTimeLeft(room_id, seconds) {
+    console.log("set time", seconds);
+    $('.slow-mode-timer[data-room-id="' + room_id + '"]').text(""+seconds);
   }
 }

@@ -10,6 +10,8 @@
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
           crossorigin="anonymous"/>
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     {% comment %} ADD ROOM {% endcomment %}
     <div class="col-md-2 offset-8">
         <a class="btn btn-info btn-sm" href="{% url 'chat:add_room' %}">+{% trans 'Add Room' %}</a>
@@ -93,6 +95,27 @@
 
     {% comment %} HERE CHATS WILL APPEAR {% endcomment %}
     <div id="chats" class="col-md-12"></div>
+
+    <!-- Bootstrap modal for message history -->
+    <div id="message-history-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Message history</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+              </div>
+        </div>
+   </div>
+    <!-- End Modal -->
 
 
 

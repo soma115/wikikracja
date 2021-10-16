@@ -499,6 +499,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         user = await self.get_user_by_id(event["user_id"])
         vote = await self.get_vote(event['message_id'])
         del event['type']
+        del event["user_id"]  # delete user id to not give away author of anonymous message
 
         return {
             **event,  # copy event
@@ -680,7 +681,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         history = history.first()
 
         states = [
-            {"text": state.text, "date": int(state.time.timestamp())} for state in history.entries.all().order_by("-time")
+            {"text": state.text, "timestamp": int(state.time.timestamp()) * 1000} for state in history.entries.all().order_by("time")
         ]
         return states
 

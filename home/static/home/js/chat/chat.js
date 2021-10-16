@@ -1,9 +1,11 @@
 import WsApi from './wsapi.js';
 import DomApi from './domapi.js';
-import { makeNotification, formatDate } from './utility.js';
+import { makeNotification, formatDate, formatTime } from './utility.js';
 
 let WS_API = new WsApi();
 let DOM_API = new DomApi();
+let slow_mode = {};
+let slow_mode_time_left = {};
 
 // Says if we joined a room or not by if there's a div for it
 function inRoom (roomId) {
@@ -19,10 +21,11 @@ WS_API.receiveSync = (data) => {
       // TODO: send seen confirmation to server after a little while
       DOM_API.seenChat(data.join);
       WS_API.seenRoom(data.join);
+      slow_mode[data.join] = data.slow_mode_delay || 0;
 
       let room_icon = DOM_API.getRoomIcon(data.join);
-      let roomdiv = DOM_API.createRoomDiv(data.join, data.title, data.public, data.notifications);
-
+      let roomdiv = DOM_API.createRoomDiv(data.join, data.title, data.public, data.slow_mode_delay, data.notifications);
+      DOM_API.setSlowMode(data.join, slow_mode[data.join]);
 
       let submit_handler = async function (e) {
         let room_id = $(this).data('room-id');
@@ -36,6 +39,11 @@ WS_API.receiveSync = (data) => {
           WS_API.editMessage(edit_message_id, message);
           DOM_API.stopEditing(room_id);
         } else {
+
+          if (slow_mode_time_left[data.join] > 0) {
+            return;
+          }
+
           let attachments = {};
           let is_anonymous = DOM_API.getAnonymousValue(room_id);
           let files = DOM_API.getFiles(room_id);
@@ -50,6 +58,20 @@ WS_API.receiveSync = (data) => {
           }
 
           WS_API.sendMessage(data.join, message, is_anonymous, attachments);
+
+          DOM_API.setSlowModeTimeLeft(data.join, slow_mode[data.join]);
+          slow_mode_time_left[data.join] = slow_mode[data.join];
+          console.log(slow_mode[data.join], slow_mode_time_left);
+
+          let i = setInterval(()=> {
+            let d = parseInt(slow_mode_time_left[data.join]);
+            if (d == 0) {
+                clearInterval(i);
+                return;
+            }
+            slow_mode_time_left[data.join] = d - 1;
+            DOM_API.setSlowModeTimeLeft(data.join, slow_mode_time_left[data.join]);
+          }, 1000);
         }
 
         let room = DOM_API.getRoom(room_id);
@@ -84,7 +106,7 @@ WS_API.receiveSync = (data) => {
         message.room_id, message.message_id,
         message.username, message.message,
         message.upvotes, message.downvotes, message.your_vote,
-        message.own, data.edited, message.attachments,
+        message.own, message.edited, message.attachments,
         message.timestamp, message.latest_timestamp
       );
 
@@ -248,10 +270,24 @@ $(document).on("click",".msg-vote", function () {
   }
 });
 
-// Show history button
+// Show history handler
 $(document).on("click",".show-history", async function () {
   let message_id = $(this).data('message-id');
   let history = await WS_API.getMessageHistory(message_id);
+  let text = "<table class='table' style='border-bottom: 1px solid #dee2e6;'>";
+  for (let [i, entry] of Object.entries(history.message_history)) {
+    let n = parseInt(i) + 1;
+
+    text += `
+    <tr>
+      <td style='width: 0'>${n}.</td>
+      <td>${entry.text}</td>
+      <td style='text-align: end; font-size: smaller; color: gray;'>${formatTime(entry.timestamp)}</td>
+    </tr>
+    `;
+  }
+  text += "</table>"
+  $("#message-history-modal").modal('show').find(".modal-body").html(text);
 });
 
 // Edit button handler
