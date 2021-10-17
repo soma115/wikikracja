@@ -1,4 +1,6 @@
 
+import { onSocketMessage } from './handlers.js';
+
 export default class WsApi {
 
   constructor() {
@@ -24,7 +26,7 @@ export default class WsApi {
       if (data.__TRACE_ID) {
         this.receiveAsync(data);
       } else {
-        this.receiveSync(data);
+        onSocketMessage(data);
       }
     }
 

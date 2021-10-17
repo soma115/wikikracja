@@ -11,6 +11,7 @@
           crossorigin="anonymous"/>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.5/ejs.min.js"></script>
 
     {% comment %} ADD ROOM {% endcomment %}
     <div class="col-md-2 offset-8">
@@ -122,8 +123,9 @@
 {% endblock content %}
 
 {% block extra_body %}
-    <script type="module" src="{% static 'home/js/chat/utility.js'%}"></script>
-    <script type="module" src="{% static 'home/js/chat/domapi.js' %}"></script>
     <script type="module" src="{% static 'home/js/chat/wsapi.js' %}"></script>
+    <script type="module" src="{% static 'home/js/chat/handlers.js' %}"></script>
     <script type="module" src="{% static 'home/js/chat/chat.js' %}"></script>
+    <script type="module" src="{% static 'home/js/chat/domapi.js' %}"></script>
+    <script type="module" src="{% static 'home/js/chat/utility.js'%}"></script>
 {% endblock extra_body %}

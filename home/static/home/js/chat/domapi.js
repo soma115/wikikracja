@@ -1,109 +1,174 @@
 import { removeNotification, formatTime } from './utility.js';
+
+const room_template = `
+<div class='room' data-room-id='<%-room_id%>' id='room-<%-room_id%>'>
+
+    <div class='d-flex justify-content-between p-3 header'>
+      <h5><%=title%></h5>
+      <div>
+        <input type='checkbox'
+               class='notifications-switch'
+               id='notif-switch-<%-room_id%>'
+               <%notifs_enabled ? 'checked="checked"': ''%>
+               data-room-id='<%-room_id%>'
+        />
+        <label for='notif-switch-<%-room_id%>'> Notifications </label>
+      </div>
+    </div>
+
+    <div class='messages'></div>
+
+    <div style='position: relative'>
+
+      <div class='status-container'
+           data-room-id="<%-room_id%>"
+           style='display:none!important'>
+
+        <div class='status-message'
+             data-room-id='<%-room_id%>'>
+        </div>
+        <div class='stop-editing' data-room-id='<%-room_id%>'>
+           <i class='fas fa fa-times'></i>
+        </div>
+      </div>
+
+      <div class='image-preview-container'
+             data-room-id="<%-room_id%>"
+             style='display:none'>
+
+        <div class='preview-images' data-room-id='<%-room_id%>'></div>
+
+        <div class='delete-images-preview' data-room-id='<%-room_id%>'>
+          <i class='fas fa fa-times'></i>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <div class='chat-controls' class='d-flex'>
+
+      <div class='chat-controls-row'>
+        <input data-room-id='<%-room_id%>'
+               class='message-input col-12 col-sm message-input mr-1'>
+
+        <button data-room-id='<%-room_id%>'
+                class='send-message chat-control btn btn-primary btn-sm'>
+                  <i class="fas fa-paper-plane"></i>
+        </button>
+
+
+      </div>
+
+      <!-- Those two have to go one after another for some CSS trickery -->
+      <input type='file'
+             id="file-input-<%-room_id%>"
+             style='display:none;'
+             class='file-input'
+             data-room-id='<%-room_id%>' multiple='multiple'
+      />
+
+      <label class='btn btn-primary mr-1 file-input-label chat-control'
+             for="file-input-<%-room_id%>">
+             <i class="fas fa-file-image"></i>
+      </label>
+      <!-- Those two-->
+
+    </div>
+    <div class='mt-3'>
+
+
+    <% if (is_public) { %>
+
+        <input class='anonymous-switch'
+                data-room-id="<%-room_id%>"
+                id="anonymous-switch-id-<%-room_id%>"
+                type='checkbox'
+        />
+        <label for='anonymous-switch-id-<%-room_id%>'>Anonymous</label>
+
+    <% } %>
+
+
+    <% if (slow_mode_delay) { %>
+
+        <div class='d-flex justify-content-between'>
+          <div class='slow-mode-hint' data-room-id='<%-room_id%>'></div>
+          <span data-room-id='<%-room_id%>'
+                style='align-self: center; display: none;'
+                class="slow-mode-timer badge badge-primary badge-pill">0
+          </span>
+        </div>
+
+    <% } %>
+
+    </div>
+</div>
+`;
+
+const message_template = `<div class='message <% if (own) { %> own <% } %>' data-message-id=<%-message_id%>>
+
+    <div class='header'>
+      <span class='username'><%=username%></span>
+
+      <div class='message-info'>
+        <div class='show-history' <% if (!edited) { %> style='display:none' <% } %>
+             data-message-id='<%-message_id%>'> edited
+        </div>
+        <div class='message-timestamp ml-1' data-message-id='<%-message_id%>'><%- latest_ts %></div>
+
+        <% if (own) { %>
+          <div class='edit-message ml-1'
+                data-message-id='<%-message_id%>'
+                data-room-id='<%-room_id%>'>edit</div>
+        <% } %>
+
+      </div>
+    </div>
+
+
+    <div class='body'>
+      <div class='attachment-image-container'>
+        <% for (let filename of attachments?.images || []) { %>
+          <img class='attached-image' src='/media/uploads/<%-filename %>'>
+        <% } %>
+      </div>
+
+      <span class='text'><%-message%></span>
+
+    </div>
+
+    <div class='footer'>
+      <% if (type == "public") { %>
+        <div class='d-flex'>
+
+         <div data-event-name="upvote" data-message-id="<%-message_id%>" class='msg-vote vote-block'>
+          <i class="fas fa-check"></i>
+          <div class='msg-upvotes'><%-upvotes%></div>
+         </div>
+
+         <div data-event-name="downvote" data-message-id="<%-message_id%>" class='msg-vote vote-block'>
+          <i class="fas fa-times"></i>
+          <div class='msg-downvotes'><%-downvotes%></div>
+         </div>
+
+       </div>
+      <% } %>
+
+      </div>
+  </div>`
+
+const ROOM_TEMPLATE = ejs.compile(room_template);
+const MESSAGE_TEMPLATE = ejs.compile(message_template)
+
 export default class DomApi {
   getRoomIcon(room_id) {
     return $(`.room-link[data-room-id="${room_id}"]`);
   }
 
   createRoomDiv(room_id, title, is_public, slow_mode_delay, notifs_enabled) {
-    let roomdiv = $(
-        `<div class='room' data-room-id='${room_id}' id='room-${room_id}'>
-
-            <div class='d-flex justify-content-between p-3 header'>
-              <h5>${title}</h5>
-              <div>
-                <input type='checkbox'
-                       class='notifications-switch'
-                       id='notif-switch-${room_id}'
-                       ${notifs_enabled ? 'checked="checked"': ''}
-                       data-room-id='${room_id}'
-                />
-                <label for='notif-switch-${room_id}'> Notifications </label>
-              </div>
-            </div>
-
-            <div class='messages'></div>
-
-            <div style='position: relative'>
-
-              <div class='status-container'
-                   data-room-id="${room_id}"
-                   style='display:none!important'>
-
-                <div class='status-message'
-                     data-room-id='${room_id}'>
-                </div>
-                <div class='stop-editing' data-room-id='${room_id}'>
-                   <i class='fas fa fa-times'></i>
-                </div>
-              </div>
-
-              <div class='image-preview-container'
-                     data-room-id="${room_id}"
-                     style='display:none'>
-
-                <div class='preview-images' data-room-id='${room_id}'></div>
-
-                <div class='delete-images-preview' data-room-id='${room_id}'>
-                  <i class='fas fa fa-times'></i>
-                </div>
-
-              </div>
-            </div>
-
-
-
-            <div class='chat-controls' class='d-flex'>
-
-              <div class='chat-controls-row'>
-                <input data-room-id='${room_id}'
-                       class='message-input col-12 col-sm message-input mr-1'>
-
-                <button data-room-id='${room_id}'
-                        class='send-message chat-control btn btn-primary btn-sm'>
-                          <i class="fas fa-paper-plane"></i>
-                </button>
-
-
-              </div>
-
-              <!-- Those two have to go one after another for some CSS trickery -->
-              <input type='file'
-                     id="file-input-${room_id}"
-                     style='display:none;'
-                     class='file-input'
-                     data-room-id='${room_id}' multiple='multiple'
-              />
-
-              <label class='btn btn-primary mr-1 file-input-label chat-control'
-                     for="file-input-${room_id}">
-                     <i class="fas fa-file-image"></i>
-              </label>
-              <!-- Those two-->
-
-            </div>
-            <div class='mt-3'>
-              ${is_public ?
-                `<input class='anonymous-switch'
-                        data-room-id="${room_id}"
-                        id="anonymous-switch-id-${room_id}"
-                        type='checkbox'
-                />
-                <label for='anonymous-switch-id-${room_id}'>Anonymous</label>`
-              : ""}
-              ${slow_mode_delay ?
-                `<div class='d-flex justify-content-between'>
-                  <div class='slow-mode-hint' data-room-id='${room_id}'></div>
-                  <span data-room-id='${room_id}'
-                        style='align-self: center;'
-                        class="slow-mode-timer badge badge-primary badge-pill">0
-                  </span>
-                </div>`
-              : ''}
-            </div>
-        </div>`
-    );
-
-    // Here is <div id="chats"></div> used
+    let roomdiv = $(ROOM_TEMPLATE({room_id, title, is_public, slow_mode_delay, notifs_enabled}));
     $("#chats").append(roomdiv);
     return roomdiv;
   }
@@ -122,59 +187,21 @@ export default class DomApi {
     own, edited,
     attachments,
     original_ts, latest_ts) {
+
     let type = this.getRoomType(room_id);
 
-    let attachments_html = "<div class='attachment-image-container'>";
+    let html = MESSAGE_TEMPLATE({room_id, message_id,
+      username,
+      message: this.formatMessage(message),
+      upvotes, downvotes, vote,
+      own, edited,
+      attachments,
+      original_ts,
+      latest_ts: formatTime(latest_ts),
+      type,
+    });
 
-    for (let filename of attachments?.images || []) {
-      attachments_html += `<img class='attached-image' src='/media/uploads/${filename}'>`
-    }
-    attachments_html += "</div>"
-
-    let ok_msg = `
-    <div class='message ${own ? "own": ""}' data-message-id=${message_id}>
-
-      <div class='header'>
-        <span class='username'>${username}</span>
-
-        <div class='message-info'>
-          <div class='show-history' ${edited ? "" : "style='display:none'"} data-message-id='${message_id}'>edited</div>
-          <div class='message-timestamp ml-1' data-message-id='${message_id}'>${formatTime(latest_ts)}</div>
-          ${(own ?
-            `<div class='edit-message ml-1'
-                  data-message-id='${message_id}'
-                  data-room-id='${room_id}'>edit</div>`
-          : "")}
-        </div>
-      </div>
-
-
-      <div class='body'>
-        ${attachments_html}
-
-        <!-- it appears newlines and spaces are prererved, so no nice indents for message here -->
-        <span class='text'>${this.formatMessage(message)}</span>
-
-      </div>
-
-      <div class='footer'>
-        ${(type == "public" ?
-        `
-          <div class='d-flex'>
-           <div data-event-name="upvote" data-message-id="${message_id}" class='msg-vote vote-block'>
-            <i class="fas fa-check"></i>
-            <div class='msg-upvotes'>${upvotes}</div>
-           </div>
-
-           <div data-event-name="downvote" data-message-id="${message_id}" class='msg-vote vote-block'>
-            <i class="fas fa-times"></i>
-            <div class='msg-downvotes'>${downvotes}</div>
-          </div>
-        </div>
-        ` : "")}
-      </div>
-    </div>`;
-    this.getMessagesDiv(room_id).append(ok_msg);
+    this.getMessagesDiv(room_id).append(html);
 
     // make own vote appear active
     this.getVoteDiv(message_id, vote).addClass('active');
@@ -320,7 +347,6 @@ export default class DomApi {
     this.getFileInput(room_id).attr('disabled', 'disabled');
     this.getMessageInput(room_id).data('edit-message', message_id)
     .val(text);
-    console.log(text);
   }
 
   stopEditing(room_id) {
@@ -350,11 +376,22 @@ export default class DomApi {
 
   setSlowMode(room_id, delay) {
     if (delay == 0) return;
-    $(`.slow-mode-hint[data-room-id='${room_id}']`).text(`slow mode is active. you can send messages once in ${delay} seconds.`)
+    $(`.slow-mode-hint[data-room-id='${room_id}']`).html(`⚠ slow mode is active. you can send messages once in ${delay} seconds.`)
   }
 
   setSlowModeTimeLeft(room_id, seconds) {
-    console.log("set time", seconds);
-    $('.slow-mode-timer[data-room-id="' + room_id + '"]').text(""+seconds);
+    if (seconds == 0) {
+      $('.slow-mode-timer[data-room-id="' + room_id + '"]').hide();
+      return;
+    }
+    $('.slow-mode-timer[data-room-id="' + room_id + '"]').show().text(""+seconds);
+  }
+
+  getLatestOwnMessage(room_id) {
+    return this.getMessagesDiv(room_id).find('.message.own').last();
+  }
+
+  isEditing(room_id) {
+    return this.getEditedMessageId(room_id) ? true : false;
   }
 }

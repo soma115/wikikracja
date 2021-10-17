@@ -63,3 +63,7 @@ export function formatTime(ts) {
   var seconds = "0" + date.getSeconds();
   return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
+
+export function inRoom (roomId) {
+    return $("#room-" + roomId).length > 0;
+};

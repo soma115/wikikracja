@@ -498,11 +498,13 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     async def format_chat_message_data(self, event):
         user = await self.get_user_by_id(event["user_id"])
         vote = await self.get_vote(event['message_id'])
-        del event['type']
-        del event["user_id"]  # delete user id to not give away author of anonymous message
+
+        event_copy = {**event}
+        del event_copy["user_id"]  # delete user id to not give away author of anonymous message
+        del event_copy["type"]
 
         return {
-            **event,  # copy event
+            **event_copy,  # copy event
             # Override some of fields based on receiver
             'username': 'Anonymous User' if event["anonymous"] else user.username,
             "new": event["new"] if self.scope['user'] != user else False,
@@ -533,7 +535,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         Send vote updates to each interested client.
         """
 
-        # copy sub dictionary, just in case
+        # copy sub dictionary, as same event object is sent to every consumer
         update = {**event['update_votes']}
 
         who_triggered = update['user_id']
