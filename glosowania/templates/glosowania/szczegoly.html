@@ -9,15 +9,15 @@
 	{% if next %} <a href="{% url 'glosowania:details' pk=next.id %}">{% trans 'next' %} >></a> {% else %} {% trans 'next' %} >> {% endif %}
 
 	<div>
-		<h5>{% trans 'Bill number' %}: {{ id.id }}</h5>
-		<h5>{% trans 'Bill title' %}: {{ id.title }}</h5>
-		<h5>{% trans 'Bill state' %}: {{ state }}</h5>
-		<h5>{% trans 'Bill text' %}:</h5><p>{{ id.tresc }}</p>
-		<h5>{% trans 'Penalty for non-compliance' %}:</h5><p>{{ id.kara }}</p>
-		<h5>{% trans 'Reason' %}:</h5><p>{{ id.uzasadnienie }}</p>
-		<h5>{% trans 'Positives' %}:</h5><p>{{ id.args_for }}</p>
-		<h5>{% trans 'Negatives' %}:</h5><p>{{ id.args_against }}</p>
-        <h5>{% trans 'This law supersedes the following bills' %}:</h5><p>{{ id.znosi }}</p>
+		<h5>{% trans 'Bill number' %}: <b>{{ id.id }}</b></h5>
+		<h5>{% trans 'Bill title' %}: <b>{{ id.title }}</b></h5>
+		<h5>{% trans 'Bill state' %}: <b>{{ state }}</b></h5>
+		<h5>{% trans 'Bill text' %}: <b>{{ id.tresc }}</b></h5>
+		<h5>{% trans 'Penalty for non-compliance' %}: <b>{{ id.kara }}</b></h5>
+		<h5>{% trans 'Reason' %}: <b>{{ id.uzasadnienie }}</b></h5>
+		<h5>{% trans 'Positives' %}: <b>{{ id.args_for }}</b></h5>
+		<h5>{% trans 'Negatives' %}: <b>{{ id.args_against }}</b></h5>
+        <h5>{% trans 'This law supersedes the following bills' %}: <b>{{ id.znosi }}</b></h5>
 			<p>
 				{% trans 'Author' %}: {{ id.author }} | {% trans 'Number of people signed the motion for a referendum' %}: {{ id.ile_osob_podpisalo }}
 				{% if id.status >= 6 %} | {% trans 'For' %}: {{ id.za }} | {% trans 'Against' %}: {{ id.przeciw }} {% endif %}
@@ -35,15 +35,13 @@
 		{% if id.status == 5 or id.status == 6 or id.status == 7 %}
 			<p>
 				<h5>{% trans 'Protocol' %}:</h5>
-			</p>
-			<p>
 				{% for i in report %}
 					{{ i.code }}
 					{% if i.vote %}
 						{% trans "Yes" %}
 					{% else %}
 						{% trans "No" %}
-					{% endif %}<br>
+					{% endif %}
 				{% endfor %}
 			</p>
 		{% endif %}
