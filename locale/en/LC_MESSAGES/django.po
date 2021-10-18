@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-16 19:48+0200\n"
+"POT-Creation-Date: 2021-10-17 17:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -179,7 +179,7 @@ msgid "Delete"
 msgstr ""
 
 #: elibrary/templates/elibrary/book_detail.html:38
-#: glosowania/templates/glosowania/szczegoly.html:67
+#: glosowania/templates/glosowania/szczegoly.html:65
 msgid "Edit"
 msgstr ""
 
@@ -433,37 +433,37 @@ msgstr ""
 msgid "Protocol"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:44
-#: glosowania/templates/glosowania/szczegoly.html:75
+#: glosowania/templates/glosowania/szczegoly.html:42
+#: glosowania/templates/glosowania/szczegoly.html:73
 msgid "Yes"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:46
-#: glosowania/templates/glosowania/szczegoly.html:76
+#: glosowania/templates/glosowania/szczegoly.html:44
+#: glosowania/templates/glosowania/szczegoly.html:74
 msgid "No"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:56
+#: glosowania/templates/glosowania/szczegoly.html:54
 msgid "Do you want a referendum on this law?"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:57
+#: glosowania/templates/glosowania/szczegoly.html:55
 msgid "Yes, I sign"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:60
+#: glosowania/templates/glosowania/szczegoly.html:58
 msgid "You already signed this proposal."
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:62
+#: glosowania/templates/glosowania/szczegoly.html:60
 msgid "Withdraw your sign"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:74
+#: glosowania/templates/glosowania/szczegoly.html:72
 msgid "Do you want to implement this law?"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:79
+#: glosowania/templates/glosowania/szczegoly.html:77
 msgid "You already voted."
 msgstr ""
 
@@ -1124,19 +1124,19 @@ msgstr ""
 msgid "You can find more setting in your profile"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:29
+#: obywatele/templates/obywatele/szczegoly.html:30
 msgid "Your relationship to this person is"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:31
+#: obywatele/templates/obywatele/szczegoly.html:32
 msgid "I accept this person"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:32
+#: obywatele/templates/obywatele/szczegoly.html:33
 msgid "Indifferent"
 msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:33
+#: obywatele/templates/obywatele/szczegoly.html:34
 msgid " I do not accept this person "
 msgstr ""
 

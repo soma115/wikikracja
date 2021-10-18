@@ -323,7 +323,7 @@ def zliczaj_wszystko():
                     str(_("Proposal no.")) + " " + str(i.id) + str(_("was approved")),
                     str(_("Proposal no.")) + " " + str(i.id) + " " +
                     str(_("was approved in referendum and is now in Vacatio Legis period")) + '.\n' +
-                    str(_("The law will take effect on")) + 
+                    str(_("The law will take effect on")) + " " + 
                     str(i.data_obowiazuje_od) + '\n' + str(_("Click here to read proposal: http://")) + 
                     f"{HOST}/glosowania/details/{str(i.id)}"
                     )

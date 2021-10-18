@@ -8,7 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 17:52+0200\n"
+<<<<<<< Updated upstream
+"POT-Creation-Date: 2021-10-16 19:48+0200\n"
+=======
+"POT-Creation-Date: 2021-10-17 11:59+0200\n"
+>>>>>>> Stashed changes
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,59 +20,57 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: article/models.py:13 elibrary/forms.py:6 elibrary/models.py:12
 #: glosowania/models.py:26
 msgid "Title"
-msgstr "Tytuł"
+msgstr ""
 
 #: article/models.py:14 elibrary/forms.py:7 elibrary/models.py:13
 #: glosowania/templates/glosowania/szczegoly.html:22
 msgid "Author"
-msgstr "Autor"
+msgstr ""
 
 #: article/models.py:15
 msgid "Slug"
-msgstr "Slug"
+msgstr ""
 
 #: article/models.py:16
 msgid "Summary"
-msgstr "Podsumowanie"
+msgstr ""
 
 #: article/models.py:17
 msgid "Modified"
-msgstr "Zmieniony"
+msgstr ""
 
 #: article/models.py:18
 msgid "Published"
-msgstr "Opublikowany"
+msgstr ""
 
 #: article/models.py:19 article/templates/article/list.html:14
 msgid "Public"
-msgstr "Publiczny"
+msgstr ""
 
 #: article/models.py:20
 msgid "Body"
-msgstr "Treść"
+msgstr ""
 
 #: article/models.py:25
 msgid "Article"
-msgstr "Artykuł"
+msgstr ""
 
 #: article/models.py:26
 msgid "Articles"
-msgstr "Artykuły"
+msgstr ""
 
 #: article/templates/article/list.html:14
 msgid "Private"
-msgstr "Prywatny"
+msgstr ""
 
 #: chat/templates/chat/add.html:7
 msgid "New room"
-msgstr "Nowy pokój"
+msgstr ""
 
 #: chat/templates/chat/add.html:15 elibrary/templates/elibrary/add.html:32
 #: elibrary/templates/elibrary/book_form.html:27
@@ -79,250 +81,267 @@ msgstr "Nowy pokój"
 #: obywatele/templates/obywatele/change_name.html:24
 #: obywatele/templates/obywatele/change_username.html:18
 msgid "Save"
-msgstr "Zapisz"
+msgstr ""
 
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:33
 #: elibrary/templates/elibrary/book_form.html:28
 #: glosowania/templates/glosowania/dodaj.html:35
+<<<<<<< Updated upstream
 #: glosowania/templates/glosowania/edit.html:34
 #: obywatele/templates/obywatele/dodaj.html:70
 #: obywatele/templates/obywatele/szczegoly.html:111
+=======
+#: glosowania/templates/glosowania/szczegoly.html:42
+#: glosowania/templates/glosowania/szczegoly.html:55
+#: glosowania/templates/glosowania/szczegoly.html:59
+#: obywatele/templates/obywatele/dodaj.html:64
+#: obywatele/templates/obywatele/szczegoly.html:103
+>>>>>>> Stashed changes
 msgid "Back"
-msgstr "Wróć"
+msgstr ""
 
-#: chat/templates/chat/chat.html:10
+#: chat/templates/chat/chat.html:18
 msgid "Add Room"
-msgstr "Dodaj pokój"
+msgstr ""
 
-#: chat/templates/chat/chat.html:16
+#: chat/templates/chat/chat.html:24
 msgid "Public chat rooms"
-msgstr "Publiczne pokoje"
+msgstr ""
 
-#: chat/templates/chat/chat.html:27
+#: chat/templates/chat/chat.html:37
 msgid "Private messages"
-msgstr "Prywatne wiadomości"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: chat/templates/chat/chat.html:48
 msgid "Archived chats"
-msgstr "Archiwum czatów"
+msgstr ""
 
 #: chat/templates/chat/chat.html:58
 msgid "Public chat rooms are archived if they are not used for"
-msgstr "Publiczne pokoje są archiwizowane jeśli nie są używane przez"
+msgstr ""
 
 #: chat/templates/chat/chat.html:60
 msgid "days. After"
-msgstr "dni. Po upływie"
+msgstr ""
 
 #: chat/templates/chat/chat.html:62
 msgid "days they are deleted."
-msgstr "dni - są kasowane."
+msgstr ""
 
 #: chat/templates/chat/chat.html:65
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
-"Prywatne wiadomości są archiwizowane, gdy użytkownik zostanie zablokowany i "
-"usuwane po upływie"
 
 #: chat/templates/chat/chat.html:67
+=======
+#: chat/templates/chat/chat.html:55
+msgid "Archived chats"
+msgstr ""
+
+#: chat/templates/chat/chat.html:65
+msgid "Public chat rooms are archived if they are not used for"
+msgstr ""
+
+#: chat/templates/chat/chat.html:67
+msgid "days. After"
+msgstr ""
+
+#: chat/templates/chat/chat.html:69
+msgid "days they are deleted."
+msgstr ""
+
+#: chat/templates/chat/chat.html:72
+msgid "Private messages are archived when user is blocked and deleted after"
+msgstr ""
+
+#: chat/templates/chat/chat.html:74
+>>>>>>> Stashed changes
 msgid "days"
-msgstr "dni"
+msgstr ""
 
 #: elibrary/forms.py:8 elibrary/models.py:15
 msgid "Cover"
-msgstr "Okładka"
+msgstr ""
 
 #: elibrary/forms.py:10
 msgid "File epub"
-msgstr "Plik epub"
+msgstr ""
 
 #: elibrary/forms.py:11
 msgid "File mobi"
-msgstr "Plik mobi"
+msgstr ""
 
 #: elibrary/forms.py:12
 msgid "File pdf"
-msgstr "Plik pdf"
+msgstr ""
 
 #: elibrary/models.py:16 elibrary/templates/elibrary/add.html:20
 msgid "Cover proportions should be 2/3. I.E. width x 1.5 = height"
-msgstr "Proporcje okładki powinny wynosić 2/3. Tzn. szerokość x 1,5 = wysokość"
+msgstr ""
 
 #: elibrary/models.py:18
 msgid "epub"
-msgstr "epub"
+msgstr ""
 
 #: elibrary/models.py:19
 msgid "mobi"
-msgstr "mobi"
+msgstr ""
 
 #: elibrary/models.py:20
 msgid "pdf"
-msgstr "pdf"
+msgstr ""
 
 #: elibrary/templates/elibrary/add.html:8
 msgid "Upload Book"
-msgstr "Wgraj ebook"
+msgstr ""
 
 #: elibrary/templates/elibrary/book_detail.html:9
 #: glosowania/templates/glosowania/szczegoly.html:8
 #: obywatele/templates/obywatele/szczegoly.html:6
 #: obywatele/templates/obywatele/szczegoly.html:9
 msgid "prev"
-msgstr "poprzedni"
+msgstr ""
 
 #: elibrary/templates/elibrary/book_detail.html:10
 #: glosowania/templates/glosowania/szczegoly.html:9
 #: obywatele/templates/obywatele/szczegoly.html:7
 #: obywatele/templates/obywatele/szczegoly.html:10
 msgid "next"
-msgstr "następny"
+msgstr ""
 
 #: elibrary/templates/elibrary/book_detail.html:36
 msgid "Delete"
-msgstr "Skasuj"
+msgstr ""
 
 #: elibrary/templates/elibrary/book_detail.html:38
-#: glosowania/templates/glosowania/szczegoly.html:65
+#: glosowania/templates/glosowania/szczegoly.html:67
 msgid "Edit"
-msgstr "Edytuj"
+msgstr ""
 
 #: elibrary/templates/elibrary/book_form.html:8
 msgid "Edit Book"
-msgstr "Edytuj eBook"
+msgstr ""
 
 #: elibrary/templates/elibrary/book_list.html:7
 msgid "Add eBook"
-msgstr "Dodaj eBook"
+msgstr ""
 
 #: glosowania/models.py:18
 msgid "Enter only existing bill numbers here"
-msgstr "Wpisz tutaj tylko numery istniejących przepisów"
+msgstr ""
 
 #: glosowania/models.py:27
 msgid "Enter short title describing new law."
-msgstr "Wpisz krótki tytuł opisujący nowe prawo."
+msgstr ""
 
 #: glosowania/models.py:32
 msgid "Law text"
-msgstr "Treść przepisu"
+msgstr ""
 
 #: glosowania/models.py:33
 msgid "Enter the exact wording of the law as it is to be applied."
 msgstr ""
-"Wpisz treść przepisu dokładnie w takim brzmieniu w jakim ma obowiązywać."
 
 #: glosowania/models.py:38
 msgid "Penalty"
-msgstr "Kara"
+msgstr ""
 
 #: glosowania/models.py:39
 msgid ""
 "What is the penalty for non-compliance with this rule. This can be, for "
 "example: \"Banishment for 3 months\", \"Banishment forever\", etc."
 msgstr ""
-"Jaka jest kara za nieprzestrzeganie tej zasady. Może to być na przykład: "
-"\"Wygnanie na 3 miesiące\", \"Wygnanie na zawsze itd.\""
 
 #: glosowania/models.py:44
 msgid "Reasoning"
-msgstr "Uzasadnienie"
+msgstr ""
 
 #: glosowania/models.py:45
 msgid "What events inspired this bill? What are we going to achieve with it?"
 msgstr ""
-"Jakie wydarzenia zainspirowały projekt ustawy? Co dzięki niej osiągniemy?"
 
 #: glosowania/models.py:50
 msgid "Positive Aspects of the Idea"
-msgstr "Pozytywne Aspekty Pomysłu"
+msgstr ""
 
 #: glosowania/models.py:51
 msgid ""
 "Enter the benefits for the group, environment, economy, etc. resulting from "
 "the introduction of the idea."
 msgstr ""
-"Określ korzyści dla grupy, otoczenia, środowiska, ekonomi etc. wynikające z "
-"wprowadzenia pomysłu."
 
 #: glosowania/models.py:57
 msgid "Negative Aspects of the Idea"
-msgstr "Negatywne Aspekty Pomysłu"
+msgstr ""
 
 #: glosowania/models.py:58
 msgid "Enter the potential threat associated with the proposal."
-msgstr "Określ potencjalne zagrożenie związane z propozycją."
+msgstr ""
 
 #: glosowania/models.py:65
 msgid "Abolishes the rules"
-msgstr "Znosi przepis/y"
+msgstr ""
 
 #: glosowania/models.py:66
-#, fuzzy
-#| msgid ""
-#| "If the proposed law supersedes other bills, enter their numbers here."
 msgid ""
 "If the proposed law supersedes other bills, enter their comma separated "
 "numbers here."
 msgstr ""
-"Jeśli proponowane prawo zastępuje inne przepisy, wprowadź tutaj ich numery "
-"rozdzielone przecinkami."
 
 #: glosowania/templates/glosowania/dodaj.html:7
 msgid "Add new law proposal"
-msgstr "Dodaj nową propozycję przepisu"
+msgstr ""
 
 #: glosowania/templates/glosowania/edit.html:7
 msgid "Edit law proposal"
-msgstr "Nowa propozycja przepisu"
+msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:13
 msgid "Proposals"
-msgstr "Propozycje"
+msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:29
 msgid "No endorsement"
-msgstr "Brak poparcia"
+msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:37 glosowania/views.py:220
 msgid "Queued"
-msgstr "W kolejce"
+msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:45 glosowania/views.py:220
 msgid "Referendum"
-msgstr "Referendum"
+msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:53 glosowania/views.py:220
 msgid "Rejected"
-msgstr "Odrzucone"
+msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:61 glosowania/views.py:220
 msgid "Vacatio Legis"
-msgstr "Vacatio Legis"
+msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:69 glosowania/views.py:220
 msgid "Governing Law"
-msgstr "Obowiązujące"
+msgstr ""
 
 #: glosowania/templates/glosowania/menu.html:75
 msgid ""
 "A referendum is not a one-off decision. The referendum is to pass a law that "
 "will be in force all the time."
 msgstr ""
-"Referendum nie służy do podejmowania jednorazowych decyzji. Referendum jest "
-"po to żeby uchwalić prawo, które będzie obowiązywało cały czas."
 
 #: glosowania/templates/glosowania/status.html:15
 msgid "There is no proposal with this status"
-msgstr "Nie ma propozycji o tym statusie"
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:28
 msgid "Voting parameters"
-msgstr "Parametry głosowań"
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:37
 msgid "New proposal needs to gather"
-msgstr "Nowa propozycja musi zebrać"
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:39
 msgid ""
@@ -330,216 +349,207 @@ msgid ""
 "enough for any sensible proposal to be voted on, and only high enough to "
 "filter out obvious spam."
 msgstr ""
-"podpisów aby została poddana pod referendum. Ta liczba powinna pozostać "
-"wystarczająco niska aby możliwe było głosowanie nad każdą rozsądną "
-"propozycją, i tylko na tyle wysoka aby odfiltrować oczywisty spam."
 
 #: glosowania/templates/glosowania/status.html:42
 msgid "Maximum time to gather signatures is"
-msgstr "Maksymalny czas na zebranie podpisów to"
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:44
 msgid ""
 "days. If there is not enough signatures - after this time, proposal is "
 "rejected."
 msgstr ""
-"dni. Jeśli nie ma wystarczającej liczby podpisów - po tym czasie propozycja "
-"jest odrzucana."
 
 #: glosowania/templates/glosowania/status.html:47
 msgid "Queue and discussion before referendum lasts"
-msgstr "Czas na dyskusję trwa"
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:49
 #: glosowania/templates/glosowania/status.html:54
 msgid "days."
-msgstr "dni."
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:52
 msgid "Referendum lasts for"
-msgstr "Referendum trwa"
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:57
 msgid "Vacatio Legis duration is"
-msgstr "Vacatio Legis trwa"
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:59
 msgid "days. After that time new law is in force."
-msgstr "dni. Po tym czasie prawo obowiązuje."
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:62
 #: obywatele/templates/obywatele/menu.html:66
 msgid "If you want to change any of"
-msgstr "Jeśli chcesz zmienić któryś z"
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:62
 #: obywatele/templates/obywatele/menu.html:66
 msgid "marked"
-msgstr "zaznaczonych"
+msgstr ""
 
 #: glosowania/templates/glosowania/status.html:62
 #: obywatele/templates/obywatele/menu.html:66
 msgid ""
 "parameters - create referendum and show its result to your administrator."
-msgstr "parametrów - utwórz referendum i pokaż jego wynik administratorowi."
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:12
 msgid "Bill number"
-msgstr "Numer przepisu"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:13
 msgid "Bill title"
-msgstr "Tytuł"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:14
 msgid "Bill state"
-msgstr "Status"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:15
 msgid "Bill text"
-msgstr "Treść przepisu"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:16
 msgid "Penalty for non-compliance"
-msgstr "Kara za nieprzestrzeganie"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:17
 msgid "Reason"
-msgstr "Uzasadnienie"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:18
 msgid "Positives"
-msgstr "Argumenty Za"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:19
 msgid "Negatives"
-msgstr "Argumenty przeciw"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:20
 msgid "This law supersedes the following bills"
-msgstr "Ta propozycja znosi następujące przepisy"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:22
 msgid "Number of people signed the motion for a referendum"
-msgstr "Liczba osób, które podpisały ten wniosek o referendum"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:23
 msgid "For"
-msgstr "Za"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:23
 msgid "Against"
-msgstr "Przeciw"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:26
 msgid "Date created"
-msgstr "Data utworzenia"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:27
 msgid "Date of collecting signatures"
-msgstr "Data zebrania podpisów"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:28
 msgid "Start referendum"
-msgstr "Start referendum"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:29
 msgid "End referendum"
-msgstr "Koniec referendum"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:30
 msgid "The rule applies from"
-msgstr "Ten przepis obowiązuje od"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:38
 msgid "Protocol"
-msgstr "Protokół"
-
-#: glosowania/templates/glosowania/szczegoly.html:42
-#: glosowania/templates/glosowania/szczegoly.html:73
-msgid "Yes"
-msgstr "Tak"
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:44
-#: glosowania/templates/glosowania/szczegoly.html:74
+#: glosowania/templates/glosowania/szczegoly.html:75
+msgid "Yes"
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:46
+#: glosowania/templates/glosowania/szczegoly.html:76
 msgid "No"
-msgstr "Nie"
+msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:54
+#: glosowania/templates/glosowania/szczegoly.html:56
 msgid "Do you want a referendum on this law?"
-msgstr "Czy chcesz referendum w sprawie tego przepisu?"
+msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:55
+#: glosowania/templates/glosowania/szczegoly.html:57
 msgid "Yes, I sign"
-msgstr "Tak, podpisuję"
-
-#: glosowania/templates/glosowania/szczegoly.html:58
-msgid "You already signed this proposal."
-msgstr "Już podpisałeś tę propozycję."
+msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:60
+msgid "You already signed this proposal."
+msgstr ""
+
+#: glosowania/templates/glosowania/szczegoly.html:62
 msgid "Withdraw your sign"
-msgstr "Wycofaj podpis"
+msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:72
+#: glosowania/templates/glosowania/szczegoly.html:74
 msgid "Do you want to implement this law?"
-msgstr "Czy chcesz wprowadzenia tego przepisu?"
+msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:77
+#: glosowania/templates/glosowania/szczegoly.html:79
 msgid "You already voted."
-msgstr "Już głosowałeś."
+msgstr ""
 
 #: glosowania/views.py:45
 msgid "New proposal has been saved."
-msgstr "Nowa propozycja została zapisana."
+msgstr ""
 
 #: glosowania/views.py:49
 msgid "New law proposal"
-msgstr "Nowa propozycja przepisu"
+msgstr ""
 
 #: glosowania/views.py:50
 msgid ""
 "added new law proposal\n"
 "You can read it here:"
 msgstr ""
-"dodał/a nową propozycję przepisu\n"
-"Możesz ją zobaczyć tutaj:"
 
 #: glosowania/views.py:76
 msgid "Saved."
-msgstr "Zapisane."
+msgstr ""
 
 #: glosowania/views.py:80 glosowania/views.py:220
 msgid "Proposal"
-msgstr "Propozycja"
+msgstr ""
 
 #: glosowania/views.py:80
 msgid " has been modified"
-msgstr " została zmodyfikowana"
+msgstr ""
 
 #: glosowania/views.py:81
 msgid ""
 "modified proposal\n"
 "You can read new version here:"
 msgstr ""
-"zmodyfikował/a propozycję przepisu\n"
-"Możesz ją nową wersję tutaj:"
 
 #: glosowania/views.py:136
 msgid "You signed this motion for a referendum."
-msgstr "Podpisałeś ten wniosek o referendum."
+msgstr ""
 
 #: glosowania/views.py:147
 msgid "Not signed."
-msgstr "Nie podpisane."
+msgstr ""
 
 #: glosowania/views.py:171
 msgid "Your vote has been saved. You voted Yes."
-msgstr "Twój podpis został zapisany. Zagłosowałeś na Tak."
+msgstr ""
 
 #: glosowania/views.py:174 glosowania/views.py:202
 msgid "Your verification code is:"
-msgstr "Twój kod weryfikacyjny to:"
+msgstr ""
 
 #: glosowania/views.py:177 glosowania/views.py:205
 msgid ""
@@ -547,183 +557,172 @@ msgid ""
 "is over. This code will be presented just once and will be not related to "
 "you."
 msgstr ""
-"Zapisz swój kod na kartce lub zrób zrzut ekranu aby zweryfikować go po "
-"zakończeniu referendum. Ten kod zostanie przedstawiony tylko raz i nie "
-"będzie powiązany z twoją osobą."
 
 #: glosowania/views.py:199
 msgid "Your vote has been saved. You voted No."
-msgstr "Twój podpis został zapisany. Zagłosowałeś na Nie."
+msgstr ""
 
 #: glosowania/views.py:274 glosowania/views.py:275 glosowania/views.py:290
 #: glosowania/views.py:291 glosowania/views.py:323 glosowania/views.py:324
 #: glosowania/views.py:336 glosowania/views.py:337 glosowania/views.py:356
 #: glosowania/views.py:357
 msgid "Proposal no."
-msgstr "Propozycja nr."
+msgstr ""
 
 #: glosowania/views.py:274
 msgid "is approved for referendum"
-msgstr "zostanie poddana pod referendum"
+msgstr ""
 
 #: glosowania/views.py:276
 msgid "gathered required amount of signatures and will be voted from"
-msgstr "zebrała wymaganą liczbę podpisów i zostania poddana pod głosowanie od"
+msgstr ""
 
 #: glosowania/views.py:277
 msgid "to"
-msgstr "do"
+msgstr ""
 
 #: glosowania/views.py:278 glosowania/views.py:294 glosowania/views.py:327
 #: glosowania/views.py:340
 msgid "Click here to read proposal: http://"
-msgstr "Kliknij tutaj aby zobaczyć propozycję: http://"
+msgstr ""
 
 #: glosowania/views.py:290 glosowania/views.py:292
 msgid "didn't gathered required amount of signatures"
-msgstr "nie zebrała wymaganej liczby podpisów"
+msgstr ""
 
 #: glosowania/views.py:292
 msgid "and was removed from queue."
-msgstr "i został usunięty z kolejki."
+msgstr ""
 
 #: glosowania/views.py:293 glosowania/views.py:339
 msgid "Feel free to improve it and send it again."
-msgstr "Możesz ją ulepszyć i wysłać ponownie."
+msgstr ""
 
 #: glosowania/views.py:305
 msgid "Referendum on proposal no."
-msgstr "Referendum nad propozycją nr."
+msgstr ""
 
 #: glosowania/views.py:305
 msgid "is starting now"
-msgstr "właśnie się rozpoczęło"
+msgstr ""
 
 #: glosowania/views.py:306
 msgid "It is time to vote on proposal no."
-msgstr "Nadszedł czas żeby zagłosować nad propozycją nr."
+msgstr ""
 
 #: glosowania/views.py:307
 msgid "Referendum ends at"
-msgstr "Referendum kończy się"
+msgstr ""
 
 #: glosowania/views.py:309
 msgid "Click here to vote: http://"
-msgstr "Kliknij tutaj aby zagłosować: http://"
+msgstr ""
 
 #: glosowania/views.py:323
 msgid "was approved"
-msgstr "została zatwierdzona"
+msgstr ""
 
 #: glosowania/views.py:325
 msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
-"została zatwierdzona w referendum i znajduje się obecnie w okresie Vacatio "
-"Legis."
 
 #: glosowania/views.py:326
 msgid "The law will take effect on"
-msgstr "Nowe prawo zacznie obowiązywać od"
+msgstr ""
 
 #: glosowania/views.py:336
 msgid "was rejected"
-msgstr "została odrzucona"
+msgstr ""
 
 #: glosowania/views.py:338
 msgid "was rejected in referendum."
-msgstr "została odrzucona w referendum."
+msgstr ""
 
 #: glosowania/views.py:356
 msgid "is in efect from today"
-msgstr "obowiązuje od dzisiaj"
+msgstr ""
 
 #: glosowania/views.py:357
 msgid "became abiding law today"
-msgstr "stała się dziś obowiązującym prawem"
+msgstr ""
 
 #: glosowania/views.py:358
 msgid "Click here to read it: http://"
-msgstr "Kliknij tutaj aby ją przeczytać: http://"
+msgstr ""
 
 #: grappelli/templates/registration/password_reset_email.html:2
-#, fuzzy, python-format
-#| msgid ""
-#| "You're receiving this email because you requested a password reset for "
-#| "your user account at %(site_name)s."
+#, python-format
 msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account at %(site_name)s."
 msgstr ""
-"Otrzymujesz tę wiadomość e-mail, ponieważ poprosiłeś(aś) o zresetowanie "
-"hasła na stronie %(site_name)."
 
 #: grappelli/templates/registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
-msgstr "Przejdź do następującej strony i wybierz nowe hasło:"
+msgstr ""
 
 #: grappelli/templates/registration/password_reset_email.html:8
 msgid "Your username, in case you've forgotten:"
-msgstr "Twoja nazwa użytkownika, na wypadek gdybyś zapomniał(a):"
+msgstr ""
 
 #: grappelli/templates/registration/password_reset_email.html:10
 msgid "Thanks for using our site!"
-msgstr "Dziękujemy za używanie naszej strony!"
+msgstr ""
 
 #: grappelli/templates/registration/password_reset_email.html:12
-#, fuzzy, python-format
-#| msgid "The %(site_name)s team"
+#, python-format
 msgid "The %(site_name)s team"
-msgstr "Zespół %(site_name)"
+msgstr ""
 
 #: home/templates/home/base.html:38 home/templates/home/home.html:40
 msgid "Start"
-msgstr "Start"
+msgstr ""
 
 #: home/templates/home/base.html:39
 msgid "Blog"
-msgstr "Blog"
+msgstr ""
 
 #: home/templates/home/base.html:42 home/templates/home/home.html:12
 #: home/templates/home/login.html:4 home/templates/home/login.html:14
 #: home/templates/home/login.html:25
 msgid "Login"
-msgstr "Zaloguj"
+msgstr ""
 
 #: home/templates/home/base.html:46 obywatele/models.py:39
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
-msgstr "Obywatele"
+msgstr ""
 
 #: home/templates/home/base.html:48
 msgid "Voting"
-msgstr "Głosowania"
+msgstr ""
 
 #: home/templates/home/base.html:50
 msgid "eLibrary"
-msgstr "eBiblioteka"
+msgstr ""
 
 #: home/templates/home/base.html:53
 msgid "Chat"
-msgstr "Chat"
+msgstr ""
 
 #: home/templates/home/base.html:55
 msgid "profile"
-msgstr "profil"
+msgstr ""
 
 #: home/templates/home/base.html:57
 msgid "admin"
-msgstr "admin"
+msgstr ""
 
 #: home/templates/home/base.html:59
 msgid "logout"
-msgstr "wyloguj"
+msgstr ""
 
 #: home/templates/home/haslo.html:7
 #: home/templates/home/password_reset_confirm.html:7
 #: home/templates/home/password_reset_confirm.html:20
 #: obywatele/templates/obywatele/my_profile.html:12
 msgid "Change password"
-msgstr "Zmień hasło"
+msgstr ""
 
 #: home/templates/home/haslo.html:26
 #: obywatele/templates/obywatele/change_email.html:24
@@ -731,309 +730,406 @@ msgstr "Zmień hasło"
 #: obywatele/templates/obywatele/change_username.html:19
 #: obywatele/templates/obywatele/my_assets.html:87
 msgid "Cancel"
-msgstr "Anuluj"
+msgstr ""
 
 #: home/templates/home/home.html:15 home/templates/home/login.html:28
 #: home/templates/home/password_reset_form.html:5
 msgid "Reset password"
-msgstr "Odzyskaj hasło"
+msgstr ""
 
 #: home/templates/home/home.html:18
 msgid "Send message to developer"
-msgstr "Wyślij wiadomość do developera"
+msgstr ""
 
 #: home/templates/home/home.html:27
 msgid "Ongoing referenda"
-msgstr "Trwające referenda"
+msgstr ""
 
 #: home/templates/home/home.html:29
 msgid "End"
-msgstr "Koniec"
+msgstr ""
 
 #: home/templates/home/home.html:31
 msgid "there is currently no referendum"
-msgstr "nie ma obecnie trwających referendów."
+msgstr ""
 
 #: home/templates/home/home.html:37
 msgid "Upcoming referenda"
-msgstr "Nadchodzące referenda"
+msgstr ""
 
 #: home/templates/home/home.html:42
 msgid "there are no upcoming referenda at this moment"
-msgstr "nie ma obecnie nadchodzących referendów"
+msgstr ""
 
 #: home/templates/home/login.html:33
 msgid ""
 "The username or password is incorrect. Please try again or reset your "
 "password."
 msgstr ""
-"Nazwa użytkownika lub hasło są nieprawidłowe. Spróbuj ponownie lub odzyskaj "
-"hasło."
 
 #: home/templates/home/password_reset_complete.html:7
 msgid "A new password has been set. You can log in"
-msgstr "Nowe hasło zostało utworzone. Możesz już się zalogować"
+msgstr ""
 
 #: home/templates/home/password_reset_complete.html:7
 #: home/templates/home/password_reset_confirm.html:25
 msgid "here"
-msgstr "tutaj"
+msgstr ""
 
 #: home/templates/home/password_reset_confirm.html:24
 msgid ""
 "The link you used is invalid, possibly because it has already been used."
 msgstr ""
-"Użyty link jest nieprawidłowy, prawdopodobnie dlatego, że został już użyty."
 
 #: home/templates/home/password_reset_confirm.html:25
 msgid "You must restart the password change process"
-msgstr "Musisz ponownie uruchomić proces zmiany hasła"
+msgstr ""
 
 #: home/templates/home/password_reset_done.html:7
 msgid ""
 "We've emailed you instructions for setting your password, if an account "
 "exists with the email you entered. You should receive them shortly."
 msgstr ""
-"Wysłaliśmy Ci e-mailem instrukcje dotyczące ustawiania hasła, jeśli istnieje "
-"konto z podanym adresem e-mail. Wkrótce powinieneś je otrzymać."
 
 #: home/templates/home/password_reset_done.html:11
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
 msgstr ""
-"Jeśli nie otrzymasz wiadomości e-mail, upewnij się, że podałeś adres, na "
-"który się zarejestrowałeś i sprawdź folder ze spamem."
 
 #: home/templates/home/password_reset_done.html:15
 msgid "Back to login page"
-msgstr "Powrót do strony logowania"
+msgstr ""
 
 #: home/templates/home/password_reset_form.html:7
 msgid "To reset your password, enter your e-mail address and click \"Send\""
-msgstr "Aby zresetować hasło, wprowadź swój adres e-mail i kliknij \"Wyślij\""
+msgstr ""
 
 #: home/templates/home/password_reset_form.html:15
 msgid "Send"
-msgstr "Wyślij"
+msgstr ""
 
 #: home/views.py:40
 msgid "Your password has been changed."
-msgstr "Twoje hasło zostało zmienione."
+msgstr ""
 
 #: home/views.py:43
 msgid "You typed something wrong. See what error appeared above and try again."
 msgstr ""
-"Coś źle wpisałeś. Zobacz, jaki błąd pojawił się powyżej i spróbuj ponownie."
 
 #: obywatele/forms.py:65
 msgid "The two email addresses fields didn't match."
-msgstr "Dwa pola adresów e-mail nie zgadzają się"
+msgstr ""
 
 #: obywatele/forms.py:66
 msgid "The email address is the same as the one already defined."
-msgstr "Nowy email jest taki sam jak obecny."
+msgstr ""
 
 #: obywatele/forms.py:70
 msgid "New email address"
-msgstr "Nowy email"
+msgstr ""
 
 #: obywatele/forms.py:75
 msgid "New email address confirmation"
-msgstr "Potwierdź nowy email"
+msgstr ""
 
 #: obywatele/models.py:20
 msgid "Foto"
-msgstr "Zdjęcie"
+msgstr ""
 
 #: obywatele/models.py:21
 msgid "Phone number i.e. +48 123 456 789"
-msgstr "Numer telefonu np. +48 123 456 789"
+msgstr ""
 
 #: obywatele/models.py:21
+<<<<<<< Updated upstream
 msgid "Phone number"
-msgstr "Numer telefonu"
+=======
+msgid "Tasks performed in our group"
+msgstr ""
+
+#: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:12
+#: obywatele/templates/obywatele/my_profile.html:27
+#: obywatele/templates/obywatele/szczegoly.html:36
+msgid "Responsibilities"
+>>>>>>> Stashed changes
+msgstr ""
 
 #: obywatele/models.py:22
 msgid "Where one spend most of their time"
-msgstr "Gdzie spędza się większość czasu"
+msgstr ""
 
 #: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
+<<<<<<< Updated upstream
 #: obywatele/templates/obywatele/my_profile.html:36
 #: obywatele/templates/obywatele/szczegoly.html:56
+=======
+#: obywatele/templates/obywatele/my_profile.html:35
+#: obywatele/templates/obywatele/szczegoly.html:44
+>>>>>>> Stashed changes
 msgid "City"
-msgstr "Miasto"
+msgstr ""
 
 #: obywatele/models.py:23
 msgid "Tasks performed in our group"
-msgstr "Zadania wykonywane w naszej grupie"
+msgstr ""
 
 #: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:12
 #: obywatele/templates/obywatele/my_profile.html:44
 #: obywatele/templates/obywatele/szczegoly.html:48
 msgid "Responsibilities"
-msgstr "Zadania"
+msgstr ""
 
 #: obywatele/models.py:24
 msgid "Hobbies one have"
-msgstr "Hobby"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:14
 #: obywatele/templates/obywatele/my_profile.html:52
 #: obywatele/templates/obywatele/szczegoly.html:60
+=======
+#: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:14
+#: obywatele/templates/obywatele/my_profile.html:39
+#: obywatele/templates/obywatele/szczegoly.html:48
+>>>>>>> Stashed changes
 msgid "Hobby"
-msgstr "Hobby"
+msgstr ""
 
 #: obywatele/models.py:25
 msgid "Things you are willing to give away for free"
-msgstr "Przedmioty, które chcesz oddać za darmo"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:15
 #: obywatele/templates/obywatele/my_profile.html:60
 #: obywatele/templates/obywatele/szczegoly.html:64
+=======
+#: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:15
+#: obywatele/templates/obywatele/my_profile.html:43
+#: obywatele/templates/obywatele/szczegoly.html:52
+>>>>>>> Stashed changes
 msgid "To give away"
-msgstr "Do oddania"
+msgstr ""
 
 #: obywatele/models.py:26
 msgid "Stuff you can borrow to others"
-msgstr "Przedmioty, które możesz pożyczyć"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:16
 #: obywatele/templates/obywatele/my_profile.html:64
 #: obywatele/templates/obywatele/szczegoly.html:68
+=======
+#: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:16
+#: obywatele/templates/obywatele/my_profile.html:47
+#: obywatele/templates/obywatele/szczegoly.html:56
+>>>>>>> Stashed changes
 msgid "To borrow"
-msgstr "Do pożyczenia"
+msgstr ""
 
 #: obywatele/models.py:27
 msgid "Stuff you have for sale"
-msgstr "Przedmioty, które chcesz sprzedać"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:17
 #: obywatele/templates/obywatele/my_profile.html:68
 #: obywatele/templates/obywatele/szczegoly.html:72
+=======
+#: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:17
+#: obywatele/templates/obywatele/my_profile.html:51
+#: obywatele/templates/obywatele/szczegoly.html:60
+>>>>>>> Stashed changes
 msgid "For sale"
-msgstr "Do sprzedania"
+msgstr ""
 
 #: obywatele/models.py:28
 msgid "What do you need"
-msgstr "Czego potrzebujesz"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:18
 #: obywatele/templates/obywatele/my_profile.html:72
 #: obywatele/templates/obywatele/szczegoly.html:76
+=======
+#: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:18
+#: obywatele/templates/obywatele/my_profile.html:55
+#: obywatele/templates/obywatele/szczegoly.html:64
+>>>>>>> Stashed changes
 msgid "I need"
-msgstr "Potrzebuję"
+msgstr ""
 
 #: obywatele/models.py:29
 msgid "Practical skills one have"
-msgstr "Praktyczne umiejętności"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:19
 #: obywatele/templates/obywatele/my_profile.html:80
 #: obywatele/templates/obywatele/szczegoly.html:80
+=======
+#: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:19
+#: obywatele/templates/obywatele/my_profile.html:59
+#: obywatele/templates/obywatele/szczegoly.html:68
+>>>>>>> Stashed changes
 msgid "Skills"
-msgstr "Umiejętności"
+msgstr ""
 
 #: obywatele/models.py:30
 msgid "Knowledge one have"
-msgstr "Wiedza"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:20
 #: obywatele/templates/obywatele/my_profile.html:84
 #: obywatele/templates/obywatele/szczegoly.html:84
+=======
+#: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:20
+#: obywatele/templates/obywatele/my_profile.html:63
+#: obywatele/templates/obywatele/szczegoly.html:72
+>>>>>>> Stashed changes
 msgid "Knowledge"
-msgstr "Wiedza"
+msgstr ""
 
 #: obywatele/models.py:31
 msgid "Things one would like to learn"
-msgstr "Czego chce się nauczyć"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:21
 #: obywatele/templates/obywatele/my_profile.html:76
 #: obywatele/templates/obywatele/szczegoly.html:88
+=======
+#: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:21
+#: obywatele/templates/obywatele/my_profile.html:67
+#: obywatele/templates/obywatele/szczegoly.html:76
+>>>>>>> Stashed changes
 msgid "I want to learn"
-msgstr "Chcę się nauczyć"
+msgstr ""
 
 #: obywatele/models.py:32
 msgid "If running a business"
-msgstr "Jaki prowadzisz biznes"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:22
 #: obywatele/templates/obywatele/my_profile.html:56
 #: obywatele/templates/obywatele/szczegoly.html:92
+=======
+#: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:22
+#: obywatele/templates/obywatele/my_profile.html:71
+#: obywatele/templates/obywatele/szczegoly.html:80
+>>>>>>> Stashed changes
 msgid "Business"
-msgstr "Biznes"
+msgstr ""
 
 #: obywatele/models.py:33
 msgid "Profession"
-msgstr "Wykonywany zawód"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:23
 #: obywatele/templates/obywatele/my_profile.html:48
 #: obywatele/templates/obywatele/szczegoly.html:96
 msgid "Job"
-msgstr "Zawód"
+msgstr ""
 
+=======
+#: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:23
+#: obywatele/templates/obywatele/my_profile.html:75
+#: obywatele/templates/obywatele/szczegoly.html:84
+msgid "Job"
+msgstr ""
+
+#: obywatele/models.py:33
+msgid "Link to Facebook profile"
+msgstr ""
+
+#: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:24
+#: obywatele/templates/obywatele/my_profile.html:79
+#: obywatele/templates/obywatele/szczegoly.html:88
+msgid "Facebook"
+msgstr ""
+
+>>>>>>> Stashed changes
 #: obywatele/models.py:34
 msgid "What gift would you like to receive"
-msgstr "Jaki prazent chciałbyś dostać"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:24
 #: obywatele/templates/obywatele/my_profile.html:88
 #: obywatele/templates/obywatele/szczegoly.html:100
+=======
+#: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:25
+#: obywatele/templates/obywatele/my_profile.html:83
+#: obywatele/templates/obywatele/szczegoly.html:92
+>>>>>>> Stashed changes
 msgid "Gift"
-msgstr "Prezent"
+msgstr ""
 
 #: obywatele/models.py:35
 msgid "Other things worth mentioning"
-msgstr "Inne rzeczy warte wzmianki"
+msgstr ""
 
+<<<<<<< Updated upstream
 #: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:25
 #: obywatele/templates/obywatele/my_profile.html:92
 #: obywatele/templates/obywatele/szczegoly.html:104
+=======
+#: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:26
+#: obywatele/templates/obywatele/my_profile.html:87
+#: obywatele/templates/obywatele/szczegoly.html:96
+>>>>>>> Stashed changes
 msgid "Other"
-msgstr "Inne"
+msgstr ""
 
 #: obywatele/models.py:38
 msgid "Citizen"
-msgstr "Obywatel"
+msgstr ""
 
 #: obywatele/templates/obywatele/assets.html:10
 msgid "Name"
-msgstr "Imię"
+msgstr ""
 
 #: obywatele/templates/obywatele/assets.html:11
+<<<<<<< Updated upstream
 #: obywatele/templates/obywatele/my_profile.html:40
 #: obywatele/templates/obywatele/szczegoly.html:52
+=======
+#: obywatele/templates/obywatele/my_profile.html:31
+#: obywatele/templates/obywatele/szczegoly.html:40
+>>>>>>> Stashed changes
 msgid "Phone"
-msgstr "Telefon"
+msgstr ""
 
 #: obywatele/templates/obywatele/change_email.html:7
 #: obywatele/templates/obywatele/my_profile.html:13
 msgid "Change email"
-msgstr "Zmień email"
+msgstr ""
 
 #: obywatele/templates/obywatele/change_email.html:9
 msgid "Your current email"
-msgstr "Twój obecny email"
+msgstr ""
 
 #: obywatele/templates/obywatele/change_name.html:7
 msgid "Change your name"
-msgstr "Zmień imię i nazwisko"
+msgstr ""
 
 #: obywatele/templates/obywatele/change_name.html:9
 #: obywatele/templates/obywatele/my_profile.html:7
 msgid "First name"
-msgstr "Imię"
+msgstr ""
 
 #: obywatele/templates/obywatele/change_name.html:10
 #: obywatele/templates/obywatele/my_profile.html:8
 msgid "Last name"
-msgstr "Nazwisko"
+msgstr ""
 
 #: obywatele/templates/obywatele/change_username.html:7
 msgid "Change your username"
-msgstr "Zmień nazwę użytkownika"
+msgstr ""
 
 #: obywatele/templates/obywatele/change_username.html:9
 msgid "Username"
@@ -1044,100 +1140,94 @@ msgid ""
 "Below fields are not mandatory but filling them out will help us make the "
 "right decision when accepting a new person."
 msgstr ""
-"Poniższe pola nie są obowiązkowe, ale ich wypełnienie pomoże nam podjąć "
-"właściwą decyzję przy przyjmowaniu nowej osoby."
 
 #: obywatele/templates/obywatele/dodaj.html:69
 #: obywatele/templates/obywatele/my_assets.html:86
 msgid "Submit"
-msgstr "Wyślij"
+msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:22
 msgid "Candidates"
-msgstr "Kandydaci"
+msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:30
 msgid "New person"
-msgstr "Nowa osoba"
+msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:38
 msgid "Assets"
-msgstr "Zasoby"
+msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:50
 msgid "Population"
-msgstr "Populacja"
+msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:54
 msgid "Multiplier"
-msgstr "Mnożnik"
+msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:58
 msgid ""
 "Acceptance formula: required_reputation = round(log(Population) * Multiplier)"
 msgstr ""
-"Formuła obliczania akceptacji: wymagana_reputacja = round(log(Populacja) * "
-"Mnożnik)"
 
 #: obywatele/templates/obywatele/menu.html:62
 msgid "Currently required_reputation"
-msgstr "Obecnie wymagana reputacja"
+msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:70
 msgid "New person will be accepted above required_reputation threshold."
-msgstr "Nowa osoba zostanie zaakceptowana powyżej wymaganego progu reputacji."
+msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:71
 msgid "Existing person will be banned bellow that threshold."
-msgstr "Istniejąca osoba zostanie zbanowana poniżej tego progu."
+msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:72
 msgid ""
 "Information about who gave and took away someone's reputation is not "
 "presented anywhere."
 msgstr ""
-"Informacje o tym, kto dał i odebrał komuś reputację, nie są nigdzie "
-"prezentowane."
 
 #: obywatele/templates/obywatele/menu.html:74
 msgid "Read more"
-msgstr "Czytaj dalej"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_assets.html:8
 msgid "Here you can edit your assets"
-msgstr "Tutaj możesz edytować twoje zasoby"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:5
 msgid "This is your profile"
-msgstr "To jest twój profil"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:6
 msgid "Your email"
-msgstr "Twój email"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:9
 msgid "Your reputation"
-msgstr "Twoja reputacja"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:9
 msgid "required reputation"
-msgstr "Wymagana reputacja"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:10
 msgid "You've been introduced by"
-msgstr "Polecony przez"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:11
 msgid "You've joined"
-msgstr "Przyłączyłeś się"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:14
 msgid "Change name"
-msgstr "Zmień imię i nazwisko"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:30
 msgid "Those are your assets"
-msgstr "To są twoje zasoby"
+msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:31
 msgid ""
@@ -1145,139 +1235,134 @@ msgid ""
 "the better we will be able to fullfill our needs. Also we will know each "
 "other better."
 msgstr ""
-"Nie musisz wypełniać ich wszystkich, ale im więcej informacji podasz tym "
-"łatwiej będziemy mogli wypełniać wzajemnie nasze potrzeby. Dzięki również "
-"lepiej się poznamy."
 
 #: obywatele/templates/obywatele/my_profile.html:98
 msgid "Edit my assets"
-msgstr "Edytuj moje zasoby"
+msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:9
 msgid "proposed at"
-msgstr "zaproponowany dnia"
+msgstr ""
 
 #: obywatele/templates/obywatele/poczekalnia.html:18
 #: obywatele/templates/obywatele/start.html:18
 msgid "System parameters"
-msgstr "Parametry systemu"
+msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:18
 msgid "Introduced by"
-msgstr "Polecony przez"
+msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:19
 msgid "Joined"
-msgstr "Data przyjęcia"
+msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:24
 msgid "This is you"
-msgstr "To jesteś Ty"
+msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:25
 msgid "You can find more setting in your profile"
-msgstr "Więcej ustawień znajdziesz w twoim profilu"
+msgstr ""
 
-#: obywatele/templates/obywatele/szczegoly.html:30
+#: obywatele/templates/obywatele/szczegoly.html:29
 msgid "Your relationship to this person is"
-msgstr "Twój stosunek do tej osoby jest"
+msgstr ""
+
+#: obywatele/templates/obywatele/szczegoly.html:31
+msgid "I accept this person"
+msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:32
-msgid "I accept this person"
-msgstr "Akceptuję tą osobę"
+msgid "Indifferent"
+msgstr ""
 
 #: obywatele/templates/obywatele/szczegoly.html:33
-msgid "Indifferent"
-msgstr "Neutralny"
-
-#: obywatele/templates/obywatele/szczegoly.html:34
 msgid " I do not accept this person "
-msgstr "Nie akceptuję tej osoby"
+msgstr ""
 
 #: obywatele/views.py:55
 msgid "Your new email has been saved."
-msgstr "Twój nowy email został zapisany."
+msgstr ""
 
 #: obywatele/views.py:74 obywatele/views.py:92
 msgid "Your name has been saved."
-msgstr "Twój imię i nazwisko zostały zapisane."
+msgstr ""
 
 #: obywatele/views.py:143
 msgid "Email already exist"
-msgstr "Email już został użyty"
+msgstr ""
 
 #: obywatele/views.py:178
 msgid "The new user has been saved"
-msgstr "Nowy użytkownik został zapisany."
+msgstr ""
 
 #: obywatele/views.py:182
 msgid "New citizen has been proposed"
-msgstr "Został zaproponowany nowy użytkownik"
+msgstr ""
 
 #: obywatele/views.py:183
 msgid ""
 "proposed new citizen\n"
 "You can approve him/her here:"
 msgstr ""
-"zaproponował/a nową osobę\n"
-"Może ją zatwierdzić tutaj:"
 
 #: obywatele/views.py:258
 msgid "Changes was saved"
-msgstr "Zmiany zostały zapisane"
+msgstr ""
 
 #: obywatele/views.py:271
 msgid "Form is not valid!"
-msgstr "Formularz zawiera błędy"
+msgstr ""
 
 #: obywatele/views.py:346
 msgid "positive"
-msgstr "pozytywny"
+msgstr ""
 
 #: obywatele/views.py:353
 msgid "negative"
-msgstr "negatywny"
+msgstr ""
 
 #: obywatele/views.py:360
 msgid "neutral"
-msgstr "obojętny"
+msgstr ""
 
 #: obywatele/views.py:453
 msgid "Your account has been blocked"
-msgstr "Twoje konto zostało zablokowane."
+msgstr ""
 
 #: obywatele/views.py:454
 msgid "Welcome"
-msgstr "Witaj"
+msgstr ""
 
 #: obywatele/views.py:454
 msgid "Your account on page"
-msgstr "Twoje konto na stronie"
+msgstr ""
 
 #: obywatele/views.py:454 obywatele/views.py:463
 msgid "has been blocked."
-msgstr "zostało zablokowane."
+msgstr ""
 
 #: obywatele/views.py:462
 msgid "Citizen has been banned"
-msgstr "Obywatel został zbanowany"
+msgstr ""
 
 #: obywatele/views.py:463
 msgid "Account"
-msgstr "Konto"
+msgstr ""
 
 #: templates/admin/base_site.html:3
 msgid "Django site admin"
-msgstr "Django site admin"
+msgstr ""
 
 #: templates/admin/base_site.html:6
 msgid "Wikicracy Administration"
-msgstr "Wikicracy Administration"
+msgstr ""
 
 #: zzz/settings_custom.py:13 zzz/settings_custom_template.py:13
 msgid "English"
-msgstr "Angielski"
+msgstr ""
 
 #: zzz/settings_custom.py:14 zzz/settings_custom_template.py:14
 msgid "Polish"
-msgstr "Polski"
+msgstr ""
