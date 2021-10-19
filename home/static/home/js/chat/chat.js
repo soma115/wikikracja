@@ -17,8 +17,15 @@ $(document).ready(()=>{
     for (let user of online) {
       DOM_API.updateOnline(user.room_id, user.online);
     }
-  }
 
+    // get room id of first room in DOM
+    let room_id = $('.room-link[data-room-type="public"]').data('room-id');
+
+    if (room_id) {
+      onRoomTryJoin(room_id);
+    }
+
+  }
 });
 
 const slow_mode = {};
