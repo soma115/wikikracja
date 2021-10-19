@@ -153,6 +153,11 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # the authentication ASGI middleware
         room = await get_room_or_error(room_id, self.scope["user"])
 
+        # user can only be in one room at the time
+        for room_id_to_leave in self.rooms.items():
+            room_to_leave = await self.get_room(room_id_to_leave)
+            await self.handle_leave_room(room_to_leave)
+
         # Store that we're in the room
         self.rooms.join(room_id)  # 1
 
@@ -212,13 +217,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # the authentication ASGI middleware
         room = await get_room_or_error(room_id, self.scope["user"])
 
-        # Remove info that we're in the room
-        self.rooms.leave(room_id)
-        # Remove them from the group so they no longer get room messages
-        await self.channel_layer.group_discard(
-            room.group_name,
-            self.channel_name,
-        )
+        await self.handle_leave_room(room)
+
         # Instruct their client to finish closing the room
         proxy.send_json({"leave": str(room.id)})
 
@@ -504,6 +504,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     ###################
     # Utility methods #
     ###################
+
+    async def handle_leave_room(self, room):
+        # Remove info that we're in the room
+        self.rooms.leave(room.id)
+
+        # Remove them from the group so they no longer get room messages
+        await self.channel_layer.group_discard(
+            room.group_name,
+            self.channel_name,
+        )
 
     async def format_chat_message_data(self, event):
         user = await self.get_user_by_id(event["user_id"])

@@ -5,14 +5,16 @@ import {
   onRoomTryJoin,
   onToggleNotifications,
   onMessageHistory,
-  onRoomJoin,
-  onRoomLeave,
   onReceiveMessages,
   onRoomUnsee,
   onReceiveVotes,
   onReceiveEdit,
   onReceiveOnlineUpdates,
 } from './chat.js';
+
+import {
+  makeNotification
+} from './utility.js'
 
 import { inRoom } from './utility.js';
 
@@ -22,9 +24,9 @@ const DOM_API = new DomApi();
 
 export async function onSocketMessage(data) {
   if (data.join) {
-    onRoomJoin(data.join, data.title, data.public, data.slow_mode_delay, data.notifications);
+    alert("deprecated");
   } else if (data.leave) {
-    onRoomLeave(data.leave);
+    alert("deprecated");
   } else if (data.messages) {
     onReceiveMessages(data.messages);
   } else if (data.unsee_room) {
@@ -47,25 +49,22 @@ export async function onSocketMessage(data) {
 
 // Hook up send button to send a message
 $(document).on("click", ".send-message", function() {
-  let room_id = $(this).data('room-id');
-  let edit_message_id = DOM_API.getEditedMessageId(room_id);
-  let message = DOM_API.getEnteredText(room_id);
-  onSubmitMessage(room_id, message, edit_message_id);
+  let edit_message_id = DOM_API.getEditedMessageId();
+  let message = DOM_API.getEnteredText();
+  onSubmitMessage(message, edit_message_id);
 });
 
 $(document).on("keydown", ".message-input", function(e) {
   if (e.keyCode == 13) {
-    let room_id = $(this).data('room-id');
-    let edit_message_id = DOM_API.getEditedMessageId(room_id);
-    let message = DOM_API.getEnteredText(room_id);
-    onSubmitMessage(room_id, message, edit_message_id);
+    let edit_message_id = DOM_API.getEditedMessageId();
+    let message = DOM_API.getEnteredText();
+    onSubmitMessage(message, edit_message_id);
   }
   if (e.key == "ArrowUp") {
-    let room_id = $(this).data('room-id');
-    let message = DOM_API.getLatestOwnMessage(room_id);
+    let message = DOM_API.getLatestOwnMessage();
     let message_id = message.data('message-id');
-    if (!DOM_API.isEditing(room_id)) {
-      DOM_API.setEditing(room_id, message_id);
+    if (!DOM_API.isEditing()) {
+      DOM_API.setEditing(message_id);
     }
   }
 });
@@ -91,13 +90,11 @@ $(document).on('click', '#big-image', function(e) {
 });
 
 $(document).on('input', '.notifications-switch', function() {
-  let room_id = $(this).data('room-id');
-  onToggleNotifications(room_id, $(this).is(":checked"));
+  onToggleNotifications($(this).is(":checked"));
 });
 
 $(document).on('click', ".stop-editing", function(e) {
-  let room_id = $(this).data("room-id");
-  DOM_API.stopEditing(room_id);
+  DOM_API.stopEditing();
 });
 
 $(document).on('click', ".delete-images-preview", function(e) {
@@ -106,18 +103,17 @@ $(document).on('click', ".delete-images-preview", function(e) {
 });
 
 $(document).on("change", ".file-input", function(e) {
-    let room_id = $(this).data('room-id');
     let files = this.files;
-    let preview_container = DOM_API.getPreviewDiv(room_id);
+    let preview_container = DOM_API.getPreviewDiv();
     preview_container.empty();
 
-    DOM_API.getPreviewContainer(room_id).show();
+    DOM_API.getPreviewContainer().show();
 
     for (let i = 0; i < files.length; ++i){
       let file = files.item(i);
       var fr = new FileReader();
 
-      let preview_id = `preview-id-${i}-${room_id}`;
+      let preview_id = `preview-id-${i}`;
 
       preview_container.append("<img class='image-preview' id='" + preview_id + "'>");
       fr.onload = function(e) {
@@ -148,21 +144,18 @@ $(document).on("click",".show-history", async function () {
 // Edit button handler
 $(document).on("click",".edit-message", function () {
   let message_id = $(this).data("message-id");
-  let room_id = $(this).data('room-id');
-  DOM_API.setEditing(room_id, message_id);
+  DOM_API.setEditing(message_id);
 });
 
 // Room join/leave
 $(".room-link").click(function () {
-    let room_id = $(this).attr("data-room-id");  // Here is  <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li> used
+    let room_id = $(this).attr("data-room-id");
 
-    if (inRoom(room_id)) {
-        // Leave room
-        onRoomTryLeave(room_id);
-
+    if ($(this).hasClass("joined")) {
+      onRoomTryLeave(true);
     } else {
-        // Join room
-        onRoomTryJoin(room_id);
+      // Join room
+      onRoomTryJoin(room_id);
     }
 });
 

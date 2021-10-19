@@ -1,10 +1,10 @@
 import { removeNotification, formatTime, escapeHtml } from './utility.js';
 
 const room_template = `
-  <div class='room' data-room-id='<%-room_id%>' id='room-<%-room_id%>'>
+  <div class='room' id='room'>
 
       <div class='messages'>
-        <div class='room-empty-banner empty-chat-message' data-room-id="<%- room_id %>" >
+        <div class='room-empty-banner empty-chat-message'>
           This room is empty, be the first one to write something.
         </div>
       </div>
@@ -12,24 +12,21 @@ const room_template = `
       <div style='position: relative'>
 
         <div class='status-container'
-             data-room-id="<%-room_id%>"
              style='display:none!important'>
 
-          <div class='status-message'
-               data-room-id='<%-room_id%>'>
+          <div class='status-message'>
           </div>
-          <div class='stop-editing' data-room-id='<%-room_id%>'>
+          <div class='stop-editing'>
              <i class='fas fa fa-times'></i>
           </div>
         </div>
 
         <div class='image-preview-container'
-               data-room-id="<%-room_id%>"
                style='display:none'>
 
-          <div class='preview-images' data-room-id='<%-room_id%>'></div>
+          <div class='preview-images'></div>
 
-          <div class='delete-images-preview' data-room-id='<%-room_id%>'>
+          <div class='delete-images-preview'>
             <i class='fas fa fa-times'></i>
           </div>
 
@@ -41,10 +38,10 @@ const room_template = `
       <div class='chat-controls' class='d-flex'>
 
         <div class='chat-controls-row'>
-          <input data-room-id='<%-room_id%>'
+          <input
                  class='message-input col-12 col-sm message-input mr-1'>
 
-          <button data-room-id='<%-room_id%>'
+          <button
                   class='send-message chat-control btn btn-primary btn-sm'>
                     <i class="fas fa-paper-plane"></i>
           </button>
@@ -54,14 +51,14 @@ const room_template = `
 
         <!-- Those two have to go one after another for some CSS trickery -->
         <input type='file'
-               id="file-input-<%-room_id%>"
+               id="file-input"
                style='display:none;'
                class='file-input'
-               data-room-id='<%-room_id%>' multiple='multiple'
+               multiple='multiple'
         />
 
         <label class='btn btn-primary ml-1 file-input-label chat-control'
-               for="file-input-<%-room_id%>">
+               for="file-input">
                <i class="fas fa-file-image"></i>
         </label>
         <!-- Those two-->
@@ -73,11 +70,10 @@ const room_template = `
       <% if (is_public) { %>
 
           <input class='anonymous-switch'
-                  data-room-id="<%-room_id%>"
-                  id="anonymous-switch-id-<%-room_id%>"
+                  id="anonymous-switch-id"
                   type='checkbox'
           />
-          <label for='anonymous-switch-id-<%-room_id%>'>Anonymous</label>
+          <label for='anonymous-switch-id'>Anonymous</label>
 
       <% } %>
 
@@ -85,8 +81,8 @@ const room_template = `
       <% if (slow_mode_delay) { %>
 
           <div class='d-flex justify-content-between'>
-            <div class='slow-mode-hint' data-room-id='<%-room_id%>'></div>
-            <span data-room-id='<%-room_id%>'
+            <div class='slow-mode-hint'></div>
+            <span
                   style='align-self: center; display: none;'
                   class="slow-mode-timer badge badge-primary badge-pill">0
             </span>
@@ -109,9 +105,7 @@ const message_template = `<div class='message <% if (own) { %> own <% } %>' data
         </div>
 
         <% if (own) { %>
-          <div class='edit-message ml-1'
-                data-message-id='<%-message_id%>'
-                data-room-id='<%-room_id%>'>edit</div>
+          <div class='edit-message ml-1'>edit</div>
         <% } %>
 
         <div class='message-timestamp ml-1' data-message-id='<%-message_id%>'><%- latest_ts %></div>
@@ -165,12 +159,12 @@ export default class DomApi {
     return roomdiv;
   }
 
-  getRoom(room_id) {
-    return $(`#room-${room_id}`)
+  getRoom() {
+    return $(`#room`)
   }
 
-  getMessagesDiv(room_id) {
-    return this.getRoom(room_id).find('.messages');
+  getMessagesDiv() {
+    return this.getRoom().find('.messages');
   }
 
   addMessage(room_id, message_id,
@@ -193,14 +187,14 @@ export default class DomApi {
       type,
     });
 
-    this.getMessagesDiv(room_id).append(html);
+    this.getMessagesDiv().append(html);
 
     // make own vote appear active
     this.getVoteDiv(message_id, vote).addClass('active');
   }
 
   addDateBanner(text) {
-    getMessagesDiv().append(`<div>${text}</div>`)
+    this.getMessagesDiv().append(`<div>${text}</div>`)
   }
 
   getMessageDiv(message_id) {
@@ -238,8 +232,8 @@ export default class DomApi {
     return $(`.room-link[data-room-id="${room_id}"`).attr("data-room-type");
   }
 
-  getLastMessageBanner(room_id) {
-    return this.getMessagesDiv(room_id).find('.date-banner');
+  getLastMessageBanner() {
+    return this.getMessagesDiv().find('.date-banner');
   }
 
   getMessageText(message_id) {
@@ -261,13 +255,13 @@ export default class DomApi {
   }
 
   // container for images
-  getPreviewDiv(room_id) {
-    return $(".preview-images[data-room-id='" + room_id +"']")
+  getPreviewDiv() {
+    return $(".preview-images")
   }
 
   // container with all images and close button
-  getPreviewContainer(room_id) {
-    return $(`.image-preview-container[data-room-id="${room_id}"]`)
+  getPreviewContainer() {
+    return $(`.image-preview-container`)
   }
 
   seenChat(room_id) {
@@ -288,67 +282,66 @@ export default class DomApi {
       room_icon.removeClass('online').addClass('offline');
     }
   }
-  setRoomNotifs(room_id, enabled) {
-    $(`.notifications-switch[data-room-id='${room_id}']`).prop('checked', enabled);
+  setRoomNotifs(enabled) {
+    $(`.notifications-switch`).prop('checked', enabled);
   }
 
   getMessageTimeDiv(message_id) {
     return $(`.message-timestamp[data-message-id=${message_id}]`);
   }
 
-  getEnteredText(room_id) {
-    return $(`.message-input[data-room-id='${room_id}']`).val();
+  getEnteredText() {
+    return $(`.message-input`).val();
   }
 
-  getAnonymousValue(room_id) {
-    return $(`.anonymous-switch[data-room-id="${room_id}"]`).is(":checked");
+  getAnonymousValue() {
+    return $(`.anonymous-switch`).is(":checked");
   }
 
-  getFileInput(room_id) {
-    return $(`#file-input-${room_id}`);
+  getFileInput() {
+    return $(`#file-input`);
   }
 
-  getFiles(room_id) {
-    return this.getFileInput(room_id)[0].files;
+  getFiles() {
+    return this.getFileInput()[0].files;
   }
 
-  clearFiles(room_id) {
-    $(`#file-input-${room_id}`).val("");
-    this.getPreviewContainer(room_id).hide();
-    this.getPreviewDiv(room_id).empty();
+  clearFiles() {
+    $(`#file-input`).val("");
+    this.getPreviewContainer().hide();
+    this.getPreviewDiv().empty();
   }
 
-  getEditedMessageId(room_id) {
-    return this.getMessageInput(room_id).data('edit-message');
+  getEditedMessageId() {
+    return this.getMessageInput().data('edit-message');
   }
 
-  getStatusMessageDiv(room_id){
-    return $(`.status-message[data-room-id="${room_id}"`);
+  getStatusMessageDiv(){
+    return $(`.status-message`);
   }
 
-  getStatusMessageContainer(room_id){
-    return $(`.status-container[data-room-id="${room_id}"`);
+  getStatusMessageContainer(){
+    return $(`.status-container`);
   }
 
-  getMessageInput(room_id) {
-    return $(`.message-input[data-room-id='${room_id}']`);
+  getMessageInput() {
+    return $(`.message-input`);
   }
 
-  setEditing(room_id, message_id) {
+  setEditing(message_id) {
     let text = this.getMessageText(message_id);
-    this.getStatusMessageContainer(room_id).show();
-    this.getStatusMessageDiv(room_id).text(`editing ${text}`);
-    this.getFileInput(room_id).attr('disabled', 'disabled');
-    this.getMessageInput(room_id).data('edit-message', message_id)
+    this.getStatusMessageContainer().show();
+    this.getStatusMessageDiv().text(`editing ${text}`);
+    this.getFileInput().attr('disabled', 'disabled');
+    this.getMessageInput().data('edit-message', message_id)
     .val(text);
   }
 
-  stopEditing(room_id) {
-    this.getStatusMessageContainer(room_id).hide();
-    this.getFileInput(room_id).removeAttr('disabled');
-    this.getMessageInput(room_id).removeData('edit-message');
-      this.getMessageInput(room_id).val("")
-    console.log(this.getMessageInput(room_id));
+  stopEditing() {
+    this.getStatusMessageContainer().hide();
+    this.getFileInput().removeAttr('disabled');
+    this.getMessageInput().removeData('edit-message');
+      this.getMessageInput().val("")
   }
 
   openBigImage(src) {
@@ -368,29 +361,29 @@ export default class DomApi {
     $('body').removeClass('modal-open');
   }
 
-  setSlowMode(room_id, delay) {
+  setSlowMode(delay) {
     if (delay == 0) return;
-    $(`.slow-mode-hint[data-room-id='${room_id}']`).html(`⚠ slow mode is active. you can send messages once in ${delay} seconds.`)
+    $(`.slow-mode-hint`).html(`⚠ slow mode is active. you can send messages once in ${delay} seconds.`)
   }
 
-  setSlowModeTimeLeft(room_id, seconds) {
+  setSlowModeTimeLeft(seconds) {
     if (seconds == 0) {
-      $('.slow-mode-timer[data-room-id="' + room_id + '"]').hide();
+      $('.slow-mode-timer').hide();
       return;
     }
-    $('.slow-mode-timer[data-room-id="' + room_id + '"]').show().text(""+seconds);
+    $('.slow-mode-timer').show().text(""+seconds);
   }
 
-  getLatestOwnMessage(room_id) {
-    return this.getMessagesDiv(room_id).find('.message.own').last();
+  getLatestOwnMessage() {
+    return this.getMessagesDiv().find('.message.own').last();
   }
 
-  isEditing(room_id) {
-    return this.getEditedMessageId(room_id) ? true : false;
+  isEditing() {
+    return this.getEditedMessageId() ? true : false;
   }
 
-  removeNoMessagesBanner(room_id) {
-    $('.room-empty-banner[data-room-id="' +room_id + '"]').remove();
+  removeNoMessagesBanner() {
+    $('.room-empty-banner').remove();
   }
 
   setRoomTitle(title) {
@@ -398,6 +391,16 @@ export default class DomApi {
   }
   setRoomNotifications(is_enabled) {
     $("#notif-switch").prop("disabled", false).prop('checked', is_enabled);
+  }
+
+  clearRoomData() {
+      this.getMessagesDiv().empty();
+      this.getMessageInput().val("");
+      this.clearFiles();
+      this.stopEditing();
+      this.getMessagesDiv().append(
+        "<p class='empty-chat-message'>Select a chat to start messaging.</p>"
+      );
   }
 
   // addActiveClass(room_id) {

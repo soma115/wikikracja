@@ -74,14 +74,18 @@ export default class WsApi {
 
   receiveAsync(obj) {
     let ID = obj.__TRACE_ID;
+    if (this.promises[ID] === undefined) {
+      console.warn("received __TRACE_ID of " + ID + " that does not exist locally. Was it already resolved? Server should return only one message from this kind of responding handlers");
+      return;
+    }
     this.promises[ID].resolve(obj);
     delete this.promises[ID];
   }
 
 
 
-  joinRoom(room_id) {
-    this.sendJson({
+  async joinRoom(room_id) {
+    return await this.sendJsonAsync({
         "command": "join",
         "room_id": room_id
     });
@@ -128,8 +132,8 @@ export default class WsApi {
     });
   }
 
-  leaveRoom(room_id) {
-    this.sendJson({
+  async leaveRoom(room_id) {
+    return await this.sendJsonAsync({
       "command": "leave",
       "room_id": room_id
     });

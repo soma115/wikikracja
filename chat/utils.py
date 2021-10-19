@@ -74,6 +74,9 @@ class RoomRegistry:
     def items(self):
         return list(self._reg.keys())
 
+    def clear(self):
+        self._reg.clear()
+
 
 class HandledMessage:
     def __init__(self):
@@ -87,11 +90,17 @@ class HandledMessage:
         self._explicit_consumer = None
 
     def send_json(self, message: Union[dict, str, int, float], to_consumer=None, ignore_trace=False):
-
-        self.messages.append([None, message, to_consumer or self._explicit_consumer, ignore_trace])
+        self._add_message(None, message, to_consumer or self._explicit_consumer, ignore_trace)
 
     def group_send(self, group: str, message: dict, ignore_trace=False):
-        self.messages.append([group, message, None, ignore_trace])
+        self._add_message(group, message, None, ignore_trace)
+
+    def _add_message(self, group, message, to_consumer, ignore_trace):
+        # if handler associated with proxy already has something to respond to client,
+        # do not respond with other data as well as it will cause it to be discarded
+        # as that trace id will be already resolved.
+        should_ignore_trace = bool([x for x in self.messages if not x[3]])
+        self.messages.append([group, message, to_consumer, ignore_trace or should_ignore_trace])
 
     def get_messages(self):
         return self.messages

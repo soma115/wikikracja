@@ -76,3 +76,39 @@ export function escapeHtml(unsafe) {
          .replace(/"/g, "&quot;")
          .replace(/'/g, "&#039;");
  }
+
+ export class Lock {
+   constructor() {
+     this.__locked = false;
+     this.promises = [];
+   }
+
+   lock() {
+     if (this.__locked) {
+       throw new Error("[LockError] Locking locked lock");
+     }
+     this.__locked = true;
+   }
+
+   unlock() {
+     if (!this.__locked) {
+       throw new Error("[LockError] Unlocking unlocked lock");
+     }
+     this.__locked = false;
+     for (let resolver of this.promises) {
+       resolver();
+     }
+     this.promises = [];
+   }
+
+   locked() {
+     return this.__locked;
+   }
+
+   wait() {
+     let ctx = this;
+     return new Promise((resolve, reject)=> {
+       ctx.promises.push(resolve);
+     })
+   }
+ }

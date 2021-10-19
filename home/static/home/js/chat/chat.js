@@ -1,9 +1,10 @@
 import WsApi from './wsapi.js';
 import DomApi from './domapi.js';
-import { makeNotification, formatDate, formatTime, inRoom } from './utility.js';
+import { makeNotification, formatDate, formatTime, inRoom, Lock } from './utility.js';
 
 let WS_API;
 let DOM_API;
+const RoomLock = new Lock();
 let current_room = null;
 
 $(document).ready(()=>{
@@ -31,46 +32,110 @@ $(document).ready(()=>{
 const slow_mode = {};
 const slow_mode_time_left = {};
 
-export async function onRoomJoin(room_id, room_title, is_public, room_slow_mode, has_notifs) {
+//
+// export async function onRoomJoin(room_id, room_title, is_public, room_slow_mode, has_notifs) {
+//
+//
+// }
 
-  if (current_room) {
-    // let server know
-    await onRoomTryLeave(current_room);
+
+export async function onRoomTryJoin(room_id) {
+  if (RoomLock.locked()) {
+    console.log("cant join, waiting for lock");
+    await RoomLock.wait();
+    console.log("join lock done");
+  }
+  // already in this room
+  if (room_id == current_room) {
+    console.log("already in");
+    return;
   }
 
+  // leave current room
+  if (current_room) {
+      // only do client stuff, user will leave
+      // serverside automatically with join
+      await onRoomTryLeave(false);
+  }
+
+  DOM_API.getRoomIcon(room_id).addClass("joined");
+
+  // already in the room
+  if (current_room == room_id) {
+    return;
+  }
+
+  // joined another room while awaiting confirmation
+  if (current_room) {
+    return;
+  }
+
+  RoomLock.lock();
+  let response = await WS_API.joinRoom(room_id);
+  RoomLock.unlock();
+
   current_room = room_id;
+  let title = response.title;
+  let has_notifs = response.notifications;
+  let is_public = response.public;
+  let room_slow_mode = response.slow_mode_delay;
 
   // TODO: send seen confirmation to server after a little while
   DOM_API.seenChat(room_id);
   WS_API.seenRoom(room_id);
 
-  DOM_API.setRoomTitle(room_title);
+  //DOM_API.setRoomTitle(title);
   DOM_API.setRoomNotifications(has_notifs);
 
   DOM_API.createRoomDiv(
-    room_id, room_title, is_public,
+    current_room, title, is_public,
     room_slow_mode, has_notifs);
 
-  slow_mode[room_id] = room_slow_mode || 0;
-  DOM_API.setSlowMode(room_id, slow_mode[room_id]);
+  slow_mode[current_room] = room_slow_mode || 0;
+  DOM_API.setSlowMode(slow_mode[current_room]);
 }
 
-export async function onRoomLeave(room_id) {
-  DOM_API.getRoom(room_id).remove();
+export async function onRoomTryLeave(sync_with_server) {
+  if (RoomLock.locked()) {
+    console.log("cant leave, waiting for lock");
+    await RoomLock.wait();
+    console.log("leave lovk done");
+  }
+
+  if (sync_with_server) {
+    RoomLock.lock();
+    await WS_API.leaveRoom(current_room);
+    RoomLock.unlock();
+  }
+  DOM_API.getRoomIcon(current_room).removeClass("joined");
+  DOM_API.clearRoomData();
+
+  current_room = null;
 }
+
+// export async function onRoomLeave() {
+//   current_room = null;
+// }
 
 export async function onReceiveMessages(messages) {
 
   let room_id = messages[0].room_id;
-  let msgdiv = DOM_API.getMessagesDiv(room_id);
-  DOM_API.removeNoMessagesBanner(room_id);
+
+  // received data for wrong room if message was delayed
+  if (room_id != current_room) {
+    console.warn("received message for wrong room");
+    return;
+  }
+
+  let msgdiv = DOM_API.getMessagesDiv();
+  DOM_API.removeNoMessagesBanner();
 
 
   for (let message of messages) {
     let type = DOM_API.getRoomType(message.room_id);
 
     let current_banner = formatDate(message.timestamp);
-    let banner_div = DOM_API.getLastMessageBanner(message.room_id);
+    let banner_div = DOM_API.getLastMessageBanner();
     let previous_banner = banner_div.length ? banner_div.last().text() : null;
 
     if (previous_banner != current_banner) {
@@ -141,16 +206,6 @@ export async function onRoomUnsee(room_id) {
   DOM_API.getRoomIcon(room_id).addClass("room-not-seen");
 }
 
-export async function onRoomTryJoin(room_id) {
-  DOM_API.getRoomIcon(room_id).addClass("joined");
-  WS_API.joinRoom(room_id);
-}
-
-export async function onRoomTryLeave(room_id) {
-  DOM_API.getRoomIcon(room_id).removeClass("joined");
-  WS_API.leaveRoom(room_id);
-}
-
 export async function onUpdateVote(vote, message_id, is_add) {
   // toggle button's state
   $(this).toggleClass('active');
@@ -162,8 +217,8 @@ export async function onUpdateVote(vote, message_id, is_add) {
   }
 }
 
-export async function onToggleNotifications(room_id, is_enabled) {
-  WS_API.toggleNotifications(room_id, is_enabled);
+export async function onToggleNotifications(is_enabled) {
+  WS_API.toggleNotifications(current_room, is_enabled);
 }
 
 export async function onMessageHistory(message_id) {
@@ -184,21 +239,21 @@ export async function onMessageHistory(message_id) {
   $("#message-history-modal").modal('show').find(".modal-body").html(text);
 }
 
-export async function onSubmitMessage(room_id, message, editing_message_id) {
+export async function onSubmitMessage(message, editing_message_id) {
   // message being edited
   if (editing_message_id) {
     WS_API.editMessage(editing_message_id, message);
-    DOM_API.stopEditing(room_id);
+    DOM_API.stopEditing();
     return;
   }
 
-  if (slow_mode_time_left[room_id] > 0) {
+  if (slow_mode_time_left[current_room] > 0) {
     return;
   }
 
-  let files = DOM_API.getFiles(room_id);
+  let files = DOM_API.getFiles();
   let attachments = {};
-  let is_anonymous = DOM_API.getAnonymousValue(room_id);
+  let is_anonymous = DOM_API.getAnonymousValue();
 
   if (message.replace(" ", "").length == 0 && files.length == 0) {
     return;
@@ -209,25 +264,25 @@ export async function onSubmitMessage(room_id, message, editing_message_id) {
     attachments.images = response.filenames;
   }
 
-  WS_API.sendMessage(room_id, message, is_anonymous, attachments);
+  WS_API.sendMessage(current_room, message, is_anonymous, attachments);
 
   // remove files from input and image preview
-  DOM_API.clearFiles(room_id);
+  DOM_API.clearFiles();
 
   // Clears input field
-  DOM_API.getMessageInput(room_id).val("");
+  DOM_API.getMessageInput().val("");
 
-  DOM_API.setSlowModeTimeLeft(room_id, slow_mode[room_id]);
-  slow_mode_time_left[room_id] = slow_mode[room_id];
+  DOM_API.setSlowModeTimeLeft(slow_mode[current_room]);
+  slow_mode_time_left[current_room] = slow_mode[current_room];
 
   let i = setInterval( ()=> {
-    let d = parseInt(slow_mode_time_left[room_id]);
+    let d = parseInt(slow_mode_time_left[current_room]);
     if (d == 0) {
         clearInterval(i);
         return;
     }
-    slow_mode_time_left[room_id] = d - 1;
-    DOM_API.setSlowModeTimeLeft(room_id, slow_mode_time_left[room_id]);
+    slow_mode_time_left[current_room] = d - 1;
+    DOM_API.setSlowModeTimeLeft(slow_mode_time_left[current_room]);
   }, 1000);
 
 }
