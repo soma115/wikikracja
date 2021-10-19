@@ -153,6 +153,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # the authentication ASGI middleware
         room = await get_room_or_error(room_id, self.scope["user"])
 
+        if not await self.allowed_in_room(room):
+            raise ClientError("ACCESS_DENIED")
+
         # user can only be in one room at the time
         for room_id_to_leave in self.rooms.items():
             room_to_leave = await self.get_room(room_id_to_leave)
@@ -741,3 +744,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         user = self.scope['user']
         if not room.muted_by.filter(id=user.id).exists():
             room.muted_by.add(self.scope['user'])
+
+    @database_sync_to_async
+    def allowed_in_room(self, room):
+        return room.allowed.filter(id=self.scope['user'].id).exists()

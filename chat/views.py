@@ -3,6 +3,7 @@ import uuid
 
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Room, Message
@@ -26,8 +27,8 @@ def add_room(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('chat:chat')
+            room = form.save()
+            return redirect(f"{reverse('chat:chat')}#{room.id}")
     else:
         form = RoomForm()
     return render(request, 'chat/add.html', {'form': form})
