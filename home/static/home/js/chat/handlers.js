@@ -153,7 +153,7 @@ $(document).on("click",".edit-message", function () {
 });
 
 // Room join/leave
-$("li.room-link").click(function () {
+$(".room-link").click(function () {
     let room_id = $(this).attr("data-room-id");  // Here is  <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li> used
 
     if (inRoom(room_id)) {
@@ -165,6 +165,7 @@ $("li.room-link").click(function () {
         onRoomTryJoin(room_id);
     }
 });
+
 $('.room-link').on('click', function() {
   if (!Notification) {
    return;

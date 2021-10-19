@@ -61,6 +61,10 @@
 		</div>
 	  </nav>
 
+	<div class="container-fluid">
+		{% block content_fullscreen %}{% endblock content_fullscreen%}
+	</div>
+
 	<div class="container body-content">
 		<p>{% block content %}{% endblock content%}</p>
 	</div>

@@ -4,6 +4,7 @@ import { makeNotification, formatDate, formatTime, inRoom } from './utility.js';
 
 let WS_API;
 let DOM_API;
+let current_room = null;
 
 $(document).ready(()=>{
   WS_API = new WsApi();
@@ -24,14 +25,26 @@ const slow_mode = {};
 const slow_mode_time_left = {};
 
 export async function onRoomJoin(room_id, room_title, is_public, room_slow_mode, has_notifs) {
+
+  if (current_room) {
+    // let server know
+    await onRoomTryLeave(current_room);
+  }
+
+  current_room = room_id;
+
   // TODO: send seen confirmation to server after a little while
   DOM_API.seenChat(room_id);
   WS_API.seenRoom(room_id);
-  slow_mode[room_id] = room_slow_mode || 0;
+
+  DOM_API.setRoomTitle(room_title);
+  DOM_API.setRoomNotifications(has_notifs);
 
   DOM_API.createRoomDiv(
     room_id, room_title, is_public,
     room_slow_mode, has_notifs);
+
+  slow_mode[room_id] = room_slow_mode || 0;
   DOM_API.setSlowMode(room_id, slow_mode[room_id]);
 }
 
@@ -41,7 +54,10 @@ export async function onRoomLeave(room_id) {
 
 export async function onReceiveMessages(messages) {
 
-  let msgdiv = DOM_API.getMessagesDiv(messages[0].room_id);
+  let room_id = messages[0].room_id;
+  let msgdiv = DOM_API.getMessagesDiv(room_id);
+  DOM_API.removeNoMessagesBanner(room_id);
+
 
   for (let message of messages) {
     let type = DOM_API.getRoomType(message.room_id);

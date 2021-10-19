@@ -3,99 +3,152 @@
 {% load i18n %}
 {% load filters %}
 
-{% block content %}
+{% block content_fullscreen %}
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
           crossorigin="anonymous"/>
 
+    <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- EJS template library -->
     <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.5/ejs.min.js"></script>
 
-    {% comment %} ADD ROOM {% endcomment %}
-    <div class="col-md-2 offset-8">
-        <a class="btn btn-info btn-sm" href="{% url 'chat:add_room' %}">+{% trans 'Add Room' %}</a>
-    </div>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@600&display=swap" rel="stylesheet">
 
-    {% comment %} PUBLIC CHAT ROOMS {% endcomment %}
-    <ul class="rooms col-md-8">
-        <h4>{% trans 'Public chat rooms' %}</h4>
-        {% for room in allowed_rooms %}
-            {% if room.public == True and room.archived == False %}
-                <li class="room-link text-uppercase {{ room|seen_by:user }}"
-                    data-room-type="public"
-                    data-room-id="{{ room.id }}">{{ room|name_for:user }}</li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-
-    {% comment %} PRIVATE MESSAGES {% endcomment %}
-    <ul class="rooms col-md-8">
-        <h4>{% trans 'Private messages' %}</h4>
-        {% for room in allowed_rooms %}
-            {% if room.public == False and room.archived == False %}
-                <li class="room-link offline {{ room|seen_by:user }}"
-                    data-room-type="private"
-                    data-room-id="{{ room.id }}">{{ room|name_for:user }}</li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-
-    {% comment %} ARCHIVED PUBLIC ROOMS {% endcomment %}
-
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <p>
-                    <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#archive" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    {% trans "Archived chats" %}</button>
-                </p>
-            </div>
+    <div class="row">
+        <div class="col-sm-12 chat-functions d-flex justify-content-center">
+            <a class="btn" href="{% url 'chat:add_room' %}">{% trans 'Add Room' %}</a>
+            <a class="btn"> Some function</a>
+            <a class="btn"> Some function</a>
+            <a class="btn"> Some function</a>
         </div>
     </div>
 
-    <div id="archive" class="collapse">
-        <p>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    {% trans 'Public chat rooms are archived if they are not used for' %}
-                    <span class="badge badge-primary badge-pill">{{ ARCHIVE_CHAT_ROOM }}</span>
-                    {% trans 'days. After' %} 
-                    <span class="badge badge-primary badge-pill">{{ DELETE_CHAT_ROOM }}</span>
-                    {% trans 'days they are deleted.' %}
-                </li>
-                <li class="list-group-item">
-                    {% trans 'Private messages are archived when user is blocked and deleted after' %} 
-                    <span class="badge badge-primary badge-pill">{{ DELETE_CHAT_ROOM }}</span>
-                    {% trans 'days' %}
-                </li>
-            </ul>
-        </p>
+    <!-- Room Header -->
+    <div class="row">
+        <div class="col header">
+            <div class='d-flex justify-content-between'>
+                  <h5 id="room-title">No Room Selected</h5>
+                  <div>
+                    <input type='checkbox'
+                           id="notif-switch"
+                           class='notifications-switch'
+                           disabled="disabled" />
 
-        {% comment %} PUBLIC ROOMS {% endcomment %}
-        <ul class="rooms col-md-8">
-            {% for room in allowed_rooms %}
-                {% if room.archived == True and room.public == True %}
-                    <li class="room-link text-uppercase" data-room-id="{{ room.id }}">{{ room }}</li>
-                {% endif %}
-            {% endfor %}
-        </ul>
+                      <a></a>
+                      <label for='notif-switch'> Notifications </label>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Room Header -->
 
-        {% comment %} PRIVATE MESSAGES {% endcomment %}
-        <ul class="rooms col-md-8">
-            {% for room in allowed_rooms %}
-                {% if room.archived == True and room.public == False %}
-                    <li class="room-link" data-room-id="{{ room.id }}">{{ room }}</li>
-                {% endif %}
-            {% endfor %}
-        </ul>
+    <div id="div-room-list" class="row mb-3">
+        <div class="col-md-3 overflow-auto">
+            <div class="col-scrollable">
+                <p class="mt-3 mb-1 text-muted">Available rooms</p>
+                <div class="list-of-chats">
+                    {% for room in allowed_rooms %}
+                        {% if room.public == True and room.archived == False %}
+                            <div class="room-link text-uppercase {{ room|seen_by:user }}"
+                                data-room-type="public"
+                                data-room-id="{{ room.id }}">
+                                {{ room|name_for:user }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <p class="mt-3 mb-1 text-muted">Archived</p>
+                <div class="list-of-chats">
+                    {% for room in allowed_rooms %}
+                        {% if room.archived == True and room.public == True %}
+                            <div class="room-link"
+                                 data-room-id="{{ room.id }}">
+                                <span class="text-uppercase">{{ room }}</span>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div id="chats" class="col-lg-6">
+            <div class='room'>
+
+                <div class='messages text-center'>
+                    <p class="empty-chat-message">Select a chat to start messaging.</p>
+                </div>
+
+                <div class='chat-controls d-flex'>
+
+                  <div class='chat-controls-row'>
+                    <input data-room-id='<%-room_id%>'
+                           class='message-input col-12 col-sm message-input mr-1'>
+
+                    <button data-room-id='<%-room_id%>'
+                            class='send-message chat-control btn btn-primary btn-sm'>
+                              <i class="fas fa-paper-plane"></i>
+                    </button>
+                  </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div id="div-pm" class="col-md-3 overflow-auto">
+            <div class="col-scrollable">
+                <p class="mt-3 mb-1 text-muted">Available users</p>
+                <div class="list-of-pms">
+                    {% for room in allowed_rooms %}
+                        {% if room.public == False and room.archived == False %}
+                            <div class="room-link offline {{ room|seen_by:user }}"
+                                data-room-type="private"
+                                data-room-id="{{ room.id }}">
+                                {{ room|name_for:user }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <p class="mt-3 mb-1 text-muted">Archived</p>
+                <div class="list-of-pms">
+                    {% for room in allowed_rooms %}
+                        {% if room.archived == True and room.public == False %}
+                            <div class="room-link" data-room-id="{{ room.id }}">{{ room }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
     </div>
 
+    <div class="row">
+        <div class="col-sm-12">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        {% trans 'Public chat rooms are archived if they are not used for' %}
+                        <span class="badge badge-primary badge-pill">{{ ARCHIVE_CHAT_ROOM }}</span>
+                        {% trans 'days. After' %}
+                        <span class="badge badge-primary badge-pill">{{ DELETE_CHAT_ROOM }}</span>
+                        {% trans 'days they are deleted.' %}
+                    </li>
+                    <li class="list-group-item">
+                        {% trans 'Private messages are archived when user is blocked and deleted after' %}
+                        <span class="badge badge-primary badge-pill">{{ DELETE_CHAT_ROOM }}</span>
+                        {% trans 'days' %}
+                    </li>
+                </ul>
+        </div>
+    </div>
 
-
-    {% comment %} HERE CHATS WILL APPEAR {% endcomment %}
-    <div id="chats" class="col-md-12"></div>
 
     <!-- Bootstrap modal for message history -->
     <div id="message-history-modal" class="modal fade" tabindex="-1" role="dialog">
@@ -120,7 +173,7 @@
 
 
 
-{% endblock content %}
+{% endblock content_fullscreen %}
 
 {% block extra_body %}
     <script type="module" src="{% static 'home/js/chat/wsapi.js' %}"></script>

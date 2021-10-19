@@ -198,7 +198,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 attachments=await self.load_attachments(message['id']),
             )
             to_send.append(await self.format_chat_message_data(data))
-        proxy.send_json({'messages': to_send})
+
+        if to_send:
+            proxy.send_json({'messages': to_send})
 
     @handlers.register("leave")
     async def leave_room(self, proxy: HandledMessage, room_id):

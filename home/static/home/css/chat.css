@@ -1,16 +1,28 @@
-.rooms li {
-    padding: 5px 7px;
-    background: #def;
-    display: inline;
-    margin: 5px 2px;
-    border: 1px solid #bcd;
-    border-radius: 2px;
-    cursor: pointer;
+.room-link {
+  padding: .5rem 1rem;
+  /* background: var(--orange); */
+  display: inline;
+  /* border-bottom: 3px solid #f9eccc; */
+  border-radius: 2px;
+  cursor: pointer;
+  /* color: white; */
+  font-family: 'Noto Sans Mono', monospace;
+  font-size: 1.2rem;
 }
-    .rooms li.joined {
-        background: #5898D9;
-        border: 1px solid #35485C;
-    }
+.room-link.joined {
+    background: var(--orange);
+    color: #f0f1cd;
+    border: 1px solid #c7c7c7;
+}
+
+:root {
+  --orange: #fea453;
+  --yellow: #FEC601;
+  --green: #FEC601;
+  --blue: #3DA5D9;
+  --purple: #7950b9;
+  --dark-blue: #2364AA;
+}
 
 /*
     # is an id selector, used to target a single specific element with a unique id, but . is a class selector used to target multiple elements with a particular class.
@@ -18,10 +30,61 @@
 #chats {
 }
 
+.chat-functions {
+  background: var(--orange);
+  color: #f0f1cd;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.list-of-chats, .list-of-pms {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .col-scrollable::-webkit-scrollbar {
+  display: none;
+} */
+.overflow-auto {
+    min-height: 200px;
+    background: #fff8f0;
+    padding:  1rem;
+}
+
+.col-scrollable {
+  position: absolute;
+  /* height: 500px; */
+  width: calc(100% - 30px);
+
+  /* overflow-y: scroll; */
+  /* -ms-overflow-style: none;  /* IE and Edge */
+  /* scrollbar-width: none;  /* Firefox */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 #chats .room {
-    border: 1px solid #ccc;
     padding: 5px;
-    margin: 30px 0 0 0;
 }
 #chats h5 {
     color: #333;
@@ -31,25 +94,25 @@
 #chats .messages {
     height: 500px;
     overflow: auto;
-    background: #eee;
     display: flex;
     flex-direction: column;
 }
 #chats .username {
-    color: #0c80e5;
+    color: var(--purple);
     font-weight: bold;
 }
 
 .offline {
-    color: gray;
+    /* color: #402c2c; */
 }
 
 .online {
-    color: green;
+    color: #0d8c0d;
 }
 
 .room-not-seen {
-    border: 2px solid blue!important;
+  background: #d77b29!important;
+    /* border: 2px solid blue!important; */
 }
 
 .msg-vote.active {
@@ -118,10 +181,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #cfcfcf;
+  background-color: #fea4538f /*#cfcfcf*/;
   border-radius: 5px;
   padding: 0 3px 0 3px;
-  margin-left: .2rem;
+  margin-right: .2rem;
 }
 
 .vote-block i, .vote-block div {
@@ -131,9 +194,18 @@
 .message {
   background: #f6fff6;
   margin-bottom: .3rem;
-  width: 70%;
+  max-width: 70%;
+  min-width: 30%;
   padding: .3rem;
   position: relative;
+  box-shadow: 1px 4px 9px 3px #d9d6d6f0;
+}
+
+.empty-chat-message {
+  font-size: 20;
+  color: gray;
+  margin-top: 200px;
+  text-align: center;
 }
 
 .message.own {
@@ -145,23 +217,23 @@
 }
 
 .header {
-  margin-bottom: .2rem;
+  background: #7950b9;
+  padding: 1rem;
+  color: #f0f1cd;
 }
 
 .message-info {
-  position: absolute;
   display: flex;
-  top: 0;
-  right: 0;
-  padding: 10px;
+  margin-left: 1rem;
 }
 
 .date-banner {
   text-align: center;
   font-weight: bold;
+  font-family: 'Noto Sans Mono', monospace;
   padding: .3rem;
-  background: #dddddd;
-  color: #5b5855;
+  background: var(--orange);
+  color: #f0f1cd;
   font-size: 1.2rem;
   margin: .4rem 0 .4rem 0;
 }
@@ -179,7 +251,6 @@
 
 .chat-controls-row {
   display: flex;
-  margin-right: 3rem;
   flex: 1;
 }
 
@@ -232,4 +303,23 @@ input:disabled+label, input:disabled+label:hover {
   background-color: #8d8d8d;
   border: 1px solid #555555;
   color: #d9d9d9;
+}
+
+.messages {
+  background-image: url(/static/home/images/background.jpg);
+  padding: .5rem;
+}
+#room-title {
+  font-family: 'Noto Sans Mono', monospace;
+}
+
+.message-header {
+  padding: .2rem;
+  margin-bottom: .4rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.message .body {
+    margin-bottom: .2rem;
 }

@@ -1,128 +1,120 @@
 import { removeNotification, formatTime } from './utility.js';
 
 const room_template = `
-<div class='room' data-room-id='<%-room_id%>' id='room-<%-room_id%>'>
+  <div class='room' data-room-id='<%-room_id%>' id='room-<%-room_id%>'>
 
-    <div class='d-flex justify-content-between p-3 header'>
-      <h5><%=title%></h5>
-      <div>
-        <input type='checkbox'
-               class='notifications-switch'
-               id='notif-switch-<%-room_id%>'
-               <%notifs_enabled ? 'checked="checked"': ''%>
-               data-room-id='<%-room_id%>'
-        />
-        <label for='notif-switch-<%-room_id%>'> Notifications </label>
-      </div>
-    </div>
-
-    <div class='messages'></div>
-
-    <div style='position: relative'>
-
-      <div class='status-container'
-           data-room-id="<%-room_id%>"
-           style='display:none!important'>
-
-        <div class='status-message'
-             data-room-id='<%-room_id%>'>
-        </div>
-        <div class='stop-editing' data-room-id='<%-room_id%>'>
-           <i class='fas fa fa-times'></i>
+      <div class='messages'>
+        <div class='room-empty-banner empty-chat-message' data-room-id="<%- room_id %>" >
+          This room is empty, be the first one to write something.
         </div>
       </div>
 
-      <div class='image-preview-container'
+      <div style='position: relative'>
+
+        <div class='status-container'
              data-room-id="<%-room_id%>"
-             style='display:none'>
+             style='display:none!important'>
 
-        <div class='preview-images' data-room-id='<%-room_id%>'></div>
-
-        <div class='delete-images-preview' data-room-id='<%-room_id%>'>
-          <i class='fas fa fa-times'></i>
+          <div class='status-message'
+               data-room-id='<%-room_id%>'>
+          </div>
+          <div class='stop-editing' data-room-id='<%-room_id%>'>
+             <i class='fas fa fa-times'></i>
+          </div>
         </div>
 
-      </div>
-    </div>
+        <div class='image-preview-container'
+               data-room-id="<%-room_id%>"
+               style='display:none'>
 
+          <div class='preview-images' data-room-id='<%-room_id%>'></div>
 
+          <div class='delete-images-preview' data-room-id='<%-room_id%>'>
+            <i class='fas fa fa-times'></i>
+          </div>
 
-    <div class='chat-controls' class='d-flex'>
-
-      <div class='chat-controls-row'>
-        <input data-room-id='<%-room_id%>'
-               class='message-input col-12 col-sm message-input mr-1'>
-
-        <button data-room-id='<%-room_id%>'
-                class='send-message chat-control btn btn-primary btn-sm'>
-                  <i class="fas fa-paper-plane"></i>
-        </button>
-
-
+        </div>
       </div>
 
-      <!-- Those two have to go one after another for some CSS trickery -->
-      <input type='file'
-             id="file-input-<%-room_id%>"
-             style='display:none;'
-             class='file-input'
-             data-room-id='<%-room_id%>' multiple='multiple'
-      />
-
-      <label class='btn btn-primary mr-1 file-input-label chat-control'
-             for="file-input-<%-room_id%>">
-             <i class="fas fa-file-image"></i>
-      </label>
-      <!-- Those two-->
-
-    </div>
-    <div class='mt-3'>
 
 
-    <% if (is_public) { %>
+      <div class='chat-controls' class='d-flex'>
 
-        <input class='anonymous-switch'
-                data-room-id="<%-room_id%>"
-                id="anonymous-switch-id-<%-room_id%>"
-                type='checkbox'
+        <div class='chat-controls-row'>
+          <input data-room-id='<%-room_id%>'
+                 class='message-input col-12 col-sm message-input mr-1'>
+
+          <button data-room-id='<%-room_id%>'
+                  class='send-message chat-control btn btn-primary btn-sm'>
+                    <i class="fas fa-paper-plane"></i>
+          </button>
+
+
+        </div>
+
+        <!-- Those two have to go one after another for some CSS trickery -->
+        <input type='file'
+               id="file-input-<%-room_id%>"
+               style='display:none;'
+               class='file-input'
+               data-room-id='<%-room_id%>' multiple='multiple'
         />
-        <label for='anonymous-switch-id-<%-room_id%>'>Anonymous</label>
 
-    <% } %>
+        <label class='btn btn-primary ml-1 file-input-label chat-control'
+               for="file-input-<%-room_id%>">
+               <i class="fas fa-file-image"></i>
+        </label>
+        <!-- Those two-->
+
+      </div>
+      <div class='mt-3'>
 
 
-    <% if (slow_mode_delay) { %>
+      <% if (is_public) { %>
 
-        <div class='d-flex justify-content-between'>
-          <div class='slow-mode-hint' data-room-id='<%-room_id%>'></div>
-          <span data-room-id='<%-room_id%>'
-                style='align-self: center; display: none;'
-                class="slow-mode-timer badge badge-primary badge-pill">0
-          </span>
-        </div>
+          <input class='anonymous-switch'
+                  data-room-id="<%-room_id%>"
+                  id="anonymous-switch-id-<%-room_id%>"
+                  type='checkbox'
+          />
+          <label for='anonymous-switch-id-<%-room_id%>'>Anonymous</label>
 
-    <% } %>
+      <% } %>
 
-    </div>
-</div>
+
+      <% if (slow_mode_delay) { %>
+
+          <div class='d-flex justify-content-between'>
+            <div class='slow-mode-hint' data-room-id='<%-room_id%>'></div>
+            <span data-room-id='<%-room_id%>'
+                  style='align-self: center; display: none;'
+                  class="slow-mode-timer badge badge-primary badge-pill">0
+            </span>
+          </div>
+
+      <% } %>
+
+      </div>
+  </div>
 `;
 
 const message_template = `<div class='message <% if (own) { %> own <% } %>' data-message-id=<%-message_id%>>
 
-    <div class='header'>
+    <div class='message-header'>
       <span class='username'><%=username%></span>
 
       <div class='message-info'>
         <div class='show-history' <% if (!edited) { %> style='display:none' <% } %>
              data-message-id='<%-message_id%>'> edited
         </div>
-        <div class='message-timestamp ml-1' data-message-id='<%-message_id%>'><%- latest_ts %></div>
 
         <% if (own) { %>
           <div class='edit-message ml-1'
                 data-message-id='<%-message_id%>'
                 data-room-id='<%-room_id%>'>edit</div>
         <% } %>
+
+        <div class='message-timestamp ml-1' data-message-id='<%-message_id%>'><%- latest_ts %></div>
 
       </div>
     </div>
@@ -169,7 +161,7 @@ export default class DomApi {
 
   createRoomDiv(room_id, title, is_public, slow_mode_delay, notifs_enabled) {
     let roomdiv = $(ROOM_TEMPLATE({room_id, title, is_public, slow_mode_delay, notifs_enabled}));
-    $("#chats").append(roomdiv);
+    $("#chats").empty().append(roomdiv);
     return roomdiv;
   }
 
@@ -394,4 +386,20 @@ export default class DomApi {
   isEditing(room_id) {
     return this.getEditedMessageId(room_id) ? true : false;
   }
+
+  removeNoMessagesBanner(room_id) {
+    $('.room-empty-banner[data-room-id="' +room_id + '"]').remove();
+  }
+
+  setRoomTitle(title) {
+    $("#room-title").text(title);
+  }
+  setRoomNotifications(is_enabled) {
+    $("#notif-switch").prop("disabled", false).prop('checked', is_enabled);
+  }
+
+  // addActiveClass(room_id) {
+  //   $(".room-active").removeClass(".room-active");
+  //   $(".room-link[data-room-id='" + room_id + "']").addClass('room-active');
+  // }
 }
