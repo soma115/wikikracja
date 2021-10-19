@@ -347,11 +347,13 @@ def zliczaj_wszystko():
                 i.status = obowiazuje
                 
                 # Reject bills
-                separated = re.split('\W+', i.znosi)
-                for z in separated:
-                    abolish = Decyzja.objects.get(pk=str(z))
-                    abolish.status = 5
-                    abolish.save()
+                if i.znosi:
+                    separated = re.split('\W+', i.znosi)
+                    for z in separated:
+                        abolish = Decyzja.objects.get(pk=str(z))
+                        abolish.status = 5
+                        abolish.save()
+                
                 i.save()
 
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-19 03:44+0200\n"
+"POT-Creation-Date: 2021-10-19 04:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -528,8 +528,8 @@ msgstr ""
 
 #: glosowania/views.py:274 glosowania/views.py:275 glosowania/views.py:290
 #: glosowania/views.py:291 glosowania/views.py:323 glosowania/views.py:324
-#: glosowania/views.py:336 glosowania/views.py:337 glosowania/views.py:356
-#: glosowania/views.py:357
+#: glosowania/views.py:336 glosowania/views.py:337 glosowania/views.py:359
+#: glosowania/views.py:360
 msgid "Proposal no."
 msgstr ""
 
@@ -602,15 +602,15 @@ msgstr ""
 msgid "was rejected in referendum."
 msgstr ""
 
-#: glosowania/views.py:356
+#: glosowania/views.py:359
 msgid "is in efect from today"
 msgstr ""
 
-#: glosowania/views.py:357
+#: glosowania/views.py:360
 msgid "became abiding law today"
 msgstr ""
 
-#: glosowania/views.py:358
+#: glosowania/views.py:361
 msgid "Click here to read it: http://"
 msgstr ""
 
@@ -665,23 +665,19 @@ msgstr ""
 msgid "eLibrary"
 msgstr ""
 
-#: home/templates/home/base.html:53
+#: home/templates/home/base.html:52
 msgid "Chat"
 msgstr ""
 
-#: home/templates/home/base.html:55
-msgid "Payments"
-msgstr ""
-
-#: home/templates/home/base.html:57
+#: home/templates/home/base.html:54
 msgid "profile"
 msgstr ""
 
-#: home/templates/home/base.html:59
+#: home/templates/home/base.html:56
 msgid "admin"
 msgstr ""
 
-#: home/templates/home/base.html:61
+#: home/templates/home/base.html:58
 msgid "logout"
 msgstr ""
 
