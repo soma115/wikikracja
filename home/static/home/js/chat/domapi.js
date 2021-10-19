@@ -1,4 +1,4 @@
-import { removeNotification, formatTime } from './utility.js';
+import { removeNotification, formatTime, escapeHtml } from './utility.js';
 
 const room_template = `
   <div class='room' data-room-id='<%-room_id%>' id='room-<%-room_id%>'>
@@ -247,9 +247,11 @@ export default class DomApi {
   }
 
   formatMessage(raw_message) {
+    let escaped = escapeHtml(raw_message);
     let URL_REGEX = /(http(s){0,1}:\/\/){0,1}[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)/g;
-    let matches = raw_message.match(URL_REGEX);
-    let formatted = raw_message;
+    let formatted = escaped;
+
+    let matches = escaped.match(URL_REGEX);
     if (matches != null) {
       for (let match of matches) {
         formatted = raw_message.replace(match, `<a href='${match}'>${match}</a>`);

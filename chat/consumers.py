@@ -15,6 +15,7 @@ from datetime import datetime as dt
 from django.contrib.auth.models import User
 from channels.db import database_sync_to_async
 from django.db import IntegrityError
+from django.utils.html import escape
 
 from .group_messages import format_chat_message
 
@@ -263,6 +264,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         # Save message to DB
         u = await self.get_user_by_name(self.scope["user"].username)  # ???
         r = await self.get_room(room_id)
+
+        # escape HTML
+        message = escape(message)
+
         msg = Message(sender=u, text=message, room=r, anonymous=is_anonymous)  # time is added in a models.py
         message_id = await self.save_message(msg)
 
@@ -403,6 +408,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     @handlers.register("edit-message")
     async def handle_edit_message(self, proxy: HandledMessage, message_id: int, new_message: str):
+        # escape HTML
+        new_message = escape(new_message)
+
         message = await self.get_message(message_id)
 
         # only sender can edit own message

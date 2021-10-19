@@ -67,3 +67,12 @@ export function formatTime(ts) {
 export function inRoom (roomId) {
     return $("#room-" + roomId).length > 0;
 };
+
+export function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
