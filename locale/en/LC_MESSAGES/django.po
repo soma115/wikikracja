@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-18 22:08+0200\n"
+"POT-Creation-Date: 2021-10-19 03:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -670,14 +670,18 @@ msgid "Chat"
 msgstr ""
 
 #: home/templates/home/base.html:55
-msgid "profile"
+msgid "Payments"
 msgstr ""
 
 #: home/templates/home/base.html:57
-msgid "admin"
+msgid "profile"
 msgstr ""
 
 #: home/templates/home/base.html:59
+msgid "admin"
+msgstr ""
+
+#: home/templates/home/base.html:61
 msgid "logout"
 msgstr ""
 

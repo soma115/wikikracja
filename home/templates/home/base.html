@@ -47,7 +47,6 @@
 
 				<a {% if request.resolver_match.namespace == 'elibrary' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'elibrary:book-list' %}">{% trans "eLibrary" %}</a>
 				
-				
 				<a {% if request.resolver_match.namespace == 'chat' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/chat/">{% trans "Chat" %}</a>
 
 				<a {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} style="color:green" href="{% url 'obywatele:my_profile' %}">{% trans "profile" %}</a>

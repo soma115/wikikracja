@@ -345,12 +345,15 @@ def zliczaj_wszystko():
             # FROM VACATIO_LEGIS TO LAW
             if i.status == zatwierdzone and i.data_obowiazuje_od <= dzisiaj:
                 i.status = obowiazuje
-                separated = re.split('\W+', i.znosi.strip(' ').strip(',').strip(' ').strip(',').strip(' ').strip(',').strip(' ').strip(','))
+                
+                # Reject bills
+                separated = re.split('\W+', i.znosi)
                 for z in separated:
                     abolish = Decyzja.objects.get(pk=str(z))
                     abolish.status = 5
                     abolish.save()
                 i.save()
+
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
                 SendEmail(
                 str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("is in efect from today")),
