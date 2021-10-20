@@ -498,6 +498,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 'title': "Anonymous User" if message.anonymous else sender.username,
                 'body': message.text[:100],
                 'link': None,
+                'room_id': (await self.get_room_by_message(message.id)).id
             }
         })
 

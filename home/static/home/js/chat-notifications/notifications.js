@@ -31,9 +31,9 @@ $(document).ready( ()=> {
 });
 
 export function onReceiveNotification(notification) {
-  makeNotification(notification.title, notification.body, notification.link);
+  makeNotification(notification);
 }
 
 export function onRoomUnsee(room_id) {
-  $(".nav-link[data-route='chat']").css("background", "red");
+  $(".nav-link[data-route='chat']").addClass("chat-has-messages");
 }

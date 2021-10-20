@@ -145,11 +145,23 @@ $(".room-link").click(function () {
     }
 });
 
-$('.room-link').on('click', function() {
+$(document).on('click', '.permission-banner', ()=> {
+  DOM_API.showNotificationPermModal(
+    "Enable Notifications",
+    `<div>Chat works better with notifications.
+     You can allow them to see new messages even beyond chat room.</div>
+     <p class='mt-3'>Do you want to receive notifications?</p>
+     <small class='text-muted'>If nothing happens, you may have ignored permission prompt too many times. check your browser settings to enable them.</small>`
+ );
+})
+
+$(function() {
   if (!Notification) {
    return;
   }
 
-  if (Notification.permission !== 'granted')
-   Notification.requestPermission();
+  if (Notification.permission !== 'granted' && localStorage.notifications !== "No") {
+   DOM_API.addPermissionBanner();
+ }
+
 })

@@ -226,8 +226,9 @@ body {
 
 .header {
   background: #7950b9;
-  padding: 1rem;
+  padding: .3rem;
   color: #f0f1cd;
+  min-height: 48px;
 }
 
 .message-info {

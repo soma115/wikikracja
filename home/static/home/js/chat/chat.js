@@ -1,6 +1,6 @@
 import WsApi from './wsapi.js';
 import DomApi from './domapi.js';
-import { makeNotification, formatDate, formatTime, inRoom, Lock } from './utility.js';
+import { makeNotification, formatDate, formatTime, inRoom, Lock, parseParms } from './utility.js';
 
 let WS_API;
 let DOM_API;
@@ -25,10 +25,23 @@ $(document).ready(()=>{
     }
 
     let room_id;
-    if (window.location.hash) {
+
+    if (!room_id && window.location.hash) {
+
       // get room id passed with hash (room was created)
-      room_id = window.location.hash.slice(1);
-    } else {
+      let hash = window.location.hash.slice(1);
+      let obj = parseParms(hash);
+      if (obj.room_id) {
+        room_id = obj.room_id;
+      }
+    }
+
+    // check if room_id was passed from backend
+    if (!room_id && LAST_USED_ROOM_ID) {
+      room_id = LAST_USED_ROOM_ID;
+    }
+
+    if (!room_id) {
       // get room id of first room in DOM
       room_id = $('.room-link[data-room-type="public"]').data('room-id');
     }
@@ -44,7 +57,7 @@ const slow_mode = {};
 const slow_mode_time_left = {};
 
 export async function onReceiveNotification(notification) {
-  makeNotification(notification.title, notification.body, notification.link)
+  makeNotification(notification)
 }
 
 export async function onRoomTryJoin(room_id) {
@@ -244,7 +257,7 @@ export async function onMessageHistory(message_id) {
     `;
   }
   text += "</table>"
-  $("#message-history-modal").modal('show').find(".modal-body").html(text);
+  DOM_API.showHistoryModal("Message History", text);
 }
 
 export async function onSubmitMessage(message, editing_message_id) {

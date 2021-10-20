@@ -1,4 +1,4 @@
-export function makeNotification(title, body, icon) {
+export function makeNotification(n) {
   changeIcon('/static/home/images/notification-icon.ico');
   try {
     new Audio('/static/home/sounds/notification.mp3').play();
@@ -7,11 +7,15 @@ export function makeNotification(title, body, icon) {
   }
 
   if (Notification && Notification.permission == 'granted') {
-    let notification = new Notification(title, {
-     icon: icon,
-     body: body,
+    let notification = new Notification(n.title, {
+     icon: n.link,
+     body: n.body,
     });
-    notification.onclick = function() {};
+    notification.onclick = function() {
+      if (window.location.pathname !== "/chat/") {
+        window.location.href = "/chat#room_id=" + n.room_id;
+      }
+    };
   }
 }
 
@@ -121,3 +125,16 @@ export function escapeHtml(unsafe) {
    img.src = src;
    })
  }
+
+ export function parseParms(str) {
+   let pieces = str.split("&"), data = {}, i, parts;
+   // process each query pair
+   for (i = 0; i < pieces.length; i++) {
+       parts = pieces[i].split("=");
+       if (parts.length < 2) {
+           parts.push("");
+       }
+       data[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+   }
+   return data;
+}

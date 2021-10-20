@@ -28,7 +28,7 @@ def add_room(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             room = form.save()
-            return redirect(f"{reverse('chat:chat')}#{room.id}")
+            return redirect(f"{reverse('chat:chat')}#room_id={room.id}")
     else:
         form = RoomForm()
     return render(request, 'chat/add.html', {'form': form})
@@ -108,8 +108,15 @@ def chat(request):
     # Get a list of rooms, ordered alphabetically
     allowed_rooms = Room.objects.filter(allowed=request.user.id).order_by("title")
 
+    # Find out which room to open by default
+    last_user_room = None
+    messages_by_user = Message.objects.filter(sender=request.user).order_by("-time")
+    if messages_by_user.exists():
+        last_user_room = messages_by_user.first().room.id
+
     # Render that in the chat template
     return render(request, "chat/chat.html", {
+        'last_used_room': last_user_room,
         'allowed_rooms': allowed_rooms,
         'user': request.user,
         'ARCHIVE_CHAT_ROOM': td(days=s.ARCHIVE_CHAT_ROOM).days,

@@ -356,7 +356,8 @@ export default class DomApi {
     }
 
     var options = {
-        index: 0 // start at first slide
+        index: 0, // start at first slide
+        closeOnScroll: false,
     };
 
     var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
@@ -409,5 +410,21 @@ export default class DomApi {
       this.getMessagesDiv().append(
         "<p class='empty-chat-message'>Select a chat to start messaging.</p>"
       );
+  }
+
+  showHistoryModal(title, body) {
+    let modal = $("#message-history-modal").modal('show');
+    modal.find(".modal-body").html(body)
+    modal.find(".modal-title").html(title);
+  }
+
+  showNotificationPermModal(title, body) {
+    let modal = $("#message-permission-modal").modal('show');
+    modal.find(".modal-body").html(body)
+    modal.find(".modal-title").html(title);
+  }
+
+  addPermissionBanner() {
+    $('.room-header').append("<button class='permission-banner btn btn-success'> <i class='far fa-bell'></i> Manage notifications </button>")
   }
 }
