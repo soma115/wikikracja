@@ -38,20 +38,20 @@ export function formatDate(someDateTimeStamp) {
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let dt = new Date(someDateTimeStamp),
         date = dt.getDate(),
-        month = months[dt.getMonth()],
+        month = _(months[dt.getMonth()]),
         timeDiff = someDateTimeStamp - Date.now(),
         diffDays = new Date().getDate() - date,
         diffMonths = new Date().getMonth() - dt.getMonth(),
         diffYears = new Date().getFullYear() - dt.getFullYear();
 
     if (diffYears === 0 && diffDays === 0 && diffMonths === 0) {
-      return "Today";
+      return _("Today");
     } else if(diffYears === 0 && diffDays === 1) {
-      return "Yesterday";
+      return _("Yesterday");
     } else if(diffYears === 0 && diffDays === -1) {
-      return "Tomorrow";
+      return _("Tomorrow");
     } else if(diffYears === 0 && (diffDays < -1 && diffDays > -7)) {
-      return fulldays[dt.getDay()];
+      return _(fulldays[dt.getDay()]);
     } else if(diffYears >= 1) {
       return month + " " + date + ", " + new Date(someDateTimeStamp).getFullYear();
     } else {
@@ -137,4 +137,8 @@ export function escapeHtml(unsafe) {
        data[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
    }
    return data;
+}
+
+export function _(s) {
+  return TRANSLATIONS[s];
 }

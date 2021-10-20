@@ -13,7 +13,7 @@ import {
   onReceiveNotification,
 } from './chat.js';
 
-import { inRoom } from './utility.js';
+import { inRoom, _ } from './utility.js';
 
 import DomApi from './domapi.js';
 
@@ -21,9 +21,9 @@ const DOM_API = new DomApi();
 
 export async function onSocketMessage(data) {
   if (data.join) {
-    alert("deprecated");
+    console.warn("deprecated");
   } else if (data.leave) {
-    alert("deprecated");
+    console.warn("deprecated");
   } else if (data.messages) {
     onReceiveMessages(data.messages);
   } else if (data.unsee_room) {
@@ -147,11 +147,12 @@ $(".room-link").click(function () {
 
 $(document).on('click', '.permission-banner', ()=> {
   DOM_API.showNotificationPermModal(
-    "Enable Notifications",
-    `<div>Chat works better with notifications.
-     You can allow them to see new messages even beyond chat room.</div>
-     <p class='mt-3'>Do you want to receive notifications?</p>
-     <small class='text-muted'>If nothing happens, you may have ignored permission prompt too many times. check your browser settings to enable them.</small>`
+    _("Enable Notifications"),
+    `<div>
+    ${_("Chat works better with notifications. You can allow them to see new messages even beyond chat room.")}
+    </div>
+     <p class='mt-3'>${_("Do you want to receive notifications?")}</p>
+     <small class='text-muted'>${_("If nothing happens, you may have ignored permission prompt too many times. check your browser settings to enable them.")}"</small>`
  );
 })
 

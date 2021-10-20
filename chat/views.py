@@ -17,6 +17,8 @@ from django.shortcuts import redirect
 from django.conf import settings as s
 import logging as l
 
+from django.utils.translation import gettext as _
+
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
 @login_required
@@ -117,6 +119,7 @@ def chat(request):
     # Render that in the chat template
     return render(request, "chat/chat.html", {
         'last_used_room': last_user_room,
+        'translations': get_translations(),
         'allowed_rooms': allowed_rooms,
         'user': request.user,
         'ARCHIVE_CHAT_ROOM': td(days=s.ARCHIVE_CHAT_ROOM).days,
@@ -145,3 +148,27 @@ def upload_image(request):
         filenames.append(filename)
 
     return JsonResponse({'filenames': filenames})
+
+
+def get_translations():
+    strings = [
+        "Manage notifications",
+        "Today",
+        "Yesterday",
+        "Anonymous",
+        "⚠ slow mode is active. you can send messages once in %d seconds.",
+        "Enable Notifications",
+        "Chat works better with notifications. You can allow them to see new messages even beyond chat room.",
+        "Do you want to receive notifications?",
+        "If nothing happens, you may have ignored permission prompt too many times. check your browser settings to enable them.",
+        "Yes",
+        "No, don't show again",
+        "edit",
+        "edited",
+        "Select a chat to start messaging.",
+        "Message History",
+        "Close",
+        "This room is empty, be the first one to write something.",
+        "editing",
+    ]
+    return {x: _(x) for x in strings}

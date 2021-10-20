@@ -263,7 +263,8 @@
     </div>
 
     <script>
-        let LAST_USED_ROOM_ID = {{ last_used_room }}
+        let LAST_USED_ROOM_ID = {{ last_used_room }};
+        let TRANSLATIONS = {{ translations|safe }};
     </script>
 
 {% endblock content_fullscreen %}

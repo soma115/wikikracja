@@ -1,11 +1,11 @@
-import { removeNotification, formatTime, escapeHtml, getImageSize } from './utility.js';
+import { removeNotification, formatTime, escapeHtml, getImageSize, _ } from './utility.js';
 
 const room_template = `
   <div class='room' id='room'>
 
       <div class='messages'>
         <div class='room-empty-banner empty-chat-message'>
-          This room is empty, be the first one to write something.
+          ${_("This room is empty, be the first one to write something.")}
         </div>
       </div>
 
@@ -73,7 +73,7 @@ const room_template = `
                   id="anonymous-switch-id"
                   type='checkbox'
           />
-          <label for='anonymous-switch-id'>Anonymous</label>
+          <label for='anonymous-switch-id'>${_("Anonymous")}</label>
 
       <% } %>
 
@@ -101,11 +101,11 @@ const message_template = `<div class='message <% if (own) { %> own <% } %>' data
 
       <div class='message-info'>
         <div class='show-history' <% if (!edited) { %> style='display:none' <% } %>
-             data-message-id='<%-message_id%>'> edited
+             data-message-id='<%-message_id%>'> ${_("edited")}
         </div>
 
         <% if (own) { %>
-          <div class='edit-message ml-1'>edit</div>
+          <div class='edit-message ml-1'>${_("edit")}</div>
         <% } %>
 
         <div class='message-timestamp ml-1' data-message-id='<%-message_id%>'><%- latest_ts %></div>
@@ -328,7 +328,7 @@ export default class DomApi {
   setEditing(message_id) {
     let text = this.getMessageText(message_id);
     this.getStatusMessageContainer().show();
-    this.getStatusMessageDiv().text(`editing ${text}`);
+    this.getStatusMessageDiv().text(`${_("editing")} ${text}`);
     this.getFileInput().attr('disabled', 'disabled');
     this.getMessageInput().data('edit-message', message_id)
     .val(text);
@@ -371,7 +371,7 @@ export default class DomApi {
 
   setSlowMode(delay) {
     if (delay == 0) return;
-    $(`.slow-mode-hint`).html(`⚠ slow mode is active. you can send messages once in ${delay} seconds.`)
+    $(`.slow-mode-hint`).html(_(`⚠ slow mode is active. you can send messages once in %d seconds.`).replace("%d", delay) );
   }
 
   setSlowModeTimeLeft(seconds) {
@@ -408,7 +408,7 @@ export default class DomApi {
       this.clearFiles();
       this.stopEditing();
       this.getMessagesDiv().append(
-        "<p class='empty-chat-message'>Select a chat to start messaging.</p>"
+        "<p class='empty-chat-message'>" + _("Select a chat to start messaging.") + "</p>"
       );
   }
 
@@ -425,6 +425,6 @@ export default class DomApi {
   }
 
   addPermissionBanner() {
-    $('.room-header').append("<button class='permission-banner btn btn-success'> <i class='far fa-bell'></i> Manage notifications </button>")
+    $('.room-header').append("<button class='permission-banner btn btn-success'> <i class='far fa-bell'></i>" + _("Manage notifications") + "</button>")
   }
 }

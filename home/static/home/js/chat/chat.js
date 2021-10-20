@@ -1,11 +1,12 @@
 import WsApi from './wsapi.js';
 import DomApi from './domapi.js';
-import { makeNotification, formatDate, formatTime, inRoom, Lock, parseParms } from './utility.js';
+import { makeNotification, formatDate, formatTime, inRoom, Lock, parseParms, _ } from './utility.js';
 
 let WS_API;
 let DOM_API;
 const RoomLock = new Lock();
 let current_room = null;
+
 
 $(document).ready(()=>{
   WS_API = new WsApi();
@@ -257,7 +258,7 @@ export async function onMessageHistory(message_id) {
     `;
   }
   text += "</table>"
-  DOM_API.showHistoryModal("Message History", text);
+  DOM_API.showHistoryModal(_("Message History"), text);
 }
 
 export async function onSubmitMessage(message, editing_message_id) {
