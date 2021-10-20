@@ -112,3 +112,12 @@ export function escapeHtml(unsafe) {
      })
    }
  }
+
+ export async function getImageSize(src) {
+   const img = new Image();
+   return new Promise((resolve, reject)=>{img.onload = function() {
+     resolve({w:this.width, h: this.height});
+   }
+   img.src = src;
+   })
+ }

@@ -11,4 +11,4 @@ def name_for(room, user):
 
 @register.filter('seen_by')
 def seen_by(room, user):
-    return "" if room.seen_by.filter(id=user.id) else "room-not-seen"
+    return "" if (room.seen_by.filter(id=user.id) or room.messages.all().count() == 0) else "room-not-seen"

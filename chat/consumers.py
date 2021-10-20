@@ -309,7 +309,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             consumer = ChatConsumer.online_registry.get_consumer(member)
 
             # room is not seen at the moment
-            if consumer.room_is_seen(room):
+            if await consumer.room_is_seen(room):
                 # update database
                 await consumer.unsee_room(room)
 
@@ -626,7 +626,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     @database_sync_to_async
     def room_is_seen(self, room):
-        return self.scope['user'].seen_rooms.filter(id=room.id).exists()
+        return room.messages.all().count() == 0 or self.scope['user'].seen_rooms.filter(id=room.id).exists()
 
     @database_sync_to_async
     def see_room(self, room):

@@ -69,24 +69,12 @@ $(document).on("keydown", ".message-input", function(e) {
   }
 });
 
-$(document).on('click', '.attached-image', function(e) {
-  DOM_API.openBigImage($(this).attr('src'));
-});
-
-$(document).on('click', '#big-image img', function(e){
-  e.stopPropagation();
-});
-
-$(document).on('click', '.close-big-image', function() {
-  DOM_API.closeBigImage();
-});
-
-$(document).on('keydown', function() {
-  DOM_API.closeBigImage();
-});
-
-$(document).on('click', '#big-image', function(e) {
-  DOM_API.closeBigImage();
+$(document).on('click', '.attachment-image-container', function(e) {
+  let srcs = []
+  for (let img of $(this).find("img")) {
+    srcs.push(img.src);
+  }
+  DOM_API.openBigImage(srcs);
 });
 
 $(document).on('input', '.notifications-switch', function() {
@@ -152,7 +140,8 @@ $(".room-link").click(function () {
     let room_id = $(this).attr("data-room-id");
 
     if ($(this).hasClass("joined")) {
-      onRoomTryLeave(true);
+      // ignore second click on active room
+      //onRoomTryLeave(true);
     } else {
       // Join room
       onRoomTryJoin(room_id);

@@ -38,6 +38,7 @@
 html,
 body {
     height: 100%;
+    touch-action: none;
 }
 
 .list-of-chats, .list-of-pms {
@@ -113,6 +114,10 @@ body {
 .room-not-seen {
   background: #7950b9!important;
     /* border: 2px solid blue!important; */
+}
+
+#image {
+  position: absolute;
 }
 
 .msg-vote.active {

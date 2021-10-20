@@ -1,4 +1,4 @@
-import { removeNotification, formatTime, escapeHtml } from './utility.js';
+import { removeNotification, formatTime, escapeHtml, getImageSize } from './utility.js';
 
 const room_template = `
   <div class='room' id='room'>
@@ -344,16 +344,26 @@ export default class DomApi {
       this.getMessageInput().val("")
   }
 
-  openBigImage(src) {
-    $('body').append(
-      `<div id="big-image">
-        <img src=${src}>
-        <div class='close-big-image'>
-          <i class="fa fas fa-times"></i>
-        </div>
-      </div>`
-    )
-    $('body').addClass('modal-open');
+  async openBigImage(srcs) {
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+    let items = [];
+    for (let src of srcs) {
+
+      let size = await getImageSize(src);
+
+      items.push({
+        src,
+        w: size.w,
+        h: size.h
+      })
+    }
+
+    var options = {
+        index: 0 // start at first slide
+    };
+
+    var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    gallery.init();
   }
 
   closeBigImage() {
@@ -402,9 +412,4 @@ export default class DomApi {
         "<p class='empty-chat-message'>Select a chat to start messaging.</p>"
       );
   }
-
-  // addActiveClass(room_id) {
-  //   $(".room-active").removeClass(".room-active");
-  //   $(".room-link[data-room-id='" + room_id + "']").addClass('room-active');
-  // }
 }
