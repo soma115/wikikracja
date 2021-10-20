@@ -127,14 +127,3 @@ I've tried to create really detailed description of this job. Please read throug
 You can also check existing code on https://github.com/soma115/wikikracja
 Please check if you are able to create mentioned functionalities and integrate it to existing project.
 Let me know if those requirements are fine for you.
-
----------------------------------------------
-
-Next version:
-- number of new messages should be presented
-- if there are new messages - chat windows should be scrolled to first new message.
-- Users should use picters from profile
-- @ woła osobę
-- ctrl+v paste image
-- komunikacja głosowa i video
-- powiadomienia email, sms, Signal o nowych wiadomościach. Albo na bieżąco albo raz dziennie.
