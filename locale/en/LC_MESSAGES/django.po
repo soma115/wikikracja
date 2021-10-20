@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-19 04:42+0200\n"
+"POT-Creation-Date: 2021-10-20 09:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -528,8 +528,8 @@ msgstr ""
 
 #: glosowania/views.py:274 glosowania/views.py:275 glosowania/views.py:290
 #: glosowania/views.py:291 glosowania/views.py:323 glosowania/views.py:324
-#: glosowania/views.py:336 glosowania/views.py:337 glosowania/views.py:359
-#: glosowania/views.py:360
+#: glosowania/views.py:336 glosowania/views.py:337 glosowania/views.py:361
+#: glosowania/views.py:362
 msgid "Proposal no."
 msgstr ""
 
@@ -602,15 +602,15 @@ msgstr ""
 msgid "was rejected in referendum."
 msgstr ""
 
-#: glosowania/views.py:359
+#: glosowania/views.py:361
 msgid "is in efect from today"
 msgstr ""
 
-#: glosowania/views.py:360
+#: glosowania/views.py:362
 msgid "became abiding law today"
 msgstr ""
 
-#: glosowania/views.py:361
+#: glosowania/views.py:363
 msgid "Click here to read it: http://"
 msgstr ""
 
