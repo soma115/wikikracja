@@ -480,6 +480,14 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 }]
             }, to_consumer=consumer)
 
+    @handlers.register("get-notifications-data")
+    async def get_notifications_data(self, proxy):
+        """
+            Returns list of rooms that have notifications enabled
+        """
+        rooms = await self.get_rooms_with_notifications_enabled()
+        proxy.send_json({'rooms': [room.id for room in rooms]})
+
     @helper_method
     async def send_notification(self, proxy: HandledMessage, message_id):
         message = await self.get_message(message_id)
@@ -748,3 +756,15 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def allowed_in_room(self, room):
         return room.allowed.filter(id=self.scope['user'].id).exists()
+
+    @database_sync_to_async
+    def get_rooms_with_notifications_enabled(self):
+        u_id = self.scope['user'].id
+        not_muted = []
+        for user_room in Room.objects.all():
+            if not user_room.allowed.filter(id=u_id).exists():
+                continue
+            if user_room.muted_by.filter(id=u_id).exists():
+                continue
+            not_muted.append(user_room)
+        return not_muted

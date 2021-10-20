@@ -50,15 +50,7 @@
         <div class="col header">
             <div class='d-flex justify-content-between'>
                   <h5 id="room-title"><!--No Room Selected--></h5>
-                  <div>
-                    <input type='checkbox'
-                           id="notif-switch"
-                           class='notifications-switch'
-                           disabled="disabled" />
 
-                      <a></a>
-                      <label for='notif-switch'> Notifications </label>
-                  </div>
             </div>
         </div>
     </div>
@@ -71,11 +63,7 @@
                 <div class="list-of-chats">
                     {% for room in allowed_rooms %}
                         {% if room.public == True and room.archived == False %}
-                            <div class="room-link text-uppercase {{ room|seen_by:user }}"
-                                data-room-type="public"
-                                data-room-id="{{ room.id }}">
-                                {{ room|name_for:user }}
-                            </div>
+                            {% include 'chat/room_icon.html' %}
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -83,10 +71,7 @@
                 <div class="list-of-chats">
                     {% for room in allowed_rooms %}
                         {% if room.archived == True and room.public == True %}
-                            <div class="room-link"
-                                 data-room-id="{{ room.id }}">
-                                <span class="text-uppercase">{{ room }}</span>
-                            </div>
+                            {% include 'chat/room_icon.html' %}
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -103,10 +88,10 @@
                 <div class='chat-controls d-flex'>
 
                   <div class='chat-controls-row'>
-                    <input data-room-id='<%-room_id%>'
+                    <input
                            class='message-input col-12 col-sm message-input mr-1'>
 
-                    <button data-room-id='<%-room_id%>'
+                    <button
                             class='send-message chat-control btn btn-primary btn-sm'>
                               <i class="fas fa-paper-plane"></i>
                     </button>
@@ -123,11 +108,7 @@
                 <div class="list-of-pms">
                     {% for room in allowed_rooms %}
                         {% if room.public == False and room.archived == False %}
-                            <div class="room-link offline {{ room|seen_by:user }}"
-                                data-room-type="private"
-                                data-room-id="{{ room.id }}">
-                                {{ room|name_for:user }}
-                            </div>
+                            {% include 'chat/room_icon.html' %}
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -136,7 +117,7 @@
                 <div class="list-of-pms">
                     {% for room in allowed_rooms %}
                         {% if room.archived == True and room.public == False %}
-                            <div class="room-link" data-room-id="{{ room.id }}">{{ room }}</div>
+                           {% include 'chat/room_icon.html' %}
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -258,9 +239,9 @@
 {% endblock content_fullscreen %}
 
 {% block extra_body %}
-    <script type="module" src="{% static 'home/js/chat/wsapi.js' %}"></script>
-    <script type="module" src="{% static 'home/js/chat/handlers.js' %}"></script>
     <script type="module" src="{% static 'home/js/chat/chat.js' %}"></script>
-    <script type="module" src="{% static 'home/js/chat/domapi.js' %}"></script>
-    <script type="module" src="{% static 'home/js/chat/utility.js'%}"></script>
 {% endblock extra_body %}
+
+{% block notifications_script %}
+    <!-- Ignore notifications script as it is part of chat script already -->
+{% endblock notifications_script %}

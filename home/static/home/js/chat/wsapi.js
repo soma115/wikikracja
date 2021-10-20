@@ -1,4 +1,3 @@
-
 import { onSocketMessage } from './handlers.js';
 
 export default class WsApi {
@@ -150,6 +149,12 @@ export default class WsApi {
       "command": "get-message-history",
       "message_id": message_id,
     });
+  }
+
+  async getNotificationData() {
+    return await this.sendJsonAsync({
+      command: 'get-notifications-data'
+    })
   }
 
   async uploadFiles(files) {

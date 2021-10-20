@@ -7,7 +7,7 @@ class Room(models.Model):
     A room for people to chat in.
     """
     # Allowed users
-    allowed = models.ManyToManyField(User)
+    allowed = models.ManyToManyField(User, related_name="rooms")
 
     # For 1to1 chats
     public = models.BooleanField(default=True)

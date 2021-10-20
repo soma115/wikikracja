@@ -19,6 +19,11 @@ $(document).ready(()=>{
       DOM_API.updateOnline(user.room_id, user.online);
     }
 
+    let rooms = await WS_API.getNotificationData();
+    for (let room_id of rooms.rooms) {
+        DOM_API.setRoomNotifications(room_id, true);
+    }
+
     let room_id;
     if (window.location.hash) {
       // get room id passed with hash (room was created)
@@ -38,12 +43,9 @@ $(document).ready(()=>{
 const slow_mode = {};
 const slow_mode_time_left = {};
 
-//
-// export async function onRoomJoin(room_id, room_title, is_public, room_slow_mode, has_notifs) {
-//
-//
-// }
-
+export async function onReceiveNotification(notification) {
+  makeNotification(notification.title, notification.body, notification.link)
+}
 
 export async function onRoomTryJoin(room_id) {
   if (RoomLock.locked()) {
@@ -223,8 +225,8 @@ export async function onUpdateVote(vote, message_id, is_add) {
   }
 }
 
-export async function onToggleNotifications(is_enabled) {
-  WS_API.toggleNotifications(current_room, is_enabled);
+export async function onToggleNotifications(room_id, is_enabled) {
+  WS_API.toggleNotifications(room_id, is_enabled);
 }
 
 export async function onMessageHistory(message_id) {

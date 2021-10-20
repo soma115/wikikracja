@@ -10,11 +10,8 @@ import {
   onReceiveVotes,
   onReceiveEdit,
   onReceiveOnlineUpdates,
+  onReceiveNotification,
 } from './chat.js';
-
-import {
-  makeNotification
-} from './utility.js'
 
 import { inRoom } from './utility.js';
 
@@ -33,7 +30,7 @@ export async function onSocketMessage(data) {
     onRoomUnsee(data.unsee_room);
   } else if (data.notification) {
     let notif = data.notification
-    makeNotification(notif.title, notif.body, notif.link);
+    onReceiveNotification(notif);
   } else if (data.update_votes) {
     let event = data.update_votes;
     onReceiveVotes(event);
@@ -77,8 +74,8 @@ $(document).on('click', '.attachment-image-container', function(e) {
   DOM_API.openBigImage(srcs);
 });
 
-$(document).on('input', '.notifications-switch', function() {
-  onToggleNotifications($(this).is(":checked"));
+$(document).on('input', '.notif-switch', function() {
+  onToggleNotifications($(this).data("room-id"), $(this).is(":checked"));
 });
 
 $(document).on('click', ".stop-editing", function(e) {

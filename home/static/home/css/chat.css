@@ -1,13 +1,16 @@
 .room-link {
   padding: .5rem 1rem;
   /* background: var(--orange); */
-  display: inline;
+  /* display: inline; */
   /* border-bottom: 3px solid #f9eccc; */
   border-radius: 2px;
   cursor: pointer;
   /* color: white; */
   font-family: 'Noto Sans Mono', monospace;
   font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  text-overflow: ellipsis;
 }
 .room-link.joined {
     background: var(--orange);
@@ -103,11 +106,11 @@ body {
     font-weight: bold;
 }
 
-.offline {
+.offline .room-name {
     /* color: #402c2c; */
 }
 
-.online {
+.online .room-name {
     color: #0d8c0d;
 }
 
@@ -327,4 +330,8 @@ input:disabled+label, input:disabled+label:hover {
 
 .message .body {
     margin-bottom: .2rem;
+}
+
+.notif-switch {
+  margin-left: .3rem;
 }

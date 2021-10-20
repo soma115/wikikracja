@@ -282,9 +282,6 @@ export default class DomApi {
       room_icon.removeClass('online').addClass('offline');
     }
   }
-  setRoomNotifs(enabled) {
-    $(`.notifications-switch`).prop('checked', enabled);
-  }
 
   getMessageTimeDiv(message_id) {
     return $(`.message-timestamp[data-message-id=${message_id}]`);
@@ -399,8 +396,9 @@ export default class DomApi {
   setRoomTitle(title) {
     $("#room-title").text(title);
   }
-  setRoomNotifications(is_enabled) {
-    $("#notif-switch").prop("disabled", false).prop('checked', is_enabled);
+
+  setRoomNotifications(room_id, is_enabled) {
+    $(".notif-switch[data-room-id='"+room_id+"']").prop("disabled", false).prop('checked', is_enabled);
   }
 
   clearRoomData() {
