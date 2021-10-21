@@ -28,11 +28,8 @@ class Room(models.Model):
         return self.title
 
     def get_other(self, user):
-        # TODO: nice query
-        for member in self.allowed.all():
-            if member != user:
-                return member
-        raise ValueError("Only one member in private room")
+        assert not self.public
+        return self.allowed.exclude(id=user.id).first()
 
     # Name that user will see in chats list
     def displayed_name(self, user):

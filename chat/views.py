@@ -9,8 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Room, Message
 from django.contrib.auth.models import User
 from chat.forms import RoomForm
-from django.http import HttpResponse, JsonResponse
-from datetime import datetime as dt
+from django.http import JsonResponse
 from datetime import timedelta as td
 from django.utils import timezone
 from django.shortcuts import redirect
@@ -49,7 +48,7 @@ def chat(request):
             if i == j:  
                 continue
             # Avoid A-B B-A because it is the same thing
-            t=sorted([i.username, j.username])
+            t = sorted([i.username, j.username])
             title = '-'.join(t)
 
             existing_room = Room.find_with_users(i, j)
@@ -93,7 +92,7 @@ def chat(request):
     all_private_rooms = Room.objects.filter(public=False)
     for i in all_private_rooms:
         for user in i.allowed.all():
-            if user.is_active == False:
+            if not user.is_active:
                 i.archived = True
                 i.save()
                 try:
@@ -103,7 +102,7 @@ def chat(request):
                 if last_message.time < (timezone.now() - td(days=s.DELETE_CHAT_ROOM)):  # delete after 1 year
                     l.info(f'Chat room {i.title} deleted.')
                     i.delete()  # delete
-            elif user.is_active == True:
+            elif user.is_active:
                 i.archived = False
                 i.save()
 
@@ -120,7 +119,12 @@ def chat(request):
     return render(request, "chat/chat.html", {
         'last_used_room': last_user_room,
         'translations': get_translations(),
-        'allowed_rooms': allowed_rooms,
+
+        'public_active': allowed_rooms.filter(public=True, archived=False),
+        'public_archived': allowed_rooms.filter(public=True, archived=True),
+        'private_active': allowed_rooms.filter(public=False, archived=False),
+        'private_archived': allowed_rooms.filter(public=False, archived=True),
+
         'user': request.user,
         'ARCHIVE_CHAT_ROOM': td(days=s.ARCHIVE_CHAT_ROOM).days,
         'DELETE_CHAT_ROOM': td(days=s.DELETE_CHAT_ROOM).days,
@@ -170,5 +174,7 @@ def get_translations():
         "Close",
         "This room is empty, be the first one to write something.",
         "editing",
+        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
     ]
     return {x: _(x) for x in strings}

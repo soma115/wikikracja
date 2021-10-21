@@ -1,6 +1,6 @@
 import WsApi from './wsapi.js';
 import DomApi from './domapi.js';
-import { makeNotification, formatDate, formatTime, inRoom, Lock, parseParms, _ } from './utility.js';
+import { makeNotification, formatDate, formatTime, Lock, parseParms, _ } from './utility.js';
 
 let WS_API;
 let DOM_API;
@@ -8,7 +8,7 @@ const RoomLock = new Lock();
 let current_room = null;
 
 
-$(document).ready(()=>{
+$(()=>{
   WS_API = new WsApi();
   DOM_API = new DomApi();
 
@@ -63,13 +63,10 @@ export async function onReceiveNotification(notification) {
 
 export async function onRoomTryJoin(room_id) {
   if (RoomLock.locked()) {
-    console.log("cant join, waiting for lock");
     await RoomLock.wait();
-    console.log("join lock done");
   }
   // already in this room
   if (room_id == current_room) {
-    console.log("already in");
     return;
   }
 
@@ -119,9 +116,7 @@ export async function onRoomTryJoin(room_id) {
 
 export async function onRoomTryLeave(sync_with_server) {
   if (RoomLock.locked()) {
-    console.log("cant leave, waiting for lock");
     await RoomLock.wait();
-    console.log("leave lovk done");
   }
 
   if (sync_with_server) {
@@ -134,10 +129,6 @@ export async function onRoomTryLeave(sync_with_server) {
 
   current_room = null;
 }
-
-// export async function onRoomLeave() {
-//   current_room = null;
-// }
 
 export async function onReceiveMessages(messages) {
 
@@ -222,9 +213,10 @@ export async function onReceiveOnlineUpdates(updates) {
 
 export async function onRoomUnsee(room_id) {
   // room is seen if we are in it
-  if ( inRoom(room_id) ) {
+  if ( current_room == room_id ) {
     return;
   }
+
   DOM_API.getRoomIcon(room_id).addClass("room-not-seen");
 }
 
@@ -245,20 +237,11 @@ export async function onToggleNotifications(room_id, is_enabled) {
 
 export async function onMessageHistory(message_id) {
   let history = await WS_API.getMessageHistory(message_id);
-  let text = "<table class='table' style='border-bottom: 1px solid #dee2e6;'>";
-  for (let [i, entry] of Object.entries(history.message_history)) {
-    let n = parseInt(i) + 1;
+  history = history.message_history.map(
+    x => { x.formattedTime = formatTime(x.timestamp); return x; }
+  );
 
-    text += `
-    <tr>
-      <td style='width: 0'>${n}.</td>
-      <td>${entry.text}</td>
-      <td style='text-align: end; font-size: smaller; color: gray;'>${formatTime(entry.timestamp)}</td>
-    </tr>
-    `;
-  }
-  text += "</table>"
-  DOM_API.showHistoryModal(_("Message History"), text);
+  DOM_API.showHistoryModal(_("Message History"), history);
 }
 
 export async function onSubmitMessage(message, editing_message_id) {

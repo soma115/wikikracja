@@ -1,152 +1,6 @@
 import { removeNotification, formatTime, escapeHtml, getImageSize, _ } from './utility.js';
+import { Room, Message, MessageHistory } from './templates.js';
 
-const room_template = `
-  <div class='room' id='room'>
-
-      <div class='messages'>
-        <div class='room-empty-banner empty-chat-message'>
-          ${_("This room is empty, be the first one to write something.")}
-        </div>
-      </div>
-
-      <div style='position: relative'>
-
-        <div class='status-container'
-             style='display:none!important'>
-
-          <div class='status-message'>
-          </div>
-          <div class='stop-editing'>
-             <i class='fas fa fa-times'></i>
-          </div>
-        </div>
-
-        <div class='image-preview-container'
-               style='display:none'>
-
-          <div class='preview-images'></div>
-
-          <div class='delete-images-preview'>
-            <i class='fas fa fa-times'></i>
-          </div>
-
-        </div>
-      </div>
-
-
-
-      <div class='chat-controls' class='d-flex'>
-
-        <div class='chat-controls-row'>
-          <input
-                 class='message-input col-12 col-sm message-input mr-1'>
-
-          <button
-                  class='send-message chat-control btn btn-primary btn-sm'>
-                    <i class="fas fa-paper-plane"></i>
-          </button>
-
-
-        </div>
-
-        <!-- Those two have to go one after another for some CSS trickery -->
-        <input type='file'
-               id="file-input"
-               style='display:none;'
-               class='file-input'
-               multiple='multiple'
-        />
-
-        <label class='btn btn-primary ml-1 file-input-label chat-control'
-               for="file-input">
-               <i class="fas fa-file-image"></i>
-        </label>
-        <!-- Those two-->
-
-      </div>
-      <div class='mt-3'>
-
-
-      <% if (is_public) { %>
-
-          <input class='anonymous-switch'
-                  id="anonymous-switch-id"
-                  type='checkbox'
-          />
-          <label for='anonymous-switch-id'>${_("Anonymous")}</label>
-
-      <% } %>
-
-
-      <% if (slow_mode_delay) { %>
-
-          <div class='d-flex justify-content-between'>
-            <div class='slow-mode-hint'></div>
-            <span
-                  style='align-self: center; display: none;'
-                  class="slow-mode-timer badge badge-primary badge-pill">0
-            </span>
-          </div>
-
-      <% } %>
-
-      </div>
-  </div>
-`;
-
-const message_template = `<div class='message <% if (own) { %> own <% } %>' data-message-id=<%-message_id%>>
-
-    <div class='message-header'>
-      <span class='username'><%=username%></span>
-
-      <div class='message-info'>
-        <div class='show-history' <% if (!edited) { %> style='display:none' <% } %>
-             data-message-id='<%-message_id%>'> ${_("edited")}
-        </div>
-
-        <% if (own) { %>
-          <div class='edit-message ml-1'>${_("edit")}</div>
-        <% } %>
-
-        <div class='message-timestamp ml-1' data-message-id='<%-message_id%>'><%- latest_ts %></div>
-
-      </div>
-    </div>
-
-
-    <div class='body'>
-      <div class='attachment-image-container'>
-        <% for (let filename of attachments?.images || []) { %>
-          <img class='attached-image' src='/media/uploads/<%-filename %>'>
-        <% } %>
-      </div>
-
-      <span class='text'><%-message%></span>
-
-    </div>
-
-    <div class='footer'>
-      <% if (type == "public") { %>
-        <div class='d-flex'>
-
-         <div data-event-name="upvote" data-message-id="<%-message_id%>" class='msg-vote vote-block'>
-          <i class="fas fa-check"></i>
-          <div class='msg-upvotes'><%-upvotes%></div>
-         </div>
-
-         <div data-event-name="downvote" data-message-id="<%-message_id%>" class='msg-vote vote-block'>
-          <i class="fas fa-times"></i>
-          <div class='msg-downvotes'><%-downvotes%></div>
-         </div>
-
-       </div>
-      <% } %>
-
-      </div>
-  </div>`
-
-const ROOM_TEMPLATE = ejs.compile(room_template);
-const MESSAGE_TEMPLATE = ejs.compile(message_template)
 
 export default class DomApi {
   getRoomIcon(room_id) {
@@ -154,7 +8,7 @@ export default class DomApi {
   }
 
   createRoomDiv(room_id, title, is_public, slow_mode_delay, notifs_enabled) {
-    let roomdiv = $(ROOM_TEMPLATE({room_id, title, is_public, slow_mode_delay, notifs_enabled}));
+    let roomdiv = $(Room({room_id, title, is_public, slow_mode_delay, notifs_enabled}));
     $("#chats").empty().append(roomdiv);
     return roomdiv;
   }
@@ -176,7 +30,7 @@ export default class DomApi {
 
     let type = this.getRoomType(room_id);
 
-    let html = MESSAGE_TEMPLATE({room_id, message_id,
+    let html = Message({room_id, message_id,
       username,
       message: this.formatMessage(message),
       upvotes, downvotes, vote,
@@ -412,9 +266,9 @@ export default class DomApi {
       );
   }
 
-  showHistoryModal(title, body) {
+  showHistoryModal(title, history) {
     let modal = $("#message-history-modal").modal('show');
-    modal.find(".modal-body").html(body)
+    modal.find(".modal-body").html(MessageHistory({history}));
     modal.find(".modal-title").html(title);
   }
 

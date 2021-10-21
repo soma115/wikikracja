@@ -1,23 +1,3 @@
-.room-link {
-  padding: .5rem 1rem;
-  /* background: var(--orange); */
-  /* display: inline; */
-  /* border-bottom: 3px solid #f9eccc; */
-  border-radius: 2px;
-  cursor: pointer;
-  /* color: white; */
-  font-family: 'Noto Sans Mono', monospace;
-  font-size: 1.2rem;
-  display: flex;
-  justify-content: space-between;
-  text-overflow: ellipsis;
-}
-.room-link.joined {
-    background: var(--orange);
-    color: #f0f1cd;
-    border: 1px solid #c7c7c7;
-}
-
 :root {
   --orange: #fea453;
   --yellow: #FEC601;
@@ -27,10 +7,21 @@
   --dark-blue: #2364AA;
 }
 
-/*
-    # is an id selector, used to target a single specific element with a unique id, but . is a class selector used to target multiple elements with a particular class.
-*/
-#chats {
+.room-link {
+  padding: .5rem 1rem;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: 'Noto Sans Mono', monospace;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  text-overflow: ellipsis;
+}
+
+.room-link.joined {
+    background: var(--orange);
+    color: #f0f1cd;
+    border: 1px solid #c7c7c7;
 }
 
 .chat-functions {
@@ -38,20 +29,12 @@
   color: #f0f1cd;
 }
 
-html,
-body {
-    height: 100%;
-    touch-action: none;
-}
-
 .list-of-chats, .list-of-pms {
   display: flex;
   flex-direction: column;
 }
 
-/* .col-scrollable::-webkit-scrollbar {
-  display: none;
-} */
+/* Scrollable left and right columns  */
 .overflow-auto {
     min-height: 200px;
     background: #fff8f0;
@@ -60,12 +43,7 @@ body {
 
 .col-scrollable {
   position: absolute;
-  /* height: 500px; */
   width: calc(100% - 30px);
-
-  /* overflow-y: scroll; */
-  /* -ms-overflow-style: none;  /* IE and Edge */
-  /* scrollbar-width: none;  /* Firefox */
 }
 
 ::-webkit-scrollbar {
@@ -90,51 +68,57 @@ body {
 #chats .room {
     padding: 5px;
 }
+
 #chats h5 {
     color: #333;
     margin: 2px 0 5px 0;
     font-weight: bold;
 }
+
 #chats .messages {
     height: 500px;
     overflow: auto;
     display: flex;
     flex-direction: column;
+    background-image: url(/static/home/images/background.jpg);
+    padding: .5rem;
 }
+
 #chats .username {
     color: var(--purple);
     font-weight: bold;
 }
 
-.offline .room-name {
-    /* color: #402c2c; */
-}
-
+/* Style name of online user */
 .online .room-name {
     color: #0d8c0d;
 }
 
+/* Style room that was not seen yet */
 .room-not-seen {
-  background: #7950b9!important;
-    /* border: 2px solid blue!important; */
+  color: #7950b9!important;
 }
 
-#image {
-  position: absolute;
+.room-not-seen /*[data-room-type="private"]*/ {
+  background: #7950b930;
 }
 
+/* Message votes */
 .msg-vote.active {
     font-weight: bold;
 }
 
+/* Style own upvote */
 .msg-vote.active .fa-check {
   color: green;
 }
 
+/* Style own downvote */
 .msg-vote.active .fa-times {
   color: crimson;
 }
 
+/* Preview images before sending */
 .image-preview-container {
     position: absolute;
     display: flex;
@@ -146,6 +130,16 @@ body {
     padding: .3rem 0;
 }
 
+/* Preview instance */
+.image-preview-container .preview-images .image-preview {
+    width: 50px;
+    height: 50px;
+    background-color: gray;
+    margin: .3rem;
+    object-fit: cover;
+}
+
+/* Status message above message input */
 .status-container {
   position: absolute;
   left: 0;
@@ -158,20 +152,16 @@ body {
   padding: 1rem;
 }
 
-
-.image-preview {
-    width: 50px;
-    height: 50px;
-    background-color: gray;
-    margin: .3rem;
-    object-fit: cover;
+/* Container for attached images inside message */
+.attachment-image-container {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    flex-basis: min-content;
 }
 
-.preview-images {
-  /* position: absolute; */
-}
-
-.attached-image {
+/* Attached image inside message */
+.attachment-image-container .attached-image {
     width: 150px;
     height: 150px;
     background-color: gray;
@@ -179,17 +169,12 @@ body {
     margin: 2px;
 }
 
-.attachment-image-container {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-}
-
+/* Container for vote buttons */
 .vote-block {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #fea4538f /*#cfcfcf*/;
+  background-color: #fea4538f;
   border-radius: 5px;
   padding: 0 3px 0 3px;
   margin-right: .2rem;
@@ -199,16 +184,65 @@ body {
   padding: .1rem;
 }
 
+/* Message container */
 .message {
-  background: #f6fff6;
-  margin-bottom: .3rem;
-  max-width: 70%;
-  min-width: 30%;
-  padding: .3rem;
-  position: relative;
-  box-shadow: 1px 4px 9px 3px #d9d6d6f0;
+  display: flex;
+  margin-right: 30%;
+  margin-left: 0;
 }
 
+.text {
+  overflow-wrap: anywhere;
+}
+
+.message.own {
+  justify-content: flex-end;
+  margin-left: 30%;
+  margin-right: 0;
+}
+
+.message-content {
+  background: #f6fff6;
+  margin-bottom: .3rem;
+  min-width: 30%;
+  padding: .3rem;
+  box-shadow: 1px 4px 9px 3px #d9d6d6f0;
+  /* display: flex; */
+}
+
+/* Header of message containing username and additional data/actions */
+.message-header {
+  padding: .2rem;
+  margin-bottom: .4rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.message .body {
+    margin-bottom: .2rem;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.message.own .message-content {
+  background: white;
+}
+
+/* Additional information/actions for message */
+.message .message-info {
+  display: flex;
+  margin-left: 1rem;
+  align-items: center;
+}
+
+/* Additional actions for message */
+.show-history, .edit-message {
+  text-decoration: underline;
+  color: gray;
+  font-size: smaller;
+}
+
+/* Alert about empty chat */
 .empty-chat-message {
   font-size: 20;
   color: gray;
@@ -216,24 +250,12 @@ body {
   text-align: center;
 }
 
-.message.own {
-  background: white;
-}
-
-.message.own {
-  align-self: end;
-}
-
+/* Room header */
 .header {
   background: #7950b9;
   padding: .3rem;
   color: #f0f1cd;
   min-height: 48px;
-}
-
-.message-info {
-  display: flex;
-  margin-left: 1rem;
 }
 
 .date-banner {
@@ -247,12 +269,7 @@ body {
   margin: .4rem 0 .4rem 0;
 }
 
-.show-history, .edit-message {
-  text-decoration: underline;
-  color: gray;
-  font-size: smaller;
-}
-
+/* Bottom part of room */
 .chat-controls {
   display: flex;
   margin-top: 1rem;
@@ -262,7 +279,6 @@ body {
   display: flex;
   flex: 1;
 }
-
 
 .chat-control {
   padding: .5rem;
@@ -283,56 +299,15 @@ input[type='checkbox'] {
   border-radius: .3rem;
 }
 
+/* x at editing overlay */
 .stop-editing {
   top: 0;
   right: 0;
 }
 
-#big-image {
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #bcbcbcb5;
-}
-
-.close-big-image {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 50px;
-}
-
-input:disabled+label, input:disabled+label:hover {
+/* Style label for disabled file input */
+input[type="file"]:disabled+label, input[type="file"]:disabled+label:hover {
   background-color: #8d8d8d;
   border: 1px solid #555555;
   color: #d9d9d9;
-}
-
-.messages {
-  background-image: url(/static/home/images/background.jpg);
-  padding: .5rem;
-}
-#room-title {
-  font-family: 'Noto Sans Mono', monospace;
-}
-
-.message-header {
-  padding: .2rem;
-  margin-bottom: .4rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.message .body {
-    margin-bottom: .2rem;
-}
-
-.notif-switch {
-  margin-left: .3rem;
 }

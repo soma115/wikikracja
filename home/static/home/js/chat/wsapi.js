@@ -14,7 +14,6 @@ export default class WsApi {
 
     this.socket.onmessage = (e) => {
       let data = JSON.parse(e.data);
-      console.log("Got websocket message ", data);
 
       // Handle errors
       if (data.error) {
@@ -56,7 +55,6 @@ export default class WsApi {
   async sendJsonAsync(obj) {
     let ID = Math.floor(Math.random() * 1000000) + 1;
     obj.__TRACE_ID = ID;
-    console.log(this, this.promises);
     let promises = this.promises;
 
     let promise = new Promise(
@@ -85,21 +83,21 @@ export default class WsApi {
 
   async joinRoom(room_id) {
     return await this.sendJsonAsync({
-        "command": "join",
-        "room_id": room_id
+        command: "join",
+        room_id: room_id
     });
   }
 
   seenRoom(room_id) {
     this.sendJson({
-      "command": "room-seen",
-      "room_id": room_id
+      command: "room-seen",
+      room_id: room_id
     });
   }
 
   sendMessage(room_id, message, is_anonymous, attachments) {
     this.sendJson({
-        "command": "send",
+        command: "send",
         room_id,  // room number
         message,  // value, message to send
         is_anonymous,
@@ -109,32 +107,32 @@ export default class WsApi {
 
   editMessage(message_id, message) {
       this.sendJson({
-        "command": "edit-message",
-        "message_id": message_id,
-        "new_message": message
+        command: "edit-message",
+        message_id: message_id,
+        new_message: message
       });
   }
 
   addVote(vote, message_id) {
     this.sendJson({
-      "command": "message-add-vote",
-      "vote": vote,
-      "message_id": message_id
+      command: "message-add-vote",
+      vote: vote,
+      message_id: message_id
     });
   }
 
   removeVote(vote, message_id) {
     this.sendJson({
-      "command": "message-remove-vote",
-      "vote": vote,
-      "message_id": message_id
+      command: "message-remove-vote",
+      vote: vote,
+      message_id: message_id
     });
   }
 
   async leaveRoom(room_id) {
     return await this.sendJsonAsync({
-      "command": "leave",
-      "room_id": room_id
+      command: "leave",
+      room_id: room_id
     });
   }
 
@@ -146,8 +144,8 @@ export default class WsApi {
 
   async getMessageHistory(message_id) {
     return await this.sendJsonAsync({
-      "command": "get-message-history",
-      "message_id": message_id,
+      command: "get-message-history",
+      message_id: message_id,
     });
   }
 
@@ -159,12 +157,11 @@ export default class WsApi {
 
   async uploadFiles(files) {
     if (files.length == 0) {
-      alert("no files");
       return new Promise((r, _)=>r({'filenames': []}));
     }
 
-    var xhr = new XMLHttpRequest();
-    var formData = new FormData();
+    let xhr = new XMLHttpRequest();
+    let formData = new FormData();
 
     let promise_funcs = {};
 
@@ -196,6 +193,10 @@ export default class WsApi {
   }
 
   toggleNotifications(room_id, enabled) {
-    this.sendJson({command: 'toggle-notifications', room_id, enabled})
+    this.sendJson({
+      command: 'toggle-notifications',
+      room_id,
+      enabled
+    });
   }
 }

@@ -13,7 +13,7 @@ import {
   onReceiveNotification,
 } from './chat.js';
 
-import { inRoom, _ } from './utility.js';
+import { _ } from './utility.js';
 
 import DomApi from './domapi.js';
 

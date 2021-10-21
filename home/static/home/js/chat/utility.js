@@ -3,7 +3,6 @@ export function makeNotification(n) {
   try {
     new Audio('/static/home/sounds/notification.mp3').play();
   } catch (e) {
-    console.log(e);
   }
 
   if (Notification && Notification.permission == 'granted') {
@@ -24,7 +23,7 @@ export function removeNotification() {
 }
 
 export function changeIcon(resource) {
-  var link = document.querySelector("link[rel~='icon']");
+  let link = document.querySelector("link[rel~='icon']");
   if (!link) {
       link = document.createElement('link');
       link.rel = 'icon';
@@ -46,11 +45,11 @@ export function formatDate(someDateTimeStamp) {
 
     if (diffYears === 0 && diffDays === 0 && diffMonths === 0) {
       return _("Today");
-    } else if(diffYears === 0 && diffDays === 1) {
+    } else if(diffYears === 0 && diffMonths === 0 && diffDays === 1) {
       return _("Yesterday");
-    } else if(diffYears === 0 && diffDays === -1) {
+    } else if(diffYears === 0 && diffMonths === 0 && diffDays === -1) {
       return _("Tomorrow");
-    } else if(diffYears === 0 && (diffDays < -1 && diffDays > -7)) {
+    } else if(diffYears === 0 && diffMonths === 0 && (diffDays > 1 && diffDays < 7)) {
       return _(fulldays[dt.getDay()]);
     } else if(diffYears >= 1) {
       return month + " " + date + ", " + new Date(someDateTimeStamp).getFullYear();
@@ -59,18 +58,13 @@ export function formatDate(someDateTimeStamp) {
     }
 }
 
-
 export function formatTime(ts) {
-  var date = new Date(ts);
-  var hours = date.getHours();
-  var minutes = "0" + date.getMinutes();
-  var seconds = "0" + date.getSeconds();
+  let date = new Date(ts);
+  let hours = date.getHours();
+  let minutes = "0" + date.getMinutes();
+  let seconds = "0" + date.getSeconds();
   return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
-
-export function inRoom (roomId) {
-    return $("#room-" + roomId).length > 0;
-};
 
 export function escapeHtml(unsafe) {
     return unsafe
@@ -118,6 +112,13 @@ export function escapeHtml(unsafe) {
  }
 
  export async function getImageSize(src) {
+   // if (src instanceof Blob) {
+   //   let reader = new FileReader();
+   //    reader.onload = function(){
+   //      let dataURL = reader.result;
+   //    };
+   //  reader.readAsDataURL(input.files[0]);
+   // }
    const img = new Image();
    return new Promise((resolve, reject)=>{img.onload = function() {
      resolve({w:this.width, h: this.height});
@@ -140,5 +141,10 @@ export function escapeHtml(unsafe) {
 }
 
 export function _(s) {
-  return TRANSLATIONS[s];
+  let translation = TRANSLATIONS[s];
+  if (translation !== undefined) {
+    return translation;
+  }
+  console.warn("translation for '" + s + "' was not passed to JS. Take a look at chat.views.get_translations");
+  return s;
 }

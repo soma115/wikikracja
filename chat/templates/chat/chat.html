@@ -39,19 +39,12 @@
     <div class="row">
         <div class="col-sm-12 chat-functions d-flex justify-content-center">
             <a class="btn" href="{% url 'chat:add_room' %}">{% trans 'Add Room' %}</a>
-            <a class="btn"> Some function</a>
-            <a class="btn"> Some function</a>
-            <a class="btn"> Some function</a>
         </div>
     </div>
 
     <!-- Room Header -->
     <div class="row">
         <div class="col header room-header justify-content-end d-flex">
-<!--            <div class='d-flex justify-content-between'>-->
-<!--                  <h5 id="room-title">&lt;!&ndash;No Room Selected&ndash;&gt;</h5>-->
-
-<!--            </div>-->
         </div>
     </div>
     <!-- End Room Header -->
@@ -61,18 +54,18 @@
             <div class="col-scrollable">
                 <p class="mt-3 mb-1 text-muted">Available rooms</p>
                 <div class="list-of-chats">
-                    {% for room in allowed_rooms %}
-                        {% if room.public and not room.archived %}
-                            {% include 'chat/room_icon.html' %}
-                        {% endif %}
+                    {% for room in public_active %}
+                        {% include 'chat/room_icon.html' %}
+                    {% empty %}
+                        <p class="text-muted text-center">no rooms</p>
                     {% endfor %}
                 </div>
                 <p class="mt-3 mb-1 text-muted">Archived</p>
                 <div class="list-of-chats">
-                    {% for room in allowed_rooms %}
-                        {% if room.archived and room.public %}
-                            {% include 'chat/room_icon.html' %}
-                        {% endif %}
+                    {% for room in public_archived %}
+                        {% include 'chat/room_icon.html' %}
+                    {% empty %}
+                        <p class="text-muted text-center">no rooms</p>
                     {% endfor %}
                 </div>
             </div>
@@ -106,19 +99,19 @@
             <div class="col-scrollable">
                 <p class="mt-3 mb-1 text-muted">Available users</p>
                 <div class="list-of-pms">
-                    {% for room in allowed_rooms %}
-                        {% if not room.public and not room.archived %}
-                            {% include 'chat/room_icon.html' %}
-                        {% endif %}
+                    {% for room in private_active %}
+                        {% include 'chat/room_icon.html' %}
+                    {% empty %}
+                        <p class="text-muted text-center">no rooms</p>
                     {% endfor %}
                 </div>
 
                 <p class="mt-3 mb-1 text-muted">Archived</p>
                 <div class="list-of-pms">
-                    {% for room in allowed_rooms %}
-                        {% if not room.public and room.archived %}
-                           {% include 'chat/room_icon.html' %}
-                        {% endif %}
+                    {% for room in private_archived %}
+                       {% include 'chat/room_icon.html' %}
+                    {% empty %}
+                        <p class="text-muted text-center">no rooms</p>
                     {% endfor %}
                 </div>
             </div>
