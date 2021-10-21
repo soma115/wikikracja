@@ -1,4 +1,5 @@
 import imghdr
+import json
 import uuid
 
 from django.shortcuts import render
@@ -117,7 +118,7 @@ def chat(request):
 
     # Render that in the chat template
     return render(request, "chat/chat.html", {
-        'last_used_room': last_user_room,
+        'last_used_room': json.dumps(last_user_room),
         'translations': get_translations(),
 
         'public_active': allowed_rooms.filter(public=True, archived=False),
