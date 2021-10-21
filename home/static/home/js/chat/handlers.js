@@ -96,7 +96,7 @@ $(document).on("change", ".file-input", function(e) {
 
     for (let i = 0; i < files.length; ++i){
       let file = files.item(i);
-      var fr = new FileReader();
+      let fr = new FileReader();
 
       let preview_id = `preview-id-${i}`;
 

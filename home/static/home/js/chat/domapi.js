@@ -196,7 +196,7 @@ export default class DomApi {
   }
 
   async openBigImage(srcs) {
-    var pswpElement = document.querySelectorAll('.pswp')[0];
+    let pswpElement = document.querySelectorAll('.pswp')[0];
     let items = [];
     for (let src of srcs) {
 
@@ -209,12 +209,12 @@ export default class DomApi {
       })
     }
 
-    var options = {
+    let options = {
         index: 0, // start at first slide
         closeOnScroll: false,
     };
 
-    var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    let gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
     gallery.init();
   }
 

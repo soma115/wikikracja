@@ -253,8 +253,10 @@ export async function onSubmitMessage(message, editing_message_id) {
   }
 
   if (slow_mode_time_left[current_room] > 0) {
+    console.log("slow mode. cancel message");
     return;
   }
+
 
   let files = DOM_API.getFiles();
   let attachments = {};
@@ -279,15 +281,23 @@ export async function onSubmitMessage(message, editing_message_id) {
 
   DOM_API.setSlowModeTimeLeft(slow_mode[current_room]);
   slow_mode_time_left[current_room] = slow_mode[current_room];
+  console.log("set slow mode time left: ", slow_mode[current_room]);
 
+  const closure_room_id = current_room;
+  console.log("set interval");
   let i = setInterval( ()=> {
-    let d = parseInt(slow_mode_time_left[current_room]);
+    let d = parseInt(slow_mode_time_left[closure_room_id]);
+
     if (d == 0) {
         clearInterval(i);
         return;
     }
-    slow_mode_time_left[current_room] = d - 1;
-    DOM_API.setSlowModeTimeLeft(slow_mode_time_left[current_room]);
+
+    slow_mode_time_left[closure_room_id] = d - 1;
+    if (closure_room_id == current_room) {
+      DOM_API.setSlowModeTimeLeft(slow_mode_time_left[closure_room_id]);
+    }
+
   }, 1000);
 
 }
