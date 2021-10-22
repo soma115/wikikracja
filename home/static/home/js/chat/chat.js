@@ -98,6 +98,11 @@ export async function onRoomTryJoin(room_id) {
   let has_notifs = response.notifications;
   let is_public = response.public;
   let room_slow_mode = response.slow_mode_delay;
+  let cooldown = response.cooldown
+
+  if (cooldown) {
+    setSlowMode(room_id, cooldown);
+  }
 
   // TODO: send seen confirmation to server after a little while
   DOM_API.seenChat(room_id);
@@ -253,7 +258,6 @@ export async function onSubmitMessage(message, editing_message_id) {
   }
 
   if (slow_mode_time_left[current_room] > 0) {
-    console.log("slow mode. cancel message");
     return;
   }
 
@@ -279,25 +283,34 @@ export async function onSubmitMessage(message, editing_message_id) {
   // Clears input field
   DOM_API.getMessageInput().val("");
 
-  DOM_API.setSlowModeTimeLeft(slow_mode[current_room]);
-  slow_mode_time_left[current_room] = slow_mode[current_room];
-  console.log("set slow mode time left: ", slow_mode[current_room]);
+  setSlowMode(current_room, slow_mode[current_room]);
+}
 
-  const closure_room_id = current_room;
-  console.log("set interval");
+function setSlowMode(room_id, time_left) {
+  if (!time_left) {
+    console.warn("falsy time left for cooldown");
+    return;
+  }
+
+  if (slow_mode_time_left[room_id]) {
+    console.warn("tried to set cooldown on room with active cooldown");
+    return;
+  }
+
+  slow_mode_time_left[room_id] = time_left;
+
   let i = setInterval( ()=> {
-    let d = parseInt(slow_mode_time_left[closure_room_id]);
 
-    if (d == 0) {
+    slow_mode_time_left[room_id]--;
+
+    if (room_id == current_room) {
+      DOM_API.setSlowModeTimeLeft(slow_mode_time_left[room_id]);
+    }
+
+    if (slow_mode_time_left[room_id] == 0) {
         clearInterval(i);
         return;
     }
 
-    slow_mode_time_left[closure_room_id] = d - 1;
-    if (closure_room_id == current_room) {
-      DOM_API.setSlowModeTimeLeft(slow_mode_time_left[closure_room_id]);
-    }
-
   }, 1000);
-
 }

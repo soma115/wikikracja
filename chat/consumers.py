@@ -170,11 +170,22 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             self.channel_name,  # specific.BZcPrnWw!vvvelNWGEgbE
         )
 
+        time_now = datetime.datetime.now()
+        last_message_by_user = await self.get_own_latest_message(room)
+        delay = get_slow_mode_delay(room)
+
+        cooldown = 0
+        if last_message_by_user is not None \
+                and delay is not None \
+                and time_now.timestamp() - last_message_by_user.time.timestamp() < delay:
+            cooldown = delay - int(time_now.timestamp() - last_message_by_user.time.timestamp())
+
         # Instruct their client to finish opening the room
         proxy.send_json({
             "join": str(room.id),  # 1
             "title": room.title,   # "Room 1"
             "slow_mode_delay": get_slow_mode_delay(room),  # delay in seconds or None if slow mode is disabled
+            "cooldown": cooldown,
             "public": room.public,
             "notifications": not await self.has_muted_room(room.id)
         })
