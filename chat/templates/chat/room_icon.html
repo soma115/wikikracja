@@ -1,7 +1,7 @@
 {% load filters %}
 
 
-<div class="room-link text-uppercase {{ room|seen_by:user }}"
+<div class="room-link {{ room|seen_by:user }}"
     data-room-type="{% if room.public %}public{% else %}private{% endif %}"
     data-room-id="{{ room.id }}">
     <div class="room-name" style="width: 250px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">

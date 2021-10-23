@@ -18,6 +18,10 @@
   text-overflow: ellipsis;
 }
 
+.room-link[data-room-type="public"] {
+  text-transform: uppercase!important;
+}
+
 .room-link.joined {
     background: var(--orange);
     color: #f0f1cd;
