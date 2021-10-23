@@ -1,4 +1,11 @@
-import { removeNotification, formatTime, escapeHtml, getImageSize, _ } from './utility.js';
+import {
+  removeNotification,
+  formatTime,
+  escapeHtml,
+  getImageSize,
+  _,
+  setCaretPosition
+} from './utility.js';
 import { Room, Message, MessageHistory } from './templates.js';
 
 
@@ -186,6 +193,7 @@ export default class DomApi {
     this.getFileInput().attr('disabled', 'disabled');
     this.getMessageInput().data('edit-message', message_id)
     .val(text);
+    setCaretPosition(this.getMessageInput()[0], text.length);
   }
 
   stopEditing() {

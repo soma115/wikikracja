@@ -52,6 +52,8 @@ $(document).on("click", ".send-message", function() {
 });
 
 $(document).on("keydown", ".message-input", function(e) {
+  // up arrow will move caret to start by default
+  e.preventDefault();
   if (e.keyCode == 13) {
     let edit_message_id = DOM_API.getEditedMessageId();
     let message = DOM_API.getEnteredText();
@@ -76,6 +78,18 @@ $(document).on('click', '.attachment-image-container', function(e) {
 
 $(document).on('input', '.notif-switch', function() {
   onToggleNotifications($(this).data("room-id"), $(this).is(":checked"));
+});
+
+$(document).on('keydown', function(e) {
+  if (e.key !== "Escape") {
+    return;
+  }
+
+  if (!DOM_API.isEditing()) {
+    return;
+  }
+
+  DOM_API.stopEditing();
 });
 
 $(document).on('click', ".stop-editing", function(e) {

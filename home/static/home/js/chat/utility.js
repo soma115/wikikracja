@@ -148,3 +148,26 @@ export function _(s) {
   console.warn("translation for '" + s + "' was not passed to JS. Take a look at chat.views.get_translations");
   return s;
 }
+
+export function setCaretPosition(elem, caretPos) {
+
+    if(elem == null) {
+      return
+    }
+
+    if (elem.createTextRange) {
+        var range = elem.createTextRange();
+        range.move('character', caretPos);
+        range.select();
+    }
+    else {
+        if(elem.selectionStart) {
+            elem.focus();
+            elem.setSelectionRange(caretPos, caretPos);
+        }
+
+        else {
+          elem.focus();
+        }
+    }
+}
