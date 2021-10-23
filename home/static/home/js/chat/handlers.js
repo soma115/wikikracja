@@ -52,14 +52,16 @@ $(document).on("click", ".send-message", function() {
 });
 
 $(document).on("keydown", ".message-input", function(e) {
-  // up arrow will move caret to start by default
-  e.preventDefault();
+
   if (e.keyCode == 13) {
     let edit_message_id = DOM_API.getEditedMessageId();
     let message = DOM_API.getEnteredText();
     onSubmitMessage(message, edit_message_id);
   }
+  
   if (e.key == "ArrowUp") {
+    // up arrow will move caret to start by default
+    e.preventDefault();
     let message = DOM_API.getLatestOwnMessage();
     let message_id = message.data('message-id');
     if (!DOM_API.isEditing()) {
