@@ -37,6 +37,11 @@ $(()=>{
       }
     }
 
+    // get locally stored last room id
+    if (!room_id && localStorage.lastUsedRoomID) {
+      room_id = localStorage.lastUsedRoomID;
+    }
+
     // check if room_id was passed from backend
     if (!room_id && LAST_USED_ROOM_ID) {
       room_id = LAST_USED_ROOM_ID;
@@ -92,6 +97,8 @@ export async function onRoomTryJoin(room_id) {
   RoomLock.lock();
   let response = await WS_API.joinRoom(room_id);
   RoomLock.unlock();
+
+  localStorage.lastUsedRoomID = room_id;
 
   current_room = room_id;
   let title = response.title;
