@@ -177,6 +177,14 @@ export async function onReceiveMessages(messages) {
 
     if (message.new) {
         // handle new message in opened channel somehow
+
+        // if page is not active (user at other browser tab)
+        if (document.hidden) {
+          makeNotification({
+            title: message.username,
+            body:  message.message
+          })
+        }
     }
 
     if (message.your_vote /* You voted for this message e.g. 'upvote' or 'downvote' */) {
