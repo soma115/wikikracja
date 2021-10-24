@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-20 09:37+0200\n"
+"POT-Creation-Date: 2021-10-23 14:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,46 +82,40 @@ msgstr ""
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:33
 #: elibrary/templates/elibrary/book_form.html:28
 #: glosowania/templates/glosowania/dodaj.html:35
-#: glosowania/templates/glosowania/edit.html:34
-#: obywatele/templates/obywatele/dodaj.html:70
-#: obywatele/templates/obywatele/szczegoly.html:111
+#: glosowania/templates/glosowania/szczegoly.html:42
+#: glosowania/templates/glosowania/szczegoly.html:55
+#: glosowania/templates/glosowania/szczegoly.html:59
+#: obywatele/templates/obywatele/dodaj.html:64
+#: obywatele/templates/obywatele/szczegoly.html:103
 msgid "Back"
 msgstr ""
 
-#: chat/templates/chat/chat.html:10
+#: chat/templates/chat/chat.html:41
 msgid "Add Room"
 msgstr ""
 
-#: chat/templates/chat/chat.html:16
-msgid "Public chat rooms"
-msgstr ""
-
-#: chat/templates/chat/chat.html:27
-msgid "Private messages"
-msgstr ""
-
-#: chat/templates/chat/chat.html:48
-msgid "Archived chats"
-msgstr ""
-
-#: chat/templates/chat/chat.html:58
+#: chat/templates/chat/chat.html:126
 msgid "Public chat rooms are archived if they are not used for"
 msgstr ""
 
-#: chat/templates/chat/chat.html:60
+#: chat/templates/chat/chat.html:128
 msgid "days. After"
 msgstr ""
 
-#: chat/templates/chat/chat.html:62
+#: chat/templates/chat/chat.html:130
 msgid "days they are deleted."
 msgstr ""
 
-#: chat/templates/chat/chat.html:65
+#: chat/templates/chat/chat.html:133
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
 
-#: chat/templates/chat/chat.html:67
+#: chat/templates/chat/chat.html:135
 msgid "days"
+msgstr ""
+
+#: chat/views.py:171
+msgid "edit"
 msgstr ""
 
 #: elibrary/forms.py:8 elibrary/models.py:15
@@ -638,46 +632,46 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: home/templates/home/base.html:38 home/templates/home/home.html:40
+#: home/templates/home/base.html:47 home/templates/home/home.html:40
 msgid "Start"
 msgstr ""
 
-#: home/templates/home/base.html:39
+#: home/templates/home/base.html:48
 msgid "Blog"
 msgstr ""
 
-#: home/templates/home/base.html:42 home/templates/home/home.html:12
+#: home/templates/home/base.html:51 home/templates/home/home.html:12
 #: home/templates/home/login.html:4 home/templates/home/login.html:14
 #: home/templates/home/login.html:25
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/base.html:46 obywatele/models.py:39
+#: home/templates/home/base.html:55 obywatele/models.py:39
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
 msgstr ""
 
-#: home/templates/home/base.html:48
+#: home/templates/home/base.html:57
 msgid "Voting"
 msgstr ""
 
-#: home/templates/home/base.html:50
+#: home/templates/home/base.html:59
 msgid "eLibrary"
 msgstr ""
 
-#: home/templates/home/base.html:52
+#: home/templates/home/base.html:64
 msgid "Chat"
 msgstr ""
 
-#: home/templates/home/base.html:54
+#: home/templates/home/base.html:67
 msgid "profile"
 msgstr ""
 
-#: home/templates/home/base.html:56
+#: home/templates/home/base.html:69
 msgid "admin"
 msgstr ""
 
-#: home/templates/home/base.html:58
+#: home/templates/home/base.html:71
 msgid "logout"
 msgstr ""
 
@@ -806,7 +800,13 @@ msgid "Phone number i.e. +48 123 456 789"
 msgstr ""
 
 #: obywatele/models.py:21
-msgid "Phone number"
+msgid "Tasks performed in our group"
+msgstr ""
+
+#: obywatele/models.py:21 obywatele/templates/obywatele/assets.html:12
+#: obywatele/templates/obywatele/my_profile.html:27
+#: obywatele/templates/obywatele/szczegoly.html:36
+msgid "Responsibilities"
 msgstr ""
 
 #: obywatele/models.py:22
@@ -814,8 +814,8 @@ msgid "Where one spend most of their time"
 msgstr ""
 
 #: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
-#: obywatele/templates/obywatele/my_profile.html:36
-#: obywatele/templates/obywatele/szczegoly.html:56
+#: obywatele/templates/obywatele/my_profile.html:35
+#: obywatele/templates/obywatele/szczegoly.html:44
 msgid "City"
 msgstr ""
 
@@ -833,9 +833,9 @@ msgstr ""
 msgid "Hobbies one have"
 msgstr ""
 
-#: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:14
-#: obywatele/templates/obywatele/my_profile.html:52
-#: obywatele/templates/obywatele/szczegoly.html:60
+#: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:14
+#: obywatele/templates/obywatele/my_profile.html:39
+#: obywatele/templates/obywatele/szczegoly.html:48
 msgid "Hobby"
 msgstr ""
 
@@ -843,9 +843,9 @@ msgstr ""
 msgid "Things you are willing to give away for free"
 msgstr ""
 
-#: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:15
-#: obywatele/templates/obywatele/my_profile.html:60
-#: obywatele/templates/obywatele/szczegoly.html:64
+#: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:15
+#: obywatele/templates/obywatele/my_profile.html:43
+#: obywatele/templates/obywatele/szczegoly.html:52
 msgid "To give away"
 msgstr ""
 
@@ -853,9 +853,9 @@ msgstr ""
 msgid "Stuff you can borrow to others"
 msgstr ""
 
-#: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:16
-#: obywatele/templates/obywatele/my_profile.html:64
-#: obywatele/templates/obywatele/szczegoly.html:68
+#: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:16
+#: obywatele/templates/obywatele/my_profile.html:47
+#: obywatele/templates/obywatele/szczegoly.html:56
 msgid "To borrow"
 msgstr ""
 
@@ -863,9 +863,9 @@ msgstr ""
 msgid "Stuff you have for sale"
 msgstr ""
 
-#: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:17
-#: obywatele/templates/obywatele/my_profile.html:68
-#: obywatele/templates/obywatele/szczegoly.html:72
+#: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:17
+#: obywatele/templates/obywatele/my_profile.html:51
+#: obywatele/templates/obywatele/szczegoly.html:60
 msgid "For sale"
 msgstr ""
 
@@ -873,9 +873,9 @@ msgstr ""
 msgid "What do you need"
 msgstr ""
 
-#: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:18
-#: obywatele/templates/obywatele/my_profile.html:72
-#: obywatele/templates/obywatele/szczegoly.html:76
+#: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:18
+#: obywatele/templates/obywatele/my_profile.html:55
+#: obywatele/templates/obywatele/szczegoly.html:64
 msgid "I need"
 msgstr ""
 
@@ -883,9 +883,9 @@ msgstr ""
 msgid "Practical skills one have"
 msgstr ""
 
-#: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:19
-#: obywatele/templates/obywatele/my_profile.html:80
-#: obywatele/templates/obywatele/szczegoly.html:80
+#: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:19
+#: obywatele/templates/obywatele/my_profile.html:59
+#: obywatele/templates/obywatele/szczegoly.html:68
 msgid "Skills"
 msgstr ""
 
@@ -893,9 +893,9 @@ msgstr ""
 msgid "Knowledge one have"
 msgstr ""
 
-#: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:20
-#: obywatele/templates/obywatele/my_profile.html:84
-#: obywatele/templates/obywatele/szczegoly.html:84
+#: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:20
+#: obywatele/templates/obywatele/my_profile.html:63
+#: obywatele/templates/obywatele/szczegoly.html:72
 msgid "Knowledge"
 msgstr ""
 
@@ -903,9 +903,9 @@ msgstr ""
 msgid "Things one would like to learn"
 msgstr ""
 
-#: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:21
-#: obywatele/templates/obywatele/my_profile.html:76
-#: obywatele/templates/obywatele/szczegoly.html:88
+#: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:21
+#: obywatele/templates/obywatele/my_profile.html:67
+#: obywatele/templates/obywatele/szczegoly.html:76
 msgid "I want to learn"
 msgstr ""
 
@@ -913,9 +913,9 @@ msgstr ""
 msgid "If running a business"
 msgstr ""
 
-#: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:22
-#: obywatele/templates/obywatele/my_profile.html:56
-#: obywatele/templates/obywatele/szczegoly.html:92
+#: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:22
+#: obywatele/templates/obywatele/my_profile.html:71
+#: obywatele/templates/obywatele/szczegoly.html:80
 msgid "Business"
 msgstr ""
 
@@ -923,19 +923,29 @@ msgstr ""
 msgid "Profession"
 msgstr ""
 
-#: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:23
-#: obywatele/templates/obywatele/my_profile.html:48
-#: obywatele/templates/obywatele/szczegoly.html:96
+#: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:23
+#: obywatele/templates/obywatele/my_profile.html:75
+#: obywatele/templates/obywatele/szczegoly.html:84
 msgid "Job"
+msgstr ""
+
+#: obywatele/models.py:33
+msgid "Link to Facebook profile"
+msgstr ""
+
+#: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:24
+#: obywatele/templates/obywatele/my_profile.html:79
+#: obywatele/templates/obywatele/szczegoly.html:88
+msgid "Facebook"
 msgstr ""
 
 #: obywatele/models.py:34
 msgid "What gift would you like to receive"
 msgstr ""
 
-#: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:24
-#: obywatele/templates/obywatele/my_profile.html:88
-#: obywatele/templates/obywatele/szczegoly.html:100
+#: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:25
+#: obywatele/templates/obywatele/my_profile.html:83
+#: obywatele/templates/obywatele/szczegoly.html:92
 msgid "Gift"
 msgstr ""
 
@@ -943,9 +953,9 @@ msgstr ""
 msgid "Other things worth mentioning"
 msgstr ""
 
-#: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:25
-#: obywatele/templates/obywatele/my_profile.html:92
-#: obywatele/templates/obywatele/szczegoly.html:104
+#: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:26
+#: obywatele/templates/obywatele/my_profile.html:87
+#: obywatele/templates/obywatele/szczegoly.html:96
 msgid "Other"
 msgstr ""
 
@@ -958,8 +968,8 @@ msgid "Name"
 msgstr ""
 
 #: obywatele/templates/obywatele/assets.html:11
-#: obywatele/templates/obywatele/my_profile.html:40
-#: obywatele/templates/obywatele/szczegoly.html:52
+#: obywatele/templates/obywatele/my_profile.html:31
+#: obywatele/templates/obywatele/szczegoly.html:40
 msgid "Phone"
 msgstr ""
 

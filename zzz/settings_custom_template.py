@@ -48,4 +48,7 @@ VACATIO_LEGIS = 7                   # default 7 days
 # chat
 ARCHIVE_CHAT_ROOM = 90              # default 90 days
 DELETE_CHAT_ROOM = 365              # default 365 days
-
+SLOW_MODE = {
+    "room name or *": 10            # delay between messages in seconds
+}
+UPLOAD_IMAGE_MAX_SIZE_MB = 10       # max size of uploaded image, MB
