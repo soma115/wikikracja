@@ -39,7 +39,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 ACCEPTANCE_MULTIPLIER = 2.7
 
 # voting
-WYMAGANYCH_PODPISOW = 2             # Number of signatures needed to approve request for referendum.
+WYMAGANYCH_PODPISOW = 3             # Number of signatures needed to approve request for referendum.
 CZAS_NA_ZEBRANIE_PODPISOW = 365     # default 365 days
 KOLEJKA = 7                         # default 7 days. Discussion before referendum.
 CZAS_TRWANIA_REFERENDUM = 7         # default 7 days
