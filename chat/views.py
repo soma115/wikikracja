@@ -156,16 +156,37 @@ def upload_image(request):
 
 
 def get_translations():
+    _("Manage notifications"),
+    _("Today"),
+    _("Yesterday"),
+    _("Anonymous"),
+    _("⚠ slow-mode is active. You can send messages once in %d seconds."),
+    _("Enable Notifications"),
+    _("Chat works better with notifications. You can allow them to see new messages even beyond chat room."),
+    _("Do you want to receive notifications?"),
+    _("If nothing happens, you may have ignored permission prompt too many times. Check your browser settings to enable them."),
+    _("Yes"),
+    _("No, don't show again"),
+    _("edit"),
+    _("edited"),
+    _("Select a chat to start messaging."),
+    _("Message History"),
+    _("Close"),
+    _("This room is empty, be the first one to write something."),
+    _("editing: "),
+    _("Sunday"), _("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"),
+    _("Jan"), _("Feb"), _("Mar"), _("Apr"), _("May"), _("Jun"), _("Jul"), _("Aug"), _("Sep"), _("Oct"), _("Nov"), _("Dec"),
+
     strings = [
         "Manage notifications",
         "Today",
         "Yesterday",
         "Anonymous",
-        "⚠ slow mode is active. you can send messages once in %d seconds.",
+        "⚠ slow-mode is active. You can send messages once in %d seconds.",
         "Enable Notifications",
         "Chat works better with notifications. You can allow them to see new messages even beyond chat room.",
         "Do you want to receive notifications?",
-        "If nothing happens, you may have ignored permission prompt too many times. check your browser settings to enable them.",
+        "If nothing happens, you may have ignored permission prompt too many times. Check your browser settings to enable them.",
         "Yes",
         "No, don't show again",
         "edit",
@@ -174,8 +195,11 @@ def get_translations():
         "Message History",
         "Close",
         "This room is empty, be the first one to write something.",
-        "editing",
+        "editing: ",
         "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
         "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
     ]
-    return {x: _(x) for x in strings}
+    translation = {x: _(x) for x in strings}
+    for i in translation:
+        print(i, _(i))
+    return translation

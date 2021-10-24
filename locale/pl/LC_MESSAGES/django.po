@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-24 13:22+0200\n"
+"POT-Creation-Date: 2021-10-24 17:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,27 +94,212 @@ msgstr "Wróć"
 msgid "Add Room"
 msgstr "Dodaj pokój"
 
-#: chat/templates/chat/chat.html:126
+#: chat/templates/chat/chat.html:55
+msgid "Rooms"
+msgstr "Pokoje"
+
+#: chat/templates/chat/chat.html:60 chat/templates/chat/chat.html:68
+#: chat/templates/chat/chat.html:103 chat/templates/chat/chat.html:112
+msgid "none"
+msgstr "brak"
+
+#: chat/templates/chat/chat.html:63 chat/templates/chat/chat.html:107
+msgid "Archived"
+msgstr "Archiwum"
+
+#: chat/templates/chat/chat.html:78 chat/views.py:172
+msgid "Select a chat to start messaging."
+msgstr "Wybierz chat żeby zacząć pisać"
+
+#: chat/templates/chat/chat.html:98
+msgid "Users"
+msgstr "Ludzie"
+
+#: chat/templates/chat/chat.html:123
 msgid "Public chat rooms are archived if they are not used for"
 msgstr "Publiczne pokoje są archiwizowane jeśli nie są używane przez"
 
-#: chat/templates/chat/chat.html:128
+#: chat/templates/chat/chat.html:125
 msgid "days. After"
 msgstr "dni. Po upływie"
 
-#: chat/templates/chat/chat.html:130
+#: chat/templates/chat/chat.html:127
 msgid "days they are deleted."
 msgstr "dni - są kasowane."
 
-#: chat/templates/chat/chat.html:133
+#: chat/templates/chat/chat.html:130
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
 "Prywatne wiadomości są archiwizowane, gdy użytkownik zostanie zablokowany i "
 "usuwane po upływie"
 
-#: chat/templates/chat/chat.html:135
+#: chat/templates/chat/chat.html:132
 msgid "days"
 msgstr "dni"
+
+#: chat/templates/chat/chat.html:143
+msgid "Message history"
+msgstr "Historia wiadomości"
+
+#: chat/templates/chat/chat.html:164
+msgid "Permission"
+msgstr "Uprawnienie"
+
+#: chat/templates/chat/chat.html:176 chat/views.py:169
+msgid "No, don't show again"
+msgstr "Nie, nie pokazuj ponownie"
+
+#: chat/templates/chat/chat.html:180 chat/views.py:168
+#: glosowania/templates/glosowania/szczegoly.html:42
+#: glosowania/templates/glosowania/szczegoly.html:73
+msgid "Yes"
+msgstr "Tak"
+
+#: chat/views.py:159
+msgid "Manage notifications"
+msgstr "Zarządzaj powiadomieniami"
+
+#: chat/views.py:160
+msgid "Today"
+msgstr "Dzisiaj"
+
+#: chat/views.py:161
+msgid "Yesterday"
+msgstr "Wczoraj"
+
+#: chat/views.py:162
+msgid "Anonymous"
+msgstr "Anonimowy"
+
+#: chat/views.py:163
+#, python-format
+msgid "⚠ slow-mode is active. You can send messages once in %d seconds."
+msgstr ""
+"⚠ tryb powolny jest aktywny. Możesz wysłać jedną wiadomość na %d sekund."
+
+#: chat/views.py:164
+msgid "Enable Notifications"
+msgstr "Włącz powiadomienia"
+
+#: chat/views.py:165
+msgid ""
+"Chat works better with notifications. You can allow them to see new messages "
+"even beyond chat room."
+msgstr ""
+"Czat działa lepiej z powiadomieniami. Możesz zezwolić na wyświetlanie "
+"powiadomień - nawet poza pokojem rozmów."
+
+#: chat/views.py:166
+msgid "Do you want to receive notifications?"
+msgstr "Czy chcesz otrzymywać powiadomienia?"
+
+#: chat/views.py:167
+msgid ""
+"If nothing happens, you may have ignored permission prompt too many times. "
+"Check your browser settings to enable them."
+msgstr ""
+"Jeśli nic się nie dzieje, być może zbyt wiele razy zignorowałeś prośbę o "
+"pozwolenie. Sprawdź ustawienia swojej przeglądarki, aby je włączyć."
+
+#: chat/views.py:170
+msgid "edit"
+msgstr "edytuj"
+
+#: chat/views.py:171
+msgid "edited"
+msgstr "zmiany"
+
+#: chat/views.py:173
+msgid "Message History"
+msgstr "Historia wiadomości"
+
+#: chat/views.py:174
+msgid "Close"
+msgstr "Zamknij"
+
+#: chat/views.py:175
+msgid "This room is empty, be the first one to write something."
+msgstr "Ten pokój jest pusty, bądź pierwszą osobą, która coś napisze."
+
+#: chat/views.py:176
+msgid "editing: "
+msgstr "edytujesz: "
+
+#: chat/views.py:177
+msgid "Sunday"
+msgstr "Niedziela"
+
+#: chat/views.py:177
+msgid "Monday"
+msgstr "Poniedziałek"
+
+#: chat/views.py:177
+msgid "Tuesday"
+msgstr "Wtorek"
+
+#: chat/views.py:177
+msgid "Wednesday"
+msgstr "Środa"
+
+#: chat/views.py:177
+msgid "Thursday"
+msgstr "Czwartek"
+
+#: chat/views.py:177
+msgid "Friday"
+msgstr "Piątek"
+
+#: chat/views.py:177
+msgid "Saturday"
+msgstr "Sobota"
+
+#: chat/views.py:178
+msgid "Jan"
+msgstr "Sty"
+
+#: chat/views.py:178
+msgid "Feb"
+msgstr "Lut"
+
+#: chat/views.py:178
+msgid "Mar"
+msgstr "Mar"
+
+#: chat/views.py:178
+msgid "Apr"
+msgstr "Kwi"
+
+#: chat/views.py:178
+msgid "May"
+msgstr "Maj"
+
+#: chat/views.py:178
+msgid "Jun"
+msgstr "Cze"
+
+#: chat/views.py:178
+msgid "Jul"
+msgstr "Lip"
+
+#: chat/views.py:178
+msgid "Aug"
+msgstr "Sie"
+
+#: chat/views.py:178
+msgid "Sep"
+msgstr "Wrz"
+
+#: chat/views.py:178
+msgid "Oct"
+msgstr "Paź"
+
+#: chat/views.py:178
+msgid "Nov"
+msgstr "Lis"
+
+#: chat/views.py:178
+msgid "Dec"
+msgstr "Gru"
 
 #: elibrary/forms.py:8 elibrary/models.py:15
 msgid "Cover"
@@ -246,9 +431,6 @@ msgid "Abolishes the rules"
 msgstr "Znosi przepis/y"
 
 #: glosowania/models.py:66
-#, fuzzy
-#| msgid ""
-#| "If the proposed law supersedes other bills, enter their numbers here."
 msgid ""
 "If the proposed law supersedes other bills, enter their comma separated "
 "numbers here."
@@ -442,11 +624,6 @@ msgstr "Ten przepis obowiązuje od"
 #: glosowania/templates/glosowania/szczegoly.html:38
 msgid "Protocol"
 msgstr "Protokół"
-
-#: glosowania/templates/glosowania/szczegoly.html:42
-#: glosowania/templates/glosowania/szczegoly.html:73
-msgid "Yes"
-msgstr "Tak"
 
 #: glosowania/templates/glosowania/szczegoly.html:44
 #: glosowania/templates/glosowania/szczegoly.html:74
@@ -680,7 +857,7 @@ msgstr "Zaloguj"
 #: home/templates/home/base.html:55 obywatele/models.py:39
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
-msgstr "Obywatele"
+msgstr "Ludzie"
 
 #: home/templates/home/base.html:57
 msgid "Voting"
@@ -854,13 +1031,13 @@ msgstr "Miasto"
 
 #: obywatele/models.py:23
 msgid "Tasks performed in our group"
-msgstr ""
+msgstr "Zadania wykonywane w naszej grupie"
 
 #: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:12
 #: obywatele/templates/obywatele/my_profile.html:44
 #: obywatele/templates/obywatele/szczegoly.html:48
 msgid "Responsibilities"
-msgstr ""
+msgstr "Obowiązki"
 
 #: obywatele/models.py:24
 msgid "Hobbies one have"
@@ -984,7 +1161,7 @@ msgstr "Inne"
 
 #: obywatele/models.py:38
 msgid "Citizen"
-msgstr "Obywatel"
+msgstr "Człowiek"
 
 #: obywatele/templates/obywatele/assets.html:10
 msgid "Name"
@@ -1025,7 +1202,7 @@ msgstr "Zmień nazwę użytkownika"
 
 #: obywatele/templates/obywatele/change_username.html:9
 msgid "Username"
-msgstr ""
+msgstr "Nazwa użytkownika"
 
 #: obywatele/templates/obywatele/dodaj.html:28
 msgid ""
@@ -1248,7 +1425,7 @@ msgstr "zostało zablokowane."
 
 #: obywatele/views.py:462
 msgid "Citizen has been banned"
-msgstr "Obywatel został zbanowany"
+msgstr "Ta osoba została zbanowany"
 
 #: obywatele/views.py:463
 msgid "Account"
@@ -1269,24 +1446,3 @@ msgstr "Angielski"
 #: zzz/settings_custom.py:14 zzz/settings_custom_template.py:14
 msgid "Polish"
 msgstr "Polski"
-
-#~ msgid "edit"
-#~ msgstr "edytuj"
-
-#~ msgid "Link to Facebook profile"
-#~ msgstr "Link do profilu na Facebooku"
-
-#~ msgid "Facebook"
-#~ msgstr "Facebook"
-
-#~ msgid "Public chat rooms"
-#~ msgstr "Publiczne pokoje"
-
-#~ msgid "Private messages"
-#~ msgstr "Prywatne wiadomości"
-
-#~ msgid "Archived chats"
-#~ msgstr "Archiwum czatów"
-
-#~ msgid "If picture is not updating - use ctrl+shift+r"
-#~ msgstr "Jeśli nowy obrazek się nie wyświetla - use ctrl+shift+r"
