@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-24 17:31+0200\n"
+"POT-Creation-Date: 2021-10-24 19:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,6 +141,11 @@ msgstr "dni"
 msgid "Message history"
 msgstr "Historia wiadomości"
 
+#: chat/templates/chat/chat.html:144 chat/templates/chat/chat.html:152
+#: chat/templates/chat/chat.html:165 chat/views.py:174
+msgid "Close"
+msgstr "Zamknij"
+
 #: chat/templates/chat/chat.html:164
 msgid "Permission"
 msgstr "Uprawnienie"
@@ -212,10 +217,6 @@ msgstr "zmiany"
 #: chat/views.py:173
 msgid "Message History"
 msgstr "Historia wiadomości"
-
-#: chat/views.py:174
-msgid "Close"
-msgstr "Zamknij"
 
 #: chat/views.py:175
 msgid "This room is empty, be the first one to write something."
@@ -1024,7 +1025,7 @@ msgid "Where one spend most of their time"
 msgstr "Gdzie spędza się większość czasu"
 
 #: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
-#: obywatele/templates/obywatele/my_profile.html:36
+#: obywatele/templates/obywatele/my_profile.html:35
 #: obywatele/templates/obywatele/szczegoly.html:56
 msgid "City"
 msgstr "Miasto"
@@ -1034,7 +1035,7 @@ msgid "Tasks performed in our group"
 msgstr "Zadania wykonywane w naszej grupie"
 
 #: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:12
-#: obywatele/templates/obywatele/my_profile.html:44
+#: obywatele/templates/obywatele/my_profile.html:43
 #: obywatele/templates/obywatele/szczegoly.html:48
 msgid "Responsibilities"
 msgstr "Obowiązki"
@@ -1044,7 +1045,7 @@ msgid "Hobbies one have"
 msgstr "Hobby"
 
 #: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:14
-#: obywatele/templates/obywatele/my_profile.html:52
+#: obywatele/templates/obywatele/my_profile.html:51
 #: obywatele/templates/obywatele/szczegoly.html:60
 msgid "Hobby"
 msgstr "Hobby"
@@ -1054,7 +1055,7 @@ msgid "Things you are willing to give away for free"
 msgstr "Przedmioty, które chcesz oddać za darmo"
 
 #: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:15
-#: obywatele/templates/obywatele/my_profile.html:60
+#: obywatele/templates/obywatele/my_profile.html:59
 #: obywatele/templates/obywatele/szczegoly.html:64
 msgid "To give away"
 msgstr "Do oddania"
@@ -1064,7 +1065,7 @@ msgid "Stuff you can borrow to others"
 msgstr "Przedmioty, które możesz pożyczyć"
 
 #: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:16
-#: obywatele/templates/obywatele/my_profile.html:64
+#: obywatele/templates/obywatele/my_profile.html:63
 #: obywatele/templates/obywatele/szczegoly.html:68
 msgid "To borrow"
 msgstr "Do pożyczenia"
@@ -1074,7 +1075,7 @@ msgid "Stuff you have for sale"
 msgstr "Przedmioty, które chcesz sprzedać"
 
 #: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:17
-#: obywatele/templates/obywatele/my_profile.html:68
+#: obywatele/templates/obywatele/my_profile.html:67
 #: obywatele/templates/obywatele/szczegoly.html:72
 msgid "For sale"
 msgstr "Do sprzedania"
@@ -1084,7 +1085,7 @@ msgid "What do you need"
 msgstr "Czego potrzebujesz"
 
 #: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:18
-#: obywatele/templates/obywatele/my_profile.html:72
+#: obywatele/templates/obywatele/my_profile.html:71
 #: obywatele/templates/obywatele/szczegoly.html:76
 msgid "I need"
 msgstr "Potrzebuję"
@@ -1094,7 +1095,7 @@ msgid "Practical skills one have"
 msgstr "Praktyczne umiejętności"
 
 #: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:19
-#: obywatele/templates/obywatele/my_profile.html:80
+#: obywatele/templates/obywatele/my_profile.html:79
 #: obywatele/templates/obywatele/szczegoly.html:80
 msgid "Skills"
 msgstr "Umiejętności"
@@ -1104,7 +1105,7 @@ msgid "Knowledge one have"
 msgstr "Wiedza"
 
 #: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:20
-#: obywatele/templates/obywatele/my_profile.html:84
+#: obywatele/templates/obywatele/my_profile.html:83
 #: obywatele/templates/obywatele/szczegoly.html:84
 msgid "Knowledge"
 msgstr "Wiedza"
@@ -1114,7 +1115,7 @@ msgid "Things one would like to learn"
 msgstr "Czego chce się nauczyć"
 
 #: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:21
-#: obywatele/templates/obywatele/my_profile.html:76
+#: obywatele/templates/obywatele/my_profile.html:75
 #: obywatele/templates/obywatele/szczegoly.html:88
 msgid "I want to learn"
 msgstr "Chcę się nauczyć"
@@ -1124,7 +1125,7 @@ msgid "If running a business"
 msgstr "Jaki prowadzisz biznes"
 
 #: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:22
-#: obywatele/templates/obywatele/my_profile.html:56
+#: obywatele/templates/obywatele/my_profile.html:55
 #: obywatele/templates/obywatele/szczegoly.html:92
 msgid "Business"
 msgstr "Biznes"
@@ -1134,7 +1135,7 @@ msgid "Profession"
 msgstr "Wykonywany zawód"
 
 #: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:23
-#: obywatele/templates/obywatele/my_profile.html:48
+#: obywatele/templates/obywatele/my_profile.html:47
 #: obywatele/templates/obywatele/szczegoly.html:96
 msgid "Job"
 msgstr "Zawód"
@@ -1144,7 +1145,7 @@ msgid "What gift would you like to receive"
 msgstr "Jaki prazent chciałbyś dostać"
 
 #: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:24
-#: obywatele/templates/obywatele/my_profile.html:88
+#: obywatele/templates/obywatele/my_profile.html:87
 #: obywatele/templates/obywatele/szczegoly.html:100
 msgid "Gift"
 msgstr "Prezent"
@@ -1154,7 +1155,7 @@ msgid "Other things worth mentioning"
 msgstr "Inne rzeczy warte wzmianki"
 
 #: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:25
-#: obywatele/templates/obywatele/my_profile.html:92
+#: obywatele/templates/obywatele/my_profile.html:91
 #: obywatele/templates/obywatele/szczegoly.html:104
 msgid "Other"
 msgstr "Inne"
@@ -1168,7 +1169,7 @@ msgid "Name"
 msgstr "Imię"
 
 #: obywatele/templates/obywatele/assets.html:11
-#: obywatele/templates/obywatele/my_profile.html:40
+#: obywatele/templates/obywatele/my_profile.html:39
 #: obywatele/templates/obywatele/szczegoly.html:52
 msgid "Phone"
 msgstr "Telefon"
@@ -1300,11 +1301,17 @@ msgstr "Przyłączyłeś się"
 msgid "Change name"
 msgstr "Zmień imię i nazwisko"
 
-#: obywatele/templates/obywatele/my_profile.html:30
+#: obywatele/templates/obywatele/my_profile.html:18
+#, fuzzy
+#| msgid "Change your username"
+msgid "Change username"
+msgstr "Zmień nazwę użytkownika"
+
+#: obywatele/templates/obywatele/my_profile.html:29
 msgid "Those are your assets"
 msgstr "To są twoje zasoby"
 
-#: obywatele/templates/obywatele/my_profile.html:31
+#: obywatele/templates/obywatele/my_profile.html:30
 msgid ""
 "You don't have to fill all of them but the more information you'll give - "
 "the better we will be able to fullfill our needs. Also we will know each "
@@ -1314,7 +1321,7 @@ msgstr ""
 "łatwiej będziemy mogli wypełniać wzajemnie nasze potrzeby. Dzięki również "
 "lepiej się poznamy."
 
-#: obywatele/templates/obywatele/my_profile.html:98
+#: obywatele/templates/obywatele/my_profile.html:97
 msgid "Edit my assets"
 msgstr "Edytuj moje zasoby"
 

@@ -200,6 +200,6 @@ def get_translations():
         "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
     ]
     translation = {x: _(x) for x in strings}
-    for i in translation:
-        print(i, _(i))
+    # for i in translation:
+    #     print(i, _(i))
     return translation

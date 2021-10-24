@@ -17,10 +17,10 @@ def seen_by(room, user):
 @register.filter("has_messages")
 def has_messages(user):
     for room in user.rooms.all():
-        print(room)
+        # print(room)
         seen_by_user = room.seen_by.filter(id=user.id)
-        print(f"is seen: {seen_by_user}")
-        print(f"has messages: {room.messages.all().count()}")
+        # print(f"is seen: {seen_by_user}")
+        # print(f"has messages: {room.messages.all().count()}")
 
     return "chat-has-messages" if \
         [room for room in user.rooms.all() if not room.seen_by.filter(id=user.id).exists() and
