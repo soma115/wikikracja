@@ -15,11 +15,11 @@
 		<h5>{% trans 'Bill text' %}: <b>{{ id.tresc }}</b></h5>
 		<h5>{% trans 'Penalty for non-compliance' %}: <b>{{ id.kara }}</b></h5>
 		<h5>{% trans 'Reason' %}: <b>{{ id.uzasadnienie }}</b></h5>
-		<h5>{% trans 'Positives' %}: <b>{{ id.args_for }}</b></h5>
-		<h5>{% trans 'Negatives' %}: <b>{{ id.args_against }}</b></h5>
-        <h5>{% trans 'This law supersedes the following bills' %}: <b>{{ id.znosi }}</b></h5>
+		<h5>{% trans 'Positives' %}: <b>{{ id.args_for|default_if_none:"--" }}</b></h5>
+		<h5>{% trans 'Negatives' %}: <b>{{ id.args_against|default_if_none:"--" }}</b></h5>
+        <h5>{% trans 'This law supersedes the following bills' %}: <b>{{ id.znosi|default_if_none:"--" }}</b></h5>
 			<p>
-				{% trans 'Author' %}: {{ id.author }} | {% trans 'Number of people signed the motion for a referendum' %}: {{ id.ile_osob_podpisalo }}
+				{% trans 'Author' %}: {{ id.author|default_if_none:"--" }} | {% trans 'Number of people signed the motion for a referendum' %}: {{ id.ile_osob_podpisalo }}
 				{% if id.status >= 6 %} | {% trans 'For' %}: {{ id.za }} | {% trans 'Against' %}: {{ id.przeciw }} {% endif %}
 				
 				<br><small>
@@ -42,6 +42,7 @@
 					{% else %}
 						{% trans "No" %}
 					{% endif %}
+					<br>
 				{% endfor %}
 			</p>
 		{% endif %}

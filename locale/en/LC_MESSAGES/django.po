@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-24 20:26+0200\n"
+"POT-Creation-Date: 2021-10-25 11:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,7 +152,7 @@ msgstr ""
 
 #: chat/templates/chat/chat.html:180 chat/views.py:168
 #: glosowania/templates/glosowania/szczegoly.html:42
-#: glosowania/templates/glosowania/szczegoly.html:73
+#: glosowania/templates/glosowania/szczegoly.html:74
 msgid "Yes"
 msgstr ""
 
@@ -348,7 +348,7 @@ msgid "Delete"
 msgstr ""
 
 #: elibrary/templates/elibrary/book_detail.html:38
-#: glosowania/templates/glosowania/szczegoly.html:65
+#: glosowania/templates/glosowania/szczegoly.html:66
 msgid "Edit"
 msgstr ""
 
@@ -603,31 +603,31 @@ msgid "Protocol"
 msgstr ""
 
 #: glosowania/templates/glosowania/szczegoly.html:44
-#: glosowania/templates/glosowania/szczegoly.html:74
+#: glosowania/templates/glosowania/szczegoly.html:75
 msgid "No"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:54
+#: glosowania/templates/glosowania/szczegoly.html:55
 msgid "Do you want a referendum on this law?"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:55
+#: glosowania/templates/glosowania/szczegoly.html:56
 msgid "Yes, I sign"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:58
+#: glosowania/templates/glosowania/szczegoly.html:59
 msgid "You already signed this proposal."
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:60
+#: glosowania/templates/glosowania/szczegoly.html:61
 msgid "Withdraw your sign"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:72
+#: glosowania/templates/glosowania/szczegoly.html:73
 msgid "Do you want to implement this law?"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:77
+#: glosowania/templates/glosowania/szczegoly.html:78
 msgid "You already voted."
 msgstr ""
 

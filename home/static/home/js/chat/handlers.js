@@ -165,10 +165,10 @@ $(document).on('click', '.permission-banner', () => {
     DOM_API.showNotificationPermModal(
         _("Enable Notifications"),
         `<div>
-    ${_("Chat works better with notifications. You can allow them to see new messages even beyond chat room.")}
-    </div>
-     <p class='mt-3'>${_("Do you want to receive notifications?")}</p>
-     <small class='text-muted'>${_("If nothing happens, you may have ignored permission prompt too many times. Check your browser settings to enable them.")}"</small>`
+      ${_("Chat works better with notifications. You can allow them to see new messages even beyond chat room.")}
+      </div>
+       <p class='mt-3'>${_("Do you want to receive notifications?")}</p>
+       <small class='text-muted'>${_("If nothing happens, you may have ignored permission prompt too many times. Check your browser settings to enable them.")}"</small>`
     );
 })
 
