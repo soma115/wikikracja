@@ -60,11 +60,11 @@ def chat(request):
     login and admin parts.
     """
     # Create all 1to1 rooms
+    l.warning('2')
     active_users = User.objects.filter(is_active=True)
     # for i in active_users:
     i = request.user
     for j in active_users:
-        l.warning('2')
         # User A will not talk to user A
         if i == j:  
             continue
@@ -74,17 +74,16 @@ def chat(request):
 
         existing_room = Room.find_with_users(i, j)
 
-        l.warning('3')
         # check if room for user i and j exists, if so make sure room name is correct
         if existing_room is not None:
             existing_room.title = title
             existing_room.save()
-            l.warning('4')
         # if not, create room
         else:
             r = Room.objects.create(title=title, public=False)
             r.allowed.set((i, j,))
-            l.warning('5')
+
+    l.warning('5')
 
     # Add all active_users to public_rooms.
     # It is done here because it is needed when:
