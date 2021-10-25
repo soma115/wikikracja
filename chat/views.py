@@ -61,6 +61,7 @@ def chat(request):
     """
     # Create all 1to1 rooms
     active_users = User.objects.filter(is_active=True)
+    l.warning('1')
     for i in active_users:
         for j in active_users:
             # User A will not talk to user A
@@ -85,12 +86,14 @@ def chat(request):
     # It is done here because it is needed when:
     # 1. new public room is created
     # 2. new user is activated
+    l.warning('2')
     public_rooms = Room.objects.filter(public=True)
     for i in public_rooms:
         i.allowed.set(active_users)
 
     # Archive/Delete old public chat rooms
     all_public_rooms = Room.objects.filter(public=True)
+    l.warning('3')
     for i in all_public_rooms:
         try:
             last_message = Message.objects.filter(room_id=i.id).latest('time')
@@ -108,6 +111,7 @@ def chat(request):
             i.delete()  # delete
 
     # Archive/Delete old private chat room
+    l.warning('4')
     all_private_rooms = Room.objects.filter(public=False)
     for i in all_private_rooms:
         for user in i.allowed.all():
@@ -125,15 +129,18 @@ def chat(request):
                 i.archived = False
                 i.save()
 
+    l.warning('5')
     # Get a list of rooms, ordered alphabetically
     allowed_rooms = Room.objects.filter(allowed=request.user.id).order_by("title")
 
+    l.warning('6')
     # Find out which room to open by default
     last_user_room = None
     messages_by_user = Message.objects.filter(sender=request.user).order_by("-time")
     if messages_by_user.exists():
         last_user_room = messages_by_user.first().room.id
 
+    l.warning('7')
     # Render that in the chat template
     return render(request, "chat/chat.html", {
         'last_used_room': json.dumps(last_user_room),
