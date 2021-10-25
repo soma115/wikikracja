@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 18:13+0200\n"
+"POT-Creation-Date: 2021-10-25 18:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,7 +105,7 @@ msgstr ""
 msgid "Archived"
 msgstr ""
 
-#: chat/templates/chat/chat.html:78 chat/views.py:202
+#: chat/templates/chat/chat.html:78 chat/views.py:204
 msgid "Loading..."
 msgstr ""
 
@@ -138,7 +138,7 @@ msgid "Message history"
 msgstr ""
 
 #: chat/templates/chat/chat.html:143 chat/templates/chat/chat.html:151
-#: chat/templates/chat/chat.html:164 chat/views.py:199
+#: chat/templates/chat/chat.html:164 chat/views.py:201
 msgid "Close"
 msgstr ""
 
@@ -146,150 +146,150 @@ msgstr ""
 msgid "Permission"
 msgstr ""
 
-#: chat/templates/chat/chat.html:175 chat/views.py:195
+#: chat/templates/chat/chat.html:175 chat/views.py:197
 msgid "No, don't show again"
 msgstr ""
 
-#: chat/templates/chat/chat.html:179 chat/views.py:194
+#: chat/templates/chat/chat.html:179 chat/views.py:196
 #: glosowania/templates/glosowania/szczegoly.html:42
 #: glosowania/templates/glosowania/szczegoly.html:74
 msgid "Yes"
 msgstr ""
 
-#: chat/views.py:185
+#: chat/views.py:187
 msgid "Manage notifications"
 msgstr ""
 
-#: chat/views.py:186
+#: chat/views.py:188
 msgid "Today"
 msgstr ""
 
-#: chat/views.py:187
+#: chat/views.py:189
 msgid "Yesterday"
 msgstr ""
 
-#: chat/views.py:188
+#: chat/views.py:190
 msgid "Anonymous"
 msgstr ""
 
-#: chat/views.py:189
+#: chat/views.py:191
 #, python-format
 msgid "⚠ slow-mode is active. You can send messages once in %d seconds."
 msgstr ""
 
-#: chat/views.py:190
+#: chat/views.py:192
 msgid "Enable Notifications"
 msgstr ""
 
-#: chat/views.py:191
+#: chat/views.py:193
 msgid ""
 "Chat works better with notifications. You can allow them to see new messages "
 "even beyond chat room."
 msgstr ""
 
-#: chat/views.py:192
+#: chat/views.py:194
 msgid "Do you want to receive notifications?"
 msgstr ""
 
-#: chat/views.py:193
+#: chat/views.py:195
 msgid ""
 "If nothing happens, you may have ignored permission prompt too many times. "
 "Check your browser settings to enable them."
 msgstr ""
 
-#: chat/views.py:196
+#: chat/views.py:198
 msgid "edit"
 msgstr ""
 
-#: chat/views.py:197
+#: chat/views.py:199
 msgid "edited"
 msgstr ""
 
-#: chat/views.py:198
+#: chat/views.py:200
 msgid "Message History"
 msgstr ""
 
-#: chat/views.py:200
+#: chat/views.py:202
 msgid "This room is empty, be the first one to write something."
 msgstr ""
 
-#: chat/views.py:201
+#: chat/views.py:203
 msgid "editing: "
 msgstr ""
 
-#: chat/views.py:203
+#: chat/views.py:205
 msgid "Sunday"
 msgstr ""
 
-#: chat/views.py:203
+#: chat/views.py:205
 msgid "Monday"
 msgstr ""
 
-#: chat/views.py:203
+#: chat/views.py:205
 msgid "Tuesday"
 msgstr ""
 
-#: chat/views.py:203
+#: chat/views.py:205
 msgid "Wednesday"
 msgstr ""
 
-#: chat/views.py:203
+#: chat/views.py:205
 msgid "Thursday"
 msgstr ""
 
-#: chat/views.py:203
+#: chat/views.py:205
 msgid "Friday"
 msgstr ""
 
-#: chat/views.py:203
+#: chat/views.py:205
 msgid "Saturday"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Jan"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Feb"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Mar"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Apr"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "May"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Jun"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Jul"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Aug"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Sep"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Oct"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Nov"
 msgstr ""
 
-#: chat/views.py:204
+#: chat/views.py:206
 msgid "Dec"
 msgstr ""
 

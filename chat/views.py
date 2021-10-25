@@ -114,7 +114,7 @@ def chat(request):
 
     l.warning('7')
     # Archive/Delete old private chat room
-    all_private_rooms = Room.objects.filter(public=False)
+    all_private_rooms = Room.objects.filter(public=False).filter(allowed=request.user)
     for i in all_private_rooms:
         for user in i.allowed.all():
             if not user.is_active:
