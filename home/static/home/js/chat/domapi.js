@@ -275,7 +275,7 @@ export default class DomApi {
         this.clearFiles();
         this.stopEditing();
         this.getMessagesDiv().append(
-            "<p class='empty-chat-message'>" + _("Select a chat to start messaging.") + "</p>"
+            "<p class='empty-chat-message'>" + _("Loading...") + "</p>"
         );
     }
 

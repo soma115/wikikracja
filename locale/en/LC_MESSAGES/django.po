@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 11:33+0200\n"
+"POT-Creation-Date: 2021-10-25 13:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,60 +97,60 @@ msgid "Rooms"
 msgstr ""
 
 #: chat/templates/chat/chat.html:60 chat/templates/chat/chat.html:68
-#: chat/templates/chat/chat.html:103 chat/templates/chat/chat.html:112
+#: chat/templates/chat/chat.html:102 chat/templates/chat/chat.html:111
 msgid "none"
 msgstr ""
 
-#: chat/templates/chat/chat.html:63 chat/templates/chat/chat.html:107
+#: chat/templates/chat/chat.html:63 chat/templates/chat/chat.html:106
 msgid "Archived"
 msgstr ""
 
-#: chat/templates/chat/chat.html:78 chat/views.py:172
-msgid "Select a chat to start messaging."
+#: chat/templates/chat/chat.html:78
+msgid "Loading..."
 msgstr ""
 
-#: chat/templates/chat/chat.html:98
+#: chat/templates/chat/chat.html:97
 msgid "Users"
 msgstr ""
 
-#: chat/templates/chat/chat.html:123
+#: chat/templates/chat/chat.html:122
 msgid "Public chat rooms are archived if they are not used for"
 msgstr ""
 
-#: chat/templates/chat/chat.html:125
+#: chat/templates/chat/chat.html:124
 msgid "days. After"
 msgstr ""
 
-#: chat/templates/chat/chat.html:127
+#: chat/templates/chat/chat.html:126
 msgid "days they are deleted."
 msgstr ""
 
-#: chat/templates/chat/chat.html:130
+#: chat/templates/chat/chat.html:129
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
 
-#: chat/templates/chat/chat.html:132
+#: chat/templates/chat/chat.html:131
 msgid "days"
 msgstr ""
 
-#: chat/templates/chat/chat.html:143
+#: chat/templates/chat/chat.html:142
 msgid "Message history"
 msgstr ""
 
-#: chat/templates/chat/chat.html:144 chat/templates/chat/chat.html:152
-#: chat/templates/chat/chat.html:165 chat/views.py:174
+#: chat/templates/chat/chat.html:143 chat/templates/chat/chat.html:151
+#: chat/templates/chat/chat.html:164 chat/views.py:173
 msgid "Close"
 msgstr ""
 
-#: chat/templates/chat/chat.html:164
+#: chat/templates/chat/chat.html:163
 msgid "Permission"
 msgstr ""
 
-#: chat/templates/chat/chat.html:176 chat/views.py:169
+#: chat/templates/chat/chat.html:175 chat/views.py:169
 msgid "No, don't show again"
 msgstr ""
 
-#: chat/templates/chat/chat.html:180 chat/views.py:168
+#: chat/templates/chat/chat.html:179 chat/views.py:168
 #: glosowania/templates/glosowania/szczegoly.html:42
 #: glosowania/templates/glosowania/szczegoly.html:74
 msgid "Yes"
@@ -205,91 +205,91 @@ msgstr ""
 msgid "edited"
 msgstr ""
 
-#: chat/views.py:173
+#: chat/views.py:172
 msgid "Message History"
 msgstr ""
 
-#: chat/views.py:175
+#: chat/views.py:174
 msgid "This room is empty, be the first one to write something."
 msgstr ""
 
-#: chat/views.py:176
+#: chat/views.py:175
 msgid "editing: "
 msgstr ""
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Sunday"
 msgstr ""
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Monday"
 msgstr ""
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Tuesday"
 msgstr ""
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Wednesday"
 msgstr ""
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Thursday"
 msgstr ""
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Friday"
 msgstr ""
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Saturday"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Jan"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Feb"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Mar"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Apr"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "May"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Jun"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Jul"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Aug"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Sep"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Oct"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Nov"
 msgstr ""
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Dec"
 msgstr ""
 

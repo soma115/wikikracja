@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 11:33+0200\n"
+"POT-Creation-Date: 2021-10-25 13:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,62 +99,62 @@ msgid "Rooms"
 msgstr "Pokoje"
 
 #: chat/templates/chat/chat.html:60 chat/templates/chat/chat.html:68
-#: chat/templates/chat/chat.html:103 chat/templates/chat/chat.html:112
+#: chat/templates/chat/chat.html:102 chat/templates/chat/chat.html:111
 msgid "none"
 msgstr "brak"
 
-#: chat/templates/chat/chat.html:63 chat/templates/chat/chat.html:107
+#: chat/templates/chat/chat.html:63 chat/templates/chat/chat.html:106
 msgid "Archived"
 msgstr "Archiwum"
 
-#: chat/templates/chat/chat.html:78 chat/views.py:172
-msgid "Select a chat to start messaging."
-msgstr "Wybierz chat żeby zacząć pisać"
+#: chat/templates/chat/chat.html:78
+msgid "Loading..."
+msgstr "Wczytywanie..."
 
-#: chat/templates/chat/chat.html:98
+#: chat/templates/chat/chat.html:97
 msgid "Users"
 msgstr "Ludzie"
 
-#: chat/templates/chat/chat.html:123
+#: chat/templates/chat/chat.html:122
 msgid "Public chat rooms are archived if they are not used for"
 msgstr "Publiczne pokoje są archiwizowane jeśli nie są używane przez"
 
-#: chat/templates/chat/chat.html:125
+#: chat/templates/chat/chat.html:124
 msgid "days. After"
 msgstr "dni. Po upływie"
 
-#: chat/templates/chat/chat.html:127
+#: chat/templates/chat/chat.html:126
 msgid "days they are deleted."
 msgstr "dni - są kasowane."
 
-#: chat/templates/chat/chat.html:130
+#: chat/templates/chat/chat.html:129
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
 "Prywatne wiadomości są archiwizowane, gdy użytkownik zostanie zablokowany i "
 "usuwane po upływie"
 
-#: chat/templates/chat/chat.html:132
+#: chat/templates/chat/chat.html:131
 msgid "days"
 msgstr "dni"
 
-#: chat/templates/chat/chat.html:143
+#: chat/templates/chat/chat.html:142
 msgid "Message history"
 msgstr "Historia wiadomości"
 
-#: chat/templates/chat/chat.html:144 chat/templates/chat/chat.html:152
-#: chat/templates/chat/chat.html:165 chat/views.py:174
+#: chat/templates/chat/chat.html:143 chat/templates/chat/chat.html:151
+#: chat/templates/chat/chat.html:164 chat/views.py:173
 msgid "Close"
 msgstr "Zamknij"
 
-#: chat/templates/chat/chat.html:164
+#: chat/templates/chat/chat.html:163
 msgid "Permission"
 msgstr "Uprawnienie"
 
-#: chat/templates/chat/chat.html:176 chat/views.py:169
+#: chat/templates/chat/chat.html:175 chat/views.py:169
 msgid "No, don't show again"
 msgstr "Nie, nie pokazuj ponownie"
 
-#: chat/templates/chat/chat.html:180 chat/views.py:168
+#: chat/templates/chat/chat.html:179 chat/views.py:168
 #: glosowania/templates/glosowania/szczegoly.html:42
 #: glosowania/templates/glosowania/szczegoly.html:74
 msgid "Yes"
@@ -214,91 +214,91 @@ msgstr "edytuj"
 msgid "edited"
 msgstr "zmiany"
 
-#: chat/views.py:173
+#: chat/views.py:172
 msgid "Message History"
 msgstr "Historia wiadomości"
 
-#: chat/views.py:175
+#: chat/views.py:174
 msgid "This room is empty, be the first one to write something."
 msgstr "Ten pokój jest pusty, bądź pierwszą osobą, która coś napisze."
 
-#: chat/views.py:176
+#: chat/views.py:175
 msgid "editing: "
 msgstr "edytujesz: "
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Sunday"
 msgstr "Niedziela"
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Monday"
 msgstr "Poniedziałek"
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Tuesday"
 msgstr "Wtorek"
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Wednesday"
 msgstr "Środa"
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Thursday"
 msgstr "Czwartek"
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Friday"
 msgstr "Piątek"
 
-#: chat/views.py:177
+#: chat/views.py:176
 msgid "Saturday"
 msgstr "Sobota"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Jan"
 msgstr "Sty"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Feb"
 msgstr "Lut"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Mar"
 msgstr "Mar"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Apr"
 msgstr "Kwi"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "May"
 msgstr "Maj"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Jun"
 msgstr "Cze"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Jul"
 msgstr "Lip"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Aug"
 msgstr "Sie"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Sep"
 msgstr "Wrz"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Oct"
 msgstr "Paź"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Nov"
 msgstr "Lis"
 
-#: chat/views.py:178
+#: chat/views.py:177
 msgid "Dec"
 msgstr "Gru"
 
@@ -1451,3 +1451,6 @@ msgstr "Angielski"
 #: zzz/settings_custom.py:14 zzz/settings_custom_template.py:14
 msgid "Polish"
 msgstr "Polski"
+
+#~ msgid "Select a chat to start messaging."
+#~ msgstr "Wybierz chat żeby zacząć pisać"
