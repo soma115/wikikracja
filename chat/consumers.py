@@ -702,7 +702,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
         # Update current text
         message.text = new_message
-        message.save()
+        message.save(update_fields=('text',))
 
         return state
 
