@@ -60,30 +60,46 @@ def chat(request):
     login and admin parts.
     """
     # Create all 1to1 rooms
-    l.warning('2')
     active_users = User.objects.filter(is_active=True)
     # for i in active_users:
     i = request.user
     for j in active_users:
+        l.warning('1')
         # User A will not talk to user A
         if i == j:  
             continue
         # Avoid A-B B-A because it is the same thing
+        l.warning('2')
+
         t = sorted([i.username, j.username])
+        l.warning('3')
+
         title = '-'.join(t)
+        l.warning('4')
 
         existing_room = Room.find_with_users(i, j)
+        l.warning('5')
 
         # check if room for user i and j exists, if so make sure room name is correct
         if existing_room is not None:
+            l.warning('6')
+
             existing_room.title = title
+            l.warning('7')
+
             existing_room.save()
+            l.warning('8')
+
         # if not, create room
         else:
-            r = Room.objects.create(title=title, public=False)
-            r.allowed.set((i, j,))
+            l.warning('9')
 
-    l.warning('5')
+            r = Room.objects.create(title=title, public=False)
+            l.warning('10')
+
+            r.allowed.set((i, j,))
+            l.warning('11')
+    l.warning('12')
 
     # Add all active_users to public_rooms.
     # It is done here because it is needed when:
@@ -92,7 +108,6 @@ def chat(request):
     public_rooms = Room.objects.filter(public=True)
     for i in public_rooms:
         i.allowed.set(active_users)
-    l.warning('6')
 
     # Archive/Delete old public chat rooms
     all_public_rooms = Room.objects.filter(public=True)
@@ -112,7 +127,6 @@ def chat(request):
             l.info(f'Chat room {i.title} deleted.')
             i.delete()  # delete
 
-    l.warning('7')
     # Archive/Delete old private chat room
     all_private_rooms = Room.objects.filter(public=False).filter(allowed=request.user)
     for i in all_private_rooms:
@@ -131,8 +145,6 @@ def chat(request):
                 i.archived = False
                 i.save()
 
-    l.warning('8')
-
     # Get a list of rooms, ordered alphabetically
     allowed_rooms = Room.objects.filter(allowed=request.user.id).order_by("title")
 
@@ -141,8 +153,6 @@ def chat(request):
     messages_by_user = Message.objects.filter(sender=request.user).order_by("-time")
     if messages_by_user.exists():
         last_user_room = messages_by_user.first().room.id
-
-    l.warning('9')
 
     # Render that in the chat template
     return render(request, "chat/chat.html", {
