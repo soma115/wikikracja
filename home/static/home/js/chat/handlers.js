@@ -58,7 +58,7 @@ $(document).on("keydown", ".message-input", function(e) {
     let message = DOM_API.getEnteredText();
     onSubmitMessage(message, edit_message_id);
   }
-  
+
   if (e.key == "ArrowUp") {
     // up arrow will move caret to start by default
     e.preventDefault();

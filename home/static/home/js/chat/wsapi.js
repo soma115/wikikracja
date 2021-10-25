@@ -12,6 +12,10 @@ export default class WsApi {
 
     this.socket = new ReconnectingWebSocket(ws_path);
 
+    $(window).on('unload', ()=> {
+      this.socket.close();
+    });
+
     this.socket.onmessage = (e) => {
       let data = JSON.parse(e.data);
 

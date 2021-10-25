@@ -44,7 +44,14 @@ class OnlineUserRegistry:
     def make_online(self, user, consumer):
         self._reg[user.id] = consumer
 
-    def make_offline(self, user):
+    def make_offline(self, consumer):
+        user = consumer.scope['user']
+        if not user.is_authenticated:
+            for user_id, cons in self._reg.items():
+                if cons == consumer:
+                    del self._reg[user_id]
+                    return
+
         del self._reg[user.id]
 
     def is_online(self, user):

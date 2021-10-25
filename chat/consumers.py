@@ -63,6 +63,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when the WebSocket closes for any reason.
         """
+        if self.scope['user'].is_anonymous:
+            return
+
         # Leave all the rooms we are still in
         for room_id in self.rooms.items():
             try:
@@ -73,7 +76,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 pass
 
         # remove user from online list
-        ChatConsumer.online_registry.make_offline(self.scope['user'])
+        ChatConsumer.online_registry.make_offline(self)
 
         proxy = HandledMessage()
         await self.send_online_update(proxy, False)
