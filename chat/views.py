@@ -62,7 +62,6 @@ def chat(request):
     # Create all 1to1 rooms
     active_users = User.objects.filter(is_active=True)
     # for i in active_users:
-    l.warning('1')
     i = request.user
     for j in active_users:
         l.warning('2')
@@ -133,6 +132,8 @@ def chat(request):
                 i.archived = False
                 i.save()
 
+    l.warning('8')
+
     # Get a list of rooms, ordered alphabetically
     allowed_rooms = Room.objects.filter(allowed=request.user.id).order_by("title")
 
@@ -141,6 +142,8 @@ def chat(request):
     messages_by_user = Message.objects.filter(sender=request.user).order_by("-time")
     if messages_by_user.exists():
         last_user_room = messages_by_user.first().room.id
+
+    l.warning('9')
 
     # Render that in the chat template
     return render(request, "chat/chat.html", {
