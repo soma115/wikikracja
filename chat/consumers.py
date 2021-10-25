@@ -282,8 +282,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         u = await self.get_user_by_name(self.scope["user"].username)  # ???
         r = await self.get_room(room_id)
 
-        # escape HTML
-        message = escape(message)
+        # escape HTML - this is second excaping, no need for that
+        # message = escape(message)
 
         msg = Message(sender=u, text=message, room=r, anonymous=is_anonymous)  # time is added in a models.py
         message_id = await self.save_message(msg)

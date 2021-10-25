@@ -16,10 +16,27 @@ from django.utils import timezone
 from django.shortcuts import redirect
 from django.conf import settings as s
 import logging as l
+import time
 
 from django.utils.translation import gettext as _
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
+
+
+def timeit(method):
+    def timed(*args, **kw):
+        ts = time.time()
+        result = method(*args, **kw)
+        te = time.time()
+        if 'log_time' in kw:
+            name = kw.get('log_name', method.__name__.upper())
+            kw['log_time'][name] = int((te - ts) * 1000)
+        else:
+            print(f'%r  %2.2f ms' % (method.__name__, (te - ts) * 1000))
+            l.warning(f'%r  %2.2f ms' % (method.__name__, (te - ts) * 1000))
+        return result
+    return timed
+
 
 @login_required
 def add_room(request):
@@ -36,6 +53,7 @@ def add_room(request):
     return render(request, 'chat/add.html', {'form': form})
 
 @login_required
+@timeit
 def chat(request):
     """
     Root page view. This is essentially a single-page app, if you ignore the
@@ -203,3 +221,5 @@ def get_translations():
     # for i in translation:
     #     print(i, _(i))
     return translation
+
+
