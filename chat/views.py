@@ -53,7 +53,7 @@ def add_room(request):
     return render(request, 'chat/add.html', {'form': form})
 
 @login_required
-@timeit
+# @timeit
 def chat(request):
     """
     Root page view. This is essentially a single-page app, if you ignore the
@@ -64,42 +64,22 @@ def chat(request):
     # for i in active_users:
     i = request.user
     for j in active_users:
-        l.warning('1')
         # User A will not talk to user A
         if i == j:  
             continue
         # Avoid A-B B-A because it is the same thing
-        l.warning('2')
-
         t = sorted([i.username, j.username])
-        l.warning('3')
-
         title = '-'.join(t)
-        l.warning('4')
-
         existing_room = Room.find_with_users(i, j)
-        l.warning('5')
 
         # check if room for user i and j exists, if so make sure room name is correct
         if existing_room is not None:
-            l.warning('6')
-
             existing_room.title = title
-            l.warning('7')
-
             existing_room.save()
-            l.warning('8')
-
         # if not, create room
         else:
-            l.warning('9')
-
             r = Room.objects.create(title=title, public=False)
-            l.warning('10')
-
             r.allowed.set((i, j,))
-            l.warning('11')
-    l.warning('12')
 
     # Add all active_users to public_rooms.
     # It is done here because it is needed when:
