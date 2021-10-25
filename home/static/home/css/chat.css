@@ -228,7 +228,7 @@
 
 .message {
     display: flex;
-    margin-right: 30%;
+    margin-right: 10%;
     margin-left: 0;
 }
 
@@ -238,14 +238,14 @@
 
 .message.own {
     justify-content: flex-end;
-    margin-left: 30%;
+    margin-left: 10%;
     margin-right: 0;
 }
 
 .message-content {
     background: #f6fff6;
     margin-bottom: .3rem;
-    min-width: 30%;
+    min-width: 20%;
     padding: .3rem;
     box-shadow: 1px 4px 9px 3px #d9d6d6f0;
     /* display: flex; */
