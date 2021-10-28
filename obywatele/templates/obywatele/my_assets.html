@@ -7,13 +7,83 @@
 
 <p>{% trans 'Here you can edit your assets' %} <b>{{ user }}</b></p>
 
-<form action="#" method="POST" enctype="multipart/form-data">{% csrf_token %}
-	{{ form|crispy }}
-	<button type="submit" class="btn btn-primary btn-sm">{% trans 'Submit' %}</button>
-</form>
+	<form action="#" method="post" enctype="multipart/form-data">{% csrf_token %}
+		<div class="container">
 
-<p>
-    <a href="{% url 'obywatele:my_profile' %}" class="btn btn-warning btn-sm">{% trans 'Cancel' %}</a>
-</p>
+			<div class="row">
+				<div class="col">
+					{{ form.city|as_crispy_field }}
+				</div>
+				<div class="col">
+					{{ form.foto|as_crispy_field }}
+				</div>
+			</div>
 
+			<div class="row">
+				<div class="col">
+					{{ form.phone|as_crispy_field }}
+				</div>
+				<div class="col">
+					{{ form.responsibilities|as_crispy_field }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					{{ form.job|as_crispy_field }}
+				</div>
+				<div class="col">
+					{{ form.hobby|as_crispy_field }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					{{ form.business|as_crispy_field }}
+				</div>
+				<div class="col">
+					{{ form.to_give_away|as_crispy_field }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					{{ form.to_borrow|as_crispy_field }}
+				</div>
+				<div class="col">
+					{{ form.for_sale|as_crispy_field }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					{{ form.i_need|as_crispy_field }}
+				</div>
+				<div class="col">
+					{{ form.want_to_learn|as_crispy_field }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					{{ form.skills|as_crispy_field }}
+				</div>
+				<div class="col">
+					{{ form.knowledge|as_crispy_field }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					{{ form.gift|as_crispy_field }}
+				</div>
+				<div class="col">
+					{{ form.other|as_crispy_field }}
+				</div>
+			</div>
+
+		</div>
+		<button type="submit" class="btn btn-primary btn-sm">{% trans 'Submit' %}</button>
+		<a href="{% url 'obywatele:my_profile' %}" class="btn btn-warning btn-sm">{% trans 'Cancel' %}</a>
+	</form>
 {% endblock %}

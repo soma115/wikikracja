@@ -2,7 +2,7 @@
         "model": "glosowania.decyzja",
         "pk": 1,
         "fields": {
-            "autor": "",
+            "author": null,
             "title": "Prawo nie działa wstecz.",
             "tresc": "Prawo nie działa wstecz.",
             "kara": "Banicja na 3 miesiące.",
@@ -26,7 +26,7 @@
         "model": "glosowania.decyzja",
         "pk": 2,
         "fields": {
-            "autor": "",
+            "author": null,
             "title": "Każdy z nas jest równy wobec prawa.",
             "tresc": "Każdy z nas jest równy wobec prawa.",
             "kara": "Banicja na 3 miesiące.",
@@ -50,7 +50,7 @@
         "model": "glosowania.decyzja",
         "pk": 3,
         "fields": {
-            "autor": "",
+            "author": null,
             "title": "Nowe przepisy akceptujemy i odrzucamy zwykłą większością głosów.",
             "tresc": "Nowe przepisy akceptujemy i odrzucamy zwykłą większością głosów.",
             "kara": "Banicja na 3 miesiące.",
@@ -74,7 +74,7 @@
         "model": "glosowania.decyzja",
         "pk": 4,
         "fields": {
-            "autor": "",
+            "author": null,
             "title": "Każdy z nas ma jeden głos.",
             "tresc": "Każdy z nas ma jeden głos.",
             "kara": "Banicja na 3 miesiące.",
@@ -98,7 +98,7 @@
         "model": "glosowania.decyzja",
         "pk": 5,
         "fields": {
-            "autor": "",
+            "author": null,
             "title": "Prawo do pożyczki",
             "tresc": "Każdy z nas ma prawo do pożyczki ze wspólnej kasy. Oprocentowanie pożyczki wynosi 4% a zwrot musi nastąpić w mniej niż 1 rok.",
             "kara": "Banicja na 3 miesiące.",
@@ -122,7 +122,7 @@
         "model": "glosowania.decyzja",
         "pk": 6,
         "fields": {
-            "autor": "",
+            "author": null,
             "title": "Wsparcie naszych interesów",
             "tresc": "Każdy z nas ma obowiązek, w pierwszej kolejności, kupować od kogoś z naszej grupy. Dostawca zobowiązuje się do dbania o korzystną cenę oraz jakość towarów i usług.",
             "kara": "Banicja na 3 miesiące.",
@@ -146,7 +146,7 @@
         "model": "glosowania.decyzja",
         "pk": 7,
         "fields": {
-            "autor": "",
+            "author": null,
             "title": "Zrzutka",
             "tresc": "Zrzutka od 2021 roku wynosi 12zł rocznie. Płatność musi być wykonana w pierwszym kwartale każdego roku. Nowa osoba płaci składkę roczną proporcjonalnie za każdy miesiąc przynależności i ma na to 3 miesiące od daty przyjęcia.",
             "kara": "Banicja na 3 miesiące. Przywrócenie członkostwa następuje automatycznie po opłaceniu wszystkich zaległych składek.",

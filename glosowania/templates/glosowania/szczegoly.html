@@ -1,44 +1,69 @@
-{% extends 'home/base.html' %}
+{% extends 'glosowania/menu.html' %}
+
 {% load static %}
 {% load i18n %}
 
-{% block content %}
-	<div>
-		<h5>{% trans 'Bill number' %}: {{ id.id }}</h5>
-		<h5>{% trans 'Bill title' %}: {{ id.title }}</h5>
-		<h5>{% trans 'Bill text' %}:</h5><p>{{ id.tresc }}</p>
-		<h5>{% trans 'Penalty for non-compliance' %}:</h5><p>{{ id.kara }}</p>
-		<h5>{% trans 'Reason' %}:</h5><p>{{ id.uzasadnienie }}</p>
-		<h5>{% trans 'Positives' %}:</h5><p>{{ id.args_for }}</p>
-		<h5>{% trans 'Negatives' %}:</h5><p>{{ id.args_against }}</p>
-        <h5>{% trans 'This law supersedes the following bills' %}:</h5><p>{{ id.znosi }}</p>
-			<p>
-				{% trans 'Author' %}: {{ id.autor }}
+{% block glosowania %}
 
-				{% if id.ile_osob_podpisalo %} | {% trans 'Number of people signed the motion for a referendum' %}: {{ id.ile_osob_podpisalo }} {% endif %}
+	{% if prev %} <a href="{% url 'glosowania:details' pk=prev.id %}"><< {% trans 'prev' %}</a> {% else %} << {% trans 'prev' %} {% endif %}
+	{% if next %} <a href="{% url 'glosowania:details' pk=next.id %}">{% trans 'next' %} >></a> {% else %} {% trans 'next' %} >> {% endif %}
+
+	<div>
+		<h5>{% trans 'Bill number' %}: <b>{{ id.id }}</b></h5>
+		<h5>{% trans 'Bill title' %}: <b>{{ id.title }}</b></h5>
+		<h5>{% trans 'Bill state' %}: <b>{{ state }}</b></h5>
+		<h5>{% trans 'Bill text' %}: <b>{{ id.tresc }}</b></h5>
+		<h5>{% trans 'Penalty for non-compliance' %}: <b>{{ id.kara }}</b></h5>
+		<h5>{% trans 'Reason' %}: <b>{{ id.uzasadnienie }}</b></h5>
+		<h5>{% trans 'Positives' %}: <b>{{ id.args_for|default_if_none:"--" }}</b></h5>
+		<h5>{% trans 'Negatives' %}: <b>{{ id.args_against|default_if_none:"--" }}</b></h5>
+        <h5>{% trans 'This law supersedes the following bills' %}: <b>{{ id.znosi|default_if_none:"--" }}</b></h5>
+			<p>
+				{% trans 'Author' %}: {{ id.author|default_if_none:"--" }} | {% trans 'Number of people signed the motion for a referendum' %}: {{ id.ile_osob_podpisalo }}
 				{% if id.status >= 6 %} | {% trans 'For' %}: {{ id.za }} | {% trans 'Against' %}: {{ id.przeciw }} {% endif %}
 				
 				<br><small>
 				{% if id.data_powstania %} {% trans 'Date created' %}: {{ id.data_powstania }} {% endif %}
 				{% if id.data_zebrania_podpisow %} | {% trans 'Date of collecting signatures' %}: {{ id.data_zebrania_podpisow }} {% endif %}
 				{% if id.data_referendum_start %} | {% trans 'Start referendum' %}: {{ id.data_referendum_start }} {% endif %}
-				{% if id.data_referendum_stop %} | {% trans 'End referendum' %}: {{ id.data_referendum_stop }} (wyłącznie) {% endif %}
+				{% if id.data_referendum_stop %} | {% trans 'End referendum' %}: {{ corrected_data_referendum_stop }} {% endif %}
 				{% if id.data_obowiazuje_od %} <br> <b>{% trans 'The rule applies from' %}: {{ id.data_obowiazuje_od }}</b> {% endif %}
 				</small>
 				{% comment %} Status: {{ id.status }} {% endcomment %}
 			</p>
+
+		{% if id.status == 5 or id.status == 6 or id.status == 7 %}
+			<p>
+				<h5>{% trans 'Protocol' %}:</h5>
+				{% for i in report %}
+					{{ i.code }}
+					{% if i.vote %}
+						{% trans "Yes" %}
+					{% else %}
+						{% trans "No" %}
+					{% endif %}
+					<br>
+				{% endfor %}
+			</p>
+		{% endif %}
 	</div>
 
 	{% if id.status == 1 %}
 		{% if not signed %}
 			<form action="#" method="get">
 				<p><u><h5>{% trans 'Do you want a referendum on this law?' %}</h5></u></p>
-				<input class="btn btn-primary btn-sm" type="submit" name="podpisz" value="{% trans "Yes, I sign" %}"/>
+				<input class="btn btn-primary btn-sm" type="submit" name="sign" value="{% trans "Yes, I sign" %}"/>
 			</form>
-			{% elif signed %}
+		{% elif signed %}
 			<p><u><h5>{% trans 'You already signed this proposal.' %}</h5></u></p>
-			{% endif %}
-		<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
+			<form action="#" method="get">
+				<input class="btn btn-danger btn-sm" type="submit" name="withdraw" value="{% trans "Withdraw your sign" %}"/>
+			</form>
+		{% endif %}
+
+		{% if id.author == None or id.author == current_user %}
+			<a class="btn btn-primary btn-sm" href="{% url 'glosowania:edit' id.pk %}">{% trans 'Edit' %}</a>
+		{% endif %}
 	{% endif %}
 
 	{% if id.status == 4 %}
@@ -51,10 +76,9 @@
 		{% elif voted %}
 			<p><u><h5>{% trans 'You already voted.' %}</h5></u></p>
 		{% endif %}
-		<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
 	{% endif %}
 
-	{% if id.status == 2 or id.status == 3 or id.status >= 5 %}
-		<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
-	{% endif %}
+	{% comment %} {% if id.status == 2 or id.status == 3 or id.status >= 5 %}
+	{% endif %} {% endcomment %}
+
 {% endblock %}

@@ -3,6 +3,7 @@ venv/
 myvenv/
 backup/
 _inne_materialy/
+static/
 
 *.DS_Store
 *.cache
@@ -36,5 +37,6 @@ gen_users.txt
 *.pot
 *.pyc
 __pycache__/
-db.sqlite3
+db.sqlite3*
 zzz/settings_custom.py
+static/

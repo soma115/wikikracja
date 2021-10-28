@@ -13,31 +13,40 @@ from django.utils.timezone import now as dzis
 from django.utils.translation import ugettext_lazy as _
 from random import choice
 from string import ascii_letters, digits
-from math import log
+from math import log, floor
 import logging as l
-from obywatele.forms import UserForm, ProfileForm, EmailChangeForm
+from obywatele.forms import UserForm, ProfileForm, EmailChangeForm, NameChangeForm, UsernameChangeForm
 from obywatele.models import Uzytkownik, Rate
 from django.contrib.auth.models import Group
 from PIL import Image
 import os
+from django.utils import translation
+from django.utils.translation import get_language
+from django.core.mail import EmailMessage
+import threading
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
+HOST = s.ALLOWED_HOSTS[0]
 
 def population():
     try:
         population = User.objects.filter(is_active=True).count()
         return population
     except:
-        pass
         l.error(f"Population zero, I don't know what to do.")
 
 
 def required_reputation():
-    return round(log(population()) * s.ACCEPTANCE_MULTIPLIER)
+    # return round(log(population()) * s.ACCEPTANCE_MULTIPLIER)
+    # -2 is needed because first 3 users needs to be accepted without explicit action from introducer and second user. Without -2 second user is banned automatically.
+    # floor is used to further lower required reputation lewel at the group start.
+    result = floor(log(population() * s.ACCEPTANCE_MULTIPLIER + 1))-2
+    return result
+
 
 @login_required() 
-def email_change(request):
+def change_email(request):
     form = EmailChangeForm(request.user)
     if request.method=='POST':
         form = EmailChangeForm(request.user, request.POST)
@@ -51,7 +60,44 @@ def email_change(request):
             error(request, (message))
             return redirect('obywatele:my_profile')
     else:
-        return render(request, 'obywatele/email_change.html', {'form':form})
+        return render(request, 'obywatele/change_email.html', {'form':form})
+
+
+@login_required() 
+def change_name(request):
+    form = NameChangeForm(request.POST)
+    if request.method=='POST':
+        # form = NameChangeForm(request.POST, request.user)
+        form = NameChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            message = _("Your name has been saved.")
+            success(request, (message))
+            return redirect('obywatele:my_profile')
+        else:
+            message = form.errors
+            error(request, (message))
+            return redirect('obywatele:my_profile')
+    else:
+        return render(request, 'obywatele/change_name.html', {'form':form})
+
+
+@login_required() 
+def change_username(request):  # not in use for now. Unintendet consequence is that private chat names are not updated.
+    form = UsernameChangeForm(request.POST)
+    if request.method=='POST':
+        form = UsernameChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            message = _("Your name has been saved.")
+            success(request, (message))
+            return redirect('obywatele:my_profile')
+        else:
+            message = form.errors
+            error(request, (message))
+            return redirect('obywatele:my_profile')
+    else:
+        return render(request, 'obywatele/change_username.html', {'form':form})
 
 
 @login_required
@@ -85,10 +131,13 @@ def dodaj(request):
         profile_form = ProfileForm(request.POST, request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
+            
             # USER
-            mail = user_form.cleaned_data['email']
             nick = user_form.cleaned_data['username']
+            first_name = user_form.cleaned_data['first_name']
+            last_name = user_form.cleaned_data['last_name']
 
+            mail = user_form.cleaned_data['email']
             if User.objects.filter(email=mail).exists():
                 # is_valid doesn't check if email exist
                 message = _('Email already exist')
@@ -114,7 +163,6 @@ def dodaj(request):
                 candidate_profile.want_to_learn = profile_form.cleaned_data['want_to_learn']
                 candidate_profile.business = profile_form.cleaned_data['business']
                 candidate_profile.job = profile_form.cleaned_data['job']
-                candidate_profile.fb = profile_form.cleaned_data['fb']
                 candidate_profile.other = profile_form.cleaned_data['other']
                 candidate_profile.save()
 
@@ -129,6 +177,12 @@ def dodaj(request):
 
                 message = _('The new user has been saved')
                 success(request, (message))
+
+                SendEmailToAll(
+                          _('New citizen has been proposed'),
+                          f'{request.user.username} ' + str(_('proposed new citizen\nYou can approve him/her here:')) + f' http://{HOST}/obywatele/poczekalnia/{str(candidate_profile.id)}'
+                )
+
                 return redirect('obywatele:poczekalnia')
         else:
             message = user_form.errors.get_json_data()['username'][0]['message']
@@ -146,7 +200,10 @@ def my_profile(request):
     pk=request.user.id
     profile = Uzytkownik.objects.get(pk=pk)
     user = User.objects.get(pk=pk)
-    return render(request, 'obywatele/my_profile.html', {'profile': profile, 'user': user, 'population': population(), 'required_reputation': required_reputation(),})
+    return render(request, 'obywatele/my_profile.html', {'profile': profile,
+                                                         'user': user,
+                                                         'population': population(),
+                                                         'required_reputation': required_reputation(),})
 
 
 @login_required
@@ -158,7 +215,12 @@ def my_assets(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            profile.foto = form.cleaned_data['foto']
+            # Remove foto: form.cleaned_data['foto'] = False
+            # Add foto:  form.cleaned_data['foto'] = uplodaed_file_name.png
+            if form.cleaned_data['foto'] == False:
+                profile.foto = 'obywatele/anonymous.png'
+            else:
+                profile.foto = form.cleaned_data['foto']
             profile.phone = form.cleaned_data['phone']
             profile.responsibilities = form.cleaned_data['responsibilities']
             profile.city = form.cleaned_data['city']
@@ -172,23 +234,22 @@ def my_assets(request):
             profile.want_to_learn = form.cleaned_data['want_to_learn']
             profile.business = form.cleaned_data['business']
             profile.job = form.cleaned_data['job']
-            profile.fb = form.cleaned_data['fb']
             profile.gift = form.cleaned_data['gift']
             profile.other = form.cleaned_data['other']
             profile.save()
 
-            image = Image.open(profile.foto)
-            width, height = image.width, image.height
-            dest_height = 200
-            factor = height / dest_height
-            new_height = round(height / factor)
-            new_width = round(width / factor)
-            image = image.resize((new_width, new_height), Image.ANTIALIAS)
-            upload_file_name = profile.foto.file.name
-            image.save('media/obywatele/' + str(user.id) + '.png')
-            profile.foto.name = 'obywatele/' + str(user.id) + '.png'
-            profile.save()
-            os.remove(upload_file_name)  # delete original file
+            if form.cleaned_data['foto']:
+                image = Image.open(profile.foto)
+                width, height = image.width, image.height
+                dest_height = 200
+                factor = height / dest_height
+                new_height = round(height / factor)
+                new_width = round(width / factor)
+                image = image.resize((new_width, new_height), Image.ANTIALIAS)
+                image.save('media/obywatele/' + str(user.id) + '.png')
+                profile.foto.name = 'obywatele/' + str(user.id) + '.png'
+                os.remove(profile.foto.file.name)  # delete original file
+                profile.save()
 
             return render(
                 request,
@@ -228,7 +289,6 @@ def my_assets(request):
             'want_to_learn': profile.want_to_learn,
             'business': profile.business,
             'job': profile.job,
-            'fb': profile.fb,
             'other': profile.other,
             }
         )
@@ -272,6 +332,8 @@ def obywatele_szczegoly(request, pk):
     -[x] New person increase population so also increase reputation requirements for existing citizens. Therefore every time new person is accepted - every other old member should have his reputation increased autmatically. And vice versa - if somebody is banned - everyone else should loose one point of reputation from banned person.
     '''
 
+    zliczaj_obywateli(request)  # run reputation counting because a lot can change in the meanwhile
+
     candidate_profile = get_object_or_404(Uzytkownik, pk=pk)
     candidate_user = User.objects.get(pk=pk)
     citizen_profile = Uzytkownik.objects.get(pk=request.user.id)
@@ -301,6 +363,12 @@ def obywatele_szczegoly(request, pk):
         rate.save()
         return redirect('obywatele:obywatele_szczegoly', pk)
 
+    # Previous and Next
+    obj = get_object_or_404(User, pk=pk)
+    # kandydaci czy obywatele? Na razie wszyscy
+    prev = User.objects.filter(pk__lt=obj.pk, is_active=obj.is_active).order_by('-pk').first()
+    next = User.objects.filter(pk__gt=obj.pk, is_active=obj.is_active).order_by('pk').first()
+  
     return render(
         request,
         'obywatele/szczegoly.html',
@@ -310,7 +378,10 @@ def obywatele_szczegoly(request, pk):
             'tr': citizen_reputation,
             'wr': required_reputation(),
             'rate': r1,
-            'p': polecajacy
+            'p': polecajacy,
+            'prev': prev,
+            'next': next,
+            'active': obj.is_active,
         })
 
 
@@ -328,7 +399,6 @@ def zliczaj_obywateli(request):
 
     # Count everyones reputation from Rate model and put it in to Uzytkownik
     for i in Uzytkownik.objects.all():
-
         if Rate.objects.filter(kandydat=i).exists():
             reputation = Rate.objects.filter(kandydat=i).aggregate(Sum('rate'))
             i.reputation = list(reputation.values())[0]
@@ -357,6 +427,7 @@ def zliczaj_obywateli(request):
                 if i == k:    # but not yourself
                     continue
                 obj, created = Rate.objects.update_or_create(obywatel = i, kandydat = k, defaults={'rate': '1'})
+                obj.save()
 
             subject = request.get_host() + ' - Twoje konto zostało włączone'
             uname = str(i.uid.username)
@@ -379,13 +450,18 @@ def zliczaj_obywateli(request):
             Rate.objects.filter(obywatel=i.id).update(rate=0)
 
             send_mail(
-                f'{str(request.get_host())} - Twoje konto zostało zablokowane',
-                f'Witaj {i.uid.username}\nTwoje konto na {str(request.get_host())} zostało zablokowane.',
+                f'{str(request.get_host())} - ' + str(_('Your account has been blocked')),
+                str(_('Welcome')) + f' {i.uid.username}\n' + str(_('Your account on page')) + f' {str(request.get_host())} ' + str(_('has been blocked.')),
                 str(s.DEFAULT_FROM_EMAIL),
                 [i.uid.email],
                 fail_silently=False,
             )
             # We are not deleting user bacuse he may come back.
+
+            SendEmailToAll(
+                        _('Citizen has been banned'),
+                        str(_('Account')) + f' {i.uid.username} ' + str(_('has been blocked.'))
+            )
 
     # l.info(f'Population: {POPULATION}. Required reputation: {REQUIRED_REPUTATION}')
 
@@ -409,3 +485,25 @@ def change_password(request):
 
 def password_generator(size=8, chars=ascii_letters + digits):
     return ''.join(choice(chars) for i in range(size))
+
+
+def SendEmailToAll(subject, message):
+    # bcc: all active users
+    # subject: Custom
+    # message: Custom
+    translation.activate(s.LANGUAGE_CODE)
+
+    email_message = EmailMessage(
+        from_email=str(s.DEFAULT_FROM_EMAIL),
+        bcc = list(User.objects.filter(is_active=True).values_list('email', flat=True)),
+        subject=f'{HOST} - {subject}',
+        body=message,
+        )
+    # l.warning(f'subject: {subject} \n message: {message}')
+    
+    t = threading.Thread(
+                         target=email_message.send,
+                         args=("fail_silently=False",)
+                        )
+    t.setDaemon(True)
+    t.start()

@@ -12,6 +12,7 @@ from PIL import Image
 import os
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404
 
 
 @login_required
@@ -60,10 +61,19 @@ class BookDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['book_list'] = Book.objects.all()
+
+        # Previous and Next
+        obj = get_object_or_404(Book, pk=self.kwargs['pk'])
+        # kandydaci czy obywatele? Na razie wszyscy
+        prev = Book.objects.filter(pk__lt=obj.pk).order_by('-pk').first()
+        next = Book.objects.filter(pk__gt=obj.pk).order_by('pk').first()
+
+        context['prev'] = prev
+        context['next'] = next
+
         return context
 
     # success_url = reverse_lazy('elibrary:elibrary')
-    
     queryset = Book.objects.all()
 
     def get_object(self):
@@ -75,7 +85,11 @@ class BookDetailView(LoginRequiredMixin, DetailView):
 class BookUpdateView(LoginRequiredMixin, UpdateView):
     model = Book
     fields = ['title', 'author', 'cover', 'file_epub', 'file_mobi', 'file_pdf']
-    # template_name_suffix = '_update_form'   
+
+    def form_valid(self, form):
+        if form.instance.cover == "":
+            form.instance.cover = 'elibrary/default.png'
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('elibrary:book-detail', kwargs={'pk': self.object.pk})

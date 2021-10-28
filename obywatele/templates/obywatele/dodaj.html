@@ -16,6 +16,12 @@
 		<div class="col-4">
 			{{ profile_form.phone|as_crispy_field }}
 		</div>
+		<div class="col-4">
+			{{ user_form.first_name|as_crispy_field }}
+		</div>
+		<div class="col-4">
+			{{ user_form.last_name|as_crispy_field }}
+		</div>
 	</div>
 
 	<p>
@@ -36,7 +42,7 @@
 			{{ profile_form.job|as_crispy_field }}
 		</div>
 		<div class="col-6">
-			{{ profile_form.fb|as_crispy_field }}
+			{{ profile_form.business|as_crispy_field }}
 		</div>
 	</div>
 
@@ -54,11 +60,11 @@
 			{{ profile_form.want_to_learn|as_crispy_field }}
 		</div>
 		<div class="col-6">
-			{{ profile_form.business|as_crispy_field }}
+			{{ profile_form.other|as_crispy_field }}
 		</div>
 	</div>
 
-	{{ profile_form.other|as_crispy_field }}
+	
 
 	<button type="submit" class="save btn btn-danger btn-sm">{% trans 'Submit' %}</button>
 	<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>

@@ -1,14 +1,23 @@
-# wikikracja
+## Wikikracja
 This is community building system. Currently it consist following modules:
 - voting
 - citizens
 - chat
 - eLibrary
 - blog
-Voting module (glosowania) uses principle known as Zero Knowledge Proof (https://youtu.be/HUs1bH85X9I). It means that voting is fairly anonymous.
+  
+Voting module (glosowania) uses principle known as Zero Knowledge Proof (https://youtu.be/HUs1bH85X9I).  
+It means that voting is anonymous.
+
+## Demo
+You can find demo here:
+https://demo.wikikracja.pl/
+
+Login: demo  
+Password: #democracynow
 
 ## Requirements
-You will need email account like gmail in order to send emails to users.
+You will need email account like gmail in order to send emails to users. 
 Smallest KVM VM is enough. 
 
 ## Installation (Centos 7, 8)

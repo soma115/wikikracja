@@ -1,29 +1,41 @@
 {% extends 'obywatele/menu.html' %} {% load static %} {% load i18n %} {% block citizens %}
 
+    <!--prev & next for citizens and candidates separatelly -->
+    <p>
+    {% if active %}
+        {% if prev %} <a href="{% url 'obywatele:obywatele_szczegoly' pk=prev.id %}"><< {% trans 'prev' %}</a> {% else %} << {% trans 'prev' %} {% endif %}
+        {% if next %} <a href="{% url 'obywatele:obywatele_szczegoly' pk=next.id %}">{% trans 'next' %} >></a> {% else %} {% trans 'next' %} >> {% endif %}
+    {% else %}
+        {% if prev %} <a href="{% url 'obywatele:poczekalnia_szczegoly' pk=prev.id %}"><< {% trans 'prev' %}</a> {% else %} << {% trans 'prev' %} {% endif %}
+        {% if next %} <a href="{% url 'obywatele:poczekalnia_szczegoly' pk=next.id %}">{% trans 'next' %} >></a> {% else %} {% trans 'next' %} >> {% endif %}
+    {% endif %}
+    </p>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-6 p-3">
-            <p>
-                {{ b.uid }} | {{ b.uid.email }} | {% trans 'Introduced by' %}: {{ b.polecajacy|default:"-" }} | {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d"|default:"-" }}
-            </p>
-            {% if b.id == d.id %}
+        <div class="col-md-8 p-3">
+            {{ b.uid }} | {{ b.uid.email }}<br>
+            {% trans 'Introduced by' %}: {{ b.polecajacy|default:"-" }}<br>
+            {% trans 'Joined' %}: {{ b.data_przyjecia|date:"Y-m-d"|default:"-" }}<br>
+            
             <!--Podgląd własnego profilu-->
-            <p> {% trans 'This is you' %} {{ b.uid }}.
-                <a href="{% url 'obywatele:my_profile' %}">{% trans 'You can find more setting in your profile' %}</a>
-            </p>
-            {% else %}
-            </p>
+            {% if b.id == d.id %}
+                <br>
+                {% trans 'This is you' %} {{ b.uid }}.
+                    <a href="{% url 'obywatele:my_profile' %}">{% trans 'You can find more setting in your profile' %}</a>
+
             <!--Podgląd cudzego profilu-->
-            {% trans 'Your relationship to this person is' %} <b>{{rate}}</b>
-            <form action="#" method="get">
-                <input class="btn btn-success btn-sm" type="submit" name="tak" value="{% trans 'I accept this person' %}" />
-                <input class="btn btn-warning btn-sm" type="submit" name="reset" value="{% trans 'Indifferent' %}" />
-                <input class="btn btn-danger btn-sm" type="submit" name="nie" value="{% trans " I do not accept this person " %}" />
-            </form>
-            </p>
+            {% else %}
+            <br>
+                {% trans 'Your relationship to this person is' %} <b>{{rate}}</b>
+                <form action="#" method="get">
+                    <input class="btn btn-success btn-sm mt-1" type="submit" name="tak" value="{% trans 'I accept this person' %}" />
+                    <input class="btn btn-warning btn-sm mt-1" type="submit" name="reset" value="{% trans 'Indifferent' %}" />
+                    <input class="btn btn-danger btn-sm mt-1" type="submit" name="nie" value="{% trans " I do not accept this person " %}" />
+                </form>
             {% endif %}
         </div>
-        <div class="col-md-6 p-3">
+        <div class="col-md-4 p-3">
         	<img class="img-fluid" src={% get_media_prefix %}{{ b.foto }}>
         </div>
     </div>
@@ -83,10 +95,6 @@
                         <tr>
                             <th scope="col">{% trans "Job" %}</th>
                             <td scope="col">{{ b.job|default:"-" }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="col">{% trans "Facebook" %}</th>
-                            <td scope="col">{{ b.fb|default:"-" }}</td>
                         </tr>
                         <tr>
                             <th scope="col">{% trans "Gift" %}</th>
