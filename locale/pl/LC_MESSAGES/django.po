@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 18:44+0200\n"
+"POT-Creation-Date: 2021-10-26 16:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -107,7 +107,7 @@ msgstr "brak"
 msgid "Archived"
 msgstr "Archiwum"
 
-#: chat/templates/chat/chat.html:78 chat/views.py:204
+#: chat/templates/chat/chat.html:78 chat/views.py:194
 msgid "Loading..."
 msgstr "Wczytywanie..."
 
@@ -142,7 +142,7 @@ msgid "Message history"
 msgstr "Historia wiadomości"
 
 #: chat/templates/chat/chat.html:143 chat/templates/chat/chat.html:151
-#: chat/templates/chat/chat.html:164 chat/views.py:201
+#: chat/templates/chat/chat.html:164 chat/views.py:191
 msgid "Close"
 msgstr "Zamknij"
 
@@ -150,43 +150,43 @@ msgstr "Zamknij"
 msgid "Permission"
 msgstr "Uprawnienie"
 
-#: chat/templates/chat/chat.html:175 chat/views.py:197
+#: chat/templates/chat/chat.html:175 chat/views.py:187
 msgid "No, don't show again"
 msgstr "Nie, nie pokazuj ponownie"
 
-#: chat/templates/chat/chat.html:179 chat/views.py:196
+#: chat/templates/chat/chat.html:179 chat/views.py:186
 #: glosowania/templates/glosowania/szczegoly.html:42
 #: glosowania/templates/glosowania/szczegoly.html:74
 msgid "Yes"
 msgstr "Tak"
 
-#: chat/views.py:187
+#: chat/views.py:177
 msgid "Manage notifications"
 msgstr "Zarządzaj powiadomieniami"
 
-#: chat/views.py:188
+#: chat/views.py:178
 msgid "Today"
 msgstr "Dzisiaj"
 
-#: chat/views.py:189
+#: chat/views.py:179
 msgid "Yesterday"
 msgstr "Wczoraj"
 
-#: chat/views.py:190
+#: chat/views.py:180
 msgid "Anonymous"
-msgstr "Anonimowy"
+msgstr "Wyślij Anonimowo"
 
-#: chat/views.py:191
+#: chat/views.py:181
 #, python-format
 msgid "⚠ slow-mode is active. You can send messages once in %d seconds."
 msgstr ""
 "⚠ tryb powolny jest aktywny. Możesz wysłać jedną wiadomość na %d sekund."
 
-#: chat/views.py:192
+#: chat/views.py:182
 msgid "Enable Notifications"
 msgstr "Włącz powiadomienia"
 
-#: chat/views.py:193
+#: chat/views.py:183
 msgid ""
 "Chat works better with notifications. You can allow them to see new messages "
 "even beyond chat room."
@@ -194,11 +194,11 @@ msgstr ""
 "Czat działa lepiej z powiadomieniami. Możesz zezwolić na wyświetlanie "
 "powiadomień - nawet poza pokojem rozmów."
 
-#: chat/views.py:194
+#: chat/views.py:184
 msgid "Do you want to receive notifications?"
 msgstr "Czy chcesz otrzymywać powiadomienia?"
 
-#: chat/views.py:195
+#: chat/views.py:185
 msgid ""
 "If nothing happens, you may have ignored permission prompt too many times. "
 "Check your browser settings to enable them."
@@ -206,99 +206,99 @@ msgstr ""
 "Jeśli nic się nie dzieje, być może zbyt wiele razy zignorowałeś prośbę o "
 "pozwolenie. Sprawdź ustawienia swojej przeglądarki, aby je włączyć."
 
-#: chat/views.py:198
+#: chat/views.py:188
 msgid "edit"
 msgstr "edytuj"
 
-#: chat/views.py:199
+#: chat/views.py:189
 msgid "edited"
 msgstr "zmiany"
 
-#: chat/views.py:200
+#: chat/views.py:190
 msgid "Message History"
 msgstr "Historia wiadomości"
 
-#: chat/views.py:202
+#: chat/views.py:192
 msgid "This room is empty, be the first one to write something."
 msgstr "Ten pokój jest pusty, bądź pierwszą osobą, która coś napisze."
 
-#: chat/views.py:203
+#: chat/views.py:193
 msgid "editing: "
 msgstr "edytujesz: "
 
-#: chat/views.py:205
+#: chat/views.py:195
 msgid "Sunday"
 msgstr "Niedziela"
 
-#: chat/views.py:205
+#: chat/views.py:195
 msgid "Monday"
 msgstr "Poniedziałek"
 
-#: chat/views.py:205
+#: chat/views.py:195
 msgid "Tuesday"
 msgstr "Wtorek"
 
-#: chat/views.py:205
+#: chat/views.py:195
 msgid "Wednesday"
 msgstr "Środa"
 
-#: chat/views.py:205
+#: chat/views.py:195
 msgid "Thursday"
 msgstr "Czwartek"
 
-#: chat/views.py:205
+#: chat/views.py:195
 msgid "Friday"
 msgstr "Piątek"
 
-#: chat/views.py:205
+#: chat/views.py:195
 msgid "Saturday"
 msgstr "Sobota"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Jan"
 msgstr "Sty"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Feb"
 msgstr "Lut"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Mar"
 msgstr "Mar"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Apr"
 msgstr "Kwi"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "May"
 msgstr "Maj"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Jun"
 msgstr "Cze"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Jul"
 msgstr "Lip"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Aug"
 msgstr "Sie"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Sep"
 msgstr "Wrz"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Oct"
 msgstr "Paź"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Nov"
 msgstr "Lis"
 
-#: chat/views.py:206
+#: chat/views.py:196
 msgid "Dec"
 msgstr "Gru"
 
@@ -701,7 +701,7 @@ msgstr "Nie podpisane."
 
 #: glosowania/views.py:171
 msgid "Your vote has been saved. You voted Yes."
-msgstr "Twój podpis został zapisany. Zagłosowałeś na Tak."
+msgstr "Twój głos został zapisany. Zagłosowałeś na Tak."
 
 #: glosowania/views.py:174 glosowania/views.py:202
 msgid "Your verification code is:"
@@ -719,7 +719,7 @@ msgstr ""
 
 #: glosowania/views.py:199
 msgid "Your vote has been saved. You voted No."
-msgstr "Twój podpis został zapisany. Zagłosowałeś na Nie."
+msgstr "Twój głos został zapisany. Zagłosowałeś na Nie."
 
 #: glosowania/views.py:274 glosowania/views.py:275 glosowania/views.py:290
 #: glosowania/views.py:291 glosowania/views.py:323 glosowania/views.py:324
