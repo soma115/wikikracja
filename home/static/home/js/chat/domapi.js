@@ -285,13 +285,13 @@ export default class DomApi {
         modal.find(".modal-title").html(title);
     }
 
-    showNotificationPermModal(title, body) {
-        let modal = $("#message-permission-modal").modal('show');
-        modal.find(".modal-body").html(body)
-        modal.find(".modal-title").html(title);
-    }
+    // showNotificationPermModal(title, body) {
+    //     let modal = $("#message-permission-modal").modal('show');
+    //     modal.find(".modal-body").html(body)
+    //     modal.find(".modal-title").html(title);
+    // }
 
     addPermissionBanner() {
-        $('.room-header').append("<button class='permission-banner btn btn-success'> <i class='far fa-bell'></i>" + _("Manage notifications") + "</button>")
+        $('.room-header').append("<button type='button' class='alert alert-danger col-12 text-center p-0' onclick='Notification.requestPermission()'><i class='far fa-bell-slash'></i>" + " " + _("Browser notifications are disabled") + " " + "<i class ='far fa-bell-slash'></i></button>")
     }
 }

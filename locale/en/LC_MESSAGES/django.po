@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-31 15:37+0100\n"
+"POT-Creation-Date: 2021-11-04 23:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,76 +88,76 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: chat/templates/chat/chat.html:41
+#: chat/templates/chat/chat.html:42
 msgid "Add Room"
 msgstr ""
 
-#: chat/templates/chat/chat.html:55
-msgid "Rooms"
-msgstr ""
-
-#: chat/templates/chat/chat.html:60 chat/templates/chat/chat.html:68
-#: chat/templates/chat/chat.html:102 chat/templates/chat/chat.html:111
-msgid "none"
-msgstr ""
-
-#: chat/templates/chat/chat.html:63 chat/templates/chat/chat.html:106
-msgid "Archived"
-msgstr ""
-
-#: chat/templates/chat/chat.html:78 chat/views.py:194
+#: chat/templates/chat/chat.html:63 chat/views.py:194
 msgid "Loading..."
 msgstr ""
 
-#: chat/templates/chat/chat.html:97
+#: chat/templates/chat/chat.html:85
+msgid "Rooms"
+msgstr ""
+
+#: chat/templates/chat/chat.html:90 chat/templates/chat/chat.html:98
+#: chat/templates/chat/chat.html:111 chat/templates/chat/chat.html:119
+msgid "none"
+msgstr ""
+
+#: chat/templates/chat/chat.html:93 chat/templates/chat/chat.html:114
+msgid "Archived"
+msgstr ""
+
+#: chat/templates/chat/chat.html:106
 msgid "Users"
 msgstr ""
 
-#: chat/templates/chat/chat.html:122
+#: chat/templates/chat/chat.html:138
 msgid "Public chat rooms are archived if they are not used for"
 msgstr ""
 
-#: chat/templates/chat/chat.html:124
+#: chat/templates/chat/chat.html:140
 msgid "days. After"
 msgstr ""
 
-#: chat/templates/chat/chat.html:126
+#: chat/templates/chat/chat.html:142
 msgid "days they are deleted."
 msgstr ""
 
-#: chat/templates/chat/chat.html:129
+#: chat/templates/chat/chat.html:145
 msgid "Private messages are archived when user is blocked and deleted after"
 msgstr ""
 
-#: chat/templates/chat/chat.html:131
+#: chat/templates/chat/chat.html:147
 msgid "days"
 msgstr ""
 
-#: chat/templates/chat/chat.html:142
-msgid "Message history"
+#: chat/templates/chat/chat.html:160
+msgid "Changes history"
 msgstr ""
 
-#: chat/templates/chat/chat.html:143 chat/templates/chat/chat.html:151
-#: chat/templates/chat/chat.html:164 chat/views.py:191
+#: chat/templates/chat/chat.html:161 chat/templates/chat/chat.html:169
+#: chat/templates/chat/chat.html:184 chat/views.py:191
 msgid "Close"
 msgstr ""
 
-#: chat/templates/chat/chat.html:163
+#: chat/templates/chat/chat.html:183
 msgid "Permission"
 msgstr ""
 
-#: chat/templates/chat/chat.html:175 chat/views.py:187
+#: chat/templates/chat/chat.html:195 chat/views.py:187
 msgid "No, don't show again"
 msgstr ""
 
-#: chat/templates/chat/chat.html:179 chat/views.py:186
+#: chat/templates/chat/chat.html:199 chat/views.py:186
 #: glosowania/templates/glosowania/szczegoly.html:42
 #: glosowania/templates/glosowania/szczegoly.html:74
 msgid "Yes"
 msgstr ""
 
 #: chat/views.py:177
-msgid "Manage notifications"
+msgid "Notifications"
 msgstr ""
 
 #: chat/views.py:178
@@ -206,7 +206,7 @@ msgid "edited"
 msgstr ""
 
 #: chat/views.py:190
-msgid "Message History"
+msgid "Changes History"
 msgstr ""
 
 #: chat/views.py:192
@@ -802,47 +802,43 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: home/templates/home/base.html:47 home/templates/home/home.html:40
+#: home/templates/home/base.html:50 home/templates/home/home.html:40
 msgid "Start"
 msgstr ""
 
-#: home/templates/home/base.html:48
+#: home/templates/home/base.html:51
 msgid "Blog"
 msgstr ""
 
-#: home/templates/home/base.html:51 home/templates/home/home.html:12
+#: home/templates/home/base.html:54 home/templates/home/home.html:12
 #: home/templates/home/login.html:4 home/templates/home/login.html:14
 #: home/templates/home/login.html:25
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/base.html:55 obywatele/models.py:39
+#: home/templates/home/base.html:58 obywatele/models.py:39
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
 msgstr ""
 
-#: home/templates/home/base.html:57
+#: home/templates/home/base.html:60
 msgid "Voting"
 msgstr ""
 
-#: home/templates/home/base.html:59
+#: home/templates/home/base.html:62
 msgid "eLibrary"
 msgstr ""
 
-#: home/templates/home/base.html:64
+#: home/templates/home/base.html:67
 msgid "Chat"
 msgstr ""
 
-#: home/templates/home/base.html:67
+#: home/templates/home/base.html:70
 msgid "profile"
 msgstr ""
 
-#: home/templates/home/base.html:69
+#: home/templates/home/base.html:72
 msgid "admin"
-msgstr ""
-
-#: home/templates/home/base.html:71
-msgid "logout"
 msgstr ""
 
 #: home/templates/home/haslo.html:7

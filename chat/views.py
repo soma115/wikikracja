@@ -174,7 +174,7 @@ def upload_image(request):
 
 
 def get_translations():
-    _("Manage notifications"),
+    _("Browser notifications are disabled"),
     _("Today"),
     _("Yesterday"),
     _("Anonymous"),
@@ -187,7 +187,7 @@ def get_translations():
     _("No, don't show again"),
     _("edit"),
     _("edited"),
-    _("Message History"),
+    _("Changes History"),
     _("Close"),
     _("This room is empty, be the first one to write something."),
     _("editing: "),
@@ -196,7 +196,7 @@ def get_translations():
     _("Jan"), _("Feb"), _("Mar"), _("Apr"), _("May"), _("Jun"), _("Jul"), _("Aug"), _("Sep"), _("Oct"), _("Nov"), _("Dec"),
 
     strings = [
-        "Manage notifications",
+        "Browser notifications are disabled",
         "Today",
         "Yesterday",
         "Anonymous",
@@ -209,7 +209,7 @@ def get_translations():
         "No, don't show again",
         "edit",
         "edited",
-        "Message History",
+        "Changes History",
         "Close",
         "This room is empty, be the first one to write something.",
         "editing: ",
