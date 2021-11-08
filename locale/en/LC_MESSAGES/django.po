@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-04 23:22+0100\n"
+"POT-Creation-Date: 2021-11-07 17:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,6 +76,7 @@ msgstr ""
 #: obywatele/templates/obywatele/change_email.html:23
 #: obywatele/templates/obywatele/change_name.html:24
 #: obywatele/templates/obywatele/change_username.html:18
+#: obywatele/templates/obywatele/dodaj.html:67
 msgid "Save"
 msgstr ""
 
@@ -83,81 +84,63 @@ msgstr ""
 #: elibrary/templates/elibrary/book_form.html:28
 #: glosowania/templates/glosowania/dodaj.html:35
 #: glosowania/templates/glosowania/edit.html:34
-#: obywatele/templates/obywatele/dodaj.html:70
-#: obywatele/templates/obywatele/szczegoly.html:111
 msgid "Back"
 msgstr ""
 
-#: chat/templates/chat/chat.html:42
-msgid "Add Room"
-msgstr ""
-
-#: chat/templates/chat/chat.html:63 chat/views.py:194
+#: chat/templates/chat/chat.html:67 chat/views.py:194
 msgid "Loading..."
 msgstr ""
 
-#: chat/templates/chat/chat.html:85
+#: chat/templates/chat/chat.html:99
 msgid "Rooms"
 msgstr ""
 
-#: chat/templates/chat/chat.html:90 chat/templates/chat/chat.html:98
-#: chat/templates/chat/chat.html:111 chat/templates/chat/chat.html:119
-msgid "none"
-msgstr ""
-
-#: chat/templates/chat/chat.html:93 chat/templates/chat/chat.html:114
-msgid "Archived"
-msgstr ""
-
-#: chat/templates/chat/chat.html:106
-msgid "Users"
-msgstr ""
-
-#: chat/templates/chat/chat.html:138
+#: chat/templates/chat/chat.html:103
 msgid "Public chat rooms are archived if they are not used for"
 msgstr ""
 
-#: chat/templates/chat/chat.html:140
+#: chat/templates/chat/chat.html:103
 msgid "days. After"
 msgstr ""
 
-#: chat/templates/chat/chat.html:142
-msgid "days they are deleted."
+#: chat/templates/chat/chat.html:103
+msgid ""
+"days they are deleted. Private messages are archived when user is blocked "
+"and deleted after"
 msgstr ""
 
-#: chat/templates/chat/chat.html:145
-msgid "Private messages are archived when user is blocked and deleted after"
-msgstr ""
-
-#: chat/templates/chat/chat.html:147
+#: chat/templates/chat/chat.html:103
 msgid "days"
 msgstr ""
 
-#: chat/templates/chat/chat.html:160
+#: chat/templates/chat/chat.html:110 chat/templates/chat/chat.html:118
+#: chat/templates/chat/chat.html:132 chat/templates/chat/chat.html:140
+msgid "none"
+msgstr ""
+
+#: chat/templates/chat/chat.html:113 chat/templates/chat/chat.html:135
+msgid "Archived"
+msgstr ""
+
+#: chat/templates/chat/chat.html:127
+msgid "Users"
+msgstr ""
+
+#: chat/templates/chat/chat.html:186
 msgid "Changes history"
 msgstr ""
 
-#: chat/templates/chat/chat.html:161 chat/templates/chat/chat.html:169
-#: chat/templates/chat/chat.html:184 chat/views.py:191
+#: chat/templates/chat/chat.html:187 chat/templates/chat/chat.html:195
+#: chat/templates/chat/chat.html:210 chat/views.py:191
 msgid "Close"
 msgstr ""
 
-#: chat/templates/chat/chat.html:183
+#: chat/templates/chat/chat.html:209
 msgid "Permission"
 msgstr ""
 
-#: chat/templates/chat/chat.html:195 chat/views.py:187
-msgid "No, don't show again"
-msgstr ""
-
-#: chat/templates/chat/chat.html:199 chat/views.py:186
-#: glosowania/templates/glosowania/szczegoly.html:42
-#: glosowania/templates/glosowania/szczegoly.html:74
-msgid "Yes"
-msgstr ""
-
 #: chat/views.py:177
-msgid "Notifications"
+msgid "Browser notifications are disabled"
 msgstr ""
 
 #: chat/views.py:178
@@ -195,6 +178,15 @@ msgstr ""
 msgid ""
 "If nothing happens, you may have ignored permission prompt too many times. "
 "Check your browser settings to enable them."
+msgstr ""
+
+#: chat/views.py:186 glosowania/templates/glosowania/szczegoly.html:42
+#: glosowania/templates/glosowania/szczegoly.html:74
+msgid "Yes"
+msgstr ""
+
+#: chat/views.py:187
+msgid "No, don't show again"
 msgstr ""
 
 #: chat/views.py:188
@@ -885,6 +877,10 @@ msgstr ""
 msgid "there are no upcoming referenda at this moment"
 msgstr ""
 
+#: home/templates/home/login.html:16
+msgid "Email"
+msgstr ""
+
 #: home/templates/home/login.html:33
 msgid ""
 "The username or password is incorrect. Please try again or reset your "
@@ -1160,11 +1156,6 @@ msgid ""
 "right decision when accepting a new person."
 msgstr ""
 
-#: obywatele/templates/obywatele/dodaj.html:69
-#: obywatele/templates/obywatele/my_assets.html:86
-msgid "Submit"
-msgstr ""
-
 #: obywatele/templates/obywatele/menu.html:22
 msgid "Candidates"
 msgstr ""
@@ -1214,6 +1205,10 @@ msgstr ""
 
 #: obywatele/templates/obywatele/my_assets.html:8
 msgid "Here you can edit your assets"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_assets.html:86
+msgid "Submit"
 msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:5

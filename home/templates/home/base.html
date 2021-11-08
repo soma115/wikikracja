@@ -15,7 +15,7 @@
     <title>{{ HTTP_HOST }}</title>
 	{% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" async> {% endcomment %}
 
-    {% comment %} <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" async/> {% endcomment %}
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" async/>
 
 	<link id="mystylesheet" rel="stylesheet" href='{% static "home/css/bootstrap-dark.min.css" %}'>
 	
@@ -89,7 +89,6 @@
 	<div class="container">
 		{{ footer.content|safe }}
     </div>
-
 
 {% comment %} Need for chat {% endcomment %}
 {% block extra_body %}{% endblock %}

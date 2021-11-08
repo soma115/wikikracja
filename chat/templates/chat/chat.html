@@ -6,7 +6,7 @@
 {% block content_fullscreen %}
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" async/>
+    {% comment %} <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" async/> {% endcomment %}
 
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" async></script>
@@ -51,14 +51,16 @@
 
 <!-- ------------------------------------------------------------------------------------------- -->
 
-<div class="row">
+
+<div class="row fill">
 
     <div id="chats" class="col">
-        <div class='room'>
-            <div class='messages text-center'>
+        <div class='room fill'>
+            <div class='messages text-center fill'>
                 <p class="empty-chat-message">{% trans "Loading..." %}</p>
             </div>
-            <div class='chat-controls d-flex'>
+
+            <div class='chat-controls fixed-bottom'>
                 <div class='chat-controls-row'>
                     <input class='message-input col-10 col-sm message-input mr-1'>
                     <button class='send-message chat-control btn btn-primary btn-sm'> 
@@ -66,32 +68,43 @@
                     </button>
                 </div>
             </div>
+
         </div>
     </div>
 
+    
+
     <div id="div-room-list" class="col-lg-2">
-        <div class="col-scrollable">
-            <p class="mt-3 mb-1 text-muted">{% trans "Rooms" %}
-                <a class="btn" href="{% url 'chat:add_room' %}"><i class="fas fa-plus"></i></a>
-                <div class="row overflow-auto">
-            </p>
-            <div class="list-of-chats">
-                {% for room in public_active %}
-                    {% include 'chat/room_icon.html' %}
-                {% empty %}
-                    <p class="text-muted text-center">{% trans "none" %}</p>
-                {% endfor %}
+
+        <div class="row overflow-auto">
+
+            <div class="col-scrollable">
+                <p class="mt-3 mb-1 text-muted">
+                    {% trans "Rooms" %}
+                    <a class="btn text-muted" href="{% url 'chat:add_room' %}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="left" title="{% trans 'Public chat rooms are archived if they are not used for' %} {{ ARCHIVE_CHAT_ROOM }} {% trans 'days. After' %} {{ DELETE_CHAT_ROOM }} {% trans 'days they are deleted. Private messages are archived when user is blocked and deleted after' %} {{ DELETE_CHAT_ROOM }} {% trans 'days' %}."></i>
+                </p>
+
+                <div class="list-of-chats">
+                    {% for room in public_active %}
+                        {% include 'chat/room_icon.html' %}
+                    {% empty %}
+                        <p class="text-muted text-center">{% trans "none" %}</p>
+                    {% endfor %}
+                </div>
+                <p class="mt-3 mb-1 text-muted">{% trans "Archived" %}</p>
+                <div class="list-of-chats">
+                    {% for room in public_archived %}
+                        {% include 'chat/room_icon.html' %}
+                    {% empty %}
+                        <p class="text-muted text-center">{% trans "none" %}</p>
+                    {% endfor %}
+                </div>
             </div>
-            <p class="mt-3 mb-1 text-muted">{% trans "Archived" %}</p>
-            <div class="list-of-chats">
-                {% for room in public_archived %}
-                    {% include 'chat/room_icon.html' %}
-                {% empty %}
-                    <p class="text-muted text-center">{% trans "none" %}</p>
-                {% endfor %}
-            </div>
+            
         </div>
-    </div>
 
         <div id="div-pm" class="row overflow-auto">
             <div class="col-scrollable">
@@ -116,14 +129,18 @@
         
     </div>
 
-
 </div>
+
+
+
+
+
 
 
 <!-- ------------------------------------------------------------------------------------------- -->
 
 
-    <p><div class="row">
+    {% comment %} <p><div class="row">
         <div class="col-sm-12">
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -140,7 +157,7 @@
                     </li>
                 </ul>
         </div>
-    </div></p>
+    </div></p> {% endcomment %}
 
 
 
@@ -263,6 +280,10 @@
         let LAST_USED_ROOM_ID = {{ last_used_room }};
         let TRANSLATIONS = {{ translations|safe }};
     </script>
+
+
+
+
 
 {% endblock content_fullscreen %}
 

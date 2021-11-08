@@ -1,9 +1,9 @@
 import { _, formatTime } from './utility.js';
 
 const room_template = `
-<div class='room' id='room'>
+<div class='room fill' id='room'>
 
-  <div class='messages'>
+  <div class='messages fill'>
     <div class='room-empty-banner empty-chat-message'>
       ${_("This room is empty, be the first one to write something.")}
     </div>
@@ -28,7 +28,7 @@ const room_template = `
     </div>
   </div>
 
-  <div class='chat-controls' class='d-flex'>
+  <div class='chat-controls fixed-bottom'>
     <!-- Those two have to go one after another for some CSS trickery -->
       <input type='file' id="file-input" style='display:none;' class='file-input' multiple='multiple'/>
       <label class='btn btn-primary ml-1 file-input-label chat-control'
@@ -36,11 +36,10 @@ const room_template = `
           <i class="fas fa-image"></i>
       </label>
     <!-- Those two-->
-
     <div class='chat-controls-row'>
       <input class='message-input col-11 col-sm message-input mr-1'>
       <button class='send-message chat-control btn btn-primary'>
-          <i class="fas fa-paper-plane"></i>
+        <i class="fas fa-paper-plane"></i>
       </button>
     </div>
   </div>
