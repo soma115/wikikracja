@@ -12096,5 +12096,5 @@ input[type="file"]:disabled+label:hover {
     padding-left: var(--gutter-x, .75rem);
     margin-right: auto;
     margin-left: auto;
-    height: 68%;
+    /* height: 68%; */
 }
