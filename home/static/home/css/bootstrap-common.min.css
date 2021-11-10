@@ -597,7 +597,6 @@ progress {
 }
 
 .container,
-.container-fluid,
 .container-lg,
 .container-md,
 .container-sm,
@@ -678,8 +677,8 @@ progress {
     max-width: 100%;
     padding-right: calc(var(--gutter-x) * .5);
     padding-left: calc(var(--gutter-x) * 1);
-    padding-right: .3rem;
-    padding-left: 1rem;
+    padding-right: .1rem;
+    padding-left: .1rem;
     margin-top: var(--gutter-y)
 }
 
@@ -11672,12 +11671,6 @@ fieldset:disabled .btn {
     color: var(--warning);
 }
 
-.room {
-    /* justify-content: stretch; */
-    /* vertical-align: baseline; */
-    /* resize: vertical; */
-}
-
 .room-link {
     padding: .1rem .2rem .2rem .2rem;
     margin: .1rem .1rem .1rem .1rem;
@@ -11726,7 +11719,9 @@ fieldset:disabled .btn {
 .col-scrollable {
     /* position: absolute; */
     /* it breakes room list in Chat */
-    width: calc(100%);
+    /* width: calc(100%); */
+    /* padding-left: var(--gutter-x, .75rem); */
+    padding-left: 0px;
 }
 
 ::-webkit-scrollbar {
@@ -11765,10 +11760,13 @@ fieldset:disabled .btn {
 }
 
 #chats .messages {
-    height: 400px;
-    overflow: auto;
+    height: 550px;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    background-color: var(--bg-dim);
+    /* min-height: 90%; */
     /* background-image: url(/static/home/images/background.jpg); */
     /* padding: .5rem; */
 }
@@ -11960,7 +11958,7 @@ fieldset:disabled .btn {
 .show-history,
 .edit-message {
     text-decoration: underline;
-    color: gray;
+    color: var(--fg);
     font-size: smaller;
     margin-right: 5px
 }
@@ -12049,7 +12047,54 @@ input[type="file"]:disabled+label:hover {
     color: #d9d9d9;
 }
 
-.fill {
-    min-height: 80%;
-    height: 80%;
+
+/* CUSTOM STYLES FOR CHAT */
+
+
+/* Chat controls */
+
+#room .chat-controls {
+    display: block;
+}
+
+
+/* Id= */
+
+.chat-controls>div>.id\= {
+    transform: translatex(0px) translatey(0px);
+    flex: 1 1 0%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+/* Division */
+
+#room .chat-controls>div {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    float: none;
+    clear: none;
+    flex-wrap: nowrap;
+}
+
+
+/* Message input */
+
+.chat-controls div .message-input {
+    transform: translatex(0px) translatey(0px);
+    flex: 1 1 0%;
+}
+
+
+/* Container fluid */
+
+.container-fluid {
+    width: 100%;
+    padding-right: var(--gutter-x, .75rem);
+    padding-left: var(--gutter-x, .75rem);
+    margin-right: auto;
+    margin-left: auto;
+    height: 68%;
 }

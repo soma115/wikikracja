@@ -5,7 +5,7 @@
     --pink: #e83e8c;
     --orange: #fd7e14;
     --teal: #20c997;
-    --white: #fff;
+    --white: #eee;
     --black: #000;
     --gray: #6c757d;
     --primary: #0d6efd;
@@ -26,8 +26,8 @@
     --body-font-size: 1rem;
     --body-font-weight: 400;
     --body-line-height: 1.5;
-    --bg: var(--bg-dim);
-    --bg-dim: #ddb;
+    --bg: var(--white);
+    --bg-dim: #ddd;
     --fg: var(--black);
     --fg-dim: #222;
 }

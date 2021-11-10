@@ -1,9 +1,9 @@
 import { _, formatTime } from './utility.js';
 
 const room_template = `
-<div class='room fill' id='room'>
+<div class='room' id='room'>
 
-  <div class='messages fill'>
+  <div class='messages'>
     <div class='room-empty-banner empty-chat-message'>
       ${_("This room is empty, be the first one to write something.")}
     </div>
@@ -28,38 +28,63 @@ const room_template = `
     </div>
   </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div class='chat-controls fixed-bottom'>
-    <!-- Those two have to go one after another for some CSS trickery -->
-      <input type='file' id="file-input" style='display:none;' class='file-input' multiple='multiple'/>
-      <label class='btn btn-primary ml-1 file-input-label chat-control'
-        for="file-input">
-          <i class="fas fa-image"></i>
-      </label>
-    <!-- Those two-->
-    <div class='chat-controls-row'>
-      <input class='message-input col-11 col-sm message-input mr-1'>
-      <button class='send-message chat-control btn btn-primary'>
-        <i class="fas fa-paper-plane"></i>
-      </button>
+
+    <div id='c1'>
+      <div id='c2'>
+        <% if (is_public) { %>
+          <input class='anonymous-switch' id="anonymous-switch-id" type='checkbox'
+          />
+          <label for='anonymous-switch-id'>${_("Anonymous")}</label>
+        <% } %>
+      </div>
+      <div id='c3'>
+        <% if (slow_mode_delay) { %>
+          <div class='slow-mode-hint' style="display:contents;"></div>
+          <span style='display: none;' class="slow-mode-timer">0</span>
+        <% } %>
+      </div>
     </div>
+
+    <div id='c4'>
+      <div id='c5'>
+        <!-- Those two have to go one after another for some CSS trickery -->
+          <input type='file' id="file-input" style='display:none;' class='file-input' multiple='multiple'/>
+          <label class='btn btn-primary chat-control'
+            for="file-input">
+              <i class="fas fa-image"></i>
+          </label>
+        <!-- Those two-->
+      </div>
+
+      <div class='chat-controls-row id='c6''>
+        <input class='message-input' id='c7'>
+        <button class='send-message chat-control btn btn-primary id='c8''>
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
   </div>
 
-  <div class='mt-3'>
-    <% if (is_public) { %>
-      <input class='anonymous-switch' id="anonymous-switch-id" type='checkbox'
-      />
-      <label for='anonymous-switch-id'>${_("Anonymous")}</label>
-    <% } %>
-    <% if (slow_mode_delay) { %>
-      <div class='d-flex justify-content-between'>
-        <div class='slow-mode-hint'></div>
-        <span
-          style='align-self: center; display: none;'
-          class="slow-mode-timer badge badge-primary badge-pill">0
-        </span>
-      </div>
-    <% } %>
-  </div>
+
+
+
+
 </div>
 `;
 

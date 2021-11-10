@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-07 17:15+0100\n"
+"POT-Creation-Date: 2021-11-10 17:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,55 +93,52 @@ msgstr "Wróć"
 msgid "Loading..."
 msgstr "Wczytywanie..."
 
-#: chat/templates/chat/chat.html:99
+#: chat/templates/chat/chat.html:94
 msgid "Rooms"
 msgstr "Pokoje"
 
-#: chat/templates/chat/chat.html:103
+#: chat/templates/chat/chat.html:98
 msgid "Public chat rooms are archived if they are not used for"
 msgstr "Publiczne pokoje są archiwizowane jeśli nie są używane przez"
 
-#: chat/templates/chat/chat.html:103
+#: chat/templates/chat/chat.html:98
 msgid "days. After"
 msgstr "dni. Po upływie"
 
-#: chat/templates/chat/chat.html:103
-#, fuzzy
-#| msgid "Private messages are archived when user is blocked and deleted after"
+#: chat/templates/chat/chat.html:98
 msgid ""
 "days they are deleted. Private messages are archived when user is blocked "
 "and deleted after"
 msgstr ""
-"Prywatne wiadomości są archiwizowane, gdy użytkownik zostanie zablokowany i "
-"usuwane po upływie"
+"dniach są usuwane. Prywatne wiadomości są archiwizowane, gdy użytkownik zostanie zablokowany i usuwane po"
 
-#: chat/templates/chat/chat.html:103
+#: chat/templates/chat/chat.html:98
 msgid "days"
 msgstr "dni"
 
-#: chat/templates/chat/chat.html:110 chat/templates/chat/chat.html:118
-#: chat/templates/chat/chat.html:132 chat/templates/chat/chat.html:140
+#: chat/templates/chat/chat.html:105 chat/templates/chat/chat.html:113
+#: chat/templates/chat/chat.html:127 chat/templates/chat/chat.html:135
 msgid "none"
 msgstr "brak"
 
-#: chat/templates/chat/chat.html:113 chat/templates/chat/chat.html:135
+#: chat/templates/chat/chat.html:108 chat/templates/chat/chat.html:130
 msgid "Archived"
 msgstr "Archiwum"
 
-#: chat/templates/chat/chat.html:127
+#: chat/templates/chat/chat.html:122
 msgid "Users"
 msgstr "Ludzie"
 
-#: chat/templates/chat/chat.html:186
+#: chat/templates/chat/chat.html:181
 msgid "Changes history"
 msgstr "Historia zmian"
 
-#: chat/templates/chat/chat.html:187 chat/templates/chat/chat.html:195
-#: chat/templates/chat/chat.html:210 chat/views.py:191
+#: chat/templates/chat/chat.html:182 chat/templates/chat/chat.html:190
+#: chat/templates/chat/chat.html:205 chat/views.py:191
 msgid "Close"
 msgstr "Zamknij"
 
-#: chat/templates/chat/chat.html:209
+#: chat/templates/chat/chat.html:204
 msgid "Permission"
 msgstr "Uprawnienie"
 
@@ -163,9 +160,8 @@ msgstr "Wyślij Anonimowo"
 
 #: chat/views.py:181
 #, python-format
-msgid "⚠ slow-mode is active. You can send messages once in %d seconds."
+msgid "Slow-mode %dsec"
 msgstr ""
-"⚠ tryb powolny jest aktywny. Możesz wysłać jedną wiadomość na %d sekund."
 
 #: chat/views.py:182
 msgid "Enable Notifications"
@@ -779,7 +775,7 @@ msgstr "została zatwierdzona"
 msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
 "została zatwierdzona w referendum i znajduje się obecnie w okresie Vacatio "
-"Legis."
+"Legis"
 
 #: glosowania/views.py:326
 msgid "The law will take effect on"
@@ -835,42 +831,42 @@ msgstr "Dziękujemy za używanie naszej strony!"
 msgid "The %(site_name)s team"
 msgstr "Zespół %(site_name)"
 
-#: home/templates/home/base.html:50 home/templates/home/home.html:40
+#: home/templates/home/base.html:47 home/templates/home/home.html:40
 msgid "Start"
 msgstr "Start"
 
-#: home/templates/home/base.html:51
+#: home/templates/home/base.html:48
 msgid "Blog"
 msgstr "Blog"
 
-#: home/templates/home/base.html:54 home/templates/home/home.html:12
+#: home/templates/home/base.html:51 home/templates/home/home.html:12
 #: home/templates/home/login.html:4 home/templates/home/login.html:14
 #: home/templates/home/login.html:25
 msgid "Login"
 msgstr "Zaloguj"
 
-#: home/templates/home/base.html:58 obywatele/models.py:39
+#: home/templates/home/base.html:55 obywatele/models.py:39
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
 msgstr "Ludzie"
 
-#: home/templates/home/base.html:60
+#: home/templates/home/base.html:57
 msgid "Voting"
 msgstr "Głosowania"
 
-#: home/templates/home/base.html:62
+#: home/templates/home/base.html:59
 msgid "eLibrary"
 msgstr "eBiblioteka"
 
-#: home/templates/home/base.html:67
+#: home/templates/home/base.html:64
 msgid "Chat"
 msgstr "Chat"
 
-#: home/templates/home/base.html:70
+#: home/templates/home/base.html:67
 msgid "profile"
 msgstr "profil"
 
-#: home/templates/home/base.html:72
+#: home/templates/home/base.html:69
 msgid "admin"
 msgstr "admin"
 
@@ -1229,10 +1225,10 @@ msgstr "Mnożnik"
 
 #: obywatele/templates/obywatele/menu.html:58
 msgid ""
-"Acceptance formula: required_reputation = round(log(Population) * Multiplier)"
+"Acceptance formula: required_reputation = floor(log(Population * Multiplier "
+"+ 1)-2"
 msgstr ""
-"Formuła obliczania akceptacji: wymagana_reputacja = round(log(Populacja) * "
-"Mnożnik)"
+"Formuła obliczania akceptacji: wymagana_reputacja = floor(log(Populacja * Mnożnik + 1)-2"
 
 #: obywatele/templates/obywatele/menu.html:62
 msgid "Currently required_reputation"
@@ -1444,18 +1440,3 @@ msgstr "Angielski"
 #: zzz/settings_custom.py:14 zzz/settings_custom_template.py:14
 msgid "Polish"
 msgstr "Polski"
-
-#~ msgid "Add Room"
-#~ msgstr "Dodaj pokój"
-
-#~ msgid "days they are deleted."
-#~ msgstr "dni - są kasowane."
-
-#~ msgid "Notifications"
-#~ msgstr "Zarządzaj powiadomieniami"
-
-#~ msgid "logout"
-#~ msgstr "wyloguj"
-
-#~ msgid "Select a chat to start messaging."
-#~ msgstr "Wybierz chat żeby zacząć pisać"

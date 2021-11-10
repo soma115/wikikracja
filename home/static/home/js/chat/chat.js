@@ -124,6 +124,9 @@ export async function onRoomTryJoin(room_id) {
 
     slow_mode[current_room] = room_slow_mode || 0;
     DOM_API.setSlowMode(slow_mode[current_room]);
+
+    // Put cursor into inout field
+    document.querySelector("#c7").focus();
 }
 
 export async function onRoomTryLeave(sync_with_server) {

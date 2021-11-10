@@ -19,8 +19,6 @@
 
 	<link id="mystylesheet" rel="stylesheet" href='{% static "home/css/bootstrap-dark.min.css" %}'>
 	
-	{% comment %} <link rel="stylesheet" href="{% static "home/css/bootstrap-light.min.css" %}" async> {% endcomment %}
-
 	{% comment %} <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}"/> {% endcomment %}
 	{% comment %} <link rel="icon" href="home/images/favicon.ico"> {% endcomment %}
 	
@@ -86,9 +84,11 @@
 		<p>{% block content %}{% endblock content%}</p>
 	</div>
 
-	<div class="container">
-		{{ footer.content|safe }}
-    </div>
+	{% if request.resolver_match.url_name != 'chat' %}
+		<div class="container">
+			{{ footer.content|safe }}
+		</div>
+	{% endif %}
 
 {% comment %} Need for chat {% endcomment %}
 {% block extra_body %}{% endblock %}
