@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
-from glosowania.models import Decyzja, ZebranePodpisy, KtoJuzGlosowal
+from glosowania.models import Decyzja, ZebranePodpisy, KtoJuzGlosowal, VoteCode
+from glosowania.forms import DecyzjaForm
 from django.shortcuts import get_object_or_404
 from django.db import IntegrityError
 from django.shortcuts import render
-from glosowania.forms import DecyzjaForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
@@ -17,6 +17,10 @@ from django.contrib import messages
 from django.shortcuts import redirect
 import logging as l
 from django.utils import translation
+import threading
+import random
+import re
+
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
@@ -31,40 +35,65 @@ def dodaj(request):
         form = DecyzjaForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
-            form.autor = request.user
+            form.author = request.user
             form.data_powstania = datetime.today()
             form.ile_osob_podpisalo += 1
             form.save()
             signed = ZebranePodpisy.objects.create(projekt=form, podpis_uzytkownika = request.user)
             
-            # l.warning(f"{form.autor} _('added new law proposal:' form.tresc)")
+            # l.warning(f"{form.author} _('added new law proposal:' form.tresc)")
             message = _("New proposal has been saved.")
             messages.success(request, (message))
 
             SendEmail(
                 _('New law proposal'),
-                f'{request.user.username.capitalize()} ' + str(_('added new law proposal\nYou can read it here:')) + f' http://{HOST}/glosowania/{str(form.id)}'
+                f'{request.user.username.capitalize()} ' + str(_('added new law proposal\nYou can read it here:')) + f' http://{HOST}/glosowania/details/{str(form.id)}'
                 )
             return redirect('glosowania:status', 1)
+        else:
+            return render(request, 'glosowania/dodaj.html', {'form': form})
     else:
         form = DecyzjaForm()
     return render(request, 'glosowania/dodaj.html', {'form': form})
 
 
 @login_required
-def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    username = None
+def edit(request, pk):
+    decision = Decyzja.objects.get(pk=pk)
 
-    if request.user.is_authenticated():
-        username = request.user.username
+    if request.method == 'POST':
+        form = DecyzjaForm(request.POST)
+        if form.is_valid():
+            decision.author = request.user
+            decision.title = form.cleaned_data['title']
+            decision.tresc = form.cleaned_data['tresc']
+            decision.kara = form.cleaned_data['kara']
+            decision.uzasadnienie = form.cleaned_data['uzasadnienie']
+            decision.args_for = form.cleaned_data['args_for']
+            decision.args_against = form.cleaned_data['args_against']
+            decision.znosi = form.cleaned_data['znosi']
+            decision.save()
+            message = _("Saved.")
+            messages.success(request, (message))
 
-    with open('access.log', 'a') as log:
-        log.writelines(f"{datetime.now()} {ip} {username}\n")
+            SendEmail(
+                str(_('Proposal')) + f' {str(decision.id)}' + str(_(' has been modified')),
+                f'{request.user.username.capitalize()} ' + str(_('modified proposal\nYou can read new version here:')) + f' http://{HOST}/glosowania/details/{str(decision.id)}'
+                )
+            return redirect('glosowania:status', 1)
+    else:  # request.method != 'POST':
+        form = DecyzjaForm(initial={
+            'author': decision.author,
+            'title': decision.title,
+            'tresc': decision.tresc,
+            'kara': decision.kara,
+            'uzasadnienie': decision.uzasadnienie,
+            'args_for': decision.args_for,
+            'args_against': decision.args_against,
+            'znosi': decision.znosi,
+        }
+        )
+    return render(request, 'glosowania/edit.html', {'form': form})
 
 
 # Wyświetl głosowania:
@@ -85,31 +114,69 @@ def status(request, pk):
     })
 
 
+def generate_code():
+    return''.join([random.SystemRandom().choice('abcdefghjkmnoprstuvwxyz23456789') for i in range(6)])
+
+
 # Pokaż szczegóły przepisu
 @login_required
 def details(request, pk):
+
+    zliczaj_wszystko()  # when link from email is used - this is only place Referendum status can be recounted.
+
     szczegoly = get_object_or_404(Decyzja, pk=pk)
 
-    if request.GET.get('podpisz'):
+    if request.GET.get('sign'):
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_podpisujaca = request.user
         podpis = ZebranePodpisy(projekt=nowy_projekt, podpis_uzytkownika=osoba_podpisujaca)
         nowy_projekt.ile_osob_podpisalo += 1
         podpis.save()
         nowy_projekt.save()
-        message = _('Your signature has been saved.')
+        message = _('You signed this motion for a referendum.')
+        messages.success(request, (message))
+        return redirect('glosowania:details', pk)
+
+    if request.GET.get('withdraw'):
+        nowy_projekt = Decyzja.objects.get(pk=pk)
+        osoba_podpisujaca = request.user
+        podpis = ZebranePodpisy.objects.get(projekt=nowy_projekt, podpis_uzytkownika=osoba_podpisujaca)
+        podpis.delete()
+        nowy_projekt.ile_osob_podpisalo -= 1
+        nowy_projekt.save()
+        message = _('Not signed.')
         messages.success(request, (message))
         return redirect('glosowania:details', pk)
 
     if request.GET.get('tak'):
         nowy_projekt = Decyzja.objects.get(pk=pk)
         osoba_glosujaca = request.user
-        glos = KtoJuzGlosowal(projekt=nowy_projekt, ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca)
+        glos = KtoJuzGlosowal(
+                              projekt=nowy_projekt,
+                              ktory_uzytkownik_juz_zaglosowal=osoba_glosujaca
+                             )
         nowy_projekt.za += 1
         glos.save()
         nowy_projekt.save()
-        message = _('Your vote has been saved. You voted Yes.')
-        messages.success(request, (message))
+        
+        # TODO: Kod oddanego głosu
+        # - wygeneruj kod
+        # - tak
+        # - projekt
+        # - zapisz
+        # - wyswietl
+        code = generate_code()
+        report = VoteCode.objects.create(project=nowy_projekt, code=code, vote=True)
+
+        message1 = str(_('Your vote has been saved. You voted Yes.'))
+        messages.success(request, (message1))
+
+        message2 = str(_('Your verification code is:') + f' {code} ')
+        messages.error(request, (message2))
+
+        message3 = str(_('Write down your code or create screenshot to verify it when the referendum is over. This code will be presented just once and will be not related to you.'))
+        messages.info(request, (message3))
+
         return redirect('glosowania:details', pk)
 
     if request.GET.get('nie'):
@@ -119,8 +186,25 @@ def details(request, pk):
         nowy_projekt.przeciw += 1
         glos.save()
         nowy_projekt.save()
-        message = _('Your vote has been saved. You voted No.')
-        messages.success(request, (message))
+
+        # TODO: Kod oddanego głosu
+        # - wygeneruj kod
+        # - nie
+        # - projekt
+        # - zapisz
+        # - wyswietl
+        code = generate_code()
+        report = VoteCode.objects.create(project=nowy_projekt, code=code, vote=False)
+
+        message1 = str(_('Your vote has been saved. You voted No.'))
+        messages.success(request, (message1))
+
+        message2 = str(_('Your verification code is:') + f' {code} ')
+        messages.error(request, (message2))
+
+        message3 = str(_('Write down your code or create screenshot to verify it when the referendum is over. This code will be presented just once and will be not related to you.'))
+        messages.info(request, (message3))
+
         return redirect('glosowania:details', pk)
 
     # check if already signed
@@ -129,7 +213,32 @@ def details(request, pk):
     # check if already voted
     voted = KtoJuzGlosowal.objects.filter(projekt=pk, ktory_uzytkownik_juz_zaglosowal=request.user).exists()
 
-    return render(request, 'glosowania/szczegoly.html', {'id': szczegoly, 'signed': signed, 'voted': voted})
+    # Report
+    report = VoteCode.objects.filter(project_id=pk)
+
+    # State dictionary
+    state = {1: _('Proposal'), 2: _('Rejected'), 3: _('Queued'), 4: _('Referendum'), 5: _('Rejected'), 6: _('Vacatio Legis'), 7: _('Governing Law'), }
+
+    # Corrected data_referendum_stop
+    corrected_data_referendum_stop = None
+    if szczegoly.data_referendum_stop:
+        corrected_data_referendum_stop = szczegoly.data_referendum_stop - timedelta(days=1)
+
+    # Previous and Next
+    obj = get_object_or_404(Decyzja, pk=pk)
+    prev = Decyzja.objects.filter(pk__lt=obj.pk, status = szczegoly.status).order_by('-pk').first()
+    next = Decyzja.objects.filter(pk__gt=obj.pk, status = szczegoly.status).order_by('pk').first()
+    
+    return render(request, 'glosowania/szczegoly.html', {'id': szczegoly,
+                                                         'signed': signed,
+                                                         'voted': voted,
+                                                         'report': report,
+                                                         'current_user': request.user,
+                                                         'state': state[szczegoly.status],
+                                                         'corrected_data_referendum_stop': corrected_data_referendum_stop,
+                                                         'prev': prev,
+                                                         'next': next,
+                                                         })
 
 
 def zliczaj_wszystko():
@@ -156,17 +265,17 @@ def zliczaj_wszystko():
                 i.status = w_kolejce
                 i.data_zebrania_podpisow = dzisiaj
 
-                # TODO: Referendum odbędzie się za 1 tydzień w niedzielę
+                # TODO: Referendum rozpocznie się za 1 tydzień w poniedziałek
                 # 0 = monday, 1 = tuesday, ..., 6 = sunday
                 i.data_referendum_start = i.data_zebrania_podpisow + timedelta(days=s.KOLEJKA) + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
                 i.data_referendum_stop = i.data_referendum_start + timedelta(days=s.CZAS_TRWANIA_REFERENDUM)
                 i.save()
                 SendEmail(
-                    str(_("Proposal no. ")) + str(i.id) + str(_(" is approved for referendum")),
-                    str(_("Proposal no. ")) + str(i.id) +
-                    str(_(" gathered required amount of signatures and will be voted from ")) +
-                    str(i.data_referendum_start) + ' to ' + str(i.data_referendum_stop) +
-                    '\nClick here to read proposal: http://' +
+                    str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("is approved for referendum")),
+                    str(_("Proposal no.")) + " " + str(i.id) + " " +
+                    str(_("gathered required amount of signatures and will be voted from")) + " " +
+                    str(i.data_referendum_start) + " " + str(_('to')) + " " + str(i.data_referendum_stop) +
+                    '\n' + str(_("Click here to read proposal: http://")) +
                     f"{HOST}/glosowania/details/{str(i.id)}"
                 )
                 continue
@@ -177,10 +286,12 @@ def zliczaj_wszystko():
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
                 SendEmail(
-                    # _(f"Proposal {str(i.id)} didn't gathered required amount of signatures"),  # translation doesn't work
-                    str(_("Proposal no. ")) + str(i.id) + str(_(" didn't gathered required amount of signatures")),
-                    str(_("Proposal no. ")) + str(i.id) +
-                    str(_(" didn't gathered required amount of signatures and was removed from queue. Feel free to improve it and send it again.\nClick here to read proposal: http://")) +
+                    # _(f"Proposal {str(i.id)} didn't gathered required amount of signatures"),  # translation doesn't work this way
+                    str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("didn't gathered required amount of signatures")),
+                    str(_("Proposal no.")) + " " + str(i.id) + " " +
+                    str(_("didn't gathered required amount of signatures")) + " " + str(_("and was removed from queue.")) + " " +
+                    str(_("Feel free to improve it and send it again.")) +
+                    '\n' + str(_("Click here to read proposal: http://")) +
                     f"{HOST}/glosowania/details/{str(i.id)}"
                 )
                 continue
@@ -191,9 +302,11 @@ def zliczaj_wszystko():
                 i.save()
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
                 SendEmail(
-                    str(_("Referendum on proposal no. ")) + str(i.id) + str(_(" is starting now")),
-                    str(_("It is time to vote on proposal no. ")) + str(i.id) + str(_(".\nReferendum ends at ")) + 
-                    str(i.data_referendum_stop) + str(_(".\nClick here to vote: http://")) + 
+                    str(_("Referendum on proposal no.")) + " " + str(i.id) + " " + str(_("is starting now")),
+                    str(_("It is time to vote on proposal no.")) + " " + str(i.id) + '\n' +
+                    str(_("Referendum ends at")) + " " +
+                    str(i.data_referendum_stop) + '\n' +
+                    str(_("Click here to vote: http://")) + 
                     f"{HOST}/glosowania/details/{str(i.id)}"
                 )
                 continue
@@ -207,10 +320,11 @@ def zliczaj_wszystko():
                     i.save()
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
                     SendEmail(
-                    str(_("Proposal no. ")) + str(i.id) + str(_("was approved")),
-                    str(_("Proposal no. ")) + str(i.id) + 
-                    str(_("was approved in referendum and is now in Vacatio Legis period.\nThe law will take effect on")) + 
-                    i.data_obowiazuje_od + str(_(".\nClick here to read proposal: http://")) + 
+                    str(_("Proposal no.")) + " " + str(i.id) + str(_("was approved")),
+                    str(_("Proposal no.")) + " " + str(i.id) + " " +
+                    str(_("was approved in referendum and is now in Vacatio Legis period")) + '.\n' +
+                    str(_("The law will take effect on")) + " " + 
+                    str(i.data_obowiazuje_od) + '\n' + str(_("Click here to read proposal: http://")) + 
                     f"{HOST}/glosowania/details/{str(i.id)}"
                     )
                     continue
@@ -219,21 +333,34 @@ def zliczaj_wszystko():
                     i.save()
                     # log('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
                     SendEmail(
-                    str(_("Proposal no. ")) + str(i.id) + str(_("was rejected")),
-                    str(_("Proposal no. ")) + str(i.id) +
-                    str(_(" was rejected in referendum.\nFeel free to improve it and send it again.\nClick here to read proposal: http://")) + 
-                    f"{HOST}/glosowania/{str(i.id)}"
+                    str(_("Proposal no.")) + " " + str(i.id) + str(_("was rejected")),
+                    str(_("Proposal no.")) + " " + str(i.id) + " " +
+                    str(_("was rejected in referendum.")) + '\n' + 
+                    str(_("Feel free to improve it and send it again.")) +
+                    '\n' + str(_("Click here to read proposal: http://")) + 
+                    f"{HOST}/glosowania/details/{str(i.id)}"
                     )
                     continue
 
             # FROM VACATIO_LEGIS TO LAW
             if i.status == zatwierdzone and i.data_obowiazuje_od <= dzisiaj:
                 i.status = obowiazuje
+                
+                # Reject bills
+                if i.znosi:
+                    separated = re.split('\W+', i.znosi)
+                    for z in separated:
+                        abolish = Decyzja.objects.get(pk=str(z))
+                        abolish.status = 5
+                        abolish.save()
+                
                 i.save()
+
                 # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
                 SendEmail(
-                str(_("Proposal no. ")) + str(i.id) + str(_(" is in efect from today")),
-                str(_("Proposal no. ")) + str(i.id) + str(_(" became abiding law today.\nClick here to read proposal: http://")) + 
+                str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("is in efect from today")),
+                str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("became abiding law today")) + '.\n' + 
+                str(_("Click here to read it: http://")) + 
                 f"{HOST}/glosowania/details/{str(i.id)}"
                 )
                 continue
@@ -252,4 +379,10 @@ def SendEmail(subject, message):
         body=message,
         )
     # l.warning(f'subject: {subject} \n message: {message}')
-    email_message.send(fail_silently=False)
+    
+    t = threading.Thread(
+                         target=email_message.send,
+                         args=("fail_silently=False",)
+                        )
+    t.setDaemon(True)
+    t.start()

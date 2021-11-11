@@ -8,13 +8,52 @@ from django.utils.translation import ugettext_lazy as _
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ('username', 'email', 'first_name', 'last_name')
+
+
+class NameChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(NameChangeForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        first_name = self.cleaned_data["first_name"]
+        last_name = self.cleaned_data["last_name"]
+        self.user.first_name = first_name
+        self.user.last_name = last_name
+        if commit:
+            self.user.save()
+        return self.user
+
+
+class UsernameChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username',)
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(UsernameChangeForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        username = self.cleaned_data["username"]
+        self.user.username = username
+        if commit:
+            self.user.save()
+        return self.user
 
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Uzytkownik
-        fields = ('responsibilities', 'city', 'hobby', 'to_give_away', 'to_borrow', 'for_sale', 'i_need', 'skills', 'knowledge', 'want_to_learn', 'business', 'job', 'fb', 'gift', 'other')
+        fields = ('foto', 'phone', 'responsibilities', 'city', 'hobby',
+                  'to_give_away', 'to_borrow', 'for_sale', 'i_need',
+                  'skills', 'knowledge', 'want_to_learn', 'business',
+                  'job', 'gift', 'other')
 
 
 class EmailChangeForm(forms.Form):

@@ -6,17 +6,17 @@
 <ul class="nav nav-pills justify-content-center">
 	<li class="nav-item" >
 		<a {% if request.path_info == '/glosowania/status/1/' %}
-			class="btn mr-1 btn-sm btn-primary" 
+			class="btn mr-1 btn-sm btn-primary"
 		{% else %}
-			class="btn mr-1 btn-sm btn-outline-primary"
+			class="btn mr-1 btn-sm btn-secondary"
 		{% endif %}
 			href="{% url 'glosowania:status' pk=1 %}">{% trans "Proposals" %}</a>
 	</li>
 	<li class="nav-item" >
 		<a {% if request.path_info == '/glosowania/nowy/' %}
-			class="btn mr-1 btn-sm btn-danger text-white font-weight-bold" 
+			class="btn mr-1 btn-sm btn-primary text-red font-weight-bold" 
 		{% else %}
-			class="btn mr-1 btn-sm btn-danger text-white font-weight-bold"
+			class="btn mr-1 btn-sm btn-secondary text-red font-weight-bold"
 		{% endif %}
 			href="{% url 'glosowania:dodaj_nowy' %}">+</a>
 	</li>
@@ -24,7 +24,7 @@
 		<a {% if request.path_info == '/glosowania/status/2/' %}
 			class="btn mr-1 btn-sm btn-primary" 
 		{% else %}
-			class="btn mr-1 btn-sm btn-outline-primary"
+			class="btn mr-1 btn-sm btn-secondary"
 		{% endif %}
 			href="{% url 'glosowania:status' pk=2 %}">{% trans "No endorsement" %}</a>
 	</li>
@@ -32,7 +32,7 @@
 		<a {% if request.path_info == '/glosowania/status/3/' %}
 			class="btn mr-1 btn-sm btn-primary" 
 		{% else %}
-			class="btn mr-1 btn-sm btn-outline-primary"
+			class="btn mr-1 btn-sm btn-secondary"
 		{% endif %}
 			href="{% url 'glosowania:status' pk=3 %}">{% trans "Queued" %}</a>
 	</li>
@@ -40,7 +40,7 @@
 		<a {% if request.path_info == '/glosowania/status/4/' %}
 			class="btn mr-1 btn-sm btn-primary" 
 		{% else %}
-			class="btn mr-1 btn-sm btn-outline-primary"
+			class="btn mr-1 btn-sm btn-secondary"
 		{% endif %}
 			href="{% url 'glosowania:status' pk=4 %}">{% trans "Referendum" %}</a>
 	</li>
@@ -48,7 +48,7 @@
 		<a {% if request.path_info == '/glosowania/status/5/' %}
 			class="btn mr-1 btn-sm btn-primary" 
 		{% else %}
-			class="btn mr-1 btn-sm btn-outline-primary"
+			class="btn mr-1 btn-sm btn-secondary"
 		{% endif %}
 			href="{% url 'glosowania:status' pk=5 %}">{% trans "Rejected" %}</a>
 	</li>
@@ -56,7 +56,7 @@
 		<a {% if request.path_info == '/glosowania/status/6/' %}
 			class="btn mr-1 btn-sm btn-primary" 
 		{% else %}
-			class="btn mr-1 btn-sm btn-outline-primary"
+			class="btn mr-1 btn-sm btn-secondary"
 		{% endif %}
 			href="{% url 'glosowania:status' pk=6 %}">{% trans "Vacatio Legis" %}</a>
 	</li>
@@ -64,14 +64,14 @@
 		<a {% if request.path_info == '/glosowania/status/7/' %}
 			class="btn mr-1 btn-sm btn-primary" 
 		{% else %}
-			class="btn mr-1 btn-sm btn-outline-primary"
+			class="btn mr-1 btn-sm btn-secondary"
 		{% endif %}
 			href="{% url 'glosowania:status' pk=7 %}">{% trans "Governing Law" %}</a>
 	</li>
 </ul>
 
 <p>
-	<div class="row d-flex justify-content-center list-group-item-success">
+	<div class="alert alert-success text-center p-0">
 		{% trans 'A referendum is not a one-off decision. The referendum is to pass a law that will be in force all the time.' %}
 	</div>
 </p>

@@ -3,7 +3,9 @@ venv/
 myvenv/
 backup/
 _inne_materialy/
-static/
+node_modules/
+/static
+!/*/static/
 
 *.DS_Store
 *.cache
@@ -37,5 +39,7 @@ gen_users.txt
 *.pot
 *.pyc
 __pycache__/
-db.sqlite3
+db.sqlite3*
 zzz/settings_custom.py
+package-lock.json
+package.json

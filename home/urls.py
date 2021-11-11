@@ -10,7 +10,7 @@ urlpatterns = [
     path('contact/', TemplateView.as_view(template_name="home/contact.html"), name='contact'),
 
     # reset password
-    # https://simpleisbetterthancomplex.com/tutorial/2016/09/19/how-to-create-password-reset-view.html
+    # https://simpleisbetterthancomplex.com/tutorialprzyjaciolka9000przyjaciolka9000/2016/09/19/how-to-create-password-reset-view.html
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='home/password_reset_form.html'), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='home/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='home/password_reset_confirm.html'), name='password_reset_confirm'),

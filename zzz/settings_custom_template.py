@@ -35,13 +35,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # citizens
-# Higher = harder to accept new person. Higher = easier to ban existing person.
-# Above ~0.72 SECOND person in group requires 2 points of acceptance which is a paradox.
-# Be careful changing this formula - people rarely accept each other.
-ACCEPTANCE_MULTIPLIER = 0.72
+# Sane range 1.6 - 2.7
+ACCEPTANCE_MULTIPLIER = 2.7
 
 # voting
-WYMAGANYCH_PODPISOW = 2             # Number of signatures needed to approve request for referendum.
+WYMAGANYCH_PODPISOW = 3             # Number of signatures needed to approve request for referendum.
 CZAS_NA_ZEBRANIE_PODPISOW = 365     # default 365 days
 KOLEJKA = 7                         # default 7 days. Discussion before referendum.
 CZAS_TRWANIA_REFERENDUM = 7         # default 7 days
@@ -51,3 +49,7 @@ VACATIO_LEGIS = 7                   # default 7 days
 ARCHIVE_CHAT_ROOM = 90              # default 90 days
 DELETE_CHAT_ROOM = 365              # default 365 days
 
+SLOW_MODE = {
+    "room name or *": 10            # delay between messages in seconds
+}
+UPLOAD_IMAGE_MAX_SIZE_MB = 10       # max size of uploaded image, MB

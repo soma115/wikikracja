@@ -12,7 +12,7 @@
 	{% for i in filtered_glosowania %}
 		<p><a href="{% url 'glosowania:details' pk=i.pk %}">{{ i.pk }}. {{ i.title }}<br>{{ i.tresc }}</a></p>
 	{% empty %}
-		<div class="alert alert-light">({% trans 'There is no proposal with this status' %})</div>
+		<div class="alert alert-dark">({% trans 'There is no proposal with this status' %})</div>
 	{% endfor %}
 </p>
 
@@ -57,6 +57,9 @@
 			{% trans "Vacatio Legis duration is" %}
 			<span class="badge badge-primary badge-pill">{{ vacatio_legis_span }}</span>
 			{% trans "days. After that time new law is in force." %}
+		</li>
+		<li class="list-group-item">
+			{% trans "If you want to change any of" %} <span class="badge badge-primary badge-pill">{% trans "marked" %}</span> {% trans "parameters - create referendum and show its result to your administrator." %}
 		</li>
 	</ul>
 </div>

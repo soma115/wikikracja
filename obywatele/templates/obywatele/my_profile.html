@@ -1,45 +1,101 @@
-{% extends 'home/base.html' %}
-{% load static %}
-{% load i18n %}
+{% extends 'home/base.html' %} {% load static %} {% load i18n %} {% block content %}
+<div class="container">
+<div class="row">
+<div class="col-md-9 p-4">
+	<b>{% trans "This is your profile" %} {{ user }}</b>
+	<div>{% trans "Your email" %}: {{ user.email }}</div>
+	<div>{% trans "First name" %}: {{ user.first_name }}</div>
+	<div>{% trans "Last name" %}: {{ user.last_name }}</div>
+	<div>{% trans "Your reputation" %}: {{ profile.reputation }} ({% trans "required reputation" %}: {{ required_reputation }})</div>
+	<div>{% trans "You've been introduced by" %}: {{ profile.polecajacy }}</div>
+	<div>{% trans "You've joined" %}: {{ profile.data_przyjecia|date:"Y-m-d" }}</div>
+	<a class="btn btn-primary btn-sm" href="{% url 'haslo'%}">{% trans 'Change password' %}</a>
+	<a class="btn btn-primary btn-sm" href="{% url 'change_email'%}">{% trans 'Change email' %}</a>
+	<a class="btn btn-primary btn-sm" href="{% url 'obywatele:change_name'%}">{% trans 'Change name' %}</a>
 
-{% block content %}
-<div>
+	{% comment %} For now username can't be changed because it has unintended consequences in chat {% endcomment %}
+	<a class="btn btn-primary btn-sm" href="{% url 'obywatele:change_username'%}">{% trans 'Change username' %}</a>
+
+</div>
+<div class="col-md-3 p-3">
+	<img class="img-fluid" src={% get_media_prefix %}{{ profile.foto }}>
+	{% comment %} <p style="color:blue;font-size:12px;">{% trans "If picture is not updating - use ctrl+shift+r" %}</p> {% endcomment %}
+</div>
+</div>
+<div class="row">
+<div class="col-md-12 p-3">
+	<b>{% trans "Those are your assets" %}</b>
+	<div>{% trans "You don't have to fill all of them but the more information you'll give - the better we will be able to fullfill our needs. Also we will know each other better." %}</div>
 	<p>
-		<b>{% trans "This is your profile" %} {{ user }}</b>
-		<div>{% trans "Your email" %}: {{ user.email }}</div>
-		<div>{% trans "Your reputation" %}: {{ profile.reputation }} ({% trans "required reputation" %}: {{ required_reputation }})</div>
-		<div>{% trans "You've been introduced by" %}: {{ profile.polecajacy }}</div>
-		<div>{% trans "You've joined" %}: {{ profile.data_przyjecia|date:"Y-m-d" }}</div>
+		<table class="table table-striped table-sm">
+			<tbody>
+				<tr>
+					<th scope="col">{% trans "City" %}</th>
+					<td scope="col">{{ profile.city|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Phone" %}</th>
+					<td scope="col">{{ profile.phone|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Responsibilities" %}</th>
+					<td scope="col">{{ profile.responsibilities|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Job" %}</th>
+					<td scope="col">{{ profile.job|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Hobby" %}</th>
+					<td scope="col">{{ profile.hobby|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Business" %}</th>
+					<td scope="col">{{ profile.business|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "To give away" %}</th>
+					<td scope="col">{{ profile.to_give_away|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "To borrow" %}</th>
+					<td scope="col">{{ profile.to_borrow|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "For sale" %}</th>
+					<td scope="col">{{ profile.for_sale|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "I need" %}</th>
+					<td scope="col">{{ profile.i_need|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "I want to learn" %}</th>
+					<td scope="col">{{ profile.want_to_learn|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Skills" %}</th>
+					<td scope="col">{{ profile.skills|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Knowledge" %}</th>
+					<td scope="col">{{ profile.knowledge|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Gift" %}</th>
+					<td scope="col">{{ profile.gift|default:"-" }}</td>
+				</tr>
+				<tr>
+					<th scope="col">{% trans "Other" %}</th>
+					<td scope="col">{{ profile.other|default:"-" }}</td>
+				</tr>
+			</tbody>
+		</table>
 	</p>
-
-	<p>
-		<a class="btn btn-primary btn-sm" href="{% url 'haslo'%}">{% trans 'Change password' %}</a>
-		<a class="btn btn-primary btn-sm" href="{% url 'email_change'%}">{% trans 'Change email' %}</a>
-	</p>
-
-	<p>
-		<b>{% trans "Those are your assets" %}</b>
-		<div>{% trans "You don't have to fill all of them but the more information you give - the more profit each one of us and whole group will gain. Those information will be also usefull for new people in the group. We will know each other better and we will be able to fullfill our needs better." %}</div>
-	</p>
-	
-	<p><table class="table table-striped table-sm"><tbody>    
-		<tr><th scope="col" class="col-md-2">{% trans "Responsibilities" %}</th><td scope="col">{{ profile.responsibilities|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "City" %}</th><td scope="col">{{ profile.city|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "Hobby" %}</th><td scope="col">{{ profile.hobby|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "To give away" %}</th><td scope="col">{{ profile.to_give_away|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "To borrow" %}</th><td scope="col">{{ profile.to_borrow|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "For sale" %}</th><td scope="col">{{ profile.for_sale|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "I need" %}</th><td scope="col">{{ profile.i_need|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "Skills" %}</th><td scope="col">{{ profile.skills|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "Knowledge" %}</th><td scope="col">{{ profile.knowledge|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "I want to learn" %}</th><td scope="col">{{ profile.want_to_learn|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "Business" %}</th><td scope="col">{{ profile.business|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "Job" %}</th><td scope="col">{{ profile.job|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "Facebook" %}</th><td scope="col">{{ profile.fb|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "Gift" %}</th><td scope="col">{{ profile.gift|default:"-" }}</td></tr>
-		<tr><th scope="col">{% trans "Other" %}</th><td scope="col">{{ profile.other|default:"-" }}</td></tr>
-	</tbody></table></p>
-
 	<p><a class="btn btn-primary btn-sm" href="{% url 'obywatele:my_assets' %}">{% trans 'Edit my assets' %}</a></p>
 </div>
+
+</div>
+</div>
+
 {% endblock %}

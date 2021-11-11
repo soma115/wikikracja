@@ -97,7 +97,7 @@ INSTALLED_APPS = (
     'chat',
     'bootstrap4',
     'customize',
-    'taggit',
+    'taggit',  # for eLibrary and later for Articles/Blog
     'article',
     'tinymce',
     'grappelli',

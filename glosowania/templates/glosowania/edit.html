@@ -1,0 +1,36 @@
+{% extends 'glosowania/menu.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block glosowania %}
+<h2>{% trans 'Edit law proposal' %}</h2>
+<form action="." method="POST" class="post-form">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-3">
+          {{ form.title|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.tresc|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.kara|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.uzasadnienie|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.args_for|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.args_against|as_crispy_field }}
+        </div>
+        <div class="col-md-3">
+          {{ form.znosi|as_crispy_field }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-danger btn-sm">{% trans 'Save' %}</button>
+    <button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
+</form>
+{% endblock %}

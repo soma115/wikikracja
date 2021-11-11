@@ -1,25 +1,33 @@
 {% extends 'home/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-	<h1>{% trans 'Upload ebook' %}</h1>
-	<p><h5>
-		<center>{% trans 'Before uploading a file make sure that file name is nicely formatted.' %}</center></p>
-		<p><center>{% trans 'Ideally the filename should be in the format like:' %}</center></p>
-		<p><center><b>{% trans 'First Name Last Name - Title.pdf' %}</b></center>
-	</h5></p>
-		<p>
-			<form method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button type='file' class="btn btn-primary btn-sm">{% trans 'Send' %}</button>
-			</form>
-		</p>
-	<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
+	<h1>
+		{% trans 'Upload Book' %}
+	</h1>
+	<form method="post" enctype="multipart/form-data">{% csrf_token %}
+		<div class="container">
+			<div class="row">
+				<div class="col-sm ">
+					{{ form.author|as_crispy_field }}
+					{{ form.title|as_crispy_field }}
+					{{ form.cover|as_crispy_field }}
+					
+					{% comment %}Workaround because help_test in models doesn't work{% endcomment %}
+					<p>{% trans 'Cover proportions should be 2/3. I.E. width x 1.5 = height' %}</p>
 
+					{% comment %} {{ form.tag|as_crispy_field }} {% endcomment %}
+				</div>
+				<div class="col-sm">
+					{{ form.file_epub|as_crispy_field }}
+					{{ form.file_mobi|as_crispy_field }}
+					{{ form.file_pdf|as_crispy_field }}
+				</div>
+			</div>
+		</div>
+		<button type='file' class="btn btn-primary btn-sm">{% trans 'Save' %}</button>
+		<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
+	</form>
 {% endblock %}
-
-
-
-
