@@ -366,7 +366,7 @@ msgstr "Wpisz tutaj tylko numery istniejących propozycji"
 
 #: glosowania/models.py:27
 msgid "Enter short title describing new law."
-msgstr "Wpisz krótki tytuł opisujący nową propozycję."
+msgstr "Wpisz krótki tytuł"
 
 #: glosowania/models.py:32
 msgid "Law text"
@@ -375,7 +375,7 @@ msgstr "Treść propozycji"
 #: glosowania/models.py:33
 msgid "Enter the exact wording of the law as it is to be applied."
 msgstr ""
-"Wpisz treść propozycji dokładnie w takim brzmieniu w jakim ma obowiązywać."
+"Wpisz treść pomysłu."
 
 #: glosowania/models.py:38
 msgid "Penalty"
@@ -396,7 +396,7 @@ msgstr "Uzasadnienie"
 #: glosowania/models.py:45
 msgid "What events inspired this bill? What are we going to achieve with it?"
 msgstr ""
-"Jakie wydarzenia zainspirowały projekt ustawy? Co dzięki niej osiągniemy?"
+"Jakie wydarzenia zainspirowały powstanie pomysłu? Co dzięki niemu osiągniemy?"
 
 #: glosowania/models.py:50
 msgid "Positive Aspects of the Idea"
@@ -427,16 +427,11 @@ msgid ""
 "If the proposed law supersedes other bills, enter their comma separated "
 "numbers here."
 msgstr ""
-"Jeśli nowa propozycja zastępuje inne propozycje, wprowadź tutaj ich numery "
-"rozdzielone przecinkami."
+"Jeśli proponowany pomysł zastępuje inny, wprowadź tutaj ich numery."
 
 #: glosowania/templates/glosowania/dodaj.html:7
 msgid "Add new law proposal"
 msgstr "Dodaj nową propozycję"
-
-#: glosowania/templates/glosowania/edit.html:7
-msgid "Edit law proposal"
-msgstr "Edytuj propozycję"
 
 #: glosowania/templates/glosowania/menu.html:13
 msgid "Proposals"
