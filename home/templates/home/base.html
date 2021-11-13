@@ -54,11 +54,10 @@
 					<a {% if request.resolver_match.namespace == 'glosowania' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'glosowania:status' pk=7 %}">{% trans "Voting" %}</a>
 					<a {% if request.resolver_match.namespace == 'elibrary' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'elibrary:book-list' %}">{% trans "eLibrary" %}</a>
 					<a class="nav-item nav-link {% if request.resolver_match.namespace == 'chat' %} active {% else %} {{ request.user|has_messages }} {% endif %}"
-					data-route="chat"
-					href="/chat/"> {% trans "Chat" %}
+						data-route="chat"
+						href="/chat/"> {% trans "Chat" %}
 					</a>
 					<a {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'obywatele:my_profile' %}">{% trans "profile" %}</a>
-					<a {% if request.resolver_match.url_name == 'admin' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/admin">{% trans "settings" %}</a>
 					<a class="nav-item nav-link" href="/logout">{% trans "logout" %}</a>
 				{% endif %}
 

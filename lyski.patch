@@ -32,7 +32,7 @@ index a4b34a0..b40b36e 100644
  <p>
  	{% block glosowania %}
  	{% endblock glosowania %}
-iff --git a/glosowania/templates/glosowania/szczegoly.html b/glosowania/templates/glosowania/szczegoly.html
+diff --git a/glosowania/templates/glosowania/szczegoly.html b/glosowania/templates/glosowania/szczegoly.html
 index 3b77c5e..b3f0b86 100644
 --- a/glosowania/templates/glosowania/szczegoly.html
 +++ b/glosowania/templates/glosowania/szczegoly.html
@@ -165,4 +165,10 @@ index 03cfedc..034c2cd 100644
  msgid "The law will take effect on"
 -msgstr "Nowe prawo zacznie obowiązywać od"
 +msgstr "Nowy pomysł jest ważny od"
- 
+diff --git a/home/templates/home/base.html b/home/templates/home/base.html
+--- a/home/templates/home/base.html
++++ b/home/templates/home/base.html
+@@ -60,4 +60,4 @@
+ 					<a {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'obywatele:my_profile' %}">{% trans "profile" %}</a>
+-					<a {% if request.resolver_match.url_name == 'admin' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/admin">{% trans "settings" %}</a>
+					<a class="nav-item nav-link" href="/logout">{% trans "logout" %}</a>
