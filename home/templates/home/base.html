@@ -33,44 +33,41 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<!-- <a class="navbar-brand" href="{% url 'home' %}">{{ request.site.name }}</a> -->
 		<a class="navbar-brand" href="#"></a>
+		
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
+			<span class="navbar-toggler-icon"></span>
 		</button>
+		
 		<div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
-		  <div class="navbar-nav text-right">
-		  <!-- <div class="nav nav-tabs"> -->
+			<div class="navbar-nav text-right">
+		  	<!-- <div class="nav nav-tabs"> -->
+				<a {% if request.resolver_match.url_name == 'home' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'home' %}">{% trans 'Start' %}</a>
+				<a {% if request.resolver_match.namespace == 'blog' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'blog:article-list' %}">{% trans "Blog" %}</a>
+
+				{% if not user.is_authenticated %}
+					<a {% if request.resolver_match.url_name == 'login' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'login' %}">{% trans "Login" %}</a>
+				{% endif %}
+
+				{% if user.is_authenticated %}
+					<a {% if request.resolver_match.url_name == 'obywatele' or request.resolver_match.url_name == 'poczekalnia' or request.resolver_match.url_name == 'zaproponuj_osobe' or request.resolver_match.url_name == 'obywatele_szczegoly'  or request.resolver_match.url_name == 'poczekalnia_szczegoly' or request.resolver_match.url_name == 'assets'%} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'obywatele:obywatele' %}">{% trans "Citizens" %}</a>
+					<a {% if request.resolver_match.namespace == 'glosowania' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'glosowania:status' pk=7 %}">{% trans "Voting" %}</a>
+					<a {% if request.resolver_match.namespace == 'elibrary' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'elibrary:book-list' %}">{% trans "eLibrary" %}</a>
+					<a class="nav-item nav-link {% if request.resolver_match.namespace == 'chat' %} active {% else %} {{ request.user|has_messages }} {% endif %}"
+					data-route="chat"
+					href="/chat/">{% trans "Chat" %}
+					</a>
+					<a {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'obywatele:my_profile' %}">{% trans "profile" %}</a>
+					<a {% if request.resolver_match.url_name == 'admin' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/admin">{% trans "settings" %}</a>
+					<a class="nav-item nav-link" href="/logout">{% trans "logout" %}</a> 
+				{% endif %}
+
 				<div id="box">
 					<button class="btn btn-sm btn-light" onclick="swapStyle('{% static "home/css/bootstrap-light.min.css" %}')"><i class="far fa-sun"></i></button>
 					<button class="btn btn-sm btn-dark" onclick="swapStyle('{% static "home/css/bootstrap-dark.min.css" %}')"><i class="far fa-moon"></i></button>
 				</div>
-			<a {% if request.resolver_match.url_name == 'home' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'home' %}">{% trans 'Start' %}</a>
-			<a {% if request.resolver_match.namespace == 'blog' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'blog:article-list' %}">{% trans "Blog" %}</a>
-
-			{% if not user.is_authenticated %}
-				<a {% if request.resolver_match.url_name == 'login' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'login' %}">{% trans "Login" %}</a>
-			{% endif %}
-
-			{% if user.is_authenticated %}
-				<a {% if request.resolver_match.url_name == 'obywatele' or request.resolver_match.url_name == 'poczekalnia' or request.resolver_match.url_name == 'zaproponuj_osobe' or request.resolver_match.url_name == 'obywatele_szczegoly'  or request.resolver_match.url_name == 'poczekalnia_szczegoly' or request.resolver_match.url_name == 'assets'%} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'obywatele:obywatele' %}">{% trans "Citizens" %}</a>
-
-				<a {% if request.resolver_match.namespace == 'glosowania' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'glosowania:status' pk=7 %}">{% trans "Voting" %}</a>
-
-				<a {% if request.resolver_match.namespace == 'elibrary' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'elibrary:book-list' %}">{% trans "eLibrary" %}</a>
-				
-				<a class="nav-item nav-link {% if request.resolver_match.namespace == 'chat' %} active {% else %} {{ request.user|has_messages }} {% endif %}"
-				   data-route="chat"
-				   href="/chat/">{% trans "Chat" %}
-				</a>
-
-				<a {% if request.resolver_match.url_name == 'my_profile' or request.resolver_match.url_name == 'haslo' or request.resolver_match.url_name == 'my_assets' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="{% url 'obywatele:my_profile' %}">{% trans "profile" %}</a>
-			
-				<a {% if request.resolver_match.url_name == 'admin' %} class="nav-item nav-link active" {% else %} class="nav-item nav-link" {% endif %} href="/admin">{% trans "settings" %}</a>
-
-				<a class="nav-item nav-link" href="/logout">{% trans "logout" %}</a> 
-			{% endif %}
-		  </div>
+			</div>
 		</div>
-	  </nav>
+	</nav>
 
 	<div class="container-fluid">
 		{% block content_fullscreen %}{% endblock content_fullscreen%}
