@@ -32,27 +32,20 @@ index a4b34a0..b40b36e 100644
  <p>
  	{% block glosowania %}
  	{% endblock glosowania %}
-diff --git a/glosowania/templates/glosowania/szczegoly.html b/glosowania/templates/glosowania/szczegoly.html
+iff --git a/glosowania/templates/glosowania/szczegoly.html b/glosowania/templates/glosowania/szczegoly.html
 index 3b77c5e..b3f0b86 100644
 --- a/glosowania/templates/glosowania/szczegoly.html
 +++ b/glosowania/templates/glosowania/szczegoly.html
-@@ -13,8 +13,8 @@
- 		<h5>{% trans 'Bill title' %}: <b>{{ id.title }}</b></h5>
- 		<h5>{% trans 'Bill state' %}: <b>{{ state }}</b></h5>
+@@ -15,4 +15,2 @@
  		<h5>{% trans 'Bill text' %}: <b>{{ id.tresc }}</b></h5>
 -		<h5>{% trans 'Penalty for non-compliance' %}: <b>{{ id.kara }}</b></h5>
 -		<h5>{% trans 'Reason' %}: <b>{{ id.uzasadnienie }}</b></h5>
-+		{% comment %} <h5>{% trans 'Penalty for non-compliance' %}: <b>{{ id.kara }}</b></h5> {% endcomment %}
-+		{% comment %} <h5>{% trans 'Reason' %}: <b>{{ id.uzasadnienie }}</b></h5> {% endcomment %}
  		<h5>{% trans 'Positives' %}: <b>{{ id.args_for|default_if_none:"--" }}</b></h5>
- 		<h5>{% trans 'Negatives' %}: <b>{{ id.args_against|default_if_none:"--" }}</b></h5>
-         <h5>{% trans 'This law supersedes the following bills' %}: <b>{{ id.znosi|default_if_none:"--" }}</b></h5>
 diff --git a/locale/pl/LC_MESSAGES/django.po b/locale/pl/LC_MESSAGES/django.po
 index 03cfedc..034c2cd 100644
 --- a/locale/pl/LC_MESSAGES/django.po
 +++ b/locale/pl/LC_MESSAGES/django.po
-@@ -361,20 +362,20 @@ msgstr "Dodaj eBook"
- 
+@@ -363,18 +363,18 @@ msgstr "Dodaj eBook"
  #: glosowania/models.py:18
  msgid "Enter only existing bill numbers here"
 -msgstr "Wpisz tutaj tylko numery istniejących przepisów"
@@ -96,12 +89,7 @@ index 03cfedc..034c2cd 100644
  msgid "Add new law proposal"
 -msgstr "Dodaj nową propozycję przepisu"
 +msgstr "Dodaj nową propozycję"
- 
- #: glosowania/templates/glosowania/edit.html:7
- msgid "Edit law proposal"
--msgstr "Nowa propozycja przepisu"
-+msgstr "Edytuj propozycję"
- 
+
  #: glosowania/templates/glosowania/menu.html:13
  msgid "Proposals"
 @@ -526,7 +519,7 @@ msgstr "Vacatio Legis trwa"

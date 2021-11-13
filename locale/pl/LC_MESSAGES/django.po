@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-11 08:04+0100\n"
+"POT-Creation-Date: 2021-11-13 10:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,7 +72,7 @@ msgstr "Nowy pokój"
 
 #: chat/templates/chat/add.html:15 elibrary/templates/elibrary/add.html:32
 #: elibrary/templates/elibrary/book_form.html:27
-#: glosowania/templates/glosowania/dodaj.html:28
+#: glosowania/templates/glosowania/dodaj.html:35
 #: glosowania/templates/glosowania/edit.html:33
 #: home/templates/home/haslo.html:25
 #: obywatele/templates/obywatele/change_email.html:23
@@ -84,7 +84,7 @@ msgstr "Zapisz"
 
 #: chat/templates/chat/add.html:16 elibrary/templates/elibrary/add.html:33
 #: elibrary/templates/elibrary/book_form.html:28
-#: glosowania/templates/glosowania/dodaj.html:29
+#: glosowania/templates/glosowania/dodaj.html:36
 #: glosowania/templates/glosowania/edit.html:34
 msgid "Back"
 msgstr "Wróć"
@@ -374,8 +374,7 @@ msgstr "Treść propozycji"
 
 #: glosowania/models.py:33
 msgid "Enter the exact wording of the law as it is to be applied."
-msgstr ""
-"Wpisz treść pomysłu."
+msgstr "Wpisz treść pomysłu."
 
 #: glosowania/models.py:38
 msgid "Penalty"
@@ -426,12 +425,15 @@ msgstr "Znosi propozycję"
 msgid ""
 "If the proposed law supersedes other bills, enter their comma separated "
 "numbers here."
-msgstr ""
-"Jeśli proponowany pomysł zastępuje inny, wprowadź tutaj ich numery."
+msgstr "Jeśli proponowany pomysł zastępuje inny, wprowadź tutaj ich numery rozdzielone przecinkami."
 
 #: glosowania/templates/glosowania/dodaj.html:7
 msgid "Add new law proposal"
 msgstr "Dodaj nową propozycję"
+
+#: glosowania/templates/glosowania/edit.html:7
+msgid "Edit law proposal"
+msgstr "Edytuj propozycję"
 
 #: glosowania/templates/glosowania/menu.html:13
 msgid "Proposals"
