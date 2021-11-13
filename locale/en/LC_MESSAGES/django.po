@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-13 17:11+0100\n"
+"POT-Creation-Date: 2021-11-13 17:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -794,26 +794,26 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: home/templates/home/base.html:47 home/templates/home/home.html:40
+#: home/templates/home/base.html:49 home/templates/home/home.html:40
 msgid "Start"
 msgstr ""
 
-#: home/templates/home/base.html:48
+#: home/templates/home/base.html:50
 msgid "Blog"
 msgstr ""
 
-#: home/templates/home/base.html:51 home/templates/home/home.html:12
+#: home/templates/home/base.html:53 home/templates/home/home.html:12
 #: home/templates/home/login.html:4 home/templates/home/login.html:14
 #: home/templates/home/login.html:25
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/base.html:55 obywatele/models.py:39
+#: home/templates/home/base.html:57 obywatele/models.py:39
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
 msgstr ""
 
-#: home/templates/home/base.html:57
+#: home/templates/home/base.html:58
 msgid "Voting"
 msgstr ""
 
@@ -821,16 +821,20 @@ msgstr ""
 msgid "eLibrary"
 msgstr ""
 
-#: home/templates/home/base.html:64
+#: home/templates/home/base.html:62
 msgid "Chat"
 msgstr ""
 
-#: home/templates/home/base.html:67
+#: home/templates/home/base.html:64
 msgid "profile"
 msgstr ""
 
-#: home/templates/home/base.html:69
-msgid "admin"
+#: home/templates/home/base.html:65
+msgid "settings"
+msgstr ""
+
+#: home/templates/home/base.html:66
+msgid "logout"
 msgstr ""
 
 #: home/templates/home/haslo.html:7
