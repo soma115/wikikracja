@@ -1,0 +1,180 @@
+diff --git a/glosowania/templates/glosowania/dodaj.html b/glosowania/templates/glosowania/dodaj.html
+index 9535dcd..ae06ca5 100644
+--- a/glosowania/templates/glosowania/dodaj.html
++++ b/glosowania/templates/glosowania/dodaj.html
+@@ -15,12 +15,6 @@
+         <div class="col-md-3">
+           {{ form.tresc|as_crispy_field }}
+         </div>
+-        <div class="col-md-3">
+-          {{ form.kara|as_crispy_field }}
+-        </div>
+-        <div class="col-md-3">
+-          {{ form.uzasadnienie|as_crispy_field }}
+-        </div>
+         <div class="col-md-3">
+           {{ form.args_for|as_crispy_field }}
+         </div>
+diff --git a/glosowania/templates/glosowania/menu.html b/glosowania/templates/glosowania/menu.html
+index a4b34a0..b40b36e 100644
+--- a/glosowania/templates/glosowania/menu.html
++++ b/glosowania/templates/glosowania/menu.html
+@@ -70,12 +70,6 @@
+ 	</li>
+ </ul>
+ 
+-<p>
+-	<div class="alert alert-success text-center p-0">
+-		{% trans 'A referendum is not a one-off decision. The referendum is to pass a law that will be in force all the time.' %}
+-	</div>
+-</p>
+-
+ <p>
+ 	{% block glosowania %}
+ 	{% endblock glosowania %}
+diff --git a/glosowania/templates/glosowania/szczegoly.html b/glosowania/templates/glosowania/szczegoly.html
+index 3b77c5e..b3f0b86 100644
+--- a/glosowania/templates/glosowania/szczegoly.html
++++ b/glosowania/templates/glosowania/szczegoly.html
+@@ -13,8 +13,8 @@
+ 		<h5>{% trans 'Bill title' %}: <b>{{ id.title }}</b></h5>
+ 		<h5>{% trans 'Bill state' %}: <b>{{ state }}</b></h5>
+ 		<h5>{% trans 'Bill text' %}: <b>{{ id.tresc }}</b></h5>
+-		<h5>{% trans 'Penalty for non-compliance' %}: <b>{{ id.kara }}</b></h5>
+-		<h5>{% trans 'Reason' %}: <b>{{ id.uzasadnienie }}</b></h5>
++		{% comment %} <h5>{% trans 'Penalty for non-compliance' %}: <b>{{ id.kara }}</b></h5> {% endcomment %}
++		{% comment %} <h5>{% trans 'Reason' %}: <b>{{ id.uzasadnienie }}</b></h5> {% endcomment %}
+ 		<h5>{% trans 'Positives' %}: <b>{{ id.args_for|default_if_none:"--" }}</b></h5>
+ 		<h5>{% trans 'Negatives' %}: <b>{{ id.args_against|default_if_none:"--" }}</b></h5>
+         <h5>{% trans 'This law supersedes the following bills' %}: <b>{{ id.znosi|default_if_none:"--" }}</b></h5>
+diff --git a/locale/pl/LC_MESSAGES/django.po b/locale/pl/LC_MESSAGES/django.po
+index 03cfedc..034c2cd 100644
+--- a/locale/pl/LC_MESSAGES/django.po
++++ b/locale/pl/LC_MESSAGES/django.po
+@@ -361,20 +362,20 @@ msgstr "Dodaj eBook"
+ 
+ #: glosowania/models.py:18
+ msgid "Enter only existing bill numbers here"
+-msgstr "Wpisz tutaj tylko numery istniejących przepisów"
++msgstr "Wpisz tutaj tylko numery istniejących propozycji"
+ 
+ #: glosowania/models.py:27
+ msgid "Enter short title describing new law."
+-msgstr "Wpisz krótki tytuł opisujący nowe prawo."
++msgstr "Wpisz krótki tytuł opisujący nową propozycję."
+ 
+ #: glosowania/models.py:32
+ msgid "Law text"
+-msgstr "Treść przepisu"
++msgstr "Treść propozycji"
+ 
+ #: glosowania/models.py:33
+ msgid "Enter the exact wording of the law as it is to be applied."
+ msgstr ""
+-"Wpisz treść przepisu dokładnie w takim brzmieniu w jakim ma obowiązywać."
++"Wpisz treść propozycji dokładnie w takim brzmieniu w jakim ma obowiązywać."
+ 
+ #: glosowania/models.py:38
+ msgid "Penalty"
+@@ -419,23 +420,23 @@ msgstr "Określ potencjalne zagrożenie związane z propozycją."
+ 
+ #: glosowania/models.py:65
+ msgid "Abolishes the rules"
+-msgstr "Znosi przepis/y"
++msgstr "Znosi propozycje"
+ 
+ #: glosowania/models.py:66
+ msgid ""
+ "If the proposed law supersedes other bills, enter their comma separated "
+ "numbers here."
+ msgstr ""
+-"Jeśli proponowane prawo zastępuje inne przepisy, wprowadź tutaj ich numery "
++"Jeśli nowa propozycja zastępuje inne propozycje, wprowadź tutaj ich numery "
+ "rozdzielone przecinkami."
+ 
+ #: glosowania/templates/glosowania/dodaj.html:7
+ msgid "Add new law proposal"
+-msgstr "Dodaj nową propozycję przepisu"
++msgstr "Dodaj nową propozycję"
+ 
+ #: glosowania/templates/glosowania/edit.html:7
+ msgid "Edit law proposal"
+-msgstr "Nowa propozycja przepisu"
++msgstr "Edytuj propozycję"
+ 
+ #: glosowania/templates/glosowania/menu.html:13
+ msgid "Proposals"
+@@ -526,7 +519,7 @@ msgstr "Vacatio Legis trwa"
+ 
+ #: glosowania/templates/glosowania/status.html:59
+ msgid "days. After that time new law is in force."
+-msgstr "dni. Po tym czasie prawo obowiązuje."
++msgstr "dni. Po tym czasie pomysł obowiązuje."
+ 
+ #: glosowania/templates/glosowania/status.html:62
+ #: obywatele/templates/obywatele/menu.html:66
+@@ -546,7 +539,7 @@ msgstr "parametrów - utwórz referendum i pokaż jego wynik administratorowi."
+ 
+ #: glosowania/templates/glosowania/szczegoly.html:12
+ msgid "Bill number"
+-msgstr "Numer przepisu"
++msgstr "Numer propozycji"
+ 
+ #: glosowania/templates/glosowania/szczegoly.html:13
+ msgid "Bill title"
+@@ -558,90 +551,82 @@ msgstr "Status"
+ 
+ #: glosowania/templates/glosowania/szczegoly.html:15
+ msgid "Bill text"
+-msgstr "Treść przepisu"
++msgstr "Treść propozycji"
+  
+-#: glosowania/templates/glosowania/szczegoly.html:20
++#: glosowania/templates/glosowania/szczegoly.html:22
+ msgid "This law supersedes the following bills"
+-msgstr "Ta propozycja znosi następujące przepisy"
++msgstr "Ta propozycja znosi następujące propozycje"
+
+ msgid "Do you want a referendum on this law?"
+-msgstr "Czy chcesz referendum w sprawie tego przepisu?"
++msgstr "Czy chcesz referendum w sprawie tej propozycji?"
+  
+-#: glosowania/templates/glosowania/szczegoly.html:73
++#: glosowania/templates/glosowania/szczegoly.html:75
+ msgid "Do you want to implement this law?"
+-msgstr "Czy chcesz wprowadzenia tego przepisu?"
++msgstr "Czy chcesz wprowadzenia tej propozycji?"
+  
+@@ -651,14 +636,14 @@ msgstr "Nowa propozycja została zapisana."
+ 
+ #: glosowania/views.py:49
+ msgid "New law proposal"
+-msgstr "Nowa propozycja przepisu"
++msgstr "Nowa propozycja"
+ 
+ #: glosowania/views.py:50
+ msgid ""
+ "added new law proposal\n"
+ "You can read it here:"
+ msgstr ""
+-"dodał/a nową propozycję przepisu\n"
++"dodał/a nową propozycję\n"
+ "Możesz ją zobaczyć tutaj:"
+ 
+ #: glosowania/views.py:76
+@@ -678,7 +663,7 @@ msgid ""
+ "modified proposal\n"
+ "You can read new version here:"
+ msgstr ""
+-"zmodyfikował/a propozycję przepisu\n"
++"zmodyfikował/a propozycję\n"
+ "Możesz ją nową wersję tutaj:"
+ 
+ #: glosowania/views.py:136
+@@ -779,7 +764,7 @@ msgstr ""
+ 
+ #: glosowania/views.py:326
+ msgid "The law will take effect on"
+-msgstr "Nowe prawo zacznie obowiązywać od"
++msgstr "Nowy pomysł jest ważny od"
+ 

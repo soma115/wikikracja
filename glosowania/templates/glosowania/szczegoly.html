@@ -13,8 +13,8 @@
 		<h5>{% trans 'Bill title' %}: <b>{{ id.title }}</b></h5>
 		<h5>{% trans 'Bill state' %}: <b>{{ state }}</b></h5>
 		<h5>{% trans 'Bill text' %}: <b>{{ id.tresc }}</b></h5>
-		<h5>{% trans 'Penalty for non-compliance' %}: <b>{{ id.kara }}</b></h5>
-		<h5>{% trans 'Reason' %}: <b>{{ id.uzasadnienie }}</b></h5>
+		{% comment %} <h5>{% trans 'Penalty for non-compliance' %}: <b>{{ id.kara }}</b></h5> {% endcomment %}
+		{% comment %} <h5>{% trans 'Reason' %}: <b>{{ id.uzasadnienie }}</b></h5> {% endcomment %}
 		<h5>{% trans 'Positives' %}: <b>{{ id.args_for|default_if_none:"--" }}</b></h5>
 		<h5>{% trans 'Negatives' %}: <b>{{ id.args_against|default_if_none:"--" }}</b></h5>
         <h5>{% trans 'This law supersedes the following bills' %}: <b>{{ id.znosi|default_if_none:"--" }}</b></h5>
