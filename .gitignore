@@ -33,6 +33,7 @@ setup.cfg
 wiki.log
 gen_users_out.txt
 gen_users.txt
+django.mo
 
 ### Django ###
 *.log
