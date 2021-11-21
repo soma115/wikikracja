@@ -21,9 +21,16 @@ from django.contrib.auth.models import Group
 from PIL import Image
 import os
 from django.utils import translation
-from django.utils.translation import get_language
 from django.core.mail import EmailMessage
 import threading
+from django.views.generic import ListView
+from obywatele.tables import UzytkownikTable
+from obywatele.filters import UzytkownikFilter
+from django_filters.views import FilterView
+from django_tables2.views import SingleTableMixin
+from django_tables2 import RequestConfig
+# from django_tables2.export import TableExport
+
 
 l.basicConfig(filename='wiki.log', datefmt='%d-%b-%y %H:%M:%S', format='%(asctime)s %(levelname)s %(funcName)s() %(message)s', level=l.INFO)
 
@@ -304,17 +311,16 @@ def my_assets(request):
         )
 
 
-@login_required
-def assets(request):
-    zliczaj_obywateli(request)
-    all_assets = Uzytkownik.objects.filter(uid__is_active=True)
-    return render(
-        request,
-        'obywatele/assets.html',
-        {
-            'all_assets': all_assets
-        },
-    )
+class AssetListView(SingleTableMixin, FilterView):
+    # https://stackoverflow.com/questions/59094917/employeefilterset-resolved-field-emp-photo-with-exact-lookup-to-an-unrecogni
+    
+    table_class = UzytkownikTable
+    model = Uzytkownik
+    template_name = 'obywatele/assets.html'
+    filterset_class = UzytkownikFilter
+
+    def get_queryset(self):
+        return Uzytkownik.objects.filter(uid__is_active=True)
 
 
 @login_required
