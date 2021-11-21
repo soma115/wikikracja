@@ -11,7 +11,9 @@ class Uzytkownik(models.Model):
     uid = models.OneToOneField(User,
                                on_delete=models.CASCADE,
                                editable=False,
-                               null=True)
+                               null=True,
+                               verbose_name=_('Username'),
+                               )
 
     reputation = models.SmallIntegerField(null=True, default=0)
     polecajacy = models.CharField(editable=False, null=True, max_length=64)

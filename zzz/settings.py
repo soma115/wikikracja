@@ -103,6 +103,8 @@ INSTALLED_APPS = (
     'grappelli',
     'filebrowser',
     'django.contrib.admin',
+    'django_tables2',
+    'django_filters',
 )
 
 TINYMCE_DEFAULT_CONFIG = {
