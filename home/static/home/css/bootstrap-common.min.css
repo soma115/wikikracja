@@ -5445,7 +5445,7 @@ fieldset:disabled .btn {
     font-size: .75em;
     font-weight: 700;
     line-height: 1;
-    color: #fff;
+    color: var(--fg);
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
@@ -5672,7 +5672,7 @@ fieldset:disabled .btn {
     position: relative;
     display: block;
     padding: .5rem 1rem;
-    color: #fff;
+    color: var(--primary);
     text-decoration: none;
     background-color: var(--bg);
     border: .1px solid #444

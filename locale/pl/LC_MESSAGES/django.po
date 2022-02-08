@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-21 17:13+0100\n"
+"POT-Creation-Date: 2022-01-09 12:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,7 +103,7 @@ msgstr "Publiczne pokoje są archiwizowane jeśli nie są używane przez"
 
 #: chat/templates/chat/chat.html:98
 msgid "days. After"
-msgstr "dni. Po upływie"
+msgstr "dni. Po"
 
 #: chat/templates/chat/chat.html:98
 msgid ""
@@ -1370,7 +1370,7 @@ msgid ""
 "You can approve him/her here:"
 msgstr ""
 "zaproponował/a nową osobę\n"
-"Może ją zatwierdzić tutaj:"
+"Możesz ją zatwierdzić tutaj:"
 
 #: obywatele/views.py:265
 msgid "Changes was saved"
