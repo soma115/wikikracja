@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-26 16:53+0200\n"
+"POT-Creation-Date: 2022-01-09 12:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,6 +76,7 @@ msgstr ""
 #: obywatele/templates/obywatele/change_email.html:23
 #: obywatele/templates/obywatele/change_name.html:24
 #: obywatele/templates/obywatele/change_username.html:18
+#: obywatele/templates/obywatele/dodaj.html:67
 msgid "Save"
 msgstr ""
 
@@ -83,81 +84,63 @@ msgstr ""
 #: elibrary/templates/elibrary/book_form.html:28
 #: glosowania/templates/glosowania/dodaj.html:35
 #: glosowania/templates/glosowania/edit.html:34
-#: obywatele/templates/obywatele/dodaj.html:70
-#: obywatele/templates/obywatele/szczegoly.html:111
 msgid "Back"
 msgstr ""
 
-#: chat/templates/chat/chat.html:41
-msgid "Add Room"
-msgstr ""
-
-#: chat/templates/chat/chat.html:55
-msgid "Rooms"
-msgstr ""
-
-#: chat/templates/chat/chat.html:60 chat/templates/chat/chat.html:68
-#: chat/templates/chat/chat.html:102 chat/templates/chat/chat.html:111
-msgid "none"
-msgstr ""
-
-#: chat/templates/chat/chat.html:63 chat/templates/chat/chat.html:106
-msgid "Archived"
-msgstr ""
-
-#: chat/templates/chat/chat.html:78 chat/views.py:194
+#: chat/templates/chat/chat.html:67 chat/views.py:194
 msgid "Loading..."
 msgstr ""
 
-#: chat/templates/chat/chat.html:97
-msgid "Users"
+#: chat/templates/chat/chat.html:94
+msgid "Rooms"
 msgstr ""
 
-#: chat/templates/chat/chat.html:122
+#: chat/templates/chat/chat.html:98
 msgid "Public chat rooms are archived if they are not used for"
 msgstr ""
 
-#: chat/templates/chat/chat.html:124
+#: chat/templates/chat/chat.html:98
 msgid "days. After"
 msgstr ""
 
-#: chat/templates/chat/chat.html:126
-msgid "days they are deleted."
+#: chat/templates/chat/chat.html:98
+msgid ""
+"days they are deleted. Private messages are archived when user is blocked "
+"and deleted after"
 msgstr ""
 
-#: chat/templates/chat/chat.html:129
-msgid "Private messages are archived when user is blocked and deleted after"
-msgstr ""
-
-#: chat/templates/chat/chat.html:131
+#: chat/templates/chat/chat.html:98
 msgid "days"
 msgstr ""
 
-#: chat/templates/chat/chat.html:142
-msgid "Message history"
+#: chat/templates/chat/chat.html:105 chat/templates/chat/chat.html:113
+#: chat/templates/chat/chat.html:127 chat/templates/chat/chat.html:135
+msgid "none"
 msgstr ""
 
-#: chat/templates/chat/chat.html:143 chat/templates/chat/chat.html:151
-#: chat/templates/chat/chat.html:164 chat/views.py:191
+#: chat/templates/chat/chat.html:108 chat/templates/chat/chat.html:130
+msgid "Archived"
+msgstr ""
+
+#: chat/templates/chat/chat.html:122
+msgid "Users"
+msgstr ""
+
+#: chat/templates/chat/chat.html:181
+msgid "Changes history"
+msgstr ""
+
+#: chat/templates/chat/chat.html:182 chat/templates/chat/chat.html:190
+#: chat/templates/chat/chat.html:205 chat/views.py:191
 msgid "Close"
 msgstr ""
 
-#: chat/templates/chat/chat.html:163
+#: chat/templates/chat/chat.html:204
 msgid "Permission"
 msgstr ""
 
-#: chat/templates/chat/chat.html:175 chat/views.py:187
-msgid "No, don't show again"
-msgstr ""
-
-#: chat/templates/chat/chat.html:179 chat/views.py:186
-#: glosowania/templates/glosowania/szczegoly.html:42
-#: glosowania/templates/glosowania/szczegoly.html:74
-msgid "Yes"
-msgstr ""
-
 #: chat/views.py:177
-msgid "Manage notifications"
+msgid "Browser notifications are disabled"
 msgstr ""
 
 #: chat/views.py:178
@@ -174,7 +157,7 @@ msgstr ""
 
 #: chat/views.py:181
 #, python-format
-msgid "⚠ slow-mode is active. You can send messages once in %d seconds."
+msgid "Slow-mode %dsec"
 msgstr ""
 
 #: chat/views.py:182
@@ -197,6 +180,15 @@ msgid ""
 "Check your browser settings to enable them."
 msgstr ""
 
+#: chat/views.py:186 glosowania/templates/glosowania/szczegoly.html:42
+#: glosowania/templates/glosowania/szczegoly.html:74
+msgid "Yes"
+msgstr ""
+
+#: chat/views.py:187
+msgid "No, don't show again"
+msgstr ""
+
 #: chat/views.py:188
 msgid "edit"
 msgstr ""
@@ -206,7 +198,7 @@ msgid "edited"
 msgstr ""
 
 #: chat/views.py:190
-msgid "Message History"
+msgid "Changes History"
 msgstr ""
 
 #: chat/views.py:192
@@ -802,26 +794,26 @@ msgstr ""
 msgid "The %(site_name)s team"
 msgstr ""
 
-#: home/templates/home/base.html:47 home/templates/home/home.html:40
+#: home/templates/home/base.html:49 home/templates/home/home.html:40
 msgid "Start"
 msgstr ""
 
-#: home/templates/home/base.html:48
+#: home/templates/home/base.html:50
 msgid "Blog"
 msgstr ""
 
-#: home/templates/home/base.html:51 home/templates/home/home.html:12
+#: home/templates/home/base.html:53 home/templates/home/home.html:12
 #: home/templates/home/login.html:4 home/templates/home/login.html:14
 #: home/templates/home/login.html:25
 msgid "Login"
 msgstr ""
 
-#: home/templates/home/base.html:55 obywatele/models.py:39
+#: home/templates/home/base.html:57 obywatele/models.py:41
 #: obywatele/templates/obywatele/menu.html:14
 msgid "Citizens"
 msgstr ""
 
-#: home/templates/home/base.html:57
+#: home/templates/home/base.html:58
 msgid "Voting"
 msgstr ""
 
@@ -829,19 +821,19 @@ msgstr ""
 msgid "eLibrary"
 msgstr ""
 
-#: home/templates/home/base.html:64
+#: home/templates/home/base.html:62
 msgid "Chat"
 msgstr ""
 
-#: home/templates/home/base.html:67
+#: home/templates/home/base.html:64
 msgid "profile"
 msgstr ""
 
-#: home/templates/home/base.html:69
-msgid "admin"
+#: home/templates/home/base.html:65
+msgid "settings"
 msgstr ""
 
-#: home/templates/home/base.html:71
+#: home/templates/home/base.html:66
 msgid "logout"
 msgstr ""
 
@@ -887,6 +879,10 @@ msgstr ""
 
 #: home/templates/home/home.html:42
 msgid "there are no upcoming referenda at this moment"
+msgstr ""
+
+#: home/templates/home/login.html:16
+msgid "Email"
 msgstr ""
 
 #: home/templates/home/login.html:33
@@ -961,170 +957,154 @@ msgstr ""
 msgid "New email address confirmation"
 msgstr ""
 
-#: obywatele/models.py:20
-msgid "Foto"
-msgstr ""
-
-#: obywatele/models.py:21
-msgid "Phone number i.e. +48 123 456 789"
-msgstr ""
-
-#: obywatele/models.py:21
-msgid "Phone number"
+#: obywatele/models.py:15 obywatele/templates/obywatele/change_username.html:9
+msgid "Username"
 msgstr ""
 
 #: obywatele/models.py:22
+msgid "Foto"
+msgstr ""
+
+#: obywatele/models.py:23
+msgid "Phone number i.e. +48 123 456 789"
+msgstr ""
+
+#: obywatele/models.py:23
+msgid "Phone number"
+msgstr ""
+
+#: obywatele/models.py:24
 msgid "Where one spend most of their time"
 msgstr ""
 
-#: obywatele/models.py:22 obywatele/templates/obywatele/assets.html:13
-#: obywatele/templates/obywatele/my_profile.html:35
+#: obywatele/models.py:24 obywatele/templates/obywatele/my_profile.html:35
 #: obywatele/templates/obywatele/szczegoly.html:56
 msgid "City"
 msgstr ""
 
-#: obywatele/models.py:23
+#: obywatele/models.py:25
 msgid "Tasks performed in our group"
 msgstr ""
 
-#: obywatele/models.py:23 obywatele/templates/obywatele/assets.html:12
-#: obywatele/templates/obywatele/my_profile.html:43
+#: obywatele/models.py:25 obywatele/templates/obywatele/my_profile.html:43
 #: obywatele/templates/obywatele/szczegoly.html:48
 msgid "Responsibilities"
 msgstr ""
 
-#: obywatele/models.py:24
+#: obywatele/models.py:26
 msgid "Hobbies one have"
 msgstr ""
 
-#: obywatele/models.py:24 obywatele/templates/obywatele/assets.html:14
-#: obywatele/templates/obywatele/my_profile.html:51
+#: obywatele/models.py:26 obywatele/templates/obywatele/my_profile.html:51
 #: obywatele/templates/obywatele/szczegoly.html:60
 msgid "Hobby"
 msgstr ""
 
-#: obywatele/models.py:25
+#: obywatele/models.py:27
 msgid "Things you are willing to give away for free"
 msgstr ""
 
-#: obywatele/models.py:25 obywatele/templates/obywatele/assets.html:15
-#: obywatele/templates/obywatele/my_profile.html:59
+#: obywatele/models.py:27 obywatele/templates/obywatele/my_profile.html:59
 #: obywatele/templates/obywatele/szczegoly.html:64
 msgid "To give away"
 msgstr ""
 
-#: obywatele/models.py:26
+#: obywatele/models.py:28
 msgid "Stuff you can borrow to others"
 msgstr ""
 
-#: obywatele/models.py:26 obywatele/templates/obywatele/assets.html:16
-#: obywatele/templates/obywatele/my_profile.html:63
+#: obywatele/models.py:28 obywatele/templates/obywatele/my_profile.html:63
 #: obywatele/templates/obywatele/szczegoly.html:68
 msgid "To borrow"
 msgstr ""
 
-#: obywatele/models.py:27
+#: obywatele/models.py:29
 msgid "Stuff you have for sale"
 msgstr ""
 
-#: obywatele/models.py:27 obywatele/templates/obywatele/assets.html:17
-#: obywatele/templates/obywatele/my_profile.html:67
+#: obywatele/models.py:29 obywatele/templates/obywatele/my_profile.html:67
 #: obywatele/templates/obywatele/szczegoly.html:72
 msgid "For sale"
 msgstr ""
 
-#: obywatele/models.py:28
+#: obywatele/models.py:30
 msgid "What do you need"
 msgstr ""
 
-#: obywatele/models.py:28 obywatele/templates/obywatele/assets.html:18
-#: obywatele/templates/obywatele/my_profile.html:71
+#: obywatele/models.py:30 obywatele/templates/obywatele/my_profile.html:71
 #: obywatele/templates/obywatele/szczegoly.html:76
 msgid "I need"
 msgstr ""
 
-#: obywatele/models.py:29
+#: obywatele/models.py:31
 msgid "Practical skills one have"
 msgstr ""
 
-#: obywatele/models.py:29 obywatele/templates/obywatele/assets.html:19
-#: obywatele/templates/obywatele/my_profile.html:79
+#: obywatele/models.py:31 obywatele/templates/obywatele/my_profile.html:79
 #: obywatele/templates/obywatele/szczegoly.html:80
 msgid "Skills"
 msgstr ""
 
-#: obywatele/models.py:30
+#: obywatele/models.py:32
 msgid "Knowledge one have"
 msgstr ""
 
-#: obywatele/models.py:30 obywatele/templates/obywatele/assets.html:20
-#: obywatele/templates/obywatele/my_profile.html:83
+#: obywatele/models.py:32 obywatele/templates/obywatele/my_profile.html:83
 #: obywatele/templates/obywatele/szczegoly.html:84
 msgid "Knowledge"
 msgstr ""
 
-#: obywatele/models.py:31
+#: obywatele/models.py:33
 msgid "Things one would like to learn"
 msgstr ""
 
-#: obywatele/models.py:31 obywatele/templates/obywatele/assets.html:21
-#: obywatele/templates/obywatele/my_profile.html:75
+#: obywatele/models.py:33 obywatele/templates/obywatele/my_profile.html:75
 #: obywatele/templates/obywatele/szczegoly.html:88
 msgid "I want to learn"
 msgstr ""
 
-#: obywatele/models.py:32
+#: obywatele/models.py:34
 msgid "If running a business"
 msgstr ""
 
-#: obywatele/models.py:32 obywatele/templates/obywatele/assets.html:22
-#: obywatele/templates/obywatele/my_profile.html:55
+#: obywatele/models.py:34 obywatele/templates/obywatele/my_profile.html:55
 #: obywatele/templates/obywatele/szczegoly.html:92
 msgid "Business"
 msgstr ""
 
-#: obywatele/models.py:33
+#: obywatele/models.py:35
 msgid "Profession"
 msgstr ""
 
-#: obywatele/models.py:33 obywatele/templates/obywatele/assets.html:23
-#: obywatele/templates/obywatele/my_profile.html:47
+#: obywatele/models.py:35 obywatele/templates/obywatele/my_profile.html:47
 #: obywatele/templates/obywatele/szczegoly.html:96
 msgid "Job"
 msgstr ""
 
-#: obywatele/models.py:34
+#: obywatele/models.py:36
 msgid "What gift would you like to receive"
 msgstr ""
 
-#: obywatele/models.py:34 obywatele/templates/obywatele/assets.html:24
-#: obywatele/templates/obywatele/my_profile.html:87
+#: obywatele/models.py:36 obywatele/templates/obywatele/my_profile.html:87
 #: obywatele/templates/obywatele/szczegoly.html:100
 msgid "Gift"
 msgstr ""
 
-#: obywatele/models.py:35
+#: obywatele/models.py:37
 msgid "Other things worth mentioning"
 msgstr ""
 
-#: obywatele/models.py:35 obywatele/templates/obywatele/assets.html:25
-#: obywatele/templates/obywatele/my_profile.html:91
+#: obywatele/models.py:37 obywatele/templates/obywatele/my_profile.html:91
 #: obywatele/templates/obywatele/szczegoly.html:104
 msgid "Other"
 msgstr ""
 
-#: obywatele/models.py:38
+#: obywatele/models.py:40
 msgid "Citizen"
 msgstr ""
 
-#: obywatele/templates/obywatele/assets.html:10
-msgid "Name"
-msgstr ""
-
-#: obywatele/templates/obywatele/assets.html:11
-#: obywatele/templates/obywatele/my_profile.html:39
-#: obywatele/templates/obywatele/szczegoly.html:52
-msgid "Phone"
+#: obywatele/templates/obywatele/assets.html:20
+msgid "Filter"
 msgstr ""
 
 #: obywatele/templates/obywatele/change_email.html:7
@@ -1154,19 +1134,10 @@ msgstr ""
 msgid "Change your username"
 msgstr ""
 
-#: obywatele/templates/obywatele/change_username.html:9
-msgid "Username"
-msgstr ""
-
 #: obywatele/templates/obywatele/dodaj.html:28
 msgid ""
 "Below fields are not mandatory but filling them out will help us make the "
 "right decision when accepting a new person."
-msgstr ""
-
-#: obywatele/templates/obywatele/dodaj.html:69
-#: obywatele/templates/obywatele/my_assets.html:86
-msgid "Submit"
 msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:22
@@ -1191,7 +1162,8 @@ msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:58
 msgid ""
-"Acceptance formula: required_reputation = round(log(Population) * Multiplier)"
+"Acceptance formula: required_reputation = floor(log(Population * Multiplier "
+"+ 1)-2"
 msgstr ""
 
 #: obywatele/templates/obywatele/menu.html:62
@@ -1218,6 +1190,10 @@ msgstr ""
 
 #: obywatele/templates/obywatele/my_assets.html:8
 msgid "Here you can edit your assets"
+msgstr ""
+
+#: obywatele/templates/obywatele/my_assets.html:86
+msgid "Submit"
 msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:5
@@ -1261,6 +1237,11 @@ msgid ""
 "You don't have to fill all of them but the more information you'll give - "
 "the better we will be able to fullfill our needs. Also we will know each "
 "other better."
+msgstr ""
+
+#: obywatele/templates/obywatele/my_profile.html:39
+#: obywatele/templates/obywatele/szczegoly.html:52
+msgid "Phone"
 msgstr ""
 
 #: obywatele/templates/obywatele/my_profile.html:97
@@ -1308,73 +1289,73 @@ msgstr ""
 msgid " I do not accept this person "
 msgstr ""
 
-#: obywatele/views.py:55
+#: obywatele/views.py:62
 msgid "Your new email has been saved."
 msgstr ""
 
-#: obywatele/views.py:74 obywatele/views.py:92
+#: obywatele/views.py:81 obywatele/views.py:99
 msgid "Your name has been saved."
 msgstr ""
 
-#: obywatele/views.py:143
+#: obywatele/views.py:150
 msgid "Email already exist"
 msgstr ""
 
-#: obywatele/views.py:178
+#: obywatele/views.py:185
 msgid "The new user has been saved"
 msgstr ""
 
-#: obywatele/views.py:182
+#: obywatele/views.py:189
 msgid "New citizen has been proposed"
 msgstr ""
 
-#: obywatele/views.py:183
+#: obywatele/views.py:190
 msgid ""
 "proposed new citizen\n"
 "You can approve him/her here:"
 msgstr ""
 
-#: obywatele/views.py:258
+#: obywatele/views.py:265
 msgid "Changes was saved"
 msgstr ""
 
-#: obywatele/views.py:271
+#: obywatele/views.py:278
 msgid "Form is not valid!"
 msgstr ""
 
-#: obywatele/views.py:346
+#: obywatele/views.py:352
 msgid "positive"
 msgstr ""
 
-#: obywatele/views.py:353
+#: obywatele/views.py:359
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:360
+#: obywatele/views.py:366
 msgid "neutral"
 msgstr ""
 
-#: obywatele/views.py:453
+#: obywatele/views.py:459
 msgid "Your account has been blocked"
 msgstr ""
 
-#: obywatele/views.py:454
+#: obywatele/views.py:460
 msgid "Welcome"
 msgstr ""
 
-#: obywatele/views.py:454
+#: obywatele/views.py:460
 msgid "Your account on page"
 msgstr ""
 
-#: obywatele/views.py:454 obywatele/views.py:463
+#: obywatele/views.py:460 obywatele/views.py:469
 msgid "has been blocked."
 msgstr ""
 
-#: obywatele/views.py:462
+#: obywatele/views.py:468
 msgid "Citizen has been banned"
 msgstr ""
 
-#: obywatele/views.py:463
+#: obywatele/views.py:469
 msgid "Account"
 msgstr ""
 

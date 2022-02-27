@@ -99,7 +99,7 @@ class MessageVote(models.Model):
         unique_together = ('user', 'message')
 
 
-# Store message history separately,
+# Store changes history separately,
 # so you don't have to deal with it unless you need it
 class MessageHistory(models.Model):
     """

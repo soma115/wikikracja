@@ -20,7 +20,7 @@
         <h5>{% trans 'This law supersedes the following bills' %}: <b>{{ id.znosi|default_if_none:"--" }}</b></h5>
 			<p>
 				{% trans 'Author' %}: {{ id.author|default_if_none:"--" }} | {% trans 'Number of people signed the motion for a referendum' %}: {{ id.ile_osob_podpisalo }}
-				{% if id.status >= 6 %} | {% trans 'For' %}: {{ id.za }} | {% trans 'Against' %}: {{ id.przeciw }} {% endif %}
+				{% if id.status >= 5 %} | {% trans 'For' %}: {{ id.za }} | {% trans 'Against' %}: {{ id.przeciw }} {% endif %}
 				
 				<br><small>
 				{% if id.data_powstania %} {% trans 'Date created' %}: {{ id.data_powstania }} {% endif %}

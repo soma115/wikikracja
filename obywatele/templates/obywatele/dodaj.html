@@ -7,67 +7,64 @@
 
 <form action="." method="POST" enctype="multipart/form-data" class="post-form">{% csrf_token %}
 	<div class="row">
-		<div class="col-4">
+		<div class="col-lg-4 col-sm-12 text-secondary bg-primary">
 			{{ user_form.username|as_crispy_field }}
 		</div>
-		<div class="col-4">
+		<div class="col-lg-4 col-sm-12">
 			{{ user_form.email|as_crispy_field }}
 		</div>
-		<div class="col-4">
+		<div class="col-lg-4 col-sm-12">
 			{{ profile_form.phone|as_crispy_field }}
 		</div>
-		<div class="col-4">
+		<div class="col-lg-4 col-sm-12">
 			{{ user_form.first_name|as_crispy_field }}
 		</div>
-		<div class="col-4">
+		<div class="col-lg-4 col-sm-12">
 			{{ user_form.last_name|as_crispy_field }}
 		</div>
 	</div>
 
-	<p>
+	<p class="text-center mt-3 h5">
 		{% trans "Below fields are not mandatory but filling them out will help us make the right decision when accepting a new person." %}
 	</p>
 
 	<div class="row">
-		<div class="col-6">
+		<div class="col-lg-6 col-sm-12">
 			{{ profile_form.city|as_crispy_field }}
 		</div>
-		<div class="col-6">
+		<div class="col-lg-6 col-sm-12">
 			{{ profile_form.hobby|as_crispy_field }}
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-6">
+		<div class="col-lg-6 col-sm-12">
 			{{ profile_form.job|as_crispy_field }}
 		</div>
-		<div class="col-6">
+		<div class="col-lg-6 col-sm-12">
 			{{ profile_form.business|as_crispy_field }}
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-6">
+		<div class="col-lg-6 col-sm-12">
 			{{ profile_form.skills|as_crispy_field }}
 		</div>
-		<div class="col-6">
+		<div class="col-lg-6 col-sm-12">
 			{{ profile_form.knowledge|as_crispy_field }}
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-6">
+		<div class="col-lg-6 col-sm-12">
 			{{ profile_form.want_to_learn|as_crispy_field }}
 		</div>
-		<div class="col-6">
+		<div class="col-lg-6 col-sm-12">
 			{{ profile_form.other|as_crispy_field }}
 		</div>
 	</div>
 
-	
-
-	<button type="submit" class="save btn btn-danger btn-sm">{% trans 'Submit' %}</button>
-	<button onclick="window.history.back();" class="btn btn-warning btn-sm" type="button">{% trans 'Back' %}</button>
+	<button type="submit" class="save btn btn-danger btn-sm">{% trans 'Save' %}</button>
 </form>
 
 {% endblock citizens %}

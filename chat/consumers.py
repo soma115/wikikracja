@@ -119,8 +119,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             # unless it was explicitly specified not to.
             # It is done to prevent some messages sent by handler to be treated as response to request.
             # For example, client asks for messages history and server needs to notify everyone
-            # that user fetches message history. It will be done in same handler, but notification will not have trace id,
-            # unlike message history sent to user.
+            # that user fetches changes history. It will be done in same handler, but notification will not have trace id,
+            # unlike changes history sent to user.
             # bruh that's a lot of text.
             await handler(self=self, proxy=result, **args)
             # there are 3 possible scenarios:

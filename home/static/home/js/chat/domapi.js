@@ -238,7 +238,7 @@ export default class DomApi {
 
     setSlowMode(delay) {
         if (delay == 0) return;
-        $(`.slow-mode-hint`).html(_(`⚠ slow-mode is active. You can send messages once in %d seconds.`).replace("%d", delay));
+        $(`.slow-mode-hint`).html(_(`Slow-mode %dsec`).replace("%d", delay));
     }
 
     setSlowModeTimeLeft(seconds) {
@@ -246,7 +246,7 @@ export default class DomApi {
             $('.slow-mode-timer').hide();
             return;
         }
-        $('.slow-mode-timer').show().text("" + seconds);
+        $('.slow-mode-timer').show().text("/" + seconds);
     }
 
     getLatestOwnMessage() {
@@ -285,13 +285,13 @@ export default class DomApi {
         modal.find(".modal-title").html(title);
     }
 
-    showNotificationPermModal(title, body) {
-        let modal = $("#message-permission-modal").modal('show');
-        modal.find(".modal-body").html(body)
-        modal.find(".modal-title").html(title);
-    }
+    // showNotificationPermModal(title, body) {
+    //     let modal = $("#message-permission-modal").modal('show');
+    //     modal.find(".modal-body").html(body)
+    //     modal.find(".modal-title").html(title);
+    // }
 
     addPermissionBanner() {
-        $('.room-header').append("<button class='permission-banner btn btn-success'> <i class='far fa-bell'></i>" + _("Manage notifications") + "</button>")
+        $('.room-header').append("<button type='button' class='alert alert-danger col-12 text-center p-0' onclick='Notification.requestPermission()'><i class='far fa-bell-slash'></i>" + " " + _("Browser notifications are disabled") + " " + "<i class ='far fa-bell-slash'></i></button>")
     }
 }
