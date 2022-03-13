@@ -108,13 +108,15 @@ export default class DomApi {
 
     formatMessage(raw_message) {
         let escaped = escapeHtml(raw_message);
-        let URL_REGEX = /(http(s){0,1}:\/\/){0,1}[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)/g;
+        // let URL_REGEX = /(http(s){0,1}:\/\/){0,1}[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)/g; //default
+        let URL_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)/g; // http only
+        // let URL_REGEX = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)/g; // dot is enough
         let formatted = escaped;
 
         let matches = escaped.match(URL_REGEX);
         if (matches != null) {
             for (let match of matches) {
-                formatted = raw_message.replace(match, `<a href='${match}'>${match}</a>`);
+                formatted = raw_message.replace(match, `<a href='${match}' target="_blank">${match}</a>`);
             }
         }
         return formatted;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-13 15:41+0100\n"
+"POT-Creation-Date: 2022-03-13 15:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,7 +188,7 @@ msgstr ""
 "Jeśli nic się nie dzieje, być może zbyt wiele razy zignorowałeś prośbę o "
 "pozwolenie. Sprawdź ustawienia swojej przeglądarki, aby je włączyć."
 
-#: chat/views.py:186 glosowania/templates/glosowania/szczegoly.html:42
+#: chat/views.py:186 glosowania/templates/glosowania/szczegoly.html:41
 #: glosowania/templates/glosowania/szczegoly.html:74
 msgid "Yes"
 msgstr "Tak"
@@ -617,7 +617,7 @@ msgstr "Ten przepis obowiązuje od"
 msgid "Protocol"
 msgstr "Protokół"
 
-#: glosowania/templates/glosowania/szczegoly.html:44
+#: glosowania/templates/glosowania/szczegoly.html:43
 #: glosowania/templates/glosowania/szczegoly.html:75
 msgid "No"
 msgstr "Nie"
