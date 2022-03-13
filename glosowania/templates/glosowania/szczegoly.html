@@ -36,12 +36,12 @@
 			<p>
 				<h5>{% trans 'Protocol' %}:</h5>
 				{% for i in report %}
-					{{ i.code }}
 					{% if i.vote %}
 						{% trans "Yes" %}
 					{% else %}
 						{% trans "No" %}
 					{% endif %}
+					{{ i.code }}
 					<br>
 				{% endfor %}
 			</p>

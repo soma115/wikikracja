@@ -214,7 +214,7 @@ def details(request, pk):
     voted = KtoJuzGlosowal.objects.filter(projekt=pk, ktory_uzytkownik_juz_zaglosowal=request.user).exists()
 
     # Report
-    report = VoteCode.objects.filter(project_id=pk)
+    report = VoteCode.objects.filter(project_id=pk).order_by('vote', 'code')
 
     # State dictionary
     state = {1: _('Proposal'), 2: _('Rejected'), 3: _('Queued'), 4: _('Referendum'), 5: _('Rejected'), 6: _('Vacatio Legis'), 7: _('Governing Law'), }
