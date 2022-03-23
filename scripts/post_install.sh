@@ -22,5 +22,8 @@ certbot --nginx --quiet --agree-tos --domains ${DOMAIN}
 # Fixtures z początkowymi głosowaniami do wiki
 cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py loaddata $HOME/$APP/glosowania/fixtures/votings.json
 
+# COLLECT STATIC
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py collectstatic --no-input -v 0 --no-post-process -i *bootstrap.css
+
 # RESTART INSTANCE
 supervisorctl restart ${APP}:asgi0
