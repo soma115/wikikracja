@@ -22,6 +22,19 @@ certbot --nginx --quiet --agree-tos --domains ${DOMAIN}
 # Fixtures z początkowymi głosowaniami do wiki
 cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py loaddata $HOME/$APP/glosowania/fixtures/votings.json
 
+# DEPLOY DB
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py makemigrations article;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py makemigrations chat;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py makemigrations customize;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py makemigrations elibrary;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py makemigrations glosowania;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py makemigrations obywatele;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py makemigrations;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py migrate;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py makemessages -l 'en' --ignore=.git/* --ignore=static/* --ignore=.mypy_cache/*;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py makemessages -l 'pl' --ignore=.git/* --ignore=static/* --ignore=.mypy_cache/*;
+cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py compilemessages --ignore=.git/* --ignore=static/* --ignore=.mypy_cache/*;
+
 # COLLECT STATIC
 cd $HOME/$APP; $HOME/venv/bin/python $HOME/$APP/manage.py collectstatic --no-input -v 0 --no-post-process -i *bootstrap.css
 

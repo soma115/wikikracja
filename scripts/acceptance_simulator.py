@@ -13,7 +13,7 @@ max_possible_acceptance = n_users - 2
 -2 is there because first 3 users needs to be accepted without explicit approval from others. First 3 users are usualy bulk-generated.
 Sane range 1.6 - 2.7
 '''
-ACCEPTANCE_MULTIPLIER = 90
+ACCEPTANCE_MULTIPLIER = 5
 # ACCEPTANCE_MULTIPLIER = 7
 
 print('Population | Required acceptance')

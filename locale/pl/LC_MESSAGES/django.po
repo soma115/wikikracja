@@ -480,7 +480,7 @@ msgstr "Nie ma propozycji o tym statusie"
 
 #: glosowania/templates/glosowania/status.html:28
 msgid "Voting parameters"
-msgstr "Legenda"
+msgstr "Rozwiń legendę"
 
 #: glosowania/templates/glosowania/status.html:37
 msgid "New proposal needs to gather"
@@ -1310,7 +1310,7 @@ msgstr "zaproponowany dnia"
 #: obywatele/templates/obywatele/poczekalnia.html:18
 #: obywatele/templates/obywatele/start.html:18
 msgid "System parameters"
-msgstr "Legenda"
+msgstr "Rozwiń legendę"
 
 #: obywatele/templates/obywatele/szczegoly.html:18
 msgid "Introduced by"
