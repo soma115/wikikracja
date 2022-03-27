@@ -139,7 +139,7 @@ def chat(request):
         'last_used_room': json.dumps(last_user_room),
         'translations': get_translations(),
 
-        'public_active': allowed_rooms.filter(public=True, archived=False),
+        'public_active': allowed_rooms.filter(public=True, archived=False).extra(select={'lower_title':'lower(title)'}).order_by('lower_title'),
         'public_archived': allowed_rooms.filter(public=True, archived=True),
         'private_active': allowed_rooms.filter(public=False, archived=False),
         'private_archived': allowed_rooms.filter(public=False, archived=True),

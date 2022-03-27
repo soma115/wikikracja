@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-09 12:21+0100\n"
+"POT-Creation-Date: 2022-03-13 16:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,7 +180,7 @@ msgid ""
 "Check your browser settings to enable them."
 msgstr ""
 
-#: chat/views.py:186 glosowania/templates/glosowania/szczegoly.html:42
+#: chat/views.py:186 glosowania/templates/glosowania/szczegoly.html:41
 #: glosowania/templates/glosowania/szczegoly.html:74
 msgid "Yes"
 msgstr ""
@@ -594,7 +594,7 @@ msgstr ""
 msgid "Protocol"
 msgstr ""
 
-#: glosowania/templates/glosowania/szczegoly.html:44
+#: glosowania/templates/glosowania/szczegoly.html:43
 #: glosowania/templates/glosowania/szczegoly.html:75
 msgid "No"
 msgstr ""
@@ -682,91 +682,91 @@ msgstr ""
 msgid "Your vote has been saved. You voted No."
 msgstr ""
 
-#: glosowania/views.py:274 glosowania/views.py:275 glosowania/views.py:290
-#: glosowania/views.py:291 glosowania/views.py:323 glosowania/views.py:324
-#: glosowania/views.py:336 glosowania/views.py:337 glosowania/views.py:361
-#: glosowania/views.py:362
+#: glosowania/views.py:275 glosowania/views.py:276 glosowania/views.py:291
+#: glosowania/views.py:292 glosowania/views.py:325 glosowania/views.py:326
+#: glosowania/views.py:339 glosowania/views.py:340 glosowania/views.py:366
+#: glosowania/views.py:367
 msgid "Proposal no."
 msgstr ""
 
-#: glosowania/views.py:274
+#: glosowania/views.py:275
 msgid "is approved for referendum"
 msgstr ""
 
-#: glosowania/views.py:276
+#: glosowania/views.py:277
 msgid "gathered required amount of signatures and will be voted from"
 msgstr ""
 
-#: glosowania/views.py:277
+#: glosowania/views.py:278
 msgid "to"
 msgstr ""
 
-#: glosowania/views.py:278 glosowania/views.py:294 glosowania/views.py:327
-#: glosowania/views.py:340
+#: glosowania/views.py:279 glosowania/views.py:295 glosowania/views.py:329
+#: glosowania/views.py:343
 msgid "Click here to read proposal: http://"
 msgstr ""
 
-#: glosowania/views.py:290 glosowania/views.py:292
+#: glosowania/views.py:291 glosowania/views.py:293
 msgid "didn't gathered required amount of signatures"
 msgstr ""
 
-#: glosowania/views.py:292
+#: glosowania/views.py:293
 msgid "and was removed from queue."
 msgstr ""
 
-#: glosowania/views.py:293 glosowania/views.py:339
+#: glosowania/views.py:294 glosowania/views.py:342
 msgid "Feel free to improve it and send it again."
 msgstr ""
 
-#: glosowania/views.py:305
+#: glosowania/views.py:306
 msgid "Referendum on proposal no."
 msgstr ""
 
-#: glosowania/views.py:305
+#: glosowania/views.py:306
 msgid "is starting now"
 msgstr ""
 
-#: glosowania/views.py:306
+#: glosowania/views.py:307
 msgid "It is time to vote on proposal no."
 msgstr ""
 
-#: glosowania/views.py:307
+#: glosowania/views.py:308
 msgid "Referendum ends at"
 msgstr ""
 
-#: glosowania/views.py:309
+#: glosowania/views.py:310
 msgid "Click here to vote: http://"
 msgstr ""
 
-#: glosowania/views.py:323
+#: glosowania/views.py:325
 msgid "was approved"
 msgstr ""
 
-#: glosowania/views.py:325
+#: glosowania/views.py:327
 msgid "was approved in referendum and is now in Vacatio Legis period"
 msgstr ""
 
-#: glosowania/views.py:326
+#: glosowania/views.py:328
 msgid "The law will take effect on"
 msgstr ""
 
-#: glosowania/views.py:336
+#: glosowania/views.py:339
 msgid "was rejected"
 msgstr ""
 
-#: glosowania/views.py:338
+#: glosowania/views.py:341
 msgid "was rejected in referendum."
 msgstr ""
 
-#: glosowania/views.py:361
+#: glosowania/views.py:366
 msgid "is in efect from today"
 msgstr ""
 
-#: glosowania/views.py:362
+#: glosowania/views.py:367
 msgid "became abiding law today"
 msgstr ""
 
-#: glosowania/views.py:363
+#: glosowania/views.py:368
 msgid "Click here to read it: http://"
 msgstr ""
 
@@ -848,7 +848,7 @@ msgstr ""
 #: obywatele/templates/obywatele/change_email.html:24
 #: obywatele/templates/obywatele/change_name.html:25
 #: obywatele/templates/obywatele/change_username.html:19
-#: obywatele/templates/obywatele/my_assets.html:87
+#: obywatele/templates/obywatele/my_assets.html:88
 msgid "Cancel"
 msgstr ""
 
@@ -941,19 +941,19 @@ msgstr ""
 msgid "You typed something wrong. See what error appeared above and try again."
 msgstr ""
 
-#: obywatele/forms.py:65
+#: obywatele/forms.py:66
 msgid "The two email addresses fields didn't match."
 msgstr ""
 
-#: obywatele/forms.py:66
+#: obywatele/forms.py:67
 msgid "The email address is the same as the one already defined."
 msgstr ""
 
-#: obywatele/forms.py:70
+#: obywatele/forms.py:71
 msgid "New email address"
 msgstr ""
 
-#: obywatele/forms.py:75
+#: obywatele/forms.py:76
 msgid "New email address confirmation"
 msgstr ""
 
@@ -1192,7 +1192,7 @@ msgstr ""
 msgid "Here you can edit your assets"
 msgstr ""
 
-#: obywatele/templates/obywatele/my_assets.html:86
+#: obywatele/templates/obywatele/my_assets.html:87
 msgid "Submit"
 msgstr ""
 
@@ -1315,47 +1315,47 @@ msgid ""
 "You can approve him/her here:"
 msgstr ""
 
-#: obywatele/views.py:265
+#: obywatele/views.py:263
 msgid "Changes was saved"
 msgstr ""
 
-#: obywatele/views.py:278
+#: obywatele/views.py:276
 msgid "Form is not valid!"
 msgstr ""
 
-#: obywatele/views.py:352
+#: obywatele/views.py:350
 msgid "positive"
 msgstr ""
 
-#: obywatele/views.py:359
+#: obywatele/views.py:357
 msgid "negative"
 msgstr ""
 
-#: obywatele/views.py:366
+#: obywatele/views.py:364
 msgid "neutral"
 msgstr ""
 
-#: obywatele/views.py:459
+#: obywatele/views.py:457
 msgid "Your account has been blocked"
 msgstr ""
 
-#: obywatele/views.py:460
+#: obywatele/views.py:458
 msgid "Welcome"
 msgstr ""
 
-#: obywatele/views.py:460
+#: obywatele/views.py:458
 msgid "Your account on page"
 msgstr ""
 
-#: obywatele/views.py:460 obywatele/views.py:469
+#: obywatele/views.py:458 obywatele/views.py:467
 msgid "has been blocked."
 msgstr ""
 
-#: obywatele/views.py:468
+#: obywatele/views.py:466
 msgid "Citizen has been banned"
 msgstr ""
 
-#: obywatele/views.py:469
+#: obywatele/views.py:467
 msgid "Account"
 msgstr ""
 

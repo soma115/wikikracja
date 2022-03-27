@@ -222,12 +222,10 @@ def my_assets(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            # Remove foto: form.cleaned_data['foto'] = False
-            # Add foto:  form.cleaned_data['foto'] = uplodaed_file_name.png
-            if form.cleaned_data['foto'] == False:
-                profile.foto = 'obywatele/anonymous.png'
-            else:
-                profile.foto = form.cleaned_data['foto']
+            # if form.cleaned_data['foto'] == False:
+            #     profile.foto = 'obywatele/anonymous.png'
+            # else:
+            #     profile.foto = form.cleaned_data['foto']
             profile.phone = form.cleaned_data['phone']
             profile.responsibilities = form.cleaned_data['responsibilities']
             profile.city = form.cleaned_data['city']
@@ -245,18 +243,18 @@ def my_assets(request):
             profile.other = form.cleaned_data['other']
             profile.save()
 
-            if form.cleaned_data['foto']:
-                image = Image.open(profile.foto)
-                width, height = image.width, image.height
-                dest_height = 200
-                factor = height / dest_height
-                new_height = round(height / factor)
-                new_width = round(width / factor)
-                image = image.resize((new_width, new_height), Image.ANTIALIAS)
-                image.save('media/obywatele/' + str(user.id) + '.png')
-                profile.foto.name = 'obywatele/' + str(user.id) + '.png'
-                os.remove(profile.foto.file.name)  # delete original file
-                profile.save()
+            # if form.cleaned_data['foto']:
+            #     image = Image.open(profile.foto)
+            #     width, height = image.width, image.height
+            #     dest_height = 200
+            #     factor = height / dest_height
+            #     new_height = round(height / factor)
+            #     new_width = round(width / factor)
+            #     image = image.resize((new_width, new_height), Image.ANTIALIAS)
+            #     image.save('media/obywatele/' + str(user.id) + '.png')
+            #     profile.foto.name = 'obywatele/' + str(user.id) + '.png'
+            #     os.remove(profile.foto.file.name)  # delete original file
+            #     profile.save()
 
             return render(
                 request,
@@ -282,7 +280,7 @@ def my_assets(request):
             )
     else:  # request.method != 'POST':
         form = ProfileForm(initial={  # pre-populate fields from database
-            'foto': profile.foto,
+            # 'foto': profile.foto,
             'phone': profile.phone,
             'responsibilities': profile.responsibilities,
             'city': profile.city,

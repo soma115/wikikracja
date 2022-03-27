@@ -214,7 +214,7 @@ def details(request, pk):
     voted = KtoJuzGlosowal.objects.filter(projekt=pk, ktory_uzytkownik_juz_zaglosowal=request.user).exists()
 
     # Report
-    report = VoteCode.objects.filter(project_id=pk)
+    report = VoteCode.objects.filter(project_id=pk).order_by('vote', 'code')
 
     # State dictionary
     state = {1: _('Proposal'), 2: _('Rejected'), 3: _('Queued'), 4: _('Referendum'), 5: _('Rejected'), 6: _('Vacatio Legis'), 7: _('Governing Law'), }
@@ -270,6 +270,7 @@ def zliczaj_wszystko():
                 i.data_referendum_start = i.data_zebrania_podpisow + timedelta(days=s.KOLEJKA) + timedelta(days=-dzisiaj.weekday()+0, weeks=1)
                 i.data_referendum_stop = i.data_referendum_start + timedelta(days=s.CZAS_TRWANIA_REFERENDUM)
                 i.save()
+                l.info('Proposition ' + str(i.id) + ' changed status from PROPOSITION to QUEUE".')
                 SendEmail(
                     str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("is approved for referendum")),
                     str(_("Proposal no.")) + " " + str(i.id) + " " +
@@ -280,11 +281,11 @@ def zliczaj_wszystko():
                 )
                 continue
 
-            # FROM PROPOSITION TO NO_INTREST
+            # FROM PROPOSITION TO NOT_INTRESTED
             if i.status == propozycja and i.data_powstania + timedelta(days=s.CZAS_NA_ZEBRANIE_PODPISOW) <= dzisiaj:
                 i.status = brak_poparcia
                 i.save()
-                # log('Propozycja ' + str(i.id) + ' zmieniła status na "brak poparcia".')
+                l.info('Proposition ' + str(i.id) + ' changed status from PROPOSITION to NOT_INTRESTED.')
                 SendEmail(
                     # _(f"Proposal {str(i.id)} didn't gathered required amount of signatures"),  # translation doesn't work this way
                     str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("didn't gathered required amount of signatures")),
@@ -300,7 +301,7 @@ def zliczaj_wszystko():
             if i.status == w_kolejce and i.data_referendum_start <= dzisiaj:
                 i.status = referendum
                 i.save()
-                # log('Propozycja ' + str(i.id) + ' zmieniła status na "referendum".')
+                l.info('Proposition ' + str(i.id) + ' changed status from QUEUE to REFERENDUM.')
                 SendEmail(
                     str(_("Referendum on proposal no.")) + " " + str(i.id) + " " + str(_("is starting now")),
                     str(_("It is time to vote on proposal no.")) + " " + str(i.id) + '\n' +
@@ -318,7 +319,8 @@ def zliczaj_wszystko():
                     i.data_zatwierdzenia = i.data_referendum_stop
                     i.data_obowiazuje_od = i.data_referendum_stop + timedelta(days=s.VACATIO_LEGIS)
                     i.save()
-                    # log('Propozycja ' + str(i.id) + ' zmieniła status na "zatwierdzone".')
+                    l.info('Proposition ' + str(i.id) + ' changed status from REFERENDUM to VACATIO_LEGIS.')
+
                     SendEmail(
                     str(_("Proposal no.")) + " " + str(i.id) + str(_("was approved")),
                     str(_("Proposal no.")) + " " + str(i.id) + " " +
@@ -331,7 +333,8 @@ def zliczaj_wszystko():
                 else:
                     i.status = odrzucone
                     i.save()
-                    # log('Propozycja ' + str(i.id) + ' zmieniła status na "odrzucone"')
+                    l.info('Proposition ' + str(i.id) + ' changed status from REFERENDUM to REJECTED.')
+
                     SendEmail(
                     str(_("Proposal no.")) + " " + str(i.id) + str(_("was rejected")),
                     str(_("Proposal no.")) + " " + str(i.id) + " " +
@@ -345,7 +348,8 @@ def zliczaj_wszystko():
             # FROM VACATIO_LEGIS TO LAW
             if i.status == zatwierdzone and i.data_obowiazuje_od <= dzisiaj:
                 i.status = obowiazuje
-                
+                l.info('Proposition ' + str(i.id) + ' changed status from VACATIO_LEGIS to VALID.')
+                                
                 # Reject bills
                 if i.znosi:
                     separated = re.split('\W+', i.znosi)
@@ -353,10 +357,11 @@ def zliczaj_wszystko():
                         abolish = Decyzja.objects.get(pk=str(z))
                         abolish.status = 5
                         abolish.save()
-                
+                        l.info('Proposition ' + str(z.id) + ' was rejected by ' + str(i.id))
                 i.save()
 
-                # log('Propozycja ' + str(i.id) + ' zmieniła status na "obowiązuje".')
+
+
                 SendEmail(
                 str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("is in efect from today")),
                 str(_("Proposal no.")) + " " + str(i.id) + " " + str(_("became abiding law today")) + '.\n' + 
