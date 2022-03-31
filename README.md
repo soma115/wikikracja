@@ -13,9 +13,6 @@ It means that voting is anonymous.
 You can find demo here:
 https://demo.wikikracja.pl/
 
-Login: demo  
-Password: #democracynow
-
 ## Requirements
 You will need email account like gmail in order to send emails to users. 
 Smallest KVM VM is enough. 

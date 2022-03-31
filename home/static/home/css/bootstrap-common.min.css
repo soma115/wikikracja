@@ -4938,9 +4938,9 @@ fieldset:disabled .btn {
 }
 
 .navbar-light .navbar-toggler {
-    color: var(--bg);
-    ;
-    border-color: rgba(34, 34, 34, .1)
+    /* color: var(--white); */
+    background-color: var(--gray);
+    border-color: var(--fg);
 }
 
 .navbar-light .navbar-toggler-icon {
