@@ -90,21 +90,21 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django_extensions',
     'crispy_forms',
-    'elibrary',
-    'obywatele',
-    'glosowania',
-    'home',
-    'chat',
     'bootstrap4',
-    'customize',
     'taggit',  # for eLibrary and later for Articles/Blog
-    'article',
     'tinymce',
     'grappelli',
     'filebrowser',
     'django.contrib.admin',
     'django_tables2',
     'django_filters',
+    'obywatele',
+    'glosowania',
+    'elibrary',
+    'chat',
+    'home',
+    'customize',
+    'article',
 )
 
 TINYMCE_DEFAULT_CONFIG = {
