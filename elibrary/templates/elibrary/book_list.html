@@ -8,9 +8,16 @@
   </div>
   <div class="row">
     {% for i in object_list %}
+    
       <div class="col-3 justify-content-center p-3">
         {% comment %} <a href="{{ i.get_absolute_url }}"><img class="img-fluid" src="{% static i.cover %}"></a> {% endcomment %}
-        <a href="{{ i.get_absolute_url }}"><img class="img-fluid" src="{% get_media_prefix %}{{ i.cover }}"></a>
+        <a href="{{ i.get_absolute_url }}">
+          <figure>
+          <img class="img-fluid" src="{% get_media_prefix %}{{ i.cover }}" alt="{{ i.author }} {{ i.title }}">
+          <figcaption>{{ i.title }}</figcaption> 
+        </figure>
+        </a>
+      
       </div>
     {% endfor %}
   </div>
